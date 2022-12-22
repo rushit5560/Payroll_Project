@@ -4,61 +4,69 @@
 
 import 'dart:convert';
 
-LogInDetails aboutDetailsModelFromJson(String str) =>
-    LogInDetails.fromJson(json.decode(str));
+import 'package:payroll_system/Models/user_permission_model/user_permission_model.dart';
 
-String aboutDetailsModelToJson(LogInDetails data) => json.encode(data.toJson());
+LoginDetailsModel aboutDetailsModelFromJson(String str) =>
+    LoginDetailsModel.fromJson(json.decode(str));
 
-class LogInDetails {
-  LogInDetails({
+String aboutDetailsModelToJson(LoginDetailsModel data) =>
+    json.encode(data.toJson());
+
+class LoginDetailsModel {
+  LoginDetailsModel({
     required this.success,
     required this.messege,
-    required this.data,
+    required this.loginData,
   });
 
   final bool success;
   final String messege;
-  final Data data;
+  final LoginData loginData;
 
-  factory LogInDetails.fromJson(Map<String, dynamic> json) => LogInDetails(
+  factory LoginDetailsModel.fromJson(Map<String, dynamic> json) =>
+      LoginDetailsModel(
         success: json["success"] ?? false,
-        messege: json["messege"] ?? '',
-        data: Data.fromJson(json["Data"] ?? []),
+        messege: json["messege"] ?? "",
+        loginData: LoginData.fromJson(json["Data"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
         "success": success,
         "messege": messege,
-        "Data": data.toJson(),
+        "Data": loginData.toJson(),
       };
 }
 
-class Data {
-  Data({
+class LoginData {
+  LoginData({
     required this.id,
-    this.token,
+    required this.token,
     required this.data,
+    required this.permissiondata,
   });
 
   final int id;
-  final dynamic token;
-  final DataClass data;
+  final String token;
+  final UserData data;
+  final PermissionData permissiondata;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["ID"],
-        token: json["Token"],
-        data: DataClass.fromJson(json["data"]),
+  factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
+        id: json["ID"] ?? 0,
+        token: json["Token"] ?? "",
+        data: UserData.fromJson(json["data"] ?? {}),
+        permissiondata: PermissionData.fromJson(json["permissiondata"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
         "ID": id,
         "Token": token,
         "data": data.toJson(),
+        "permissiondata": permissiondata.toJson(),
       };
 }
 
-class DataClass {
-  DataClass({
+class UserData {
+  UserData({
     required this.id,
     required this.userName,
     required this.email,
@@ -98,7 +106,7 @@ class DataClass {
   final String createdAt;
   final String updatedAt;
 
-  factory DataClass.fromJson(Map<String, dynamic> json) => DataClass(
+  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         id: json["id"] ?? 0,
         userName: json["user_name"] ?? '',
         email: json["email"] ?? '',

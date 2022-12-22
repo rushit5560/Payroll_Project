@@ -5,6 +5,7 @@ import 'package:payroll_system/Utils/style.dart';
 class CustomAlertDialog {
   void showAlertDialog({
     required BuildContext context,
+    required String textContent,
     required Function() onYesTap,
     required Function() onCancelTap,
   }) {
@@ -13,7 +14,7 @@ class CustomAlertDialog {
       builder: (context) {
         return AlertDialog(
           title: Text(
-            AppMessage.deleteAlertMessage,
+            textContent,
             textAlign: TextAlign.center,
           ),
           actionsAlignment: MainAxisAlignment.spaceBetween,

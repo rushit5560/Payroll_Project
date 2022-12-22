@@ -1,6 +1,4 @@
-
 class FieldValidation {
-
   String? validateName(String value) {
     if (value.isEmpty) {
       return 'Please enter User name';

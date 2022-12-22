@@ -1,13 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Controller/login_screen_controller.dart';
 import 'package:payroll_system/Screen/Authentication/Sign_Up_Screen/sign_up_screen.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:sizer/sizer.dart';
 import '../../../Utils/validator.dart';
 import '../../../constants/colors.dart';
+import '../Forgot_Password_Screen/forgot_password_screen.dart';
 
 class LogInEmailTextFieldModule extends StatelessWidget {
   LogInEmailTextFieldModule({Key? key}) : super(key: key);
@@ -30,6 +33,109 @@ class LogInEmailTextFieldModule extends StatelessWidget {
           ),
         ),
         hintText: "Email Address",
+      ),
+    );
+  }
+}
+
+class PasswordTextFieldModule extends StatelessWidget {
+  PasswordTextFieldModule({Key? key}) : super(key: key);
+
+  final loginScreenController = Get.find<LoginController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => TextFormField(
+        obscureText: loginScreenController.isPasswordVisible.value,
+        validator: (value) => FieldValidation().validatePassword(value!),
+        controller: loginScreenController.loginPasswordController,
+        decoration: InputDecoration(
+          hintText: AppMessage.password,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          suffixIcon: IconButton(
+            onPressed: () {
+              loginScreenController.isPasswordVisible.value =
+                  !loginScreenController.isPasswordVisible.value;
+              // setState(() {
+              // });
+            },
+            icon: Icon(
+              loginScreenController.isPasswordVisible.value
+                  ? Icons.visibility
+                  : Icons.visibility_off,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ForgotPasswordTextModule extends StatelessWidget {
+  ForgotPasswordTextModule({Key? key}) : super(key: key);
+
+  final loginScreenController = Get.find<LoginController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          onTap: () {
+            Get.to(const ForgotPasswordScreen());
+          },
+          child: const Text(
+            "Forgot password ?",
+            style: TextStyle(decoration: TextDecoration.underline),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class LoginButtonModule extends StatelessWidget {
+  LoginButtonModule({Key? key}) : super(key: key);
+
+  final loginScreenController = Get.find<LoginController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        height: 50,
+        width: 60.w,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              // backgroundColor: Colors.blueAccent,
+
+              shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          )),
+          onPressed: () {
+            if (loginScreenController.isPrivacyChecked.value) {
+              if (loginScreenController.formKey.currentState!.validate()) {
+                loginScreenController.loginUserFunction(context);
+              }
+            } else {
+              Fluttertoast.showToast(
+                  msg: "Please accept privacy policy to login");
+            }
+          },
+          child: Text(
+            AppMessage.logIn,
+            style: TextStyleConfig.textStyle(
+              textColor: AppColors.whiteColor,
+              fontSize: 16.sp,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -84,37 +190,62 @@ class SignInTextFormFiledCustom extends StatelessWidget {
 class PrivacyPolicyCustom extends StatelessWidget {
   PrivacyPolicyCustom({super.key});
 
-  bool isChecked = false;
-  bool _isHidden = true;
+  final loginScreenController = Get.find<LoginController>();
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Checkbox(
-          value: isChecked,
-          onChanged: (bool? value) {
-            // isChecked = value!;
-            isChecked = value!;
-            // setState(
-            //   () {
-            //   },
-            // );
-          },
-        ),
-        const Text(
-          "I Agree with ",
-        ),
-        Text(
-          'provacy',
-          style: TextStyleConfig.textStyle(textColor: Colors.red),
-        ),
-        const Text(' & '),
-        Text(
-          "policy",
-          style: TextStyleConfig.textStyle(textColor: Colors.red),
-        )
-      ],
+    return Obx(
+      () => Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Checkbox(
+            value: loginScreenController.isPrivacyChecked.value,
+            onChanged: (bool? value) {
+              loginScreenController.isPrivacyChecked.value = value!;
+            },
+          ),
+          Expanded(
+            child: RichText(
+              textAlign: TextAlign.left,
+              maxLines: null,
+              text: TextSpan(
+                text: "I Agree with ",
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: AppColors.blackColor,
+                  fontWeight: FontWeight.normal,
+                ),
+                children: [
+                  TextSpan(
+                    text: "privacy policy",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.redColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  TextSpan(
+                    text: " & ",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.blackColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "terms conditions",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.redColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

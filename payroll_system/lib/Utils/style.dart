@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:payroll_system/constants/colors.dart';
 
 class TextStyleConfig {
-
   static TextStyle textStyle({
     Color textColor = AppColors.blackColor,
     FontWeight fontWeight = FontWeight.normal,
@@ -16,7 +15,6 @@ class TextStyleConfig {
     );
   }
 
-
   static TextStyle drawerTextStyle({
     Color textColor = AppColors.blackColor,
     FontWeight fontWeight = FontWeight.w500,
@@ -28,5 +26,4 @@ class TextStyleConfig {
       fontWeight: fontWeight,
     );
   }
-
 }
