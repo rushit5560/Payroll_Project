@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/Screen/Authentication/Login_Screen/login_screen.dart';
 import 'package:payroll_system/Screen/Employe_Details/employe_details_form_screen.dart';
+import 'package:payroll_system/Screen/super_admin_home_screen/super_admin_home_screen.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:payroll_system/Utils/extension_methods/user_preference.dart';
@@ -64,7 +65,9 @@ class LoginController extends GetxController {
           userUpdatedAt: logInDetails.data.data.updatedAt,
         );
 
-        Get.off(() => EmployeDetailsScreen());
+        // todo - here put condition which user loggedIn successful
+
+        Get.off(() => SuperAdminHomeScreen());
 
         formKey.currentState!.reset();
         Fluttertoast.showToast(msg: 'You are successfully login');

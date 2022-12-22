@@ -11,4 +11,15 @@ class AppMessage {
   static String companyLogin = 'Company Sign Up';
   static String dontHaveAnAccount = "Don't have an account ?";
   static String haveAlreadyAnAccount = 'Already have an account ?  ';
+
+  /// Drawer Name's
+  static String companyNameDrawer = "Company";
+  static String departmentNameDrawer = "Department";
+  static String employeeNameDrawer = "Employee";
+  static String editProfileNameDrawer = "Edit Profile";
+  static String logOutNameDrawer = "Logout";
+
+  static String adminName = "Admin";
+  static String companiesName = "Companies";
+  static String companyName = "Company Name";
 }
