@@ -7,12 +7,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'package:payroll_system/Screen/Authentication/Login_Screen/login_screen.dart';
-import 'package:payroll_system/Screen/Employe_Details/employe_details_form_screen.dart';
 
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/user_permission_model/user_permission_model.dart';
+import '../Screen/Home_Screen/home_screen.dart';
 import '../Screen/super_admin_home_screen/super_admin_home_screen.dart';
 import '../Utils/api_url.dart';
 import '../Utils/extension_methods/user_preference.dart';
@@ -112,7 +112,7 @@ class SplashScreenController extends GetxController {
             () {
               //if user is loggedin already
               if (UserDetails.isUserLoggedIn) {
-                Get.off(() => const SuperAdminHomeScreen());
+                Get.off(() => HomeScreen());
               } else {
                 Get.off(() => LoginScreen());
               }

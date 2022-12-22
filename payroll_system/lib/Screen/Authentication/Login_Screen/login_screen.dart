@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/Utils/validator.dart';
+
 import 'package:payroll_system/constants/colors.dart';
 import 'package:sizer/sizer.dart';
 
@@ -9,8 +9,7 @@ import '../../../Controller/login_screen_controller.dart';
 import '../../../Utils/messaging.dart';
 import '../../../Utils/style.dart';
 import '../../../common_modules/common_loader.dart';
-import '../../Employe_Details/employe_details_form_screen.dart';
-import '../Forgot_Password_Screen/forgot_password_screen.dart';
+
 import 'login_screen_widget.dart';
 
 class LoginScreen extends StatelessWidget {
