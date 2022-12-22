@@ -21,10 +21,13 @@ class EditAndDeleteButtonModule extends StatelessWidget {
           flex: 5,
           child: ElevatedButton(
             onPressed: onEditTap,
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(AppColors.greenColor),
+            ),
             child: Text(
               AppMessage.edit,
               style: TextStyleConfig.textStyle(
-                fontSize: 15.sp,
+                fontSize: 14.sp,
                 textColor: AppColors.whiteColor,
               ),
             ),
@@ -41,7 +44,7 @@ class EditAndDeleteButtonModule extends StatelessWidget {
             child: Text(
               AppMessage.delete,
               style: TextStyleConfig.textStyle(
-                fontSize: 15.sp,
+                fontSize: 14.sp,
                 textColor: AppColors.whiteColor,
               ),
             ),
