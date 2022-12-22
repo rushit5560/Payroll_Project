@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Controller/company_list_screen_controller.dart';
+import 'package:payroll_system/Screen/company_manage_screen/company_manage_screen.dart';
 import 'package:payroll_system/Utils/messaging.dart';
+import 'package:payroll_system/constants/anums.dart';
 
 import 'company_list_screen_widgets.dart';
 
@@ -12,22 +14,25 @@ class CompanyListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: Text(AppMessage.companiesName),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(()=> CompanyManageScreen(),
+              arguments: [CompanyOption.create],
+              );
+            },
             icon: const Icon(Icons.add_rounded),
           ),
         ],
       ),
-
-
-      body: CompanyListModule(),
-
-
+      body: Obx(
+        () => companyListScreenController.isLoading.value
+            ? const Center(child: CircularProgressIndicator())
+            : CompanyListModule(),
+      ),
     );
   }
 }

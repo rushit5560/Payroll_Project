@@ -20,11 +20,11 @@ class AppMessage {
   static String logOutNameDrawer = "Logout";
 
   static String adminName = "Admin";
-  static String companiesName = "Companies";
+  static String companiesName = "Company List";
   static String companyName = "Company Name";
   static String phoneNoName = "Phone No";
   static String verifiedStatusName = "Verified Status";
-  static String verifiedStatusValueName = "In=Active";
+  static String verifiedStatusValueName = "In-Active";
   static String edit = 'Edit';
   static String delete = 'Delete';
   static String yes = 'Yes';
@@ -56,6 +56,18 @@ class AppMessage {
   static String employeeEmail = 'Email';
   static String employeePassword = 'Password';
   static String employeeCurrentAddress = 'Current Address';
-  static String employeeHomAddresse = 'Home Address';
+  static String employeeHomAddress = 'Home Address';
   static String employeeDetails = 'Employee Details';
+
+
+  static String companyEdit = 'Edit Company';
+  static String companyCreate = 'Create Company';
+  static String labelName = 'Name';
+  static String labelEmailName = 'Company Email';
+  static String labelPhoneNo = 'Company Phone Number';
+  static String labelAddress = 'Address';
+  static String labelCompanyAddress = 'Company Address';
+
+
+
 }

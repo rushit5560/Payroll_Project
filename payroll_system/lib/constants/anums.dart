@@ -1,0 +1,3 @@
+enum CompanyOption {
+  create, update
+}

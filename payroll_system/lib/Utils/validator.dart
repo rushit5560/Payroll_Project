@@ -37,7 +37,7 @@ class FieldValidation {
     } else if (!isNumeric(value) &&
         !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             .hasMatch(value)) {
-      return "Invalid email Address";
+      return "Invalid email address";
     } else {
       return null;
     }
@@ -61,6 +61,14 @@ class FieldValidation {
   String? validateCompanyId(String value) {
     if (value.isEmpty) {
       return 'Please enter Company Id';
+    } else {
+      return null;
+    }
+  }
+
+  String? validateCompanyName(String value) {
+    if (value.isEmpty) {
+      return 'Please enter company name';
     } else {
       return null;
     }
@@ -126,9 +134,9 @@ class FieldValidation {
     if (value.isEmpty) {
       return 'Please enter Mobile number';
     } else if (value.length < 10) {
-      return 'Mobile number must enter 10 characters';
+      return 'Phone number must enter 10 characters';
     } else if (value.length > 10) {
-      return 'Mobile number enter 10 characters';
+      return 'Phone number enter 10 characters';
     } else {
       return null;
     }

@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:payroll_system/Utils/extensions.dart';
+import 'package:get/get.dart';
+import 'package:payroll_system/Controller/company_list_screen_controller.dart';
+import 'package:payroll_system/Models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/Utils/messaging.dart';
-import 'package:payroll_system/Utils/style.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
+import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
+import 'package:payroll_system/common_modules/single_item_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 
+
+
 class CompanyListModule extends StatelessWidget {
-  const CompanyListModule({Key? key}) : super(key: key);
+  CompanyListModule({Key? key}) : super(key: key);
+  final screenController = Get.find<CompanyListScreenController>();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: screenController.allCompanyList.length,
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, i) {
-        return companyListTile();
+        CompanyData singleItem = screenController.allCompanyList[i];
+        return CompanyListTile(singleItem: singleItem);
       },
     );
   }
 
-  Widget companyListTile() {
+}
+
+class CompanyListTile extends StatelessWidget {
+  CompanyData singleItem;
+  CompanyListTile({Key? key, required this.singleItem}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Container(
@@ -33,31 +48,35 @@ class CompanyListModule extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              EmployeeListTileCustom(
-                textKey: AppMessage.companyName,
-                textValue: AppMessage.companyName,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      AppMessage.companyName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyleConfig.textStyle(fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      AppMessage.companyName,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyleConfig.textStyle(),
-                    ),
-                  ),
-                ],
-              ).commonSymmetricPadding(vertical: 2),
 
+              /// Getting From Common Module
+              SingleListTileCustom(
+                textKey: AppMessage.companyName,
+                textValue: singleItem.userName,
+              ),
+
+              /// Getting From Common Module
+              SingleListTileCustom(
+                textKey: AppMessage.phoneNoName,
+                textValue: singleItem.phoneno,
+              ),
+
+              /// Getting From Common Module
+              SingleListTileCustom(
+                textKey: AppMessage.verifiedStatusName,
+                textValue: singleItem.verified,
+              ),
+
+              /// Getting From Common Module
+              EditAndDeleteButtonModule(
+                onEditTap: () {},
+                onDeleteTap: () => CustomAlertDialog().showAlertDialog(
+                  textContent: AppMessage.deleteAlertMessage,
+                    context: context,
+                  onYesTap: () => Get.back(),
+                  onCancelTap: () => Get.back(),
+                ),
+              ),
             ],
           ),
         ),
@@ -67,36 +86,10 @@ class CompanyListModule extends StatelessWidget {
 }
 
 
-class EmployeeListTileCustom extends StatelessWidget {
-  final String textKey;
-  final String textValue;
 
-  const EmployeeListTileCustom(
-  {super.key, required this.textValue, required this.textKey});
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            textKey,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyleConfig.textStyle(fontWeight: FontWeight.w600),
-          ),
-        ),
-        Expanded(
-          child: Text(
-            textValue,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyleConfig.textStyle(),
-          ),
-        ),
-      ],
-    ).commonSymmetricPadding(vertical: 2);
-  }
-}
+
+
+
 
 
