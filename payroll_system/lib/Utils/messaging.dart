@@ -56,7 +56,7 @@ class AppMessage {
   static String employeeEmail = 'Email';
   static String employeePassword = 'Password';
   static String employeeCurrentAddress = 'Current Address';
-  static String employeeHomAddress = 'Home Address';
+  static String employeeHomeAddress = 'Home Address';
   static String employeeDetails = 'Employee Details';
 
 

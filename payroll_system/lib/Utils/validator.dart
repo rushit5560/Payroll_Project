@@ -1,15 +1,15 @@
 class FieldValidation {
-  String? validateName(String value) {
+  String? validateFirstName(String value) {
     if (value.isEmpty) {
-      return 'Please enter User name';
+      return 'Please enter your first name';
     } else {
       return null;
     }
   }
 
-  String? validateFullName(String value) {
+  String? validateMiddleName(String value) {
     if (value.isEmpty) {
-      return 'Please enter Full Name';
+      return 'Please enter your middle name';
     } else {
       return null;
     }
@@ -17,15 +17,35 @@ class FieldValidation {
 
   String? validateLastName(String value) {
     if (value.isEmpty) {
-      return 'Please enter name';
+      return 'Please enter your last name';
     } else {
       return null;
     }
   }
 
-  String? validateAddress(String value) {
+  String? validateMobileNumber(String value) {
     if (value.isEmpty) {
-      return 'Please enter address';
+      return 'Please enter your Mobile number';
+    } else if (value.length < 10) {
+      return 'Mobile number must enter 10 characters';
+    } else if (value.length > 10) {
+      return 'Mobile number enter 10 characters';
+    } else {
+      return null;
+    }
+  }
+
+  String? validateCurrentAddress(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your CurrentAddress';
+    } else {
+      return null;
+    }
+  }
+
+  String? validateHomeAddress(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your homeAddress';
     } else {
       return null;
     }
@@ -81,18 +101,29 @@ class FieldValidation {
       return null;
     }
   }
+  // String? validateHomePhoneNumber(String value) {
+  //   if (value.isEmpty) {
+  //     return 'Please enter Mobile number';
+  //   } else if (value.length < 10) {
+  //     return 'Mobile number must enter 10 characters';
+  //   } else if (value.length > 10) {
+  //     return 'Mobile number enter 10 characters';
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   String? validateWorkPhoneNumber(String value) {
     if (value.isEmpty) {
-      return 'Please enter Phone number';
+      return 'Please enter your Phone number';
     } else {
       return null;
     }
   }
 
-  String? validateDAteOfBirth(String value) {
+  String? validateDateOfBirth(String value) {
     if (value.isEmpty) {
-      return 'Please enter dateofbrith';
+      return 'Please enter your date of brith';
     } else {
       return null;
     }
@@ -114,9 +145,17 @@ class FieldValidation {
     }
   }
 
-  String? validateFirstDayWork(String value) {
+  String? validateStartDayWork(String value) {
     if (value.isEmpty) {
       return 'Please enter FirstDayWork';
+    } else {
+      return null;
+    }
+  }
+
+  String? validateLastDayWork(String value) {
+    if (value.isEmpty) {
+      return 'Please enter LastDayWork';
     } else {
       return null;
     }
@@ -125,18 +164,6 @@ class FieldValidation {
   String? validateZipCode(String value) {
     if (value.isEmpty) {
       return 'Please enter ZipCode';
-    } else {
-      return null;
-    }
-  }
-
-  String? validateMobileNumber(String value) {
-    if (value.isEmpty) {
-      return 'Please enter Mobile number';
-    } else if (value.length < 10) {
-      return 'Phone number must enter 10 characters';
-    } else if (value.length > 10) {
-      return 'Phone number enter 10 characters';
     } else {
       return null;
     }

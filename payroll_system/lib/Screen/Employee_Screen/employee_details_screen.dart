@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Controller/employe_details_form_screen_controller.dart';
+import 'package:payroll_system/Controller/employee_details_screen_controller.dart';
 import 'package:payroll_system/constants/colors.dart';
 
-import 'employe_details_form_screen_widget.dart';
+import 'employee_details_screen_widget.dart';
 
-class EmployeDetailsScreen extends StatelessWidget {
-  EmployeDetailsScreen({super.key});
-  final employeDetailsFormController = Get.put(EmployeDetailsFormScreenController());
+class EmployeeDetailsScreen extends StatelessWidget {
+  EmployeeDetailsScreen({super.key});
+  final employeDetailsFormController = Get.put(EmployeDetailsScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class EmployeDetailsScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: EmployeDetailsScreenBody(),
+        body: EmployeeDetailsScreenWidgets(),
       ),
     );
   }

@@ -9,6 +9,8 @@ import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
 
+import '../../Screen/Employee_Screen/Employee_list_screen/employee_list_screen.dart';
+
 class AdminDrawerMenu extends StatelessWidget {
   const AdminDrawerMenu({Key? key}) : super(key: key);
 
@@ -37,6 +39,7 @@ class AdminDrawerMenu extends StatelessWidget {
                     AdminDrawerTile(
                       onTap: () {
                         log('Employee');
+                        Get.to(() => EmployeeListScreen());
                       },
                       title: AppMessage.employeeNameDrawer,
                     ),
