@@ -11,6 +11,7 @@ import 'package:payroll_system/Screen/Employe_Details/employe_details_form_scree
 
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/user_permission_model/user_permission_model.dart';
 import '../Screen/super_admin_home_screen/super_admin_home_screen.dart';
 import '../Utils/api_url.dart';
@@ -102,10 +103,11 @@ class SplashScreenController extends GetxController {
   }
 
   startTimer() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     Timer(
       const Duration(milliseconds: 2500),
       () async {
-        if (UserDetails.isUserLoggedIn) {
+        if (prefs.getBool(UserPreference.isUserLoggedInKey) ?? false) {
           await UserPreference().getUserPrefsAndSaveToLocal().whenComplete(
             () {
               //if user is loggedin already

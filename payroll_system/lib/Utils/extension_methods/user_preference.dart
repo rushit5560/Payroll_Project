@@ -6,38 +6,38 @@ import 'user_details.dart';
 
 class UserPreference {
   // user details keys
-  String isUserLoggedInKey = "isUserLoggedInKey";
-  String userIdKey = "userIdKey";
-  String roleIdKey = "roleIdKey";
-  String userNameKey = "userNameKey";
-  String userEmailKey = "userEmailKey";
-  String userProfileImageKey = "userProfileImageKey";
+  static String isUserLoggedInKey = "isUserLoggedInKey";
+  static String userIdKey = "userIdKey";
+  static String roleIdKey = "roleIdKey";
+  static String userNameKey = "userNameKey";
+  static String userEmailKey = "userEmailKey";
+  static String userProfileImageKey = "userProfileImageKey";
 
   // user permissions keys
-  String roleAddKey = 'roleAddKey';
-  String roleEditKey = 'roleEditKey';
-  String roleViewKey = 'roleViewKey';
-  String roleDeleteKey = 'roleDeleteKey';
+  static String roleAddKey = 'roleAddKey';
+  static String roleEditKey = 'roleEditKey';
+  static String roleViewKey = 'roleViewKey';
+  static String roleDeleteKey = 'roleDeleteKey';
 
-  String companyAddKey = 'companyAddKey';
-  String companyEditKey = 'companyEditKey';
-  String companyViewKey = 'companyviewKey';
-  String companyDeleteKey = 'companyDeleteKey';
+  static String companyAddKey = 'companyAddKey';
+  static String companyEditKey = 'companyEditKey';
+  static String companyViewKey = 'companyviewKey';
+  static String companyDeleteKey = 'companyDeleteKey';
 
-  String locationAddKey = 'locationAddKey';
-  String locationEditKey = 'locationEditKey';
-  String locationViewKey = 'locationViewKey';
-  String locationDeleteKey = 'locationDeleteKey';
+  static String locationAddKey = 'locationAddKey';
+  static String locationEditKey = 'locationEditKey';
+  static String locationViewKey = 'locationViewKey';
+  static String locationDeleteKey = 'locationDeleteKey';
 
-  String employeeAddKey = 'employeeAddKey';
-  String employeeEditKey = 'employeeEditKey';
-  String employeeViewKey = 'employeeViewKey';
-  String employeeDeleteKey = 'employeeDeleteKey';
+  static String employeeAddKey = 'employeeAddKey';
+  static String employeeEditKey = 'employeeEditKey';
+  static String employeeViewKey = 'employeeViewKey';
+  static String employeeDeleteKey = 'employeeDeleteKey';
 
-  String departmentAddKey = 'departmentAddKey';
-  String departmentEditKey = 'departmentEditKey';
-  String departmentViewKey = 'departmentViewKey';
-  String departmentDeleteKey = 'departmentDeleteKey';
+  static String departmentAddKey = 'departmentAddKey';
+  static String departmentEditKey = 'departmentEditKey';
+  static String departmentViewKey = 'departmentViewKey';
+  static String departmentDeleteKey = 'departmentDeleteKey';
 
   /// Set user permission commmon function
   Future<void> setUserPermissionsToPrefsAndLocal({
