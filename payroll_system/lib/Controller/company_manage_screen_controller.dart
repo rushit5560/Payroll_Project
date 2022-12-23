@@ -1,15 +1,21 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/Models/company_manage_screen_model/create_company_model.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:payroll_system/constants/anums.dart';
 
+import 'company_list_screen_controller.dart';
+
 class CompanyManageScreenController extends GetxController {
   CompanyOption companyOption = Get.arguments[0];
+
+  CompanyListScreenController companyListScreenController = Get.find<CompanyListScreenController>();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
@@ -75,14 +81,29 @@ class CompanyManageScreenController extends GetxController {
         "user_name": nameFieldController.text.trim(),
         "email": emailFieldController.text.trim().toLowerCase(),
         "phoneno": phoneNumberFieldController.text,
-        "department_id": convertDepartmentIdListToStringFunction(),
+        "department_id": "$selectedDepartmentIdList",
         "address": addressFieldController.text.trim(),
       };
+
+      log('bodyData : $bodyData');
 
       http.Response response = await http.post(
         Uri.parse(url),
         body: bodyData,
       );
+      log('response : ${response.body}');
+
+      CreateCompanyModel createCompanyModel = CreateCompanyModel.fromJson(json.decode(response.body));
+
+      isSuccessStatus = createCompanyModel.success.obs;
+
+      if(isSuccessStatus.value) {
+        Fluttertoast.showToast(msg: createCompanyModel.messege);
+        Get.back();
+        await companyListScreenController.getAllCompanyFunction();
+      } else {
+        log('createCompanyFunction Else');
+      }
 
 
     } catch(e) {
