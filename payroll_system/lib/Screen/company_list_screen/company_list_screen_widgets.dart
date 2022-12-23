@@ -6,7 +6,10 @@ import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
 import 'package:payroll_system/common_modules/single_item_module.dart';
+import 'package:payroll_system/constants/anums.dart';
 import 'package:payroll_system/constants/colors.dart';
+
+import '../company_manage_screen/company_manage_screen.dart';
 
 
 
@@ -22,7 +25,7 @@ class CompanyListModule extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, i) {
         CompanyData singleItem = screenController.allCompanyList[i];
-        return CompanyListTile(singleItem: singleItem);
+        return CompanyListTile(singleItem: singleItem, index: i);
       },
     );
   }
@@ -31,7 +34,10 @@ class CompanyListModule extends StatelessWidget {
 
 class CompanyListTile extends StatelessWidget {
   CompanyData singleItem;
-  CompanyListTile({Key? key, required this.singleItem}) : super(key: key);
+  int index;
+  CompanyListTile({Key? key, required this.singleItem, required this.index}) : super(key: key);
+
+  final screenController = Get.find<CompanyListScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +75,21 @@ class CompanyListTile extends StatelessWidget {
 
               /// Getting From Common Module
               EditAndDeleteButtonModule(
-                onEditTap: () {},
+                onEditTap: () {
+                  Get.to(
+                    () => CompanyManageScreen(),
+                    arguments: [
+                      CompanyOption.update,
+                      singleItem.id.toString(),
+                    ],
+                  );
+                },
                 onDeleteTap: () => CustomAlertDialog().showAlertDialog(
                   textContent: AppMessage.deleteAlertMessage,
                     context: context,
-                  onYesTap: () => Get.back(),
+                  onYesTap: () async {
+                    await screenController.deleteCompanyFunction(singleItem.id.toString(), index);
+                  },
                   onCancelTap: () => Get.back(),
                 ),
               ),

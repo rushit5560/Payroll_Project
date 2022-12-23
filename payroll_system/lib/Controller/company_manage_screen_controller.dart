@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/Models/company_manage_screen_model/company_get_by_id_model.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/create_company_model.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
@@ -14,6 +15,7 @@ import 'company_list_screen_controller.dart';
 
 class CompanyManageScreenController extends GetxController {
   CompanyOption companyOption = Get.arguments[0];
+  String companyId = Get.arguments[1] ?? "";
 
   CompanyListScreenController companyListScreenController = Get.find<CompanyListScreenController>();
 
@@ -64,11 +66,18 @@ class CompanyManageScreenController extends GetxController {
       log('getAllDepartmentFunction Error :$e');
       rethrow;
     } finally {
-      isLoading(false);
+      if(companyOption == CompanyOption.update) {
+        // when update company that time
+        await getCompanyDetailsFunction();
+      } else if(companyOption == CompanyOption.create) {
+        // when create new company
+        isLoading(false);
+      }
     }
 
   }
 
+  /// Create Company
   Future<void> createCompanyFunction() async {
     isLoading(true);
     String url = ApiUrl.createCompanyApi;
@@ -114,14 +123,47 @@ class CompanyManageScreenController extends GetxController {
     }
   }
 
+  /// Get Company Details
+  Future<void> getCompanyDetailsFunction() async {
+    isLoading(true);
+    String url = "${ApiUrl.getCompanyDetailsApi}$companyId";
+    log('Company Details Get By Id Api Url : $url');
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+      CompanyGetByIdModel companyGetByIdModel = CompanyGetByIdModel.fromJson(json.decode(response.body));
+
+      isSuccessStatus = companyGetByIdModel.success.obs;
+
+      if(isSuccessStatus.value) {
+        nameFieldController.text = companyGetByIdModel.data.userName;
+        emailFieldController.text = companyGetByIdModel.data.email;
+        phoneNumberFieldController.text = companyGetByIdModel.data.phoneno;
+        addressFieldController.text = companyGetByIdModel.data.address;
+
+        List departmentList = companyGetByIdModel.data.departmentId.split(',');
+
+        for (var element in departmentList) {
+          log('Element : $element');
+        }
+
+
+      } else {
+        log('getCompanyDetailsFunction Else');
+      }
+
+    } catch(e) {
+      log('getCompanyDetailsFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+
+  }
+
   @override
   void onInit() {
     getAllDepartmentFunction();
-    if(companyOption == CompanyOption.update) {
-      // when update company that time
-    } else if(companyOption == CompanyOption.create) {
-      // when create new company
-    }
 
     log("$companyOption");
     super.onInit();

@@ -13,7 +13,7 @@ class CompanyListScreenController extends GetxController {
 
   List<CompanyData> allCompanyList = [];
 
-
+  /// Get All Company
   Future<void> getAllCompanyFunction() async {
     isLoading(true);
     String url = ApiUrl.allCompanyApi;
@@ -34,9 +34,6 @@ class CompanyListScreenController extends GetxController {
         log('getAllCompanyFunction Else');
       }
 
-
-
-
     } catch(e) {
       log('getAllCompanyFunction Error :$e');
       rethrow;
@@ -46,7 +43,7 @@ class CompanyListScreenController extends GetxController {
 
   }
 
-
+  /// Delete Company
   Future<void> deleteCompanyFunction(String companyId, int index) async {
     isLoading(true);
     String url = "${ApiUrl.deleteCompanyApi}$companyId";
@@ -54,6 +51,8 @@ class CompanyListScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
+      log('response : ${response.body}');
+
 
       DeleteCompanyModel deleteCompanyModel = DeleteCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = deleteCompanyModel.success.obs;
@@ -61,6 +60,7 @@ class CompanyListScreenController extends GetxController {
       if(isSuccessStatus.value) {
         Fluttertoast.showToast(msg: deleteCompanyModel.messege);
         allCompanyList.removeAt(index);
+        Get.back();
       } else {
         log('deleteCompanyFunction Else');
       }

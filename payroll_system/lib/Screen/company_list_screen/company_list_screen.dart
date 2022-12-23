@@ -21,7 +21,7 @@ class CompanyListScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               Get.to(()=> CompanyManageScreen(),
-              arguments: [CompanyOption.create],
+              arguments: [CompanyOption.create, ""],
               );
             },
             icon: const Icon(Icons.add_rounded),
