@@ -58,8 +58,7 @@ class AppMessage {
   static String employeeCurrentAddress = 'Current Address';
   static String employeeHomeAddress = 'Home Address';
   static String employeeDetails = 'Employee Details';
-
-
+  static String createEmployee = 'Create employee';
   static String companyEdit = 'Edit Company';
   static String companyCreate = 'Create Company';
   static String labelName = 'Name';
@@ -67,7 +66,4 @@ class AppMessage {
   static String labelPhoneNo = 'Company Phone Number';
   static String labelAddress = 'Address';
   static String labelCompanyAddress = 'Company Address';
-
-
-
 }

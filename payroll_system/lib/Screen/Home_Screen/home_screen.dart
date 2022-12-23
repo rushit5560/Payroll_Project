@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Controller/home_screen_controller.dart';
+import 'package:payroll_system/controller/home_screen_controller.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:sizer/sizer.dart';
 

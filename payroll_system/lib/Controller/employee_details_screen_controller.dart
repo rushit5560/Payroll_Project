@@ -152,7 +152,7 @@ class EmployeDetailsScreenController extends GetxController {
 
   Future<void> employeeStoreFunction() async {
     isLoading(true);
-    String url = ApiUrl.employee;
-    log(url);
+    // String url = ApiUrl.employee;
+    // log(url);
   }
 }

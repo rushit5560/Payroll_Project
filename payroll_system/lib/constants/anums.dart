@@ -1,3 +1,3 @@
-enum CompanyOption {
-  create, update
-}
+enum CompanyOption { create, update }
+
+enum EmployeeOption { create, update }

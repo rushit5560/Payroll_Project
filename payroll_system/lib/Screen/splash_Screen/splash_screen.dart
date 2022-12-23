@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Controller/splash_screen_controller.dart';
+import 'package:payroll_system/controller/splash_screen_controller.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Utils/style.dart';

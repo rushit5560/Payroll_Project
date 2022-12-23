@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/controller/employee_list_screen_controller.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:sizer/sizer.dart';
@@ -7,10 +8,11 @@ import '../../../Utils/messaging.dart';
 import '../../../common_modules/custom_alert_dialog_module.dart';
 import '../../../common_modules/edit_and_delete_button_module.dart';
 import '../../../common_modules/single_item_module.dart';
-import '../employee_details_screen.dart';
+import '../employee_manage_screen/employee_manage_screen.dart';
 
 class EmployeeListScreenWidgets extends StatelessWidget {
-  const EmployeeListScreenWidgets({super.key});
+  EmployeeListScreenWidgets({super.key});
+  final employeeListScreenController = Get.find<EmployeeListScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,10 @@ class EmployeeListScreenWidgets extends StatelessWidget {
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: 2,
+            physics: const BouncingScrollPhysics(),
+            itemCount: employeeListScreenController.allCompanyList.length,
             itemBuilder: (context, index) {
+              final value = employeeListScreenController.allCompanyList[index];
               return Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.blackColor),
@@ -29,31 +33,32 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                     SizedBox(height: 1.h),
                     SingleListTileCustom(
                       textKey: AppMessage.employeeName,
-                      textValue: AppMessage.employeeName,
+                      textValue:
+                          value.firstName + value.middleName + value.lastName,
                     ),
                     SizedBox(height: 1.h),
                     SingleListTileCustom(
                       textKey: AppMessage.employeeEmail,
-                      textValue: AppMessage.employeeEmail,
+                      textValue: value.email,
                     ),
                     SizedBox(height: 1.h),
                     SingleListTileCustom(
                       textKey: AppMessage.employeePhoneNumber,
-                      textValue: AppMessage.employeePhoneNumber,
+                      textValue: value.phoneNo,
                     ),
                     SizedBox(height: 2.h),
                     SingleListTileCustom(
                       textKey: AppMessage.employeeDepartmentName,
-                      textValue: AppMessage.employeeDepartmentName,
+                      textValue: value.departmentId,
                     ),
                     SizedBox(height: 2.h),
                     SingleListTileCustom(
                         textKey: AppMessage.employeeCompanyName,
-                        textValue: AppMessage.employeeCompanyName),
+                        textValue: value.companyid),
                     SizedBox(height: 2.h),
                     SingleListTileCustom(
                         textKey: AppMessage.employeeStatus,
-                        textValue: AppMessage.employeeStatus),
+                        textValue: value.home),
                     SizedBox(height: 3.h),
                     EditAndDeleteButtonModule(
                       onDeleteTap: () {
@@ -69,7 +74,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                       },
                       onEditTap: () {
                         Get.to(
-                          EmployeeDetailsScreen(),
+                          EmployeeManageScreen(),
                         );
                       },
                     )

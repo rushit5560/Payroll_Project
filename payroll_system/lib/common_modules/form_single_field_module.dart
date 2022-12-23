@@ -17,7 +17,7 @@ class FormSingleFieldModule extends StatelessWidget {
   TextInputType? keyboardType;
   bool readOnly;
   int? maxLength;
-
+Function()? onPressed;
   //  double fontSize = 15.0,
   FormSingleFieldModule(
       {Key? key,
@@ -33,6 +33,7 @@ class FormSingleFieldModule extends StatelessWidget {
         this.keyboardType,
         this.validate,
         this.maxLength,
+        this.onPressed,
         this.readOnly = false})
       : super(key: key);
 
@@ -56,10 +57,12 @@ class FormSingleFieldModule extends StatelessWidget {
           controller: textEditingController,
           inputFormatters: inputFormatters,
           maxLength: maxLength,
+          
           decoration: InputDecoration(
             // prefixIcon: Icon(prefixIcon, color: color),
             counterText: '',
             hintText: text,
+            suffixIcon:IconButton(onPressed:onPressed , icon: Icon(suffixIcon)),
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),

@@ -19,7 +19,7 @@ class EmployeeModele {
 
   final bool success;
   final String messege;
-  final List<Employee> data;
+  final List<EmployeeData> data;
 
   factory EmployeeModele.fromJson(Map<String, dynamic> json) => EmployeeModele(
         success: json["success"] ?? false,
@@ -27,8 +27,8 @@ class EmployeeModele {
         // data:
         // List<Datum>.from(json["Data"].map((x) => Datum.fromJson(x))) ?? [],
 
-        data: List<Employee>.from(
-            (json["Data"] ?? []).map((x) => Employee.fromJson(x ?? {}))),
+        data: List<EmployeeData>.from(
+            (json["Data"] ?? []).map((x) => EmployeeData.fromJson(x ?? {}))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,8 +38,8 @@ class EmployeeModele {
       };
 }
 
-class Employee {
-  Employee({
+class EmployeeData {
+  EmployeeData({
     required this.id,
     required this.firstName,
     required this.middleName,
@@ -91,7 +91,7 @@ class Employee {
   final String createdAt;
   final String updatedAt;
 
-  factory Employee.fromJson(Map<String, dynamic> json) => Employee(
+  factory EmployeeData.fromJson(Map<String, dynamic> json) => EmployeeData(
         id: json["id"] ?? 0,
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
@@ -101,21 +101,21 @@ class Employee {
         phoneNo: json["phone_no"] ?? "",
         email: json["email"] ?? "",
         departmentId: json["department_id"] ?? "",
-        isActive: json["is_active"],
-        createdby: json["createdby"],
+        isActive: json["is_active"] ?? "",
+        createdby: json["createdby"] ?? 0,
         // modifiedby: json["modifiedby"] == null ? null : json["modifiedby"],
-        dateOfBrith: json["date_of_brith"],
-        home: json["home"],
-        homeNo: json["home_no"],
-        workPhone: json["work_phone"],
-        hourlyRate: json["hourly_rate"],
-        salary: json["salary"],
-        startDate: json["start_date"],
-        lastDayOfWork: json["last_day_of_work"],
-        companyid: json["companyid"],
-        photo: json["photo"],
-        createdAt: json["created_at"],
-        updatedAt: json["updated_at"],
+        dateOfBrith: json["date_of_brith"] ?? "",
+        home: json["home"] ?? "",
+        homeNo: json["home_no"] ?? "",
+        workPhone: json["work_phone"] ?? "",
+        hourlyRate: json["hourly_rate"] ?? 0,
+        salary: json["salary"] ?? 0,
+        startDate: json["start_date"] ?? "",
+        lastDayOfWork: json["last_day_of_work"] ?? 0,
+        companyid: json["companyid"] ?? "",
+        photo: json["photo"] ?? "",
+        createdAt: json["created_at"] ?? "",
+        updatedAt: json["updated_at"] ?? "",
       );
 
   // Map<String, dynamic> toJson() => {
