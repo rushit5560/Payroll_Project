@@ -24,7 +24,7 @@ class UserProfileScreenController extends GetxController {
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
-    String url = ApiUrl.profileGetApi;
+    String url = ApiUrl.profileGetApi + UserDetails.userId.toString();
     log("getUserProfileFunction Api url : $url");
 
     try {
