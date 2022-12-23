@@ -9,7 +9,7 @@ import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_preference.dart';
 import '../Models/log_in_model.dart';
 import '../Screen/Home_Screen/home_screen.dart';
-import '../Screen/super_admin_home_screen/super_admin_home_screen.dart';
+
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

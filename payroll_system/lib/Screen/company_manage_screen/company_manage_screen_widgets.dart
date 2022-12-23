@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:payroll_system/Controller/company_manage_screen_controller.dart';
@@ -106,7 +107,17 @@ class CompanyFormModule extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: ButtonCustom(
-                    onPressed: () {},
+                    onPressed: () async {
+
+
+                      if(screenController.selectedDepartmentIdList.isEmpty) {
+                        Fluttertoast.showToast(msg: "Please select department");
+                      } else if(screenController.selectedDepartmentIdList.isNotEmpty) {
+                        await screenController.createCompanyFunction();
+                      }
+
+
+                    },
                     text: "Submit",
                     textsize: 15.sp,
                   ),

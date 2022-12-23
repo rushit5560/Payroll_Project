@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
+import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:payroll_system/constants/anums.dart';
 
 class CompanyManageScreenController extends GetxController {
@@ -26,7 +27,7 @@ class CompanyManageScreenController extends GetxController {
   TextEditingController addressFieldController = TextEditingController();
 
 
-
+  /// Get All Department
   Future<void> getAllDepartmentFunction() async {
     isLoading(true);
     String url = ApiUrl.allDepartmentApi;
@@ -62,7 +63,35 @@ class CompanyManageScreenController extends GetxController {
 
   }
 
+  Future<void> createCompanyFunction() async {
+    isLoading(true);
+    String url = ApiUrl.createCompanyApi;
+    log('Create Company Api Url :$url');
 
+    try {
+
+      Map<String, dynamic> bodyData = {
+        "userid": "${UserDetails.userId}",
+        "user_name": nameFieldController.text.trim(),
+        "email": emailFieldController.text.trim().toLowerCase(),
+        "phoneno": phoneNumberFieldController.text,
+        "department_id": convertDepartmentIdListToStringFunction(),
+        "address": addressFieldController.text.trim(),
+      };
+
+      http.Response response = await http.post(
+        Uri.parse(url),
+        body: bodyData,
+      );
+
+
+    } catch(e) {
+      log('createCompanyFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
 
   @override
   void onInit() {
@@ -76,4 +105,16 @@ class CompanyManageScreenController extends GetxController {
     log("$companyOption");
     super.onInit();
   }
+
+  /// Selected department convert into string & remove white space
+  String convertDepartmentIdListToStringFunction() {
+    String selectedDepartmentIdString = "";
+    String selectedDepartmentIdString2 = "";
+
+    selectedDepartmentIdString = selectedDepartmentIdList.toString().substring(1, selectedDepartmentIdList.toString().length -1);
+    selectedDepartmentIdString2 = selectedDepartmentIdString.replaceAll(" ", "");
+    log('selectedDepartmentIdString2 :$selectedDepartmentIdString2');
+    return selectedDepartmentIdString2;
+  }
+
 }

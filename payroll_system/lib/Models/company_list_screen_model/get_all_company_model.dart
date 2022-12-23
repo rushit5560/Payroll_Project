@@ -56,7 +56,7 @@ class CompanyData {
   String address;
   String phoneno;
   int roleId;
-  int departmentId;
+  String departmentId;
   String isActive;
   // dynamic lastlogin;
   String verified;
@@ -75,7 +75,7 @@ class CompanyData {
     address: json["address"] ?? "",
     phoneno: json["phoneno"] ?? "",
     roleId: json["role_id"] ?? 0,
-    departmentId: json["department_id"] ?? 0,
+    departmentId: (json["department_id"] ?? 0).toString(),
     isActive: json["is_active"] ?? "",
     // lastlogin: json["lastlogin"],
     verified: json["verified"] ?? "",
