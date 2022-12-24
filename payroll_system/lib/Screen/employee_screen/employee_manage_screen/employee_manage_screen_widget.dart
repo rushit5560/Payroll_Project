@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/controller/employee_details_screen_controller.dart';
-import 'package:payroll_system/Screen/authentication/Login_Screen/login_screen.dart';
+import 'package:multiselect/multiselect.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
@@ -11,14 +10,15 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../common_modules/form_single_field_module.dart';
+import '../../../controller/employee_manage_screen_controller.dart';
 
 // ignore: must_be_immutable
 class EmployeeDetailsScreenWidgets extends StatelessWidget {
   EmployeeDetailsScreenWidgets({super.key});
 
   @override
-  final employeCreateFormController =
-      Get.find<EmployeDetailsScreenController>();
+  final employeeCreteScreenController =
+      Get.find<EmployeManageScreenController>();
 
   bool isChecked = false;
   bool _isHidden = true;
@@ -26,8 +26,9 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Form(
-      key: employeCreateFormController.formKey,
+      key: employeeCreteScreenController.formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             AppMessage.employeeDetails,
@@ -41,7 +42,8 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
             headerText: AppMessage.firstName,
             text: AppMessage.firstName,
             keyboardType: TextInputType.text,
-            textEditingController: employeCreateFormController.FirstName,
+            textEditingController:
+                employeeCreteScreenController.firstNameController,
             validate: (value) => FieldValidation().validateFirstName(value),
           ),
           const SizedBox(height: 5),
@@ -49,7 +51,8 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
             headerText: AppMessage.middleName,
             text: AppMessage.middleName,
             keyboardType: TextInputType.text,
-            textEditingController: employeCreateFormController.middleName,
+            textEditingController:
+                employeeCreteScreenController.middleNameController,
             validate: (value) => FieldValidation().validateMiddleName(value),
           ),
           const SizedBox(height: 5),
@@ -57,7 +60,8 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
             headerText: AppMessage.lastName,
             text: AppMessage.lastName,
             keyboardType: TextInputType.text,
-            textEditingController: employeCreateFormController.lastName,
+            textEditingController:
+                employeeCreteScreenController.lastNameController,
             validate: (value) => FieldValidation().validateLastName(value),
           ),
           const SizedBox(height: 5),
@@ -66,65 +70,37 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
             text: AppMessage.phoneNo,
             keyboardType: TextInputType.phone,
             maxLength: 10,
-            textEditingController: employeCreateFormController.phoneNo,
+            textEditingController:
+                employeeCreteScreenController.phoneNoController,
             validate: (value) => FieldValidation().validateMobileNumber(value),
           ),
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.dateOfBrith,
-            text: AppMessage.dateOfBrith,
+            text: "Select Date",
             keyboardType: TextInputType.datetime,
             maxLength: 10,
-            textEditingController: employeCreateFormController.dateOfBrith,
+            textEditingController:
+                employeeCreteScreenController.dateOfBrithController,
             suffixIcon: Icons.calendar_month,
             onPressed: () {
-              employeCreateFormController.showDatePicker(context);
+              DateTime selectedDate =
+                  employeeCreteScreenController.selectedDate;
+              _selectDate(context, selectedDate,
+                  employeeCreteScreenController.dateOfBrithController);
+
+              // employeeCreteScreenController.showDatePicker(context);
             },
             validate: (value) => FieldValidation().validateDateOfBirth(value),
           ),
-          // DateOfBrithFiledCustom(),
-          const SizedBox(height: 5),
-
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Text(
-          //       AppMessage.departmentNameDrawer,
-          //       style: TextStyleConfig.textStyle(
-          //           fontWeight: FontWeight.w600, fontSize: 16),
-          //     ).commonSymmetricPadding(vertical: 2),
-
-          // DropDownMultiSelect(
-          //   options: employeCreateFormController.departmentStringList,
-          //   whenEmpty: 'Choose Department',
-          //   onChanged: (value) {
-          //     employeCreateFormController.selectedEmployeeList.value = value;
-          //     employeCreateFormController.selectedDepartmentOption.value = "";
-          //     employeCreateFormController.selectedDepartmentIdList = [];
-
-          //     // Selected Department generate new id list for send in api
-          //     for(int i=0; i < value.length; i++) {
-          //       for(int j=0; j < employeCreateFormController.departmentList.length; j++) {
-          //         if(value[i] == employeCreateFormController.departmentList[j].departmentName) {
-          //           employeCreateFormController.selectedDepartmentIdList.add(employeCreateFormController.departmentList[j].id.toString());
-          //         }
-          //       }
-          //     }
-
-          //     log('screenController.selectedDepartmentIdList :${employeCreateFormController.selectedDepartmentIdList}');
-
-          //   },
-          //   selectedValues: employeCreateFormController.selectedDepartmentList.value,
-          // ),
-          // ],
-          // ),
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.homeNo,
             text: AppMessage.homeNo,
             keyboardType: TextInputType.phone,
             maxLength: 10,
-            textEditingController: employeCreateFormController.homeNo,
+            textEditingController:
+                employeeCreteScreenController.homeNoController,
             validate: (value) => FieldValidation().validateMobileNumber(value),
           ),
           const SizedBox(height: 5),
@@ -133,95 +109,191 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
             text: AppMessage.workNO,
             keyboardType: TextInputType.phone,
             maxLength: 10,
-            textEditingController: employeCreateFormController.homeNo,
+            textEditingController:
+                employeeCreteScreenController.workNoController,
             validate: (value) => FieldValidation().validateMobileNumber(value),
           ),
-
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.hourlyRate,
             text: AppMessage.hourlyRate,
             keyboardType: TextInputType.number,
-            textEditingController: employeCreateFormController.homeNo,
+            textEditingController:
+                employeeCreteScreenController.hourlyRateController,
             validate: (value) => FieldValidation().validateHourlyRate(value),
           ),
-
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.salary,
             text: AppMessage.salary,
             keyboardType: TextInputType.number,
-            textEditingController: employeCreateFormController.salary,
+            textEditingController:
+                employeeCreteScreenController.salaryController,
             validate: (value) => FieldValidation().validateSalary(value),
           ),
-
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.startDate,
-            text: AppMessage.startDate,
-            // keyboardType: TextInputType.number,
-            textEditingController: employeCreateFormController.startDate,
+            text: "Select First Date",
+            keyboardType: TextInputType.datetime,
+            textEditingController:
+                employeeCreteScreenController.startDateController,
+            suffixIcon: Icons.calendar_month,
+            onPressed: () {
+              DateTime selectedFirstDate =
+                  employeeCreteScreenController.selectedDate;
+              _selectDate(context, selectedFirstDate,
+                  employeeCreteScreenController.startDateController);
+            },
             validate: (value) => FieldValidation().validateStartDayWork(value),
           ),
-
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.lastDay,
-            text: AppMessage.lastDay,
-            // keyboardType: TextInputType.number,
-            textEditingController: employeCreateFormController.lastDate,
+            text: "Select Last Date",
+            keyboardType: TextInputType.datetime,
+            textEditingController:
+                employeeCreteScreenController.lastDateController,
+            suffixIcon: Icons.calendar_month,
+            onPressed: () {
+              DateTime selectedLastDate =
+                  employeeCreteScreenController.selectedDate;
+              _selectDate(context, selectedLastDate,
+                  employeeCreteScreenController.lastDateController);
+            },
             validate: (value) => FieldValidation().validateLastDayWork(value),
           ),
-
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.isActive,
             text: AppMessage.isActive,
             // keyboardType: TextInputType.number,
-            textEditingController: employeCreateFormController.isActive,
-            // validate: (value) => FieldValidation().validateLastDayWork(value),
+            textEditingController:
+                employeeCreteScreenController.isActiveController,
+            validate: (value) => FieldValidation().validateLastDayWork(value),
           ),
-
           const SizedBox(height: 5),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppMessage.companyNameDrawer,
+                style: TextStyleConfig.textStyle(
+                    fontWeight: FontWeight.w600, fontSize: 16),
+              ).commonSymmetricPadding(vertical: 2),
+              DropDownMultiSelect(
+                options: employeeCreteScreenController.departmentStringList,
+                whenEmpty: 'Choose Company',
+                onChanged: (value) {
+                  employeeCreteScreenController.selectedDepartmentList.value =
+                      value;
+                  employeeCreteScreenController.selectedDepartmentOption.value =
+                      "";
+                  employeeCreteScreenController.selectedDepartmentIdList = [];
 
+                  // Selected Department generate new id list for send in api
+                  for (int i = 0; i < value.length; i++) {
+                    for (int j = 0;
+                        j < employeeCreteScreenController.departmentList.length;
+                        j++) {
+                      if (value[i] ==
+                          employeeCreteScreenController
+                              .departmentList[j].departmentName) {
+                        employeeCreteScreenController.selectedDepartmentIdList
+                            .add(employeeCreteScreenController
+                                .departmentList[j].id
+                                .toString());
+                      }
+                    }
+                  }
+
+                  // log('screenController.selectedDepartmentIdList :${screenController.selectedDepartmentIdList}');
+                },
+                selectedValues:
+                    employeeCreteScreenController.selectedDepartmentList.value,
+              ),
+            ],
+          ),
           FormSingleFieldModule(
             headerText: AppMessage.company,
             text: AppMessage.company,
             // keyboardType: TextInputType.number,
-            textEditingController: employeCreateFormController.company,
+            textEditingController:
+                employeeCreteScreenController.companyController,
             validate: (value) => FieldValidation().validateCompanyName(value),
           ),
+          const SizedBox(height: 5),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppMessage.departmentNameDrawer,
+                style: TextStyleConfig.textStyle(
+                    fontWeight: FontWeight.w600, fontSize: 16),
+              ).commonSymmetricPadding(vertical: 2),
+              DropDownMultiSelect(
+                options: employeeCreteScreenController.departmentStringList,
+                whenEmpty: 'Choose Department',
+                onChanged: (value) {
+                  employeeCreteScreenController.selectedDepartmentList.value =
+                      value;
+                  employeeCreteScreenController.selectedDepartmentOption.value =
+                      "";
+                  employeeCreteScreenController.selectedDepartmentIdList = [];
 
+                  // Selected Department generate new id list for send in api
+                  for (int i = 0; i < value.length; i++) {
+                    for (int j = 0;
+                        j < employeeCreteScreenController.departmentList.length;
+                        j++) {
+                      if (value[i] ==
+                          employeeCreteScreenController
+                              .departmentList[j].departmentName) {
+                        employeeCreteScreenController.selectedDepartmentIdList
+                            .add(employeeCreteScreenController
+                                .departmentList[j].id
+                                .toString());
+                      }
+                    }
+                  }
+
+                  // log('screenController.selectedDepartmentIdList :${screenController.selectedDepartmentIdList}');
+                },
+                selectedValues:
+                    employeeCreteScreenController.selectedDepartmentList.value,
+              ),
+            ],
+          ),
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.employeeEmail,
             text: AppMessage.employeeEmail,
-            // keyboardType: TextInputType.number,
-            textEditingController: employeCreateFormController.email,
+            keyboardType: TextInputType.emailAddress,
+            textEditingController:
+                employeeCreteScreenController.emailController,
             validate: (value) => FieldValidation().validateEmail(value),
           ),
-
           const SizedBox(height: 5),
-
           FormSingleFieldModule(
             headerText: AppMessage.password,
             text: AppMessage.password,
             keyboardType: TextInputType.visiblePassword,
             // maxLength: 10,
-            textEditingController: employeCreateFormController.password,
-            suffixIcon: _isHidden ? Icons.calendar_month : Icons.visibility,
+            textEditingController:
+                employeeCreteScreenController.passwordController,
+            suffixIcon: _isHidden ? Icons.visibility_off : Icons.visibility,
             onPressed: () {
               _isHidden = !_isHidden;
             },
             validate: (value) => FieldValidation().validatePassword(value),
           ),
-
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.employeeCurrentAddress,
             text: AppMessage.employeeCurrentAddress,
             keyboardType: TextInputType.text,
-            textEditingController: employeCreateFormController.CurrentAddress,
+            textEditingController:
+                employeeCreteScreenController.currentAddressController,
             validate: (value) =>
                 FieldValidation().validateCurrentAddress(value),
           ),
@@ -230,116 +302,55 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
             headerText: AppMessage.employeeHomeAddress,
             text: AppMessage.employeeHomeAddress,
             keyboardType: TextInputType.text,
-            textEditingController: employeCreateFormController.homeAddress,
+            textEditingController:
+                employeeCreteScreenController.homeAddressController,
             validate: (value) => FieldValidation().validateHomeAddress(value),
           ),
-
-          ButtonCustom(
-            onPressed: () {
-              if (employeCreateFormController.formKey.currentState!
-                  .validate()) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
-                );
-              }
-            },
-            text: "Submit",
-            textsize: 15.sp,
+          const SizedBox(height: 15),
+          Center(
+            child: ButtonCustom(
+              onPressed: () async {
+                if (employeeCreteScreenController.formKey.currentState!
+                    .validate()) {
+                  if (employeeCreteScreenController.images == null) {
+                    Fluttertoast.showToast(msg: "Please select employee image");
+                  } else {
+                    await employeeCreteScreenController.employeeStoreFunction();
+                  }
+                }
+              },
+              text: "Submit",
+              textsize: 15.sp,
+            ),
           ),
         ],
       ).commonOnlyPadding(
         top: 6.h,
         right: 6.w,
         left: 6.w,
-        bottom: 2.h,
+        bottom: 4.h,
       ),
     ));
   }
-}
 
-// ignore: must_be_immutable
-class EmployeDetailsTextFormFieldCustom extends StatelessWidget {
-  final String text;
-  // IconData prefixIcon;
-  IconData? suffixIcon;
-  final FormFieldValidator? validate;
-  TextEditingController? textEditingController;
-  final List<TextInputFormatter>? inputFormatters;
-  Color color;
-  Function()? onTap;
-  Size? size;
-  TextInputType? keyboardType;
-  bool readOnly;
-
-  //  double fontSize = 15.0,
-  EmployeDetailsTextFormFieldCustom(
-      {Key? key,
-      required this.text,
-      // required this.prefixIcon,
-      this.inputFormatters,
-      this.suffixIcon,
-      this.color = Colors.grey,
-      this.size,
-      this.textEditingController,
-      this.onTap,
-      this.keyboardType,
-      this.validate,
-      this.readOnly = false})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      validator: validate,
-      onTap: onTap,
-      readOnly: readOnly,
-      keyboardType: keyboardType,
-      controller: textEditingController,
-      inputFormatters: inputFormatters,
-      decoration: InputDecoration(
-        // prefixIcon: Icon(prefixIcon, color: color),
-
-        hintText: text,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-        ),
-      ),
+  Future<void> _selectDate(BuildContext context, DateTime dateTime,
+      TextEditingController textEditingController) async {
+    final DateTime? d = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
     );
-  }
-}
+    if (d != null) {
+      employeeCreteScreenController.isLoading(true);
+      textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      employeeCreteScreenController.isLoading(false);
 
-class DateOfBrithFiledCustom extends StatelessWidget {
-  DateOfBrithFiledCustom({super.key});
-
-  final employeDetailsFormController =
-      Get.find<EmployeDetailsScreenController>();
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: employeDetailsFormController.dateOfBrith,
-      // enabled: false,
-      decoration: InputDecoration(
-        hintText: AppMessage.dateOfBrith,
-        labelText: AppMessage.dateOfBrith,
-        suffixIcon: IconButton(
-          onPressed: () {
-            employeDetailsFormController.showDatePicker(context);
-          },
-          icon: const Icon(Icons.calendar_month),
-        ),
-        // hintText: AppMessage.dateOfBrith,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-        ),
-      ),
-    );
+      //setState(() {
+      // screenController.selectedDate = DateFormat.yMd("en_US").format(d);
+      // log(screenController.selectedDate.value);
+      //});
+    }
   }
 }
 
@@ -383,7 +394,7 @@ class ButtonCustom extends StatelessWidget {
 class ImagePickerCustom extends StatelessWidget {
   ImagePickerCustom({super.key});
   final employeDetailsFormController =
-      Get.find<EmployeDetailsScreenController>();
+      Get.find<EmployeManageScreenController>();
 
   @override
   Widget build(BuildContext context) {

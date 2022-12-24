@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-EmployeeManageModel aboutDetailsModelFromJson(String str) =>
-    EmployeeManageModel.fromJson(json.decode(str));
+CraeteEmployeeModel aboutDetailsModelFromJson(String str) =>
+    CraeteEmployeeModel.fromJson(json.decode(str));
 
-String aboutDetailsModelToJson(EmployeeManageModel data) =>
+String aboutDetailsModelToJson(CraeteEmployeeModel data) =>
     json.encode(data.toJson());
 
-class EmployeeManageModel {
-  EmployeeManageModel({
+class CraeteEmployeeModel {
+  CraeteEmployeeModel({
     required this.success,
     required this.messege,
     required this.data,
@@ -15,13 +15,13 @@ class EmployeeManageModel {
 
   final bool success;
   final String messege;
-  final EmployeeManageData data;
+  final CraeteEmployeeData data;
 
-  factory EmployeeManageModel.fromJson(Map<String, dynamic> json) =>
-      EmployeeManageModel(
+  factory CraeteEmployeeModel.fromJson(Map<String, dynamic> json) =>
+      CraeteEmployeeModel(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
-        data: EmployeeManageData.fromJson(json["Data"] ?? {}),
+        data: CraeteEmployeeData.fromJson(json["Data"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,8 +31,8 @@ class EmployeeManageModel {
       };
 }
 
-class EmployeeManageData {
-  EmployeeManageData({
+class CraeteEmployeeData {
+  CraeteEmployeeData({
     required this.firstName,
     required this.middleName,
     required this.lastName,
@@ -80,8 +80,8 @@ class EmployeeManageData {
   final String photo;
   final int id;
 
-  factory EmployeeManageData.fromJson(Map<String, dynamic> json) =>
-      EmployeeManageData(
+  factory CraeteEmployeeData.fromJson(Map<String, dynamic> json) =>
+      CraeteEmployeeData(
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",

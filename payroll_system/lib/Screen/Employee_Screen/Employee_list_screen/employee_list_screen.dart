@@ -7,6 +7,7 @@ import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 
 import '../../../constants/anums.dart';
+import '../../company_manage_screen/company_manage_screen.dart';
 
 class EmployeeListScreen extends StatelessWidget {
   EmployeeListScreen({super.key});
@@ -24,7 +25,7 @@ class EmployeeListScreen extends StatelessWidget {
               onPressed: () {
                 Get.to(
                   () => EmployeeManageScreen(),
-                  arguments: [EmployeeOption.create],
+                  arguments: [CompanyOption.create, ""],
                 );
               },
               icon: const Icon(Icons.add_rounded),

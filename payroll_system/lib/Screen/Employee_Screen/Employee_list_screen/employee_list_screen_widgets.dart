@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/controller/employee_list_screen_controller.dart';
@@ -21,9 +23,9 @@ class EmployeeListScreenWidgets extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
-            itemCount: employeeListScreenController.allCompanyList.length,
+            itemCount: employeeListScreenController.allEmployeeList.length,
             itemBuilder: (context, index) {
-              final value = employeeListScreenController.allCompanyList[index];
+              final value = employeeListScreenController.allEmployeeList[index];
               return Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.blackColor),
@@ -49,16 +51,16 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                     SizedBox(height: 2.h),
                     SingleListTileCustom(
                       textKey: AppMessage.employeeDepartmentName,
-                      textValue: value.departmentId,
+                      textValue: value.departmentId.toString(),
                     ),
                     SizedBox(height: 2.h),
                     SingleListTileCustom(
                         textKey: AppMessage.employeeCompanyName,
-                        textValue: value.companyid),
+                        textValue: value.companyid.toString()),
                     SizedBox(height: 2.h),
                     SingleListTileCustom(
                         textKey: AppMessage.employeeStatus,
-                        textValue: value.home),
+                        textValue: value.isActive),
                     SizedBox(height: 3.h),
                     EditAndDeleteButtonModule(
                       onDeleteTap: () {
@@ -66,7 +68,12 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                           context: context,
                           textContent:
                               'Are youe sure you want to delete employee ?',
-                          onYesTap: () {},
+                          onYesTap: () async {
+                            log("Delete Employee");
+                            await employeeListScreenController
+                                .deleteEmployeeFunction(
+                                    value.id.toString(), index);
+                          },
                           onCancelTap: () {
                             Get.back();
                           },

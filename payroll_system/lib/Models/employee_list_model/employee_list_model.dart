@@ -4,14 +4,14 @@
 
 import 'dart:convert';
 
-EmployeeModele aboutDetailsModelFromJson(String str) =>
-    EmployeeModele.fromJson(json.decode(str));
+AllEmployeeModele aboutDetailsModelFromJson(String str) =>
+    AllEmployeeModele.fromJson(json.decode(str));
 
-String aboutDetailsModelToJson(EmployeeModele data) =>
+String aboutDetailsModelToJson(AllEmployeeModele data) =>
     json.encode(data.toJson());
 
-class EmployeeModele {
-  EmployeeModele({
+class AllEmployeeModele {
+  AllEmployeeModele({
     required this.success,
     required this.messege,
     required this.data,
@@ -21,7 +21,7 @@ class EmployeeModele {
   final String messege;
   final List<EmployeeData> data;
 
-  factory EmployeeModele.fromJson(Map<String, dynamic> json) => EmployeeModele(
+  factory AllEmployeeModele.fromJson(Map<String, dynamic> json) => AllEmployeeModele(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
         // data:
