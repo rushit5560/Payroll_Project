@@ -8,7 +8,7 @@ import '../Models/employee_list_model/employee_list_model.dart';
 import '../Utils/api_url.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/employee_delete_model/employee_delete_model.dart';
+import '../models/employee_manage_screen_models/employee_delete_model.dart';
 
 class EmployeeListScreenController extends GetxController {
   RxBool isLoading = false.obs;

@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:http/http.dart' as http;
-import 'package:payroll_system/models/create_employee_model/create_employee_model.dart';
+import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Utils/extension_methods/user_details.dart';
