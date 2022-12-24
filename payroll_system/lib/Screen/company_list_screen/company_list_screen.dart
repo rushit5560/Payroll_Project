@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Controller/company_list_screen_controller.dart';
 import 'package:payroll_system/Screen/company_manage_screen/company_manage_screen.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/controllers/company_list_screen_controller.dart';
 
 import 'company_list_screen_widgets.dart';
 

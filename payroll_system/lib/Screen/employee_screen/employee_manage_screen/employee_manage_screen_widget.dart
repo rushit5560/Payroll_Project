@@ -7,10 +7,10 @@ import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../common_modules/form_single_field_module.dart';
-import '../../../controller/employee_manage_screen_controller.dart';
 
 // ignore: must_be_immutable
 class EmployeeDetailsScreenWidgets extends StatelessWidget {

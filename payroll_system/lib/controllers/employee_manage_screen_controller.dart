@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:payroll_system/Controller/employee_list_screen_controller.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/models/create_employee_model/create_employee_model.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import '../../../Utils/messaging.dart';
-import '../../../controller/employee_manage_screen_controller.dart';
 import 'employee_manage_screen_widget.dart';
 
 class EmployeeManageScreen extends StatelessWidget {

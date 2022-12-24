@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/controllers/login_screen_controller.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../Controller/login_screen_controller.dart';
 import '../../../Utils/messaging.dart';
 import '../../../Utils/style.dart';
 import '../../../common_modules/common_loader.dart';

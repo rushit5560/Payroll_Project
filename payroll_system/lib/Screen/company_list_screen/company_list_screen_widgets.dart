@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Controller/company_list_screen_controller.dart';
+import 'package:payroll_system/controllers/company_list_screen_controller.dart';
 import 'package:payroll_system/Models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';

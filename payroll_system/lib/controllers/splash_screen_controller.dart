@@ -5,8 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
-import 'package:payroll_system/Screen/Authentication/Login_Screen/login_screen.dart';
+import 'package:payroll_system/Screen/authentication_screens/login_screen/login_screen.dart';
 
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:http/http.dart' as http;

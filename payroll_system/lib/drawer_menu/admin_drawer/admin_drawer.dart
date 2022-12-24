@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Screen/Authentication/Login_Screen/login_screen.dart';
+import 'package:payroll_system/Screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/Screen/company_list_screen/company_list_screen.dart';
 import 'package:payroll_system/Utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/Utils/extensions.dart';
@@ -26,19 +26,21 @@ class AdminDrawerMenu extends StatelessWidget {
                   children: [
                     AdminDrawerTile(
                       onTap: () {
+                        Get.back();
                         Get.to(() => CompanyListScreen());
                       },
                       title: AppMessage.companyNameDrawer,
                     ),
                     AdminDrawerTile(
                       onTap: () {
-                        log('Department');
+                        Get.back();
+                        // Get.to(() => DepartmentListScreen());
                       },
                       title: AppMessage.departmentNameDrawer,
                     ),
                     AdminDrawerTile(
                       onTap: () {
-                        log('Employee');
+                        Get.back();
                         Get.to(() => EmployeeListScreen());
                       },
                       title: AppMessage.employeeNameDrawer,

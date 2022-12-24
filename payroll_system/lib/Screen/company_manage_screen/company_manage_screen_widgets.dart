@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:multiselect/multiselect.dart';
-import 'package:payroll_system/Controller/company_manage_screen_controller.dart';
+import 'package:payroll_system/controllers/company_manage_screen_controller.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';

@@ -1,10 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/controller/employee_list_screen_controller.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:sizer/sizer.dart';
 import '../../../Utils/messaging.dart';
 import '../../../common_modules/custom_alert_dialog_module.dart';

@@ -2,11 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Controller/login_screen_controller.dart';
-import 'package:payroll_system/Screen/Authentication/Sign_Up_Screen/sign_up_screen.dart';
-import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
-import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
+import 'package:payroll_system/controllers/login_screen_controller.dart';
+import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 import '../../../Utils/validator.dart';
 import '../../../constants/colors.dart';

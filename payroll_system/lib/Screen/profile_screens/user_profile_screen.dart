@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:payroll_system/Controller/user_profile_screen_controller.dart';
+import 'package:payroll_system/controllers/user_profile_screen_controller.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 
 import '../../Utils/style.dart';
