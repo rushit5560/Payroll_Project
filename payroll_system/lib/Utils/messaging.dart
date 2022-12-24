@@ -31,6 +31,7 @@ class AppMessage {
   static String no = 'No';
 
   static String deleteAlertMessage = 'Are you sure you want to delete ?';
+  static String backAlertMessage = 'Are you sure you want to go to back ?';
 
   //Employee
   static String employeeName = 'Employee Name';

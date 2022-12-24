@@ -21,6 +21,7 @@ class ApiUrl {
   static const createCompanyApi = "${apiMainPath}api/company/store";
   static const deleteCompanyApi = "${apiMainPath}api/company/delete/";
   static const getCompanyDetailsApi = "${apiMainPath}api/company/edit/";
+  static const updateCompanyDetailsApi = "${apiMainPath}api/company/update";
   // static const activeCompanyApi = "${apiMainPath}api/company/active/";
 
   // Department Api's

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/company_get_by_id_model.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/create_company_model.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/get_all_department_model.dart';
+import 'package:payroll_system/Models/company_manage_screen_model/update_company_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:payroll_system/constants/anums.dart';
@@ -24,7 +25,8 @@ class CompanyManageScreenController extends GetxController {
 
   List<DepartmentData> departmentList = [];
   List<String> departmentStringList = [];
-  Rx<List<String>> selectedDepartmentList = Rx<List<String>>([]);
+  RxList<String> selectedDepartmentList = RxList<String>([]);
+  // List<String> selectedDepartmentList = [];
   List<String> selectedDepartmentIdList = [];
   RxString selectedDepartmentOption = "".obs;
 
@@ -54,6 +56,7 @@ class CompanyManageScreenController extends GetxController {
         departmentStringList.clear();
         for(int i=0; i < departmentList.length; i++) {
           departmentStringList.add(departmentList[i].departmentName);
+          log('${departmentList[i].id} : ${departmentList[i].departmentName}');
         }
 
         log('departmentList Length : ${departmentList.length}');
@@ -141,12 +144,27 @@ class CompanyManageScreenController extends GetxController {
         phoneNumberFieldController.text = companyGetByIdModel.data.phoneno;
         addressFieldController.text = companyGetByIdModel.data.address;
 
-        List departmentList = companyGetByIdModel.data.departmentId.split(',');
+        // Remove Braces From Api String
+        log('companyGetByIdModel.data.departmentId : ${companyGetByIdModel.data.departmentId}');
+        String removedBracesString = companyGetByIdModel.data.departmentId
+            .substring(1, companyGetByIdModel.data.departmentId.length - 1);
 
-        for (var element in departmentList) {
-          log('Element : $element');
+        // Set Api Id list into local selected list
+        List<String> apiDepartmentList = removedBracesString.split(',');
+        selectedDepartmentIdList = apiDepartmentList;
+
+        // Clear show list
+        selectedDepartmentList = <String>[].obs;
+
+        // For Dropdown Show Selected Value show in dropdown
+        for(int i=0; i < departmentList.length; i++) {
+          for(int j=0; j < selectedDepartmentIdList.length; j++) {
+            if(departmentList[i].id.toString().trim() == selectedDepartmentIdList[j].trim()) {
+              selectedDepartmentList.add(departmentList[i].departmentName);
+            }
+          }
         }
-
+        log('selectedDepartmentList : $selectedDepartmentList');
 
       } else {
         log('getCompanyDetailsFunction Else');
@@ -161,10 +179,52 @@ class CompanyManageScreenController extends GetxController {
 
   }
 
+  /// Update Company Details
+  Future<void> updateCompanyDetailsFunction() async {
+    isLoading(true);
+    String url = ApiUrl.updateCompanyDetailsApi;
+    log('Update Company Api URl : $url');
+
+    try {
+
+      Map<String, dynamic> bodyData = {
+        "id": companyId,
+        "userid": "${UserDetails.userId}",
+        "user_name": nameFieldController.text.trim(),
+        "email": emailFieldController.text.trim().toLowerCase(),
+        "phoneno": phoneNumberFieldController.text,
+        "department_id": "$selectedDepartmentIdList",
+        "address": addressFieldController.text.trim(),
+      };
+
+      http.Response response = await http.post(
+        Uri.parse(url),
+        body: bodyData,
+      );
+
+      UpdateCompanyModel updateCompanyModel = UpdateCompanyModel.fromJson(json.decode(response.body));
+      isSuccessStatus = updateCompanyModel.success.obs;
+
+      if(isSuccessStatus.value) {
+        Fluttertoast.showToast(msg: updateCompanyModel.messege);
+        Get.back();
+        await companyListScreenController.getAllCompanyFunction();
+      } else {
+        log('updateCompanyDetailsFunction Else');
+      }
+
+
+    } catch(e) {
+      log('updateCompanyDetailsFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
   @override
   void onInit() {
     getAllDepartmentFunction();
-
     log("$companyOption");
     super.onInit();
   }
@@ -178,6 +238,12 @@ class CompanyManageScreenController extends GetxController {
     selectedDepartmentIdString2 = selectedDepartmentIdString.replaceAll(" ", "");
     log('selectedDepartmentIdString2 :$selectedDepartmentIdString2');
     return selectedDepartmentIdString2;
+  }
+
+
+  loadUI() {
+    isLoading(true);
+    isLoading(false);
   }
 
 }

@@ -9,8 +9,10 @@ import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/Utils/validator.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/custom_button_module.dart';
 import 'package:payroll_system/common_modules/form_single_field_module.dart';
+import 'package:payroll_system/constants/anums.dart';
 import 'package:sizer/sizer.dart';
 
 class CompanyFormModule extends StatelessWidget {
@@ -82,7 +84,10 @@ class CompanyFormModule extends StatelessWidget {
                     }
 
                     log('screenController.selectedDepartmentIdList :${screenController.selectedDepartmentIdList}');
+                    screenController.loadUI();
+
                   },
+                  // ignore: invalid_use_of_protected_member
                   selectedValues: screenController.selectedDepartmentList.value,
                 ),
               ],
@@ -103,11 +108,25 @@ class CompanyFormModule extends StatelessWidget {
                   flex: 5,
                   child: ButtonCustom(
                     onPressed: () async {
-                      if (screenController.selectedDepartmentIdList.isEmpty) {
-                        Fluttertoast.showToast(msg: "Please select department");
-                      } else if (screenController
-                          .selectedDepartmentIdList.isNotEmpty) {
-                        await screenController.createCompanyFunction();
+                      if (screenController.companyOption ==
+                          CompanyOption.create) {
+                        if (screenController.selectedDepartmentIdList.isEmpty) {
+                          Fluttertoast.showToast(
+                              msg: "Please select department");
+                        } else if (screenController
+                            .selectedDepartmentIdList.isNotEmpty) {
+                          await screenController.createCompanyFunction();
+                        }
+                      } else {
+
+                        if (screenController.selectedDepartmentIdList.isEmpty) {
+                          Fluttertoast.showToast(
+                              msg: "Please select department");
+                        } else if (screenController
+                            .selectedDepartmentIdList.isNotEmpty) {
+                          await screenController.updateCompanyDetailsFunction();
+                        }
+
                       }
                     },
                     text: "Submit",
@@ -118,7 +137,15 @@ class CompanyFormModule extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: ButtonCustom(
-                    onPressed: () => Get.back(),
+                    onPressed: () => CustomAlertDialog().showAlertDialog(
+                      context: context,
+                      textContent: 'Are you sure you want to go to back ?',
+                      onYesTap: () {
+                        Get.back();
+                        Get.back();
+                      },
+                      onCancelTap: () => Get.back(),
+                    ),
                     text: "Back",
                     textsize: 15.sp,
                   ),
