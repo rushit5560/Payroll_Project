@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import '../../../Utils/messaging.dart';
+
+import '../../../common_modules/common_loader.dart';
 import 'employee_manage_screen_widget.dart';
 
 class EmployeeManageScreen extends StatelessWidget {
@@ -15,7 +17,11 @@ class EmployeeManageScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(AppMessage.createEmployee),
         ),
-        body: EmployeeDetailsScreenWidgets(),
+        body: Obx(
+          () => employeDetailsFormController.isLoading.value
+              ? CommonLoader().showLoader()
+              : EmployeeDetailsScreenWidgets(),
+        ),
       ),
     );
   }

@@ -30,10 +30,12 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            AppMessage.employeeDetails,
-            style: TextStyleConfig.textStyle(
-                fontSize: 22.sp, fontWeight: FontWeight.w400),
+          Center(
+            child: Text(
+              AppMessage.employeeDetails,
+              style: TextStyleConfig.textStyle(
+                  fontSize: 22.sp, fontWeight: FontWeight.w400),
+            ),
           ),
           SizedBox(height: 2.h),
           ImagePickerCustom(),
@@ -182,26 +184,25 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
                     fontWeight: FontWeight.w600, fontSize: 16),
               ).commonSymmetricPadding(vertical: 2),
               DropDownMultiSelect(
-                options: employeeCreteScreenController.departmentStringList,
+                options: employeeCreteScreenController.companyStringList,
                 whenEmpty: 'Choose Company',
-                onChanged: (value) {
-                  employeeCreteScreenController.selectedDepartmentList.value =
-                      value;
-                  employeeCreteScreenController.selectedDepartmentOption.value =
+                onChanged: (val) {
+                  employeeCreteScreenController.selectedCompanyList.value =
+                      val;
+                  employeeCreteScreenController.selectedCompanyOption.value =
                       "";
-                  employeeCreteScreenController.selectedDepartmentIdList = [];
+                  employeeCreteScreenController.selectedCompanyIdList = [];
 
                   // Selected Department generate new id list for send in api
-                  for (int i = 0; i < value.length; i++) {
+                  for (int i = 0; i < val.length; i++) {
                     for (int j = 0;
-                        j < employeeCreteScreenController.departmentList.length;
+                        j < employeeCreteScreenController.companyList.length;
                         j++) {
-                      if (value[i] ==
+                      if (val[i] ==
                           employeeCreteScreenController
-                              .departmentList[j].departmentName) {
-                        employeeCreteScreenController.selectedDepartmentIdList
-                            .add(employeeCreteScreenController
-                                .departmentList[j].id
+                              .companyList[j].userName) {
+                        employeeCreteScreenController.selectedCompanyIdList.add(
+                            employeeCreteScreenController.companyList[j].id
                                 .toString());
                       }
                     }
@@ -210,18 +211,18 @@ class EmployeeDetailsScreenWidgets extends StatelessWidget {
                   // log('screenController.selectedDepartmentIdList :${screenController.selectedDepartmentIdList}');
                 },
                 selectedValues:
-                    employeeCreteScreenController.selectedDepartmentList.value,
+                    employeeCreteScreenController.selectedCompanyList.value,
               ),
             ],
           ),
-          FormSingleFieldModule(
-            headerText: AppMessage.company,
-            text: AppMessage.company,
-            // keyboardType: TextInputType.number,
-            textEditingController:
-                employeeCreteScreenController.companyController,
-            validate: (value) => FieldValidation().validateCompanyName(value),
-          ),
+          // FormSingleFieldModule(
+          //   headerText: AppMessage.company,
+          //   text: AppMessage.company,
+          //   // keyboardType: TextInputType.number,
+          //   textEditingController:
+          //       employeeCreteScreenController.companyController,
+          //   validate: (value) => FieldValidation().validateCompanyName(value),
+          // ),
           const SizedBox(height: 5),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

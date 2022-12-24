@@ -21,7 +21,11 @@ class EmployeManageScreenController extends GetxController {
   RxBool isLoading = false.obs;
   DateTime selectedDate = DateTime.now();
   Rx<List<String>> selectedDepartmentList = Rx<List<String>>([]);
+  Rx<List<String>> selectedCompanyList = Rx<List<String>>([]);
+
   List<String> selectedDepartmentIdList = [];
+  List<String> selectedCompanyIdList = [];
+
   RxBool isSuccessStatus = false.obs;
   List<DepartmentData> departmentList = [];
   List<CompanyData> companyList = [];
@@ -32,6 +36,8 @@ class EmployeManageScreenController extends GetxController {
   CompanyOption companyOption = Get.arguments[0];
   List<CompanyData> allCompanyList = [];
   RxString selectedDepartmentOption = "".obs;
+  RxString selectedCompanyOption = "".obs;
+
   // final employeeListScreenController = Get.find<EmployeeListScreenController>();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -252,6 +258,7 @@ class EmployeManageScreenController extends GetxController {
           .add(await http.MultipartFile.fromPath("Photo", images!.path));
       log("1232357 8");
       var response = await request.send();
+      log('getEmployeeStore: ${response}');
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
