@@ -4,6 +4,7 @@ import 'package:payroll_system/controllers/employee_manage_screen_controller.dar
 import '../../../Utils/messaging.dart';
 
 import '../../../common_modules/common_loader.dart';
+import '../../employee_screen/employee_manage_screen/employee_manage_screen_widget.dart';
 import 'employee_manage_screen_widget.dart';
 
 class EmployeeManageScreen extends StatelessWidget {

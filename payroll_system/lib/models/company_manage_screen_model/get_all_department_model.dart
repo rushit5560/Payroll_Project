@@ -35,7 +35,7 @@ class DepartmentData {
     required this.isActive,
     required this.createdby,
     // required this.modifiedby,
-    // required this.companyid,
+    required this.companyid,
     // required this.createdAt,
     // required this.updatedAt,
   });
@@ -45,7 +45,7 @@ class DepartmentData {
   String isActive;
   int createdby;
   // int modifiedby;
-  // dynamic companyid;
+  String companyid;
   // DateTime createdAt;
   // DateTime updatedAt;
 
@@ -55,7 +55,7 @@ class DepartmentData {
     isActive: json["is_active"] ?? "",
     createdby: json["createdby"] ?? 0,
     // modifiedby: json["modifiedby"] == null ? null : json["modifiedby"],
-    // companyid: json["companyid"],
+    companyid: json["companyid"]??"",
     // createdAt: DateTime.parse(json["created_at"]),
     // updatedAt: DateTime.parse(json["updated_at"]),
   );
@@ -66,7 +66,7 @@ class DepartmentData {
     "is_active": isActive,
     "createdby": createdby,
     // "modifiedby": modifiedby == null ? null : modifiedby,
-    // "companyid": companyid,
+    "companyid": companyid,
     // "created_at": createdAt.toIso8601String(),
     // "updated_at": updatedAt.toIso8601String(),
   };
