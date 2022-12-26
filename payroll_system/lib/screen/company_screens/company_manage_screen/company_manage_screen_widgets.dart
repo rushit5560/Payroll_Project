@@ -85,7 +85,6 @@ class CompanyFormModule extends StatelessWidget {
 
                     log('screenController.selectedDepartmentIdList :${screenController.selectedDepartmentIdList}');
                     screenController.loadUI();
-
                   },
                   // ignore: invalid_use_of_protected_member
                   selectedValues: screenController.selectedDepartmentList.value,
@@ -118,7 +117,6 @@ class CompanyFormModule extends StatelessWidget {
                           await screenController.createCompanyFunction();
                         }
                       } else {
-
                         if (screenController.selectedDepartmentIdList.isEmpty) {
                           Fluttertoast.showToast(
                               msg: "Please select department");
@@ -126,7 +124,6 @@ class CompanyFormModule extends StatelessWidget {
                             .selectedDepartmentIdList.isNotEmpty) {
                           await screenController.updateCompanyDetailsFunction();
                         }
-
                       }
                     },
                     text: "Submit",

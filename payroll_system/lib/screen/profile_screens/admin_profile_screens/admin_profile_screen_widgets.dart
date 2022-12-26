@@ -96,7 +96,7 @@ class AdminImageModule extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         adminProfileScreenController
-                            .showPhotoChoiceDialog(Get.context!);
+                            .showPhotoPickerSheet(context);
                       },
                       child: Container(
                         height: 28,
@@ -164,7 +164,7 @@ class AdminSubmitButtonModule extends StatelessWidget {
       width: 60.w,
       child: ElevatedButton(
         onPressed: () {
-          adminProfileScreenController.updateUserProfileFunction();
+          adminProfileScreenController.updateAdminProfileFunction();
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

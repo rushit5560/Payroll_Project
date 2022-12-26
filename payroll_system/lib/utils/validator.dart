@@ -1,7 +1,7 @@
 class FieldValidation {
   String? validateUserName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your user name.';
+      return 'Please enter your name.';
     } else {
       return null;
     }
@@ -51,9 +51,17 @@ class FieldValidation {
     }
   }
 
+  String? validateAddress(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your address';
+    } else {
+      return null;
+    }
+  }
+
   String? validateHomeAddress(String value) {
     if (value.isEmpty) {
-      return 'Please enter your homeAddress';
+      return 'Please enter your home Address';
     } else {
       return null;
     }

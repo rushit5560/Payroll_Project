@@ -10,16 +10,18 @@ import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
-class SubAdminImageModule extends StatelessWidget {
-  SubAdminImageModule({super.key});
+import '../../../controllers/profile_screens_controller/employee_profile_screen_controller.dart';
 
-  final subAdminProfileScreenController =
-      Get.find<SubAdminProfileScreenController>();
+class EmployeeImageModule extends StatelessWidget {
+  EmployeeImageModule({super.key});
+
+  final employeeProfileScreenController =
+      Get.find<EmployeeProfileScreenController>();
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => subAdminProfileScreenController.isLoading.value
+      () => employeeProfileScreenController.isLoading.value
           ? CommonLoader().showLoader()
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32,11 +34,11 @@ class SubAdminImageModule extends StatelessWidget {
                       width: 120,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
-                        child: subAdminProfileScreenController.imageFile != null
+                        child: employeeProfileScreenController.imageFile != null
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.file(
-                                  subAdminProfileScreenController.imageFile!,
+                                  employeeProfileScreenController.imageFile!,
                                   // height: 100,
                                   // width: 100,
                                   fit: BoxFit.cover,
@@ -46,7 +48,7 @@ class SubAdminImageModule extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
                                   ApiUrl.apiImagePath +
-                                      subAdminProfileScreenController
+                                      employeeProfileScreenController
                                           .profileData!.photo,
                                   fit: BoxFit.cover,
                                   errorBuilder: (ctx, obj, st) {
@@ -70,7 +72,7 @@ class SubAdminImageModule extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        subAdminProfileScreenController
+                        employeeProfileScreenController
                             .showPhotoPickerSheet(context);
                       },
                       child: Container(
@@ -94,11 +96,10 @@ class SubAdminImageModule extends StatelessWidget {
   }
 }
 
-class SubAdminFormModule extends StatelessWidget {
-  SubAdminFormModule({super.key});
-
-  final subAdminProfileScreenController =
-      Get.find<SubAdminProfileScreenController>();
+class EmployeeFormModule extends StatelessWidget {
+  EmployeeFormModule({super.key});
+  final employeeProfileScreenController =
+      Get.find<EmployeeProfileScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +111,11 @@ class SubAdminFormModule extends StatelessWidget {
     );
 
     return Form(
-      key: subAdminProfileScreenController.formKey,
+      key: employeeProfileScreenController.formKey,
       child: Column(
         children: [
           TextFormField(
-            controller: subAdminProfileScreenController.nameController,
+            controller: employeeProfileScreenController.nameController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateUserName(val!),
             decoration: InputDecoration(
@@ -128,7 +129,7 @@ class SubAdminFormModule extends StatelessWidget {
           ),
           SizedBox(height: 2.h),
           TextFormField(
-            controller: subAdminProfileScreenController.phoneNumberController,
+            controller: employeeProfileScreenController.phoneNumberController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateMobileNumber(val!),
             decoration: InputDecoration(
@@ -142,7 +143,7 @@ class SubAdminFormModule extends StatelessWidget {
           ),
           SizedBox(height: 2.h),
           TextFormField(
-            controller: subAdminProfileScreenController.addressController,
+            controller: employeeProfileScreenController.addressController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateAddress(val!),
             decoration: InputDecoration(
@@ -160,11 +161,11 @@ class SubAdminFormModule extends StatelessWidget {
   }
 }
 
-class SubAdminSubmitButtonModule extends StatelessWidget {
-  SubAdminSubmitButtonModule({super.key});
+class EmployeeSubmitButtonModule extends StatelessWidget {
+  EmployeeSubmitButtonModule({super.key});
 
-  final subAdminProfileScreenController =
-      Get.find<SubAdminProfileScreenController>();
+  final employeeProfileScreenController =
+      Get.find<EmployeeProfileScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +174,7 @@ class SubAdminSubmitButtonModule extends StatelessWidget {
       width: 60.w,
       child: ElevatedButton(
         onPressed: () {
-          subAdminProfileScreenController.updateSubAdminProfileFunction();
+          employeeProfileScreenController.updateSubAdminProfileFunction();
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

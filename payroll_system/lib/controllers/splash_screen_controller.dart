@@ -10,10 +10,12 @@ import 'package:payroll_system/Screen/authentication_screens/login_screen/login_
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/Utils/extension_methods/user_preference.dart';
+import 'package:payroll_system/screen/company_home_screen/company_home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/user_permission_model/user_permission_model.dart';
 import '../Screen/Home_Screen/home_screen.dart';
 import '../Utils/api_url.dart';
+import '../screen/employee_home_screen/employee_home_screen.dart';
 
 class SplashScreenController extends GetxController {
   RxBool isLoading = false.obs;
@@ -113,8 +115,15 @@ class SplashScreenController extends GetxController {
           }).whenComplete(
             () {
               //if user is loggedin already
-              if (UserDetails.isUserLoggedIn) {
-                Get.off(() => HomeScreen());
+              /// Role wise route set
+              if (UserDetails.roleId == 1) {
+                Get.offAll(() => HomeScreen());
+              } else if (UserDetails.roleId == 2) {
+                Get.offAll(() => HomeScreen());
+              } else if (UserDetails.roleId == 3) {
+                Get.offAll(() => CompanyHomeScreen());
+              } else if (UserDetails.roleId == 4) {
+                Get.offAll(() => EmployeeHomeScreen());
               } else {
                 Get.off(() => LoginScreen());
               }

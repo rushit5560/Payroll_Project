@@ -1,25 +1,31 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:multiselect/multiselect.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
+import 'package:payroll_system/controllers/profile_screens_controller/company_profile_screen_controller.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
-class SubAdminImageModule extends StatelessWidget {
-  SubAdminImageModule({super.key});
+import '../../../models/company_manage_screen_model/get_all_department_model.dart';
 
-  final subAdminProfileScreenController =
-      Get.find<SubAdminProfileScreenController>();
+class CompanyImageModule extends StatelessWidget {
+  CompanyImageModule({super.key});
+
+  final companyProfileScreenController =
+      Get.find<CompanyProfileScreenController>();
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => subAdminProfileScreenController.isLoading.value
+      () => companyProfileScreenController.isLoading.value
           ? CommonLoader().showLoader()
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32,11 +38,11 @@ class SubAdminImageModule extends StatelessWidget {
                       width: 120,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
-                        child: subAdminProfileScreenController.imageFile != null
+                        child: companyProfileScreenController.imageFile != null
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.file(
-                                  subAdminProfileScreenController.imageFile!,
+                                  companyProfileScreenController.imageFile!,
                                   // height: 100,
                                   // width: 100,
                                   fit: BoxFit.cover,
@@ -46,7 +52,7 @@ class SubAdminImageModule extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
                                   ApiUrl.apiImagePath +
-                                      subAdminProfileScreenController
+                                      companyProfileScreenController
                                           .profileData!.photo,
                                   fit: BoxFit.cover,
                                   errorBuilder: (ctx, obj, st) {
@@ -70,7 +76,7 @@ class SubAdminImageModule extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        subAdminProfileScreenController
+                        companyProfileScreenController
                             .showPhotoPickerSheet(context);
                       },
                       child: Container(
@@ -94,12 +100,11 @@ class SubAdminImageModule extends StatelessWidget {
   }
 }
 
-class SubAdminFormModule extends StatelessWidget {
-  SubAdminFormModule({super.key});
+class CompanyFormModule extends StatelessWidget {
+  CompanyFormModule({super.key});
 
-  final subAdminProfileScreenController =
-      Get.find<SubAdminProfileScreenController>();
-
+  final companyProfileScreenController =
+      Get.find<CompanyProfileScreenController>();
   @override
   Widget build(BuildContext context) {
     var border = OutlineInputBorder(
@@ -110,11 +115,61 @@ class SubAdminFormModule extends StatelessWidget {
     );
 
     return Form(
-      key: subAdminProfileScreenController.formKey,
+      key: companyProfileScreenController.formKey,
       child: Column(
         children: [
+          DropDownMultiSelect(
+            options: companyProfileScreenController.departmentStringList,
+
+            decoration: InputDecoration(
+              fillColor: AppColors.greyColor.withOpacity(0.25),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              labelText: "Choose Department",
+              border: border,
+              enabledBorder: border,
+              filled: true,
+            ),
+
+            // whenEmpty: 'Choose Department',
+            validator: (val) {
+              if (val == "Choose Department") {
+                return "Please Choose Department";
+              } else {
+                return "";
+              }
+            },
+            onChanged: (value) {
+              companyProfileScreenController.selectedDepartmentList.value =
+                  value;
+              companyProfileScreenController.selectedDepartmentOption.value =
+                  "";
+              companyProfileScreenController.selectedDepartmentIdList = [];
+
+              // Selected Department generate new id list for send in api
+              for (int i = 0; i < value.length; i++) {
+                for (int j = 0;
+                    j < companyProfileScreenController.departmentList.length;
+                    j++) {
+                  if (value[i] ==
+                      companyProfileScreenController
+                          .departmentList[j].departmentName) {
+                    companyProfileScreenController.selectedDepartmentIdList.add(
+                        companyProfileScreenController.departmentList[j].id
+                            .toString());
+                  }
+                }
+              }
+
+              log('companyProfileScreenController.selectedDepartmentIdList :${companyProfileScreenController.selectedDepartmentIdList}');
+              companyProfileScreenController.loadUI();
+            },
+            // ignore: invalid_use_of_protected_member
+            selectedValues:
+                companyProfileScreenController.selectedDepartmentList.value,
+          ),
+          SizedBox(height: 2.h),
           TextFormField(
-            controller: subAdminProfileScreenController.nameController,
+            controller: companyProfileScreenController.nameController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateUserName(val!),
             decoration: InputDecoration(
@@ -128,7 +183,7 @@ class SubAdminFormModule extends StatelessWidget {
           ),
           SizedBox(height: 2.h),
           TextFormField(
-            controller: subAdminProfileScreenController.phoneNumberController,
+            controller: companyProfileScreenController.phoneNumberController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateMobileNumber(val!),
             decoration: InputDecoration(
@@ -142,7 +197,7 @@ class SubAdminFormModule extends StatelessWidget {
           ),
           SizedBox(height: 2.h),
           TextFormField(
-            controller: subAdminProfileScreenController.addressController,
+            controller: companyProfileScreenController.addressController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateAddress(val!),
             decoration: InputDecoration(
@@ -160,11 +215,11 @@ class SubAdminFormModule extends StatelessWidget {
   }
 }
 
-class SubAdminSubmitButtonModule extends StatelessWidget {
-  SubAdminSubmitButtonModule({super.key});
+class CompanySubmitButtonModule extends StatelessWidget {
+  CompanySubmitButtonModule({super.key});
 
-  final subAdminProfileScreenController =
-      Get.find<SubAdminProfileScreenController>();
+  final companyProfileScreenController =
+      Get.find<CompanyProfileScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +228,7 @@ class SubAdminSubmitButtonModule extends StatelessWidget {
       width: 60.w,
       child: ElevatedButton(
         onPressed: () {
-          subAdminProfileScreenController.updateSubAdminProfileFunction();
+          companyProfileScreenController.updateCompanyProfileFunction();
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

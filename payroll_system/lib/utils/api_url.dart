@@ -9,8 +9,14 @@ class ApiUrl {
   static const getPermissionApi = "${apiMainPath}api/getpermission/";
   // static const allDepartmentApi = "${apiMainPath}api/department";
 
+  // profile api urls
   static const profileGetApi = "${apiMainPath}api/profile";
-  static const profileUpdateApi = "${apiMainPath}api/profile/update";
+  static const adminProfileUpdateApi = "${apiMainPath}api/profile/update";
+  static const subAdminProfileUpdateApi = "${apiMainPath}api/profile/subupdate";
+  static const companyProfileUpdateApi =
+      "${apiMainPath}api/profile/companyupdate";
+  static const employeeProfileUpdateApi =
+      "${apiMainPath}api/profile/employeeupdate";
 
   // Employee Api's
   static const allEmployeeApi = "${apiMainPath}api/employee";

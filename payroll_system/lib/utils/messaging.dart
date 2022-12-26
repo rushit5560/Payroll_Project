@@ -12,12 +12,15 @@ class AppMessage {
   static String dontHaveAnAccount = "Don't have an account ?";
   static String haveAlreadyAnAccount = 'Already have an account ?  ';
 
+  //appbar titles
+  static String editProfileText = "Edit Profile";
+
   /// Drawer Name's
   static String companyNameDrawer = "Company";
   static String departmentNameDrawer = "Department";
   static String companyDepartmentNameDrawer = "Company Department";
   static String employeeNameDrawer = "Employee";
-  static String editProfileNameDrawer = "Edit Profile";
+
   static String logOutNameDrawer = "Logout";
   static String changePasswordDrawer = "Change Password";
 
@@ -90,5 +93,4 @@ class AppMessage {
   static String departmentCreate = 'Create Department';
   static String departmentUpdate = 'Update Department';
   static String departmentName = 'Department Name';
-
 }

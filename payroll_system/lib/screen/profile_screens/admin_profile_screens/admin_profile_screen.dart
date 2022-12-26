@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
 
 import 'package:payroll_system/common_modules/common_loader.dart';
@@ -17,7 +18,7 @@ class AdminProfileScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          "Admin Profile",
+          AppMessage.editProfileText,
           style: TextStyle(
             fontSize: 13.sp,
           ),

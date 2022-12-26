@@ -25,11 +25,13 @@ class SubAdminProfileScreenController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController userNameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
-    String url = ApiUrl.profileGetApi + "/${UserDetails.userId}";
+    String url = "${ApiUrl.profileGetApi}/${UserDetails.userId}";
     log("getUserProfileFunction Api url : $url");
 
     try {
@@ -44,7 +46,9 @@ class SubAdminProfileScreenController extends GetxController {
       if (isSuccessStatus) {
         profileData = userProfileModel.data;
 
-        userNameController.text = profileData!.userName;
+        nameController.text = profileData!.userName;
+        phoneNumberController.text = profileData!.phoneno;
+        addressController.text = profileData!.address;
 
         log(" userName :: ${userProfileModel.data.userName}");
       } else {
@@ -58,11 +62,11 @@ class SubAdminProfileScreenController extends GetxController {
     }
   }
 
-  updateUserProfileFunction() async {
+  updateSubAdminProfileFunction() async {
     isLoading(true);
 
-    String url = ApiUrl.profileUpdateApi;
-    log("updateUserProfileFunction url: $url");
+    String url = ApiUrl.subAdminProfileUpdateApi;
+    log("updateSubAdminProfileFunction url: $url");
 
     log('UserDetails.userid: ${UserDetails.userId}');
 
@@ -71,41 +75,21 @@ class SubAdminProfileScreenController extends GetxController {
         log("uploading with a photo");
         var request = http.MultipartRequest('POST', Uri.parse(url));
 
-        var stream = http.ByteStream(imageFile!.openRead());
-        stream.cast();
-
-        var length = await imageFile!.length();
-
-        request.files
-            .add(await http.MultipartFile.fromPath("photo", imageFile!.path));
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            "photo",
+            imageFile!.path,
+          ),
+        );
         // request.headers.addAll(apiHeader.headers);
 
         request.fields['userid'] = UserDetails.userId.toString();
-        request.fields['user_name'] = userNameController.text;
-        // request.fields['photo'] = "";
+        request.fields['user_name'] = nameController.text;
+        request.fields['phoneno'] = phoneNumberController.text;
+        request.fields['address'] = addressController.text;
+
         request.fields['showimg'] =
             profileData!.photo.isEmpty ? "" : profileData!.photo;
-
-        var multiPart = http.MultipartFile(
-          'photo',
-          stream,
-          length,
-        );
-
-        request.files.add(multiPart);
-
-        // var multiPart = http.MultipartFile(
-        //   'photo',
-        //   stream,
-        //   length,
-        // );
-
-        // var multiFile = await http.MultipartFile.fromPath(
-        //  "image",
-        //   file!.path,
-        // );
-
-        // request.files.add(multiPart);
 
         log('request.fields: ${request.fields}');
         log('request.files: ${request.files}');
@@ -132,8 +116,7 @@ class SubAdminProfileScreenController extends GetxController {
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-            prefs.setString(
-                UserPreference.userNameKey, userNameController.text);
+            prefs.setString(UserPreference.userNameKey, nameController.text);
 
             UserDetails.userName =
                 prefs.getString(UserPreference.userNameKey) ?? "";
@@ -147,30 +130,12 @@ class SubAdminProfileScreenController extends GetxController {
         log("uploading without a photo");
         var request = http.MultipartRequest('POST', Uri.parse(url));
 
-        // request.files.add(await http.MultipartFile.fromPath(
-        //   "photo",
-        //   imageFile == null ? "" : imageFile!.path,
-        // ));
-        // request.headers.addAll(apiHeader.headers);
-
         request.fields['userid'] = UserDetails.userId.toString();
-        request.fields['user_name'] = userNameController.text;
-        // request.fields['photo'] = "";
+        request.fields['user_name'] = nameController.text;
+        request.fields['phoneno'] = phoneNumberController.text;
+        request.fields['address'] = addressController.text;
         request.fields['showimg'] =
             profileData!.photo.isEmpty ? "" : profileData!.photo;
-
-        // var multiPart = http.MultipartFile(
-        //   'photo',
-        //   stream,
-        //   length,
-        // );
-
-        // var multiFile = await http.MultipartFile.fromPath(
-        //  "image",
-        //   file!.path,
-        // );
-
-        // request.files.add(multiPart);
 
         log('request.fields: ${request.fields}');
         log('request.files: ${request.files}');
@@ -197,8 +162,7 @@ class SubAdminProfileScreenController extends GetxController {
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-            prefs.setString(
-                UserPreference.userNameKey, userNameController.text);
+            prefs.setString(UserPreference.userNameKey, nameController.text);
 
             UserDetails.userName =
                 prefs.getString(UserPreference.userNameKey) ?? "";
@@ -210,82 +174,65 @@ class SubAdminProfileScreenController extends GetxController {
         });
       }
     } catch (e) {
-      log("updateUserProfileFunction Error ::: $e");
+      log("updateSubAdminProfileFunction Error ::: $e");
       rethrow;
     } finally {
       isLoading(false);
     }
   }
 
-  void _openCamera(BuildContext context) async {
-    final pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.camera,
-    );
-    // isLoading(true);
-    imageFile = File(pickedFile!.path);
-    // isLoading(false);
+  imageFromCamera() async {
+    XFile? image = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 50);
 
+    if (image != null) {
+      imageFile = File(image.path);
+      isLoading(true);
+      isLoading(false);
+    }
     Get.back();
   }
 
-  void _openGallery(BuildContext context) async {
-    final pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
-    // isLoading(true);
-    imageFile = File(pickedFile!.path);
-    // isLoading(false);
-
+  imageFromGallary() async {
+    XFile? image = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, imageQuality: 50);
+    if (image != null) {
+      imageFile = File(image.path);
+      isLoading(true);
+      isLoading(false);
+    }
     Get.back();
   }
 
-  Future<void> showPhotoChoiceDialog(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(
-            "Choose option",
-            style: TextStyle(color: Colors.black),
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
+  void showPhotoPickerSheet(BuildContext context) async {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Wrap(
               children: [
-                const Divider(
-                  height: 1,
-                  color: Colors.black,
-                ),
-                const SizedBox(height: 10),
                 ListTile(
-                  onTap: () {
-                    _openGallery(context);
-                  },
+                  leading: const Icon(Icons.photo_library),
                   title: const Text("Gallery"),
-                  leading: const Icon(
-                    Icons.account_box,
-                    color: Colors.black,
-                  ),
-                ),
-                // Divider(
-                //   height: 1,
-                //   color: Colors.black,
-                // ),
-                ListTile(
                   onTap: () {
-                    _openCamera(context);
+                    // employeDetailsFormController.getImage(ImageSource.gallery);
+
+                    imageFromGallary();
                   },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
                   title: const Text("Camera"),
-                  leading: const Icon(
-                    Icons.camera,
-                    color: Colors.black,
-                  ),
+                  onTap: () {
+                    // employeDetailsFormController.getImage(ImageSource.camera);
+
+                    imageFromCamera();
+                  },
                 ),
               ],
             ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
 
   @override
