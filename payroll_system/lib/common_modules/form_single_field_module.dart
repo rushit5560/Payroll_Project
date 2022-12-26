@@ -17,24 +17,26 @@ class FormSingleFieldModule extends StatelessWidget {
   TextInputType? keyboardType;
   bool readOnly;
   int? maxLength;
-Function()? onPressed;
+  bool obscureText;
+  Function()? onPressed;
   //  double fontSize = 15.0,
   FormSingleFieldModule(
       {Key? key,
-        required this.text,
-        required this.headerText,
-        // required this.prefixIcon,
-        this.inputFormatters,
-        this.suffixIcon,
-        this.color = Colors.grey,
-        this.size,
-        this.textEditingController,
-        this.onTap,
-        this.keyboardType,
-        this.validate,
-        this.maxLength,
-        this.onPressed,
-        this.readOnly = false})
+      required this.text,
+      required this.headerText,
+      // required this.prefixIcon,
+      this.inputFormatters,
+      this.suffixIcon,
+      this.color = Colors.grey,
+      this.size,
+      this.textEditingController,
+      this.onTap,
+      this.keyboardType,
+      this.validate,
+      this.maxLength,
+      this.onPressed,
+      this.obscureText = false,
+      this.readOnly = false})
       : super(key: key);
 
   @override
@@ -43,13 +45,13 @@ Function()? onPressed;
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-            headerText,
+          headerText,
           style: TextStyleConfig.textStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 16
-          ),
+              fontWeight: FontWeight.w600, fontSize: 16),
         ).commonSymmetricPadding(vertical: 2),
         TextFormField(
+          // obscureText: loginScreenController.isPasswordVisible.value,
+          obscureText: obscureText,
           validator: validate,
           onTap: onTap,
           readOnly: readOnly,
@@ -57,12 +59,12 @@ Function()? onPressed;
           controller: textEditingController,
           inputFormatters: inputFormatters,
           maxLength: maxLength,
-          
           decoration: InputDecoration(
             // prefixIcon: Icon(prefixIcon, color: color),
             counterText: '',
             hintText: text,
-            suffixIcon:IconButton(onPressed:onPressed , icon: Icon(suffixIcon)),
+            suffixIcon:
+                IconButton(onPressed: onPressed, icon: Icon(suffixIcon)),
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),

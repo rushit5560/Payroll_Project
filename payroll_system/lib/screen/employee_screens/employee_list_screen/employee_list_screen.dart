@@ -24,7 +24,7 @@ class EmployeeListScreen extends StatelessWidget {
               onPressed: () {
                 Get.to(
                   () => EmployeeManageScreen(),
-                  arguments: [CompanyOption.create, ""],
+                  arguments: [EmployeeOption.create, ""],
                 );
               },
               icon: const Icon(Icons.add_rounded),

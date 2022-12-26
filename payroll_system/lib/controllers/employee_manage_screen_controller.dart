@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:http/http.dart' as http;
+import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,15 +19,17 @@ import '../models/company_manage_screen_model/get_all_department_model.dart';
 
 class EmployeManageScreenController extends GetxController {
   DateTime? chosenDateTime;
-  EmployeeOption employeeOption = Get.arguments[0];
-
-  RxBool isLoading = false.obs;
   DateTime selectedDate = DateTime.now();
+  EmployeeOption employeeOption = Get.arguments[0];
+  RxBool isPasswordVisible = false.obs;
+  List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
+  RxString selectedValue = "Choose Option".obs;
+  RxBool isLoading = false.obs;
   Rx<List<String>> selectedDepartmentList = Rx<List<String>>([]);
   Rx<List<String>> selectedCompanyList = Rx<List<String>>([]);
 
   List<String> selectedDepartmentIdList = [];
-  // List<String> selectedCompanyIdList = [];
+  List<String> selectedCompanyIdList = [];
 
   RxBool isSuccessStatus = false.obs;
   List<DepartmentData> departmentList = [];
@@ -39,10 +42,14 @@ class EmployeManageScreenController extends GetxController {
   List<CompanyData> allCompanyList = [];
   CompanyData? companyDDSelectedItem;
   DepartmentData? departmentDataItem;
+  CompanyDepartmentData? companyDepartmentData;
+
   RxString selectedDepartmentOption = "".obs;
   RxString selectedCompanyOption = "".obs;
-  RxString selectedValue = "Choose Option".obs;
   // final employeeListScreenController = Get.find<EmployeeListScreenController>();
+
+  RxList<String> selectedEmpDepartmentList = RxList<String>([]);
+  List<String> selectedEmpDepartmentIdList = [];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -169,7 +176,7 @@ class EmployeManageScreenController extends GetxController {
   Future<void> getAllCompanyFunction() async {
     isLoading(true);
     String url = ApiUrl.allCompanyApi;
-    log('Get All Company List Api Url :$url');
+    // log('Get All Company List Api Url :$url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
@@ -177,19 +184,21 @@ class EmployeManageScreenController extends GetxController {
       AllCompanyModel allCompanyModel =
           AllCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = allCompanyModel.success.obs;
-      log('GetAllCompany :,${response.body}');
+      // log('GetAllCompany :,${response.body}');
       if (isSuccessStatus.value) {
         allCompanyList.clear();
         allCompanyList.addAll(allCompanyModel.data);
 
         companyDDSelectedItem = allCompanyList[0];
 
+        log('companyDDSelectedItem : ${companyDDSelectedItem!.fullName}');
+
         companyStringList.clear();
         for (int i = 0; i < allCompanyList.length; i++) {
           companyStringList.add(allCompanyList[i].userName);
         }
-        log('allCompanyList Length2222 : ${allCompanyList.length}');
-        log('allCompanyList Length1111 : ${allCompanyList.length}');
+        // log('allCompanyList Length2222 : ${allCompanyList.length}');
+        // log('allCompanyList Length1111 : ${allCompanyList.length}');
       } else {
         log('getAllCompanyFunction Else');
       }
@@ -201,47 +210,74 @@ class EmployeManageScreenController extends GetxController {
     }
   }
 
-  Future<void> getAllDepartmentFunction() async {
-    isLoading(true);
-    String url = ApiUrl.allDepartmentApi;
-    log('Get All Department Api Url :$url');
+  Future<void> getCompanyDepartmentFunction(int companyId) async {
+    // isLoading(true);
+    String url = "${ApiUrl.getCompanyDepartmentApi}";
+    log('Get COmpanyDepartment Api Url :$url');
 
     try {
-      http.Response response = await http.get(Uri.parse(url));
-      log('GetAllDepartment ${response.body}');
-      AllDepartmentModel allDepartmentModel =
-          AllDepartmentModel.fromJson(json.decode(response.body));
-      isSuccessStatus = allDepartmentModel.success.obs;
+      var request = http.MultipartRequest('POST', Uri.parse(url));
 
-      if (isSuccessStatus.value) {
-        departmentList.clear();
-        departmentList.addAll(allDepartmentModel.data);
+      request.fields['id'] = "$companyId";
 
-        departmentStringList.clear();
-        for (int i = 0; i < departmentList.length; i++) {
-          departmentStringList.add(departmentList[i].departmentName);
-        }
+           var response = await request.send();
 
-        log('departmentList Length222222 : ${departmentList.length}');
-        log('departmentList Length111111 : ${departmentList.length}');
-      } else {
-        log('getAllDepartmentFunction Else');
-      }
+
+            response.stream
+          .transform(const Utf8Decoder())
+          .transform(const LineSplitter()).listen((value) { 
+
+            CompanyDepartmentModel companyDepartmentModel =
+            CompanyDepartmentModel.fromJson(json.decode(value));
+
+
+            
+          });
+
+
+
+
+
+      // http.Response response = await http.post(Uri.parse(url), body: bodyData);
+      // log("Department");
+      // // log('GetAllDepartment ${response.body}');
+      // CompanyDepartmentModel companyDepartmentModel =
+      //     CompanyDepartmentModel.fromJson(json.decode(response.body));
+      // isSuccessStatus = companyDepartmentModel.success.obs;
+
+      // if (isSuccessStatus.value) {
+      //   departmentList.clear();
+      //   departmentList.addAll(companyDepartmentModel.data);
+
+      //   departmentStringList.clear();
+      //   for (int i = 0; i < departmentList.length; i++) {
+      //     departmentStringList.add(departmentList[i].departmentName);
+      //   }
+      // } else {
+      //   log('getAllDepartmentFunction Else');
+      // }
     } catch (e) {
       log('getAllDepartmentFunction Error :$e');
       rethrow;
-    } finally {
-      isLoading(false);
     }
+    //  finally {
+    //   isLoading(false);
+    // }
+
+    isLoading(true);
+    isLoading(false);
   }
 
-  Future<void> employeeStoreFunction() async {
+  Future<void> employeeCreateFunction() async {
+    // log('12211');
+    // log('ImAGE is :: ${images!.path} ');
+
     isLoading(true);
     String url = ApiUrl.createEmployeeApi;
     log(url);
     try {
-      log('asdasdasdaddd');
       var request = http.MultipartRequest('POST', Uri.parse(url));
+
       request.fields['first_name'] = firstNameController.text.trim();
       request.fields['middle_name'] = middleNameController.text.trim();
       request.fields['last_name'] = lastNameController.text.trim();
@@ -249,7 +285,7 @@ class EmployeManageScreenController extends GetxController {
       request.fields['address'] = currentAddressController.text.trim();
       request.fields['phone_no'] = phoneNoController.text.trim();
       request.fields['email'] = emailController.text.trim();
-      request.fields['department_id'] = "${departmentDataItem!.id}";
+      request.fields['department_id'] = "$selectedDepartmentIdList";
       request.fields['date_of_brith'] = dateOfBrithController.text.trim();
       request.fields['home'] = homeAddressController.text.trim();
       request.fields['home_no'] = homeNoController.text.trim();
@@ -260,12 +296,14 @@ class EmployeManageScreenController extends GetxController {
       request.fields['last_day_of_work'] = lastDateController.text.trim();
       request.fields['companyid'] = "${companyDDSelectedItem!.id}";
       request.fields['userid'] = "${UserDetails.userId}";
-      log('asdasdasdaddd');
+
+      log('777');
       request.files
           .add(await http.MultipartFile.fromPath("Photo", images!.path));
       log("1232357 8");
+
       var response = await request.send();
-      log('getEmployeeStore: ${response}');
+      log('getEmployeeStore: $response');
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
@@ -289,6 +327,7 @@ class EmployeManageScreenController extends GetxController {
       });
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong !");
+      rethrow;
     } finally {
       isLoading(false);
     }
@@ -297,10 +336,7 @@ class EmployeManageScreenController extends GetxController {
   @override
   void onInit() {
     getAllCompanyFunction();
-    // employeeStoreFunction();
-    getAllDepartmentFunction();
 
-    // TODO: implement onInit
     super.onInit();
   }
 
