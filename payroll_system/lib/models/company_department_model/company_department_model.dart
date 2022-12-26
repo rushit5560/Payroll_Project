@@ -1,17 +1,71 @@
+// // To parse this JSON data, do
+// //
+// //     final aboutDetailsModel = aboutDetailsModelFromJson(jsonString);
+
+// import 'dart:convert';
+
+// CompanyDepartmentModel allCompanyModelFromJson(String str) =>
+//     CompanyDepartmentModel.fromJson(json.decode(str));
+
+// String allCompanyModelToJson(CompanyDepartmentModel data) =>
+//     json.encode(data.toJson());
+
+// class CompanyDepartmentModel {
+//   CompanyDepartmentModel({
+//     required this.success,
+//     required this.messege,
+//     required this.data,
+//   });
+
+//   bool success;
+//   String messege;
+//   List<CompanyDepartmentData> data;
+
+//   factory CompanyDepartmentModel.fromJson(Map<String, dynamic> json) =>
+//       CompanyDepartmentModel(
+//         success: json["success"] ?? false,
+//         messege: json["messege"] ?? "",
+//         data: List<CompanyDepartmentData>.from((json["Data"] ?? [])
+//             .map((x) => CompanyDepartmentData.fromJson(x ?? {}))),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "success": success,
+//         "messege": messege,
+//         // "Data": List<dynamic>.from(data.map((x) => x.toJson())),
+//       };
+// }
+
+// class CompanyDepartmentData {
+//   CompanyDepartmentData({
+//     required this.id,
+//     required this.departmentName,
+//   });
+
+//   int id;
+//   String departmentName;
+
+//   factory CompanyDepartmentData.fromJson(Map<String, dynamic> json) =>
+//       CompanyDepartmentData(
+//         id: json["id"] ?? 0,
+//         departmentName: json["departmentName"] ?? "",
+//       );
+// }
+
 // To parse this JSON data, do
 //
-//     final aboutDetailsModel = aboutDetailsModelFromJson(jsonString);
+//     final companyDeprtmentModel = companyDeprtmentModelFromJson(jsonString);
 
 import 'dart:convert';
 
-CompanyDepartmentModel aboutDetailsModelFromJson(String str) =>
-    CompanyDepartmentModel.fromJson(json.decode(str));
+CompanyDeprtmentModel companyDeprtmentModelFromJson(String str) =>
+    CompanyDeprtmentModel.fromJson(json.decode(str));
 
-String aboutDetailsModelToJson(CompanyDepartmentModel data) =>
+String companyDeprtmentModelToJson(CompanyDeprtmentModel data) =>
     json.encode(data.toJson());
 
-class CompanyDepartmentModel {
-  CompanyDepartmentModel({
+class CompanyDeprtmentModel {
+  CompanyDeprtmentModel({
     required this.success,
     required this.messege,
     required this.data,
@@ -21,8 +75,8 @@ class CompanyDepartmentModel {
   final String messege;
   final List<CompanyDepartmentData> data;
 
-  factory CompanyDepartmentModel.fromJson(Map<String, dynamic> json) =>
-      CompanyDepartmentModel(
+  factory CompanyDeprtmentModel.fromJson(Map<String, dynamic> json) =>
+      CompanyDeprtmentModel(
         success: json["success"],
         messege: json["messege"],
         data: List<CompanyDepartmentData>.from(
@@ -59,8 +113,8 @@ class CompanyDepartmentData {
 
   factory CompanyDepartmentData.fromJson(Map<String, dynamic> json) =>
       CompanyDepartmentData(
-        id: json["id"],
-        departmentName: json["department_name"],
+        id: json["id"] ?? 0,
+        departmentName: json["department_name"] ?? "",
         // isActive: json["is_active"],
         // createdby: json["createdby"],
         // modifiedby: json["modifiedby"],

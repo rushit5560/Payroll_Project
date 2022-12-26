@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:http/http.dart' as http;
+import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
 import 'package:sizer/sizer.dart';
@@ -30,9 +31,11 @@ class EmployeManageScreenController extends GetxController {
 
   List<String> selectedDepartmentIdList = [];
   List<String> selectedCompanyIdList = [];
+  final employeeListScreenController = Get.find<EmployeeListScreenController>();
 
   RxBool isSuccessStatus = false.obs;
-  List<DepartmentData> departmentList = [];
+  // List<DepartmentData> departmentList = [];
+
   // List<CompanyData> companyList = [];
 
   List<String> departmentStringList = [];
@@ -40,8 +43,12 @@ class EmployeManageScreenController extends GetxController {
 
   // CompanyOption companyOption = Get.arguments[0];
   List<CompanyData> allCompanyList = [];
+  List<CompanyDepartmentData> companyDepartment = [];
+
+  // List<CompanyDepartmentData> allCompanyList = [];
+
   CompanyData? companyDDSelectedItem;
-  DepartmentData? departmentDataItem;
+  // DepartmentData? departmentDataItem;
   CompanyDepartmentData? companyDepartmentData;
 
   RxString selectedDepartmentOption = "".obs;
@@ -212,68 +219,58 @@ class EmployeManageScreenController extends GetxController {
 
   Future<void> getCompanyDepartmentFunction(int companyId) async {
     // isLoading(true);
-    String url = "${ApiUrl.getCompanyDepartmentApi}";
+    String url = ApiUrl.getCompanyDepartmentApi;
     log('Get COmpanyDepartment Api Url :$url');
 
+    log("try");
     try {
+      log("try12");
       var request = http.MultipartRequest('POST', Uri.parse(url));
-
       request.fields['id'] = "$companyId";
 
-           var response = await request.send();
+      var response = await request.send();
 
-
-            response.stream
+      response.stream
           .transform(const Utf8Decoder())
-          .transform(const LineSplitter()).listen((value) { 
-
-            CompanyDepartmentModel companyDepartmentModel =
-            CompanyDepartmentModel.fromJson(json.decode(value));
-
-
-            
-          });
-
-
-
-
-
-      // http.Response response = await http.post(Uri.parse(url), body: bodyData);
-      // log("Department");
-      // // log('GetAllDepartment ${response.body}');
-      // CompanyDepartmentModel companyDepartmentModel =
-      //     CompanyDepartmentModel.fromJson(json.decode(response.body));
-      // isSuccessStatus = companyDepartmentModel.success.obs;
-
-      // if (isSuccessStatus.value) {
-      //   departmentList.clear();
-      //   departmentList.addAll(companyDepartmentModel.data);
-
-      //   departmentStringList.clear();
-      //   for (int i = 0; i < departmentList.length; i++) {
-      //     departmentStringList.add(departmentList[i].departmentName);
-      //   }
-      // } else {
-      //   log('getAllDepartmentFunction Else');
-      // }
+          .transform(const LineSplitter())
+          .listen((value) {
+        log('value 12121 : $value');
+        CompanyDeprtmentModel companyDepartmentModel =
+            CompanyDeprtmentModel.fromJson(json.decode(value));
+        isSuccessStatus = companyDepartmentModel.success.obs;
+        log("1111111");
+        if (isSuccessStatus.value) {
+          companyDepartment.clear();
+          companyDepartment.addAll(companyDepartmentModel.data);
+          if (companyDepartment.isNotEmpty) {
+            companyDepartmentData = companyDepartment[0];
+          } else {
+            Fluttertoast.showToast(msg: "No department in this company!");
+          }
+          departmentStringList.clear();
+          log("companyDepartment ::::$companyDepartment");
+          for (int i = 0; i < companyDepartment.length; i++) {
+            departmentStringList.add(companyDepartment[i].departmentName);
+          }
+        } else {
+          log('getAllCompanyFunction Else');
+        }
+      });
     } catch (e) {
-      log('getAllDepartmentFunction Error :$e');
+      Fluttertoast.showToast(msg: "Something went wrong !");
+
       rethrow;
     }
-    //  finally {
-    //   isLoading(false);
-    // }
 
     isLoading(true);
     isLoading(false);
   }
 
   Future<void> employeeCreateFunction() async {
-    // log('12211');
-    // log('ImAGE is :: ${images!.path} ');
-
     isLoading(true);
-    String url = ApiUrl.createEmployeeApi;
+    // String url = ApiUrl.createEmployeeApi;
+    String url = "https://payroll.omdemo.co.in/api/employee/store";
+
     log(url);
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -285,7 +282,7 @@ class EmployeManageScreenController extends GetxController {
       request.fields['address'] = currentAddressController.text.trim();
       request.fields['phone_no'] = phoneNoController.text.trim();
       request.fields['email'] = emailController.text.trim();
-      request.fields['department_id'] = "$selectedDepartmentIdList";
+      request.fields['department_id'] = "${companyDepartmentData!.id}";
       request.fields['date_of_brith'] = dateOfBrithController.text.trim();
       request.fields['home'] = homeAddressController.text.trim();
       request.fields['home_no'] = homeNoController.text.trim();
@@ -300,28 +297,29 @@ class EmployeManageScreenController extends GetxController {
       log('777');
       request.files
           .add(await http.MultipartFile.fromPath("Photo", images!.path));
-      log("1232357 8");
+      log("12323578");
 
+      log("request.fields : ${request.fields}");
+      log("request.files : ${request.files}");
       var response = await request.send();
       log('getEmployeeStore: $response');
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-        log("value : $value");
-        log(response.stream.toString());
-
+        log('value employee : $value');
+        // log(response.stream.toString());
         CraeteEmployeeModel employeeCreateModel =
-            CraeteEmployeeModel.fromJson(json.decode(value));
+            CraeteEmployeeModel.fromJson(json.decode(value.toString()));
 
         isSuccessStatus = employeeCreateModel.success.obs;
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: employeeCreateModel.messege);
 
           Get.back();
-          // await employeeListScreenController.getAllEmployeeFunction();
+          await employeeListScreenController.getAllEmployeeFunction();
         } else {
-          Fluttertoast.showToast(msg: "Something wrong!");
+          log('createCompanyFunction Else');
         }
         log("Empliyee Details : $employeeCreateModel");
       });

@@ -10,18 +10,18 @@ class CraeteEmployeeModel {
   CraeteEmployeeModel({
     required this.success,
     required this.messege,
-    required this.data,
+    // required this.data,
   });
 
   final bool success;
   final String messege;
-  final CraeteEmployeeData data;
+  // final CraeteEmployeeData data;
 
   factory CraeteEmployeeModel.fromJson(Map<String, dynamic> json) =>
       CraeteEmployeeModel(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
-        data: CraeteEmployeeData.fromJson(json["Data"] ?? {}),
+        // data: CraeteEmployeeData.fromJson(json["Data"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {

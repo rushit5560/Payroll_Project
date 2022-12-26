@@ -12,6 +12,7 @@ import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/anums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
+import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
 import 'package:sizer/sizer.dart';
 import '../../../common_modules/form_single_field_module.dart';
@@ -254,19 +255,18 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           .companyDDSelectedItem!.id;
 
                       log('companyid : $companyid');
+
                       await employeeCreteScreenController
                           .getCompanyDepartmentFunction(companyid);
 
                       log(employeeCreteScreenController
                           .companyDDSelectedItem!.id
                           .toString());
-                      // employeeCreteScreenController.isloding(false);
                     },
                   ).commonOnlyPadding(left: 10, right: 10),
                 ),
               ),
             ),
-
             const SizedBox(height: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,37 +276,81 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   style: TextStyleConfig.textStyle(
                       fontWeight: FontWeight.w600, fontSize: 16),
                 ).commonSymmetricPadding(vertical: 2),
-                DropDownMultiSelect(
-                  options: employeeCreteScreenController.departmentStringList,
-                  whenEmpty: 'Choose Department',
-                  onChanged: (value) {
-                    employeeCreteScreenController.selectedDepartmentList.value =
-                        value;
-                    employeeCreteScreenController
-                        .selectedDepartmentOption.value = "";
-                    employeeCreteScreenController.selectedDepartmentIdList = [];
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.greyColor),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 3),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<CompanyDepartmentData>(
+                        value:
+                            employeeCreteScreenController.companyDepartmentData,
+                        items: employeeCreteScreenController.companyDepartment
+                            .map<DropdownMenuItem<CompanyDepartmentData>>(
+                                (CompanyDepartmentData value) {
+                          return DropdownMenuItem<CompanyDepartmentData>(
+                            value: value,
+                            child: Text(value.departmentName),
+                          );
+                        }).toList(),
+                        onChanged: (CompanyDepartmentData? value) async {
+                          // This is called when the user selects an item.
+                          log('valuevaluevaluevalue :${value!.departmentName}');
+                          // employeeCreteScreenController.isloding(true);
+                          employeeCreteScreenController.companyDepartmentData =
+                              value;
 
-                    // Selected Department generate new id list for send in api
-                    for (int i = 0; i < value.length; i++) {
-                      for (int j = 0;
-                          j <
-                              employeeCreteScreenController
-                                  .departmentList.length;
-                          j++) {
-                        if (value[i] ==
-                            employeeCreteScreenController
-                                .departmentList[j].departmentName) {
-                          employeeCreteScreenController.selectedDepartmentIdList
-                              .add(employeeCreteScreenController
-                                  .departmentList[j].id
-                                  .toString());
-                        }
-                      }
-                    }
-                  },
-                  selectedValues: employeeCreteScreenController
-                      .selectedDepartmentList.value,
+                          // int companyid = employeeCreteScreenController
+                          //     .companyDDSelectedItem!.id;
+
+                          // log('companyid : $companyid');
+
+                          // await employeeCreteScreenController
+                          //     .getCompanyDepartmentFunction(companyid);
+
+                          // log(employeeCreteScreenController
+                          //     .companyDDSelectedItem!.id
+                          //     .toString());
+                        },
+                      ).commonOnlyPadding(left: 10, right: 10),
+                    ),
+                  ),
                 ),
+                // DropDownMultiSelect(
+                //   options: employeeCreteScreenController.departmentStringList,
+                //   whenEmpty: 'Choose Department',
+                //   onChanged: (value) {
+                //     employeeCreteScreenController.selectedDepartmentList.value =
+                //         value;
+                //     employeeCreteScreenController
+                //         .selectedDepartmentOption.value = "";
+                //     employeeCreteScreenController.selectedDepartmentIdList = [];
+
+                //     // Selected Department generate new id list for send in api
+                //     for (int i = 0; i < value.length; i++) {
+                //       for (int j = 0;
+                //           j <
+                //               employeeCreteScreenController
+                //                   .companyDepartment.length;
+                //           j++) {
+                //         if (value[i] ==
+                //             employeeCreteScreenController
+                //                 .companyDepartment[j].departmentName) {
+                //           employeeCreteScreenController.selectedDepartmentIdList
+                //               .add(employeeCreteScreenController
+                //                   .companyDepartment[j].id
+                //                   .toString());
+                //         }
+                //       }
+                //     }
+                //   },
+                //   selectedValues: employeeCreteScreenController
+                //       .selectedDepartmentList.value,
+                // ),
               ],
             ),
             const SizedBox(height: 5),
@@ -319,32 +363,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               validate: (value) => FieldValidation().validateEmail(value),
             ),
             const SizedBox(height: 5),
-            //       TextFormField(
-            //   obscureText: employeeCreteScreenController.isPasswordVisible.value,
-            //   validator: (value) => FieldValidation().validatePassword(value!),
-            //   controller: employeeCreteScreenController.passwordController,
-            //   decoration: InputDecoration(
-            //     hintText: AppMessage.password,
-            //     border: const OutlineInputBorder(
-            //       borderRadius: BorderRadius.all(
-            //         Radius.circular(10),
-            //       ),
-            //     ),
-            //     suffixIcon: IconButton(
-            //       onPressed: () {
-            //         employeeCreteScreenController.isPasswordVisible.value =
-            //             !employeeCreteScreenController.isPasswordVisible.value;
-            //         // setState(() {
-            //         // });
-            //       },
-            //       icon: Icon(
-            //         employeeCreteScreenController.isPasswordVisible.value
-            //             ? Icons.visibility
-            //             : Icons.visibility_off,
-            //       ),
-            //     ),
-            //   ),
-            // ),
             FormSingleFieldModule(
               obscureText:
                   employeeCreteScreenController.isPasswordVisible.value,
@@ -385,7 +403,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               validate: (value) => FieldValidation().validateHomeAddress(value),
             ),
             const SizedBox(height: 15),
-
             Row(
               children: [
                 Expanded(
@@ -398,11 +415,11 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                             EmployeeOption.create) {
                           if (employeeCreteScreenController.images != null) {
                             if (employeeCreteScreenController
-                                .selectedDepartmentIdList.isEmpty) {
+                                .companyDepartment.isEmpty) {
                               Fluttertoast.showToast(
                                   msg: "Please select department");
                             } else if (employeeCreteScreenController
-                                .selectedDepartmentIdList.isNotEmpty) {
+                                .companyDepartment.isNotEmpty) {
                               await employeeCreteScreenController
                                   .employeeCreateFunction();
                             }
@@ -412,7 +429,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           }
                         } else {
                           if (employeeCreteScreenController
-                              .selectedDepartmentIdList.isEmpty) {
+                              .companyDepartment.isEmpty) {
                             Fluttertoast.showToast(
                                 msg: "Please select department");
                           } else if (employeeCreteScreenController

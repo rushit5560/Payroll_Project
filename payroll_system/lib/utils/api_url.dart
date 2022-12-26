@@ -34,5 +34,5 @@ class ApiUrl {
   static const getDepartmentDetailsApi = "${apiMainPath}api/department/edit/";
 
   static const getCompanyDepartmentApi =
-      "${apiMainPath}api/company/getdepartment ";
+      "${apiMainPath}api/company/getdepartment";
 }
