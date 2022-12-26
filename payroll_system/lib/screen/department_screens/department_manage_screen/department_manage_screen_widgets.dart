@@ -102,7 +102,7 @@ class DepartmentFormModule extends StatelessWidget {
                             if (screenController.selectedValue.value == "Choose Option") {
                               Fluttertoast.showToast(msg: AppMessage.activeStatusMessage);
                             } else {
-                              // await screenController.updateDepartmentDetailsFunction();
+                              await screenController.updateDepartmentFunction();
                             }
 
                           }

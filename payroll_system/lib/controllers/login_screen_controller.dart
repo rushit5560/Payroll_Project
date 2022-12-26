@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_preference.dart';
+import 'package:payroll_system/screen/company_home_screen/company_home_screen.dart';
+import 'package:payroll_system/screen/employee_home_screen/employee_home_screen.dart';
 import '../Models/log_in_model.dart';
 import '../Screen/Home_Screen/home_screen.dart';
 
@@ -56,6 +58,7 @@ class LoginController extends GetxController {
           userEmail: loginDetailsModel.loginData.data.email,
           userProfileImage: loginDetailsModel.loginData.data.photo,
         );
+
         UserPreference().setUserPermissionsToPrefsAndLocal(
           //role
           roleAdd: loginDetailsModel.loginData.permissiondata.roleadd != ""
@@ -141,12 +144,26 @@ class LoginController extends GetxController {
                   : false,
         );
 
-        Get.offAll(() => HomeScreen());
+        /// Role wise route set
+        if(loginDetailsModel.loginData.data.roleId == 1) {
+          Get.offAll(() => HomeScreen());
+        } else if(loginDetailsModel.loginData.data.roleId == 2) {
+          Get.offAll(() => HomeScreen());
+        } else if(loginDetailsModel.loginData.data.roleId == 3) {
+          Get.offAll(() => CompanyHomeScreen());
+        } else if(loginDetailsModel.loginData.data.roleId == 4) {
+          Get.offAll(() => EmployeeHomeScreen());
+        }
 
         formKey.currentState!.reset();
         Fluttertoast.showToast(msg: 'You are successfully login');
-      } else {
-        Fluttertoast.showToast(msg: 'You are not able to login');
+      }
+      else {
+        if(loginDetailsModel.error.contains("Email don't match")) {
+          Fluttertoast.showToast(msg: "Email don't match");
+        } else if(loginDetailsModel.error.contains("password don't match")) {
+          Fluttertoast.showToast(msg: "password don't match");
+        }
       }
     } catch (e) {
       log("user login error : $e");

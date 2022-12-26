@@ -28,7 +28,7 @@ class CompanyFormModule extends StatelessWidget {
         child: Column(
           children: [
             FormSingleFieldModule(
-              headerText: AppMessage.labelName,
+              headerText: AppMessage.companyLabelName,
               text: AppMessage.companyName,
               keyboardType: TextInputType.text,
               textEditingController: screenController.nameFieldController,
@@ -36,7 +36,7 @@ class CompanyFormModule extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.employeeEmail,
+              headerText: AppMessage.companyLabelEmail,
               text: AppMessage.labelEmailName,
               keyboardType: TextInputType.emailAddress,
               textEditingController: screenController.emailFieldController,
@@ -44,7 +44,7 @@ class CompanyFormModule extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.employeePhoneNumber,
+              headerText: AppMessage.companyPhoneNumber,
               text: AppMessage.labelPhoneNo,
               keyboardType: TextInputType.phone,
               maxLength: 10,
@@ -58,7 +58,7 @@ class CompanyFormModule extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppMessage.departmentNameDrawer,
+                  AppMessage.companyDepartmentNameDrawer,
                   style: TextStyleConfig.textStyle(
                       fontWeight: FontWeight.w600, fontSize: 16),
                 ).commonSymmetricPadding(vertical: 2),
@@ -94,7 +94,7 @@ class CompanyFormModule extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.labelAddress,
+              headerText: AppMessage.labelCompanyAddress,
               text: AppMessage.labelCompanyAddress,
               keyboardType: TextInputType.text,
               textEditingController: screenController.addressFieldController,

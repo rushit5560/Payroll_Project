@@ -48,10 +48,10 @@ class DepartmentListScreenController extends GetxController {
 
   }
 
-  /// Delete Employee
-  Future<void> deleteDepartmentFunction(String employeeId, int index) async {
+  /// Delete Department
+  Future<void> deleteDepartmentFunction(String departmentId, int index) async {
     isLoading(true);
-    String url = "${ApiUrl.deleteDepartmentApi}$employeeId";
+    String url = "${ApiUrl.deleteDepartmentApi}$departmentId";
     log('Delete Department Api Url :$url');
 
     try {

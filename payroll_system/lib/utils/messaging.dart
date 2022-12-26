@@ -15,9 +15,11 @@ class AppMessage {
   /// Drawer Name's
   static String companyNameDrawer = "Company";
   static String departmentNameDrawer = "Department";
+  static String companyDepartmentNameDrawer = "Company Department";
   static String employeeNameDrawer = "Employee";
   static String editProfileNameDrawer = "Edit Profile";
   static String logOutNameDrawer = "Logout";
+  static String changePasswordDrawer = "Change Password";
 
   static String adminName = "Admin";
   static String companiesName = "Company List";
@@ -33,10 +35,23 @@ class AppMessage {
   static String deleteAlertMessage = 'Are you sure you want to delete ?';
   static String backAlertMessage = 'Are you sure you want to go to back ?';
   static String activeStatusMessage = 'Please select active status';
+  static String privacyPolicyMessage = 'Please accept privacy policy';
+
+  static String submitText = "Submit";
+  //admin
+  static String adminText = "Admin";
+
+  //sub admin
+  static String subAdminText = "Sub Admin";
+
+  //company
+  static String companyText = "Company";
 
   //Employee
+  static String employeeText = "Employee";
   static String employeeName = 'Employee Name';
   static String employeePhoneNumber = 'Phone Number';
+  static String companyPhoneNumber = 'Company Phone Number';
   static String employeeDepartmentName = 'Department Name';
   static String employeeCompanyName = 'Company Name';
   static String employeeStatus = 'Status';
@@ -57,6 +72,7 @@ class AppMessage {
   static String isActive = 'IsActive';
   static String company = 'Company';
   static String employeeEmail = 'Email';
+  static String companyLabelEmail = 'Company Email';
   static String employeePassword = 'Password';
   static String employeeCurrentAddress = 'Current Address';
   static String employeeHomeAddress = 'Home Address';
@@ -65,6 +81,7 @@ class AppMessage {
   static String companyEdit = 'Edit Company';
   static String companyCreate = 'Create Company';
   static String labelName = 'Name';
+  static String companyLabelName = 'Company Name';
   static String labelEmailName = 'Company Email';
   static String labelPhoneNo = 'Company Phone Number';
   static String labelAddress = 'Address';

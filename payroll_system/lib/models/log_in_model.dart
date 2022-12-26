@@ -17,17 +17,20 @@ class LoginDetailsModel {
     required this.success,
     required this.messege,
     required this.loginData,
+    required this.error,
   });
 
   final bool success;
   final String messege;
   final LoginData loginData;
+  String error;
 
   factory LoginDetailsModel.fromJson(Map<String, dynamic> json) =>
       LoginDetailsModel(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
         loginData: LoginData.fromJson(json["Data"] ?? {}),
+        error: json["error"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

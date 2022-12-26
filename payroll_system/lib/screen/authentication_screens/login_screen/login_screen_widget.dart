@@ -123,7 +123,7 @@ class LoginButtonModule extends StatelessWidget {
               }
             } else {
               Fluttertoast.showToast(
-                  msg: "Please accept privacy policy to login");
+                  msg: AppMessage.privacyPolicyMessage);
             }
           },
           child: Text(
