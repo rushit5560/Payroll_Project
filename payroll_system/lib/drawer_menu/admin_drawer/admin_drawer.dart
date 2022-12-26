@@ -1,15 +1,18 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Screen/authentication_screens/login_screen/login_screen.dart';
-import 'package:payroll_system/Screen/company_list_screen/company_list_screen.dart';
-import 'package:payroll_system/Utils/extension_methods/user_preference.dart';
-import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/Utils/messaging.dart';
-import 'package:payroll_system/Utils/style.dart';
+import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
+import 'package:payroll_system/screen/company_screens/company_list_screen/company_list_screen.dart';
 
-import '../../Screen/Employee_Screen/Employee_list_screen/employee_list_screen.dart';
+import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
+import 'package:payroll_system/utils/extensions.dart';
+import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
+
+import '../../screen/employee_screens/employee_list_screen/employee_list_screen.dart';
+
+
 
 class AdminDrawerMenu extends StatelessWidget {
   const AdminDrawerMenu({Key? key}) : super(key: key);
@@ -34,7 +37,7 @@ class AdminDrawerMenu extends StatelessWidget {
                     AdminDrawerTile(
                       onTap: () {
                         Get.back();
-                        // Get.to(() => DepartmentListScreen());
+                        Get.to(() => DepartmentListScreen());
                       },
                       title: AppMessage.departmentNameDrawer,
                     ),

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/controllers/company_manage_screen_controller.dart';
-import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/controllers/department_manage_screen_controller.dart';
+import 'package:payroll_system/utils/messaging.dart';
 
-import 'company_manage_screen_widgets.dart';
+import 'department_manage_screen_widgets.dart';
 
-class CompanyManageScreen extends StatelessWidget {
-  CompanyManageScreen({Key? key}) : super(key: key);
-  final companyManageScreenController =
-      Get.put(CompanyManageScreenController());
+class DepartmentManageScreen extends StatelessWidget {
+  DepartmentManageScreen({Key? key}) : super(key: key);
+  final departmentManageScreenController =
+      Get.put(DepartmentManageScreenController());
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (companyManageScreenController.companyOption ==
-            CompanyOption.update) {
+        if (departmentManageScreenController.departmentOption ==
+            DepartmentOption.update) {
           final shouldPop = await showDialog<bool>(
             context: context,
             builder: (context) {
@@ -34,12 +34,13 @@ class CompanyManageScreen extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            companyManageScreenController.companyOption == CompanyOption.create
-                ? AppMessage.companyCreate
-                : AppMessage.companyEdit,
+            departmentManageScreenController.departmentOption ==
+                    DepartmentOption.create
+                ? AppMessage.departmentCreate
+                : AppMessage.departmentUpdate,
           ),
-          leading: companyManageScreenController.companyOption ==
-                  CompanyOption.update
+          leading: departmentManageScreenController.departmentOption ==
+                  DepartmentOption.update
               ? IconButton(
                   onPressed: () => CustomAlertDialog().showAlertDialog(
                     context: context,
@@ -57,9 +58,11 @@ class CompanyManageScreen extends StatelessWidget {
               : null,
         ),
 
-        body: Obx(() => companyManageScreenController.isLoading.value
+        body: Obx(() => departmentManageScreenController.isLoading.value
             ? CommonLoader().showLoader()
-            : CompanyFormModule()),
+            : DepartmentFormModule()),
+
+
       ),
     );
   }

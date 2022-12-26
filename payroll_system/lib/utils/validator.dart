@@ -94,6 +94,14 @@ class FieldValidation {
     }
   }
 
+  String? validateDepartmentName(String value) {
+    if (value.isEmpty) {
+      return 'Please enter department name';
+    } else {
+      return null;
+    }
+  }
+
   String? validateHomePhoneNumber(String value) {
     if (value.isEmpty) {
       return 'Please enter PhoneNumber';

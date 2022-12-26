@@ -1,13 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
-import '../Models/employee_list_model/employee_list_model.dart';
-import '../Utils/api_url.dart';
+import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
+import '../utils/api_url.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/employee_manage_screen_models/employee_delete_model.dart';
 
 class EmployeeListScreenController extends GetxController {

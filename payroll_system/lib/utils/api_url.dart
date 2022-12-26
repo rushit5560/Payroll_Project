@@ -28,8 +28,8 @@ class ApiUrl {
   static const allDepartmentApi = "${apiMainPath}api/department";
   static const createDepartmentApi = "${apiMainPath}api/department/store";
   static const deleteDepartmentApi = "${apiMainPath}api/department/delete/";
-  static const updateDepartmentApi = "${apiMainPath}api/department/update/";
-  // static const getDepartmentDetailsApi = "${apiMainPath}api/department/edit/";
+  static const updateDepartmentApi = "${apiMainPath}api/department/update";
+  static const getDepartmentDetailsApi = "${apiMainPath}api/department/edit/";
 
 
 

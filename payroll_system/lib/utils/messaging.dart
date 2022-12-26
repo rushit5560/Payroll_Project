@@ -32,6 +32,7 @@ class AppMessage {
 
   static String deleteAlertMessage = 'Are you sure you want to delete ?';
   static String backAlertMessage = 'Are you sure you want to go to back ?';
+  static String activeStatusMessage = 'Please select active status';
 
   //Employee
   static String employeeName = 'Employee Name';
@@ -46,6 +47,7 @@ class AppMessage {
   static String phoneNo = 'Phone No';
   static String dateOfBrith = 'Date Of Birth';
   static String department = 'Department';
+  static String departmentList = 'Department List';
   static String homeNo = 'Home No';
   static String workNO = 'Work No';
   static String hourlyRate = 'HourlyRate';
@@ -67,4 +69,9 @@ class AppMessage {
   static String labelPhoneNo = 'Company Phone Number';
   static String labelAddress = 'Address';
   static String labelCompanyAddress = 'Company Address';
+
+  static String departmentCreate = 'Create Department';
+  static String departmentUpdate = 'Update Department';
+  static String departmentName = 'Department Name';
+
 }
