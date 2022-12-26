@@ -12,7 +12,6 @@ import 'package:payroll_system/screen/employee_home_screen/employee_home_screen.
 import '../Models/log_in_model.dart';
 import '../Screen/Home_Screen/home_screen.dart';
 
-
 class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
@@ -61,107 +60,107 @@ class LoginController extends GetxController {
 
         UserPreference().setUserPermissionsToPrefsAndLocal(
           //role
-          roleAdd: loginDetailsModel.loginData.permissiondata.roleadd != ""
+          roleAdd: loginDetailsModel.loginData.permissiondata.roleadd == "on"
               ? true
               : false,
-          roleEdit: loginDetailsModel.loginData.permissiondata.roleedit != ""
+          roleEdit: loginDetailsModel.loginData.permissiondata.roleedit == "on"
               ? true
               : false,
-          roleView: loginDetailsModel.loginData.permissiondata.roleview != ""
+          roleView: loginDetailsModel.loginData.permissiondata.roleview == "on"
               ? true
               : false,
           roleDelete:
-              loginDetailsModel.loginData.permissiondata.roledelete != ""
+              loginDetailsModel.loginData.permissiondata.roledelete == "on"
                   ? true
                   : false,
           // company
           companyAdd:
-              loginDetailsModel.loginData.permissiondata.companyadd != ""
+              loginDetailsModel.loginData.permissiondata.companyadd == "on"
                   ? true
                   : false,
           companyEdit:
-              loginDetailsModel.loginData.permissiondata.companyedit != ""
+              loginDetailsModel.loginData.permissiondata.companyedit == "on"
                   ? true
                   : false,
           companyView:
-              loginDetailsModel.loginData.permissiondata.companyview != ""
+              loginDetailsModel.loginData.permissiondata.companyview == "on"
                   ? true
                   : false,
           companyDelete:
-              loginDetailsModel.loginData.permissiondata.companydelete != ""
+              loginDetailsModel.loginData.permissiondata.companydelete == "on"
                   ? true
                   : false,
           // location
           locationAdd:
-              loginDetailsModel.loginData.permissiondata.locationadd != ""
+              loginDetailsModel.loginData.permissiondata.locationadd == "on"
                   ? true
                   : false,
           locationEdit:
-              loginDetailsModel.loginData.permissiondata.locationedit != ""
+              loginDetailsModel.loginData.permissiondata.locationedit == "on"
                   ? true
                   : false,
           locationView:
-              loginDetailsModel.loginData.permissiondata.locationview != ""
+              loginDetailsModel.loginData.permissiondata.locationview == "on"
                   ? true
                   : false,
           locationDelete:
-              loginDetailsModel.loginData.permissiondata.locationdelete != ""
+              loginDetailsModel.loginData.permissiondata.locationdelete == "on"
                   ? true
                   : false,
           // employee
           employeeAdd:
-              loginDetailsModel.loginData.permissiondata.employeeadd != ""
+              loginDetailsModel.loginData.permissiondata.employeeadd == "on"
                   ? true
                   : false,
           employeeEdit:
-              loginDetailsModel.loginData.permissiondata.employeeedit != ""
+              loginDetailsModel.loginData.permissiondata.employeeedit == "on"
                   ? true
                   : false,
           employeeView:
-              loginDetailsModel.loginData.permissiondata.employeeview != ""
+              loginDetailsModel.loginData.permissiondata.employeeview == "on"
                   ? true
                   : false,
           employeeDelete:
-              loginDetailsModel.loginData.permissiondata.employeedelete != ""
+              loginDetailsModel.loginData.permissiondata.employeedelete == "on"
                   ? true
                   : false,
           // department
           departmentAdd:
-              loginDetailsModel.loginData.permissiondata.departmentadd != ""
+              loginDetailsModel.loginData.permissiondata.departmentadd == "on"
                   ? true
                   : false,
           departmentEdit:
-              loginDetailsModel.loginData.permissiondata.departmentedit != ""
+              loginDetailsModel.loginData.permissiondata.departmentedit == "on"
                   ? true
                   : false,
           departmentView:
-              loginDetailsModel.loginData.permissiondata.departmentview != ""
+              loginDetailsModel.loginData.permissiondata.departmentview == "on"
                   ? true
                   : false,
           departmentDelete:
-              loginDetailsModel.loginData.permissiondata.departmentdelete != ""
+              loginDetailsModel.loginData.permissiondata.departmentdelete ==
+                      "on"
                   ? true
                   : false,
         );
 
         /// Role wise route set
-        if(loginDetailsModel.loginData.data.roleId == 1) {
+        if (loginDetailsModel.loginData.data.roleId == 1) {
           Get.offAll(() => HomeScreen());
-        } else if(loginDetailsModel.loginData.data.roleId == 2) {
+        } else if (loginDetailsModel.loginData.data.roleId == 2) {
           Get.offAll(() => HomeScreen());
-        } else if(loginDetailsModel.loginData.data.roleId == 3) {
+        } else if (loginDetailsModel.loginData.data.roleId == 3) {
           Get.offAll(() => CompanyHomeScreen());
-        } else if(loginDetailsModel.loginData.data.roleId == 4) {
+        } else if (loginDetailsModel.loginData.data.roleId == 4) {
           Get.offAll(() => EmployeeHomeScreen());
         }
 
         formKey.currentState!.reset();
         Fluttertoast.showToast(msg: 'You are successfully login');
-      }
-      else {
-        if(loginDetailsModel.error.contains("Email don't match")) {
+      } else {
+        if (loginDetailsModel.error.contains("Email don't match")) {
           Fluttertoast.showToast(msg: "Email don't match");
-        } else if(loginDetailsModel.error.contains("password don't match")) {
+        } else if (loginDetailsModel.error.contains("password don't match")) {
           Fluttertoast.showToast(msg: "password don't match");
         }
       }
