@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
+import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
 import '../../../Utils/messaging.dart';
-
 import '../../../common_modules/common_loader.dart';
-import '../../employee_screen/employee_manage_screen/employee_manage_screen_widget.dart';
-import 'employee_manage_screen_widget.dart';
 
 class EmployeeManageScreen extends StatelessWidget {
   EmployeeManageScreen({super.key});
@@ -21,7 +19,7 @@ class EmployeeManageScreen extends StatelessWidget {
         body: Obx(
           () => employeDetailsFormController.isLoading.value
               ? CommonLoader().showLoader()
-              : EmployeeDetailsScreenWidgets(),
+              : EmployeeManageScreenWidgets(),
         ),
       ),
     );
