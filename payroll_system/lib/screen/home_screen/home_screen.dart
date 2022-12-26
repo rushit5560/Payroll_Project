@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/controllers/home_screen_controller.dart';
-import 'package:sizer/sizer.dart';
+import 'package:payroll_system/screen/profile_screens/admin_profile_screens/admin_profile_screen.dart';
+import 'package:payroll_system/utils/extension_methods/user_details.dart';
 
 import '../../Utils/messaging.dart';
-import '../../Utils/style.dart';
 import '../../drawer_menu/admin_drawer/admin_drawer.dart';
-import '../profile_screens/user_profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -22,12 +20,12 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          AppMessage.adminName,
+          AppMessage.adminText,
         ),
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(() => UserProfileScreen());
+              Get.to(() => AdminProfileScreen());
             },
             icon: const Icon(Icons.person_rounded),
           ),

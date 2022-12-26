@@ -1,5 +1,7 @@
 class ApiUrl {
   static const apiMainPath = "https://payroll.omdemo.co.in/";
+  static const apiImagePath =
+      "https://payroll.omdemo.co.in/public/images/employee/";
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
@@ -8,7 +10,7 @@ class ApiUrl {
   // static const allDepartmentApi = "${apiMainPath}api/department";
 
   static const profileGetApi = "${apiMainPath}api/profile";
-  static const profileUpdateApi = "${apiMainPath}api/profileupdate";
+  static const profileUpdateApi = "${apiMainPath}api/profile/update";
 
   // Employee Api's
   static const allEmployeeApi = "${apiMainPath}api/employee";
@@ -31,6 +33,6 @@ class ApiUrl {
   static const updateDepartmentApi = "${apiMainPath}api/department/update";
   static const getDepartmentDetailsApi = "${apiMainPath}api/department/edit/";
 
-
-
+  static const getCompanyDepartmentApi =
+      "${apiMainPath}api/company/getdepartment ";
 }

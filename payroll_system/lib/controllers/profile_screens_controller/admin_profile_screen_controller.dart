@@ -7,24 +7,29 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import '../Models/log_in_model.dart';
-import '../Models/success_models/success_model.dart';
-import '../Models/user_profile_model/user_profile_model.dart';
-import '../Utils/api_url.dart';
-import '../Utils/extension_methods/user_details.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class UserProfileScreenController extends GetxController {
+import '../../Utils/api_url.dart';
+import '../../Utils/extension_methods/user_details.dart';
+import '../../models/log_in_model.dart';
+import '../../models/success_models/success_model.dart';
+import '../../models/user_profile_model/user_profile_model.dart';
+
+class AdminProfileScreenController extends GetxController {
   RxBool isLoading = false.obs;
 
   File? imageFile;
 
   UserData? profileData;
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   TextEditingController userNameController = TextEditingController();
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
-    String url = ApiUrl.profileGetApi + UserDetails.userId.toString();
+    String url = ApiUrl.profileGetApi + "/${UserDetails.userId}";
     log("getUserProfileFunction Api url : $url");
 
     try {
@@ -38,6 +43,8 @@ class UserProfileScreenController extends GetxController {
 
       if (isSuccessStatus) {
         profileData = userProfileModel.data;
+
+        userNameController.text = profileData!.userName;
 
         log(" userName :: ${userProfileModel.data.userName}");
       } else {
@@ -61,7 +68,7 @@ class UserProfileScreenController extends GetxController {
 
     try {
       if (imageFile != null) {
-        print("uploading with a photo");
+        log("uploading with a photo");
         var request = http.MultipartRequest('POST', Uri.parse(url));
 
         var stream = http.ByteStream(imageFile!.openRead());
@@ -70,13 +77,22 @@ class UserProfileScreenController extends GetxController {
         var length = await imageFile!.length();
 
         request.files
-            .add(await http.MultipartFile.fromPath("image", imageFile!.path));
+            .add(await http.MultipartFile.fromPath("photo", imageFile!.path));
         // request.headers.addAll(apiHeader.headers);
 
         request.fields['userid'] = UserDetails.userId.toString();
         request.fields['user_name'] = userNameController.text;
-        request.fields['photo'] = userNameController.text;
-        request.fields['showimage'] = userNameController.text;
+        // request.fields['photo'] = "";
+        request.fields['showimg'] =
+            profileData!.photo.isEmpty ? "" : profileData!.photo;
+
+        var multiPart = http.MultipartFile(
+          'photo',
+          stream,
+          length,
+        );
+
+        request.files.add(multiPart);
 
         // var multiPart = http.MultipartFile(
         //   'photo',
@@ -105,14 +121,22 @@ class UserProfileScreenController extends GetxController {
             .listen((value) async {
           SuccessModel successModel = SuccessModel.fromJson(json.decode(value));
           var isSuccessStatus = successModel.success;
-          log('response1 ::: ${isSuccessStatus}');
+          log('response body is ::: $value');
 
           if (isSuccessStatus) {
             Fluttertoast.showToast(
-              msg: "User update successfully.",
+              msg: "User profile update successfully.",
               toastLength: Toast.LENGTH_SHORT,
             );
             log(successModel.message);
+
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+
+            prefs.setString(
+                UserPreference.userNameKey, userNameController.text);
+
+            UserDetails.userName =
+                prefs.getString(UserPreference.userNameKey) ?? "";
 
             Get.back();
           } else {
@@ -120,61 +144,74 @@ class UserProfileScreenController extends GetxController {
           }
         });
       } else {
-        print("uploading without a photo");
+        log("uploading without a photo");
         var request = http.MultipartRequest('POST', Uri.parse(url));
 
-        // var stream = http.ByteStream(file!.openRead());
-        // stream.cast();
-        //
-        // var length = await file!.length();
-
+        // request.files.add(await http.MultipartFile.fromPath(
+        //   "photo",
+        //   imageFile == null ? "" : imageFile!.path,
+        // ));
         // request.headers.addAll(apiHeader.headers);
 
-        // request.fields['Id'] = UserDetails.userId.toString();
-        // request.fields['PhoneNo'] = mobileTextFieldController.text.trim();
-        // request.fields['DateOfBirth'] = "$selectedDate";
-        // request.fields['Gender'] = gender.value;
-        // request.fields['ModifiedBy'] = UserDetails.uniqueId;
+        request.fields['userid'] = UserDetails.userId.toString();
+        request.fields['user_name'] = userNameController.text;
+        // request.fields['photo'] = "";
+        request.fields['showimg'] =
+            profileData!.photo.isEmpty ? "" : profileData!.photo;
 
         // var multiPart = http.MultipartFile(
-        //   'file',
+        //   'photo',
         //   stream,
         //   length,
         // );
-        //
+
+        // var multiFile = await http.MultipartFile.fromPath(
+        //  "image",
+        //   file!.path,
+        // );
+
         // request.files.add(multiPart);
 
-        // log('request.fields: ${request.fields}');
-        // log('request.files: ${request.files}');
-        // log('request.headers: ${request.headers}');
+        log('request.fields: ${request.fields}');
+        log('request.files: ${request.files}');
 
-        // var response = await request.send();
-        // log('response: ${response.request}');
+        log('request.headers: ${request.headers}');
 
-        // response.stream
-        //     .transform(const Utf8Decoder())
-        //     .transform(const LineSplitter())
-        //     .listen((value) async {
-        //   UpdateUserProfileModel updateUserProfileModel =
-        //       UpdateUserProfileModel.fromJson(json.decode(value));
-        //   log('response1 :::::: ${updateUserProfileModel.statusCode}');
-        //   isSuccessStatus = updateUserProfileModel.success.obs;
+        var response = await request.send();
+        log('response: ${response.request}');
 
-        //   if (isSuccessStatus.value) {
-        //     Fluttertoast.showToast(
-        //         msg: "User update successfully.",
-        //         toastLength: Toast.LENGTH_SHORT);
-        //     log(updateUserProfileModel.dataVendor.userName);
-        //     log(updateUserProfileModel.dataVendor.email);
-        //     log(updateUserProfileModel.dataVendor.phoneNo);
-        //     Get.back();
-        //   } else {
-        //     log('False False');
-        //   }
-        // });
+        response.stream
+            .transform(const Utf8Decoder())
+            .transform(const LineSplitter())
+            .listen((value) async {
+          SuccessModel successModel = SuccessModel.fromJson(json.decode(value));
+          var isSuccessStatus = successModel.success;
+          log('response body is ::: $value');
+
+          if (isSuccessStatus) {
+            Fluttertoast.showToast(
+              msg: "User profile update successfully.",
+              toastLength: Toast.LENGTH_SHORT,
+            );
+            log(successModel.message);
+
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+
+            prefs.setString(
+                UserPreference.userNameKey, userNameController.text);
+
+            UserDetails.userName =
+                prefs.getString(UserPreference.userNameKey) ?? "";
+
+            Get.back();
+          } else {
+            log('False False');
+          }
+        });
       }
     } catch (e) {
       log("updateUserProfileFunction Error ::: $e");
+      rethrow;
     } finally {
       isLoading(false);
     }
@@ -184,9 +221,9 @@ class UserProfileScreenController extends GetxController {
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
     );
-    isLoading(true);
+    // isLoading(true);
     imageFile = File(pickedFile!.path);
-    isLoading(false);
+    // isLoading(false);
 
     Get.back();
   }
@@ -195,9 +232,9 @@ class UserProfileScreenController extends GetxController {
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );
-    isLoading(true);
+    // isLoading(true);
     imageFile = File(pickedFile!.path);
-    isLoading(false);
+    // isLoading(false);
 
     Get.back();
   }

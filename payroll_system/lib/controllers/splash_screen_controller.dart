@@ -21,7 +21,6 @@ class SplashScreenController extends GetxController {
 
   //User getUserPermissionsFunction
   Future<void> getUserPermissionsFunction({
-    required BuildContext context,
     required String userId,
   }) async {
     isLoading(true);
@@ -106,7 +105,12 @@ class SplashScreenController extends GetxController {
       const Duration(milliseconds: 2500),
       () async {
         if (prefs.getBool(UserPreference.isUserLoggedInKey) ?? false) {
-          await UserPreference().getUserPrefsAndSaveToLocal().whenComplete(
+          await UserPreference()
+              .getUserPrefsAndSaveToLocal()
+              .whenComplete(() async {
+            await getUserPermissionsFunction(
+                userId: UserDetails.userId.toString());
+          }).whenComplete(
             () {
               //if user is loggedin already
               if (UserDetails.isUserLoggedIn) {
