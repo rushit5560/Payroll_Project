@@ -17,6 +17,8 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
+  UserPreference userPreference = UserPreference();
+
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
 
@@ -49,7 +51,7 @@ class LoginController extends GetxController {
 
         Fluttertoast.showToast(msg: loginDetailsModel.messege);
 
-        UserPreference().setUserLoginDetailsToPrefs(
+        await userPreference.setUserLoginDetailsToPrefs(
           isLoggedIn: true,
           userId: loginDetailsModel.loginData.data.id,
           roleId: loginDetailsModel.loginData.data.roleId,
@@ -58,7 +60,7 @@ class LoginController extends GetxController {
           userProfileImage: loginDetailsModel.loginData.data.photo,
         );
 
-        UserPreference().setUserPermissionsToPrefsAndLocal(
+        await userPreference.setUserPermissionsToPrefsAndLocal(
           //role
           roleAdd: loginDetailsModel.loginData.permissiondata.roleadd == "on"
               ? true
@@ -142,18 +144,20 @@ class LoginController extends GetxController {
                       "on"
                   ? true
                   : false,
-        );
+        ).whenComplete(() {
+          /// Role wise route set
+          if (loginDetailsModel.loginData.data.roleId == 1) {
+            Get.offAll(() => HomeScreen());
+          } else if (loginDetailsModel.loginData.data.roleId == 2) {
+            Get.offAll(() => HomeScreen());
+          } else if (loginDetailsModel.loginData.data.roleId == 3) {
+            Get.offAll(() => CompanyHomeScreen());
+          } else if (loginDetailsModel.loginData.data.roleId == 4) {
+            Get.offAll(() => EmployeeHomeScreen());
+          }
+        });
 
-        /// Role wise route set
-        if (loginDetailsModel.loginData.data.roleId == 1) {
-          Get.offAll(() => HomeScreen());
-        } else if (loginDetailsModel.loginData.data.roleId == 2) {
-          Get.offAll(() => HomeScreen());
-        } else if (loginDetailsModel.loginData.data.roleId == 3) {
-          Get.offAll(() => CompanyHomeScreen());
-        } else if (loginDetailsModel.loginData.data.roleId == 4) {
-          Get.offAll(() => EmployeeHomeScreen());
-        }
+
 
         formKey.currentState!.reset();
         Fluttertoast.showToast(msg: 'You are successfully login');
@@ -164,6 +168,7 @@ class LoginController extends GetxController {
           Fluttertoast.showToast(msg: "password don't match");
         }
       }
+
     } catch (e) {
       log("user login error : $e");
     } finally {

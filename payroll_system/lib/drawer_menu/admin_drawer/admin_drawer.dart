@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/company_screens/company_list_screen/company_list_screen.dart';
 
@@ -13,61 +14,82 @@ import 'package:payroll_system/utils/style.dart';
 
 import '../../screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 
-
-
 class AdminDrawerMenu extends StatelessWidget {
-  const AdminDrawerMenu({Key? key}) : super(key: key);
+  AdminDrawerMenu({Key? key}) : super(key: key);
+  final adminDrawerController = Get.put(AdminDrawerController());
 
   @override
   Widget build(BuildContext context) {
+    adminDrawerController.isLoading(true);
+    adminDrawerController.isLoading(false);
+    log('UserDetails.companyView1212121 : ${UserDetails.companyView}');
+    log('UserDetails.employeeView1212121 : ${UserDetails.employeeView}');
+    log('UserDetails.departmentView1212121 : ${UserDetails.departmentView}');
+
     return Drawer(
       child: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
+        child: Obx(
+          () => adminDrawerController.isLoading.value
+              ? Container()
+              : Column(
                   children: [
-                    UserDetails.companyView == true
-                        ? AdminDrawerTile(
-                            onTap: () {
-                              Get.back();
-                              Get.to(() => CompanyListScreen());
-                            },
-                            title: AppMessage.companyNameDrawer,
-                          )
-                        : Container(),
-                    AdminDrawerTile(
-                      onTap: () {
-                        Get.back();
-                        Get.to(() => DepartmentListScreen());
-                      },
-                      title: AppMessage.departmentNameDrawer,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // UserDetails.companyView == true
+                            //     ?
+                            AdminDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => CompanyListScreen());
+                                    },
+                                    title: AppMessage.companyNameDrawer,
+                                  )
+                                // : Container()
+                            ,
+                            // UserDetails.departmentView == true
+                            //     ?
+                            AdminDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => DepartmentListScreen());
+                                    },
+                                    title: AppMessage.departmentNameDrawer,
+                                  )
+                                // : Container()
+                            ,
+                            // UserDetails.employeeView == true
+                            //     ?
+                            AdminDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => EmployeeListScreen());
+                                    },
+                                    title: AppMessage.employeeNameDrawer,
+                                  )
+                                // : Container()
+                            ,
+                          ],
+                        ),
+                      ),
                     ),
-                    AdminDrawerTile(
-                      onTap: () {
-                        Get.back();
-                        Get.to(() => EmployeeListScreen());
+                    AdminDrawerLogOutTile(
+                      onTap: () async {
+                        log('Logout');
+
+                        await UserPreference()
+                            .logoutRemoveUserDetailsFromPrefs()
+                            .then(
+                          (value) {
+                            Get.offAll(() => LoginScreen());
+                          },
+                        );
                       },
-                      title: AppMessage.employeeNameDrawer,
+                      title: AppMessage.logOutNameDrawer,
                     ),
                   ],
                 ),
-              ),
-            ),
-            AdminDrawerLogOutTile(
-              onTap: () async {
-                log('Logout');
-
-                await UserPreference().logoutRemoveUserDetailsFromPrefs().then(
-                  (value) {
-                    Get.offAll(() => LoginScreen());
-                  },
-                );
-              },
-              title: AppMessage.logOutNameDrawer,
-            ),
-          ],
         ),
       ),
     );
@@ -77,6 +99,7 @@ class AdminDrawerMenu extends StatelessWidget {
 class AdminDrawerTile extends StatelessWidget {
   Function() onTap;
   String title;
+
   AdminDrawerTile({Key? key, required this.onTap, required this.title})
       : super(key: key);
 
@@ -118,6 +141,7 @@ class AdminDrawerTile extends StatelessWidget {
 class AdminDrawerLogOutTile extends StatelessWidget {
   Function() onTap;
   String title;
+
   AdminDrawerLogOutTile({Key? key, required this.onTap, required this.title})
       : super(key: key);
 

@@ -68,6 +68,7 @@ class UserPreference {
     bool? departmentDelete,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    log('companyView Prefs: $companyView');
 
     // role perms set prefs
     prefs.setBool(roleAddKey, roleAdd ?? false);
