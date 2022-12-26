@@ -93,4 +93,10 @@ class AppMessage {
   static String departmentCreate = 'Create Department';
   static String departmentUpdate = 'Update Department';
   static String departmentName = 'Department Name';
+
+  // change password
+  static String changePassword = "Change Password";
+  static String currentPassword = "Current Password";
+  static String newPassword = "New Password";
+  
 }

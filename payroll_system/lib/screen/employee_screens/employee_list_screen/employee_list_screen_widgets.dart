@@ -99,8 +99,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
 import 'package:payroll_system/Utils/extensions.dart';
+import 'package:payroll_system/constants/anums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
+import 'package:payroll_system/screen/department_screens/department_manage_screen/department_manage_screen.dart';
 import 'package:sizer/sizer.dart';
 import '../../../Utils/messaging.dart';
 import '../../../common_modules/custom_alert_dialog_module.dart';
@@ -155,7 +157,8 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                     SizedBox(height: 2.h),
                     SingleListTileCustom(
                         textKey: AppMessage.employeeStatus,
-                        textValue: value.isActive),
+                        textValue:
+                            value.isActive == "1" ? "Active" : "In-Active"),
                     SizedBox(height: 3.h),
                     EditAndDeleteButtonModule(
                       onDeleteTap: () {
@@ -176,7 +179,11 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                       },
                       onEditTap: () {
                         Get.to(
-                          EmployeeManageScreen(),
+                          () => EmployeeManageScreen(),
+                          arguments: [
+                            EmployeeOption.update,
+                            value.id.toString(),
+                          ],
                         );
                       },
                     )

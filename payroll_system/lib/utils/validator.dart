@@ -23,6 +23,14 @@ class FieldValidation {
     }
   }
 
+  String? validateCurrentPassword(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your current password';
+    } else {
+      return null;
+    }
+  }
+
   String? validateLastName(String value) {
     if (value.isEmpty) {
       return 'Please enter your last name';

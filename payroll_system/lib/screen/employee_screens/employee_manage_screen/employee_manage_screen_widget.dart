@@ -159,21 +159,30 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   FieldValidation().validateStartDayWork(value),
             ),
             const SizedBox(height: 5),
+
             FormSingleFieldModule(
               headerText: AppMessage.lastDay,
-              text: "Select Last Date",
-              keyboardType: TextInputType.datetime,
+              text: AppMessage.lastDay,
+              keyboardType: TextInputType.number,
               textEditingController:
                   employeeCreteScreenController.lastDateController,
-              suffixIcon: Icons.calendar_month,
-              onPressed: () {
-                DateTime selectedLastDate =
-                    employeeCreteScreenController.selectedDate;
-                _selectDate(context, selectedLastDate,
-                    employeeCreteScreenController.lastDateController);
-              },
               validate: (value) => FieldValidation().validateLastDayWork(value),
             ),
+            // FormSingleFieldModule(
+            //   headerText: AppMessage.lastDay,
+            //   text: "Select Last Date",
+            //   keyboardType: TextInputType.datetime,
+            //   textEditingController:
+            //       employeeCreteScreenController.lastDateController,
+            //   suffixIcon: Icons.calendar_month,
+            //   onPressed: () {
+            //     DateTime selectedLastDate =
+            //         employeeCreteScreenController.selectedDate;
+            //     _selectDate(context, selectedLastDate,
+            //         employeeCreteScreenController.lastDateController);
+            //   },
+            //   validate: (value) => FieldValidation().validateLastDayWork(value),
+            // ),
             const SizedBox(height: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
