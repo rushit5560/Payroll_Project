@@ -1,4 +1,12 @@
 class FieldValidation {
+  String? validateUserName(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your user name.';
+    } else {
+      return null;
+    }
+  }
+
   String? validateFirstName(String value) {
     if (value.isEmpty) {
       return 'Please enter your first name';
