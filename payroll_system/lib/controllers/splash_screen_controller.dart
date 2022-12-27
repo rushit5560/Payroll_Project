@@ -41,7 +41,6 @@ class SplashScreenController extends GetxController {
 
         // Fluttertoast.showToast(msg: userPermissionModel.messege);
 
-
         await userPreference.setUserPermissionsToPrefsAndLocal(
           // role
           roleAdd: userPermissionModel.data.roleadd == "on" ? true : false,
@@ -88,43 +87,70 @@ class SplashScreenController extends GetxController {
         );
 
         // Set LoggedIn user data
-        UserDetails.roleId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.roleIdKey);
-        UserDetails.userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
-        UserDetails.userName = await userPreference.getStringValueFromPrefs(keyId: UserPreference.userNameKey);
-        UserDetails.userEmail = await userPreference.getStringValueFromPrefs(keyId: UserPreference.userEmailKey);
-        UserDetails.userProfileImage = await userPreference.getStringValueFromPrefs(keyId: UserPreference.userProfileImageKey);
+        UserDetails.roleId = await userPreference.getIntValueFromPrefs(
+            keyId: UserPreference.roleIdKey);
+        UserDetails.userId = await userPreference.getIntValueFromPrefs(
+            keyId: UserPreference.userIdKey);
+        UserDetails.userName = await userPreference.getStringValueFromPrefs(
+            keyId: UserPreference.userNameKey);
+        UserDetails.userEmail = await userPreference.getStringValueFromPrefs(
+            keyId: UserPreference.userEmailKey);
+        UserDetails.userProfileImage = await userPreference
+            .getStringValueFromPrefs(keyId: UserPreference.userProfileImageKey);
         // Set Role Permission in local variable
-        UserDetails.roleView = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.roleViewKey);
-        UserDetails.roleAdd = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.roleAddKey);
-        UserDetails.roleEdit = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.roleEditKey);
-        UserDetails.roleDelete = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.roleDeleteKey);
+        UserDetails.roleView = await userPreference.getBoolPermissionFromPrefs(
+            keyId: UserPreference.roleViewKey);
+        UserDetails.roleAdd = await userPreference.getBoolPermissionFromPrefs(
+            keyId: UserPreference.roleAddKey);
+        UserDetails.roleEdit = await userPreference.getBoolPermissionFromPrefs(
+            keyId: UserPreference.roleEditKey);
+        UserDetails.roleDelete = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.roleDeleteKey);
 
         // Set Company Permission in local variable
-        UserDetails.companyView = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyViewKey);
-        UserDetails.companyAdd = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyAddKey);
-        UserDetails.companyEdit = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyEditKey);
-        UserDetails.companyDelete = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyDeleteKey);
+        UserDetails.companyView = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.companyViewKey);
+        UserDetails.companyAdd = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.companyAddKey);
+        UserDetails.companyEdit = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.companyEditKey);
+        UserDetails.companyDelete = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.companyDeleteKey);
 
         // Set Location Permission in local variable
-        UserDetails.locationView = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationViewKey);
-        UserDetails.locationAdd = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationAddKey);
-        UserDetails.locationEdit = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationEditKey);
-        UserDetails.locationDelete = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationDeleteKey);
+        UserDetails.locationView = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.locationViewKey);
+        UserDetails.locationAdd = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.locationAddKey);
+        UserDetails.locationEdit = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.locationEditKey);
+        UserDetails.locationDelete =
+            await userPreference.getBoolPermissionFromPrefs(
+                keyId: UserPreference.locationDeleteKey);
 
         // Set Employee Permission in local variable
-        UserDetails.employeeView = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
-        UserDetails.employeeAdd = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeAddKey);
-        UserDetails.employeeEdit = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeEditKey);
-        UserDetails.employeeDelete = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDeleteKey);
+        UserDetails.employeeView = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
+        UserDetails.employeeAdd = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.employeeAddKey);
+        UserDetails.employeeEdit = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.employeeEditKey);
+        UserDetails.employeeDelete =
+            await userPreference.getBoolPermissionFromPrefs(
+                keyId: UserPreference.employeeDeleteKey);
 
         // Set Department Permission in local variable
-        UserDetails.departmentView = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentViewKey);
-        UserDetails.departmentAdd = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentAddKey);
-        UserDetails.departmentEdit = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentEditKey);
-        UserDetails.departmentDelete = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentDeleteKey);
-
-
-
+        UserDetails.departmentView =
+            await userPreference.getBoolPermissionFromPrefs(
+                keyId: UserPreference.departmentViewKey);
+        UserDetails.departmentAdd = await userPreference
+            .getBoolPermissionFromPrefs(keyId: UserPreference.departmentAddKey);
+        UserDetails.departmentEdit =
+            await userPreference.getBoolPermissionFromPrefs(
+                keyId: UserPreference.departmentEditKey);
+        UserDetails.departmentDelete =
+            await userPreference.getBoolPermissionFromPrefs(
+                keyId: UserPreference.departmentDeleteKey);
 
         if (UserDetails.roleId == 1) {
           Get.off(() => HomeScreen());
@@ -144,6 +170,8 @@ class SplashScreenController extends GetxController {
       }
     } catch (e) {
       log("getUserPermissionsFunction error : $e");
+
+      rethrow;
     } finally {
       isLoading(false);
     }
@@ -154,10 +182,10 @@ class SplashScreenController extends GetxController {
     Timer(
       const Duration(milliseconds: 2500),
       () async {
-        bool isUserLoggedIn = prefs.getBool(UserPreference.isUserLoggedInKey) ?? false;
+        bool isUserLoggedIn =
+            prefs.getBool(UserPreference.isUserLoggedInKey) ?? false;
 
         if (isUserLoggedIn == true) {
-
           int roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
           await userPreference.getUserPrefsAndSaveToLocal();
           await getUserPermissionsFunction(roleId: roleId.toString());
