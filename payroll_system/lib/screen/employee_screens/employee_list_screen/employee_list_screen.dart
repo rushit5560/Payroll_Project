@@ -5,7 +5,7 @@ import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
 
-import '../../../constants/anums.dart';
+import '../../../constants/enums.dart';
 import 'employee_list_screen_widgets.dart';
 
 class EmployeeListScreen extends StatelessWidget {

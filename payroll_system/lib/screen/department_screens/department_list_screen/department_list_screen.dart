@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/department_list_screen_controller.dart';
 import 'package:payroll_system/screen/department_screens/department_manage_screen/department_manage_screen.dart';
 import 'package:payroll_system/utils/messaging.dart';

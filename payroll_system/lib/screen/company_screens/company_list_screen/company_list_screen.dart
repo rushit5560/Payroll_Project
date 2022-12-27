@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/messaging.dart';
-import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/company_list_screen_controller.dart';
 import 'package:payroll_system/screen/company_screens/company_manage_screen/company_manage_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';

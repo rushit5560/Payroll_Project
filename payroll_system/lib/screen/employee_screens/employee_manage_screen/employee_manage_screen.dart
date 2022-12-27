@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
 import '../../../Utils/messaging.dart';

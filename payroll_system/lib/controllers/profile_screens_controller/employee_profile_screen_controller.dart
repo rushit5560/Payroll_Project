@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:payroll_system/constants/anums.dart';
 import 'package:payroll_system/models/user_profile_model/employee_profile_model.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';

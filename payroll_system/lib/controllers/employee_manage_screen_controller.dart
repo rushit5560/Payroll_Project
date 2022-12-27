@@ -15,7 +15,7 @@ import 'package:payroll_system/models/employee_manage_screen_models/update_emplo
 import 'package:sizer/sizer.dart';
 
 import '../Utils/extension_methods/user_details.dart';
-import '../constants/anums.dart';
+import '../constants/enums.dart';
 import '../models/company_list_screen_model/get_all_company_model.dart';
 import '../models/employee_manage_screen_models/employee_get_by_id_model.dart';
 

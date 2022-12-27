@@ -9,7 +9,7 @@ import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
-import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
