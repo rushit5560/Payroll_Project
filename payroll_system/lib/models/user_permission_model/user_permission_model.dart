@@ -23,9 +23,9 @@ class UserPermissionModel {
 
   factory UserPermissionModel.fromJson(Map<String, dynamic> json) =>
       UserPermissionModel(
-        success: json["success"],
-        messege: json["messege"],
-        data: PermissionData.fromJson(json["Data"]),
+        success: json["success"] ?? false,
+        messege: json["messege"] ?? "",
+        data: PermissionData.fromJson(json["Data"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
