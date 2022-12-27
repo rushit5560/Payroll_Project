@@ -39,7 +39,7 @@ class UserPreference {
   static String departmentViewKey = 'departmentViewKey';
   static String departmentDeleteKey = 'departmentDeleteKey';
 
-  /// Set user permission commmon function
+  /// Set user permission common function
   Future<void> setUserPermissionsToPrefsAndLocal({
     // role perms
     bool? roleAdd,
@@ -68,7 +68,6 @@ class UserPreference {
     bool? departmentDelete,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    log('companyView Prefs: $companyView');
 
     // role perms set prefs
     prefs.setBool(roleAddKey, roleAdd ?? false);
@@ -96,33 +95,33 @@ class UserPreference {
     prefs.setBool(departmentViewKey, departmentView ?? false);
     prefs.setBool(departmentDeleteKey, departmentDelete ?? false);
 
-    // role perms set locallly
+    /*// role perms set locally
     UserDetails.roleAdd = prefs.getBool(roleAddKey) ?? false;
     UserDetails.roleEdit = prefs.getBool(roleEditKey) ?? false;
     UserDetails.roleView = prefs.getBool(roleViewKey) ?? false;
     UserDetails.roleDelete = prefs.getBool(roleDeleteKey) ?? false;
-    // company perms set locallly
+    // company perms set locally
     UserDetails.companyAdd = prefs.getBool(companyAddKey) ?? false;
     UserDetails.companyEdit = prefs.getBool(companyEditKey) ?? false;
     UserDetails.companyView = prefs.getBool(companyViewKey) ?? false;
     UserDetails.companyDelete = prefs.getBool(companyDeleteKey) ?? false;
-    // location perms set locallly
+    // location perms set locally
     UserDetails.locationAdd = prefs.getBool(locationAddKey) ?? false;
     UserDetails.locationEdit = prefs.getBool(locationEditKey) ?? false;
     UserDetails.locationView = prefs.getBool(locationViewKey) ?? false;
     UserDetails.locationDelete = prefs.getBool(locationDeleteKey) ?? false;
-    // employee perms set locallly
+    // employee perms set locally
     UserDetails.employeeAdd = prefs.getBool(employeeAddKey) ?? false;
     UserDetails.employeeEdit = prefs.getBool(employeeEditKey) ?? false;
     UserDetails.employeeView = prefs.getBool(employeeViewKey) ?? false;
     UserDetails.employeeDelete = prefs.getBool(employeeDeleteKey) ?? false;
-    // department perms set locallly
+    // department perms set locally
     UserDetails.departmentAdd = prefs.getBool(departmentAddKey) ?? false;
     UserDetails.departmentEdit = prefs.getBool(departmentEditKey) ?? false;
     UserDetails.departmentView = prefs.getBool(departmentViewKey) ?? false;
     UserDetails.departmentDelete = prefs.getBool(departmentDeleteKey) ?? false;
 
-    log("UserDetails.roleAdd : ${UserDetails.roleAdd}");
+    log("UserDetails.roleAdd1111 : ${UserDetails.roleAdd}");
     log("UserDetails.roleEdit : ${UserDetails.roleEdit}");
     log("UserDetails.roleView : ${UserDetails.roleView}");
     log("UserDetails.roleDelete : ${UserDetails.roleDelete}");
@@ -145,7 +144,7 @@ class UserPreference {
     log("UserDetails.departmentAdd : ${UserDetails.departmentAdd}");
     log("UserDetails.departmentEdit : ${UserDetails.departmentEdit}");
     log("UserDetails.departmentView : ${UserDetails.departmentView}");
-    log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");
+    log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");*/
   }
 
   /// Set User Login Details
@@ -186,7 +185,7 @@ class UserPreference {
   /// Set User Login Details
   Future<void> getUserPrefsAndSaveToLocal() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    log('getUserPrefsAndSaveToLocal11111');
     //  user details save in local vars
     UserDetails.isUserLoggedIn = prefs.getBool(isUserLoggedInKey) ?? false;
     UserDetails.userId = prefs.getInt(userIdKey) ?? 0;
@@ -202,27 +201,27 @@ class UserPreference {
     log("UserDetails.userEmail : ${UserDetails.userEmail}");
     log("UserDetails.userProfileImage : ${UserDetails.userProfileImage}");
 
-    // role perms set locallly
+    // role perms set locally
     UserDetails.roleAdd = prefs.getBool(roleAddKey) ?? false;
     UserDetails.roleEdit = prefs.getBool(roleEditKey) ?? false;
     UserDetails.roleView = prefs.getBool(roleViewKey) ?? false;
     UserDetails.roleDelete = prefs.getBool(roleDeleteKey) ?? false;
-    // company perms set locallly
+    // company perms set locally
     UserDetails.companyAdd = prefs.getBool(companyAddKey) ?? false;
     UserDetails.companyEdit = prefs.getBool(companyEditKey) ?? false;
     UserDetails.companyView = prefs.getBool(companyViewKey) ?? false;
     UserDetails.companyDelete = prefs.getBool(companyDeleteKey) ?? false;
-    // location perms set locallly
+    // location perms set locally
     UserDetails.locationAdd = prefs.getBool(locationAddKey) ?? false;
     UserDetails.locationEdit = prefs.getBool(locationEditKey) ?? false;
     UserDetails.locationView = prefs.getBool(locationViewKey) ?? false;
     UserDetails.locationDelete = prefs.getBool(locationDeleteKey) ?? false;
-    // employee perms set locallly
+    // employee perms set locally
     UserDetails.employeeAdd = prefs.getBool(employeeAddKey) ?? false;
     UserDetails.employeeEdit = prefs.getBool(employeeEditKey) ?? false;
     UserDetails.employeeView = prefs.getBool(employeeViewKey) ?? false;
     UserDetails.employeeDelete = prefs.getBool(employeeDeleteKey) ?? false;
-    // department perms set locallly
+    // department perms set locally
     UserDetails.departmentAdd = prefs.getBool(departmentAddKey) ?? false;
     UserDetails.departmentEdit = prefs.getBool(departmentEditKey) ?? false;
     UserDetails.departmentView = prefs.getBool(departmentViewKey) ?? false;
@@ -252,6 +251,7 @@ class UserPreference {
     log("UserDetails.departmentEdit : ${UserDetails.departmentEdit}");
     log("UserDetails.departmentView : ${UserDetails.departmentView}");
     log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");
+    log('//////////');
   }
 
   /// Logout user from app
@@ -300,27 +300,27 @@ class UserPreference {
     UserDetails.userEmail = "";
     UserDetails.userProfileImage = "";
 
-    // role perms set locallly
+    // role perms set locally
     UserDetails.roleAdd = false;
     UserDetails.roleEdit = false;
     UserDetails.roleView = false;
     UserDetails.roleDelete = false;
-    // company perms set locallly
+    // company perms set locally
     UserDetails.companyAdd = false;
     UserDetails.companyEdit = false;
     UserDetails.companyView = false;
     UserDetails.companyDelete = false;
-    // location perms set locallly
+    // location perms set locally
     UserDetails.locationAdd = false;
     UserDetails.locationEdit = false;
     UserDetails.locationView = false;
     UserDetails.locationDelete = false;
-    // employee perms set locallly
+    // employee perms set locally
     UserDetails.employeeAdd = false;
     UserDetails.employeeEdit = false;
     UserDetails.employeeView = false;
     UserDetails.employeeDelete = false;
-    // department perms set locallly
+    // department perms set locally
     UserDetails.departmentAdd = false;
     UserDetails.departmentEdit = false;
     UserDetails.departmentView = false;
@@ -359,4 +359,25 @@ class UserPreference {
     log("UserDetails.departmentView : ${UserDetails.departmentView}");
     log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");
   }
+
+
+  // Get Bool Permission
+  Future<bool> getBoolPermissionFromPrefs({required String keyId}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(keyId) ?? false;
+  }
+
+  // Get String Permission
+  Future<String> getStringValueFromPrefs({required String keyId}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(keyId) ?? "";
+  }
+
+  // Get Int Permission
+  Future<int> getIntValueFromPrefs({required String keyId}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(keyId) ?? 0;
+  }
+
+
 }
