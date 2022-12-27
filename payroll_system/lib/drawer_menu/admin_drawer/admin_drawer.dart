@@ -1,7 +1,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
+import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/company_screens/company_list_screen/company_list_screen.dart';
 
@@ -20,11 +22,6 @@ class AdminDrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    adminDrawerController.isLoading(true);
-    adminDrawerController.isLoading(false);
-    log('UserDetails.companyView1212121 : ${UserDetails.companyView}');
-    log('UserDetails.employeeView1212121 : ${UserDetails.employeeView}');
-    log('UserDetails.departmentView1212121 : ${UserDetails.departmentView}');
 
     return Drawer(
       child: SafeArea(
@@ -37,7 +34,7 @@ class AdminDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            // UserDetails.companyView == true
+                            // adminDrawerController.companyView.value == true
                             //     ?
                             AdminDrawerTile(
                                     onTap: () {
@@ -48,28 +45,31 @@ class AdminDrawerMenu extends StatelessWidget {
                                   )
                                 // : Container()
                             ,
-                            // UserDetails.departmentView == true
-                            //     ?
-                            AdminDrawerTile(
+                            adminDrawerController.departmentView.value == true
+                                ? AdminDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => DepartmentListScreen());
                                     },
                                     title: AppMessage.departmentNameDrawer,
                                   )
-                                // : Container()
-                            ,
-                            // UserDetails.employeeView == true
-                            //     ?
-                            AdminDrawerTile(
+                                : Container(),
+                            adminDrawerController.employeeView.value == true
+                                ? AdminDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => EmployeeListScreen());
                                     },
                                     title: AppMessage.employeeNameDrawer,
                                   )
-                                // : Container()
-                            ,
+                                : Container(),
+                            AdminDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => ChangePasswordScreen());
+                              },
+                              title: AppMessage.changePassword,
+                            ),
                           ],
                         ),
                       ),
@@ -110,11 +110,14 @@ class AdminDrawerTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            textAlign: TextAlign.left,
-            style: TextStyleConfig.drawerTextStyle(),
-          ).commonSymmetricPadding(horizontal: 10, vertical: 10),
+          ListTile(
+            leading: const Icon(Icons.person_rounded, color: AppColors.blackColor),
+            title:  Text(
+              title,
+              textAlign: TextAlign.left,
+              style: TextStyleConfig.drawerTextStyle(),
+            ),
+          ),
           const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
         ],
       ),
@@ -153,11 +156,19 @@ class AdminDrawerLogOutTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
-          Text(
-            title,
-            textAlign: TextAlign.left,
-            style: TextStyleConfig.drawerTextStyle(),
-          ).commonSymmetricPadding(horizontal: 10, vertical: 10),
+          ListTile(
+            leading: const Icon(Icons.logout_rounded, color: AppColors.blackColor),
+            title:  Text(
+              title,
+              textAlign: TextAlign.left,
+              style: TextStyleConfig.drawerTextStyle(),
+            ),
+          ),
+          // Text(
+          //   title,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyleConfig.drawerTextStyle(),
+          // ).commonSymmetricPadding(horizontal: 10, vertical: 10),
           const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
         ],
       ),

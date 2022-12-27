@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/controllers/company_home_screen_controller.dart';
 import 'package:payroll_system/drawer_menu/company_drawer/company_drawer.dart';
 import 'package:payroll_system/screen/profile_screens/company_profile_screens/company_profile_screen.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -10,7 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/extension_methods/user_preference.dart';
 
 class CompanyHomeScreen extends StatelessWidget {
-  const CompanyHomeScreen({Key? key}) : super(key: key);
+  CompanyHomeScreen({Key? key}) : super(key: key);
+  final companyHomeScreenController = Get.put(CompanyHomeScreenController());
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
@@ -9,6 +10,8 @@ import 'package:payroll_system/controllers/department_list_screen_controller.dar
 import 'package:payroll_system/models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/screen/department_screens/department_manage_screen/department_manage_screen.dart';
 import 'package:payroll_system/utils/messaging.dart';
+
+import '../../../utils/extension_methods/user_preference.dart';
 
 class DepartmentListModule extends StatelessWidget {
   DepartmentListModule({Key? key}) : super(key: key);
@@ -36,6 +39,7 @@ class DepartmentListTile extends StatelessWidget {
       : super(key: key);
 
   final screenController = Get.find<DepartmentListScreenController>();
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -66,24 +70,41 @@ class DepartmentListTile extends StatelessWidget {
 
               /// Getting From Common Module
               EditAndDeleteButtonModule(
-                onEditTap: () {
-                  Get.to(
-                    () => DepartmentManageScreen(),
-                    arguments: [
-                      DepartmentOption.update,
-                      singleItem.id.toString(),
-                    ],
-                  );
+                onEditTap: () async {
+
+                  bool departmentEditPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentEditKey);
+
+                  if(departmentEditPermission == true) {
+                    Get.to(
+                          () => DepartmentManageScreen(),
+                      arguments: [
+                        DepartmentOption.update,
+                        singleItem.id.toString(),
+                      ],
+                    );
+                  } else {
+                    Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                  }
+
                 },
-                onDeleteTap: () => CustomAlertDialog().showAlertDialog(
-                  textContent: AppMessage.deleteAlertMessage,
-                  context: context,
-                  onYesTap: () async {
-                    await screenController.deleteDepartmentFunction(
-                        singleItem.id.toString(), index);
-                  },
-                  onCancelTap: () => Get.back(),
-                ),
+                onDeleteTap: () async {
+                  bool departmentDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentDeleteKey);
+
+                  if(departmentDeletePermission == true) {
+                    CustomAlertDialog().showAlertDialog(
+                      textContent: AppMessage.deleteAlertMessage,
+                      context: context,
+                      onYesTap: () async {
+                        await screenController.deleteDepartmentFunction(
+                            singleItem.id.toString(), index);
+                      },
+                      onCancelTap: () => Get.back(),
+                    );
+                  } else {
+                    Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                  }
+
+                },
               ),
             ],
           ),

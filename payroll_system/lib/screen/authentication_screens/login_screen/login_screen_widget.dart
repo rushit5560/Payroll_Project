@@ -86,7 +86,7 @@ class ForgotPasswordTextModule extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Get.to(const ForgotPasswordScreen());
+            Get.to(()=> ForgotPasswordScreen());
           },
           child: const Text(
             "Forgot password ?",
@@ -116,10 +116,10 @@ class LoginButtonModule extends StatelessWidget {
               shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           )),
-          onPressed: () {
+          onPressed: () async {
             if (loginScreenController.isPrivacyChecked.value) {
               if (loginScreenController.formKey.currentState!.validate()) {
-                loginScreenController.loginUserFunction(context);
+                await loginScreenController.loginUserFunction(context);
               }
             } else {
               Fluttertoast.showToast(

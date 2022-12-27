@@ -12,6 +12,12 @@ class AdminDrawerController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
+  UserPreference userPreference = UserPreference();
+
+  RxBool companyView = false.obs;
+  RxBool departmentView = false.obs;
+  RxBool employeeView = false.obs;
+
   //User getUserPermissionsFunction
   /*Future<void> getUserPermissionsFunction() async {
     isLoading(true);
@@ -90,12 +96,20 @@ class AdminDrawerController extends GetxController {
     }
   }*/
 
+  getUserPermission() async {
+    isLoading(true);
+    companyView.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyViewKey);
+    departmentView.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentViewKey);
+    employeeView.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
+    log('companyView1111111111111111111 : ${companyView.value}');
+    log('departmentView : ${departmentView.value}');
+    log('employeeView : ${employeeView.value}');
+    isLoading(false);
+  }
+
   @override
   void onInit() {
-    log('UserDetails.companyView onInit : ${UserDetails.companyView}');
-    isLoading(true);
-    isLoading(false);
-    // getUserPermissionsFunction();
+    getUserPermission();
     super.onInit();
   }
 }

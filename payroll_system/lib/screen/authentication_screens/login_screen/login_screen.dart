@@ -4,6 +4,7 @@ import 'package:payroll_system/Utils/extensions.dart';
 
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/login_screen_controller.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../Utils/messaging.dart';
@@ -35,6 +36,16 @@ class LoginScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AppImages.logoImg,
+                                width: 70.w,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 5.h),
                           Text(
                             AppMessage.logIn,
                             style: TextStyleConfig.textStyle(

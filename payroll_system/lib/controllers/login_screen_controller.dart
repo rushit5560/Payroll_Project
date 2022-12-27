@@ -32,14 +32,14 @@ class LoginController extends GetxController {
     log("loginUserFunction Api url : $url");
 
     try {
-      Map<String, dynamic> logindata = {
+      Map<String, dynamic> bodyData = {
         "email": loginEmailController.text.trim(),
         "password": loginPasswordController.text.trim()
       };
 
-      log("loginUserFunction passing Data :  $logindata");
+      log("loginUserFunction passing Data :  $bodyData");
 
-      http.Response response = await http.post(Uri.parse(url), body: logindata);
+      http.Response response = await http.post(Uri.parse(url), body: bodyData);
       log("loginUserFunction response :  ${response.body}");
 
       LoginDetailsModel loginDetailsModel =
@@ -147,17 +147,15 @@ class LoginController extends GetxController {
         ).whenComplete(() {
           /// Role wise route set
           if (loginDetailsModel.loginData.data.roleId == 1) {
-            Get.offAll(() => HomeScreen());
+            Get.off(() => HomeScreen());
           } else if (loginDetailsModel.loginData.data.roleId == 2) {
-            Get.offAll(() => HomeScreen());
+            Get.off(() => HomeScreen());
           } else if (loginDetailsModel.loginData.data.roleId == 3) {
-            Get.offAll(() => CompanyHomeScreen());
+            Get.off(() => CompanyHomeScreen());
           } else if (loginDetailsModel.loginData.data.roleId == 4) {
-            Get.offAll(() => EmployeeHomeScreen());
+            Get.off(() => EmployeeHomeScreen());
           }
         });
-
-
 
         formKey.currentState!.reset();
         Fluttertoast.showToast(msg: 'You are successfully login');

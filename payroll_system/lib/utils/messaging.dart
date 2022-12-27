@@ -98,5 +98,13 @@ class AppMessage {
   static String changePassword = "Change Password";
   static String currentPassword = "Current Password";
   static String newPassword = "New Password";
-  
+  static String emailAddress = "Email address";
+
+
+  // Toast messages
+  static String deniedPermission = "Access Denied! Contact to Admin!";
+
+  static String employeeCreate = 'Create Employee';
+  static String employeeUpdate = 'Update Employee';
+
 }

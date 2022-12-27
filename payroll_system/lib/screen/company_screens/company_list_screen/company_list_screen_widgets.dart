@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/controllers/company_list_screen_controller.dart';
 import 'package:payroll_system/Models/company_list_screen_model/get_all_company_model.dart';
@@ -8,6 +9,7 @@ import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart
 import 'package:payroll_system/common_modules/single_item_module.dart';
 import 'package:payroll_system/constants/anums.dart';
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 import '../company_manage_screen/company_manage_screen.dart';
 
@@ -38,6 +40,7 @@ class CompanyListTile extends StatelessWidget {
   CompanyListTile({Key? key, required this.singleItem, required this.index}) : super(key: key);
 
   final screenController = Get.find<CompanyListScreenController>();
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -75,23 +78,38 @@ class CompanyListTile extends StatelessWidget {
 
               /// Getting From Common Module
               EditAndDeleteButtonModule(
-                onEditTap: () {
-                  Get.to(
-                    () => CompanyManageScreen(),
-                    arguments: [
-                      CompanyOption.update,
-                      singleItem.id.toString(),
-                    ],
-                  );
+                onEditTap: () async {
+                  bool companyEditPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyEditKey);
+
+                  if(companyEditPermission == true) {
+                    Get.to(
+                          () => CompanyManageScreen(),
+                      arguments: [
+                        CompanyOption.update,
+                        singleItem.id.toString(),
+                      ],
+                    );
+                  } else {
+                    Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                  }
                 },
-                onDeleteTap: () => CustomAlertDialog().showAlertDialog(
-                  textContent: AppMessage.deleteAlertMessage,
-                    context: context,
-                  onYesTap: () async {
-                    await screenController.deleteCompanyFunction(singleItem.id.toString(), index);
-                  },
-                  onCancelTap: () => Get.back(),
-                ),
+                onDeleteTap: () async {
+                  bool companyDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyDeleteKey);
+
+                  if(companyDeletePermission == true) {
+                    CustomAlertDialog().showAlertDialog(
+                      textContent: AppMessage.deleteAlertMessage,
+                      context: context,
+                      onYesTap: () async {
+                        await screenController.deleteCompanyFunction(
+                            singleItem.id.toString(), index);
+                      },
+                      onCancelTap: () => Get.back(),
+                    );
+                  } else {
+                    Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                  }
+                },
               ),
             ],
           ),
