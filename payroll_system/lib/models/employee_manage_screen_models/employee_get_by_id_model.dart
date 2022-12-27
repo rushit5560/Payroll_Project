@@ -4,14 +4,14 @@
 
 import 'dart:convert';
 
-EmployeeEditModel employeeEditModelFromJson(String str) =>
-    EmployeeEditModel.fromJson(json.decode(str));
+EmployeeGetByIdModel employeeEditModelFromJson(String str) =>
+    EmployeeGetByIdModel.fromJson(json.decode(str));
 
-String employeeEditModelToJson(EmployeeEditModel data) =>
+String employeeEditModelToJson(EmployeeGetByIdModel data) =>
     json.encode(data.toJson());
 
-class EmployeeEditModel {
-  EmployeeEditModel({
+class EmployeeGetByIdModel {
+  EmployeeGetByIdModel({
     required this.success,
     required this.messege,
     required this.data,
@@ -19,13 +19,13 @@ class EmployeeEditModel {
 
   final bool success;
   final String messege;
-  final Data data;
+  final EmployeeGEtByIdModelData data;
 
-  factory EmployeeEditModel.fromJson(Map<String, dynamic> json) =>
-      EmployeeEditModel(
+  factory EmployeeGetByIdModel.fromJson(Map<String, dynamic> json) =>
+      EmployeeGetByIdModel(
         success: json["success"],
         messege: json["messege"],
-        data: Data.fromJson(json["Data"]),
+        data: EmployeeGEtByIdModelData.fromJson(json["Data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,8 +35,8 @@ class EmployeeEditModel {
       };
 }
 
-class Data {
-  Data({
+class EmployeeGEtByIdModelData {
+  EmployeeGEtByIdModelData({
     required this.id,
     required this.firstName,
     required this.middleName,
@@ -62,7 +62,6 @@ class Data {
     required this.createdAt,
     required this.updatedAt,
   });
-
   final int id;
   final String firstName;
   final String middleName;
@@ -88,31 +87,32 @@ class Data {
   final String createdAt;
   final String updatedAt;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
-        firstName: json["first_name"],
-        middleName: json["middle_name"],
-        lastName: json["last_name"],
-        password: json["password"],
-        address: json["address"],
-        phoneNo: json["phone_no"],
-        email: json["email"],
-        departmentId: json["department_id"],
-        isActive: json["is_active"],
-        createdby: json["createdby"],
-        modifiedby: json["modifiedby"],
-        dateOfBrith: json["date_of_brith"],
-        home: json["home"],
-        homeNo: json["home_no"],
-        workPhone: json["work_phone"],
-        hourlyRate: json["hourly_rate"],
-        salary: json["salary"],
-        startDate: json["start_date"],
-        lastDayOfWork: json["last_day_of_work"],
-        companyid: json["companyid"],
-        photo: json["photo"],
-        createdAt: json["created_at"],
-        updatedAt: json["updated_at"],
+  factory EmployeeGEtByIdModelData.fromJson(Map<String, dynamic> json) =>
+      EmployeeGEtByIdModelData(
+        id: json["id"] ?? 0,
+        firstName: json["first_name"] ?? "",
+        middleName: json["middle_name"] ?? "",
+        lastName: json["last_name"] ?? "",
+        password: json["password"] ?? "",
+        address: json["address"] ?? "",
+        phoneNo: json["phone_no"] ?? "",
+        email: json["email"] ?? "",
+        departmentId: json["department_id"] ?? 0,
+        isActive: json["is_active"] ?? "",
+        createdby: json["createdby"] ?? 0,
+        modifiedby: json["modifiedby"] ?? 0,
+        dateOfBrith: json["date_of_brith"] ?? "",
+        home: json["home"] ?? "",
+        homeNo: json["home_no"] ?? "",
+        workPhone: json["work_phone"] ?? "",
+        hourlyRate: json["hourly_rate"] ?? 0,
+        salary: json["salary"] ?? 0,
+        startDate: json["start_date"] ?? "",
+        lastDayOfWork: json["last_day_of_work"] ?? 0,
+        companyid: json["companyid"] ?? 0,
+        photo: json["photo"] ?? "",
+        createdAt: json["created_at"] ?? "",
+        updatedAt: json["updated_at"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

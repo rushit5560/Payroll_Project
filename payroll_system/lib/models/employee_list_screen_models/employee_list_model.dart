@@ -21,7 +21,8 @@ class AllEmployeeModele {
   final String messege;
   final List<EmployeeData> data;
 
-  factory AllEmployeeModele.fromJson(Map<String, dynamic> json) => AllEmployeeModele(
+  factory AllEmployeeModele.fromJson(Map<String, dynamic> json) =>
+      AllEmployeeModele(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
         // data:

@@ -11,22 +11,26 @@ import 'package:http/http.dart' as http;
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
+import 'package:payroll_system/models/employee_manage_screen_models/update_employee_model.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Utils/extension_methods/user_details.dart';
 import '../constants/anums.dart';
 import '../models/company_list_screen_model/get_all_company_model.dart';
-import '../models/company_manage_screen_model/get_all_department_model.dart';
+import '../models/employee_manage_screen_models/employee_get_by_id_model.dart';
 
 class EmployeManageScreenController extends GetxController {
+  EmployeeOption employeeOption = Get.arguments[0];
+  String employeeId = Get.arguments[1] ?? "";
+
   DateTime? chosenDateTime;
   DateTime selectedDate = DateTime.now();
-  EmployeeOption employeeOption = Get.arguments[0];
   RxBool isPasswordVisible = false.obs;
   List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
   RxString selectedValue = "Choose Option".obs;
   RxBool isLoading = false.obs;
-  Rx<List<String>> selectedDepartmentList = Rx<List<String>>([]);
+  RxList<String> selectedDepartmentList = RxList<String>([]);
+
   Rx<List<String>> selectedCompanyList = Rx<List<String>>([]);
 
   List<String> selectedDepartmentIdList = [];
@@ -35,11 +39,16 @@ class EmployeManageScreenController extends GetxController {
 
   RxBool isSuccessStatus = false.obs;
   // List<DepartmentData> departmentList = [];
-
   // List<CompanyData> companyList = [];
 
   List<String> departmentStringList = [];
   List<String> companyStringList = [];
+
+  int companyId = 0;
+  int departmentId = 0;
+
+  DateTime birthDate = DateTime.now();
+  DateTime startDate = DateTime.now();
 
   // CompanyOption companyOption = Get.arguments[0];
   List<CompanyData> allCompanyList = [];
@@ -73,7 +82,6 @@ class EmployeManageScreenController extends GetxController {
   TextEditingController homeNoController = TextEditingController();
   TextEditingController workNoController = TextEditingController();
   TextEditingController hourlyRateController = TextEditingController();
-
   TextEditingController salaryController = TextEditingController();
 
   TextEditingController startDateController = TextEditingController();
@@ -88,6 +96,7 @@ class EmployeManageScreenController extends GetxController {
   TextEditingController homeAddressController = TextEditingController();
 
   File? images;
+  String oldImageName = "";
 
   RxBool isloding = false.obs;
   imageFromCamera() async {
@@ -99,6 +108,8 @@ class EmployeManageScreenController extends GetxController {
       images = File(image.path);
       isloding(false);
     }
+
+    Get.back();
   }
 
   imageFromGallary() async {
@@ -110,6 +121,7 @@ class EmployeManageScreenController extends GetxController {
       images = File(image.path);
       isloding(false);
     }
+    Get.back();
   }
 
   void showPicker(BuildContext context) async {
@@ -122,21 +134,19 @@ class EmployeManageScreenController extends GetxController {
                 ListTile(
                   leading: const Icon(Icons.photo_library),
                   title: const Text("Gallery"),
-                  onTap: () {
+                  onTap: () async {
                     // employeDetailsFormController.getImage(ImageSource.gallery);
 
-                    imageFromGallary();
-                    Navigator.of(context).pop();
+                    await imageFromGallary();
                   },
                 ),
                 ListTile(
                   leading: const Icon(Icons.camera_alt),
                   title: const Text("Camera"),
-                  onTap: () {
+                  onTap: () async {
                     // employeDetailsFormController.getImage(ImageSource.camera);
 
-                    imageFromCamera();
-                    Navigator.of(context).pop();
+                    await imageFromCamera();
                   },
                 ),
               ],
@@ -183,10 +193,12 @@ class EmployeManageScreenController extends GetxController {
   Future<void> getAllCompanyFunction() async {
     isLoading(true);
     String url = ApiUrl.allCompanyApi;
-    // log('Get All Company List Api Url :$url');
+    log('Get All Company List Api Url :$url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
+
+      // log("getAllCompanyFunction res body ::::${response.body}");
 
       AllCompanyModel allCompanyModel =
           AllCompanyModel.fromJson(json.decode(response.body));
@@ -198,19 +210,122 @@ class EmployeManageScreenController extends GetxController {
 
         companyDDSelectedItem = allCompanyList[0];
 
-        log('companyDDSelectedItem : ${companyDDSelectedItem!.fullName}');
+        // log('companyDDSelectedItem : ${companyDDSelectedItem!.userName}');
 
         companyStringList.clear();
         for (int i = 0; i < allCompanyList.length; i++) {
           companyStringList.add(allCompanyList[i].userName);
         }
-        // log('allCompanyList Length2222 : ${allCompanyList.length}');
-        // log('allCompanyList Length1111 : ${allCompanyList.length}');
       } else {
         log('getAllCompanyFunction Else');
       }
     } catch (e) {
       log('getAllCompanyFunction Error :$e');
+      rethrow;
+    } finally {
+      // if (employeeOption == EmployeeOption.update) {
+      //   // when update company that time
+      //   await employeeGetByIdFunction();
+      // } else if (employeeOption == CompanyOption.create) {
+      //   // when create new company
+      //   isLoading(false);
+      // }
+
+      isLoading(false);
+      // if (employeeOption == EmployeeOption.update) {
+      //   await getCompanyDepartmentFunction(companyId);
+      //   log("companyId :; ${companyId}");
+      // } else {
+      // }
+    }
+  }
+
+  Future<void> employeeGetByIdFunction() async {
+    isLoading(true);
+    String url = "${ApiUrl.getEmployeeDetailsApi}$employeeId";
+    log('Employee Details Get By Id Api Url : $url');
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+
+      // log("employeeGetByIdFunction  ${response.body}");
+      EmployeeGetByIdModel employeeGetByIdModel =
+          EmployeeGetByIdModel.fromJson(json.decode(response.body));
+
+      isSuccessStatus = employeeGetByIdModel.success.obs;
+
+      if (isSuccessStatus.value) {
+        firstNameController.text = employeeGetByIdModel.data.firstName;
+        middleNameController.text = employeeGetByIdModel.data.middleName;
+        lastNameController.text = employeeGetByIdModel.data.lastName;
+        phoneNoController.text = employeeGetByIdModel.data.phoneNo;
+        dateOfBrithController.text =
+            employeeGetByIdModel.data.dateOfBrith.split(" ")[0];
+        homeNoController.text = employeeGetByIdModel.data.homeNo;
+        workNoController.text = employeeGetByIdModel.data.workPhone;
+
+        hourlyRateController.text =
+            employeeGetByIdModel.data.hourlyRate.toString();
+        salaryController.text = employeeGetByIdModel.data.salary.toString();
+        // startDateController.text = employeeGetByIdModel.data.startDate;
+        isActiveController.text = employeeGetByIdModel.data.isActive;
+        emailController.text = employeeGetByIdModel.data.email;
+        lastDateController.text =
+            employeeGetByIdModel.data.lastDayOfWork.toString();
+
+        companyId = employeeGetByIdModel.data.companyid;
+        departmentId = employeeGetByIdModel.data.departmentId;
+        oldImageName = employeeGetByIdModel.data.photo;
+
+        startDate = DateTime.parse(employeeGetByIdModel.data.startDate);
+        startDateController.text =
+            "${startDate.year}-${startDate.month}-${startDate.day}";
+
+        birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
+        dateOfBrithController.text =
+            "${birthDate.year}-${birthDate.month}-${birthDate.day}";
+
+        log('Photo : ${employeeGetByIdModel.data.photo}');
+        // if (images != null) {
+        // } else {
+        //   oldImageName = employeeGetByIdModel.data.photo;
+        // }
+
+        for (int i = 0; i < allCompanyList.length; i++) {
+          if (companyId == allCompanyList[i].id) {
+            companyDDSelectedItem = allCompanyList[i];
+          }
+        }
+
+        if (companyId != 0) {
+          getCompanyDepartmentFunction(companyId);
+        } else {}
+
+        passwordController.text = employeeGetByIdModel.data.password;
+        currentAddressController.text = employeeGetByIdModel.data.address;
+        homeAddressController.text = employeeGetByIdModel.data.home;
+
+        // Remove Braces From Api String
+        // log('companyGetByIdModel.data.departmentId : ${employeeGetByIdModel.data.departmentId}');
+        // String removedBracesString = employeeGetByIdModel.data.departmentId
+        //     .toString()
+        //     .substring(1,
+        //         employeeGetByIdModel.data.departmentId.toString().length - 1);
+
+        // for (int i = 0; i < companyDepartment.length; i++) {
+        //   for (int j = 0; j < selectedDepartmentIdList.length; j++) {
+        //     if (companyDepartment[i].id.toString().trim() ==
+        //         selectedDepartmentIdList[j].trim()) {
+        //       selectedDepartmentList.add(companyDepartment[i].departmentName);
+        //     }
+        //   }
+        // }
+        // log('selectedDepartmentList : $selectedDepartmentList');
+      } else {
+        log('getEmployeeDetailsFunction Else');
+      }
+    } catch (e) {
+      log('getEmployeeDetailsFunction Error :$e');
       rethrow;
     } finally {
       isLoading(false);
@@ -222,11 +337,9 @@ class EmployeManageScreenController extends GetxController {
     String url = ApiUrl.getCompanyDepartmentApi;
     log('Get COmpanyDepartment Api Url :$url');
 
-    log("try");
     try {
-      log("try12");
       var request = http.MultipartRequest('POST', Uri.parse(url));
-      request.fields['id'] = "$companyId";
+      request.fields['id'] = companyId.toString();
 
       var response = await request.send();
 
@@ -234,18 +347,30 @@ class EmployeManageScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) {
-        log('value 12121 : $value');
+        log("getCompanyDepartmentFunction res body :: ${value}");
         CompanyDeprtmentModel companyDepartmentModel =
             CompanyDeprtmentModel.fromJson(json.decode(value));
         isSuccessStatus = companyDepartmentModel.success.obs;
-        log("1111111");
+
         if (isSuccessStatus.value) {
           companyDepartment.clear();
           companyDepartment.addAll(companyDepartmentModel.data);
-          if (companyDepartment.isNotEmpty) {
-            companyDepartmentData = companyDepartment[0];
-          } else {
-            Fluttertoast.showToast(msg: "No department in this company!");
+
+          if (employeeOption == EmployeeOption.create) {
+            if (companyDepartment.isNotEmpty) {
+              companyDepartmentData = companyDepartment[0];
+            } else {
+              Fluttertoast.showToast(msg: "No department in this company!");
+            }
+          } else if (employeeOption == EmployeeOption.update) {
+            //update logic here
+
+            for (int i = 0; i < companyDepartment.length; i++) {
+              // ignore: unrelated_type_equality_checks
+              if (departmentId == companyDepartment[i].id) {
+                companyDepartmentData = companyDepartment[i];
+              }
+            }
           }
           departmentStringList.clear();
           log("companyDepartment ::::$companyDepartment");
@@ -260,18 +385,19 @@ class EmployeManageScreenController extends GetxController {
       Fluttertoast.showToast(msg: "Something went wrong !");
 
       rethrow;
+    } finally {
+      isLoading(true);
+      isLoading(false);
     }
-
-    isLoading(true);
-    isLoading(false);
   }
 
   Future<void> employeeCreateFunction() async {
     isLoading(true);
-    // String url = ApiUrl.createEmployeeApi;
-    String url = "https://payroll.omdemo.co.in/api/employee/store";
+    String url = ApiUrl.createEmployeeApi;
+    // String url = "https://payroll.omdemo.co.in/api/employee/store";
 
     log(url);
+
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
@@ -331,9 +457,74 @@ class EmployeManageScreenController extends GetxController {
     }
   }
 
+  /// Update Employee Details
+  Future<void> updateEmployeeDetailsFunction() async {
+    String url = ApiUrl.updateEmployeeDetailsApi;
+    log('Update Company Api URl : $url');
+
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      request.fields['first_name'] = firstNameController.text.trim();
+      request.fields['middle_name'] = middleNameController.text.trim();
+      request.fields['last_name'] = lastNameController.text.trim();
+      request.fields['password'] = passwordController.text.trim();
+      request.fields['address'] = currentAddressController.text.trim();
+      request.fields['phone_no'] = phoneNoController.text.trim();
+      request.fields['email'] = emailController.text.trim();
+      request.fields['department_id'] = "${companyDepartmentData!.id}";
+      request.fields['date_of_brith'] = dateOfBrithController.text.trim();
+      request.fields['home'] = homeAddressController.text.trim();
+      request.fields['home_no'] = homeNoController.text.trim();
+      request.fields['work_phone'] = workNoController.text.trim();
+      request.fields['hourly_rate'] = hourlyRateController.text.trim();
+      request.fields['salary'] = salaryController.text.trim();
+      request.fields['start_date'] = startDateController.text.trim();
+      request.fields['last_day_of_work'] = lastDateController.text.trim();
+      request.fields['companyid'] = "${companyDDSelectedItem!.id}";
+      request.fields['userid'] = "${UserDetails.userId}";
+      request.fields['showphotos'] = oldImageName;
+      request.fields['id'] = employeeId;
+
+      if (images != null) {
+        request.files
+            .add(await http.MultipartFile.fromPath("Photo", images!.path));
+      }
+      var response = await request.send();
+
+      response.stream
+          .transform(const Utf8Decoder())
+          .transform(const LineSplitter())
+          .listen((value) async {
+        log('value Updateemployee : $value');
+        UpdateEmployeeModel updateEmployeeModel =
+            UpdateEmployeeModel.fromJson(json.decode(value));
+
+        isSuccessStatus = updateEmployeeModel.success.obs;
+        if (isSuccessStatus.value) {
+          Fluttertoast.showToast(msg: updateEmployeeModel.messege);
+          Get.back();
+          await employeeListScreenController.getAllEmployeeFunction();
+        } else {
+          log('updateCompanyDetailsFunction Else');
+        }
+        log("Empliyee Details : $updateEmployeeModel");
+      });
+    } catch (e) {
+      log('updateCompanyDetailsFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
   @override
   void onInit() {
-    getAllCompanyFunction();
+    getAllCompanyFunction().whenComplete(() {
+      if (employeeOption == EmployeeOption.update) {
+        employeeGetByIdFunction();
+      }
+    });
 
     super.onInit();
   }

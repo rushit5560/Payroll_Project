@@ -183,6 +183,8 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                           arguments: [
                             EmployeeOption.update,
                             value.id.toString(),
+                            log('111'),
+                            log(value.id.toString())
                           ],
                         );
                       },

@@ -10,15 +10,16 @@ import 'package:payroll_system/Models/company_manage_screen_model/get_all_depart
 import 'package:payroll_system/Models/company_manage_screen_model/update_company_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
-import 'package:payroll_system/constants/anums.dart';
 
+import '../constants/enums.dart';
 import 'company_list_screen_controller.dart';
 
 class CompanyManageScreenController extends GetxController {
   CompanyOption companyOption = Get.arguments[0];
   String companyId = Get.arguments[1] ?? "";
 
-  CompanyListScreenController companyListScreenController = Get.find<CompanyListScreenController>();
+  CompanyListScreenController companyListScreenController =
+      Get.find<CompanyListScreenController>();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
@@ -36,7 +37,6 @@ class CompanyManageScreenController extends GetxController {
   TextEditingController phoneNumberFieldController = TextEditingController();
   TextEditingController addressFieldController = TextEditingController();
 
-
   /// Get All Department
   Future<void> getAllDepartmentFunction() async {
     isLoading(true);
@@ -46,38 +46,36 @@ class CompanyManageScreenController extends GetxController {
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      AllDepartmentModel allDepartmentModel = AllDepartmentModel.fromJson(json.decode(response.body));
+      AllDepartmentModel allDepartmentModel =
+          AllDepartmentModel.fromJson(json.decode(response.body));
       isSuccessStatus = allDepartmentModel.success.obs;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         departmentList.clear();
         departmentList.addAll(allDepartmentModel.data);
 
         departmentStringList.clear();
-        for(int i=0; i < departmentList.length; i++) {
+        for (int i = 0; i < departmentList.length; i++) {
           departmentStringList.add(departmentList[i].departmentName);
           log('${departmentList[i].id} : ${departmentList[i].departmentName}');
         }
 
         log('departmentList Length : ${departmentList.length}');
-
       } else {
         log('getAllDepartmentFunction Else');
       }
-
-    } catch(e) {
+    } catch (e) {
       log('getAllDepartmentFunction Error :$e');
       rethrow;
     } finally {
-      if(companyOption == CompanyOption.update) {
+      if (companyOption == CompanyOption.update) {
         // when update company that time
         await getCompanyDetailsFunction();
-      } else if(companyOption == CompanyOption.create) {
+      } else if (companyOption == CompanyOption.create) {
         // when create new company
         isLoading(false);
       }
     }
-
   }
 
   /// Create Company
@@ -87,7 +85,6 @@ class CompanyManageScreenController extends GetxController {
     log('Create Company Api Url :$url');
 
     try {
-
       Map<String, dynamic> bodyData = {
         "userid": "${UserDetails.userId}",
         "user_name": nameFieldController.text.trim(),
@@ -105,20 +102,19 @@ class CompanyManageScreenController extends GetxController {
       );
       log('response : ${response.body}');
 
-      CreateCompanyModel createCompanyModel = CreateCompanyModel.fromJson(json.decode(response.body));
+      CreateCompanyModel createCompanyModel =
+          CreateCompanyModel.fromJson(json.decode(response.body));
 
       isSuccessStatus = createCompanyModel.success.obs;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: createCompanyModel.messege);
         Get.back();
         await companyListScreenController.getAllCompanyFunction();
       } else {
         log('createCompanyFunction Else');
       }
-
-
-    } catch(e) {
+    } catch (e) {
       log('createCompanyFunction Error :$e');
       rethrow;
     } finally {
@@ -134,11 +130,12 @@ class CompanyManageScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-      CompanyGetByIdModel companyGetByIdModel = CompanyGetByIdModel.fromJson(json.decode(response.body));
+      CompanyGetByIdModel companyGetByIdModel =
+          CompanyGetByIdModel.fromJson(json.decode(response.body));
 
       isSuccessStatus = companyGetByIdModel.success.obs;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         nameFieldController.text = companyGetByIdModel.data.userName;
         emailFieldController.text = companyGetByIdModel.data.email;
         phoneNumberFieldController.text = companyGetByIdModel.data.phoneno;
@@ -157,26 +154,24 @@ class CompanyManageScreenController extends GetxController {
         selectedDepartmentList = <String>[].obs;
 
         // For Dropdown Show Selected Value show in dropdown
-        for(int i=0; i < departmentList.length; i++) {
-          for(int j=0; j < selectedDepartmentIdList.length; j++) {
-            if(departmentList[i].id.toString().trim() == selectedDepartmentIdList[j].trim()) {
+        for (int i = 0; i < departmentList.length; i++) {
+          for (int j = 0; j < selectedDepartmentIdList.length; j++) {
+            if (departmentList[i].id.toString().trim() ==
+                selectedDepartmentIdList[j].trim()) {
               selectedDepartmentList.add(departmentList[i].departmentName);
             }
           }
         }
         log('selectedDepartmentList : $selectedDepartmentList');
-
       } else {
         log('getCompanyDetailsFunction Else');
       }
-
-    } catch(e) {
+    } catch (e) {
       log('getCompanyDetailsFunction Error :$e');
       rethrow;
     } finally {
       isLoading(false);
     }
-
   }
 
   /// Update Company Details
@@ -186,7 +181,6 @@ class CompanyManageScreenController extends GetxController {
     log('Update Company Api URl : $url');
 
     try {
-
       Map<String, dynamic> bodyData = {
         "id": companyId,
         "userid": "${UserDetails.userId}",
@@ -202,19 +196,18 @@ class CompanyManageScreenController extends GetxController {
         body: bodyData,
       );
 
-      UpdateCompanyModel updateCompanyModel = UpdateCompanyModel.fromJson(json.decode(response.body));
+      UpdateCompanyModel updateCompanyModel =
+          UpdateCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = updateCompanyModel.success.obs;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: updateCompanyModel.messege);
         Get.back();
         await companyListScreenController.getAllCompanyFunction();
       } else {
         log('updateCompanyDetailsFunction Else');
       }
-
-
-    } catch(e) {
+    } catch (e) {
       log('updateCompanyDetailsFunction Error :$e');
       rethrow;
     } finally {
@@ -234,16 +227,17 @@ class CompanyManageScreenController extends GetxController {
     String selectedDepartmentIdString = "";
     String selectedDepartmentIdString2 = "";
 
-    selectedDepartmentIdString = selectedDepartmentIdList.toString().substring(1, selectedDepartmentIdList.toString().length -1);
-    selectedDepartmentIdString2 = selectedDepartmentIdString.replaceAll(" ", "");
+    selectedDepartmentIdString = selectedDepartmentIdList
+        .toString()
+        .substring(1, selectedDepartmentIdList.toString().length - 1);
+    selectedDepartmentIdString2 =
+        selectedDepartmentIdString.replaceAll(" ", "");
     log('selectedDepartmentIdString2 :$selectedDepartmentIdString2');
     return selectedDepartmentIdString2;
   }
-
 
   loadUI() {
     isLoading(true);
     isLoading(false);
   }
-
 }

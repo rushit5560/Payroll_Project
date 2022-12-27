@@ -92,12 +92,13 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   employeeCreteScreenController.dateOfBrithController,
               suffixIcon: Icons.calendar_month,
               onPressed: () {
-                DateTime selectedDate =
-                    employeeCreteScreenController.selectedDate;
-                _selectDate(context, selectedDate,
-                    employeeCreteScreenController.dateOfBrithController);
-
-                // employeeCreteScreenController.showDatePicker(context);
+                // DateTime selectedDate =
+                //     employeeCreteScreenController.selectedDate;
+                _selectDate(
+                    context,
+                    employeeCreteScreenController.birthDate,
+                    employeeCreteScreenController.dateOfBrithController,
+                    DatePickerOption.dob);
               },
               validate: (value) => FieldValidation().validateDateOfBirth(value),
             ),
@@ -150,10 +151,13 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   employeeCreteScreenController.startDateController,
               suffixIcon: Icons.calendar_month,
               onPressed: () {
-                DateTime selectedFirstDate =
-                    employeeCreteScreenController.selectedDate;
-                _selectDate(context, selectedFirstDate,
-                    employeeCreteScreenController.startDateController);
+                // DateTime selectedFirstDate =
+                //     employeeCreteScreenController.selectedDate;
+                _selectDate(
+                    context,
+                    employeeCreteScreenController.startDate,
+                    employeeCreteScreenController.startDateController,
+                    DatePickerOption.startDate);
               },
               validate: (value) =>
                   FieldValidation().validateStartDayWork(value),
@@ -255,7 +259,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     }).toList(),
                     onChanged: (CompanyData? value) async {
                       // This is called when the user selects an item.
-                      log('valuevaluevaluevalue :${value!.userName}');
                       // employeeCreteScreenController.isloding(true);
                       employeeCreteScreenController.companyDDSelectedItem =
                           value;
@@ -264,6 +267,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           .companyDDSelectedItem!.id;
 
                       log('companyid : $companyid');
+                      log('valuevaluevaluevalue :${value!.userName}');
 
                       await employeeCreteScreenController
                           .getCompanyDepartmentFunction(companyid);
@@ -312,18 +316,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           // employeeCreteScreenController.isloding(true);
                           employeeCreteScreenController.companyDepartmentData =
                               value;
-
-                          // int companyid = employeeCreteScreenController
-                          //     .companyDDSelectedItem!.id;
-
-                          // log('companyid : $companyid');
-
-                          // await employeeCreteScreenController
-                          //     .getCompanyDepartmentFunction(companyid);
-
-                          // log(employeeCreteScreenController
-                          //     .companyDDSelectedItem!.id
-                          //     .toString());
                         },
                       ).commonOnlyPadding(left: 10, right: 10),
                     ),
@@ -363,35 +355,54 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 5),
-            FormSingleFieldModule(
-              headerText: AppMessage.employeeEmail,
-              text: AppMessage.employeeEmail,
-              keyboardType: TextInputType.emailAddress,
-              textEditingController:
-                  employeeCreteScreenController.emailController,
-              validate: (value) => FieldValidation().validateEmail(value),
-            ),
-            const SizedBox(height: 5),
-            FormSingleFieldModule(
-              obscureText:
-                  employeeCreteScreenController.isPasswordVisible.value,
-              // obscureText:,
-              headerText: AppMessage.password,
-              text: AppMessage.password,
-              keyboardType: TextInputType.visiblePassword,
-              // maxLength: 10,
-              textEditingController:
-                  employeeCreteScreenController.passwordController,
 
-              suffixIcon: employeeCreteScreenController.isPasswordVisible.value
-                  ? Icons.visibility
-                  : Icons.visibility_off,
-              onPressed: () {
-                employeeCreteScreenController.isPasswordVisible.value =
-                    !employeeCreteScreenController.isPasswordVisible.value;
-              },
-              validate: (value) => FieldValidation().validatePassword(value),
-            ),
+            employeeCreteScreenController.employeeOption ==
+                    EmployeeOption.update
+                ? FormSingleFieldModule(
+                    headerText: AppMessage.employeeEmail,
+                    text: AppMessage.employeeEmail,
+                    keyboardType: TextInputType.emailAddress,
+                    readOnly: true,
+                    textEditingController:
+                        employeeCreteScreenController.emailController,
+                    validate: (value) => FieldValidation().validateEmail(value),
+                  )
+                : FormSingleFieldModule(
+                    headerText: AppMessage.employeeEmail,
+                    text: AppMessage.employeeEmail,
+                    keyboardType: TextInputType.emailAddress,
+                    textEditingController:
+                        employeeCreteScreenController.emailController,
+                    validate: (value) => FieldValidation().validateEmail(value),
+                  ),
+            const SizedBox(height: 5),
+
+            employeeCreteScreenController.employeeOption ==
+                    EmployeeOption.update
+                ? Container()
+                : FormSingleFieldModule(
+                    obscureText:
+                        employeeCreteScreenController.isPasswordVisible.value,
+                    // obscureText:,
+                    headerText: AppMessage.password,
+                    text: AppMessage.password,
+                    keyboardType: TextInputType.visiblePassword,
+                    // maxLength: 10,
+                    textEditingController:
+                        employeeCreteScreenController.passwordController,
+
+                    suffixIcon:
+                        employeeCreteScreenController.isPasswordVisible.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                    onPressed: () {
+                      employeeCreteScreenController.isPasswordVisible.value =
+                          !employeeCreteScreenController
+                              .isPasswordVisible.value;
+                    },
+                    validate: (value) =>
+                        FieldValidation().validatePassword(value),
+                  ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
               headerText: AppMessage.employeeCurrentAddress,
@@ -417,6 +428,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: ButtonCustom(
+
+
+
+                    
                     onPressed: () async {
                       if (employeeCreteScreenController.formKey.currentState!
                           .validate()) {
@@ -437,14 +452,9 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                                 msg: "Please select profile image!");
                           }
                         } else {
-                          if (employeeCreteScreenController
-                              .companyDepartment.isEmpty) {
-                            Fluttertoast.showToast(
-                                msg: "Please select department");
-                          } else if (employeeCreteScreenController
-                              .selectedDepartmentIdList.isNotEmpty) {
-                            // await employeeCreteScreenController.updateCompanyDetailsFunction();
-                          }
+                          log("updateEmployeeDetailsFunction");
+                          await employeeCreteScreenController
+                              .updateEmployeeDetailsFunction();
                         }
                       }
                     },
@@ -477,8 +487,11 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
     );
   }
 
-  Future<void> _selectDate(BuildContext context, DateTime dateTime,
-      TextEditingController textEditingController) async {
+  Future<void> _selectDate(
+      BuildContext context,
+      DateTime dateTime,
+      TextEditingController textEditingController,
+      DatePickerOption datePickerOption) async {
     final DateTime? d = await showDatePicker(
       context: context,
       initialDate: dateTime,
@@ -488,6 +501,12 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
     if (d != null) {
       employeeCreteScreenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      // dateTime = d;
+      if (datePickerOption == DatePickerOption.dob) {
+        employeeCreteScreenController.birthDate = d;
+      } else {
+        employeeCreteScreenController.startDate = d;
+      }
       employeeCreteScreenController.isLoading(false);
     }
   }
