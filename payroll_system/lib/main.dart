@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Payroll System',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),

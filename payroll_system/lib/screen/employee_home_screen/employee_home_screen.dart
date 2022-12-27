@@ -7,11 +7,13 @@ import 'package:payroll_system/screen/profile_screens/employee_profile_screens/e
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../controllers/employee_home_screen_controller.dart';
 import '../../utils/extension_methods/user_preference.dart';
 
 class EmployeeHomeScreen extends StatelessWidget {
-  const EmployeeHomeScreen({Key? key}) : super(key: key);
+  EmployeeHomeScreen({Key? key}) : super(key: key);
 
+  final employeeHomeScreenController = Get.put(EmployeeHomeScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
