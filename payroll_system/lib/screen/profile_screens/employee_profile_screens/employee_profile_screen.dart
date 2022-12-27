@@ -33,17 +33,20 @@ class EmployeeProfileScreen extends StatelessWidget {
               ? CommonLoader().showLoader()
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 5.h),
-                      EmployeeImageModule(),
-                      SizedBox(height: 4.h),
-                      EmployeeFormModule(),
-                      SizedBox(height: 6.h),
-                      EmployeeSubmitButtonModule(),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 5.h),
+                        EmployeeImageModule(),
+                        SizedBox(height: 4.h),
+                        EmployeeFormModule(),
+                        SizedBox(height: 6.h),
+                        EmployeeSubmitButtonModule(),
+                        SizedBox(height: 5.h),
+                      ],
+                    ),
                   ),
                 ),
         ),

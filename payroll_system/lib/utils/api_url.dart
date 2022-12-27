@@ -15,6 +15,8 @@ class ApiUrl {
   static const subAdminProfileUpdateApi = "${apiMainPath}api/profile/subupdate";
   static const companyProfileUpdateApi =
       "${apiMainPath}api/profile/companyupdate";
+  static const employeeProfileGetApi =
+      "${apiMainPath}api/profile/employeegetdata/";
   static const employeeProfileUpdateApi =
       "${apiMainPath}api/profile/employeeupdate";
 
@@ -23,6 +25,7 @@ class ApiUrl {
   static const createEmployeeApi = "${apiMainPath}api/employee/store";
   static const deleteEmployeeApi = "${apiMainPath}api/employee/delete/";
   static const getEmployeeDetailsApi = "${apiMainPath}api/employee/edit/";
+  static const updateEmployeeDetailsApi = "${apiMainPath}api/employee/update/";
 
   // Company Api's
   static const allCompanyApi = "${apiMainPath}api/company";

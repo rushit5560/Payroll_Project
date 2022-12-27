@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/models/user_profile_model/employee_profile_model.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,99 +22,91 @@ import '../../models/user_profile_model/user_profile_model.dart';
 class EmployeeProfileScreenController extends GetxController {
   RxBool isLoading = false.obs;
 
-  File? imageFile;
-
-  UserData? profileData;
+  EmployeeDatum? employeeData;
 
   List<DepartmentData> departmentList = [];
   List<String> departmentStringList = [];
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController = TextEditingController();
+  File? imageFile;
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController middleNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  TextEditingController dobFieldController = TextEditingController();
+  TextEditingController homeNumberController = TextEditingController();
+  TextEditingController workNumberController = TextEditingController();
 
-  Future<void> getUserProfileFunction() async {
+  TextEditingController currentAddressController = TextEditingController();
+  TextEditingController homeAddressController = TextEditingController();
+
+  Future<void> selectDateOfBirth(BuildContext context) async {
+    final DateTime? d = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
+    );
+    if (d != null) {
+      isLoading(true);
+      dobFieldController.text = "${d.year}-${d.month}-${d.day}";
+      isLoading(false);
+    }
+  }
+
+  Future<void> getEmployeeProfileFunction() async {
     isLoading(true);
-    String url = ApiUrl.profileGetApi + "/${UserDetails.userId}";
-    log("getUserProfileFunction Api url : $url");
+    String url = "${ApiUrl.employeeProfileGetApi}${UserDetails.userId}";
+    log("getEmployeeProfileFunction Api url : $url");
 
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      log("getUserProfileFunction response :  ${response.body}");
+      log("getEmployeeProfileFunction response :  ${response.body}");
 
-      UserProfileModel userProfileModel =
-          UserProfileModel.fromJson(json.decode(response.body));
-      var isSuccessStatus = userProfileModel.success;
+      EmployeeProfileModel employeeProfileModel =
+          EmployeeProfileModel.fromJson(json.decode(response.body));
+      var isSuccessStatus = employeeProfileModel.success;
 
       if (isSuccessStatus) {
-        profileData = userProfileModel.data;
+        employeeData = employeeProfileModel.data[0];
 
-        nameController.text = profileData!.userName;
-        phoneNumberController.text = profileData!.phoneno;
-        addressController.text = profileData!.address;
+        firstNameController.text = employeeData!.firstName;
+        middleNameController.text = employeeData!.middleName;
+        lastNameController.text = employeeData!.lastName;
 
-        log(" userName :: ${userProfileModel.data.userName}");
+        phoneNumberController.text = employeeData!.phoneNo;
+
+        if (employeeData!.dateOfBrith != "") {
+          dobFieldController.text = employeeData!.dateOfBrith.split(" ")[0];
+        } else {
+          dobFieldController.text = employeeData!.dateOfBrith;
+        }
+
+        homeNumberController.text = employeeData!.homeNo;
+        workNumberController.text = employeeData!.workPhone;
+
+        homeAddressController.text = employeeData!.home;
+        currentAddressController.text = employeeData!.address;
+
+        log(" get employee details success :: ");
       } else {
         log("else case");
       }
     } catch (e) {
-      log("getUserProfileFunction error  $e");
+      log("getEmployeeProfileFunction error  $e");
       rethrow;
     } finally {
       isLoading(false);
     }
   }
 
-  // /// Get All Department
-  // Future<void> getAllDepartmentFunction() async {
-  //   isLoading(true);
-  //   String url = ApiUrl.allDepartmentApi;
-  //   log('Get All Department Api Url :$url');
-
-  //   try {
-  //     http.Response response = await http.get(Uri.parse(url));
-
-  //     AllDepartmentModel allDepartmentModel =
-  //         AllDepartmentModel.fromJson(json.decode(response.body));
-  //     var isSuccessStatus = allDepartmentModel.success;
-
-  //     if (isSuccessStatus) {
-  //       departmentList.clear();
-  //       departmentList.addAll(allDepartmentModel.data);
-
-  //       departmentStringList.clear();
-  //       for (int i = 0; i < departmentList.length; i++) {
-  //         departmentStringList.add(departmentList[i].departmentName);
-  //         log('${departmentList[i].id} : ${departmentList[i].departmentName}');
-  //       }
-
-  //       log('departmentList Length : ${departmentList.length}');
-  //     } else {
-  //       log('getAllDepartmentFunction Else');
-  //     }
-  //   } catch (e) {
-  //     log('getAllDepartmentFunction Error :$e');
-  //     rethrow;
-  //   } finally {
-  //     if (companyOption == CompanyOption.update) {
-  //       // when update company that time
-  //       await getCompanyDetailsFunction();
-  //     } else if (companyOption == CompanyOption.create) {
-  //       // when create new company
-  //       isLoading(false);
-  //     }
-  //       isLoading(false);
-  //   }
-  // }
-
-  updateSubAdminProfileFunction() async {
+  updateEmployeeProfileFunction() async {
     isLoading(true);
 
-    String url = ApiUrl.subAdminProfileUpdateApi;
-    log("updateSubAdminProfileFunction url: $url");
+    String url = ApiUrl.employeeProfileUpdateApi;
+    log("updateEmployeeProfileFunction url: $url");
 
     log('UserDetails.userid: ${UserDetails.userId}');
 
@@ -131,12 +124,19 @@ class EmployeeProfileScreenController extends GetxController {
         // request.headers.addAll(apiHeader.headers);
 
         request.fields['userid'] = UserDetails.userId.toString();
-        request.fields['user_name'] = nameController.text;
-        request.fields['phoneno'] = phoneNumberController.text;
-        request.fields['address'] = addressController.text;
+        request.fields['first_name'] = firstNameController.text;
+        request.fields['middle_name'] = middleNameController.text;
+        request.fields['last_name'] = lastNameController.text;
+
+        request.fields['phone_no'] = phoneNumberController.text;
+        request.fields['date_of_brith'] = dobFieldController.text;
+        request.fields['address'] = currentAddressController.text;
+        request.fields['home'] = homeAddressController.text;
+        request.fields['home_no'] = dobFieldController.text;
+        request.fields['work_phone'] = dobFieldController.text;
 
         request.fields['showimg'] =
-            profileData!.photo.isEmpty ? "" : profileData!.photo;
+            employeeData!.photo.isEmpty ? "" : employeeData!.photo;
 
         log('request.fields: ${request.fields}');
         log('request.files: ${request.files}');
@@ -163,7 +163,7 @@ class EmployeeProfileScreenController extends GetxController {
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-            prefs.setString(UserPreference.userNameKey, nameController.text);
+            // prefs.setString(UserPreference.userNameKey, nameController.text);
 
             UserDetails.userName =
                 prefs.getString(UserPreference.userNameKey) ?? "";
@@ -178,11 +178,19 @@ class EmployeeProfileScreenController extends GetxController {
         var request = http.MultipartRequest('POST', Uri.parse(url));
 
         request.fields['userid'] = UserDetails.userId.toString();
-        request.fields['user_name'] = nameController.text;
-        request.fields['phoneno'] = phoneNumberController.text;
-        request.fields['address'] = addressController.text;
+        request.fields['first_name'] = firstNameController.text;
+        request.fields['middle_name'] = middleNameController.text;
+        request.fields['last_name'] = lastNameController.text;
+
+        request.fields['phone_no'] = phoneNumberController.text;
+        request.fields['date_of_brith'] = dobFieldController.text;
+        request.fields['address'] = currentAddressController.text;
+        request.fields['home'] = homeAddressController.text;
+        request.fields['home_no'] = dobFieldController.text;
+        request.fields['work_phone'] = dobFieldController.text;
+
         request.fields['showimg'] =
-            profileData!.photo.isEmpty ? "" : profileData!.photo;
+            employeeData!.photo.isEmpty ? "" : employeeData!.photo;
 
         log('request.fields: ${request.fields}');
         log('request.files: ${request.files}');
@@ -209,7 +217,7 @@ class EmployeeProfileScreenController extends GetxController {
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-            prefs.setString(UserPreference.userNameKey, nameController.text);
+            // prefs.setString(UserPreference.userNameKey, nameController.text);
 
             UserDetails.userName =
                 prefs.getString(UserPreference.userNameKey) ?? "";
@@ -221,7 +229,7 @@ class EmployeeProfileScreenController extends GetxController {
         });
       }
     } catch (e) {
-      log("updateSubAdminProfileFunction Error ::: $e");
+      log("updateEmployeeProfileFunction Error ::: $e");
       rethrow;
     } finally {
       isLoading(false);
@@ -286,7 +294,7 @@ class EmployeeProfileScreenController extends GetxController {
   void onInit() {
     // TODO: implement onInit
 
-    getUserProfileFunction();
+    getEmployeeProfileFunction();
     super.onInit();
   }
 

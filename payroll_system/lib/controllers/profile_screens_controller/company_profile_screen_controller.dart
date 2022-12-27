@@ -15,6 +15,7 @@ import '../../Utils/extension_methods/user_details.dart';
 import '../../models/company_manage_screen_model/get_all_department_model.dart';
 import '../../models/log_in_model.dart';
 import '../../models/success_models/success_model.dart';
+import '../../models/user_profile_model/company_profile_model.dart';
 import '../../models/user_profile_model/user_profile_model.dart';
 
 class CompanyProfileScreenController extends GetxController {
@@ -22,15 +23,15 @@ class CompanyProfileScreenController extends GetxController {
 
   File? imageFile;
 
-  UserData? profileData;
+  CompanyData? companyData;
 
   List<DepartmentData> departmentList = [];
   List<String> departmentStringList = [];
 
   RxList<String> selectedDepartmentList = RxList<String>([]);
-  // List<String> selectedDepartmentList = [];
   List<String> selectedDepartmentIdList = [];
-  RxString selectedDepartmentOption = "".obs;
+  // List<String> selectedDepartmentList = [];
+  // RxString selectedDepartmentOption = "".obs;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -41,40 +42,6 @@ class CompanyProfileScreenController extends GetxController {
   loadUI() {
     isLoading(true);
     isLoading(false);
-  }
-
-  Future<void> getUserProfileFunction() async {
-    isLoading(true);
-    String url = ApiUrl.profileGetApi + "/${UserDetails.userId}";
-    log("getUserProfileFunction Api url : $url");
-
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-
-      log("getUserProfileFunction response :  ${response.body}");
-
-      UserProfileModel userProfileModel =
-          UserProfileModel.fromJson(json.decode(response.body));
-      var isSuccessStatus = userProfileModel.success;
-
-      if (isSuccessStatus) {
-        profileData = userProfileModel.data;
-
-        nameController.text = profileData!.userName;
-        phoneNumberController.text = profileData!.phoneno;
-        addressController.text = profileData!.address;
-
-        log(" userName :: ${userProfileModel.data.userName}");
-      } else {
-        log("else case");
-      }
-    } catch (e) {
-      log("getUserProfileFunction error  $e");
-      rethrow;
-    } finally {
-      getAllDepartmentFunction();
-      // isLoading(false);
-    }
   }
 
   /// Get All Department
@@ -114,6 +81,63 @@ class CompanyProfileScreenController extends GetxController {
       // } else if (companyOption == CompanyOption.create) {
       //   // when create new company
       // }
+      // isLoading(false);
+      getUserProfileFunction();
+    }
+  }
+
+  Future<void> getUserProfileFunction() async {
+    isLoading(true);
+    String url = ApiUrl.profileGetApi + "/${UserDetails.userId}";
+    log("getUserProfileFunction Api url : $url");
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+
+      log("getUserProfileFunction response :  ${response.body}");
+
+      CompanyProfileModel companyProfileModel =
+          CompanyProfileModel.fromJson(json.decode(response.body));
+      var isSuccessStatus = companyProfileModel.success;
+
+      if (isSuccessStatus) {
+        companyData = companyProfileModel.companyData;
+
+        nameController.text = companyData!.userName;
+        phoneNumberController.text = companyData!.phoneno;
+        addressController.text = companyData!.address;
+
+        if (companyData!.departmentId != "") {
+          var companyIdsString =
+              companyData!.departmentId.split("[")[1].split("]")[0];
+
+          List<int> idList = companyIdsString.split(",").map(
+            (num) {
+              return int.tryParse(num)!;
+            },
+          ).toList();
+
+          for (int i = 0; i < idList.length; i++) {
+            selectedDepartmentIdList.add(idList[i].toString());
+            for (int j = 0; j < departmentList.length; j++) {
+              if (idList[i] == departmentList[j].id) {
+                log("idList.length :: ${idList.length}");
+                log("departmentList.length :: ${departmentList.length}");
+                selectedDepartmentList.add(departmentList[i].departmentName);
+              }
+            }
+          }
+          log("selectedDepartmentIdList is :: ${selectedDepartmentIdList.toString()}");
+          log("selectedDepartmentList is :: ${selectedDepartmentList.toString()}");
+        }
+      } else {
+        log("else case");
+      }
+    } catch (e) {
+      log("getUserProfileFunction error  $e");
+      rethrow;
+    } finally {
+      // getAllDepartmentFunction();
       isLoading(false);
     }
   }
@@ -146,7 +170,7 @@ class CompanyProfileScreenController extends GetxController {
         request.fields['department_id'] = "$selectedDepartmentIdList";
 
         request.fields['showimg'] =
-            profileData!.photo.isEmpty ? "" : profileData!.photo;
+            companyData!.photo.isEmpty ? "" : companyData!.photo;
 
         log('request.fields: ${request.fields}');
         log('request.files: ${request.files}');
@@ -194,7 +218,7 @@ class CompanyProfileScreenController extends GetxController {
 
         request.fields['department_id'] = "$selectedDepartmentIdList";
         request.fields['showimg'] =
-            profileData!.photo.isEmpty ? "" : profileData!.photo;
+            companyData!.photo.isEmpty ? "" : companyData!.photo;
 
         log('request.fields: ${request.fields}');
         log('request.files: ${request.files}');
@@ -298,7 +322,7 @@ class CompanyProfileScreenController extends GetxController {
   void onInit() {
     // TODO: implement onInit
 
-    getUserProfileFunction();
+    getAllDepartmentFunction();
     super.onInit();
   }
 

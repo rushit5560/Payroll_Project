@@ -10,6 +10,7 @@ import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../common_modules/form_single_field_module.dart';
 import '../../../controllers/profile_screens_controller/employee_profile_screen_controller.dart';
 
 class EmployeeImageModule extends StatelessWidget {
@@ -49,7 +50,7 @@ class EmployeeImageModule extends StatelessWidget {
                                 child: Image.network(
                                   ApiUrl.apiImagePath +
                                       employeeProfileScreenController
-                                          .profileData!.photo,
+                                          .employeeData!.photo,
                                   fit: BoxFit.cover,
                                   errorBuilder: (ctx, obj, st) {
                                     return Container(
@@ -115,13 +116,41 @@ class EmployeeFormModule extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            controller: employeeProfileScreenController.nameController,
+            controller: employeeProfileScreenController.firstNameController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateUserName(val!),
+            validator: (val) => FieldValidation().validateFirstName(val!),
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Name",
+              labelText: "First Name",
+              border: border,
+              enabledBorder: border,
+              filled: true,
+            ),
+          ),
+          SizedBox(height: 2.h),
+          TextFormField(
+            controller: employeeProfileScreenController.middleNameController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (val) => FieldValidation().validateMiddleName(val!),
+            decoration: InputDecoration(
+              fillColor: AppColors.greyColor.withOpacity(0.25),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              labelText: "Middle Name",
+              border: border,
+              enabledBorder: border,
+              filled: true,
+            ),
+          ),
+          SizedBox(height: 2.h),
+          TextFormField(
+            controller: employeeProfileScreenController.lastNameController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (val) => FieldValidation().validateLastName(val!),
+            decoration: InputDecoration(
+              fillColor: AppColors.greyColor.withOpacity(0.25),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              labelText: "Last Name",
               border: border,
               enabledBorder: border,
               filled: true,
@@ -143,13 +172,93 @@ class EmployeeFormModule extends StatelessWidget {
           ),
           SizedBox(height: 2.h),
           TextFormField(
-            controller: employeeProfileScreenController.addressController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) => FieldValidation().validateDateOfBirth(value!),
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+              employeeProfileScreenController.selectDateOfBirth(context);
+            },
+            // readOnly: readOnly,
+            controller: employeeProfileScreenController.dobFieldController,
+            decoration: InputDecoration(
+              isDense: true,
+              labelText: "Date of birth",
+              hintText: "Ex. Insert your dob",
+              border: border,
+              enabledBorder: border,
+              filled: true,
+              fillColor: AppColors.greyColor.withOpacity(0.25),
+            ),
+          ),
+          // FormSingleFieldModule(
+          //   headerText: AppMessage.dateOfBrith,
+          //   text: "Date Of Birth",
+          //   keyboardType: TextInputType.datetime,
+          //   maxLength: 10,
+          //   textEditingController:
+          //       employeeProfileScreenController.dobFieldController,
+          //   suffixIcon: Icons.calendar_month,
+          //   onPressed: () {
+          //     // DateTime selectedDate =
+          //     //     employeeProfileScreenController.selectedDate;
+          //     employeeProfileScreenController.selectDateOfBirth(context);
+
+          //     // employeeCreteScreenController.showDatePicker(context);
+          //   },
+          //   validate: (value) => FieldValidation().validateDateOfBirth(value),
+          // ),
+          SizedBox(height: 2.h),
+          TextFormField(
+            controller: employeeProfileScreenController.homeNumberController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateAddress(val!),
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Address",
+              labelText: "Home Number",
+              border: border,
+              enabledBorder: border,
+              filled: true,
+            ),
+          ),
+          SizedBox(height: 2.h),
+          TextFormField(
+            controller: employeeProfileScreenController.workNumberController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (val) => FieldValidation().validateAddress(val!),
+            decoration: InputDecoration(
+              fillColor: AppColors.greyColor.withOpacity(0.25),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              labelText: "Work Number",
+              border: border,
+              enabledBorder: border,
+              filled: true,
+            ),
+          ),
+          SizedBox(height: 2.h),
+          TextFormField(
+            controller:
+                employeeProfileScreenController.currentAddressController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (val) => FieldValidation().validateAddress(val!),
+            decoration: InputDecoration(
+              fillColor: AppColors.greyColor.withOpacity(0.25),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              labelText: "Current Address",
+              border: border,
+              enabledBorder: border,
+              filled: true,
+            ),
+          ),
+          SizedBox(height: 2.h),
+          TextFormField(
+            controller: employeeProfileScreenController.homeAddressController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (val) => FieldValidation().validateAddress(val!),
+            decoration: InputDecoration(
+              fillColor: AppColors.greyColor.withOpacity(0.25),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              labelText: "Home Address",
               border: border,
               enabledBorder: border,
               filled: true,
@@ -174,7 +283,7 @@ class EmployeeSubmitButtonModule extends StatelessWidget {
       width: 60.w,
       child: ElevatedButton(
         onPressed: () {
-          employeeProfileScreenController.updateSubAdminProfileFunction();
+          employeeProfileScreenController.updateEmployeeProfileFunction();
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

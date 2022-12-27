@@ -53,7 +53,7 @@ class CompanyImageModule extends StatelessWidget {
                                 child: Image.network(
                                   ApiUrl.apiImagePath +
                                       companyProfileScreenController
-                                          .profileData!.photo,
+                                          .companyData!.photo,
                                   fit: BoxFit.cover,
                                   errorBuilder: (ctx, obj, st) {
                                     return Container(
@@ -114,102 +114,106 @@ class CompanyFormModule extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
     );
 
-    return Form(
-      key: companyProfileScreenController.formKey,
-      child: Column(
-        children: [
-          DropDownMultiSelect(
-            options: companyProfileScreenController.departmentStringList,
+    return Obx(
+      () => Form(
+        key: companyProfileScreenController.formKey,
+        child: Column(
+          children: [
+            DropDownMultiSelect(
+              options: companyProfileScreenController.departmentStringList,
 
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Choose Department",
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
+              decoration: InputDecoration(
+                fillColor: AppColors.greyColor.withOpacity(0.25),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                labelText: "Choose Department",
+                border: border,
+                enabledBorder: border,
+                filled: true,
+              ),
 
-            // whenEmpty: 'Choose Department',
-            validator: (val) {
-              if (val == "Choose Department") {
-                return "Please Choose Department";
-              } else {
-                return "";
-              }
-            },
-            onChanged: (value) {
-              companyProfileScreenController.selectedDepartmentList.value =
-                  value;
-              companyProfileScreenController.selectedDepartmentOption.value =
-                  "";
-              companyProfileScreenController.selectedDepartmentIdList = [];
+              // whenEmpty: 'Choose Department',
+              validator: (val) {
+                if (val == "Choose Department") {
+                  return "Please Choose Department";
+                } else {
+                  return "";
+                }
+              },
+              onChanged: (value) {
+                companyProfileScreenController.selectedDepartmentList.value =
+                    value;
+                // companyProfileScreenController.selectedDepartmentOption.value =
+                //     "";
+                companyProfileScreenController.selectedDepartmentIdList = [];
 
-              // Selected Department generate new id list for send in api
-              for (int i = 0; i < value.length; i++) {
-                for (int j = 0;
-                    j < companyProfileScreenController.departmentList.length;
-                    j++) {
-                  if (value[i] ==
-                      companyProfileScreenController
-                          .departmentList[j].departmentName) {
-                    companyProfileScreenController.selectedDepartmentIdList.add(
+                // Selected Department generate new id list for send in api
+                for (int i = 0; i < value.length; i++) {
+                  for (int j = 0;
+                      j < companyProfileScreenController.departmentList.length;
+                      j++) {
+                    if (value[i] ==
+                        companyProfileScreenController
+                            .departmentList[j].departmentName) {
+                      companyProfileScreenController.selectedDepartmentIdList
+                          .add(
                         companyProfileScreenController.departmentList[j].id
-                            .toString());
+                            .toString(),
+                      );
+                    }
                   }
                 }
-              }
 
-              log('companyProfileScreenController.selectedDepartmentIdList :${companyProfileScreenController.selectedDepartmentIdList}');
-              companyProfileScreenController.loadUI();
-            },
-            // ignore: invalid_use_of_protected_member
-            selectedValues:
-                companyProfileScreenController.selectedDepartmentList.value,
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: companyProfileScreenController.nameController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateUserName(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Name",
-              border: border,
-              enabledBorder: border,
-              filled: true,
+                log('companyProfileScreenController.selectedDepartmentIdList :${companyProfileScreenController.selectedDepartmentIdList}');
+                companyProfileScreenController.loadUI();
+              },
+              // ignore: invalid_use_of_protected_member
+              selectedValues:
+                  companyProfileScreenController.selectedDepartmentList.value,
             ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: companyProfileScreenController.phoneNumberController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateMobileNumber(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Phone Number",
-              border: border,
-              enabledBorder: border,
-              filled: true,
+            SizedBox(height: 2.h),
+            TextFormField(
+              controller: companyProfileScreenController.nameController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (val) => FieldValidation().validateUserName(val!),
+              decoration: InputDecoration(
+                fillColor: AppColors.greyColor.withOpacity(0.25),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                labelText: "Name",
+                border: border,
+                enabledBorder: border,
+                filled: true,
+              ),
             ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: companyProfileScreenController.addressController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateAddress(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Address",
-              border: border,
-              enabledBorder: border,
-              filled: true,
+            SizedBox(height: 2.h),
+            TextFormField(
+              controller: companyProfileScreenController.phoneNumberController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (val) => FieldValidation().validateMobileNumber(val!),
+              decoration: InputDecoration(
+                fillColor: AppColors.greyColor.withOpacity(0.25),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                labelText: "Phone Number",
+                border: border,
+                enabledBorder: border,
+                filled: true,
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 2.h),
+            TextFormField(
+              controller: companyProfileScreenController.addressController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (val) => FieldValidation().validateAddress(val!),
+              decoration: InputDecoration(
+                fillColor: AppColors.greyColor.withOpacity(0.25),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                labelText: "Address",
+                border: border,
+                enabledBorder: border,
+                filled: true,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
