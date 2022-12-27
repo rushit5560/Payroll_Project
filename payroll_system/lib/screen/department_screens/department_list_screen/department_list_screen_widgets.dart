@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
 import 'package:payroll_system/common_modules/single_item_module.dart';
-import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/department_list_screen_controller.dart';
 import 'package:payroll_system/models/company_manage_screen_model/get_all_department_model.dart';

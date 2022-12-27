@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/constants/anums.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/department_list_screen_controller.dart';
 import 'package:payroll_system/models/company_manage_screen_model/create_company_model.dart';
 import 'package:payroll_system/models/department_manage_screen_models/department_get_by_id_model.dart';
