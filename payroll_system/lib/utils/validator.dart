@@ -1,7 +1,7 @@
 class FieldValidation {
   String? validateUserName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your name.';
+      return 'Please enter your name';
     } else {
       return null;
     }
@@ -41,7 +41,7 @@ class FieldValidation {
 
   String? validateMobileNumber(String value) {
     if (value.isEmpty) {
-      return 'Please enter your Mobile number';
+      return 'Please enter your mobile number';
     } else if (value.length < 10) {
       return 'Mobile number must enter 10 characters';
     } else if (value.length > 10) {
@@ -53,7 +53,7 @@ class FieldValidation {
 
   String? validateCurrentAddress(String value) {
     if (value.isEmpty) {
-      return 'Please enter your CurrentAddress';
+      return 'Please enter your currentAddress';
     } else {
       return null;
     }
@@ -69,7 +69,7 @@ class FieldValidation {
 
   String? validateHomeAddress(String value) {
     if (value.isEmpty) {
-      return 'Please enter your home Address';
+      return 'Please enter your home address';
     } else {
       return null;
     }
@@ -77,7 +77,7 @@ class FieldValidation {
 
   String? validateEmail(String value) {
     if (value.isEmpty) {
-      return "Email Address is required";
+      return "Email address is required";
     } else if (!isNumeric(value) &&
         !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             .hasMatch(value)) {
@@ -96,7 +96,7 @@ class FieldValidation {
 
   String? validateDepartmentId(String value) {
     if (value.isEmpty) {
-      return 'Please enter Department Id';
+      return 'Please enter department Id';
     } else {
       return null;
     }
@@ -104,7 +104,7 @@ class FieldValidation {
 
   String? validateCompanyId(String value) {
     if (value.isEmpty) {
-      return 'Please enter Company Id';
+      return 'Please enter company Id';
     } else {
       return null;
     }
@@ -128,7 +128,7 @@ class FieldValidation {
 
   String? validateHomePhoneNumber(String value) {
     if (value.isEmpty) {
-      return 'Please enter PhoneNumber';
+      return 'Please enter phoneNumber';
     } else {
       return null;
     }
@@ -147,7 +147,7 @@ class FieldValidation {
 
   String? validateWorkPhoneNumber(String value) {
     if (value.isEmpty) {
-      return 'Please enter your Phone number';
+      return 'Please enter your phone number';
     } else {
       return null;
     }
@@ -171,7 +171,7 @@ class FieldValidation {
 
   String? validateSalary(String value) {
     if (value.isEmpty) {
-      return 'Please enter Salary';
+      return 'Please enter salary';
     } else {
       return null;
     }
@@ -179,7 +179,7 @@ class FieldValidation {
 
   String? validateStartDayWork(String value) {
     if (value.isEmpty) {
-      return 'Please enter FirstDayWork';
+      return 'Please enter firstDayWork';
     } else {
       return null;
     }
@@ -187,7 +187,7 @@ class FieldValidation {
 
   String? validateLastDayWork(String value) {
     if (value.isEmpty) {
-      return 'Please enter LastDayWork';
+      return 'Please enter lastDayWork';
     } else {
       return null;
     }
@@ -195,7 +195,7 @@ class FieldValidation {
 
   String? validateZipCode(String value) {
     if (value.isEmpty) {
-      return 'Please enter ZipCode';
+      return 'Please enter zipCode';
     } else {
       return null;
     }
@@ -204,8 +204,21 @@ class FieldValidation {
   String? validatePassword(String value) {
     if (value.isEmpty) {
       return "Password is required";
-    } else if (value.length < 6) {
-      return "Password must be at least 6 characters long";
+    } else if (value.length < 8) {
+      return "Password must be at least 8 characters long";
+    } else {
+      return null;
+    }
+  }
+
+
+  String? validateConfirmPassword(String value, String passwordValue) {
+    if (value.isEmpty) {
+      return "Confirm Password is required";
+    } else if (value.length < 8) {
+      return "Confirm Password must be at least 8 characters long";
+    } else if (value != passwordValue) {
+      return "Password & confirm password mus be same";
     } else {
       return null;
     }

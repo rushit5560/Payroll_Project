@@ -380,29 +380,31 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             employeeCreteScreenController.employeeOption ==
                     EmployeeOption.update
                 ? Container()
-                : FormSingleFieldModule(
-                    obscureText:
-                        employeeCreteScreenController.isPasswordVisible.value,
-                    // obscureText:,
-                    headerText: AppMessage.password,
-                    text: AppMessage.password,
-                    keyboardType: TextInputType.visiblePassword,
-                    // maxLength: 10,
-                    textEditingController:
-                        employeeCreteScreenController.passwordController,
+                : Obx(
+                  ()=> FormSingleFieldModule(
+                      obscureText:
+                          employeeCreteScreenController.isPasswordVisible.value,
+                      // obscureText:,
+                      headerText: AppMessage.password,
+                      text: AppMessage.password,
+                      keyboardType: TextInputType.visiblePassword,
+                      // maxLength: 10,
+                      textEditingController:
+                          employeeCreteScreenController.passwordController,
 
-                    suffixIcon:
-                        employeeCreteScreenController.isPasswordVisible.value
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                    onPressed: () {
-                      employeeCreteScreenController.isPasswordVisible.value =
-                          !employeeCreteScreenController
-                              .isPasswordVisible.value;
-                    },
-                    validate: (value) =>
-                        FieldValidation().validatePassword(value),
-                  ),
+                      suffixIcon:
+                          employeeCreteScreenController.isPasswordVisible.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                      onPressed: () {
+                        employeeCreteScreenController.isPasswordVisible.value =
+                            !employeeCreteScreenController
+                                .isPasswordVisible.value;
+                      },
+                      validate: (value) =>
+                          FieldValidation().validatePassword(value),
+                    ),
+                ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
               headerText: AppMessage.employeeCurrentAddress,

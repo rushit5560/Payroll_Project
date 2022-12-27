@@ -292,7 +292,7 @@ class UserPreference {
     prefs.setBool(departmentViewKey, false);
     prefs.setBool(departmentDeleteKey, false);
 
-    //removing from local
+    /*//removing from local
     UserDetails.isUserLoggedIn = false;
     UserDetails.userId = 0;
     UserDetails.roleId = 0;
@@ -357,7 +357,7 @@ class UserPreference {
     log("UserDetails.departmentAdd : ${UserDetails.departmentAdd}");
     log("UserDetails.departmentEdit : ${UserDetails.departmentEdit}");
     log("UserDetails.departmentView : ${UserDetails.departmentView}");
-    log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");
+    log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");*/
   }
 
 

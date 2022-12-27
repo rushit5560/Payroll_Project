@@ -10,6 +10,7 @@ import 'package:payroll_system/controllers/department_list_screen_controller.dar
 import 'package:payroll_system/models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/screen/department_screens/department_manage_screen/department_manage_screen.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../utils/extension_methods/user_preference.dart';
 
@@ -44,12 +45,13 @@ class DepartmentListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
       child: Container(
         decoration: BoxDecoration(
           // borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: AppColors.greyColor,
+            width: 2,
           ),
         ),
         child: Padding(
@@ -68,15 +70,15 @@ class DepartmentListTile extends StatelessWidget {
                 textValue: singleItem.isActive == "1" ? "Active" : "In-Active",
               ),
 
+              SizedBox(height: 2.h),
+
               /// Getting From Common Module
               EditAndDeleteButtonModule(
                 onEditTap: () async {
-
                   bool departmentEditPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentEditKey);
-
                   if(departmentEditPermission == true) {
                     Get.to(
-                          () => DepartmentManageScreen(),
+                      () => DepartmentManageScreen(),
                       arguments: [
                         DepartmentOption.update,
                         singleItem.id.toString(),
@@ -85,7 +87,6 @@ class DepartmentListTile extends StatelessWidget {
                   } else {
                     Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                   }
-
                 },
                 onDeleteTap: () async {
                   bool departmentDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentDeleteKey);

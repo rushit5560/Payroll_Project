@@ -25,7 +25,7 @@ class EmployeManageScreenController extends GetxController {
 
   DateTime? chosenDateTime;
   DateTime selectedDate = DateTime.now();
-  RxBool isPasswordVisible = false.obs;
+  RxBool isPasswordVisible = true.obs;
   List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
   RxString selectedValue = "Choose Option".obs;
   RxBool isLoading = false.obs;

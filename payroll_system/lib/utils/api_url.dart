@@ -5,6 +5,8 @@ class ApiUrl {
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
+  static const forgetPasswordApi = "${apiMainPath}api/forgetpassword";
+  static const changePasswordApi = "${apiMainPath}api/change/password";
 
   static const getPermissionApi = "${apiMainPath}api/getpermission/";
   // static const allDepartmentApi = "${apiMainPath}api/department";
@@ -26,6 +28,7 @@ class ApiUrl {
   static const deleteEmployeeApi = "${apiMainPath}api/employee/delete/";
   static const getEmployeeDetailsApi = "${apiMainPath}api/employee/edit/";
   static const updateEmployeeDetailsApi = "${apiMainPath}api/employee/update";
+  static const getCompanyWiseEmployeeApi = "${apiMainPath}api/employee/companywiseeomployee/";
 
   // Company Api's
   static const allCompanyApi = "${apiMainPath}api/company";
@@ -44,4 +47,6 @@ class ApiUrl {
 
   static const getCompanyDepartmentApi =
       "${apiMainPath}api/company/getdepartment";
+
+
 }

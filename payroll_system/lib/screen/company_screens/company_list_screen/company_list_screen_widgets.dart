@@ -10,6 +10,7 @@ import 'package:payroll_system/common_modules/single_item_module.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
+import 'package:sizer/sizer.dart';
 
 import '../company_manage_screen/company_manage_screen.dart';
 
@@ -45,12 +46,13 @@ class CompanyListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
       child: Container(
         decoration: BoxDecoration(
           // borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: AppColors.greyColor,
+            width: 2,
           ),
         ),
         child: Padding(
@@ -75,6 +77,8 @@ class CompanyListTile extends StatelessWidget {
                 textKey: AppMessage.verifiedStatusName,
                 textValue: singleItem.verified,
               ),
+
+              SizedBox(height: 2.h),
 
               /// Getting From Common Module
               EditAndDeleteButtonModule(

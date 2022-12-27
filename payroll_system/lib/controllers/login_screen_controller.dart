@@ -22,7 +22,7 @@ class LoginController extends GetxController {
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
 
-  RxBool isPasswordVisible = false.obs;
+  RxBool isPasswordVisible = true.obs;
   RxBool isPrivacyChecked = false.obs;
 
   //User login

@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import '../models/employee_manage_screen_models/employee_delete_model.dart';
@@ -13,6 +15,10 @@ class EmployeeListScreenController extends GetxController {
 
   List<EmployeeData> allEmployeeList = [];
 
+  int roleId = 0;
+  int userId = 0;
+
+  // Get All Employee
   Future<void> getAllEmployeeFunction() async {
     isLoading(true);
     String url = ApiUrl.allEmployeeApi;
@@ -21,8 +27,8 @@ class EmployeeListScreenController extends GetxController {
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      AllEmployeeModele allEmployeeModel =
-          AllEmployeeModele.fromJson(json.decode(response.body));
+      AllEmployeeModel allEmployeeModel =
+          AllEmployeeModel.fromJson(json.decode(response.body));
       isSuccessStatus = allEmployeeModel.success.obs;
 
       if (isSuccessStatus.value) {
@@ -39,7 +45,7 @@ class EmployeeListScreenController extends GetxController {
     }
   }
 
-  /// Delete Employee
+  // Delete Employee
   Future<void> deleteEmployeeFunction(String employeeId, int index) async {
     isLoading(true);
     String url = "${ApiUrl.deleteEmployeeApi}$employeeId";
@@ -69,10 +75,49 @@ class EmployeeListScreenController extends GetxController {
     }
   }
 
+  // Company Wise Employee
+  Future<void> getCompanyEmployeeFunction() async {
+    isLoading(true);
+    String url = "${ApiUrl.getCompanyWiseEmployeeApi}$userId";
+    log('Company Wise Employee Api Url : $url');
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+
+      AllEmployeeModel allEmployeeModel =
+      AllEmployeeModel.fromJson(json.decode(response.body));
+      isSuccessStatus = allEmployeeModel.success.obs;
+
+      if (isSuccessStatus.value) {
+        allEmployeeList.clear();
+        allEmployeeList.addAll(allEmployeeModel.data);
+      } else {
+        log('getAllCompanyFunction Else');
+      }
+
+    } catch (e) {
+      log('getCompanyEmployeeFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  getLoggedInUserRole() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
+    userId = prefs.getInt(UserPreference.userIdKey) ?? 0;
+
+    if(roleId == 1 || roleId == 2) {
+      await getAllEmployeeFunction();
+    } else if(roleId == 3) {
+      await getCompanyEmployeeFunction();
+    }
+  }
+
   @override
   void onInit() {
-    getAllEmployeeFunction();
-    // TODO: implement onInit
+    getLoggedInUserRole();
     super.onInit();
   }
 }

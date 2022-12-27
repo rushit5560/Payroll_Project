@@ -48,8 +48,11 @@ class PasswordTextFieldModule extends StatelessWidget {
         obscureText: loginScreenController.isPasswordVisible.value,
         validator: (value) => FieldValidation().validatePassword(value!),
         controller: loginScreenController.loginPasswordController,
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
           hintText: AppMessage.password,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(10),
@@ -86,7 +89,7 @@ class ForgotPasswordTextModule extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Get.to(()=> ForgotPasswordScreen());
+            Get.to(() => ForgotPasswordScreen());
           },
           child: const Text(
             "Forgot password ?",
@@ -117,13 +120,12 @@ class LoginButtonModule extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           )),
           onPressed: () async {
-            if (loginScreenController.isPrivacyChecked.value) {
-              if (loginScreenController.formKey.currentState!.validate()) {
+            if (loginScreenController.formKey.currentState!.validate()) {
+              if (loginScreenController.isPrivacyChecked.value) {
                 await loginScreenController.loginUserFunction(context);
+              } else {
+                Fluttertoast.showToast(msg: AppMessage.privacyPolicyMessage);
               }
-            } else {
-              Fluttertoast.showToast(
-                  msg: AppMessage.privacyPolicyMessage);
             }
           },
           child: Text(
@@ -142,6 +144,7 @@ class LoginButtonModule extends StatelessWidget {
 // ignore: must_be_immutable
 class SignInTextFormFiledCustom extends StatelessWidget {
   final String text;
+
   // IconData prefixIcon;
   IconData? suffixIcon;
   TextEditingController? textEditingController;
@@ -150,6 +153,7 @@ class SignInTextFormFiledCustom extends StatelessWidget {
   Function(String)? onChanged;
   Color color;
   Size? size;
+
   //  double fontSize = 15.0,
   SignInTextFormFiledCustom({
     Key? key,

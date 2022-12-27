@@ -43,7 +43,9 @@ class CompanyListScreen extends StatelessWidget {
       body: Obx(
         () => companyListScreenController.isLoading.value
             ? const Center(child: CircularProgressIndicator())
-            : CompanyListModule(),
+            : companyListScreenController.allCompanyList.isEmpty
+                ? const Center(child: Text('No Company Available'))
+                : CompanyListModule(),
       ),
     );
   }

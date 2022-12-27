@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/style.dart';
+import 'package:sizer/sizer.dart';
 
 
 class SingleListTileCustom extends StatelessWidget {
@@ -23,6 +24,7 @@ class SingleListTileCustom extends StatelessWidget {
             style: TextStyleConfig.textStyle(fontWeight: FontWeight.w600),
           ),
         ),
+        SizedBox(width: 4.w),
         Expanded(
           child: Text(
             textValue,
