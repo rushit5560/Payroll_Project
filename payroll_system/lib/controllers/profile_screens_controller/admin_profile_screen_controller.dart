@@ -42,9 +42,13 @@ class AdminProfileScreenController extends GetxController {
       var isSuccessStatus = userProfileModel.success;
 
       if (isSuccessStatus) {
-        profileData = userProfileModel.data;
+        if (userProfileModel.data == null) {
+          log("data is empty");
+        } else {
+          profileData = userProfileModel.data;
 
-        userNameController.text = profileData!.userName;
+          userNameController.text = profileData!.userName;
+        }
 
         log(" userName :: ${userProfileModel.data.userName}");
       } else {

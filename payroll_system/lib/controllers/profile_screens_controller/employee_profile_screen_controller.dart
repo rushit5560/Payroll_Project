@@ -56,7 +56,10 @@ class EmployeeProfileScreenController extends GetxController {
 
   Future<void> getEmployeeProfileFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.employeeProfileGetApi}${UserDetails.userId}";
+
+    var userId = await UserPreference()
+        .getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    String url = "${ApiUrl.employeeProfileGetApi}$userId";
     log("getEmployeeProfileFunction Api url : $url");
 
     try {
@@ -69,25 +72,29 @@ class EmployeeProfileScreenController extends GetxController {
       var isSuccessStatus = employeeProfileModel.success;
 
       if (isSuccessStatus) {
-        employeeData = employeeProfileModel.data[0];
-
-        firstNameController.text = employeeData!.firstName;
-        middleNameController.text = employeeData!.middleName;
-        lastNameController.text = employeeData!.lastName;
-
-        phoneNumberController.text = employeeData!.phoneNo;
-
-        if (employeeData!.dateOfBrith != "") {
-          dobFieldController.text = employeeData!.dateOfBrith.split(" ")[0];
+        if (employeeProfileModel.data.isEmpty) {
+          log("data is empty");
         } else {
-          dobFieldController.text = employeeData!.dateOfBrith;
+          employeeData = employeeProfileModel.data[0];
+
+          firstNameController.text = employeeData!.firstName;
+          middleNameController.text = employeeData!.middleName;
+          lastNameController.text = employeeData!.lastName;
+
+          phoneNumberController.text = employeeData!.phoneNo;
+
+          if (employeeData!.dateOfBrith != "") {
+            dobFieldController.text = employeeData!.dateOfBrith.split(" ")[0];
+          } else {
+            dobFieldController.text = employeeData!.dateOfBrith;
+          }
+
+          homeNumberController.text = employeeData!.homeNo;
+          workNumberController.text = employeeData!.workPhone;
+
+          homeAddressController.text = employeeData!.home;
+          currentAddressController.text = employeeData!.address;
         }
-
-        homeNumberController.text = employeeData!.homeNo;
-        workNumberController.text = employeeData!.workPhone;
-
-        homeAddressController.text = employeeData!.home;
-        currentAddressController.text = employeeData!.address;
 
         log(" get employee details success :: ");
       } else {

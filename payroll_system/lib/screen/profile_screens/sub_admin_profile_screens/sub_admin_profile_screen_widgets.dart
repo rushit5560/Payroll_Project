@@ -45,9 +45,12 @@ class SubAdminImageModule extends StatelessWidget {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
-                                  ApiUrl.apiImagePath +
-                                      subAdminProfileScreenController
-                                          .profileData!.photo,
+                                  subAdminProfileScreenController.profileData ==
+                                          null
+                                      ? ""
+                                      : ApiUrl.apiImagePath +
+                                          subAdminProfileScreenController
+                                              .profileData!.photo,
                                   fit: BoxFit.cover,
                                   errorBuilder: (ctx, obj, st) {
                                     return Container(

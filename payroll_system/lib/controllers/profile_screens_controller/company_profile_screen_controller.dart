@@ -101,34 +101,38 @@ class CompanyProfileScreenController extends GetxController {
       var isSuccessStatus = companyProfileModel.success;
 
       if (isSuccessStatus) {
-        companyData = companyProfileModel.companyData;
+        if (companyProfileModel.companyData == null) {
+          log("data is empty");
+        } else {
+          companyData = companyProfileModel.companyData;
 
-        nameController.text = companyData!.userName;
-        phoneNumberController.text = companyData!.phoneno;
-        addressController.text = companyData!.address;
+          nameController.text = companyData!.userName;
+          phoneNumberController.text = companyData!.phoneno;
+          addressController.text = companyData!.address;
 
-        if (companyData!.departmentId != "") {
-          var companyIdsString =
-              companyData!.departmentId.split("[")[1].split("]")[0];
+          if (companyData!.departmentId != "") {
+            var companyIdsString =
+                companyData!.departmentId.split("[")[1].split("]")[0];
 
-          List<int> idList = companyIdsString.split(",").map(
-            (num) {
-              return int.tryParse(num)!;
-            },
-          ).toList();
+            List<int> idList = companyIdsString.split(",").map(
+              (num) {
+                return int.tryParse(num)!;
+              },
+            ).toList();
 
-          for (int i = 0; i < idList.length; i++) {
-            selectedDepartmentIdList.add(idList[i].toString());
-            for (int j = 0; j < departmentList.length; j++) {
-              if (idList[i] == departmentList[j].id) {
-                log("idList.length :: ${idList.length}");
-                log("departmentList.length :: ${departmentList.length}");
-                selectedDepartmentList.add(departmentList[i].departmentName);
+            for (int i = 0; i < idList.length; i++) {
+              selectedDepartmentIdList.add(idList[i].toString());
+              for (int j = 0; j < departmentList.length; j++) {
+                if (idList[i] == departmentList[j].id) {
+                  log("idList.length :: ${idList.length}");
+                  log("departmentList.length :: ${departmentList.length}");
+                  selectedDepartmentList.add(departmentList[i].departmentName);
+                }
               }
             }
+            log("selectedDepartmentIdList is :: ${selectedDepartmentIdList.toString()}");
+            log("selectedDepartmentList is :: ${selectedDepartmentList.toString()}");
           }
-          log("selectedDepartmentIdList is :: ${selectedDepartmentIdList.toString()}");
-          log("selectedDepartmentList is :: ${selectedDepartmentList.toString()}");
         }
       } else {
         log("else case");

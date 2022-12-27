@@ -48,9 +48,13 @@ class EmployeeImageModule extends StatelessWidget {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
-                                  ApiUrl.apiImagePath +
-                                      employeeProfileScreenController
-                                          .employeeData!.photo,
+                                  employeeProfileScreenController
+                                              .employeeData ==
+                                          null
+                                      ? ""
+                                      : ApiUrl.apiImagePath +
+                                          employeeProfileScreenController
+                                              .employeeData!.photo,
                                   fit: BoxFit.cover,
                                   errorBuilder: (ctx, obj, st) {
                                     return Container(

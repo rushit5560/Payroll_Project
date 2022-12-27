@@ -1,12 +1,81 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:payroll_system/models/change_password_model.dart';
+
+import '../utils/api_url.dart';
+import '../utils/extension_methods/user_details.dart';
 
 class ChangePasswordController extends GetxController {
-RxBool isLoading = false .obs;
+  RxBool isLoading = false.obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController currentPasswordController = TextEditingController();
+  RxBool isPasswordVisible = true.obs;
+  RxBool isnewPasswordVisible = true.obs;
+  RxBool isConfirmPasswordVisible = true.obs;
 
+  RxBool successStatus = false.obs;
 
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController newConfirmPasswordController = TextEditingController();
 
+  changePasswordFunction() async {
+    isLoading(true);
+
+    String url = ApiUrl.changePasswordApi;
+
+    log('changePasswordFunction Url : $url');
+
+    try {
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(url),
+      );
+
+      request.fields['userid'] = "${UserDetails.userId}";
+      request.fields['oldpassword'] = oldPasswordController.text.trim();
+      request.fields['password'] = newPasswordController.text.trim();
+      request.fields['password_confirmation'] =
+          newConfirmPasswordController.text.trim();
+
+      log('changePasswordFunction fields ${request.fields}');
+
+      var response = await request.send();
+
+      response.stream
+          .transform(const Utf8Decoder())
+          .transform(const LineSplitter())
+          .listen((value) {
+        log('changePasswordFunction response: ${value}');
+        ChangePasswordModel changePasswordModel =
+            ChangePasswordModel.fromJson(json.decode(value));
+
+        successStatus.value = changePasswordModel.success;
+
+        if (successStatus.value) {
+          Fluttertoast.showToast(msg: changePasswordModel.message);
+          clearChangePasswordFieldsFunction();
+          Get.back();
+        } else {
+          log('False False');
+        }
+      });
+    } catch (e) {
+      log('changePasswordFunction Error : $e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  clearChangePasswordFieldsFunction() {
+    oldPasswordController.clear();
+    newPasswordController.clear();
+    newConfirmPasswordController.clear();
+  }
 }

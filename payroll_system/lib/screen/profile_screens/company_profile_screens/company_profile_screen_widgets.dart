@@ -51,9 +51,12 @@ class CompanyImageModule extends StatelessWidget {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
-                                  ApiUrl.apiImagePath +
-                                      companyProfileScreenController
-                                          .companyData!.photo,
+                                  companyProfileScreenController.companyData ==
+                                          null
+                                      ? ""
+                                      : ApiUrl.apiImagePath +
+                                          companyProfileScreenController
+                                              .companyData!.photo,
                                   fit: BoxFit.cover,
                                   errorBuilder: (ctx, obj, st) {
                                     return Container(

@@ -44,11 +44,15 @@ class SubAdminProfileScreenController extends GetxController {
       var isSuccessStatus = userProfileModel.success;
 
       if (isSuccessStatus) {
-        profileData = userProfileModel.data;
+        if (userProfileModel.data == null) {
+          log("data is empty");
+        } else {
+          profileData = userProfileModel.data;
 
-        nameController.text = profileData!.userName;
-        phoneNumberController.text = profileData!.phoneno;
-        addressController.text = profileData!.address;
+          nameController.text = profileData!.userName;
+          phoneNumberController.text = profileData!.phoneno;
+          addressController.text = profileData!.address;
+        }
 
         log(" userName :: ${userProfileModel.data.userName}");
       } else {

@@ -6,6 +6,7 @@ class AppMessage {
   static String name = 'Enter a Name';
   static String email = 'Enter an Email';
   static String termsAndConditions = 'I Agree with privacy and policy';
+
   // static String userId = 'User id';
   // static String signIn = 'Sign in';
   static String companyLogin = 'Company Sign Up';
@@ -96,15 +97,14 @@ class AppMessage {
 
   // change password
   static String changePassword = "Change Password";
-  static String currentPassword = "Current Password";
+  static String oldPassword = "Old Password";
   static String newPassword = "New Password";
+  static String newConfirmPassword = "Confirm Password";
   static String emailAddress = "Email address";
-
 
   // Toast messages
   static String deniedPermission = "Access Denied! Contact to Admin!";
 
   static String employeeCreate = 'Create Employee';
   static String employeeUpdate = 'Update Employee';
-
 }
