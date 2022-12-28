@@ -60,7 +60,8 @@ class LoginController extends GetxController {
           userProfileImage: loginDetailsModel.loginData.data.photo,
         );
 
-        await userPreference.setUserPermissionsToPrefsAndLocal(
+        await userPreference
+            .setUserPermissionsToPrefsAndLocal(
           //role
           roleAdd: loginDetailsModel.loginData.permissiondata.roleadd == "on"
               ? true
@@ -144,9 +145,10 @@ class LoginController extends GetxController {
                       "on"
                   ? true
                   : false,
-        ).whenComplete(() {
+        )
+            .whenComplete(() {
           // Reset the form
-          formKey.currentState!.reset();
+          // formKey.currentState!.reset();
 
           /// Role wise route set
           if (loginDetailsModel.loginData.data.roleId == 1) {
@@ -168,9 +170,9 @@ class LoginController extends GetxController {
           Fluttertoast.showToast(msg: "password don't match");
         }
       }
-
     } catch (e) {
       log("user login error : $e");
+      rethrow;
     } finally {
       isLoading(false);
     }

@@ -50,5 +50,6 @@ class ApiUrl {
       "${apiMainPath}api/company/getdepartment";
 
 //Location Api's
-  static const allLocationApi = "${apiMainPath}api/api/location";
+  static const allLocationApi = "${apiMainPath}api/location";
+  static const deleteLocationApi = "${apiMainPath}api/location/delete/";
 }
