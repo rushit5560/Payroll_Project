@@ -10,6 +10,7 @@ import 'package:payroll_system/Models/company_manage_screen_model/get_all_depart
 import 'package:payroll_system/Models/company_manage_screen_model/update_company_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
+import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 
 import '../constants/enums.dart';
 import 'company_list_screen_controller.dart';
@@ -30,6 +31,8 @@ class CompanyManageScreenController extends GetxController {
   // List<String> selectedDepartmentList = [];
   List<String> selectedDepartmentIdList = [];
   RxString selectedDepartmentOption = "".obs;
+
+  List<LocationListData> allLocationList = [];
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameFieldController = TextEditingController();
@@ -73,8 +76,33 @@ class CompanyManageScreenController extends GetxController {
         await getCompanyDetailsFunction();
       } else if (companyOption == CompanyOption.create) {
         // when create new company
+        await getAllLocationListFunction();
         isLoading(false);
       }
+    }
+  }
+
+  Future<void> getAllLocationListFunction() async {
+    isLoading(true);
+    String url = ApiUrl.allLocationApi;
+    log('Get All Location List Api Url :$url');
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+
+      AllLocationListModel allLocationListModel = AllLocationListModel.fromJson(
+        json.decode(response.body),
+      );
+      isSuccessStatus = allLocationListModel.success.obs;
+      if (isSuccessStatus.value) {
+        allLocationList.clear();
+        allLocationList.addAll(allLocationListModel.data);
+      } else {
+        log("Get All Location....");
+      }
+    } catch (e) {
+      rethrow;
+    } finally {
+      isLoading(false);
     }
   }
 
@@ -190,6 +218,8 @@ class CompanyManageScreenController extends GetxController {
         "department_id": "$selectedDepartmentIdList",
         "address": addressFieldController.text.trim(),
       };
+
+      log('bodyData : $bodyData');
 
       http.Response response = await http.post(
         Uri.parse(url),

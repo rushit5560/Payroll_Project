@@ -547,7 +547,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       if (employeeCreteScreenController.formKey.currentState!.validate()) {
                         if (employeeCreteScreenController.employeeOption == EmployeeOption.create) {
                           if (employeeCreteScreenController.images != null) {
-                            if (employeeCreteScreenController.selectedEmpDepartmentIdList.isEmpty) {
+                            if (employeeCreteScreenController.companyDepartmentData!.departmentName == "") {
                               Fluttertoast.showToast(msg: "Please select department");
                             } else if (employeeCreteScreenController.selectedValuePayper.value == "Choose Option") {
                               Fluttertoast.showToast(msg: "Please select payper");
@@ -559,7 +559,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           }
                         } else {
                           log("updateEmployeeDetailsFunction");
-                          if (employeeCreteScreenController.selectedEmpDepartmentIdList.isEmpty) {
+                          if (employeeCreteScreenController.companyDepartmentData!.departmentName == "") {
                             Fluttertoast.showToast(msg: "Please select department");
                           } else if (employeeCreteScreenController.selectedValuePayper.value == "Choose Option") {
                             Fluttertoast.showToast(msg: "Please select payper");

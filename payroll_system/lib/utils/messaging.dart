@@ -38,7 +38,7 @@ class AppMessage {
 
   static String deleteAlertMessage = 'Are you sure you want to delete ?';
   static String backAlertMessage = 'Are you sure you want to go to back ?';
-  static String activeStatusMessage = 'Please select active status';
+  static String activeStatusMessage = 'Please select status';
   static String privacyPolicyMessage = 'Please accept privacy policy';
 
   static String submitText = "Submit";
@@ -108,4 +108,11 @@ class AppMessage {
 
   static String employeeCreate = 'Create Employee';
   static String employeeUpdate = 'Update Employee';
+
+  //location
+  static String location = 'Location';
+  static String locationList = 'Location List';
+  static String locationCreate = 'Location Employee';
+  static String locationUpdate = 'Location Employee';
+  static String locationName ='Location Name';
 }

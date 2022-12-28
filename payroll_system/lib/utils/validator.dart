@@ -59,6 +59,24 @@ class FieldValidation {
     }
   }
 
+  String? validateCompanyAddress(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your company Address';
+    } else {
+      return null;
+    }
+  }
+
+  //location
+  String? validateLocationName(String value) {
+    if (value.isEmpty) {
+      return 'Please enter your first name';
+    } else {
+      return null;
+    }
+
+  }
+
   String? validateAddress(String value) {
     if (value.isEmpty) {
       return 'Please enter your address';

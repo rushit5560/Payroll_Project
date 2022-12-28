@@ -215,6 +215,7 @@ class EmployeManageScreenController extends GetxController {
         companyDDSelectedItem = allCompanyList[0];
 
         // log('companyDDSelectedItem : ${companyDDSelectedItem!.userName}');
+        log('allCompanyList : ${allCompanyList.length}');
 
         companyStringList.clear();
         for (int i = 0; i < allCompanyList.length; i++) {
@@ -227,20 +228,25 @@ class EmployeManageScreenController extends GetxController {
       log('getAllCompanyFunction Error :$e');
       rethrow;
     } finally {
-      // if (employeeOption == EmployeeOption.update) {
-      //   // when update company that time
-      //   await employeeGetByIdFunction();
-      // } else if (employeeOption == CompanyOption.create) {
-      //   // when create new company
-      //   isLoading(false);
-      // }
+      /*if (employeeOption == EmployeeOption.update) {
+        // when update company that time
+        await employeeGetByIdFunction();
+      } else if (employeeOption == CompanyOption.create) {
+        // when create new company
+        await getCompanyDepartmentFunction(companyDDSelectedItem!.id);
+        isLoading(false);
+      }*/
+    }
 
-      isLoading(false);
-      // if (employeeOption == EmployeeOption.update) {
-      //   await getCompanyDepartmentFunction(companyId);
-      //   log("companyId :; ${companyId}");
-      // } else {
-      // }
+    // isLoading(false);
+
+    if (employeeOption == EmployeeOption.update) {
+      // when update company that time
+      await employeeGetByIdFunction();
+    } else if (employeeOption == EmployeeOption.create) {
+      // when create new company
+      await getCompanyDepartmentFunction(companyDDSelectedItem!.id);
+      // isLoading(false);
     }
   }
 
@@ -304,9 +310,9 @@ class EmployeManageScreenController extends GetxController {
           }
         }
 
-        if (companyId != 0) {
+        /*if (companyId != 0) {
           getCompanyDepartmentFunction(companyId);
-        } else {}
+        } else {}*/
 
         passwordController.text = employeeGetByIdModel.data.password;
         currentAddressController.text = employeeGetByIdModel.data.address;
@@ -334,15 +340,17 @@ class EmployeManageScreenController extends GetxController {
     } catch (e) {
       log('getEmployeeDetailsFunction Error :$e');
       rethrow;
-    } finally {
-      isLoading(false);
-    }
+    } /*finally {
+      await getCompanyDepartmentFunction(companyId);
+    }*/
+
+    await getCompanyDepartmentFunction(companyId);
   }
 
   Future<void> getCompanyDepartmentFunction(int companyId) async {
     // isLoading(true);
     String url = ApiUrl.getCompanyDepartmentApi;
-    log('Get COmpanyDepartment Api Url :$url');
+    log('Get CompanyDepartment Api Url :$url');
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -389,8 +397,7 @@ class EmployeManageScreenController extends GetxController {
         }
       });
     } catch (e) {
-      Fluttertoast.showToast(msg: "Something went wrong !");
-
+      Fluttertoast.showToast(msg: "Something went wrong!");
       rethrow;
     } finally {
       isLoading(true);
@@ -531,11 +538,12 @@ class EmployeManageScreenController extends GetxController {
 
   @override
   void onInit() {
-    getAllCompanyFunction().whenComplete(() {
+    getAllCompanyFunction();
+    /*.whenComplete(() {
       if (employeeOption == EmployeeOption.update) {
         employeeGetByIdFunction();
       }
-    });
+    });*/
 
     super.onInit();
   }
