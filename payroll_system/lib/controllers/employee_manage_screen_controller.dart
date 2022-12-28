@@ -99,6 +99,8 @@ class EmployeManageScreenController extends GetxController {
   String oldImageName = "";
 
   RxBool isloding = false.obs;
+
+
   imageFromCamera() async {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -284,6 +286,7 @@ class EmployeManageScreenController extends GetxController {
         birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
         dateOfBrithController.text =
             "${birthDate.year}-${birthDate.month}-${birthDate.day}";
+        selectedValue.value = employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
 
         log('Photo : ${employeeGetByIdModel.data.photo}');
         // if (images != null) {
@@ -419,11 +422,10 @@ class EmployeManageScreenController extends GetxController {
       request.fields['last_day_of_work'] = lastDateController.text.trim();
       request.fields['companyid'] = "${companyDDSelectedItem!.id}";
       request.fields['userid'] = "${UserDetails.userId}";
-
-      log('777');
+      request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
       request.files
           .add(await http.MultipartFile.fromPath("Photo", images!.path));
-      log("12323578");
+
 
       log("request.fields : ${request.fields}");
       log("request.files : ${request.files}");
@@ -485,6 +487,7 @@ class EmployeManageScreenController extends GetxController {
       request.fields['userid'] = "${UserDetails.userId}";
       request.fields['showphotos'] = oldImageName;
       request.fields['id'] = employeeId;
+      request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
 
       if (images != null) {
         request.files

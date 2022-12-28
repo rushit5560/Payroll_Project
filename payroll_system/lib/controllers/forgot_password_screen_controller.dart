@@ -48,7 +48,7 @@ class ForgotPasswordScreenController extends GetxController {
         log("forgotPasswordFunction else case ");
       }
     } catch (e) {
-      log("user login error : $e");
+      log("forgotPasswordFunction error : $e");
 
       rethrow;
     } finally {

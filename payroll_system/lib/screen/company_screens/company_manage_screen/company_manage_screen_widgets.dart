@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:multiselect/multiselect.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/company_manage_screen_controller.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/messaging.dart';
@@ -30,6 +31,7 @@ class CompanyFormModule extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.companyLabelName,
               text: AppMessage.companyName,
+              mandatoryText: '*',
               keyboardType: TextInputType.text,
               textEditingController: screenController.nameFieldController,
               validate: (value) => FieldValidation().validateCompanyName(value),
@@ -38,6 +40,7 @@ class CompanyFormModule extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.companyLabelEmail,
               text: AppMessage.labelEmailName,
+              mandatoryText: '*',
               keyboardType: TextInputType.emailAddress,
               textEditingController: screenController.emailFieldController,
               validate: (value) => FieldValidation().validateEmail(value),
@@ -46,6 +49,7 @@ class CompanyFormModule extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.companyPhoneNumber,
               text: AppMessage.labelPhoneNo,
+              mandatoryText: '*',
               keyboardType: TextInputType.phone,
               maxLength: 10,
               textEditingController:
@@ -57,11 +61,30 @@ class CompanyFormModule extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                RichText(
+                  textAlign: TextAlign.left,
+                  maxLines: null,
+                  text: TextSpan(
+                      text: AppMessage.companyDepartmentNameDrawer,
+                      style: TextStyleConfig.textStyle(
+                        fontWeight: FontWeight.w600, fontSize: 16,),
+                      children: [
+                        TextSpan(
+                          text: ' *',
+                          style: TextStyleConfig.textStyle(
+                            textColor: AppColors.redColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ]
+                  ),
+                ).commonSymmetricPadding(vertical: 2),
+                /*Text(
                   AppMessage.companyDepartmentNameDrawer,
                   style: TextStyleConfig.textStyle(
                       fontWeight: FontWeight.w600, fontSize: 16),
-                ).commonSymmetricPadding(vertical: 2),
+                ).commonSymmetricPadding(vertical: 2),*/
                 DropDownMultiSelect(
                   options: screenController.departmentStringList,
                   whenEmpty: 'Choose Department',
@@ -96,6 +119,7 @@ class CompanyFormModule extends StatelessWidget {
               headerText: AppMessage.labelCompanyAddress,
               text: AppMessage.labelCompanyAddress,
               keyboardType: TextInputType.text,
+              mandatoryText: '',
               textEditingController: screenController.addressFieldController,
               validate: (value) => FieldValidation().validateCompanyName(value),
             ),

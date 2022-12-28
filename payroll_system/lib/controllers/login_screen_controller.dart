@@ -145,6 +145,9 @@ class LoginController extends GetxController {
                   ? true
                   : false,
         ).whenComplete(() {
+          // Reset the form
+          formKey.currentState!.reset();
+
           /// Role wise route set
           if (loginDetailsModel.loginData.data.roleId == 1) {
             Get.off(() => HomeScreen());
@@ -157,7 +160,6 @@ class LoginController extends GetxController {
           }
         });
 
-        formKey.currentState!.reset();
         Fluttertoast.showToast(msg: 'You are successfully login');
       } else {
         if (loginDetailsModel.error.contains("Email don't match")) {

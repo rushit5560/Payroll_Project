@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/style.dart';
+import 'package:payroll_system/constants/colors.dart';
 
 class FormSingleFieldModule extends StatelessWidget {
   final String text;
   final String headerText;
+  final String mandatoryText;
   // IconData prefixIcon;
   IconData? suffixIcon;
   final FormFieldValidator? validate;
@@ -24,6 +26,7 @@ class FormSingleFieldModule extends StatelessWidget {
       {Key? key,
       required this.text,
       required this.headerText,
+      required this.mandatoryText,
       // required this.prefixIcon,
       this.inputFormatters,
       this.suffixIcon,
@@ -44,11 +47,30 @@ class FormSingleFieldModule extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        RichText(
+          textAlign: TextAlign.left,
+          maxLines: null,
+          text: TextSpan(
+            text: headerText,
+            style: TextStyleConfig.textStyle(
+                fontWeight: FontWeight.w600, fontSize: 16,),
+            children: [
+              TextSpan(
+                text: ' $mandatoryText',
+                style: TextStyleConfig.textStyle(
+                  textColor: AppColors.redColor,
+                    fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
+            ]
+          ),
+        ).commonSymmetricPadding(vertical: 2),
+        /*Text(
           headerText,
           style: TextStyleConfig.textStyle(
               fontWeight: FontWeight.w600, fontSize: 16),
-        ).commonSymmetricPadding(vertical: 2),
+        ).commonSymmetricPadding(vertical: 2),*/
         TextFormField(
           // obscureText: loginScreenController.isPasswordVisible.value,
           obscureText: obscureText,

@@ -49,6 +49,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.firstName,
               text: AppMessage.firstName,
               keyboardType: TextInputType.text,
+              mandatoryText: '*',
               textEditingController:
                   employeeCreteScreenController.firstNameController,
               validate: (value) => FieldValidation().validateFirstName(value),
@@ -57,6 +58,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.middleName,
               text: AppMessage.middleName,
+              mandatoryText: '*',
               keyboardType: TextInputType.text,
               textEditingController:
                   employeeCreteScreenController.middleNameController,
@@ -66,6 +68,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.lastName,
               text: AppMessage.lastName,
+              mandatoryText: '*',
               keyboardType: TextInputType.text,
               textEditingController:
                   employeeCreteScreenController.lastNameController,
@@ -75,6 +78,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.phoneNo,
               text: AppMessage.phoneNo,
+              mandatoryText: '*',
               keyboardType: TextInputType.phone,
               maxLength: 10,
               textEditingController:
@@ -86,6 +90,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.dateOfBrith,
               text: "Select Date",
+              mandatoryText: '*',
               keyboardType: TextInputType.datetime,
               maxLength: 10,
               textEditingController:
@@ -108,6 +113,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               text: AppMessage.homeNo,
               keyboardType: TextInputType.phone,
               maxLength: 10,
+              mandatoryText: '',
               textEditingController:
                   employeeCreteScreenController.homeNoController,
               validate: (value) =>
@@ -119,6 +125,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               text: AppMessage.workNO,
               keyboardType: TextInputType.phone,
               maxLength: 10,
+              mandatoryText: '',
               textEditingController:
                   employeeCreteScreenController.workNoController,
               validate: (value) =>
@@ -128,6 +135,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.hourlyRate,
               text: AppMessage.hourlyRate,
+              mandatoryText: '*',
               keyboardType: TextInputType.number,
               textEditingController:
                   employeeCreteScreenController.hourlyRateController,
@@ -137,6 +145,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.salary,
               text: AppMessage.salary,
+              mandatoryText: '*',
               keyboardType: TextInputType.number,
               textEditingController:
                   employeeCreteScreenController.salaryController,
@@ -147,6 +156,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.startDate,
               text: "Select First Date",
               keyboardType: TextInputType.datetime,
+              mandatoryText: '*',
               textEditingController:
                   employeeCreteScreenController.startDateController,
               suffixIcon: Icons.calendar_month,
@@ -168,6 +178,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.lastDay,
               text: AppMessage.lastDay,
               keyboardType: TextInputType.number,
+              mandatoryText: '*',
               textEditingController:
                   employeeCreteScreenController.lastDateController,
               validate: (value) => FieldValidation().validateLastDayWork(value),
@@ -232,11 +243,30 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 5),
-            Text(
+            RichText(
+              textAlign: TextAlign.left,
+              maxLines: null,
+              text: TextSpan(
+                  text: AppMessage.company,
+                  style: TextStyleConfig.textStyle(
+                    fontWeight: FontWeight.w600, fontSize: 16,),
+                  children: [
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyleConfig.textStyle(
+                        textColor: AppColors.redColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ]
+              ),
+            ).commonSymmetricPadding(vertical: 2),
+           /* Text(
               AppMessage.company,
               style: TextStyleConfig.textStyle(
                   fontWeight: FontWeight.w600, fontSize: 16),
-            ).commonSymmetricPadding(vertical: 2),
+            ).commonSymmetricPadding(vertical: 2),*/
             Container(
               width: double.infinity,
               height: 50,
@@ -284,11 +314,30 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                RichText(
+                  textAlign: TextAlign.left,
+                  maxLines: null,
+                  text: TextSpan(
+                      text: AppMessage.departmentNameDrawer,
+                      style: TextStyleConfig.textStyle(
+                        fontWeight: FontWeight.w600, fontSize: 16,),
+                      children: [
+                        TextSpan(
+                          text: ' *',
+                          style: TextStyleConfig.textStyle(
+                            textColor: AppColors.redColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ]
+                  ),
+                ).commonSymmetricPadding(vertical: 2),
+                /*Text(
                   AppMessage.departmentNameDrawer,
                   style: TextStyleConfig.textStyle(
                       fontWeight: FontWeight.w600, fontSize: 16),
-                ).commonSymmetricPadding(vertical: 2),
+                ).commonSymmetricPadding(vertical: 2),*/
                 Container(
                   width: double.infinity,
                   height: 50,
@@ -311,11 +360,13 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           );
                         }).toList(),
                         onChanged: (CompanyDepartmentData? value) async {
+                          employeeCreteScreenController.isLoading(true);
                           // This is called when the user selects an item.
                           log('valuevaluevaluevalue :${value!.departmentName}');
                           // employeeCreteScreenController.isloding(true);
                           employeeCreteScreenController.companyDepartmentData =
                               value;
+                          employeeCreteScreenController.isLoading(false);
                         },
                       ).commonOnlyPadding(left: 10, right: 10),
                     ),
@@ -362,6 +413,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     headerText: AppMessage.employeeEmail,
                     text: AppMessage.employeeEmail,
                     keyboardType: TextInputType.emailAddress,
+                    mandatoryText: '*',
                     readOnly: true,
                     textEditingController:
                         employeeCreteScreenController.emailController,
@@ -370,6 +422,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 : FormSingleFieldModule(
                     headerText: AppMessage.employeeEmail,
                     text: AppMessage.employeeEmail,
+                    mandatoryText: '*',
                     keyboardType: TextInputType.emailAddress,
                     textEditingController:
                         employeeCreteScreenController.emailController,
@@ -387,6 +440,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       // obscureText:,
                       headerText: AppMessage.password,
                       text: AppMessage.password,
+                      mandatoryText: '*',
                       keyboardType: TextInputType.visiblePassword,
                       // maxLength: 10,
                       textEditingController:
@@ -410,6 +464,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.employeeCurrentAddress,
               text: AppMessage.employeeCurrentAddress,
               keyboardType: TextInputType.text,
+              mandatoryText: '',
               textEditingController:
                   employeeCreteScreenController.currentAddressController,
               validate: (value) =>
@@ -420,6 +475,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.employeeHomeAddress,
               text: AppMessage.employeeHomeAddress,
               keyboardType: TextInputType.text,
+              mandatoryText: '',
               textEditingController:
                   employeeCreteScreenController.homeAddressController,
               validate: (value) => FieldValidation().validateHomeAddress(value),
@@ -431,9 +487,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   flex: 5,
                   child: ButtonCustom(
 
-
-
-                    
                     onPressed: () async {
                       if (employeeCreteScreenController.formKey.currentState!
                           .validate()) {

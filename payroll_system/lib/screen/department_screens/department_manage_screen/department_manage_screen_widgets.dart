@@ -32,6 +32,7 @@ class DepartmentFormModule extends StatelessWidget {
                 headerText: AppMessage.departmentName,
                 text: AppMessage.departmentName,
                 keyboardType: TextInputType.text,
+                mandatoryText: '*',
                 textEditingController: screenController.nameFieldController,
                 validate: (value) => FieldValidation().validateDepartmentName(value),
               ),
@@ -41,14 +42,34 @@ class DepartmentFormModule extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+
+                  RichText(
+                    textAlign: TextAlign.left,
+                    maxLines: null,
+                    text: TextSpan(
+                        text: AppMessage.isActive,
+                        style: TextStyleConfig.textStyle(
+                          fontWeight: FontWeight.w600, fontSize: 16,),
+                        children: [
+                          TextSpan(
+                            text: ' *',
+                            style: TextStyleConfig.textStyle(
+                              textColor: AppColors.redColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ]
+                    ),
+                  ).commonSymmetricPadding(vertical: 2),
+
+                  /*Text(
                     AppMessage.isActive,
                     style: TextStyleConfig.textStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16
                     ),
-                  ).commonSymmetricPadding(vertical: 2),
-
+                  ).commonSymmetricPadding(vertical: 2),*/
 
                   Container(
                     width: Get.width,
