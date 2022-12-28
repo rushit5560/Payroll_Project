@@ -7,6 +7,7 @@ import 'package:payroll_system/screen/authentication_screens/change_password_scr
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/company_screens/company_list_screen/company_list_screen.dart';
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
+import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -31,14 +32,14 @@ class AdminDrawerMenu extends StatelessWidget {
                         child: Column(
                           children: [
                             /*adminDrawerController.companyView.value == true
-                                ? */AdminDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => CompanyListScreen());
-                                    },
-                                    title: AppMessage.companyNameDrawer,
-                                  )
-                                /*: Container()*/,
+                                ? */
+                            AdminDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => CompanyListScreen());
+                              },
+                              title: AppMessage.companyNameDrawer,
+                            ) /*: Container()*/,
                             adminDrawerController.departmentView.value == true
                                 ? AdminDrawerTile(
                                     onTap: () {
@@ -57,6 +58,13 @@ class AdminDrawerMenu extends StatelessWidget {
                                     title: AppMessage.employeeNameDrawer,
                                   )
                                 : Container(),
+                            AdminDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => LocationListScreen());
+                              },
+                              title: AppMessage.location,
+                            ),
                             AdminDrawerTile(
                               onTap: () {
                                 Get.back();

@@ -44,8 +44,8 @@ class LocationListData {
     required this.createdby,
     required this.modifiedby,
     required this.companyid,
-    required this.createdAt,
-    required this.updatedAt,
+    // required this.createdAt,
+    // required this.updatedAt,
   });
 
   final int id;
@@ -54,19 +54,19 @@ class LocationListData {
   final int createdby;
   final int modifiedby;
   final String companyid;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  // final String createdAt;
+  // final String updatedAt;
 
   factory LocationListData.fromJson(Map<String, dynamic> json) =>
       LocationListData(
-        id: json["id"],
-        locationName: json["location_name"],
-        isActive: json["is_active"],
-        createdby: json["createdby"],
+        id: json["id"] ?? 0,
+        locationName: json["location_name"] ?? "",
+        isActive: json["is_active"] ?? "",
+        createdby: json["createdby"] ?? 0,
         modifiedby: json["modifiedby"] ?? 0,
-        companyid: json["companyid"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        companyid: json["companyid"] ?? "",
+        // createdAt: json["created_at"],
+        // updatedAt: json["updated_at"],
       );
 
   // Map<String, dynamic> toJson() => {
