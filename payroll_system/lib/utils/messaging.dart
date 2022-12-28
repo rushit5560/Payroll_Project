@@ -71,6 +71,7 @@ class AppMessage {
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
   static String salary = 'Salary (\$,₹)';
+  static String payper = 'Payper';
   static String startDate = 'Start Date';
   static String lastDay = 'Last Day';
   static String isActive = 'Status';

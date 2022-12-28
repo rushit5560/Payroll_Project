@@ -47,6 +47,7 @@ class EmployeeGEtByIdModelData {
     required this.email,
     required this.departmentId,
     required this.isActive,
+    required this.payper,
     required this.createdby,
     required this.modifiedby,
     required this.dateOfBrith,
@@ -72,6 +73,7 @@ class EmployeeGEtByIdModelData {
   final String email;
   final int departmentId;
   final String isActive;
+  final String payper;
   final int createdby;
   final int modifiedby;
   final String dateOfBrith;
@@ -113,6 +115,7 @@ class EmployeeGEtByIdModelData {
         photo: json["photo"] ?? "",
         createdAt: json["created_at"] ?? "",
         updatedAt: json["updated_at"] ?? "",
+        payper: json["payper"]??"",
       );
 
   Map<String, dynamic> toJson() => {

@@ -52,6 +52,7 @@ class CraeteEmployeeData {
     required this.companyid,
     required this.createdby,
     required this.updatedAt,
+    required this.payper,
     required this.createdAt,
     required this.photo,
     required this.id,
@@ -64,6 +65,7 @@ class CraeteEmployeeData {
   final String address;
   final String phoneNo;
   final String email;
+  final String payper;
   final String departmentId;
   final String dateOfBrith;
   final String home;
@@ -103,6 +105,7 @@ class CraeteEmployeeData {
         updatedAt: json["updated_at"] ?? "",
         createdAt: json["created_at"] ?? "",
         photo: json["photo"] ?? "",
+        payper: json["payper"] ?? "",
         id: json["id"] ?? 0,
       );
 
