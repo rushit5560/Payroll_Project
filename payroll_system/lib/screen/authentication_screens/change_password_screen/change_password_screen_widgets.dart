@@ -25,6 +25,7 @@ class LogInCurrentPasswordTextFieldModule extends StatelessWidget {
         validator: (value) => FieldValidation().validatePassword(value!),
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           // filled: true,
           contentPadding: const EdgeInsets.symmetric(horizontal: 15),
@@ -33,7 +34,7 @@ class LogInCurrentPasswordTextFieldModule extends StatelessWidget {
               Radius.circular(10),
             ),
           ),
-          hintText: AppMessage.oldPassword,
+          labelText: AppMessage.oldPassword,
           suffixIcon: IconButton(
             onPressed: () {
               changePasswordScreenController.isPasswordVisible.value =
@@ -64,6 +65,7 @@ class LogInNewPasswordTextFieldModule extends StatelessWidget {
         controller: changePasswordScreenController.newPasswordController,
         validator: (value) => FieldValidation().validatePassword(value!),
         textInputAction: TextInputAction.next,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           // filled: true,
@@ -73,7 +75,7 @@ class LogInNewPasswordTextFieldModule extends StatelessWidget {
               Radius.circular(10),
             ),
           ),
-          hintText: AppMessage.newPassword,
+          labelText: AppMessage.newPassword,
           suffixIcon: IconButton(
             onPressed: () {
               changePasswordScreenController.isnewPasswordVisible.value =
@@ -105,20 +107,21 @@ class LogInNewConfirmPasswordTextFieldModule extends StatelessWidget {
         controller: changePasswordScreenController.newConfirmPasswordController,
         validator: (value) {
           if (value!.isEmpty) {
-            return "Confirmpassword is required";
+            return "Confirm password is required";
           }
           if (value.length < 8) {
-            return "Password must be at least 8 characters long";
+            return "Confirm password must be at least 8 characters long";
           }
           if (changePasswordScreenController.newPasswordController.text !=
               changePasswordScreenController
                   .newConfirmPasswordController.text) {
-            return "please enter a correct password";
+            return "password & confirm password don't match";
           }
           return null;
         },
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(horizontal: 15),
           border: const OutlineInputBorder(
@@ -126,7 +129,7 @@ class LogInNewConfirmPasswordTextFieldModule extends StatelessWidget {
               Radius.circular(10),
             ),
           ),
-          hintText: AppMessage.newConfirmPassword,
+          labelText: AppMessage.newConfirmPassword,
           suffixIcon: IconButton(
             onPressed: () {
               changePasswordScreenController.isConfirmPasswordVisible.value =
@@ -174,7 +177,7 @@ class LoginButtonModule extends StatelessWidget {
             AppMessage.changePassword,
             style: TextStyleConfig.textStyle(
               textColor: AppColors.whiteColor,
-              fontSize: 16.sp,
+              fontSize: 15.sp,
             ),
           ),
         ),
