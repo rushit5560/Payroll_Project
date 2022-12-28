@@ -28,7 +28,8 @@ class ApiUrl {
   static const deleteEmployeeApi = "${apiMainPath}api/employee/delete/";
   static const getEmployeeDetailsApi = "${apiMainPath}api/employee/edit/";
   static const updateEmployeeDetailsApi = "${apiMainPath}api/employee/update";
-  static const getCompanyWiseEmployeeApi = "${apiMainPath}api/employee/companywiseeomployee/";
+  static const getCompanyWiseEmployeeApi =
+      "${apiMainPath}api/employee/companywiseeomployee/";
 
   // Company Api's
   static const allCompanyApi = "${apiMainPath}api/company";
@@ -48,5 +49,6 @@ class ApiUrl {
   static const getCompanyDepartmentApi =
       "${apiMainPath}api/company/getdepartment";
 
-
+//Location Api's
+  static const allLocationApi = "${apiMainPath}api/api/location";
 }
