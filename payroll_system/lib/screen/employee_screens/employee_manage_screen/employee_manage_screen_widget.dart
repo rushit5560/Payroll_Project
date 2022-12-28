@@ -544,28 +544,28 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   flex: 5,
                   child: ButtonCustom(
                     onPressed: () async {
-                      if (employeeCreteScreenController.formKey.currentState!
-                          .validate()) {
-                        if (employeeCreteScreenController.employeeOption ==
-                            EmployeeOption.create) {
+                      if (employeeCreteScreenController.formKey.currentState!.validate()) {
+                        if (employeeCreteScreenController.employeeOption == EmployeeOption.create) {
                           if (employeeCreteScreenController.images != null) {
-
-                            if (employeeCreteScreenController.companyDepartment.isEmpty) {
-                              Fluttertoast.showToast(
-                                  msg: "Please select department");
-                            } else if (employeeCreteScreenController
-                                .companyDepartment.isNotEmpty) {
-                              await employeeCreteScreenController
-                                  .employeeCreateFunction();
+                            if (employeeCreteScreenController.selectedEmpDepartmentIdList.isEmpty) {
+                              Fluttertoast.showToast(msg: "Please select department");
+                            } else if (employeeCreteScreenController.selectedValuePayper.value == "Choose Option") {
+                              Fluttertoast.showToast(msg: "Please select payper");
+                            } else /*if (employeeCreteScreenController.companyDepartment.isNotEmpty)*/ {
+                              await employeeCreteScreenController.employeeCreateFunction();
                             }
                           } else {
-                            Fluttertoast.showToast(
-                                msg: "Please select profile image!");
+                            Fluttertoast.showToast(msg: "Please select profile image!");
                           }
                         } else {
                           log("updateEmployeeDetailsFunction");
-                          await employeeCreteScreenController
-                              .updateEmployeeDetailsFunction();
+                          if (employeeCreteScreenController.selectedEmpDepartmentIdList.isEmpty) {
+                            Fluttertoast.showToast(msg: "Please select department");
+                          } else if (employeeCreteScreenController.selectedValuePayper.value == "Choose Option") {
+                            Fluttertoast.showToast(msg: "Please select payper");
+                          } else {
+                            await employeeCreteScreenController.updateEmployeeDetailsFunction();
+                          }
                         }
                       }
                     },
