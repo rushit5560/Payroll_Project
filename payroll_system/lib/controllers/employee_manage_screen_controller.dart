@@ -28,6 +28,8 @@ class EmployeManageScreenController extends GetxController {
   RxBool isPasswordVisible = true.obs;
   List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
   RxString selectedValue = "Choose Option".obs;
+  List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
+  RxString selectedValuePayper = "Choose Option".obs;
   RxBool isLoading = false.obs;
   RxList<String> selectedDepartmentList = RxList<String>([]);
 
@@ -98,7 +100,7 @@ class EmployeManageScreenController extends GetxController {
   File? images;
   String oldImageName = "";
 
-  RxBool isloding = false.obs;
+  // RxBool isloding = false.obs;
 
 
   imageFromCamera() async {
@@ -106,9 +108,9 @@ class EmployeManageScreenController extends GetxController {
         .pickImage(source: ImageSource.camera, imageQuality: 50);
 
     if (image != null) {
-      isloding(true);
+      isLoading(true);
       images = File(image.path);
-      isloding(false);
+      isLoading(false);
     }
 
     Get.back();
@@ -118,10 +120,10 @@ class EmployeManageScreenController extends GetxController {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (image != null) {
-      isloding(true);
+      isLoading(true);
 
       images = File(image.path);
-      isloding(false);
+      isLoading(false);
     }
     Get.back();
   }
@@ -172,10 +174,10 @@ class EmployeManageScreenController extends GetxController {
                 child: CupertinoDatePicker(
                   initialDateTime: DateTime.now(),
                   onDateTimeChanged: (DateTime newdate) {
-                    print(newdate);
-                    isloding(true);
+                    log("$newdate");
+                    isLoading(true);
                     chosenDateTime = newdate;
-                    isloding(false);
+                    isLoading(false);
                   },
                   minuteInterval: 1,
                   use24hFormat: true,
@@ -287,6 +289,8 @@ class EmployeManageScreenController extends GetxController {
         dateOfBrithController.text =
             "${birthDate.year}-${birthDate.month}-${birthDate.day}";
         selectedValue.value = employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
+        selectedValuePayper.value =
+        employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
 
         log('Photo : ${employeeGetByIdModel.data.photo}');
         // if (images != null) {
@@ -424,7 +428,9 @@ class EmployeManageScreenController extends GetxController {
       request.fields['userid'] = "${UserDetails.userId}";
       request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
       request.files
-          .add(await http.MultipartFile.fromPath("Photo", images!.path));
+          .add(await http.MultipartFile.fromPath("photo", images!.path));
+      request.fields['payper'] =
+      selectedValue.value == "salary" ? "salary" : "Hourly";
 
 
       log("request.fields : ${request.fields}");
@@ -488,10 +494,12 @@ class EmployeManageScreenController extends GetxController {
       request.fields['showphotos'] = oldImageName;
       request.fields['id'] = employeeId;
       request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
+      request.fields['payper'] =
+      selectedValue.value == "salary" ? "salary" : "Hourly";
 
       if (images != null) {
         request.files
-            .add(await http.MultipartFile.fromPath("Photo", images!.path));
+            .add(await http.MultipartFile.fromPath("photo", images!.path));
       }
       var response = await request.send();
 

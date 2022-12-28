@@ -22,20 +22,22 @@ class EmployeeListScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(AppMessage.employeeList),
+          centerTitle: true,
           actions: [
             IconButton(
               onPressed: () async {
-                bool employeeCreatePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeAddKey);
+                bool employeeCreatePermission =
+                    await userPreference.getBoolPermissionFromPrefs(
+                        keyId: UserPreference.employeeAddKey);
 
-                if(employeeCreatePermission == true) {
+                if (employeeCreatePermission == true) {
                   Get.to(
-                        () => EmployeeManageScreen(),
+                    () => EmployeeManageScreen(),
                     arguments: [EmployeeOption.create, ""],
                   );
                 } else {
                   Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                 }
-
               },
               icon: const Icon(Icons.add_rounded),
             ),

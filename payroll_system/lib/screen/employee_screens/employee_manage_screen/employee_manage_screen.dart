@@ -9,13 +9,13 @@ import '../../../common_modules/custom_alert_dialog_module.dart';
 
 class EmployeeManageScreen extends StatelessWidget {
   EmployeeManageScreen({super.key});
-  final employeDetailsFormController = Get.put(EmployeManageScreenController());
+  final employeeDetailsFormController = Get.put(EmployeManageScreenController());
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (employeDetailsFormController.employeeOption ==
+        if (employeeDetailsFormController.employeeOption ==
             EmployeeOption.update) {
           final shouldPop = await showDialog<bool>(
             context: context,
@@ -33,14 +33,14 @@ class EmployeeManageScreen extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              employeDetailsFormController.employeeOption ==
+              employeeDetailsFormController.employeeOption ==
                       EmployeeOption.create
                   ? AppMessage.employeeCreate
                   : AppMessage.employeeUpdate,
             ),
           ),
           body: Obx(
-            () => employeDetailsFormController.isLoading.value
+            () => employeeDetailsFormController.isLoading.value
                 ? CommonLoader().showLoader()
                 : EmployeeManageScreenWidgets(),
           ),
