@@ -1,18 +1,28 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class HomeScreenController extends GetxController {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  RxBool isLoading = false.obs;
+  // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  UserPreference userPreference = UserPreference();
+  RxInt roleId = 0.obs;
+
+  getRoleIdFunctionFromPrefs() async {
+    isLoading(true);
+    int roleIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.roleIdKey);
+    roleId.value = roleIdPrefs;
+    log('Home Screen Init roleId : $roleId');
+    isLoading(false);
+  }
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    getRoleIdFunctionFromPrefs();
     super.onInit();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
 }

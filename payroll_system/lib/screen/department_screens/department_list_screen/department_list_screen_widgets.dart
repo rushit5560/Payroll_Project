@@ -93,7 +93,7 @@ class DepartmentListTile extends StatelessWidget {
 
                   if(departmentDeletePermission == true) {
                     CustomAlertDialog().showAlertDialog(
-                      textContent: AppMessage.deleteAlertMessage,
+                      textContent: AppMessage.deleteDepartmentAlertMessage,
                       context: context,
                       onYesTap: () async {
                         await screenController.deleteDepartmentFunction(

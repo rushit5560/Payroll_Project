@@ -128,7 +128,7 @@ class DepartmentListScreenController extends GetxController {
 
     log('Department List Screen OnInit Role Id : $roleId');
     log('Department List Screen OnInit user Id : $userId');
-    if(roleId == 1 || roleId == 1) {
+    if(roleId == 1 || roleId == 2) {
       await getAllDepartmentFunction();
     } else if(roleId == 3){
       await getCompanyWiseDepartmentFunction();

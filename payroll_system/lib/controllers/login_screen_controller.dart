@@ -162,7 +162,6 @@ class LoginController extends GetxController {
           }
         });
 
-        Fluttertoast.showToast(msg: 'You are successfully login');
       } else {
         if (loginDetailsModel.error.contains("Email don't match")) {
           Fluttertoast.showToast(msg: "Email don't match");

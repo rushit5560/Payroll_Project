@@ -236,7 +236,7 @@ class FieldValidation {
     } else if (value.length < 8) {
       return "Confirm Password must be at least 8 characters long";
     } else if (value != passwordValue) {
-      return "Password & confirm password mus be same";
+      return "New password & confirm password must be same";
     } else {
       return null;
     }

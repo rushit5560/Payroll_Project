@@ -2,15 +2,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
-import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
-import 'package:payroll_system/screen/department_screens/department_manage_screen/department_manage_screen.dart';
+import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
+import 'package:payroll_system/utils/extensions.dart';
+import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
-import '../../../Utils/messaging.dart';
 import '../../../common_modules/custom_alert_dialog_module.dart';
 import '../../../common_modules/edit_and_delete_button_module.dart';
 import '../../../common_modules/single_item_module.dart';
@@ -76,7 +75,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                       CustomAlertDialog().showAlertDialog(
                         context: context,
                         textContent:
-                        'Are youe sure you want to delete employee ?',
+                        AppMessage.deleteEmployeeAlertMessage,
                         onYesTap: () async {
                           log("Delete Employee");
                           await employeeListScreenController

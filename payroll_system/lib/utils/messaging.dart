@@ -36,7 +36,10 @@ class AppMessage {
   static String yes = 'Yes';
   static String no = 'No';
 
-  static String deleteAlertMessage = 'Are you sure you want to delete ?';
+  // static String deleteAlertMessage = 'Are you sure you want to delete ?';
+  static String deleteEmployeeAlertMessage = 'Are you sure you want to delete this employee?';
+  static String deleteDepartmentAlertMessage = 'Are you sure you want to delete this department?';
+  static String deleteCompanyAlertMessage = 'Are you sure you want to delete this company?';
   static String backAlertMessage = 'Are you sure you want to go to back ?';
   static String activeStatusMessage = 'Please select status';
   static String privacyPolicyMessage = 'Please accept privacy policy';
@@ -112,7 +115,13 @@ class AppMessage {
   //location
   static String location = 'Location';
   static String locationList = 'Location List';
-  static String locationCreate = 'Location Employee';
-  static String locationUpdate = 'Location Employee';
-  static String locationName ='Location Name';
+  static String locationCreate = 'Create Location';
+  static String locationUpdate = 'Update Location';
+  static String locationName = 'Location Name';
+
+  // No Records Message
+  static String noEmpFound ='No Employee Found.';
+  static String noDeptFound ='No Department Found.';
+  static String noCompanyFound ='No Company Found.';
+
 }

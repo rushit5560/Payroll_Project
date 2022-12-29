@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/models/change_password_model.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 import '../utils/api_url.dart';
 import '../utils/extension_methods/user_details.dart';
@@ -20,16 +21,18 @@ class ChangePasswordController extends GetxController {
 
   RxBool successStatus = false.obs;
 
+  UserPreference userPreference = UserPreference();
+
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController newConfirmPasswordController = TextEditingController();
 
   changePasswordFunction() async {
     isLoading(true);
-
     String url = ApiUrl.changePasswordApi;
-
     log('changePasswordFunction Url : $url');
+
+    int roleId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.roleIdKey);
 
     try {
       var request = http.MultipartRequest(
@@ -37,7 +40,7 @@ class ChangePasswordController extends GetxController {
         Uri.parse(url),
       );
 
-      request.fields['userid'] = "${UserDetails.userId}";
+      request.fields['userid'] = "$roleId";
       request.fields['oldpassword'] = oldPasswordController.text.trim();
       request.fields['password'] = newPasswordController.text.trim();
       request.fields['password_confirmation'] =
@@ -51,7 +54,7 @@ class ChangePasswordController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) {
-        log('changePasswordFunction response: ${value}');
+        log('changePasswordFunction response: $value');
         ChangePasswordModel changePasswordModel =
             ChangePasswordModel.fromJson(json.decode(value));
 
@@ -62,6 +65,7 @@ class ChangePasswordController extends GetxController {
           clearChangePasswordFieldsFunction();
           Get.back();
         } else {
+          Fluttertoast.showToast(msg: changePasswordModel.message);
           log('False False');
         }
       });

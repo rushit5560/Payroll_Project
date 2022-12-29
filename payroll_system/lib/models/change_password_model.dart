@@ -14,17 +14,20 @@ class ChangePasswordModel {
   ChangePasswordModel({
     required this.success,
     required this.message,
+    required this.messege,
     // required this.changePasswordData,
   });
 
   final bool success;
   final String message;
+  final String messege;
   // final ChangePasswordchangePasswordData changePasswordData;
 
   factory ChangePasswordModel.fromJson(Map<String, dynamic> json) =>
       ChangePasswordModel(
         success: json["success"] ?? false,
         message: json["message"] ?? "",
+        messege: json["messege"] ?? "",
         // changePasswordData: ChangePasswordchangePasswordData.fromJson(
         //     json["changePasswordData"] ?? {}),
       );
@@ -32,6 +35,7 @@ class ChangePasswordModel {
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
+        "messege": messege,
         // "changePasswordData": changePasswordData,
       };
 }

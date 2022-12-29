@@ -45,7 +45,9 @@ class DepartmentListScreen extends StatelessWidget {
       body: Obx(
             () => departmentListScreenController.isLoading.value
             ? const Center(child: CircularProgressIndicator())
-            : DepartmentListModule(),
+            : departmentListScreenController.allDepartmentList.isEmpty
+          ? Center(child: Text(AppMessage.noDeptFound))
+            :DepartmentListModule(),
       ),
 
     );

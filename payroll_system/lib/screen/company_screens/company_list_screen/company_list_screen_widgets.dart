@@ -102,7 +102,7 @@ class CompanyListTile extends StatelessWidget {
 
                   if(companyDeletePermission == true) {
                     CustomAlertDialog().showAlertDialog(
-                      textContent: AppMessage.deleteAlertMessage,
+                      textContent: AppMessage.deleteCompanyAlertMessage,
                       context: context,
                       onYesTap: () async {
                         await screenController.deleteCompanyFunction(

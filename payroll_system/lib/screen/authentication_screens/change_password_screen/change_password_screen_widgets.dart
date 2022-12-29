@@ -11,8 +11,8 @@ import '../../../Utils/style.dart';
 import '../../../constants/colors.dart';
 import '../../../controllers/change_password_screen_controller.dart';
 
-class LogInCurrentPasswordTextFieldModule extends StatelessWidget {
-  LogInCurrentPasswordTextFieldModule({Key? key}) : super(key: key);
+class CurrentPasswordTextFieldModule extends StatelessWidget {
+  CurrentPasswordTextFieldModule({Key? key}) : super(key: key);
 
   final changePasswordScreenController = Get.find<ChangePasswordController>();
 
@@ -52,8 +52,8 @@ class LogInCurrentPasswordTextFieldModule extends StatelessWidget {
   }
 }
 
-class LogInNewPasswordTextFieldModule extends StatelessWidget {
-  LogInNewPasswordTextFieldModule({Key? key}) : super(key: key);
+class NewPasswordTextFieldModule extends StatelessWidget {
+  NewPasswordTextFieldModule({Key? key}) : super(key: key);
 
   final changePasswordScreenController = Get.find<ChangePasswordController>();
 
@@ -93,8 +93,8 @@ class LogInNewPasswordTextFieldModule extends StatelessWidget {
   }
 }
 
-class LogInNewConfirmPasswordTextFieldModule extends StatelessWidget {
-  LogInNewConfirmPasswordTextFieldModule({Key? key}) : super(key: key);
+class NewConfirmPasswordTextFieldModule extends StatelessWidget {
+  NewConfirmPasswordTextFieldModule({Key? key}) : super(key: key);
 
   final changePasswordScreenController = Get.find<ChangePasswordController>();
 
@@ -105,20 +105,7 @@ class LogInNewConfirmPasswordTextFieldModule extends StatelessWidget {
         obscureText:
             changePasswordScreenController.isConfirmPasswordVisible.value,
         controller: changePasswordScreenController.newConfirmPasswordController,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "Confirm password is required";
-          }
-          if (value.length < 8) {
-            return "Confirm password must be at least 8 characters long";
-          }
-          if (changePasswordScreenController.newPasswordController.text !=
-              changePasswordScreenController
-                  .newConfirmPasswordController.text) {
-            return "password & confirm password don't match";
-          }
-          return null;
-        },
+        validator: (value) => FieldValidation().validateConfirmPassword(value!, changePasswordScreenController.newPasswordController.text.trim(),),
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -148,8 +135,8 @@ class LogInNewConfirmPasswordTextFieldModule extends StatelessWidget {
   }
 }
 
-class LoginButtonModule extends StatelessWidget {
-  LoginButtonModule({Key? key}) : super(key: key);
+class ChangePasswordButtonModule extends StatelessWidget {
+  ChangePasswordButtonModule({Key? key}) : super(key: key);
 
   final changePasswordScreenController = Get.find<ChangePasswordController>();
 
