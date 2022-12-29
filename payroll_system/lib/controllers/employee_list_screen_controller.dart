@@ -61,7 +61,6 @@ class EmployeeListScreenController extends GetxController {
 
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: deleteCompanyModel.messege);
-        // deleteEmployeeFunction(employeeId, index);
         allEmployeeList.removeAt(index);
         Get.back();
       } else {
@@ -85,7 +84,7 @@ class EmployeeListScreenController extends GetxController {
       http.Response response = await http.get(Uri.parse(url));
 
       AllEmployeeModel allEmployeeModel =
-      AllEmployeeModel.fromJson(json.decode(response.body));
+          AllEmployeeModel.fromJson(json.decode(response.body));
       isSuccessStatus = allEmployeeModel.success.obs;
 
       if (isSuccessStatus.value) {
@@ -94,7 +93,6 @@ class EmployeeListScreenController extends GetxController {
       } else {
         log('getAllCompanyFunction Else');
       }
-
     } catch (e) {
       log('getCompanyEmployeeFunction Error :$e');
       rethrow;
@@ -108,9 +106,9 @@ class EmployeeListScreenController extends GetxController {
     roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
     userId = prefs.getInt(UserPreference.userIdKey) ?? 0;
 
-    if(roleId == 1 || roleId == 2) {
+    if (roleId == 1 || roleId == 2) {
       await getAllEmployeeFunction();
-    } else if(roleId == 3) {
+    } else if (roleId == 3) {
       await getCompanyEmployeeFunction();
     }
   }

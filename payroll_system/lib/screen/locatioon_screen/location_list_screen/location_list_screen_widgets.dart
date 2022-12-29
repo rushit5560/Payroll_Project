@@ -1,12 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
 import 'package:payroll_system/common_modules/single_item_module.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_list_screen_controller.dart';
+import 'package:payroll_system/screen/locatioon_screen/location_manage_screen/location_manage_screen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../common_modules/custom_alert_dialog_module.dart';
@@ -15,15 +16,16 @@ import '../../../utils/messaging.dart';
 
 class LocationListScreenWidgets extends StatelessWidget {
   LocationListScreenWidgets({super.key});
-  final allLocationListScreen = Get.find<LocationListScreenController>();
+  final allLocationListScreenController =
+      Get.find<LocationListScreenController>();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
-      itemCount: allLocationListScreen.allLocationList.length,
+      itemCount: allLocationListScreenController.allLocationList.length,
       itemBuilder: (context, index) {
-        final value = allLocationListScreen.allLocationList[index];
+        final value = allLocationListScreenController.allLocationList[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Container(
@@ -46,7 +48,21 @@ class LocationListScreenWidgets extends StatelessWidget {
                   textValue: value.isActive == "1" ? "Active" : "In-Active",
                 ),
                 EditAndDeleteButtonModule(
-                  onDeleteTap: () async {
+                  onDeleteTap: () {
+                    CustomAlertDialog().showAlertDialog(
+                      context: context,
+                      textContent:
+                          'Are youe sure you want to delete employee ?',
+                      onYesTap: () async {
+                        log("Delete Employee");
+                        await allLocationListScreenController
+                            .deleteLocationFunction(value.id.toString(), index);
+                      },
+                      onCancelTap: () {
+                        Get.back();
+                      },
+                    );
+
                     // bool employeeUpdatePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeEditKey);
 
                     // if(employeeUpdatePermission == true) {
@@ -69,6 +85,15 @@ class LocationListScreenWidgets extends StatelessWidget {
                     // }
                   },
                   onEditTap: () async {
+                    Get.to(
+                      () => LocationManageScreen(),
+                      arguments: [
+                        LocationOption.update,
+                        value.id.toString(),
+                        log('111'),
+                        log("1111111::  ${value.id}")
+                      ],
+                    );
                     // bool employeeDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDeleteKey);
 
                     // if(employeeDeletePermission == true) {

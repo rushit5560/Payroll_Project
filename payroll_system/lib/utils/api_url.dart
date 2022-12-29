@@ -52,4 +52,8 @@ class ApiUrl {
 //Location Api's
   static const allLocationApi = "${apiMainPath}api/location";
   static const deleteLocationApi = "${apiMainPath}api/location/delete/";
+  static const getLocationApi = "${apiMainPath}api/location/edit/";
+  static const createLocationApi = "${apiMainPath}api/location/store";
+  static const updateLocationApi = "${apiMainPath}api/location/update";
+
 }

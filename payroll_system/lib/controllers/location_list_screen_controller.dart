@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
-
 import '../models/location_manage_screen_model/location_delete_screeen_model.dart';
 
 class LocationListScreenController extends GetxController {
@@ -13,7 +12,7 @@ class LocationListScreenController extends GetxController {
   RxBool isSuccessStatus = false.obs;
   List<LocationListData> allLocationList = [];
 
-  Future<void> locationListFunction() async {
+  Future<void> getAlllocationListFunction() async {
     isLoading(true);
     String url = ApiUrl.allLocationApi;
 
@@ -29,49 +28,51 @@ class LocationListScreenController extends GetxController {
       if (isSuccessStatus.value) {
         allLocationList.clear();
         allLocationList.addAll(allLocationListModel.data);
+        log('allLocationList : ${allLocationList.length}');
       } else {
         log("Get All Location....");
       }
     } catch (e) {
+      log('getAlllocationListFunction Error : $e');
       rethrow;
     } finally {
       isLoading(false);
     }
+    // isLoading(false);
+  }
+  // Delete Location
 
-    // Delete Location
-    Future<void> deleteEmployeeFunction(String employeeId, int index) async {
-      isLoading(true);
-      String url = "${ApiUrl.deleteEmployeeApi}$employeeId";
-      log('Delete Company Api Url :$url');
+  Future<void> deleteLocationFunction(String locationId, int index) async {
+    isLoading(true);
+    String url = "${ApiUrl.deleteLocationApi}$locationId";
+    log('Delete Company Api Url :$url');
 
-      try {
-        http.Response response = await http.get(Uri.parse(url));
-        log('response : ${response.body}');
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+      log('response : ${response.body}');
 
-        LocationDeleteModel locationDeleteModel =
-            LocationDeleteModel.fromJson(json.decode(response.body));
-        isSuccessStatus = locationDeleteModel.success.obs;
+      LocationDeleteModel locationDeleteModel =
+          LocationDeleteModel.fromJson(json.decode(response.body));
+      isSuccessStatus = locationDeleteModel.success.obs;
 
-        if (isSuccessStatus.value) {
-          Fluttertoast.showToast(msg: locationDeleteModel.messege);
-          allLocationList.removeAt(index);
-          Get.back();
-        } else {
-          log('deleteCompanyFunction Else');
-        }
-      } catch (e) {
-        log('deleteCompanyFunction Error :$e');
-        rethrow;
-      } finally {
-        isLoading(false);
+      if (isSuccessStatus.value) {
+        Fluttertoast.showToast(msg: locationDeleteModel.messege);
+        allLocationList.removeAt(index);
+        Get.back();
+      } else {
+        log('deleteCompanyFunction Else');
       }
+    } catch (e) {
+      log('deleteCompanyFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
     }
   }
 
   @override
   void onInit() {
-    locationListFunction();
-    // TODO: implement onInit
+    getAlllocationListFunction();
     super.onInit();
   }
 }

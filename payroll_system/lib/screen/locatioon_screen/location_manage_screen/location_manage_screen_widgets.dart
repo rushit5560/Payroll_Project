@@ -2,11 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_manage_screen_controller.dart';
 import 'package:sizer/sizer.dart';
 
@@ -34,7 +36,7 @@ class LocationManageScreenWidgets extends StatelessWidget {
               keyboardType: TextInputType.text,
               mandatoryText: '*',
               textEditingController:
-                  locationManageScreenController.locationName,
+                  locationManageScreenController.locationNameController,
               validate: (value) =>
                   FieldValidation().validateLocationName(value),
             ),
@@ -100,7 +102,20 @@ class LocationManageScreenWidgets extends StatelessWidget {
                     onPressed: () async {
                       if (locationManageScreenController.formKey.currentState!
                           .validate()) {
-                        Get.to(() => LocationListScreen());
+                        if (locationManageScreenController.locationOption ==
+                            LocationOption.create) {
+                          if (locationManageScreenController
+                                  .selectedValue.value ==
+                              "Choose Option") {
+                            Fluttertoast.showToast(msg: "Please select status");
+                          } else {
+                            await locationManageScreenController
+                                .locationCreateFunction();
+                          }
+                        } else {
+                          await locationManageScreenController
+                              .locationUpdateFunction();
+                        }
                       }
                     },
                     text: "Submit",

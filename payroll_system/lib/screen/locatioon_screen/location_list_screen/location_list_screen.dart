@@ -9,7 +9,7 @@ import 'package:payroll_system/screen/locatioon_screen/location_manage_screen/lo
 
 class LocationListScreen extends StatelessWidget {
   LocationListScreen({super.key});
-  final allLocationListScreen = Get.put(LocationListScreenController());
+  final locationListScreenController = Get.put(LocationListScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +28,11 @@ class LocationListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: allLocationListScreen.isLoading.value
-          ? CommonLoader().showLoader()
-          : LocationListScreenWidgets(),
+      body: Obx(
+        () => locationListScreenController.isLoading.value
+            ? CommonLoader().showLoader()
+            : LocationListScreenWidgets(),
+      ),
     );
   }
 }
