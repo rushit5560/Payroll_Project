@@ -102,7 +102,6 @@ class EmployeManageScreenController extends GetxController {
 
   // RxBool isloding = false.obs;
 
-
   imageFromCamera() async {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -294,9 +293,10 @@ class EmployeManageScreenController extends GetxController {
         birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
         dateOfBrithController.text =
             "${birthDate.year}-${birthDate.month}-${birthDate.day}";
-        selectedValue.value = employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
+        selectedValue.value =
+            employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
         selectedValuePayper.value =
-        employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
+            employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
 
         log('Photo : ${employeeGetByIdModel.data.photo}');
         // if (images != null) {
@@ -434,11 +434,14 @@ class EmployeManageScreenController extends GetxController {
       request.fields['companyid'] = "${companyDDSelectedItem!.id}";
       request.fields['userid'] = "${UserDetails.userId}";
       request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
-      request.files
-          .add(await http.MultipartFile.fromPath("photo", images!.path));
-      request.fields['payper'] =
-      selectedValue.value == "salary" ? "salary" : "Hourly";
 
+      if (images != null) {
+        request.files
+            .add(await http.MultipartFile.fromPath("photo", images!.path));
+      }
+
+      request.fields['payper'] =
+          selectedValue.value == "salary" ? "salary" : "Hourly";
 
       log("request.fields : ${request.fields}");
       log("request.files : ${request.files}");
@@ -502,7 +505,7 @@ class EmployeManageScreenController extends GetxController {
       request.fields['id'] = employeeId;
       request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
       request.fields['payper'] =
-      selectedValue.value == "salary" ? "salary" : "Hourly";
+          selectedValue.value == "salary" ? "salary" : "Hourly";
 
       if (images != null) {
         request.files

@@ -166,8 +166,10 @@ class AdminSubmitButtonModule extends StatelessWidget {
       height: 45,
       width: 60.w,
       child: ElevatedButton(
-        onPressed: () {
-          adminProfileScreenController.updateAdminProfileFunction();
+        onPressed: () async {
+          if (adminProfileScreenController.formKey.currentState!.validate()) {
+            await adminProfileScreenController.updateAdminProfileFunction();
+          }
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

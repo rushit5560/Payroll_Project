@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/company_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
@@ -39,14 +40,14 @@ class CompanyDrawerMenu extends StatelessWidget {
                                   )
                                 : Container(),
                             companyDrawerController.employeeView.value == true
-                            ? CompanyDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => EmployeeListScreen());
-                              },
-                              title: AppMessage.employeeNameDrawer,
-                            )
-                            : Container(),
+                                ? CompanyDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => EmployeeListScreen());
+                                    },
+                                    title: AppMessage.employeeNameDrawer,
+                                  )
+                                : Container(),
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
@@ -62,13 +63,31 @@ class CompanyDrawerMenu extends StatelessWidget {
                       onTap: () async {
                         log('Logout');
 
-                        await UserPreference()
-                            .logoutRemoveUserDetailsFromPrefs()
-                            .then(
-                          (value) {
-                            Get.offAll(() => LoginScreen());
+                        CustomAlertDialog().showAlertDialog(
+                          context: context,
+                          textContent:
+                              'Are you sure, you want to logout from subadmin ?',
+                          onYesTap: () async {
+                            await UserPreference()
+                                .logoutRemoveUserDetailsFromPrefs()
+                                .then(
+                              (value) {
+                                Get.offAll(() => LoginScreen());
+                              },
+                            );
+                          },
+                          onCancelTap: () {
+                            Get.back();
                           },
                         );
+
+                        // await UserPreference()
+                        //     .logoutRemoveUserDetailsFromPrefs()
+                        //     .then(
+                        //   (value) {
+                        //     Get.offAll(() => LoginScreen());
+                        //   },
+                        // );
                       },
                       title: AppMessage.logOutNameDrawer,
                     ),

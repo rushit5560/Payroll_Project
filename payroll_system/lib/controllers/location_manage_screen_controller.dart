@@ -30,7 +30,7 @@ class LocationManageScreenController extends GetxController {
     isLoading(true);
     String url = ApiUrl.createLocationApi;
 
-    log(url);
+    log("Location create url :  $url");
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
       request.fields['location_name'] = locationNameController.text.trim();
@@ -142,7 +142,9 @@ class LocationManageScreenController extends GetxController {
 
   @override
   void onInit() {
-    locationGetByIdFunction();
+    if (locationOption == LocationOption.update) {
+      locationGetByIdFunction();
+    }
     // TODO: implement onInit
     super.onInit();
   }

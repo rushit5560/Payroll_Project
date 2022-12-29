@@ -192,6 +192,7 @@ class CompanyFormModule extends StatelessWidget {
               controller: companyProfileScreenController.phoneNumberController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (val) => FieldValidation().validateMobileNumber(val!),
+              maxLength: 10,
               decoration: InputDecoration(
                 fillColor: AppColors.greyColor.withOpacity(0.25),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -234,8 +235,10 @@ class CompanySubmitButtonModule extends StatelessWidget {
       height: 45,
       width: 60.w,
       child: ElevatedButton(
-        onPressed: () {
-          companyProfileScreenController.updateCompanyProfileFunction();
+        onPressed: () async {
+          if (companyProfileScreenController.formKey.currentState!.validate()) {
+            await companyProfileScreenController.updateCompanyProfileFunction();
+          }
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

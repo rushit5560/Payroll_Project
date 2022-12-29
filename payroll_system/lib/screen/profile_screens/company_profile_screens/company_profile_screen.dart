@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/company_profile_screen_controller.dart';
-import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 

@@ -37,9 +37,12 @@ class AppMessage {
   static String no = 'No';
 
   // static String deleteAlertMessage = 'Are you sure you want to delete ?';
-  static String deleteEmployeeAlertMessage = 'Are you sure you want to delete this employee?';
-  static String deleteDepartmentAlertMessage = 'Are you sure you want to delete this department?';
-  static String deleteCompanyAlertMessage = 'Are you sure you want to delete this company?';
+  static String deleteEmployeeAlertMessage =
+      'Are you sure you want to delete this employee?';
+  static String deleteDepartmentAlertMessage =
+      'Are you sure you want to delete this department?';
+  static String deleteCompanyAlertMessage =
+      'Are you sure you want to delete this company?';
   static String backAlertMessage = 'Are you sure you want to go to back ?';
   static String activeStatusMessage = 'Please select status';
   static String privacyPolicyMessage = 'Please accept privacy policy';
@@ -67,7 +70,7 @@ class AppMessage {
   static String middleName = 'Middle Name';
   static String lastName = 'Last Name';
   static String phoneNo = 'Phone Number';
-  static String dateOfBrith = 'Date Of Birth';
+  static String dateOfBirth = 'Date Of Birth';
   static String department = 'Department';
   static String departmentList = 'Department List';
   static String homeNo = 'Home Number';
@@ -120,8 +123,7 @@ class AppMessage {
   static String locationName = 'Location Name';
 
   // No Records Message
-  static String noEmpFound ='No Employee Found.';
-  static String noDeptFound ='No Department Found.';
-  static String noCompanyFound ='No Company Found.';
-
+  static String noEmpFound = 'No Employee Found.';
+  static String noDeptFound = 'No Department Found.';
+  static String noCompanyFound = 'No Company Found.';
 }

@@ -215,7 +215,10 @@ class CompanyManageScreenController extends GetxController {
         "user_name": nameFieldController.text.trim(),
         "email": emailFieldController.text.trim().toLowerCase(),
         "phoneno": phoneNumberFieldController.text,
-        "department_id": "$selectedDepartmentIdList",
+        "department_id": selectedDepartmentIdList,
+        // .toString()
+        // .replaceAll("[", "")
+        // .replaceAll("]", ""),
         "address": addressFieldController.text.trim(),
       };
 

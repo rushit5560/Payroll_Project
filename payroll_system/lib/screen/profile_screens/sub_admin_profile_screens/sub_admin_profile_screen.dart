@@ -32,17 +32,19 @@ class SubAdminProfileScreen extends StatelessWidget {
               ? CommonLoader().showLoader()
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 5.h),
-                      SubAdminImageModule(),
-                      SizedBox(height: 4.h),
-                      SubAdminFormModule(),
-                      SizedBox(height: 6.h),
-                      SubAdminSubmitButtonModule(),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 5.h),
+                        SubAdminImageModule(),
+                        SizedBox(height: 4.h),
+                        SubAdminFormModule(),
+                        SizedBox(height: 6.h),
+                        SubAdminSubmitButtonModule(),
+                      ],
+                    ),
                   ),
                 ),
         ),

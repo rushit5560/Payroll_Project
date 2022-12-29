@@ -40,12 +40,15 @@ class FieldValidation {
   }
 
   String? validateMobileNumber(String value) {
+    String patttern = r'(^[0-9]*$)';
+    RegExp regExp = RegExp(patttern);
+
     if (value.isEmpty) {
-      return 'Please enter your mobile number';
-    } else if (value.length < 10) {
-      return 'Mobile number must enter 10 characters';
-    } else if (value.length > 10) {
-      return 'Mobile number enter 10 characters';
+      return 'Please enter phoneNumber';
+    } else if (value.length != 10) {
+      return "Mobile number must 10 digits";
+    } else if (!regExp.hasMatch(value)) {
+      return "Mobile Number must be digits";
     } else {
       return null;
     }
@@ -74,7 +77,6 @@ class FieldValidation {
     } else {
       return null;
     }
-
   }
 
   String? validateAddress(String value) {
@@ -114,7 +116,7 @@ class FieldValidation {
 
   String? validateDepartmentId(String value) {
     if (value.isEmpty) {
-      return 'Please enter department Id';
+      return 'Please enter department id';
     } else {
       return null;
     }
@@ -122,7 +124,7 @@ class FieldValidation {
 
   String? validateCompanyId(String value) {
     if (value.isEmpty) {
-      return 'Please enter company Id';
+      return 'Please enter company id';
     } else {
       return null;
     }
@@ -145,12 +147,20 @@ class FieldValidation {
   }
 
   String? validateHomePhoneNumber(String value) {
+    String patttern = r'(^[0-9]*$)';
+    RegExp regExp = RegExp(patttern);
+
     if (value.isEmpty) {
       return 'Please enter phoneNumber';
+    } else if (value.length != 10) {
+      return "Mobile number must 10 digits";
+    } else if (!regExp.hasMatch(value)) {
+      return "Mobile Number must be digits";
     } else {
       return null;
     }
   }
+
   // String? validateHomePhoneNumber(String value) {
   //   if (value.isEmpty) {
   //     return 'Please enter Mobile number';
@@ -164,8 +174,15 @@ class FieldValidation {
   // }
 
   String? validateWorkPhoneNumber(String value) {
+    String patttern = r'(^[0-9]*$)';
+    RegExp regExp = RegExp(patttern);
+
     if (value.isEmpty) {
-      return 'Please enter your phone number';
+      return 'Please enter phoneNumber';
+    } else if (value.length != 10) {
+      return "Mobile number must 10 digits";
+    } else if (!regExp.hasMatch(value)) {
+      return "Mobile Number must be digits";
     } else {
       return null;
     }
@@ -173,7 +190,7 @@ class FieldValidation {
 
   String? validateDateOfBirth(String value) {
     if (value.isEmpty) {
-      return 'Please enter your date of brith';
+      return 'Please enter your date of birth';
     } else {
       return null;
     }
@@ -211,13 +228,13 @@ class FieldValidation {
     }
   }
 
-  String? validateZipCode(String value) {
-    if (value.isEmpty) {
-      return 'Please enter zipCode';
-    } else {
-      return null;
-    }
-  }
+  // String? validateZipCode(String value) {
+  //   if (value.isEmpty) {
+  //     return 'Please enter zipCode';
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   String? validatePassword(String value) {
     if (value.isEmpty) {
@@ -228,7 +245,6 @@ class FieldValidation {
       return null;
     }
   }
-
 
   String? validateConfirmPassword(String value, String passwordValue) {
     if (value.isEmpty) {

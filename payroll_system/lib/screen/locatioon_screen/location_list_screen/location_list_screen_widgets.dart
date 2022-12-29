@@ -52,7 +52,7 @@ class LocationListScreenWidgets extends StatelessWidget {
                     CustomAlertDialog().showAlertDialog(
                       context: context,
                       textContent:
-                          'Are youe sure you want to delete employee ?',
+                          'Are youe sure you want to delete location ?',
                       onYesTap: () async {
                         log("Delete Employee");
                         await allLocationListScreenController

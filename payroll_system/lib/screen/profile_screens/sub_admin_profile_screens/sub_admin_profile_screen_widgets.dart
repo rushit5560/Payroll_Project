@@ -134,6 +134,7 @@ class SubAdminFormModule extends StatelessWidget {
             controller: subAdminProfileScreenController.phoneNumberController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateMobileNumber(val!),
+            maxLength: 10,
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -175,8 +176,12 @@ class SubAdminSubmitButtonModule extends StatelessWidget {
       height: 45,
       width: 60.w,
       child: ElevatedButton(
-        onPressed: () {
-          subAdminProfileScreenController.updateSubAdminProfileFunction();
+        onPressed: () async {
+          if (subAdminProfileScreenController.formKey.currentState!
+              .validate()) {
+            await subAdminProfileScreenController
+                .updateSubAdminProfileFunction();
+          }
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
@@ -80,13 +81,31 @@ class AdminDrawerMenu extends StatelessWidget {
                       onTap: () async {
                         log('Logout');
 
-                        await UserPreference()
-                            .logoutRemoveUserDetailsFromPrefs()
-                            .then(
-                          (value) {
-                            Get.offAll(() => LoginScreen());
+                        CustomAlertDialog().showAlertDialog(
+                          context: context,
+                          textContent:
+                              'Are you sure, you want to logout from admin ?',
+                          onYesTap: () async {
+                            await UserPreference()
+                                .logoutRemoveUserDetailsFromPrefs()
+                                .then(
+                              (value) {
+                                Get.offAll(() => LoginScreen());
+                              },
+                            );
+                          },
+                          onCancelTap: () {
+                            Get.back();
                           },
                         );
+
+                        // await UserPreference()
+                        //     .logoutRemoveUserDetailsFromPrefs()
+                        //     .then(
+                        //   (value) {
+                        //     Get.offAll(() => LoginScreen());
+                        //   },
+                        // );
                       },
                       title: AppMessage.logOutNameDrawer,
                     ),

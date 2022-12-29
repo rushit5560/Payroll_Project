@@ -88,7 +88,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.dateOfBrith,
+              headerText: AppMessage.dateOfBirth,
               text: "Select Date",
               mandatoryText: '*',
               keyboardType: TextInputType.datetime,
@@ -178,11 +178,11 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               text: AppMessage.workNO,
               keyboardType: TextInputType.phone,
               maxLength: 10,
-              mandatoryText: '',
+              mandatoryText: '*',
               textEditingController:
                   employeeCreteScreenController.workNoController,
-              // validate: (value) =>
-              //     FieldValidation().validateMobileNumber(value),
+              validate: (value) =>
+                  FieldValidation().validateMobileNumber(value),
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
@@ -544,27 +544,42 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   flex: 5,
                   child: ButtonCustom(
                     onPressed: () async {
-                      if (employeeCreteScreenController.formKey.currentState!.validate()) {
-                        if (employeeCreteScreenController.employeeOption == EmployeeOption.create) {
-                          if (employeeCreteScreenController.images != null) {
-                            if (employeeCreteScreenController.companyDepartmentData!.departmentName == "") {
-                              Fluttertoast.showToast(msg: "Please select department");
-                            } else if (employeeCreteScreenController.selectedValuePayper.value == "Choose Option") {
-                              Fluttertoast.showToast(msg: "Please select payper");
-                            } else /*if (employeeCreteScreenController.companyDepartment.isNotEmpty)*/ {
-                              await employeeCreteScreenController.employeeCreateFunction();
-                            }
-                          } else {
-                            Fluttertoast.showToast(msg: "Please select profile image!");
+                      if (employeeCreteScreenController.formKey.currentState!
+                          .validate()) {
+                        if (employeeCreteScreenController.employeeOption ==
+                            EmployeeOption.create) {
+                          // if (employeeCreteScreenController.images != null) {
+                          if (employeeCreteScreenController
+                                  .companyDepartmentData!.departmentName ==
+                              "") {
+                            Fluttertoast.showToast(
+                                msg: "Please select department");
+                          } else if (employeeCreteScreenController
+                                  .selectedValuePayper.value ==
+                              "Choose Option") {
+                            Fluttertoast.showToast(msg: "Please select payper");
+                          } else /*if (employeeCreteScreenController.companyDepartment.isNotEmpty)*/ {
+                            await employeeCreteScreenController
+                                .employeeCreateFunction();
                           }
+                          // } else {
+                          //   Fluttertoast.showToast(
+                          //       msg: "Please select profile image!");
+                          // }
                         } else {
                           log("updateEmployeeDetailsFunction");
-                          if (employeeCreteScreenController.companyDepartmentData!.departmentName == "") {
-                            Fluttertoast.showToast(msg: "Please select department");
-                          } else if (employeeCreteScreenController.selectedValuePayper.value == "Choose Option") {
+                          if (employeeCreteScreenController
+                                  .companyDepartmentData!.departmentName ==
+                              "") {
+                            Fluttertoast.showToast(
+                                msg: "Please select department");
+                          } else if (employeeCreteScreenController
+                                  .selectedValuePayper.value ==
+                              "Choose Option") {
                             Fluttertoast.showToast(msg: "Please select payper");
                           } else {
-                            await employeeCreteScreenController.updateEmployeeDetailsFunction();
+                            await employeeCreteScreenController
+                                .updateEmployeeDetailsFunction();
                           }
                         }
                       }
@@ -676,40 +691,63 @@ class ImagePickerCustom extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     employeeCreteScreenController.showPicker(context);
-
-                    // _showPicker();
                   },
                   child: ClipOval(
-                    child: Container(
-                      height: 15.h,
-                      width: 15.h,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey,
-                      ),
-                      child: employeeCreteScreenController.employeeOption ==
-                              EmployeeOption.create
-                          ? employeeCreteScreenController.images != null
-                              ? Image.file(
-                                  employeeCreteScreenController.images!,
-                                  fit: BoxFit.fill,
-                                )
-                              : const Icon(
-                                  Icons.camera_alt_outlined,
-                                )
-                          : employeeCreteScreenController.images != null
-                              ? Image.file(
-                                  employeeCreteScreenController.images!,
-                                  fit: BoxFit.fill,
-                                )
-                              : employeeCreteScreenController.oldImageName != ""
-                                  ? Image.network(
-                                      "${ApiUrl.apiImagePath}${employeeCreteScreenController.oldImageName}",
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey,
+                          ),
+                          child: employeeCreteScreenController.employeeOption ==
+                                  EmployeeOption.create
+                              ? employeeCreteScreenController.images != null
+                                  ? Image.file(
+                                      employeeCreteScreenController.images!,
                                       fit: BoxFit.fill,
                                     )
                                   : const Icon(
                                       Icons.camera_alt_outlined,
-                                    ),
+                                    )
+                              : employeeCreteScreenController.images != null
+                                  ? Image.file(
+                                      employeeCreteScreenController.images!,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : employeeCreteScreenController
+                                              .oldImageName !=
+                                          ""
+                                      ? Image.network(
+                                          "${ApiUrl.apiImagePath}${employeeCreteScreenController.oldImageName}",
+                                          fit: BoxFit.fill,
+                                        )
+                                      : const Icon(
+                                          Icons.camera_alt_outlined,
+                                        ),
+                        ),
+                        employeeCreteScreenController.employeeOption ==
+                                EmployeeOption.update
+                            ? Positioned(
+                                top: 70,
+                                right: 8,
+                                child: Container(
+                                  height: 28,
+                                  width: 28,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                  ),
+                                  child: Icon(
+                                    Icons.edit,
+                                    size: 15.sp,
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                      ],
                     ),
                   ),
                 ),
