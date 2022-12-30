@@ -1,23 +1,23 @@
+import 'dart:io';
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import '../constants/enums.dart';
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:payroll_system/Utils/api_url.dart';
-import 'package:http/http.dart' as http;
+import 'package:payroll_system/utils/messaging.dart';
+import '../Utils/extension_methods/user_details.dart';
+import '../models/company_list_screen_model/get_all_company_model.dart';
+import '../models/employee_manage_screen_models/employee_get_by_id_model.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/update_employee_model.dart';
-import 'package:payroll_system/utils/messaging.dart';
-import 'package:sizer/sizer.dart';
-import '../Utils/extension_methods/user_details.dart';
-import '../constants/enums.dart';
-import '../models/company_list_screen_model/get_all_company_model.dart';
-import '../models/employee_manage_screen_models/employee_get_by_id_model.dart';
 
 class EmployeManageScreenController extends GetxController {
   EmployeeOption employeeOption = Get.arguments[0];

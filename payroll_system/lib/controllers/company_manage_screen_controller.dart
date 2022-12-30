@@ -12,7 +12,6 @@ import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:payroll_system/controllers/home_screen_controller.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
-
 import '../constants/enums.dart';
 import 'company_list_screen_controller.dart';
 
@@ -26,13 +25,30 @@ class CompanyManageScreenController extends GetxController {
   RxBool isSuccessStatus = false.obs;
 
   List<DepartmentData> departmentList = [];
+
+  //11
+  List<LocationListData> allLocationList = [];
+  //11
+
   List<String> departmentStringList = [];
+  //22
+  List<String> locationStringList = [];
+  //22
+
   RxList<String> selectedDepartmentList = RxList<String>([]);
+  //33
+  RxList<String> selectedLocationList = RxList<String>([]);
+  //33
+
   // List<String> selectedDepartmentList = [];
   List<String> selectedDepartmentIdList = [];
+  //
+  List<String> selectedLocationIdList = [];
+//
   RxString selectedDepartmentOption = "".obs;
-
-  List<LocationListData> allLocationList = [];
+  //
+  RxString selectedLocationOption = "".obs;
+//
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameFieldController = TextEditingController();
@@ -96,10 +112,19 @@ class CompanyManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         allLocationList.clear();
         allLocationList.addAll(allLocationListModel.data);
+        locationStringList.clear();
+        for (int i = 0; i < allLocationList.length; i++) {
+          locationStringList.add(allLocationList[i].locationName);
+
+          log('${allLocationList[i].id} : ${allLocationList[i].locationName}');
+        }
+        log('departmentList Length : ${allLocationList.length}');
       } else {
-        log("Get All Location....");
+        log('getAllLocationListFunction Else');
       }
     } catch (e) {
+      log('getAllDepartmentFunction Error :$e');
+
       rethrow;
     } finally {
       isLoading(false);
@@ -260,6 +285,7 @@ class CompanyManageScreenController extends GetxController {
   @override
   void onInit() {
     getAllDepartmentFunction();
+    // getAllLocationListFunction();
     log("$companyOption");
     super.onInit();
   }

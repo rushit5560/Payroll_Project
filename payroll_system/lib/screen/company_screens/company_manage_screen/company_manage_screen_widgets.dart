@@ -124,6 +124,66 @@ class CompanyFormModule extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 5),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    textAlign: TextAlign.left,
+                    maxLines: null,
+                    text: TextSpan(
+                        text: AppMessage.companylocation,
+                        style: TextStyleConfig.textStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: AppMessage.mandatory,
+                            style: TextStyleConfig.textStyle(
+                              textColor: AppColors.redColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ]),
+                  ).commonSymmetricPadding(vertical: 2),
+                  /*Text(
+                    AppMessage.companyDepartmentNameDrawer,
+                    style: TextStyleConfig.textStyle(
+                        fontWeight: FontWeight.w600, fontSize: 16),
+                  ).commonSymmetricPadding(vertical: 2),*/
+                  DropDownMultiSelect(
+                    options: screenController.locationStringList,
+                    whenEmpty: AppMessage.chooseLocation,
+                    onChanged: (value) {
+                      screenController.selectedLocationList.value = value;
+                      screenController.selectedLocationOption.value = "";
+                      screenController.selectedLocationIdList = [];
+
+                      // Selected Department generate new id list for send in api
+                      for (int i = 0; i < value.length; i++) {
+                        for (int j = 0;
+                            j < screenController.allLocationList.length;
+                            j++) {
+                          if (value[i] ==
+                              screenController
+                                  .allLocationList[j].locationName) {
+                            screenController.selectedLocationIdList.add(
+                                screenController.allLocationList[j].id
+                                    .toString());
+                          }
+                        }
+                      }
+
+                      log('screenController.selectedDepartmentIdList :${screenController.selectedLocationIdList}');
+                      screenController.loadUI();
+                    },
+                    // ignore: invalid_use_of_protected_member
+                    selectedValues: screenController.selectedLocationList.value,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
               FormSingleFieldModule(
                 headerText: AppMessage.labelCompanyAddress,
                 text: AppMessage.labelCompanyAddress,
