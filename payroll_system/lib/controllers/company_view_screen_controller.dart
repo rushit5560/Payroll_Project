@@ -1,18 +1,13 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
+
 
 class CompanyViewScreenController extends GetxController {
   final String companyId = Get.arguments[0];
   final String companyName = Get.arguments[1];
 
+  RxBool isLoading = false.obs;
+  RxBool isSuccessStatus = false.obs;
 
 
-  @override
-  void onInit() {
-    log('companyId : $companyId');
-    log('companyName : $companyName');
-    super.onInit();
-  }
 
 }

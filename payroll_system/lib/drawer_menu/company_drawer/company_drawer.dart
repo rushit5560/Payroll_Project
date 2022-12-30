@@ -4,25 +4,25 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/drawer_controllers/company_drawer_controller.dart';
-import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
+import 'package:payroll_system/controllers/company_view_screen_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
-import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 
+
 class CompanyDrawerMenu extends StatelessWidget {
   CompanyDrawerMenu({Key? key}) : super(key: key);
-  final companyDrawerController = Get.put(CompanyDrawerController());
+  // final companyDrawerController = Get.put(CompanyDrawerController());
+  final companyViewScreenController = Get.find<CompanyViewScreenController>();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: SafeArea(
         child: Obx(
-          () => companyDrawerController.isLoading.value
+          () => companyViewScreenController.isLoading.value
               ? CommonLoader().showLoader()
               : Column(
                   children: [
@@ -30,31 +30,20 @@ class CompanyDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            companyDrawerController.departmentView.value == true
-                                ? CompanyDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => DepartmentListScreen());
-                                    },
-                                    title: AppMessage.departmentNameDrawer,
-                                  )
-                                : Container(),
-                            companyDrawerController.employeeView.value == true
-                                ? CompanyDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => EmployeeListScreen());
-                                    },
-                                    title: AppMessage.employeeNameDrawer,
-                                  )
-                                : Container(),
                             CompanyDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => DepartmentListScreen());
+                              },
+                              title: AppMessage.departmentNameDrawer,
+                            )
+                            /*CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
                                 Get.to(() => ChangePasswordScreen());
                               },
                               title: AppMessage.changePassword,
-                            ),
+                            ),*/
                           ],
                         ),
                       ),
