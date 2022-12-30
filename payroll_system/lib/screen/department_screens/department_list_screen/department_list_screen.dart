@@ -31,7 +31,7 @@ class DepartmentListScreen extends StatelessWidget {
 
               if (departmentAddPermission == true) {
                 Get.to(() => DepartmentManageScreen(),
-                  arguments: [DepartmentOption.create, ""],
+                  arguments: [DepartmentOption.create, AppMessage.empty],
                 );
               } else {
                 Fluttertoast.showToast(msg: AppMessage.deniedPermission);

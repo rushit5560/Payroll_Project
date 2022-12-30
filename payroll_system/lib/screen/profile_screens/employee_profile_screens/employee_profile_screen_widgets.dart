@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
-import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
+
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../common_modules/form_single_field_module.dart';
+
 import '../../../controllers/profile_screens_controller/employee_profile_screen_controller.dart';
 
 class EmployeeImageModule extends StatelessWidget {
@@ -51,7 +50,7 @@ class EmployeeImageModule extends StatelessWidget {
                                   employeeProfileScreenController
                                               .employeeData ==
                                           null
-                                      ? ""
+                                      ? AppMessage.empty
                                       : ApiUrl.apiImagePath +
                                           employeeProfileScreenController
                                               .employeeData!.photo,
@@ -62,7 +61,7 @@ class EmployeeImageModule extends StatelessWidget {
                                           AppColors.greyColor.withOpacity(0.35),
                                       child: Center(
                                         child: Text(
-                                          "No Image",
+                                          AppMessage.noImage,
                                           style: TextStyle(
                                             color: AppColors.blackColor,
                                             fontSize: 10.sp,
@@ -126,7 +125,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "First Name",
+              labelText: AppMessage.firstName,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -140,7 +139,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Middle Name",
+              labelText: AppMessage.middleName,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -154,7 +153,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Last Name",
+              labelText: AppMessage.lastName,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -169,7 +168,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Phone Number",
+              labelText: AppMessage.phoneNo,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -187,8 +186,8 @@ class EmployeeFormModule extends StatelessWidget {
             controller: employeeProfileScreenController.dobFieldController,
             decoration: InputDecoration(
               isDense: true,
-              labelText: "Date of birth",
-              hintText: "Ex. Insert your dob",
+              labelText: AppMessage.dateOfBirth,
+              hintText: AppMessage.exInsertYourDob,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -220,7 +219,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Home Number",
+              labelText: AppMessage.homeNo,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -234,7 +233,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Work Number",
+              labelText: AppMessage.workNO,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -249,7 +248,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Current Address",
+              labelText: AppMessage.currentAddress,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -263,7 +262,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Home Address",
+              labelText: AppMessage.homeAddress,
               border: border,
               enabledBorder: border,
               filled: true,

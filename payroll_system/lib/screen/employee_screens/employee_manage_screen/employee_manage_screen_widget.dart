@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
@@ -13,6 +12,7 @@ import 'package:payroll_system/controllers/employee_manage_screen_controller.dar
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 import '../../../common_modules/form_single_field_module.dart';
 
@@ -48,7 +48,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.firstName,
               text: AppMessage.firstName,
               keyboardType: TextInputType.text,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               textEditingController:
                   employeeCreteScreenController.firstNameController,
               validate: (value) => FieldValidation().validateFirstName(value),
@@ -57,7 +57,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.middleName,
               text: AppMessage.middleName,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.text,
               textEditingController:
                   employeeCreteScreenController.middleNameController,
@@ -67,7 +67,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.lastName,
               text: AppMessage.lastName,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.text,
               textEditingController:
                   employeeCreteScreenController.lastNameController,
@@ -78,7 +78,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.phoneNo,
               text: AppMessage.phoneNo,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.phone,
               maxLength: 10,
               textEditingController:
@@ -89,8 +89,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             const SizedBox(height: 5),
             FormSingleFieldModule(
               headerText: AppMessage.dateOfBirth,
-              text: "Select Date",
-              mandatoryText: '*',
+              text: AppMessage.selectDate,
+              mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.datetime,
               maxLength: 10,
               textEditingController:
@@ -117,7 +117,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: ' *',
+                      text: AppMessage.mandatory,
                       style: TextStyleConfig.textStyle(
                         textColor: AppColors.redColor,
                         fontWeight: FontWeight.w600,
@@ -166,7 +166,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               text: AppMessage.homeNo,
               keyboardType: TextInputType.phone,
               maxLength: 10,
-              mandatoryText: '',
+              mandatoryText: AppMessage.empty,
               textEditingController:
                   employeeCreteScreenController.homeNoController,
               // validate: (value) =>
@@ -178,7 +178,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               text: AppMessage.workNO,
               keyboardType: TextInputType.phone,
               maxLength: 10,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               textEditingController:
                   employeeCreteScreenController.workNoController,
               validate: (value) =>
@@ -188,7 +188,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.hourlyRate,
               text: AppMessage.hourlyRate,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.number,
               textEditingController:
                   employeeCreteScreenController.hourlyRateController,
@@ -198,7 +198,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             FormSingleFieldModule(
               headerText: AppMessage.salary,
               text: AppMessage.salary,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.number,
               textEditingController:
                   employeeCreteScreenController.salaryController,
@@ -207,9 +207,9 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             const SizedBox(height: 5),
             FormSingleFieldModule(
               headerText: AppMessage.startDate,
-              text: "Select Start Date",
+              text: AppMessage.selectStartDate,
               keyboardType: TextInputType.datetime,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory,
               textEditingController:
                   employeeCreteScreenController.startDateController,
               suffixIcon: Icons.calendar_month,
@@ -231,7 +231,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.lastDay,
               text: AppMessage.lastDay,
               keyboardType: TextInputType.number,
-              mandatoryText: '*',
+              mandatoryText: AppMessage.mandatory
+              ,
               textEditingController:
                   employeeCreteScreenController.lastDateController,
               validate: (value) => FieldValidation().validateLastDayWork(value),
@@ -381,7 +382,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: ' *',
+                          text: AppMessage.mandatory,
                           style: TextStyleConfig.textStyle(
                             textColor: AppColors.redColor,
                             fontWeight: FontWeight.w600,
@@ -470,7 +471,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     headerText: AppMessage.employeeEmail,
                     text: AppMessage.employeeEmail,
                     keyboardType: TextInputType.emailAddress,
-                    mandatoryText: '*',
+                    mandatoryText: AppMessage.mandatory,
                     readOnly: true,
                     textEditingController:
                         employeeCreteScreenController.emailController,
@@ -479,7 +480,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 : FormSingleFieldModule(
                     headerText: AppMessage.employeeEmail,
                     text: AppMessage.employeeEmail,
-                    mandatoryText: '*',
+                    mandatoryText: AppMessage.mandatory,
                     keyboardType: TextInputType.emailAddress,
                     textEditingController:
                         employeeCreteScreenController.emailController,
@@ -497,7 +498,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       // obscureText:,
                       headerText: AppMessage.password,
                       text: AppMessage.password,
-                      mandatoryText: '*',
+                      mandatoryText: AppMessage.mandatory,
                       keyboardType: TextInputType.visiblePassword,
                       // maxLength: 10,
                       textEditingController:

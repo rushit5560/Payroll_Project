@@ -211,7 +211,7 @@ class PrivacyPolicyCustom extends StatelessWidget {
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
-                text: "I Agree with ",
+                text: AppMessage.iAgreeWith,
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: AppColors.blackColor,
@@ -219,7 +219,7 @@ class PrivacyPolicyCustom extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: "privacy policy",
+                    text: AppMessage.privacyPolicy,
                     style: TextStyle(
                       fontSize: 12.sp,
                       color: AppColors.redColor,
@@ -227,7 +227,7 @@ class PrivacyPolicyCustom extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: " & ",
+                    text: AppMessage.and,
                     style: TextStyle(
                       fontSize: 12.sp,
                       color: AppColors.blackColor,
@@ -235,7 +235,7 @@ class PrivacyPolicyCustom extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: "terms conditions",
+                    text: AppMessage.termsConditions,
                     style: TextStyle(
                       fontSize: 12.sp,
                       color: AppColors.redColor,

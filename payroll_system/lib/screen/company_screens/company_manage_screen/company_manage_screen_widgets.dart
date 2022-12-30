@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -7,13 +6,13 @@ import 'package:multiselect/multiselect.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/company_manage_screen_controller.dart';
 import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/custom_button_module.dart';
 import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/enums.dart';
+import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 
 class CompanyFormModule extends StatelessWidget {
@@ -33,26 +32,29 @@ class CompanyFormModule extends StatelessWidget {
               FormSingleFieldModule(
                 headerText: AppMessage.companyLabelName,
                 text: AppMessage.companyName,
-                mandatoryText: '*',
+                mandatoryText: AppMessage.mandatory,
                 keyboardType: TextInputType.text,
                 textEditingController: screenController.nameFieldController,
-                validate: (value) => FieldValidation().validateCompanyName(value),
+                validate: (value) =>
+                    FieldValidation().validateCompanyName(value),
               ),
               const SizedBox(height: 5),
               FormSingleFieldModule(
                 headerText: AppMessage.companyLabelEmail,
                 text: AppMessage.labelEmailName,
-                mandatoryText: '*',
+                mandatoryText: AppMessage.mandatory,
                 keyboardType: TextInputType.emailAddress,
                 textEditingController: screenController.emailFieldController,
-                readOnly: screenController.companyOption == CompanyOption.create ? false : true,
+                readOnly: screenController.companyOption == CompanyOption.create
+                    ? false
+                    : true,
                 validate: (value) => FieldValidation().validateEmail(value),
               ),
               const SizedBox(height: 5),
               FormSingleFieldModule(
                 headerText: AppMessage.companyPhoneNumber,
                 text: AppMessage.labelPhoneNo,
-                mandatoryText: '*',
+                mandatoryText: AppMessage.mandatory,
                 keyboardType: TextInputType.phone,
                 maxLength: 10,
                 textEditingController:
@@ -70,18 +72,19 @@ class CompanyFormModule extends StatelessWidget {
                     text: TextSpan(
                         text: AppMessage.companyDepartmentNameDrawer,
                         style: TextStyleConfig.textStyle(
-                          fontWeight: FontWeight.w600, fontSize: 16,),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
                         children: [
                           TextSpan(
-                            text: ' *',
+                            text: AppMessage.mandatory,
                             style: TextStyleConfig.textStyle(
                               textColor: AppColors.redColor,
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
                             ),
                           ),
-                        ]
-                    ),
+                        ]),
                   ).commonSymmetricPadding(vertical: 2),
                   /*Text(
                     AppMessage.companyDepartmentNameDrawer,
@@ -90,7 +93,7 @@ class CompanyFormModule extends StatelessWidget {
                   ).commonSymmetricPadding(vertical: 2),*/
                   DropDownMultiSelect(
                     options: screenController.departmentStringList,
-                    whenEmpty: 'Choose Department',
+                    whenEmpty: AppMessage.chooseDepartment,
                     onChanged: (value) {
                       screenController.selectedDepartmentList.value = value;
                       screenController.selectedDepartmentOption.value = "";
@@ -102,9 +105,11 @@ class CompanyFormModule extends StatelessWidget {
                             j < screenController.departmentList.length;
                             j++) {
                           if (value[i] ==
-                              screenController.departmentList[j].departmentName) {
+                              screenController
+                                  .departmentList[j].departmentName) {
                             screenController.selectedDepartmentIdList.add(
-                                screenController.departmentList[j].id.toString());
+                                screenController.departmentList[j].id
+                                    .toString());
                           }
                         }
                       }
@@ -113,7 +118,8 @@ class CompanyFormModule extends StatelessWidget {
                       screenController.loadUI();
                     },
                     // ignore: invalid_use_of_protected_member
-                    selectedValues: screenController.selectedDepartmentList.value,
+                    selectedValues:
+                        screenController.selectedDepartmentList.value,
                   ),
                 ],
               ),
@@ -122,7 +128,7 @@ class CompanyFormModule extends StatelessWidget {
                 headerText: AppMessage.labelCompanyAddress,
                 text: AppMessage.labelCompanyAddress,
                 keyboardType: TextInputType.text,
-                mandatoryText: '',
+                mandatoryText: AppMessage.empty,
                 textEditingController: screenController.addressFieldController,
                 // validate: (value) => FieldValidation().validateCompanyAddress(value),
               ),
@@ -134,23 +140,31 @@ class CompanyFormModule extends StatelessWidget {
                     flex: 5,
                     child: ButtonCustom(
                       onPressed: () async {
-                        if(screenController.formKey.currentState!.validate()){
-                          if (screenController.companyOption == CompanyOption.create) {
-                            if (screenController.selectedDepartmentIdList.isEmpty) {
-                              Fluttertoast.showToast(msg: "Please select department");
-                            } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
+                        if (screenController.formKey.currentState!.validate()) {
+                          if (screenController.companyOption ==
+                              CompanyOption.create) {
+                            if (screenController
+                                .selectedDepartmentIdList.isEmpty) {
+                              Fluttertoast.showToast(
+                                  msg: AppMessage.pleaseSelectDepartment);
+                            } else if (screenController
+                                .selectedDepartmentIdList.isNotEmpty) {
                               await screenController.createCompanyFunction();
                             }
                           } else {
-                            if (screenController.selectedDepartmentIdList.isEmpty) {
-                              Fluttertoast.showToast(msg: "Please select department");
-                            } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
-                              await screenController.updateCompanyDetailsFunction();
+                            if (screenController
+                                .selectedDepartmentIdList.isEmpty) {
+                              Fluttertoast.showToast(
+                                  msg: AppMessage.pleaseSelectDepartment);
+                            } else if (screenController
+                                .selectedDepartmentIdList.isNotEmpty) {
+                              await screenController
+                                  .updateCompanyDetailsFunction();
                             }
                           }
                         }
                       },
-                      text: "Submit",
+                      text: AppMessage.submit,
                       textsize: 15.sp,
                     ),
                   ),
@@ -160,14 +174,14 @@ class CompanyFormModule extends StatelessWidget {
                     child: ButtonCustom(
                       onPressed: () => CustomAlertDialog().showAlertDialog(
                         context: context,
-                        textContent: 'Are you sure you want to go to back ?',
+                        textContent: AppMessage.permissionMessage,
                         onYesTap: () {
                           Get.back();
                           Get.back();
                         },
                         onCancelTap: () => Get.back(),
                       ),
-                      text: "Back",
+                      text: AppMessage.back,
                       textsize: 15.sp,
                     ),
                   ),

@@ -3,10 +3,14 @@ class AppMessage {
   static String password = 'Enter a password';
   static String mobileNo = 'Mobile number';
   static String fullName = 'Full Name';
-  static String name = 'Enter a Name';
+  static String enteraname = 'Enter a Name';
   static String email = 'Enter an Email';
   static String termsAndConditions = 'I Agree with privacy and policy';
   static String forgotPassword = 'Forgot password ?';
+  static String iAgreeWith = 'I Agree with ';
+  static String privacyPolicy = 'privacy policy';
+  static String and = " & ";
+  static String termsConditions = 'terms conditions';
   // static String userId = 'User id';
   // static String signIn = 'Sign in';
   static String companyLogin = 'Company Sign Up';
@@ -56,11 +60,15 @@ class AppMessage {
 
   //company
   static String companyText = "Company";
+  static String chooseDepartment = 'Choose Department';
+//Department
+  static String pleaseSelectDepartment = 'Please select department';
+  static String pleaseChooseDepartment = 'Please Choose Department';
 
   //Employee
   static String employeeText = "Employee";
   static String employeeName = 'Employee Name';
-  static String employeePhoneNumber = 'Phone Number';
+  static String phoneNumber = 'Phone Number';
   static String companyPhoneNumber = 'Company Phone Number';
   static String employeeDepartmentName = 'Department Name';
   static String employeeCompanyName = 'Company Name';
@@ -85,8 +93,8 @@ class AppMessage {
   static String employeeEmail = 'Email';
   static String companyLabelEmail = 'Company Email';
   static String employeePassword = 'Password';
-  static String employeeCurrentAddress = 'Current Address';
-  static String employeeHomeAddress = 'Home Address';
+  static String currentAddress = 'Current Address';
+  static String homeAddress = 'Home Address';
   static String employeeDetails = 'Employee Details';
   static String createEmployee = 'Create employee';
   static String companyEdit = 'Edit Company';
@@ -95,13 +103,14 @@ class AppMessage {
   static String companyLabelName = 'Company Name';
   static String labelEmailName = 'Company Email';
   static String labelPhoneNo = 'Company Phone Number';
-  static String labelAddress = 'Address';
+  static String address = 'Address';
   static String labelCompanyAddress = 'Company Address';
-
+  static String selectStartDate = 'Select Start Date';
   static String departmentCreate = 'Create Department';
   static String departmentUpdate = 'Update Department';
   static String departmentName = 'Department Name';
-
+  static String selectDate = 'Select Date';
+  static String exInsertYourDob = 'Ex. Insert your dob';
   // change password
   static String changePassword = "Change Password";
   static String oldPassword = "Old Password";
@@ -170,4 +179,20 @@ class AppMessage {
   //controller message
   static String gallery = 'Gallery';
   static String camera = 'Camera';
+  //comman messages text
+  static String mandatory = '*';
+  static String submit = 'Submit';
+  static String permissionMessage = 'Are you sure you want to go to back ?';
+  static String back = 'Back';
+  static String empty = '';
+  static String value = "1";
+  static String active = 'Active';
+  static String inActive = 'In-Active';
+  static String chooseOption = 'Choose Option';
+  static String noImage = 'No Image';
+  static String view = 'View';
+
+  //profile
+  static String userName = 'User Name';
+  static String name = 'Name';
 }

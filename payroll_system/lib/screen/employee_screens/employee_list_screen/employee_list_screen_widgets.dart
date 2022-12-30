@@ -49,7 +49,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                 ),
                 SizedBox(height: 1.h),
                 SingleListTileCustom(
-                  textKey: AppMessage.employeePhoneNumber,
+                  textKey: AppMessage.phoneNumber,
                   textValue: value.phoneNo,
                 ),
                 SizedBox(height: 2.h),
@@ -65,7 +65,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                 SingleListTileCustom(
                     textKey: AppMessage.employeeStatus,
                     textValue:
-                        value.isActive == "1" ? "Active" : "In-Active"),
+                        value.isActive == AppMessage.value ? AppMessage.active : AppMessage.inActive),
                 SizedBox(height: 2.h),
                 EditAndDeleteButtonModule(
                   onDeleteTap: () async {

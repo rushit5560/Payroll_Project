@@ -43,7 +43,7 @@ class CompanyManageScreen extends StatelessWidget {
               ? IconButton(
                   onPressed: () => CustomAlertDialog().showAlertDialog(
                     context: context,
-                    textContent: 'Are you sure you want to go to back ?',
+                    textContent: AppMessage.permissionMessage,
                     onYesTap: () {
                       Get.back();
                       Get.back();

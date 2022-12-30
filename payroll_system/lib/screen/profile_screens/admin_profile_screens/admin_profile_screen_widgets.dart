@@ -145,7 +145,7 @@ class AdminNameFieldModule extends StatelessWidget {
         decoration: InputDecoration(
           fillColor: AppColors.greyColor.withOpacity(0.25),
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-          labelText: "User Name",
+          labelText: AppMessage.userName,
           border: border,
           enabledBorder: border,
           filled: true,

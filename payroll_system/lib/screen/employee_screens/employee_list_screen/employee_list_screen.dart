@@ -33,7 +33,7 @@ class EmployeeListScreen extends StatelessWidget {
                 if (employeeCreatePermission == true) {
                   Get.to(
                     () => EmployeeManageScreen(),
-                    arguments: [EmployeeOption.create, ""],
+                    arguments: [EmployeeOption.create, AppMessage.empty],
                   );
                 } else {
                   Fluttertoast.showToast(msg: AppMessage.deniedPermission);

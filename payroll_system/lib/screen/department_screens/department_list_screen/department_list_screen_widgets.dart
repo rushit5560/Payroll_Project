@@ -67,7 +67,7 @@ class DepartmentListTile extends StatelessWidget {
               /// Getting From Common Module
               SingleListTileCustom(
                 textKey: AppMessage.verifiedStatusName,
-                textValue: singleItem.isActive == "1" ? "Active" : "In-Active",
+                textValue: singleItem.isActive == AppMessage.value ? AppMessage.active :AppMessage.inActive,
               ),
 
               SizedBox(height: 2.h),

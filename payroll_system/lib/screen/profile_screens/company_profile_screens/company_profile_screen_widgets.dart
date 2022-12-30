@@ -128,7 +128,7 @@ class CompanyFormModule extends StatelessWidget {
               decoration: InputDecoration(
                 fillColor: AppColors.greyColor.withOpacity(0.25),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: "Choose Department",
+                labelText: AppMessage.chooseDepartment,
                 border: border,
                 enabledBorder: border,
                 filled: true,
@@ -136,10 +136,10 @@ class CompanyFormModule extends StatelessWidget {
 
               // whenEmpty: 'Choose Department',
               validator: (val) {
-                if (val == "Choose Department") {
-                  return "Please Choose Department";
+                if (val == AppMessage.chooseDepartment) {
+                  return AppMessage.pleaseChooseDepartment;
                 } else {
-                  return "";
+                  return AppMessage.empty;
                 }
               },
               onChanged: (value) {
@@ -181,7 +181,7 @@ class CompanyFormModule extends StatelessWidget {
               decoration: InputDecoration(
                 fillColor: AppColors.greyColor.withOpacity(0.25),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: "Name",
+                labelText: AppMessage.name,
                 border: border,
                 enabledBorder: border,
                 filled: true,
@@ -196,7 +196,7 @@ class CompanyFormModule extends StatelessWidget {
               decoration: InputDecoration(
                 fillColor: AppColors.greyColor.withOpacity(0.25),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: "Phone Number",
+                labelText: AppMessage.phoneNumber,
                 border: border,
                 enabledBorder: border,
                 filled: true,
@@ -210,7 +210,7 @@ class CompanyFormModule extends StatelessWidget {
               decoration: InputDecoration(
                 fillColor: AppColors.greyColor.withOpacity(0.25),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: "Address",
+                labelText: AppMessage.address,
                 border: border,
                 enabledBorder: border,
                 filled: true,

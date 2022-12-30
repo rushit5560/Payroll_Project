@@ -47,7 +47,7 @@ class SubAdminImageModule extends StatelessWidget {
                                 child: Image.network(
                                   subAdminProfileScreenController.profileData ==
                                           null
-                                      ? ""
+                                      ? AppMessage.empty
                                       : ApiUrl.apiImagePath +
                                           subAdminProfileScreenController
                                               .profileData!.photo,
@@ -58,7 +58,7 @@ class SubAdminImageModule extends StatelessWidget {
                                           AppColors.greyColor.withOpacity(0.35),
                                       child: Center(
                                         child: Text(
-                                          "No Image",
+                                          AppMessage.noImage,
                                           style: TextStyle(
                                             color: AppColors.blackColor,
                                             fontSize: 10.sp,
@@ -123,7 +123,7 @@ class SubAdminFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Name",
+              labelText: AppMessage.name,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -138,7 +138,7 @@ class SubAdminFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Phone Number",
+              labelText:AppMessage.phoneNo,
               border: border,
               enabledBorder: border,
               filled: true,
@@ -152,7 +152,7 @@ class SubAdminFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Address",
+              labelText: AppMessage.address,
               border: border,
               enabledBorder: border,
               filled: true,

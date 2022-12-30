@@ -32,7 +32,7 @@ class DepartmentFormModule extends StatelessWidget {
                 headerText: AppMessage.departmentName,
                 text: AppMessage.departmentName,
                 keyboardType: TextInputType.text,
-                mandatoryText: '*',
+                mandatoryText: AppMessage.mandatory,
                 textEditingController: screenController.nameFieldController,
                 validate: (value) => FieldValidation().validateDepartmentName(value),
               ),
@@ -52,7 +52,7 @@ class DepartmentFormModule extends StatelessWidget {
                           fontWeight: FontWeight.w600, fontSize: 16,),
                         children: [
                           TextSpan(
-                            text: ' *',
+                            text: AppMessage.mandatory,
                             style: TextStyleConfig.textStyle(
                               textColor: AppColors.redColor,
                               fontWeight: FontWeight.w600,
@@ -112,7 +112,7 @@ class DepartmentFormModule extends StatelessWidget {
                       onPressed: () async {
                         if(screenController.formKey.currentState!.validate()) {
                           if (screenController.departmentOption == DepartmentOption.create) {
-                            if (screenController.selectedValue.value == "Choose Option") {
+                            if (screenController.selectedValue.value == AppMessage.chooseOption) {
                               Fluttertoast.showToast(
                                   msg: AppMessage.activeStatusMessage);
                             } else  {
@@ -120,7 +120,7 @@ class DepartmentFormModule extends StatelessWidget {
                             }
                           }
                           else {
-                            if (screenController.selectedValue.value == "Choose Option") {
+                            if (screenController.selectedValue.value == AppMessage.chooseOption) {
                               Fluttertoast.showToast(msg: AppMessage.activeStatusMessage);
                             } else {
                               await screenController.updateDepartmentFunction();
@@ -140,14 +140,14 @@ class DepartmentFormModule extends StatelessWidget {
                     child: ButtonCustom(
                       onPressed: () => CustomAlertDialog().showAlertDialog(
                         context: context,
-                        textContent: 'Are you sure you want to go to back ?',
+                        textContent: AppMessage.permissionMessage,
                         onYesTap: () {
                           Get.back();
                           Get.back();
                         },
                         onCancelTap: () => Get.back(),
                       ),
-                      text: "Back",
+                      text: AppMessage.back,
                       textsize: 15.sp,
                     ),
                   ),
