@@ -7,6 +7,7 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/company_view_screen_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
+import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -36,6 +37,13 @@ class CompanyDrawerMenu extends StatelessWidget {
                                 Get.to(() => DepartmentListScreen());
                               },
                               title: AppMessage.departmentNameDrawer,
+                            ),
+                            CompanyDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => EmployeeListScreen());
+                              },
+                              title: AppMessage.employeeNameDrawer,
                             )
                             /*CompanyDrawerTile(
                               onTap: () {
