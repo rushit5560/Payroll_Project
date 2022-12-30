@@ -32,14 +32,14 @@ class AdminDrawerMenu extends StatelessWidget {
                         child: Column(
                           children: [
                             /*adminDrawerController.companyView.value == true
-                                ? */
+                                ?
                             AdminDrawerTile(
                               onTap: () {
                                 Get.back();
                                 Get.to(() => CompanyListScreen());
                               },
                               title: AppMessage.companyNameDrawer,
-                            ) /*: Container()*/,
+                            ) : Container(),*/
                             adminDrawerController.departmentView.value == true
                                 ? AdminDrawerTile(
                                     onTap: () {

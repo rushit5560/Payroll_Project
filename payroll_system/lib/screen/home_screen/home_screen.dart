@@ -9,6 +9,8 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'home_screen_widgets.dart';
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
@@ -21,17 +23,18 @@ class HomeScreen extends StatelessWidget {
           ? Container()
           : Scaffold(
               // key: homeScreenController.scaffoldKey,
-              drawer: AdminDrawerMenu(),
+              // drawer: AdminDrawerMenu(),
               appBar: AppBar(
                 centerTitle: true,
-                title: Obx(
-                  () => homeScreenController.isLoading.value
-                      ? Container()
-                      : homeScreenController.roleId.value == 1
-                          ? Text(AppMessage.adminText)
-                          : Text(AppMessage.subAdminText),
-                ),
-                actions: [
+                title: Text(AppMessage.adminText),
+                // title: Obx(
+                //   () => homeScreenController.isLoading.value
+                //       ? Container()
+                //       : homeScreenController.roleId.value == 1
+                //           ? Text(AppMessage.adminText)
+                //           : Text(AppMessage.subAdminText),
+                // ),
+                /*actions: [
                   IconButton(
                     onPressed: () async {
                       SharedPreferences prefs =
@@ -49,8 +52,16 @@ class HomeScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.person_rounded),
                   ),
-                ],
+                ],*/
               ),
+
+        body: Obx(
+              () => homeScreenController.isLoading.value
+              ? const Center(child: CircularProgressIndicator())
+              : homeScreenController.allCompanyList.isEmpty
+              ? Center(child: Text(AppMessage.noCompanyFound))
+              : CompanyListModule(),
+        ),
             ),
     );
   }
