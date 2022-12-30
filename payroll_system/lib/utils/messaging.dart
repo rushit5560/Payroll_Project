@@ -138,6 +138,10 @@ class AppMessage {
   static String locationCreate = 'Create Location';
   static String locationUpdate = 'Update Location';
   static String locationName = 'Location Name';
+    static String chooseLocation = 'Choose Location'; 
+
+ static String companylocation = "Company Location";
+
 
   // No Records Message
   static String noEmpFound = 'No Employee Found.';
