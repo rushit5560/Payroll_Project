@@ -58,8 +58,8 @@ class EmployeManageScreenController extends GetxController {
   int departmentId = 0;
 
   DateTime birthDate = DateTime.now();
-  DateTime employeementStartDateStartDate = DateTime.now();
-  DateTime employeementEndDateStartDate = DateTime.now();
+  DateTime employeementStartDate = DateTime.now();
+  DateTime employeementEndDate = DateTime.now();
 
   // CompanyOption companyOption = Get.arguments[0];
   List<CompanyData> allCompanyList = [];
@@ -296,10 +296,15 @@ class EmployeManageScreenController extends GetxController {
         departmentId = employeeGetByIdModel.data.departmentId;
         oldImageName = employeeGetByIdModel.data.photo;
 
-        employeementStartDateStartDate =
+        employeementStartDate =
             DateTime.parse(employeeGetByIdModel.data.startDate);
         startDateController.text =
-            "${employeementStartDateStartDate.year}-${employeementStartDateStartDate.month}-${employeementStartDateStartDate.day}";
+            "${employeementStartDate.year}-${employeementStartDate.month}-${employeementStartDate.day}";
+
+        employeementEndDate =
+            DateTime.parse(employeeGetByIdModel.data.lastDayOfWork);
+        startDateController.text =
+            "${employeementEndDate.year}-${employeementEndDate.month}-${employeementEndDate.day}";
 
         birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
         dateOfBrithController.text =

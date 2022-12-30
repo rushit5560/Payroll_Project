@@ -218,8 +218,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 //     employeeCreteScreenController.selectedDate;
                 _selectDate(
                     context,
-                    employeeCreteScreenController
-                        .employeementStartDateStartDate,
+                    employeeCreteScreenController.employeementStartDate,
                     employeeCreteScreenController.startDateController,
                     DatePickerOption.startDate);
               },
@@ -250,7 +249,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 //     employeeCreteScreenController.selectedDate;
                 _selectDate(
                     context,
-                    employeeCreteScreenController.employeementEndDateStartDate,
+                    employeeCreteScreenController.employeementEndDate,
                     employeeCreteScreenController.endDateController,
                     DatePickerOption.endDate);
               },
@@ -544,7 +543,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               keyboardType: TextInputType.text,
               mandatoryText: AppMessage.empty,
               textEditingController:
-              employeeCreteScreenController.streetAddressController,
+                  employeeCreteScreenController.streetAddressController,
               // validate: (value) =>
               //     FieldValidation().validateCurrentAddress(value),
             ),
@@ -557,7 +556,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               keyboardType: TextInputType.text,
               mandatoryText: AppMessage.empty,
               textEditingController:
-              employeeCreteScreenController.landmarkAddressController,
+                  employeeCreteScreenController.landmarkAddressController,
               // validate: (value) =>
               //     FieldValidation().validateCurrentAddress(value),
             ),
@@ -570,7 +569,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               keyboardType: TextInputType.text,
               mandatoryText: AppMessage.empty,
               textEditingController:
-              employeeCreteScreenController.cityAddressController,
+                  employeeCreteScreenController.cityAddressController,
               // validate: (value) =>
               //     FieldValidation().validateCurrentAddress(value),
             ),
@@ -583,7 +582,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               keyboardType: TextInputType.text,
               mandatoryText: AppMessage.empty,
               textEditingController:
-              employeeCreteScreenController.stateAddressController,
+                  employeeCreteScreenController.stateAddressController,
               // validate: (value) =>
               //     FieldValidation().validateCurrentAddress(value),
             ),
@@ -596,11 +595,11 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               keyboardType: TextInputType.number,
               mandatoryText: AppMessage.empty,
               textEditingController:
-              employeeCreteScreenController.zipcodeAddressController,
+                  employeeCreteScreenController.zipcodeAddressController,
               // validate: (value) =>
               //     FieldValidation().validateCurrentAddress(value),
             ),
-          
+
             // FormSingleFieldModule(
             //   headerText: AppMessage.employeeCurrentAddress,
             //   text: AppMessage.employeeCurrentAddress,
@@ -717,9 +716,9 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;
       } else if (datePickerOption == DatePickerOption.startDate) {
-        employeeCreteScreenController.employeementStartDateStartDate = d;
+        employeeCreteScreenController.employeementStartDate = d;
       } else {
-        employeeCreteScreenController.employeementEndDateStartDate = d;
+        employeeCreteScreenController.employeementEndDate = d;
       }
       employeeCreteScreenController.isLoading(false);
     }

@@ -83,7 +83,7 @@ class EmployeeGEtByIdModelData {
   final int hourlyRate;
   final int salary;
   final String startDate;
-  final int lastDayOfWork;
+  final String lastDayOfWork;
   final int companyid;
   final String photo;
   final String createdAt;
@@ -110,7 +110,7 @@ class EmployeeGEtByIdModelData {
         hourlyRate: json["hourly_rate"] ?? 0,
         salary: json["salary"] ?? 0,
         startDate: json["start_date"] ?? "",
-        lastDayOfWork: json["last_day_of_work"] ?? 0,
+        lastDayOfWork: json["last_day_of_work"] ?? "",
         companyid: json["companyid"] ?? 0,
         photo: json["photo"] ?? "",
         createdAt: json["created_at"] ?? "",
