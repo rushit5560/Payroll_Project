@@ -8,6 +8,7 @@ class FormSingleFieldModule extends StatelessWidget {
   final String text;
   final String headerText;
   final String mandatoryText;
+  final bool isHeaderTextShow;
   // IconData prefixIcon;
   IconData? suffixIcon;
   final FormFieldValidator? validate;
@@ -28,6 +29,7 @@ class FormSingleFieldModule extends StatelessWidget {
       required this.headerText,
       required this.mandatoryText,
       // required this.prefixIcon,
+      this.isHeaderTextShow = true,
       this.inputFormatters,
       this.suffixIcon,
       this.color = Colors.grey,
@@ -47,7 +49,7 @@ class FormSingleFieldModule extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RichText(
+        isHeaderTextShow == true ? RichText(
           textAlign: TextAlign.left,
           maxLines: null,
           text: TextSpan(
@@ -65,7 +67,8 @@ class FormSingleFieldModule extends StatelessWidget {
               ),
             ]
           ),
-        ).commonSymmetricPadding(vertical: 2),
+        ).commonSymmetricPadding(vertical: 2)
+        : Container(),
         /*Text(
           headerText,
           style: TextStyleConfig.textStyle(

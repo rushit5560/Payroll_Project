@@ -3,20 +3,21 @@ import 'dart:developer';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
-import 'package:payroll_system/utils/extension_methods/user_preference.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import '../models/employee_manage_screen_models/employee_delete_model.dart';
 
+
 class EmployeeListScreenController extends GetxController {
+  String companyId = Get.arguments[0];
+
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
   List<EmployeeData> allEmployeeList = [];
 
-  int roleId = 0;
-  int userId = 0;
+  // int roleId = 0;
+  // int userId = 0;
 
   // Get All Employee
   Future<void> getAllEmployeeFunction() async {
@@ -76,7 +77,7 @@ class EmployeeListScreenController extends GetxController {
   // Company Wise Employee
   Future<void> getCompanyEmployeeFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.getCompanyWiseEmployeeApi}$userId";
+    String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
     log('Company Wise Employee Api Url : $url');
 
     try {
@@ -100,7 +101,7 @@ class EmployeeListScreenController extends GetxController {
     }
   }
 
-  getLoggedInUserRole() async {
+  /*getLoggedInUserRole() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
     userId = prefs.getInt(UserPreference.userIdKey) ?? 0;
@@ -110,11 +111,11 @@ class EmployeeListScreenController extends GetxController {
     } else if (roleId == 3) {
       await getCompanyEmployeeFunction();
     }
-  }
+  }*/
 
   @override
   void onInit() {
-    getLoggedInUserRole();
+    getCompanyEmployeeFunction();
     super.onInit();
   }
 }
