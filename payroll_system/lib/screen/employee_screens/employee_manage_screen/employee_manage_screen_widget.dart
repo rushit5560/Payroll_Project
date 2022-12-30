@@ -2,9 +2,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/Utils/style.dart';
-import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
@@ -12,7 +9,10 @@ import 'package:payroll_system/controllers/employee_manage_screen_controller.dar
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
+import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 import '../../../common_modules/form_single_field_module.dart';
 

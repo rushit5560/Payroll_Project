@@ -104,6 +104,8 @@ class AppMessage {
   static String labelEmailName = 'Company Email';
   static String labelPhoneNo = 'Company Phone Number';
   static String address = 'Address';
+  static String employeeCurrentAddress = 'Current Address';
+  static String employeeHomeAddress = 'Home Address';
   static String labelCompanyAddress = 'Company Address';
   static String selectStartDate = 'Select Start Date';
   static String departmentCreate = 'Create Department';
