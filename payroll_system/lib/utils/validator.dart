@@ -64,6 +64,22 @@ class FieldValidation {
     }
   }
 
+  String? validateStreetAddress(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterStreetAddress;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateLandmarkAddress(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterLandmarkAddress;
+    } else {
+      return null;
+    }
+  }
+
   String? validateCompanyAddress(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterYourCompanyAddress;

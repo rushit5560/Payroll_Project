@@ -159,6 +159,9 @@ class AppMessage {
       'Please enter your currentAddress';
   static String pleaseEnterYourCompanyAddress =
       'Please enter your company Address';
+  static String pleaseEnterStreetAddress = 'Please enter your street Address';
+  static String pleaseEnterLandmarkAddress = 'Please enter your landmark Address';
+
   static String pleaseEnterYourLocation = 'Please enter your location';
   static String pleaseEnterYourAddress = 'Please enter your address';
   static String pleaseEnterYourHomeAddress = 'Please enter your home address';

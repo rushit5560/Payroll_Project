@@ -544,8 +544,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               mandatoryText: AppMessage.empty,
               textEditingController:
                   employeeCreteScreenController.streetAddressController,
-              // validate: (value) =>
-              //     FieldValidation().validateCurrentAddress(value),
+              validate: (value) =>
+                  FieldValidation().validateStreetAddress(value),
             ),
             const SizedBox(height: 5),
 
@@ -557,34 +557,41 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               mandatoryText: AppMessage.empty,
               textEditingController:
                   employeeCreteScreenController.landmarkAddressController,
-              // validate: (value) =>
-              //     FieldValidation().validateCurrentAddress(value),
+              validate: (value) =>
+                  FieldValidation().validateLandmarkAddress(value),
             ),
             const SizedBox(height: 5),
 
-            FormSingleFieldModule(
-              headerText: AppMessage.empty,
-              isHeaderTextShow: false,
-              text: AppMessage.city,
-              keyboardType: TextInputType.text,
-              mandatoryText: AppMessage.empty,
-              textEditingController:
-                  employeeCreteScreenController.cityAddressController,
-              // validate: (value) =>
-              //     FieldValidation().validateCurrentAddress(value),
-            ),
-            const SizedBox(height: 5),
-
-            FormSingleFieldModule(
-              headerText: AppMessage.empty,
-              isHeaderTextShow: false,
-              text: AppMessage.state,
-              keyboardType: TextInputType.text,
-              mandatoryText: AppMessage.empty,
-              textEditingController:
-                  employeeCreteScreenController.stateAddressController,
-              // validate: (value) =>
-              //     FieldValidation().validateCurrentAddress(value),
+            Row(
+              children: [
+                Expanded(
+                  child: FormSingleFieldModule(
+                    headerText: AppMessage.empty,
+                    isHeaderTextShow: false,
+                    text: AppMessage.city,
+                    keyboardType: TextInputType.text,
+                    mandatoryText: AppMessage.empty,
+                    textEditingController:
+                    employeeCreteScreenController.cityAddressController,
+                    // validate: (value) =>
+                    //     FieldValidation().validateCurrentAddress(value),
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Expanded(
+                  child: FormSingleFieldModule(
+                    headerText: AppMessage.empty,
+                    isHeaderTextShow: false,
+                    text: AppMessage.state,
+                    keyboardType: TextInputType.text,
+                    mandatoryText: AppMessage.empty,
+                    textEditingController:
+                    employeeCreteScreenController.stateAddressController,
+                    // validate: (value) =>
+                    //     FieldValidation().validateCurrentAddress(value),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 5),
 
