@@ -9,7 +9,6 @@ import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
-
 import '../../../controllers/profile_screens_controller/employee_profile_screen_controller.dart';
 
 class EmployeeImageModule extends StatelessWidget {
@@ -168,7 +167,7 @@ class EmployeeFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.phoneNo,
+              labelText: AppMessage.mobileNo,
               border: border,
               enabledBorder: border,
               filled: true,

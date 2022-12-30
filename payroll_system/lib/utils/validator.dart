@@ -221,6 +221,14 @@ class FieldValidation {
     }
   }
 
+ String? validateEndDayWork(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterLastDayWork;
+    } else {
+      return null;
+    }
+  }
+
   String? validateLastDayWork(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterLastDayWork;

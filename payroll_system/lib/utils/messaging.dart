@@ -77,7 +77,7 @@ class AppMessage {
   static String firstName = 'First Name';
   static String middleName = 'Middle Name';
   static String lastName = 'Last Name';
-  static String phoneNo = 'Phone Number';
+  static String mobileNumber = ' Mobile Number ';
   static String dateOfBirth = 'Date Of Birth';
   static String department = 'Department';
   static String departmentList = 'Department List';
@@ -85,9 +85,9 @@ class AppMessage {
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
   static String salary = 'Salary (\$,₹)';
-  static String payper = 'Payper';
-  static String startDate = 'Start Date';
-  static String lastDay = 'Last Day';
+  static String payperiod = 'Pay period';
+  static String employeementStartDate = 'Employeement Start Date';
+  static String employeementEndDate = 'Employeement End Date';
   static String isActive = 'Status';
   static String company = 'Company';
   static String employeeEmail = 'Email';
@@ -107,12 +107,18 @@ class AppMessage {
   static String employeeCurrentAddress = 'Current Address';
   static String employeeHomeAddress = 'Home Address';
   static String labelCompanyAddress = 'Company Address';
-  static String selectStartDate = 'Select Start Date';
+  static String selectStartDate = 'Select employeementStartDate Start Date';
   static String departmentCreate = 'Create Department';
   static String departmentUpdate = 'Update Department';
   static String departmentName = 'Department Name';
   static String selectDate = 'Select Date';
   static String exInsertYourDob = 'Ex. Insert your dob';
+  static String pleaseSelectPayper = 'Please select payper';
+  static String street = 'Street Address';
+  static String landmark = 'Landmark';
+  static String zipcode = 'Zipcode';
+  static String city = 'City';
+  static String state = 'State';
   // change password
   static String changePassword = "Change Password";
   static String oldPassword = "Old Password";
@@ -168,6 +174,7 @@ class AppMessage {
   static String pleaseEnterHourlyRate = 'Please enter hourlyRate';
   static String pleaseEnterSalary = 'Please enter salary';
   static String pleaseEnterFirstDayWork = 'Please enter firstDayWork';
+
   static String pleaseEnterLastDayWork = 'Please enter lastDayWork';
   static String passwordIsRequired = 'Password is required';
   static String passwordMustBeAtleast8CharactersLong =

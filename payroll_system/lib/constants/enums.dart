@@ -4,6 +4,6 @@ enum DepartmentOption { create, update }
 
 enum EmployeeOption { create, update }
 
-enum DatePickerOption { dob, startDate }
+enum DatePickerOption { dob, startDate ,endDate}
 
 enum LocationOption { create, update }

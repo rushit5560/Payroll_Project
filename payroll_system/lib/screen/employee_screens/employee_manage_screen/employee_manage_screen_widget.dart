@@ -76,8 +76,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             const SizedBox(height: 5),
 
             FormSingleFieldModule(
-              headerText: AppMessage.phoneNo,
-              text: AppMessage.phoneNo,
+              headerText: AppMessage.mobileNumber,
+              text: AppMessage.mobileNumber,
               mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.phone,
               maxLength: 10,
@@ -110,7 +110,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
-                  text: AppMessage.payper,
+                  text: AppMessage.payperiod,
                   style: TextStyleConfig.textStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -161,30 +161,30 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
-            FormSingleFieldModule(
-              headerText: AppMessage.homeNo,
-              text: AppMessage.homeNo,
-              keyboardType: TextInputType.phone,
-              maxLength: 10,
-              mandatoryText: AppMessage.empty,
-              textEditingController:
-                  employeeCreteScreenController.homeNoController,
-              // validate: (value) =>
-              //     FieldValidation().validateMobileNumber(value),
-            ),
-            const SizedBox(height: 5),
-            FormSingleFieldModule(
-              headerText: AppMessage.workNO,
-              text: AppMessage.workNO,
-              keyboardType: TextInputType.phone,
-              maxLength: 10,
-              mandatoryText: AppMessage.mandatory,
-              textEditingController:
-                  employeeCreteScreenController.workNoController,
-              validate: (value) =>
-                  FieldValidation().validateMobileNumber(value),
-            ),
-            const SizedBox(height: 5),
+            // FormSingleFieldModule(
+            //   headerText: AppMessage.homeNo,
+            //   text: AppMessage.homeNo,
+            //   keyboardType: TextInputType.phone,
+            //   maxLength: 10,
+            //   mandatoryText: AppMessage.empty,
+            //   textEditingController:
+            //       employeeCreteScreenController.homeNoController,
+            //   // validate: (value) =>
+            //   //     FieldValidation().validateMobileNumber(value),
+            // ),
+            // const SizedBox(height: 5),
+            // FormSingleFieldModule(
+            //   headerText: AppMessage.workNO,
+            //   text: AppMessage.workNO,
+            //   keyboardType: TextInputType.phone,
+            //   maxLength: 10,
+            //   mandatoryText: AppMessage.mandatory,
+            //   textEditingController:
+            //       employeeCreteScreenController.workNoController,
+            //   validate: (value) =>
+            //       FieldValidation().validateMobileNumber(value),
+            // ),
+            // const SizedBox(height: 5),
             FormSingleFieldModule(
               headerText: AppMessage.hourlyRate,
               text: AppMessage.hourlyRate,
@@ -206,7 +206,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.startDate,
+              headerText: AppMessage.employeementStartDate,
               text: AppMessage.selectStartDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
@@ -218,7 +218,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 //     employeeCreteScreenController.selectedDate;
                 _selectDate(
                     context,
-                    employeeCreteScreenController.startDate,
+                    employeeCreteScreenController
+                        .employeementStartDateStartDate,
                     employeeCreteScreenController.startDateController,
                     DatePickerOption.startDate);
               },
@@ -227,19 +228,37 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
+            // FormSingleFieldModule(
+            //   headerText: AppMessage.employeementEndDate,
+            //   text: AppMessage.employeementEndDate,
+            //   keyboardType: TextInputType.number,
+            //   mandatoryText: AppMessage.mandatory,
+            //   textEditingController:
+            //       employeeCreteScreenController.lastDateController,
+            //   validate: (value) => FieldValidation().validateLastDayWork(value),
+            // ),
             FormSingleFieldModule(
-              headerText: AppMessage.lastDay,
-              text: AppMessage.lastDay,
-              keyboardType: TextInputType.number,
-              mandatoryText: AppMessage.mandatory
-              ,
+              headerText: AppMessage.employeementEndDate,
+              text: AppMessage.employeementEndDate,
+              keyboardType: TextInputType.datetime,
+              mandatoryText: AppMessage.mandatory,
               textEditingController:
-                  employeeCreteScreenController.lastDateController,
-              validate: (value) => FieldValidation().validateLastDayWork(value),
+                  employeeCreteScreenController.endDateController,
+              suffixIcon: Icons.calendar_month,
+              onPressed: () {
+                // DateTime selectedFirstDate =
+                //     employeeCreteScreenController.selectedDate;
+                _selectDate(
+                    context,
+                    employeeCreteScreenController.employeementEndDateStartDate,
+                    employeeCreteScreenController.endDateController,
+                    DatePickerOption.endDate);
+              },
+              validate: (value) => FieldValidation().validateEndDayWork(value),
             ),
             // FormSingleFieldModule(
-            //   headerText: AppMessage.lastDay,
-            //   text: "Select Last Date",
+            //   headerText: AppMessage.employeementEndDate,
+            //   text: AppMessage.employeementEndDate,
             //   keyboardType: TextInputType.datetime,
             //   textEditingController:
             //       employeeCreteScreenController.lastDateController,
@@ -310,7 +329,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: ' *',
+                      text: AppMessage.mandatory,
                       style: TextStyleConfig.textStyle(
                         textColor: AppColors.redColor,
                         fontWeight: FontWeight.w600,
@@ -518,26 +537,90 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     ),
                   ),
             const SizedBox(height: 5),
+
             FormSingleFieldModule(
-              headerText: AppMessage.employeeCurrentAddress,
-              text: AppMessage.employeeCurrentAddress,
+              headerText: AppMessage.address,
+              text: AppMessage.street,
               keyboardType: TextInputType.text,
-              mandatoryText: '',
+              mandatoryText: AppMessage.empty,
               textEditingController:
-                  employeeCreteScreenController.currentAddressController,
+              employeeCreteScreenController.streetAddressController,
               // validate: (value) =>
               //     FieldValidation().validateCurrentAddress(value),
             ),
             const SizedBox(height: 5),
+
             FormSingleFieldModule(
-              headerText: AppMessage.employeeHomeAddress,
-              text: AppMessage.employeeHomeAddress,
+              headerText: AppMessage.empty,
+              isHeaderTextShow: false,
+              text: AppMessage.landmark,
               keyboardType: TextInputType.text,
-              mandatoryText: '',
+              mandatoryText: AppMessage.empty,
               textEditingController:
-                  employeeCreteScreenController.homeAddressController,
-              // validate: (value) => FieldValidation().validateHomeAddress(value),
+              employeeCreteScreenController.landmarkAddressController,
+              // validate: (value) =>
+              //     FieldValidation().validateCurrentAddress(value),
             ),
+            const SizedBox(height: 5),
+
+            FormSingleFieldModule(
+              headerText: AppMessage.empty,
+              isHeaderTextShow: false,
+              text: AppMessage.city,
+              keyboardType: TextInputType.text,
+              mandatoryText: AppMessage.empty,
+              textEditingController:
+              employeeCreteScreenController.cityAddressController,
+              // validate: (value) =>
+              //     FieldValidation().validateCurrentAddress(value),
+            ),
+            const SizedBox(height: 5),
+
+            FormSingleFieldModule(
+              headerText: AppMessage.empty,
+              isHeaderTextShow: false,
+              text: AppMessage.state,
+              keyboardType: TextInputType.text,
+              mandatoryText: AppMessage.empty,
+              textEditingController:
+              employeeCreteScreenController.stateAddressController,
+              // validate: (value) =>
+              //     FieldValidation().validateCurrentAddress(value),
+            ),
+            const SizedBox(height: 5),
+
+            FormSingleFieldModule(
+              headerText: AppMessage.empty,
+              isHeaderTextShow: false,
+              text: AppMessage.zipcode,
+              keyboardType: TextInputType.number,
+              mandatoryText: AppMessage.empty,
+              textEditingController:
+              employeeCreteScreenController.zipcodeAddressController,
+              // validate: (value) =>
+              //     FieldValidation().validateCurrentAddress(value),
+            ),
+          
+            // FormSingleFieldModule(
+            //   headerText: AppMessage.employeeCurrentAddress,
+            //   text: AppMessage.employeeCurrentAddress,
+            //   keyboardType: TextInputType.text,
+            //   mandatoryText: AppMessage.empty,
+            //   textEditingController:
+            //       employeeCreteScreenController.currentAddressController,
+            //   // validate: (value) =>
+            //   //     FieldValidation().validateCurrentAddress(value),
+            // ),
+            // const SizedBox(height: 5),
+            // FormSingleFieldModule(
+            //   headerText: AppMessage.employeeHomeAddress,
+            //   text: AppMessage.employeeHomeAddress,
+            //   keyboardType: TextInputType.text,
+            //   mandatoryText: AppMessage.empty,
+            //   textEditingController:
+            //       employeeCreteScreenController.homeAddressController,
+            //   // validate: (value) => FieldValidation().validateHomeAddress(value),
+            // ),
             const SizedBox(height: 15),
             Row(
               children: [
@@ -552,13 +635,14 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           // if (employeeCreteScreenController.images != null) {
                           if (employeeCreteScreenController
                                   .companyDepartmentData!.departmentName ==
-                              "") {
+                              AppMessage.empty) {
                             Fluttertoast.showToast(
-                                msg: "Please select department");
+                                msg: AppMessage.pleaseSelectDepartment);
                           } else if (employeeCreteScreenController
                                   .selectedValuePayper.value ==
-                              "Choose Option") {
-                            Fluttertoast.showToast(msg: "Please select payper");
+                              AppMessage.chooseOption) {
+                            Fluttertoast.showToast(
+                                msg: AppMessage.pleaseSelectPayper);
                           } else /*if (employeeCreteScreenController.companyDepartment.isNotEmpty)*/ {
                             await employeeCreteScreenController
                                 .employeeCreateFunction();
@@ -571,13 +655,14 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           log("updateEmployeeDetailsFunction");
                           if (employeeCreteScreenController
                                   .companyDepartmentData!.departmentName ==
-                              "") {
+                              AppMessage.empty) {
                             Fluttertoast.showToast(
-                                msg: "Please select department");
+                                msg: AppMessage.pleaseSelectDepartment);
                           } else if (employeeCreteScreenController
                                   .selectedValuePayper.value ==
-                              "Choose Option") {
-                            Fluttertoast.showToast(msg: "Please select payper");
+                              AppMessage.chooseOption) {
+                            Fluttertoast.showToast(
+                                msg: AppMessage.pleaseSelectPayper);
                           } else {
                             await employeeCreteScreenController
                                 .updateEmployeeDetailsFunction();
@@ -585,7 +670,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                         }
                       }
                     },
-                    text: "Submit",
+                    text: AppMessage.submit,
                     textsize: 15.sp,
                   ),
                 ),
@@ -595,14 +680,14 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   child: ButtonCustom(
                     onPressed: () => CustomAlertDialog().showAlertDialog(
                       context: context,
-                      textContent: 'Are you sure you want to go to back ?',
+                      textContent: AppMessage.permissionMessage,
                       onYesTap: () {
                         Get.back();
                         Get.back();
                       },
                       onCancelTap: () => Get.back(),
                     ),
-                    text: "Back",
+                    text: AppMessage.back,
                     textsize: 15.sp,
                   ),
                 ),
@@ -631,8 +716,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
       // dateTime = d;
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;
+      } else if (datePickerOption == DatePickerOption.startDate) {
+        employeeCreteScreenController.employeementStartDateStartDate = d;
       } else {
-        employeeCreteScreenController.startDate = d;
+        employeeCreteScreenController.employeementEndDateStartDate = d;
       }
       employeeCreteScreenController.isLoading(false);
     }
@@ -720,7 +807,7 @@ class ImagePickerCustom extends StatelessWidget {
                                     )
                                   : employeeCreteScreenController
                                               .oldImageName !=
-                                          ""
+                                          AppMessage.empty
                                       ? Image.network(
                                           "${ApiUrl.apiImagePath}${employeeCreteScreenController.oldImageName}",
                                           fit: BoxFit.fill,

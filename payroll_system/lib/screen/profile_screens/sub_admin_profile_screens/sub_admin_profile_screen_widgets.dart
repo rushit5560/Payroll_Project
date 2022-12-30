@@ -138,7 +138,7 @@ class SubAdminFormModule extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.greyColor.withOpacity(0.25),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText:AppMessage.phoneNo,
+              labelText:AppMessage.mobileNo,
               border: border,
               enabledBorder: border,
               filled: true,

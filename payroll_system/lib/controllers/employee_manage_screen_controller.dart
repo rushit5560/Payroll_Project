@@ -26,7 +26,12 @@ class EmployeManageScreenController extends GetxController {
   DateTime? chosenDateTime;
   DateTime selectedDate = DateTime.now();
   RxBool isPasswordVisible = true.obs;
-  List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
+  List<String> isActiveOptionList = [
+    "Choose Option",
+    "active",
+    "inactive",
+    "Terminated"
+  ];
   RxString selectedValue = "Choose Option".obs;
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   RxString selectedValuePayper = "Choose Option".obs;
@@ -53,7 +58,8 @@ class EmployeManageScreenController extends GetxController {
   int departmentId = 0;
 
   DateTime birthDate = DateTime.now();
-  DateTime startDate = DateTime.now();
+  DateTime employeementStartDateStartDate = DateTime.now();
+  DateTime employeementEndDateStartDate = DateTime.now();
 
   // CompanyOption companyOption = Get.arguments[0];
   List<CompanyData> allCompanyList = [];
@@ -80,25 +86,26 @@ class EmployeManageScreenController extends GetxController {
   TextEditingController middleNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNoController = TextEditingController();
-
   TextEditingController dateOfBrithController = TextEditingController();
   TextEditingController departmentController = TextEditingController();
-
   TextEditingController homeNoController = TextEditingController();
   TextEditingController workNoController = TextEditingController();
   TextEditingController hourlyRateController = TextEditingController();
   TextEditingController salaryController = TextEditingController();
-
   TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
   TextEditingController lastDateController = TextEditingController();
-
   TextEditingController isActiveController = TextEditingController();
-
   TextEditingController companyController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController currentAddressController = TextEditingController();
   TextEditingController homeAddressController = TextEditingController();
+  TextEditingController streetAddressController = TextEditingController();
+  TextEditingController landmarkAddressController = TextEditingController();
+  TextEditingController zipcodeAddressController = TextEditingController();
+  TextEditingController cityAddressController = TextEditingController();
+  TextEditingController stateAddressController = TextEditingController();
 
   File? images;
   String oldImageName = "";
@@ -289,15 +296,18 @@ class EmployeManageScreenController extends GetxController {
         departmentId = employeeGetByIdModel.data.departmentId;
         oldImageName = employeeGetByIdModel.data.photo;
 
-        startDate = DateTime.parse(employeeGetByIdModel.data.startDate);
+        employeementStartDateStartDate =
+            DateTime.parse(employeeGetByIdModel.data.startDate);
         startDateController.text =
-            "${startDate.year}-${startDate.month}-${startDate.day}";
+            "${employeementStartDateStartDate.year}-${employeementStartDateStartDate.month}-${employeementStartDateStartDate.day}";
 
         birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
         dateOfBrithController.text =
             "${birthDate.year}-${birthDate.month}-${birthDate.day}";
+
         selectedValue.value =
             employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
+
         selectedValuePayper.value =
             employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
 
