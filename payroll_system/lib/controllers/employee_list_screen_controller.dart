@@ -23,7 +23,6 @@ class EmployeeListScreenController extends GetxController {
     isLoading(true);
     String url = ApiUrl.allEmployeeApi;
     log('Get All Company List Api Url :$url');
-
     try {
       http.Response response = await http.get(Uri.parse(url));
 

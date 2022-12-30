@@ -6,7 +6,7 @@ class AppMessage {
   static String name = 'Enter a Name';
   static String email = 'Enter an Email';
   static String termsAndConditions = 'I Agree with privacy and policy';
-
+  static String forgotPassword = 'Forgot password ?';
   // static String userId = 'User id';
   // static String signIn = 'Sign in';
   static String companyLogin = 'Company Sign Up';
@@ -126,4 +126,48 @@ class AppMessage {
   static String noEmpFound = 'No Employee Found.';
   static String noDeptFound = 'No Department Found.';
   static String noCompanyFound = 'No Company Found.';
+
+  //validation messages
+  static String pleaseEnterYourname = 'Please enter your name';
+  static String pleaseEnterYourFirstName = 'Please enter your first name';
+  static String pleaseEnterYourMiddleName = 'Please enter your middle name';
+  static String pleaseEnterYourCurrentPassword =
+      'Please enter your current password';
+  static String pleaseEnterYourLastName = 'Please enter your last name';
+  static String pattternRegx = r'(^[0-9]*$)';
+  static String pleaseEnterPhoneNumber = 'Please enter phoneNumber';
+  static String mobileNumberMustTenDigits = 'Mobile number must 10 digits';
+  static String mobileNumberMustbeDigits = 'Mobile Number must be digits';
+  static String pleaseEnterYourCurrentAddress =
+      'Please enter your currentAddress';
+  static String pleaseEnterYourCompanyAddress =
+      'Please enter your company Address';
+  static String pleaseEnterYourLocation = 'Please enter your location';
+  static String pleaseEnterYourAddress = 'Please enter your address';
+  static String pleaseEnterYourHomeAddress = 'Please enter your home address';
+  static String emailAddressIsRequired = 'Email address is required';
+  static String emailRegExp =
+      r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+  static String invalidEmailAddress = 'Invalid email address';
+  static String pleaseEnterDepartmentId = 'Please enter department id';
+  static String pleaseEnterCompanyId = 'Please enter company id';
+  static String pleaseEnterCompanyName = 'Please enter company name';
+  static String pleaseEnterDepartmentName = 'Please enter department name';
+  static String pleaseEnterYourDateOfBirth = 'Please enter your date of birth';
+  static String pleaseEnterHourlyRate = 'Please enter hourlyRate';
+  static String pleaseEnterSalary = 'Please enter salary';
+  static String pleaseEnterFirstDayWork = 'Please enter firstDayWork';
+  static String pleaseEnterLastDayWork = 'Please enter lastDayWork';
+  static String passwordIsRequired = 'Password is required';
+  static String passwordMustBeAtleast8CharactersLong =
+      'Password must be at least 8 characters long';
+  static String confirmPasswordIsRequired = 'Confirm Password is required';
+  static String confirmPasswordMustBeAtLeast8CharactersLong =
+      'Confirm Password must be at least 8 characters long';
+  static String newPasswordAndConfirmpasswordMustBeSame =
+      'New password & confirm password must be same';
+
+  //controller message
+  static String gallery = 'Gallery';
+  static String camera = 'Camera';
 }

@@ -12,7 +12,6 @@ import 'package:payroll_system/screen/locatioon_screen/location_list_screen/loca
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
-
 import '../../screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 
 class AdminDrawerMenu extends StatelessWidget {
@@ -84,7 +83,7 @@ class AdminDrawerMenu extends StatelessWidget {
                         CustomAlertDialog().showAlertDialog(
                           context: context,
                           textContent:
-                              'Are you sure, you want to logout from admin ?',
+                              'Are you sure, you want to logout from dmin ?',
                           onYesTap: () async {
                             await UserPreference()
                                 .logoutRemoveUserDetailsFromPrefs()

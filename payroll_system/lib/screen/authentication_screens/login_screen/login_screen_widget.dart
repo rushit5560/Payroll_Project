@@ -22,15 +22,15 @@ class LogInEmailTextFieldModule extends StatelessWidget {
       validator: (value) => FieldValidation().validateEmail(value!),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.emailAddress,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         // filled: true,
-        contentPadding: EdgeInsets.symmetric(horizontal: 15),
-        border: OutlineInputBorder(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
         ),
-        hintText: "Email Address",
+        hintText: AppMessage.emailAddress,
       ),
     );
   }
@@ -91,9 +91,9 @@ class ForgotPasswordTextModule extends StatelessWidget {
           onTap: () {
             Get.to(() => ForgotPasswordScreen());
           },
-          child: const Text(
-            "Forgot password ?",
-            style: TextStyle(decoration: TextDecoration.underline),
+          child: Text(
+            AppMessage.forgotPassword,
+            style: const TextStyle(decoration: TextDecoration.underline),
           ),
         ),
       ],

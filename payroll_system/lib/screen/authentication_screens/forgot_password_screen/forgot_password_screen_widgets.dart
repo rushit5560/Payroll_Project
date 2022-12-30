@@ -4,7 +4,6 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../controllers/forgot_password_screen_controller.dart';
-import '../../../utils/messaging.dart';
 import '../../../utils/validator.dart';
 
 class ForgotPassTextModule extends StatelessWidget {

@@ -8,6 +8,7 @@ import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extension_methods/user_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
+
 class AdminDrawerController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
@@ -98,9 +99,12 @@ class AdminDrawerController extends GetxController {
 
   getUserPermission() async {
     isLoading(true);
-    companyView.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyViewKey);
-    departmentView.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentViewKey);
-    employeeView.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
+    companyView.value = await userPreference.getBoolPermissionFromPrefs(
+        keyId: UserPreference.companyViewKey);
+    departmentView.value = await userPreference.getBoolPermissionFromPrefs(
+        keyId: UserPreference.departmentViewKey);
+    employeeView.value = await userPreference.getBoolPermissionFromPrefs(
+        keyId: UserPreference.employeeViewKey);
     log('companyView1111111111111111111 : ${companyView.value}');
     log('departmentView : ${departmentView.value}');
     log('employeeView : ${employeeView.value}');

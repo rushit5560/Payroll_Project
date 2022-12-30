@@ -16,12 +16,9 @@ class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
-
   UserPreference userPreference = UserPreference();
-
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
-
   RxBool isPasswordVisible = true.obs;
   RxBool isPrivacyChecked = false.obs;
 
@@ -37,7 +34,7 @@ class LoginController extends GetxController {
         "password": loginPasswordController.text.trim()
       };
 
-      log("loginUserFunction passing Data :  $bodyData");
+      log("loginUserFunction passing Data : $bodyData");
 
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
       log("loginUserFunction response :  ${response.body}");
@@ -161,7 +158,6 @@ class LoginController extends GetxController {
             Get.off(() => EmployeeHomeScreen());
           }
         });
-
       } else {
         if (loginDetailsModel.error.contains("Email don't match")) {
           Fluttertoast.showToast(msg: "Email don't match");

@@ -1,12 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../Utils/style.dart';
 import '../../../constants/colors.dart';
 import '../../../controllers/change_password_screen_controller.dart';
@@ -105,7 +102,10 @@ class NewConfirmPasswordTextFieldModule extends StatelessWidget {
         obscureText:
             changePasswordScreenController.isConfirmPasswordVisible.value,
         controller: changePasswordScreenController.newConfirmPasswordController,
-        validator: (value) => FieldValidation().validateConfirmPassword(value!, changePasswordScreenController.newPasswordController.text.trim(),),
+        validator: (value) => FieldValidation().validateConfirmPassword(
+          value!,
+          changePasswordScreenController.newPasswordController.text.trim(),
+        ),
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
         autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -12,8 +12,8 @@ import 'package:payroll_system/controllers/employee_list_screen_controller.dart'
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/update_employee_model.dart';
+import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
-
 import '../Utils/extension_methods/user_details.dart';
 import '../constants/enums.dart';
 import '../models/company_list_screen_model/get_all_company_model.dart';
@@ -30,6 +30,9 @@ class EmployeManageScreenController extends GetxController {
   RxString selectedValue = "Choose Option".obs;
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   RxString selectedValuePayper = "Choose Option".obs;
+  RxString selectedCompanyValue = "Choose Company".obs;
+  RxString selectedDepartmentValue = "Choose Department".obs;
+
   RxBool isLoading = false.obs;
   RxList<String> selectedDepartmentList = RxList<String>([]);
 
@@ -136,7 +139,7 @@ class EmployeManageScreenController extends GetxController {
               children: [
                 ListTile(
                   leading: const Icon(Icons.photo_library),
-                  title: const Text("Gallery"),
+                  title: Text(AppMessage.gallery),
                   onTap: () async {
                     // employeDetailsFormController.getImage(ImageSource.gallery);
 
@@ -145,7 +148,7 @@ class EmployeManageScreenController extends GetxController {
                 ),
                 ListTile(
                   leading: const Icon(Icons.camera_alt),
-                  title: const Text("Camera"),
+                  title: Text(AppMessage.camera),
                   onTap: () async {
                     // employeDetailsFormController.getImage(ImageSource.camera);
 

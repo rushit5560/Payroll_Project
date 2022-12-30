@@ -360,7 +360,6 @@ class UserPreference {
     log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");*/
   }
 
-
   // Get Bool Permission
   Future<bool> getBoolPermissionFromPrefs({required String keyId}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -378,6 +377,4 @@ class UserPreference {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt(keyId) ?? 0;
   }
-
-
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:payroll_system/Models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/delete_company_model.dart';
@@ -10,7 +10,6 @@ import 'package:payroll_system/Utils/api_url.dart';
 class CompanyListScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
-
   List<CompanyData> allCompanyList = [];
 
   /// Get All Company
@@ -22,25 +21,23 @@ class CompanyListScreenController extends GetxController {
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      AllCompanyModel allCompanyModel = AllCompanyModel.fromJson(json.decode(response.body));
+      AllCompanyModel allCompanyModel =
+          AllCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = allCompanyModel.success.obs;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         allCompanyList.clear();
         allCompanyList.addAll(allCompanyModel.data);
         log('allCompanyList Length : ${allCompanyList.length}');
-
       } else {
         log('getAllCompanyFunction Else');
       }
-
-    } catch(e) {
+    } catch (e) {
       log('getAllCompanyFunction Error :$e');
       rethrow;
     } finally {
       isLoading(false);
     }
-
   }
 
   /// Delete Company
@@ -53,32 +50,28 @@ class CompanyListScreenController extends GetxController {
       http.Response response = await http.get(Uri.parse(url));
       log('response : ${response.body}');
 
-
-      DeleteCompanyModel deleteCompanyModel = DeleteCompanyModel.fromJson(json.decode(response.body));
+      DeleteCompanyModel deleteCompanyModel =
+          DeleteCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = deleteCompanyModel.success.obs;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: deleteCompanyModel.messege);
         allCompanyList.removeAt(index);
         Get.back();
       } else {
         log('deleteCompanyFunction Else');
       }
-
-    } catch(e) {
+    } catch (e) {
       log('deleteCompanyFunction Error :$e');
       rethrow;
     } finally {
       isLoading(false);
     }
-
   }
-
 
   @override
   void onInit() {
     getAllCompanyFunction();
     super.onInit();
   }
-
 }

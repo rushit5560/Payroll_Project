@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class DepartmentListScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
@@ -18,7 +17,6 @@ class DepartmentListScreenController extends GetxController {
 
   int roleId = 0;
   int userId = 0;
-
 
   /// Get All Department
   Future<void> getAllDepartmentFunction() async {
@@ -29,27 +27,24 @@ class DepartmentListScreenController extends GetxController {
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      AllDepartmentModel allDepartmentModel = AllDepartmentModel.fromJson(json.decode(response.body));
+      AllDepartmentModel allDepartmentModel =
+          AllDepartmentModel.fromJson(json.decode(response.body));
       isSuccessStatus = allDepartmentModel.success.obs;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         allDepartmentList.clear();
         allDepartmentList.addAll(allDepartmentModel.data);
 
-
         log('departmentList Length : ${allDepartmentList.length}');
-
       } else {
         log('getAllDepartmentFunction Else');
       }
-
-    } catch(e) {
+    } catch (e) {
       log('getAllDepartmentFunction Error :$e');
       rethrow;
     } finally {
       isLoading(false);
     }
-
   }
 
   /// Delete Department
@@ -63,7 +58,7 @@ class DepartmentListScreenController extends GetxController {
       log('response : ${response.body}');
 
       EmployeeDeleteModel deleteCompanyModel =
-      EmployeeDeleteModel.fromJson(json.decode(response.body));
+          EmployeeDeleteModel.fromJson(json.decode(response.body));
       isSuccessStatus = deleteCompanyModel.success.obs;
 
       if (isSuccessStatus.value) {
@@ -97,8 +92,8 @@ class DepartmentListScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) {
-       AllDepartmentModel companyDepartmentModel =
-       AllDepartmentModel.fromJson(json.decode(value));
+        AllDepartmentModel companyDepartmentModel =
+            AllDepartmentModel.fromJson(json.decode(value));
         isSuccessStatus = companyDepartmentModel.success.obs;
 
         if (isSuccessStatus.value) {
@@ -106,7 +101,6 @@ class DepartmentListScreenController extends GetxController {
           allDepartmentList.addAll(companyDepartmentModel.data);
 
           log('allDepartmentList : ${allDepartmentList.length}');
-
         } else {
           log('getAllCompanyFunction Else');
         }
@@ -125,18 +119,16 @@ class DepartmentListScreenController extends GetxController {
     roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
     userId = prefs.getInt(UserPreference.userIdKey) ?? 0;
 
-
     log('Department List Screen OnInit Role Id : $roleId');
     log('Department List Screen OnInit user Id : $userId');
-    if(roleId == 1 || roleId == 2) {
+    if (roleId == 1 || roleId == 2) {
       await getAllDepartmentFunction();
-    } else if(roleId == 3){
+    } else if (roleId == 3) {
       await getCompanyWiseDepartmentFunction();
     }
 
     log('asasas');
   }
-
 
   @override
   void onInit() {
@@ -149,5 +141,4 @@ class DepartmentListScreenController extends GetxController {
     }*/
     super.onInit();
   }
-
 }

@@ -1,7 +1,9 @@
+import 'package:payroll_system/utils/messaging.dart';
+
 class FieldValidation {
   String? validateUserName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your name';
+      return AppMessage.pleaseEnterYourname;
     } else {
       return null;
     }
@@ -9,7 +11,7 @@ class FieldValidation {
 
   String? validateFirstName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your first name';
+      return AppMessage.pleaseEnterYourFirstName;
     } else {
       return null;
     }
@@ -17,7 +19,7 @@ class FieldValidation {
 
   String? validateMiddleName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your middle name';
+      return AppMessage.pleaseEnterYourMiddleName;
     } else {
       return null;
     }
@@ -25,7 +27,7 @@ class FieldValidation {
 
   String? validateCurrentPassword(String value) {
     if (value.isEmpty) {
-      return 'Please enter your current password';
+      return AppMessage.pleaseEnterYourCurrentPassword;
     } else {
       return null;
     }
@@ -33,22 +35,22 @@ class FieldValidation {
 
   String? validateLastName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your last name';
+      return AppMessage.pleaseEnterYourLastName;
     } else {
       return null;
     }
   }
 
   String? validateMobileNumber(String value) {
-    String patttern = r'(^[0-9]*$)';
+    String patttern = AppMessage.pattternRegx;
     RegExp regExp = RegExp(patttern);
 
     if (value.isEmpty) {
-      return 'Please enter phoneNumber';
+      return AppMessage.pleaseEnterPhoneNumber;
     } else if (value.length != 10) {
-      return "Mobile number must 10 digits";
+      return AppMessage.mobileNumberMustTenDigits;
     } else if (!regExp.hasMatch(value)) {
-      return "Mobile Number must be digits";
+      return AppMessage.mobileNumberMustbeDigits;
     } else {
       return null;
     }
@@ -56,7 +58,7 @@ class FieldValidation {
 
   String? validateCurrentAddress(String value) {
     if (value.isEmpty) {
-      return 'Please enter your currentAddress';
+      return AppMessage.pleaseEnterYourCurrentAddress;
     } else {
       return null;
     }
@@ -64,7 +66,7 @@ class FieldValidation {
 
   String? validateCompanyAddress(String value) {
     if (value.isEmpty) {
-      return 'Please enter your company Address';
+      return AppMessage.pleaseEnterYourCompanyAddress;
     } else {
       return null;
     }
@@ -73,7 +75,7 @@ class FieldValidation {
   //location
   String? validateLocationName(String value) {
     if (value.isEmpty) {
-      return 'Please enter your first name';
+      return AppMessage.pleaseEnterYourLocation;
     } else {
       return null;
     }
@@ -81,7 +83,7 @@ class FieldValidation {
 
   String? validateAddress(String value) {
     if (value.isEmpty) {
-      return 'Please enter your address';
+      return AppMessage.pleaseEnterYourAddress;
     } else {
       return null;
     }
@@ -89,7 +91,7 @@ class FieldValidation {
 
   String? validateHomeAddress(String value) {
     if (value.isEmpty) {
-      return 'Please enter your home address';
+      return AppMessage.pleaseEnterYourHomeAddress;
     } else {
       return null;
     }
@@ -97,11 +99,10 @@ class FieldValidation {
 
   String? validateEmail(String value) {
     if (value.isEmpty) {
-      return "Email address is required";
+      return AppMessage.emailAddressIsRequired;
     } else if (!isNumeric(value) &&
-        !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            .hasMatch(value)) {
-      return "Invalid email address";
+        !RegExp(AppMessage.emailRegExp).hasMatch(value)) {
+      return AppMessage.invalidEmailAddress;
     } else {
       return null;
     }
@@ -116,7 +117,7 @@ class FieldValidation {
 
   String? validateDepartmentId(String value) {
     if (value.isEmpty) {
-      return 'Please enter department id';
+      return AppMessage.pleaseEnterDepartmentId;
     } else {
       return null;
     }
@@ -124,7 +125,7 @@ class FieldValidation {
 
   String? validateCompanyId(String value) {
     if (value.isEmpty) {
-      return 'Please enter company id';
+      return AppMessage.pleaseEnterCompanyId;
     } else {
       return null;
     }
@@ -132,7 +133,7 @@ class FieldValidation {
 
   String? validateCompanyName(String value) {
     if (value.isEmpty) {
-      return 'Please enter company name';
+      return AppMessage.pleaseEnterCompanyName;
     } else {
       return null;
     }
@@ -140,22 +141,22 @@ class FieldValidation {
 
   String? validateDepartmentName(String value) {
     if (value.isEmpty) {
-      return 'Please enter department name';
+      return AppMessage.pleaseEnterDepartmentName;
     } else {
       return null;
     }
   }
 
   String? validateHomePhoneNumber(String value) {
-    String patttern = r'(^[0-9]*$)';
+    String patttern = AppMessage.pattternRegx;
     RegExp regExp = RegExp(patttern);
 
     if (value.isEmpty) {
-      return 'Please enter phoneNumber';
+      return AppMessage.pleaseEnterPhoneNumber;
     } else if (value.length != 10) {
-      return "Mobile number must 10 digits";
+      return AppMessage.mobileNumberMustTenDigits;
     } else if (!regExp.hasMatch(value)) {
-      return "Mobile Number must be digits";
+      return AppMessage.mobileNumberMustbeDigits;
     } else {
       return null;
     }
@@ -174,15 +175,15 @@ class FieldValidation {
   // }
 
   String? validateWorkPhoneNumber(String value) {
-    String patttern = r'(^[0-9]*$)';
+    String patttern = AppMessage.pattternRegx;
     RegExp regExp = RegExp(patttern);
 
     if (value.isEmpty) {
-      return 'Please enter phoneNumber';
+      return AppMessage.pleaseEnterPhoneNumber;
     } else if (value.length != 10) {
-      return "Mobile number must 10 digits";
+      return AppMessage.mobileNumberMustTenDigits;
     } else if (!regExp.hasMatch(value)) {
-      return "Mobile Number must be digits";
+      return AppMessage.mobileNumberMustbeDigits;
     } else {
       return null;
     }
@@ -190,7 +191,7 @@ class FieldValidation {
 
   String? validateDateOfBirth(String value) {
     if (value.isEmpty) {
-      return 'Please enter your date of birth';
+      return AppMessage.pleaseEnterYourDateOfBirth;
     } else {
       return null;
     }
@@ -198,7 +199,7 @@ class FieldValidation {
 
   String? validateHourlyRate(String value) {
     if (value.isEmpty) {
-      return 'Please enter hourlyRate';
+      return AppMessage.pleaseEnterHourlyRate;
     } else {
       return null;
     }
@@ -206,7 +207,7 @@ class FieldValidation {
 
   String? validateSalary(String value) {
     if (value.isEmpty) {
-      return 'Please enter salary';
+      return AppMessage.pleaseEnterSalary;
     } else {
       return null;
     }
@@ -214,7 +215,7 @@ class FieldValidation {
 
   String? validateStartDayWork(String value) {
     if (value.isEmpty) {
-      return 'Please enter firstDayWork';
+      return AppMessage.pleaseEnterFirstDayWork;
     } else {
       return null;
     }
@@ -222,7 +223,7 @@ class FieldValidation {
 
   String? validateLastDayWork(String value) {
     if (value.isEmpty) {
-      return 'Please enter lastDayWork';
+      return AppMessage.pleaseEnterLastDayWork;
     } else {
       return null;
     }
@@ -238,9 +239,9 @@ class FieldValidation {
 
   String? validatePassword(String value) {
     if (value.isEmpty) {
-      return "Password is required";
+      return AppMessage.passwordIsRequired;
     } else if (value.length < 8) {
-      return "Password must be at least 8 characters long";
+      return AppMessage.passwordMustBeAtleast8CharactersLong;
     } else {
       return null;
     }
@@ -248,11 +249,11 @@ class FieldValidation {
 
   String? validateConfirmPassword(String value, String passwordValue) {
     if (value.isEmpty) {
-      return "Confirm Password is required";
+      return AppMessage.confirmPasswordIsRequired;
     } else if (value.length < 8) {
-      return "Confirm Password must be at least 8 characters long";
+      return AppMessage.confirmPasswordMustBeAtLeast8CharactersLong;
     } else if (value != passwordValue) {
-      return "New password & confirm password must be same";
+      return AppMessage.newPasswordAndConfirmpasswordMustBeSame;
     } else {
       return null;
     }

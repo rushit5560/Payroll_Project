@@ -112,13 +112,18 @@ class CompanyManageScreenController extends GetxController {
     String url = ApiUrl.createCompanyApi;
     log('Create Company Api Url :$url');
 
+    String tempString = selectedDepartmentIdList.toString();
+    String tempString2 = tempString.substring(1, tempString.length - 1);
+    String selectedDepartmentIdString = tempString2.replaceAll(" ", "");
+    log('selectedDepartmentIdString111111 :$selectedDepartmentIdString');
+
     try {
       Map<String, dynamic> bodyData = {
         "userid": "${UserDetails.userId}",
         "user_name": nameFieldController.text.trim(),
         "email": emailFieldController.text.trim().toLowerCase(),
         "phoneno": phoneNumberFieldController.text,
-        "department_id": "$selectedDepartmentIdList",
+        "department_id": selectedDepartmentIdString,
         "address": addressFieldController.text.trim(),
       };
 
@@ -171,12 +176,14 @@ class CompanyManageScreenController extends GetxController {
 
         // Remove Braces From Api String
         log('companyGetByIdModel.data.departmentId : ${companyGetByIdModel.data.departmentId}');
-        String removedBracesString = companyGetByIdModel.data.departmentId
-            .substring(1, companyGetByIdModel.data.departmentId.length - 1);
+        // String removedBracesString = companyGetByIdModel.data.departmentId
+        //     .substring(1, companyGetByIdModel.data.departmentId.length - 1);
 
         // Set Api Id list into local selected list
-        List<String> apiDepartmentList = removedBracesString.split(',');
+        List<String> apiDepartmentList =
+            companyGetByIdModel.data.departmentId.split(',');
         selectedDepartmentIdList = apiDepartmentList;
+        log('selectedDepartmentIdList : $selectedDepartmentIdList');
 
         // Clear show list
         selectedDepartmentList = <String>[].obs;
@@ -209,16 +216,18 @@ class CompanyManageScreenController extends GetxController {
     log('Update Company Api URl : $url');
 
     try {
+      String tempString = selectedDepartmentIdList.toString();
+      String tempString2 = tempString.substring(1, tempString.length - 1);
+      String selectedDepartmentIdString = tempString2.replaceAll(" ", "");
+      log('selectedDepartmentIdString111111 :$selectedDepartmentIdString');
+
       Map<String, dynamic> bodyData = {
         "id": companyId,
         "userid": "${UserDetails.userId}",
         "user_name": nameFieldController.text.trim(),
         "email": emailFieldController.text.trim().toLowerCase(),
         "phoneno": phoneNumberFieldController.text,
-        "department_id": selectedDepartmentIdList,
-        // .toString()
-        // .replaceAll("[", "")
-        // .replaceAll("]", ""),
+        "department_id": selectedDepartmentIdString,
         "address": addressFieldController.text.trim(),
       };
 

@@ -27,11 +27,8 @@ class CompanyHomeScreen extends StatelessWidget {
           IconButton(
             onPressed: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
-
               var roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
-
-              log("roleId :: ${roleId}");
-
+              log("roleId :: $roleId");
               if (roleId == 3) {
                 Get.to(() => CompanyProfileScreen());
               }

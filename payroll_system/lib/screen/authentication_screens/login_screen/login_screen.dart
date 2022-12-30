@@ -18,8 +18,6 @@ class LoginScreen extends StatelessWidget {
 
   final loginScreenController = Get.put(LoginController());
 
-  bool isChecked = false;
-  bool _isHidden = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,49 +29,49 @@ class LoginScreen extends StatelessWidget {
             () => loginScreenController.isLoading.value
                 ? CommonLoader().showLoader()
                 : SingleChildScrollView(
-                  child: Form(
-                    key: loginScreenController.formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppImages.logoImg,
-                              width: 70.w,
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5.h),
-                        Text(
-                          AppMessage.logIn,
-                          style: TextStyleConfig.textStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.sp,
+                    child: Form(
+                      key: loginScreenController.formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AppImages.logoImg,
+                                width: 70.w,
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(height: 5.h),
-                        LogInEmailTextFieldModule(),
-                        SizedBox(height: 2.h),
-                        PasswordTextFieldModule(),
-                        SizedBox(height: 2.h),
-                        ForgotPasswordTextModule(),
-                        SizedBox(height: 1.h),
-                        PrivacyPolicyCustom(),
-                        SizedBox(height: 2.h),
-                        LoginButtonModule(),
-                        SizedBox(height: 10.h),
-                        // CompanyLogInCustom(),
-                      ],
-                    ).commonOnlyPadding(
-                      top: 13.h,
-                      right: 8.w,
-                      left: 8.w,
-                      bottom: 15.h,
+                          SizedBox(height: 5.h),
+                          Text(
+                            AppMessage.logIn,
+                            style: TextStyleConfig.textStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22.sp,
+                            ),
+                          ),
+                          SizedBox(height: 5.h),
+                          LogInEmailTextFieldModule(),
+                          SizedBox(height: 2.h),
+                          PasswordTextFieldModule(),
+                          SizedBox(height: 2.h),
+                          ForgotPasswordTextModule(),
+                          SizedBox(height: 1.h),
+                          PrivacyPolicyCustom(),
+                          SizedBox(height: 2.h),
+                          LoginButtonModule(),
+                          SizedBox(height: 10.h),
+                          // CompanyLogInCustom(),
+                        ],
+                      ).commonOnlyPadding(
+                        top: 13.h,
+                        right: 8.w,
+                        left: 8.w,
+                        bottom: 15.h,
+                      ),
                     ),
                   ),
-                ),
           ),
         ),
       ),
