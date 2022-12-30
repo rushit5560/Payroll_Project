@@ -10,13 +10,14 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DepartmentListScreenController extends GetxController {
+  String companyId = Get.arguments[0];
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
   List<DepartmentData> allDepartmentList = [];
 
-  int roleId = 0;
-  int userId = 0;
+  // int roleId = 0;
+  // int userId = 0;
 
   /// Get All Department
   Future<void> getAllDepartmentFunction() async {
@@ -84,7 +85,7 @@ class DepartmentListScreenController extends GetxController {
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
-      request.fields['id'] = "$userId";
+      request.fields['id'] = companyId;
 
       var response = await request.send();
 
@@ -114,7 +115,7 @@ class DepartmentListScreenController extends GetxController {
     }
   }
 
-  getUserIdDataFromPrefs() async {
+  /*getUserIdDataFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
     userId = prefs.getInt(UserPreference.userIdKey) ?? 0;
@@ -126,19 +127,12 @@ class DepartmentListScreenController extends GetxController {
     } else if (roleId == 3) {
       await getCompanyWiseDepartmentFunction();
     }
-
-    log('asasas');
-  }
+  }*/
 
   @override
   void onInit() {
-    getUserIdDataFromPrefs();
-    /*log('Department List Screen OnInit Role Id : ${UserDetails.roleId}');
-    if(UserDetails.roleId == 1 || UserDetails.roleId == 1) {
-      getAllDepartmentFunction();
-    } else  if(UserDetails.roleId == 3){
-      getCompanyWiseDepartmentFunction();
-    }*/
+    // getUserIdDataFromPrefs();
+    getCompanyWiseDepartmentFunction();
     super.onInit();
   }
 }
