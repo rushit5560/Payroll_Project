@@ -10,6 +10,7 @@ import 'package:payroll_system/Models/company_manage_screen_model/get_all_depart
 import 'package:payroll_system/Models/company_manage_screen_model/update_company_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
+import 'package:payroll_system/controllers/home_screen_controller.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 
 import '../constants/enums.dart';
@@ -19,8 +20,7 @@ class CompanyManageScreenController extends GetxController {
   CompanyOption companyOption = Get.arguments[0];
   String companyId = Get.arguments[1] ?? "";
 
-  CompanyListScreenController companyListScreenController =
-      Get.find<CompanyListScreenController>();
+  HomeScreenController homeScreenController = Get.find<HomeScreenController>();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
@@ -143,7 +143,7 @@ class CompanyManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: createCompanyModel.messege);
         Get.back();
-        await companyListScreenController.getAllCompanyFunction();
+        await homeScreenController.getAllCompanyFunction();
       } else {
         log('createCompanyFunction Else');
       }
@@ -245,7 +245,7 @@ class CompanyManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: updateCompanyModel.messege);
         Get.back();
-        await companyListScreenController.getAllCompanyFunction();
+        await homeScreenController.getAllCompanyFunction();
       } else {
         log('updateCompanyDetailsFunction Else');
       }

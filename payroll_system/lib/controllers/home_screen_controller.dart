@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
@@ -34,7 +34,7 @@ class HomeScreenController extends GetxController {
       http.Response response = await http.get(Uri.parse(url));
 
       AllCompanyModel allCompanyModel =
-      AllCompanyModel.fromJson(json.decode(response.body));
+          AllCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = allCompanyModel.success.obs;
 
       if (isSuccessStatus.value) {
@@ -58,5 +58,4 @@ class HomeScreenController extends GetxController {
     getAllCompanyFunction();
     super.onInit();
   }
-
 }
