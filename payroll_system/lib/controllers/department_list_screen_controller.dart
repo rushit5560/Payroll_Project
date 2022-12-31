@@ -6,11 +6,10 @@ import 'package:payroll_system/models/company_manage_screen_model/get_all_depart
 import 'package:payroll_system/models/employee_manage_screen_models/employee_delete_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
-import 'package:payroll_system/utils/extension_methods/user_preference.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DepartmentListScreenController extends GetxController {
   String companyId = Get.arguments[0];
+  String companyName = Get.arguments[1];
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
@@ -80,21 +79,23 @@ class DepartmentListScreenController extends GetxController {
 
   Future<void> getCompanyWiseDepartmentFunction() async {
     isLoading(true);
-    String url = ApiUrl.getCompanyDepartmentApi;
+    String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
     log('Get Company Department Api Url :$url');
 
     try {
-      var request = http.MultipartRequest('POST', Uri.parse(url));
-      request.fields['id'] = companyId;
-
-      var response = await request.send();
-
-      response.stream
-          .transform(const Utf8Decoder())
-          .transform(const LineSplitter())
-          .listen((value) {
+      // var request = http.MultipartRequest('POST', Uri.parse(url));
+      // request.fields['id'] = companyId;
+      //
+      // var response = await request.send();
+      //
+      // response.stream
+      //     .transform(const Utf8Decoder())
+      //     .transform(const LineSplitter())
+      //     .listen((value) {
+      
+      http.Response response = await http.get(Uri.parse(url));
         AllDepartmentModel companyDepartmentModel =
-            AllDepartmentModel.fromJson(json.decode(value));
+            AllDepartmentModel.fromJson(json.decode(response.body));
         isSuccessStatus = companyDepartmentModel.success.obs;
 
         if (isSuccessStatus.value) {
@@ -105,7 +106,7 @@ class DepartmentListScreenController extends GetxController {
         } else {
           log('getAllCompanyFunction Else');
         }
-      });
+      // });
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong !");
 

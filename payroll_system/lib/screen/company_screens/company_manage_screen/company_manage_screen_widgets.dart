@@ -39,6 +39,7 @@ class CompanyFormModule extends StatelessWidget {
                     FieldValidation().validateCompanyName(value),
               ),
               const SizedBox(height: 5),
+
               FormSingleFieldModule(
                 headerText: AppMessage.companyLabelEmail,
                 text: AppMessage.labelEmailName,
@@ -51,6 +52,7 @@ class CompanyFormModule extends StatelessWidget {
                 validate: (value) => FieldValidation().validateEmail(value),
               ),
               const SizedBox(height: 5),
+
               FormSingleFieldModule(
                 headerText: AppMessage.companyPhoneNumber,
                 text: AppMessage.labelPhoneNo,
@@ -63,7 +65,35 @@ class CompanyFormModule extends StatelessWidget {
                     FieldValidation().validateMobileNumber(value),
               ),
               const SizedBox(height: 5),
-              Column(
+
+              screenController.companyOption == CompanyOption.update
+                  ? Container()
+                  : Obx(
+                      () => FormSingleFieldModule(
+                        obscureText: screenController.isPasswordVisible.value,
+                        // obscureText:,
+                        headerText: AppMessage.password,
+                        text: AppMessage.password,
+                        mandatoryText: AppMessage.mandatory,
+                        keyboardType: TextInputType.visiblePassword,
+                        // maxLength: 10,
+                        readOnly: true,
+                        textEditingController:
+                            screenController.passwordFieldController,
+                        suffixIcon: screenController.isPasswordVisible.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        onPressed: () {
+                          screenController.isPasswordVisible.value =
+                              !screenController.isPasswordVisible.value;
+                        },
+                        validate: (value) =>
+                            FieldValidation().validatePassword(value),
+                      ),
+                    ),
+              const SizedBox(height: 5),
+
+              /* Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RichText(
@@ -86,11 +116,6 @@ class CompanyFormModule extends StatelessWidget {
                           ),
                         ]),
                   ).commonSymmetricPadding(vertical: 2),
-                  /*Text(
-                    AppMessage.companyDepartmentNameDrawer,
-                    style: TextStyleConfig.textStyle(
-                        fontWeight: FontWeight.w600, fontSize: 16),
-                  ).commonSymmetricPadding(vertical: 2),*/
                   DropDownMultiSelect(
                     options: screenController.departmentStringList,
                     whenEmpty: AppMessage.chooseDepartment,
@@ -123,15 +148,16 @@ class CompanyFormModule extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 5),
-              Column(
+              const SizedBox(height: 5),*/
+
+              /*Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RichText(
                     textAlign: TextAlign.left,
                     maxLines: null,
                     text: TextSpan(
-                        text: AppMessage.companylocation,
+                        text: AppMessage.companyLocation,
                         style: TextStyleConfig.textStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -147,11 +173,6 @@ class CompanyFormModule extends StatelessWidget {
                           ),
                         ]),
                   ).commonSymmetricPadding(vertical: 2),
-                  /*Text(
-                    AppMessage.companyDepartmentNameDrawer,
-                    style: TextStyleConfig.textStyle(
-                        fontWeight: FontWeight.w600, fontSize: 16),
-                  ).commonSymmetricPadding(vertical: 2),*/
                   DropDownMultiSelect(
                     options: screenController.locationStringList,
                     whenEmpty: AppMessage.chooseLocation,
@@ -183,8 +204,9 @@ class CompanyFormModule extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 5),
-              FormSingleFieldModule(
+              const SizedBox(height: 5),*/
+
+              /*FormSingleFieldModule(
                 headerText: AppMessage.labelCompanyAddress,
                 text: AppMessage.labelCompanyAddress,
                 keyboardType: TextInputType.text,
@@ -192,8 +214,81 @@ class CompanyFormModule extends StatelessWidget {
                 textEditingController: screenController.addressFieldController,
                 // validate: (value) => FieldValidation().validateCompanyAddress(value),
               ),
+              const SizedBox(height: 5),*/
+
+              FormSingleFieldModule(
+                headerText: AppMessage.labelCompanyAddress,
+                text: AppMessage.street,
+                keyboardType: TextInputType.text,
+                mandatoryText: AppMessage.mandatory,
+                textEditingController:
+                screenController.streetAddressController,
+                validate: (value) =>
+                    FieldValidation().validateStreetAddress(value),
+              ),
               const SizedBox(height: 5),
+
+              FormSingleFieldModule(
+                headerText: AppMessage.empty,
+                isHeaderTextShow: false,
+                text: AppMessage.landmark,
+                keyboardType: TextInputType.text,
+                mandatoryText: AppMessage.empty,
+                textEditingController:
+                screenController.landmarkAddressController,
+                validate: (value) =>
+                    FieldValidation().validateLandmarkAddress(value),
+              ),
+              const SizedBox(height: 5),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: FormSingleFieldModule(
+                      headerText: AppMessage.empty,
+                      isHeaderTextShow: false,
+                      text: AppMessage.city,
+                      keyboardType: TextInputType.text,
+                      mandatoryText: AppMessage.empty,
+                      textEditingController:
+                      screenController.cityAddressController,
+                      validate: (value) =>
+                          FieldValidation().validateCity(value),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: FormSingleFieldModule(
+                      headerText: AppMessage.empty,
+                      isHeaderTextShow: false,
+                      text: AppMessage.state,
+                      keyboardType: TextInputType.text,
+                      mandatoryText: AppMessage.empty,
+                      textEditingController:
+                      screenController.stateAddressController,
+                      validate: (value) =>
+                          FieldValidation().validateState(value),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+
+              FormSingleFieldModule(
+                headerText: AppMessage.empty,
+                isHeaderTextShow: false,
+                text: AppMessage.zipcode,
+                keyboardType: TextInputType.number,
+                mandatoryText: AppMessage.empty,
+                textEditingController:
+                screenController.zipcodeAddressController,
+                validate: (value) =>
+                    FieldValidation().validateZipCode(value),
+              ),
+
               const SizedBox(height: 15),
+
+              // Buttons Module - Submit & Back
               Row(
                 children: [
                   Expanded(
@@ -203,24 +298,19 @@ class CompanyFormModule extends StatelessWidget {
                         if (screenController.formKey.currentState!.validate()) {
                           if (screenController.companyOption ==
                               CompanyOption.create) {
-                            if (screenController
-                                .selectedDepartmentIdList.isEmpty) {
+                            await screenController.createCompanyFunction();
+                            /*if (screenController.selectedDepartmentIdList.isEmpty) {
                               Fluttertoast.showToast(
                                   msg: AppMessage.pleaseSelectDepartment);
-                            } else if (screenController
-                                .selectedDepartmentIdList.isNotEmpty) {
-                              await screenController.createCompanyFunction();
-                            }
+                            } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
+
+                            }*/
                           } else {
-                            if (screenController
-                                .selectedDepartmentIdList.isEmpty) {
-                              Fluttertoast.showToast(
-                                  msg: AppMessage.pleaseSelectDepartment);
-                            } else if (screenController
-                                .selectedDepartmentIdList.isNotEmpty) {
-                              await screenController
-                                  .updateCompanyDetailsFunction();
-                            }
+                            await screenController.updateCompanyDetailsFunction();
+                            /*if (screenController.selectedDepartmentIdList.isEmpty) {
+                              Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
+                            } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
+                            }*/
                           }
                         }
                       },

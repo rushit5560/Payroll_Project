@@ -16,16 +16,15 @@ import '../../../utils/messaging.dart';
 
 class LocationListScreenWidgets extends StatelessWidget {
   LocationListScreenWidgets({super.key});
-  final allLocationListScreenController =
-      Get.find<LocationListScreenController>();
+  final screenController = Get.find<LocationListScreenController>();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
-      itemCount: allLocationListScreenController.allLocationList.length,
+      itemCount: screenController.allLocationList.length,
       itemBuilder: (context, index) {
-        final value = allLocationListScreenController.allLocationList[index];
+        final value = screenController.allLocationList[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Container(
@@ -55,7 +54,7 @@ class LocationListScreenWidgets extends StatelessWidget {
                           'Are youe sure you want to delete location ?',
                       onYesTap: () async {
                         log("Delete Employee");
-                        await allLocationListScreenController
+                        await screenController
                             .deleteLocationFunction(value.id.toString(), index);
                       },
                       onCancelTap: () {
@@ -90,8 +89,8 @@ class LocationListScreenWidgets extends StatelessWidget {
                       arguments: [
                         LocationOption.update,
                         value.id.toString(),
-                        log('111'),
-                        log("1111111::  ${value.id}")
+                        screenController.companyId,
+                        screenController.companyName,
                       ],
                     );
                     // bool employeeDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDeleteKey);

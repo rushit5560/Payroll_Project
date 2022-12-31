@@ -16,20 +16,7 @@ class ChangePasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppColors.mainBackWhitegroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: AppColors.mainBackWhitegroundColor,
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.blackColor,
-          ),
-        ),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: Scaffold(
           body: Obx(

@@ -10,6 +10,7 @@ import '../models/employee_manage_screen_models/employee_delete_model.dart';
 
 class EmployeeListScreenController extends GetxController {
   String companyId = Get.arguments[0];
+  String companyName = Get.arguments[1];
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
@@ -115,6 +116,7 @@ class EmployeeListScreenController extends GetxController {
 
   @override
   void onInit() {
+    // getAllEmployeeFunction();
     getCompanyEmployeeFunction();
     super.onInit();
   }

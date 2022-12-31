@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppColors.mainBackWhitegroundColor,
+      backgroundColor: AppColors.whiteColor,
       body: SafeArea(
         child: Scaffold(
           body: Obx(

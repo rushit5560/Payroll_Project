@@ -21,7 +21,12 @@ class LocationListScreen extends StatelessWidget {
             onPressed: () {
               Get.to(
                 () => LocationManageScreen(),
-                arguments: [LocationOption.create, ""],
+                arguments: [
+                  LocationOption.create,
+                  "",
+                  locationListScreenController.companyId,
+                  locationListScreenController.companyName,
+                ],
               );
             },
             icon: const Icon(Icons.add_rounded),

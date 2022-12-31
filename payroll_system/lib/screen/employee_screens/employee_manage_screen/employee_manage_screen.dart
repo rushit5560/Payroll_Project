@@ -9,7 +9,7 @@ import '../../../common_modules/custom_alert_dialog_module.dart';
 
 class EmployeeManageScreen extends StatelessWidget {
   EmployeeManageScreen({super.key});
-  final employeeDetailsFormController = Get.put(EmployeManageScreenController());
+  final employeeDetailsFormController = Get.put(EmployeeManageScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,7 @@ class EmployeeManageScreen extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              employeeDetailsFormController.employeeOption ==
-                      EmployeeOption.create
+              employeeDetailsFormController.employeeOption == EmployeeOption.create
                   ? AppMessage.employeeCreate
                   : AppMessage.employeeUpdate,
             ),

@@ -13,14 +13,20 @@ import '../Utils/extension_methods/user_details.dart';
 import '../models/location_manage_screen_model/location_update_model.dart';
 
 class LocationManageScreenController extends GetxController {
+  LocationOption locationOption = Get.arguments[0];
+  String getLocationId = Get.arguments[1] ?? "";
+  String companyId = Get.arguments[2];
+  String companyName = Get.arguments[3];
+
+
   final allLocationListScreenController =
       Get.find<LocationListScreenController>();
 
   RxBool isLoading = false.obs;
-  String getLocationId = Get.arguments[1] ?? "";
+
   RxBool isSuccessStatus = false.obs;
 
-  LocationOption locationOption = Get.arguments[0];
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController locationNameController = TextEditingController();
   List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
@@ -50,7 +56,7 @@ class LocationManageScreenController extends GetxController {
           Fluttertoast.showToast(msg: locationCreateModel.messege);
           Get.back();
 
-          await allLocationListScreenController.getAlllocationListFunction();
+          await allLocationListScreenController.getCompanyWiseLocationFunction();
         } else {
           log('locationCreateFunction Else');
           if (locationCreateModel.error.locationName
@@ -125,7 +131,7 @@ class LocationManageScreenController extends GetxController {
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: locationUpdateModel.messege);
           Get.back();
-          await allLocationListScreenController.getAlllocationListFunction();
+          await allLocationListScreenController.getCompanyWiseLocationFunction();
         } else {
           log("locationUpdateFunction Else");
         }

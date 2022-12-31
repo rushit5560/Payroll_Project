@@ -38,7 +38,7 @@ class EmployeeDrawerMenu extends StatelessWidget {
                 CustomAlertDialog().showAlertDialog(
                   context: context,
                   textContent:
-                      'Are you sure, you want to logout from employee ?',
+                  AppMessage.logoutMessage,
                   onYesTap: () async {
                     await UserPreference()
                         .logoutRemoveUserDetailsFromPrefs()
@@ -52,12 +52,6 @@ class EmployeeDrawerMenu extends StatelessWidget {
                     Get.back();
                   },
                 );
-
-                // await UserPreference().logoutRemoveUserDetailsFromPrefs().then(
-                //   (value) {
-                //     Get.offAll(() => LoginScreen());
-                //   },
-                // );
               },
               title: AppMessage.logOutNameDrawer,
             ),

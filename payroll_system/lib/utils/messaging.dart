@@ -3,7 +3,6 @@ class AppMessage {
   static String password = 'Enter a password';
   static String mobileNo = 'Mobile number';
   static String fullName = 'Full Name';
-  static String enteraname = 'Enter a Name';
   static String email = 'Enter an Email';
   static String termsAndConditions = 'I Agree with privacy and policy';
   static String forgotPassword = 'Forgot password ?';
@@ -47,7 +46,8 @@ class AppMessage {
       'Are you sure you want to delete this department?';
   static String deleteCompanyAlertMessage =
       'Are you sure you want to delete this company?';
-  static String backAlertMessage = 'Are you sure you want to go to back ?';
+  static String logoutMessage = "Are you sure you want to logout?";
+  static String backAlertMessage = 'Are you sure you want to go to back?';
   static String activeStatusMessage = 'Please select status';
   static String privacyPolicyMessage = 'Please accept privacy policy';
 
@@ -85,9 +85,9 @@ class AppMessage {
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
   static String salary = 'Salary (\$,₹)';
-  static String payperiod = 'Pay period';
-  static String employeementStartDate = 'Employeement Start Date';
-  static String employeementEndDate = 'Employeement End Date';
+  static String payPeriod = 'Pay Period';
+  static String employmentStartDate = 'Employment Start Date';
+  static String employmentEndDate = 'Employment End Date';
   static String isActive = 'Status';
   static String company = 'Company';
   static String employeeEmail = 'Email';
@@ -107,7 +107,7 @@ class AppMessage {
   static String employeeCurrentAddress = 'Current Address';
   static String employeeHomeAddress = 'Home Address';
   static String labelCompanyAddress = 'Company Address';
-  static String selectStartDate = 'Select employeementStartDate Start Date';
+  static String selectStartDate = 'Select employment Start Date';
   static String departmentCreate = 'Create Department';
   static String departmentUpdate = 'Update Department';
   static String departmentName = 'Department Name';
@@ -140,7 +140,7 @@ class AppMessage {
   static String locationName = 'Location Name';
     static String chooseLocation = 'Choose Location'; 
 
- static String companylocation = "Company Location";
+ static String companyLocation = "Company Location";
 
 
   // No Records Message
@@ -149,22 +149,27 @@ class AppMessage {
   static String noCompanyFound = 'No Company Found.';
 
   //validation messages
-  static String pleaseEnterYourname = 'Please enter your name';
+  static String pleaseEnterYourName = 'Please enter your name';
   static String pleaseEnterYourFirstName = 'Please enter your first name';
   static String pleaseEnterYourMiddleName = 'Please enter your middle name';
   static String pleaseEnterYourCurrentPassword =
       'Please enter your current password';
   static String pleaseEnterYourLastName = 'Please enter your last name';
-  static String pattternRegx = r'(^[0-9]*$)';
+  static String patternRegX = r'(^[0-9]*$)';
   static String pleaseEnterPhoneNumber = 'Please enter phoneNumber';
   static String mobileNumberMustTenDigits = 'Mobile number must 10 digits';
-  static String mobileNumberMustbeDigits = 'Mobile Number must be digits';
+  static String mobileNumberMustBeDigits = 'Mobile Number must be digits';
   static String pleaseEnterYourCurrentAddress =
-      'Please enter your currentAddress';
+      'Please enter your current address';
   static String pleaseEnterYourCompanyAddress =
-      'Please enter your company Address';
-  static String pleaseEnterStreetAddress = 'Please enter your street Address';
-  static String pleaseEnterLandmarkAddress = 'Please enter your landmark Address';
+      'Please enter your company address';
+  static String pleaseEnterStreetAddress = 'Please enter your street address';
+  static String pleaseEnterLandmarkAddress = 'Please enter your landmark address';
+  static String pleaseEnterCity = 'Please enter city';
+  static String pleaseEnterState = 'Please enter state';
+  static String pleaseEnterZipCode = 'Please enter zipCode';
+  static String zipCode5CharacterLength = 'Zipcode length atleast 5 characters';
+  static String zipCode6CharacterLength = 'Zipcode length max 6 characters';
 
   static String pleaseEnterYourLocation = 'Please enter your location';
   static String pleaseEnterYourAddress = 'Please enter your address';
@@ -189,18 +194,18 @@ class AppMessage {
   static String confirmPasswordIsRequired = 'Confirm Password is required';
   static String confirmPasswordMustBeAtLeast8CharactersLong =
       'Confirm Password must be at least 8 characters long';
-  static String newPasswordAndConfirmpasswordMustBeSame =
+  static String newPasswordAndConfirmPasswordMustBeSame =
       'New password & confirm password must be same';
 
   //controller message
   static String gallery = 'Gallery';
   static String camera = 'Camera';
-  //comman messages text
+  //common messages text
   static String mandatory = '*';
   static String submit = 'Submit';
   static String permissionMessage = 'Are you sure you want to go to back ?';
   static String back = 'Back';
-  static String empty = '';
+  static String empty = "";
   static String value = "1";
   static String active = 'Active';
   static String inActive = 'In-Active';
@@ -211,4 +216,6 @@ class AppMessage {
   //profile
   static String userName = 'User Name';
   static String name = 'Name';
+
+
 }

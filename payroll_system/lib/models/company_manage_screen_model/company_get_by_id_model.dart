@@ -39,6 +39,11 @@ class Data {
     required this.roleId,
     required this.departmentId,
     required this.isActive,
+    required this.street,
+    required this.town,
+    required this.state,
+    required this.city,
+    required this.zipcode,
     // required this.lastlogin,
     required this.verified,
     // required this.createdby,
@@ -58,6 +63,11 @@ class Data {
   int roleId;
   String departmentId;
   String isActive;
+  String street;
+  String town;
+  String state;
+  String city;
+  String zipcode;
   // dynamic lastlogin;
   String verified;
   // int createdby;
@@ -77,6 +87,11 @@ class Data {
     roleId: json["role_id"] ?? 0,
     departmentId: json["department_id"] ?? "",
     isActive: json["is_active"] ?? "",
+    street: json["street"] ?? "",
+    town: json["town"] ?? "",
+    state: json["state"] ?? "",
+    city: json["city"] ?? "",
+    zipcode: json["zipcode"] ?? "",
     // lastlogin: json["lastlogin"],
     verified: json["verified"] ?? "",
     // createdby: json["createdby"],
@@ -97,6 +112,11 @@ class Data {
     "role_id": roleId,
     "department_id": departmentId,
     "is_active": isActive,
+    "street": street,
+    "town": town,
+    "state": state,
+    "city": city,
+    "zipcode": zipcode,
     // "lastlogin": lastlogin,
     "verified": verified,
     // "createdby": createdby,

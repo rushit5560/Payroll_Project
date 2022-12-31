@@ -85,11 +85,11 @@ class FormSingleFieldModule extends StatelessWidget {
           inputFormatters: inputFormatters,
           maxLength: maxLength,
           decoration: InputDecoration(
-            // prefixIcon: Icon(prefixIcon, color: color),
             counterText: '',
             hintText: text,
             suffixIcon:
                 IconButton(onPressed: onPressed, icon: Icon(suffixIcon)),
+            errorMaxLines: 2,
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),

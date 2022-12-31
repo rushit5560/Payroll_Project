@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/single_item_module.dart';
 import 'package:payroll_system/common_modules/view_button_module.dart';
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/home_screen_controller.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
+import 'package:payroll_system/screen/company_screens/company_manage_screen/company_manage_screen.dart';
 import 'package:payroll_system/screen/company_screens/company_view_screen/company_view_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -76,17 +78,67 @@ class CompanyListTile extends StatelessWidget {
               SizedBox(height: 2.h),
 
               /// Getting From Common Module
-              ViewButtonModule(
-                onTap: () {
+              ViewAndEditButtonModule(
+                onViewTap: () {
                   Get.to(
-                          ()=> CompanyViewScreen(),
+                        ()=> CompanyViewScreen(),
                     arguments: [
                       singleItem.id.toString(),
                       singleItem.userName.toString(),
                     ],
                   );
                 },
+                onEditTap: () {
+                  Get.to(
+                        ()=> CompanyManageScreen(),
+                    // arguments: [
+                    //   singleItem.id.toString(),
+                    //   singleItem.userName.toString(),
+                    // ],
+                      arguments: [
+                        CompanyOption.update,
+                        singleItem.id.toString(),
+                      ],
+                  );
+                },
+                viewLabelText: AppMessage.view,
+                editLabelText: AppMessage.edit,
               ),
+              /*Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: ViewAndEditButtonModule(
+                      onTap: () {
+                        Get.to(
+                              ()=> CompanyViewScreen(),
+                          arguments: [
+                            singleItem.id.toString(),
+                            singleItem.userName.toString(),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 4.w),
+                  Expanded(
+                    flex: 5,
+                    child: ViewAndEditButtonModule(
+                      onTap: () {
+                        Get.to(
+                              ()=> CompanyViewScreen(),
+                          arguments: [
+                            singleItem.id.toString(),
+                            singleItem.userName.toString(),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),*/
+
               /*EditAndDeleteButtonModule(
                 onEditTap: () async {
                   bool companyEditPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyEditKey);

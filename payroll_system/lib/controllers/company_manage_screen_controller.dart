@@ -12,6 +12,7 @@ import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:payroll_system/controllers/home_screen_controller.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import '../constants/enums.dart';
 import 'company_list_screen_controller.dart';
 
@@ -20,44 +21,41 @@ class CompanyManageScreenController extends GetxController {
   String companyId = Get.arguments[1] ?? "";
 
   HomeScreenController homeScreenController = Get.find<HomeScreenController>();
+  UserPreference userPreference = UserPreference();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
   List<DepartmentData> departmentList = [];
-
-  //11
   List<LocationListData> allLocationList = [];
-  //11
 
   List<String> departmentStringList = [];
-  //22
   List<String> locationStringList = [];
-  //22
 
   RxList<String> selectedDepartmentList = RxList<String>([]);
-  //33
   RxList<String> selectedLocationList = RxList<String>([]);
-  //33
 
-  // List<String> selectedDepartmentList = [];
+
+
   List<String> selectedDepartmentIdList = [];
-  //
   List<String> selectedLocationIdList = [];
-//
   RxString selectedDepartmentOption = "".obs;
-  //
   RxString selectedLocationOption = "".obs;
-//
+  RxBool isPasswordVisible = true.obs;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameFieldController = TextEditingController();
   TextEditingController emailFieldController = TextEditingController();
   TextEditingController phoneNumberFieldController = TextEditingController();
-  TextEditingController addressFieldController = TextEditingController();
+  TextEditingController passwordFieldController = TextEditingController(text: '12345678');
+  TextEditingController streetAddressController = TextEditingController();
+  TextEditingController landmarkAddressController = TextEditingController();
+  TextEditingController zipcodeAddressController = TextEditingController();
+  TextEditingController cityAddressController = TextEditingController();
+  TextEditingController stateAddressController = TextEditingController();
 
   /// Get All Department
-  Future<void> getAllDepartmentFunction() async {
+  /*Future<void> getAllDepartmentFunction() async {
     isLoading(true);
     String url = ApiUrl.allDepartmentApi;
     log('Get All Department Api Url :$url');
@@ -96,9 +94,9 @@ class CompanyManageScreenController extends GetxController {
         isLoading(false);
       }
     }
-  }
+  }*/
 
-  Future<void> getAllLocationListFunction() async {
+  /*Future<void> getAllLocationListFunction() async {
     isLoading(true);
     String url = ApiUrl.allLocationApi;
     log('Get All Location List Api Url :$url');
@@ -129,7 +127,7 @@ class CompanyManageScreenController extends GetxController {
     } finally {
       isLoading(false);
     }
-  }
+  }*/
 
   /// Create Company
   Future<void> createCompanyFunction() async {
@@ -137,19 +135,20 @@ class CompanyManageScreenController extends GetxController {
     String url = ApiUrl.createCompanyApi;
     log('Create Company Api Url :$url');
 
-    String tempString = selectedDepartmentIdList.toString();
-    String tempString2 = tempString.substring(1, tempString.length - 1);
-    String selectedDepartmentIdString = tempString2.replaceAll(" ", "");
-    log('selectedDepartmentIdString111111 :$selectedDepartmentIdString');
+    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
 
     try {
       Map<String, dynamic> bodyData = {
-        "userid": "${UserDetails.userId}",
+        "userid": "$userId",
         "user_name": nameFieldController.text.trim(),
+        "password": passwordFieldController.text.trim(),
         "email": emailFieldController.text.trim().toLowerCase(),
         "phoneno": phoneNumberFieldController.text,
-        "department_id": selectedDepartmentIdString,
-        "address": addressFieldController.text.trim(),
+        "street": streetAddressController.text,
+        "town": landmarkAddressController.text,
+        "state": stateAddressController.text,
+        "city": cityAddressController.text,
+        "zipcode": zipcodeAddressController.text,
       };
 
       log('bodyData : $bodyData');
@@ -197,7 +196,11 @@ class CompanyManageScreenController extends GetxController {
         nameFieldController.text = companyGetByIdModel.data.userName;
         emailFieldController.text = companyGetByIdModel.data.email;
         phoneNumberFieldController.text = companyGetByIdModel.data.phoneno;
-        addressFieldController.text = companyGetByIdModel.data.address;
+        streetAddressController.text = companyGetByIdModel.data.street;
+        landmarkAddressController.text = companyGetByIdModel.data.town;
+        cityAddressController.text = companyGetByIdModel.data.city;
+        stateAddressController.text = companyGetByIdModel.data.state;
+        zipcodeAddressController.text = companyGetByIdModel.data.zipcode;
 
         // Remove Braces From Api String
         log('companyGetByIdModel.data.departmentId : ${companyGetByIdModel.data.departmentId}');
@@ -240,20 +243,24 @@ class CompanyManageScreenController extends GetxController {
     String url = ApiUrl.updateCompanyDetailsApi;
     log('Update Company Api URl : $url');
 
+
+
     try {
-      String tempString = selectedDepartmentIdList.toString();
-      String tempString2 = tempString.substring(1, tempString.length - 1);
-      String selectedDepartmentIdString = tempString2.replaceAll(" ", "");
-      log('selectedDepartmentIdString111111 :$selectedDepartmentIdString');
+
+      int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+
 
       Map<String, dynamic> bodyData = {
         "id": companyId,
-        "userid": "${UserDetails.userId}",
+        "userid": "$userId",
         "user_name": nameFieldController.text.trim(),
         "email": emailFieldController.text.trim().toLowerCase(),
         "phoneno": phoneNumberFieldController.text,
-        "department_id": selectedDepartmentIdString,
-        "address": addressFieldController.text.trim(),
+        "street": streetAddressController.text,
+        "town": landmarkAddressController.text,
+        "state": stateAddressController.text,
+        "city": cityAddressController.text,
+        "zipcode": zipcodeAddressController.text,
       };
 
       log('bodyData : $bodyData');
@@ -284,7 +291,10 @@ class CompanyManageScreenController extends GetxController {
 
   @override
   void onInit() {
-    getAllDepartmentFunction();
+    if(companyOption == CompanyOption.update) {
+      getCompanyDetailsFunction();
+    }
+    // getAllDepartmentFunction();
     // getAllLocationListFunction();
     log("$companyOption");
     super.onInit();

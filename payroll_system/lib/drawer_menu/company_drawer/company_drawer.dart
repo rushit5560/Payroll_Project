@@ -8,6 +8,7 @@ import 'package:payroll_system/controllers/company_view_screen_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
+import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -36,7 +37,8 @@ class CompanyDrawerMenu extends StatelessWidget {
                                 Get.back();
                                 Get.to(() => DepartmentListScreen(),
                                 arguments: [
-                                  companyViewScreenController.companyId.toString()
+                                  companyViewScreenController.companyId.toString(),
+                                  companyViewScreenController.companyName,
                                 ]);
                               },
                               title: AppMessage.departmentNameDrawer,
@@ -46,11 +48,23 @@ class CompanyDrawerMenu extends StatelessWidget {
                                 Get.back();
                                 Get.to(() => EmployeeListScreen(),
                                     arguments: [
-                                      companyViewScreenController.companyId.toString()
+                                      companyViewScreenController.companyId.toString(),
+                                      companyViewScreenController.companyName,
                                     ]);
                               },
                               title: AppMessage.employeeNameDrawer,
-                            )
+                            ),
+                            CompanyDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => LocationListScreen(),
+                                    arguments: [
+                                      companyViewScreenController.companyId.toString(),
+                                      companyViewScreenController.companyName,
+                                    ]);
+                              },
+                              title: AppMessage.employeeNameDrawer,
+                            ),
                             /*CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
@@ -69,7 +83,7 @@ class CompanyDrawerMenu extends StatelessWidget {
                         CustomAlertDialog().showAlertDialog(
                           context: context,
                           textContent:
-                              'Are you sure, you want to logout from subadmin ?',
+                          AppMessage.logoutMessage,
                           onYesTap: () async {
                             await UserPreference()
                                 .logoutRemoveUserDetailsFromPrefs()

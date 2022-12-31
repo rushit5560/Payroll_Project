@@ -3,7 +3,7 @@ import 'package:payroll_system/utils/messaging.dart';
 class FieldValidation {
   String? validateUserName(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourname;
+      return AppMessage.pleaseEnterYourName;
     } else {
       return null;
     }
@@ -42,15 +42,15 @@ class FieldValidation {
   }
 
   String? validateMobileNumber(String value) {
-    String patttern = AppMessage.pattternRegx;
-    RegExp regExp = RegExp(patttern);
+    String pattern = AppMessage.patternRegX;
+    RegExp regExp = RegExp(pattern);
 
     if (value.isEmpty) {
       return AppMessage.pleaseEnterPhoneNumber;
     } else if (value.length != 10) {
       return AppMessage.mobileNumberMustTenDigits;
     } else if (!regExp.hasMatch(value)) {
-      return AppMessage.mobileNumberMustbeDigits;
+      return AppMessage.mobileNumberMustBeDigits;
     } else {
       return null;
     }
@@ -59,6 +59,22 @@ class FieldValidation {
   String? validateCurrentAddress(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterYourCurrentAddress;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateCity(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterCity;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateState(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterState;
     } else {
       return null;
     }
@@ -164,7 +180,7 @@ class FieldValidation {
   }
 
   String? validateHomePhoneNumber(String value) {
-    String patttern = AppMessage.pattternRegx;
+    String patttern = AppMessage.patternRegX;
     RegExp regExp = RegExp(patttern);
 
     if (value.isEmpty) {
@@ -172,7 +188,7 @@ class FieldValidation {
     } else if (value.length != 10) {
       return AppMessage.mobileNumberMustTenDigits;
     } else if (!regExp.hasMatch(value)) {
-      return AppMessage.mobileNumberMustbeDigits;
+      return AppMessage.mobileNumberMustBeDigits;
     } else {
       return null;
     }
@@ -191,15 +207,15 @@ class FieldValidation {
   // }
 
   String? validateWorkPhoneNumber(String value) {
-    String patttern = AppMessage.pattternRegx;
-    RegExp regExp = RegExp(patttern);
+    String pattern = AppMessage.patternRegX;
+    RegExp regExp = RegExp(pattern);
 
     if (value.isEmpty) {
       return AppMessage.pleaseEnterPhoneNumber;
     } else if (value.length != 10) {
       return AppMessage.mobileNumberMustTenDigits;
     } else if (!regExp.hasMatch(value)) {
-      return AppMessage.mobileNumberMustbeDigits;
+      return AppMessage.mobileNumberMustBeDigits;
     } else {
       return null;
     }
@@ -253,13 +269,18 @@ class FieldValidation {
     }
   }
 
-  // String? validateZipCode(String value) {
-  //   if (value.isEmpty) {
-  //     return 'Please enter zipCode';
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  String? validateZipCode(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterZipCode;
+    } else if(value.length < 4) {
+      return AppMessage.zipCode5CharacterLength;
+    } else if(value.length > 6) {
+      return AppMessage.zipCode6CharacterLength;
+    }
+    else {
+      return null;
+    }
+  }
 
   String? validatePassword(String value) {
     if (value.isEmpty) {
@@ -277,7 +298,7 @@ class FieldValidation {
     } else if (value.length < 8) {
       return AppMessage.confirmPasswordMustBeAtLeast8CharactersLong;
     } else if (value != passwordValue) {
-      return AppMessage.newPasswordAndConfirmpasswordMustBeSame;
+      return AppMessage.newPasswordAndConfirmPasswordMustBeSame;
     } else {
       return null;
     }

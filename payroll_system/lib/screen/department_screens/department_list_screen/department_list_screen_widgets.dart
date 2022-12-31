@@ -82,6 +82,7 @@ class DepartmentListTile extends StatelessWidget {
                       arguments: [
                         DepartmentOption.update,
                         singleItem.id.toString(),
+                        screenController.companyId,
                       ],
                     );
                   } else {

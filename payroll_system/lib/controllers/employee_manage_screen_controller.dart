@@ -19,9 +19,11 @@ import 'package:payroll_system/models/company_department_model/company_departmen
 import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/update_employee_model.dart';
 
-class EmployeManageScreenController extends GetxController {
+class EmployeeManageScreenController extends GetxController {
   EmployeeOption employeeOption = Get.arguments[0];
   String employeeId = Get.arguments[1] ?? "";
+  String companyId = Get.arguments[2];
+  String companyName = Get.arguments[3];
 
   DateTime? chosenDateTime;
   DateTime selectedDate = DateTime.now();
@@ -54,26 +56,23 @@ class EmployeManageScreenController extends GetxController {
   List<String> departmentStringList = [];
   List<String> companyStringList = [];
 
-  int companyId = 0;
+  // int companyId = 0;
   int departmentId = 0;
 
   DateTime birthDate = DateTime.now();
-  DateTime employeementStartDate = DateTime.now();
-  DateTime employeementEndDate = DateTime.now();
+  DateTime employmentStartDate = DateTime.now();
+  DateTime employmentEndDate = DateTime.now();
 
-  // CompanyOption companyOption = Get.arguments[0];
   List<CompanyData> allCompanyList = [];
   List<CompanyDepartmentData> companyDepartment = [];
 
-  // List<CompanyDepartmentData> allCompanyList = [];
-
   CompanyData? companyDDSelectedItem;
-  // DepartmentData? departmentDataItem;
+  String companyDDSelectedStringItem = '';
   CompanyDepartmentData? companyDepartmentData;
 
   RxString selectedDepartmentOption = "".obs;
   RxString selectedCompanyOption = "".obs;
-  // final employeeListScreenController = Get.find<EmployeeListScreenController>();
+
 
   RxList<String> selectedEmpDepartmentList = RxList<String>([]);
   List<String> selectedEmpDepartmentIdList = [];
@@ -109,8 +108,6 @@ class EmployeManageScreenController extends GetxController {
 
   File? images;
   String oldImageName = "";
-
-  // RxBool isloding = false.obs;
 
   imageFromCamera() async {
     XFile? image = await ImagePicker()
@@ -254,7 +251,7 @@ class EmployeManageScreenController extends GetxController {
       await employeeGetByIdFunction();
     } else if (employeeOption == EmployeeOption.create) {
       // when create new company
-      await getCompanyDepartmentFunction(companyDDSelectedItem!.id);
+      await getCompanyDepartmentFunction(companyDDSelectedItem!.id.toString());
       // isLoading(false);
     }
   }
@@ -267,7 +264,7 @@ class EmployeManageScreenController extends GetxController {
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      // log("employeeGetByIdFunction  ${response.body}");
+      log("employeeGetByIdFunction  ${response.body}");
       EmployeeGetByIdModel employeeGetByIdModel =
           EmployeeGetByIdModel.fromJson(json.decode(response.body));
 
@@ -292,19 +289,27 @@ class EmployeManageScreenController extends GetxController {
         lastDateController.text =
             employeeGetByIdModel.data.lastDayOfWork.toString();
 
-        companyId = employeeGetByIdModel.data.companyid;
+        // companyId = employeeGetByIdModel.data.companyid.toString();
         departmentId = employeeGetByIdModel.data.departmentId;
+
+        for (int i = 0; i < companyDepartment.length; i++) {
+          // ignore: unrelated_type_equality_checks
+          if (departmentId == companyDepartment[i].id) {
+            companyDepartmentData = companyDepartment[i];
+          }
+        }
+
         oldImageName = employeeGetByIdModel.data.photo;
 
-        employeementStartDate =
+        employmentStartDate =
             DateTime.parse(employeeGetByIdModel.data.startDate);
         startDateController.text =
-            "${employeementStartDate.year}-${employeementStartDate.month}-${employeementStartDate.day}";
+            "${employmentStartDate.year}-${employmentStartDate.month}-${employmentStartDate.day}";
 
-        employeementEndDate =
-            DateTime.parse(employeeGetByIdModel.data.lastDayOfWork);
+        // employmentEndDate =
+        //     DateTime.parse(employeeGetByIdModel.data.lastDayOfWork);
         startDateController.text =
-            "${employeementEndDate.year}-${employeementEndDate.month}-${employeementEndDate.day}";
+            "${employmentEndDate.year}-${employmentEndDate.month}-${employmentEndDate.day}";
 
         birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
         dateOfBrithController.text =
@@ -317,56 +322,34 @@ class EmployeManageScreenController extends GetxController {
             employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
 
         log('Photo : ${employeeGetByIdModel.data.photo}');
-        // if (images != null) {
-        // } else {
-        //   oldImageName = employeeGetByIdModel.data.photo;
-        // }
+
 
         for (int i = 0; i < allCompanyList.length; i++) {
-          if (companyId == allCompanyList[i].id) {
+          if (companyId == allCompanyList[i].id.toString()) {
             companyDDSelectedItem = allCompanyList[i];
           }
         }
 
-        /*if (companyId != 0) {
-          getCompanyDepartmentFunction(companyId);
-        } else {}*/
 
         passwordController.text = employeeGetByIdModel.data.password;
         currentAddressController.text = employeeGetByIdModel.data.address;
         homeAddressController.text = employeeGetByIdModel.data.home;
 
-        // Remove Braces From Api String
-        // log('companyGetByIdModel.data.departmentId : ${employeeGetByIdModel.data.departmentId}');
-        // String removedBracesString = employeeGetByIdModel.data.departmentId
-        //     .toString()
-        //     .substring(1,
-        //         employeeGetByIdModel.data.departmentId.toString().length - 1);
-
-        // for (int i = 0; i < companyDepartment.length; i++) {
-        //   for (int j = 0; j < selectedDepartmentIdList.length; j++) {
-        //     if (companyDepartment[i].id.toString().trim() ==
-        //         selectedDepartmentIdList[j].trim()) {
-        //       selectedDepartmentList.add(companyDepartment[i].departmentName);
-        //     }
-        //   }
-        // }
-        // log('selectedDepartmentList : $selectedDepartmentList');
       } else {
         log('getEmployeeDetailsFunction Else');
       }
     } catch (e) {
       log('getEmployeeDetailsFunction Error :$e');
       rethrow;
-    } /*finally {
-      await getCompanyDepartmentFunction(companyId);
-    }*/
+    } finally {
+      isLoading(false);
+    }
 
-    await getCompanyDepartmentFunction(companyId);
+    // await getCompanyDepartmentFunction(companyId);
   }
 
-  Future<void> getCompanyDepartmentFunction(int companyId) async {
-    // isLoading(true);
+  Future<void> getCompanyDepartmentFunction(String companyId) async {
+    isLoading(true);
     String url = ApiUrl.getCompanyDepartmentApi;
     log('Get CompanyDepartment Api Url :$url');
 
@@ -380,7 +363,7 @@ class EmployeManageScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) {
-        log("getCompanyDepartmentFunction res body :: ${value}");
+        log("getCompanyDepartmentFunction res body :: $value");
         CompanyDeprtmentModel companyDepartmentModel =
             CompanyDeprtmentModel.fromJson(json.decode(value));
         isSuccessStatus = companyDepartmentModel.success.obs;
@@ -397,7 +380,6 @@ class EmployeManageScreenController extends GetxController {
             }
           } else if (employeeOption == EmployeeOption.update) {
             //update logic here
-
             for (int i = 0; i < companyDepartment.length; i++) {
               // ignore: unrelated_type_equality_checks
               if (departmentId == companyDepartment[i].id) {
@@ -417,8 +399,14 @@ class EmployeManageScreenController extends GetxController {
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong!");
       rethrow;
-    } finally {
-      isLoading(true);
+    }/* finally {
+      // isLoading(true);
+      isLoading(false);
+    }*/
+
+    if(employeeOption == EmployeeOption.update) {
+      await employeeGetByIdFunction();
+    } else {
       isLoading(false);
     }
   }
@@ -559,14 +547,16 @@ class EmployeManageScreenController extends GetxController {
 
   @override
   void onInit() {
-    getAllCompanyFunction();
-    /*.whenComplete(() {
-      if (employeeOption == EmployeeOption.update) {
-        employeeGetByIdFunction();
-      }
-    });*/
+    // getAllCompanyFunction();
+    companyDDSelectedStringItem = companyName;
+    getCompanyDepartmentFunction(companyId);
 
-    super.onInit();
+    /*if(employeeOption == EmployeeOption.create) {
+      getCompanyDepartmentFunction(companyId);
+    } else if(employeeOption == EmployeeOption.update) {
+      employeeGetByIdFunction();
+    }*/
+        super.onInit();
   }
 
   loadUI() {

@@ -23,7 +23,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
   });
 
   final employeeCreteScreenController =
-      Get.find<EmployeManageScreenController>();
+      Get.find<EmployeeManageScreenController>();
 
   bool isChecked = false;
   @override
@@ -110,7 +110,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
-                  text: AppMessage.payperiod,
+                  text: AppMessage.payPeriod,
                   style: TextStyleConfig.textStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -206,7 +206,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.employeementStartDate,
+              headerText: AppMessage.employmentStartDate,
               text: AppMessage.selectStartDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
@@ -218,7 +218,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 //     employeeCreteScreenController.selectedDate;
                 _selectDate(
                     context,
-                    employeeCreteScreenController.employeementStartDate,
+                    employeeCreteScreenController.employmentStartDate,
                     employeeCreteScreenController.startDateController,
                     DatePickerOption.startDate);
               },
@@ -237,8 +237,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             //   validate: (value) => FieldValidation().validateLastDayWork(value),
             // ),
             FormSingleFieldModule(
-              headerText: AppMessage.employeementEndDate,
-              text: AppMessage.employeementEndDate,
+              headerText: AppMessage.employmentEndDate,
+              text: AppMessage.employmentEndDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:
@@ -249,7 +249,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 //     employeeCreteScreenController.selectedDate;
                 _selectDate(
                     context,
-                    employeeCreteScreenController.employeementEndDate,
+                    employeeCreteScreenController.employmentEndDate,
                     employeeCreteScreenController.endDateController,
                     DatePickerOption.endDate);
               },
@@ -328,7 +328,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: AppMessage.mandatory,
+                      text: " ${AppMessage.mandatory}",
                       style: TextStyleConfig.textStyle(
                         textColor: AppColors.redColor,
                         fontWeight: FontWeight.w600,
@@ -337,11 +337,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     ),
                   ]),
             ).commonSymmetricPadding(vertical: 2),
-            /* Text(
-              AppMessage.company,
-              style: TextStyleConfig.textStyle(
-                  fontWeight: FontWeight.w600, fontSize: 16),
-            ).commonSymmetricPadding(vertical: 2),*/
             Container(
               width: double.infinity,
               height: 50,
@@ -350,6 +345,27 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 border: Border.all(color: AppColors.greyColor),
               ),
               child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: employeeCreteScreenController.companyDDSelectedStringItem,
+                    items: [employeeCreteScreenController.companyName]
+                        .map<DropdownMenuItem<String>>(
+                            (String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                    onChanged: (String? value) async {
+                      employeeCreteScreenController.companyDDSelectedStringItem
+                      = value!;
+                    },
+                  ).commonOnlyPadding(left: 10, right: 10),
+                ),
+              ),
+              /// Company api data wise dropdown
+              /*child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<CompanyData>(
@@ -375,7 +391,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       log('valuevaluevaluevalue :${value!.userName}');
 
                       await employeeCreteScreenController
-                          .getCompanyDepartmentFunction(companyid);
+                          .getCompanyDepartmentFunction(companyid.toString());
 
                       log(employeeCreteScreenController
                           .companyDDSelectedItem!.id
@@ -383,7 +399,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     },
                   ).commonOnlyPadding(left: 10, right: 10),
                 ),
-              ),
+              ),*/
             ),
             const SizedBox(height: 5),
             Column(
@@ -400,7 +416,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: AppMessage.mandatory,
+                          text: " ${AppMessage.mandatory}",
                           style: TextStyleConfig.textStyle(
                             textColor: AppColors.redColor,
                             fontWeight: FontWeight.w600,
@@ -723,9 +739,9 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;
       } else if (datePickerOption == DatePickerOption.startDate) {
-        employeeCreteScreenController.employeementStartDate = d;
+        employeeCreteScreenController.employmentStartDate = d;
       } else {
-        employeeCreteScreenController.employeementEndDate = d;
+        employeeCreteScreenController.employmentEndDate = d;
       }
       employeeCreteScreenController.isLoading(false);
     }
@@ -772,7 +788,7 @@ class ButtonCustom extends StatelessWidget {
 class ImagePickerCustom extends StatelessWidget {
   ImagePickerCustom({super.key});
   final employeeCreteScreenController =
-      Get.find<EmployeManageScreenController>();
+      Get.find<EmployeeManageScreenController>();
 
   @override
   Widget build(BuildContext context) {

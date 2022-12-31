@@ -31,16 +31,7 @@ class AdminDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            /*adminDrawerController.companyView.value == true
-                                ?
-                            AdminDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => CompanyListScreen());
-                              },
-                              title: AppMessage.companyNameDrawer,
-                            ) : Container(),*/
-                            adminDrawerController.departmentView.value == true
+                            /*adminDrawerController.departmentView.value == true
                                 ? AdminDrawerTile(
                                     onTap: () {
                                       Get.back();
@@ -48,8 +39,8 @@ class AdminDrawerMenu extends StatelessWidget {
                                     },
                                     title: AppMessage.departmentNameDrawer,
                                   )
-                                : Container(),
-                            adminDrawerController.employeeView.value == true
+                                : Container(),*/
+                            /*adminDrawerController.employeeView.value == true
                                 ? AdminDrawerTile(
                                     onTap: () {
                                       Get.back();
@@ -57,14 +48,14 @@ class AdminDrawerMenu extends StatelessWidget {
                                     },
                                     title: AppMessage.employeeNameDrawer,
                                   )
-                                : Container(),
-                            AdminDrawerTile(
+                                : Container(),*/
+                           /* AdminDrawerTile(
                               onTap: () {
                                 Get.back();
                                 Get.to(() => LocationListScreen());
                               },
                               title: AppMessage.location,
-                            ),
+                            ),*/
                             AdminDrawerTile(
                               onTap: () {
                                 Get.back();
@@ -83,7 +74,7 @@ class AdminDrawerMenu extends StatelessWidget {
                         CustomAlertDialog().showAlertDialog(
                           context: context,
                           textContent:
-                              'Are you sure, you want to logout from dmin ?',
+                              AppMessage.logoutMessage,
                           onYesTap: () async {
                             await UserPreference()
                                 .logoutRemoveUserDetailsFromPrefs()

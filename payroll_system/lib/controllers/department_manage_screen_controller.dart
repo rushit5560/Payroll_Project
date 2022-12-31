@@ -6,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/department_list_screen_controller.dart';
-import 'package:payroll_system/models/company_manage_screen_model/create_company_model.dart';
+import 'package:payroll_system/models/department_manage_screen_models/create_department_model.dart';
 import 'package:payroll_system/models/department_manage_screen_models/department_get_by_id_model.dart';
 import 'package:payroll_system/models/department_manage_screen_models/update_department_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
@@ -16,6 +16,7 @@ import 'package:payroll_system/utils/extension_methods/user_details.dart';
 class DepartmentManageScreenController extends GetxController {
   DepartmentOption departmentOption = Get.arguments[0];
   String departmentId = Get.arguments[1] ?? "";
+  String companyId = Get.arguments[2] ?? "";
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
@@ -36,26 +37,30 @@ class DepartmentManageScreenController extends GetxController {
     try {
       Map<String, dynamic> bodyData = {
         "department_name": nameFieldController.text.trim(),
-        "userid": "${UserDetails.userId}",
+        "userid": companyId,
         "is_active": selectedValue.value == "active" ? "1" : "0"
       };
-
+      log("bodyData : $bodyData");
       http.Response response = await http.post(
         Uri.parse(url),
         body: bodyData,
       );
 
-      CreateCompanyModel createCompanyModel =
-          CreateCompanyModel.fromJson(json.decode(response.body));
+      log('response : ${response.body}');
+      CreateDepartmentModel createDepartmentModel =
+      CreateDepartmentModel.fromJson(json.decode(response.body));
 
-      isSuccessStatus = createCompanyModel.success.obs;
+      isSuccessStatus = createDepartmentModel.success.obs;
 
       if (isSuccessStatus.value) {
-        Fluttertoast.showToast(msg: createCompanyModel.messege);
+        Fluttertoast.showToast(msg: createDepartmentModel.messege);
         Get.back();
-        await departmentListScreenController.getAllDepartmentFunction();
+        await departmentListScreenController.getCompanyWiseDepartmentFunction();
       } else {
         log('createDepartmentFunction Else');
+        if(createDepartmentModel.error.departmentName[0].contains("The department name has already been taken")) {
+          Fluttertoast.showToast(msg: createDepartmentModel.error.departmentName[0].toString());
+        }
       }
     } catch (e) {
       log('createDepartmentFunction Error : $e');
@@ -135,6 +140,7 @@ class DepartmentManageScreenController extends GetxController {
 
   @override
   void onInit() {
+    log('companyId : $companyId');
     if (departmentOption == DepartmentOption.update) {
       departmentGetByIdFunction();
     }
