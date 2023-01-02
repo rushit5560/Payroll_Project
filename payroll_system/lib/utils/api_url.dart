@@ -41,20 +41,18 @@ class ApiUrl {
 
   // Department Api's
   static const allDepartmentApi = "${apiMainPath}api/department";
-  static const createDepartmentApi = "${apiMainPath}api/department/store";
+  static const createDepartmentApi = "${apiMainPath}api/admin/department/store";
   static const deleteDepartmentApi = "${apiMainPath}api/department/delete/";
   static const updateDepartmentApi = "${apiMainPath}api/department/update";
-  static const getDepartmentDetailsApi = "${apiMainPath}api/department/edit/";
-
-  static const getCompanyDepartmentApi =
-      "${apiMainPath}api/admin/department/";
+  static const getDepartmentDetailsApi = "${apiMainPath}api/admin/department/edit/";
+  static const getCompanyDepartmentApi = "${apiMainPath}api/admin/department/";
 
 //Location Api's
-  static const allLocationApi = "${apiMainPath}api/location";
+  static const allLocationApi = "${apiMainPath}api/admin/location";
   static const companyWiseLocationApi = "${apiMainPath}api/";
-  static const deleteLocationApi = "${apiMainPath}api/location/delete/";
-  static const getLocationApi = "${apiMainPath}api/location/edit/";
-  static const createLocationApi = "${apiMainPath}api/location/store";
-  static const updateLocationApi = "${apiMainPath}api/location/update";
+  static const deleteLocationApi = "${apiMainPath}api/admin/location/delete/";
+  static const getLocationApi = "${apiMainPath}api/admin/location/edit/";
+  static const createLocationApi = "${apiMainPath}api/admin/location/store";
+  static const updateLocationApi = "${apiMainPath}api/admin/location/update";
 
 }
