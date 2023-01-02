@@ -117,7 +117,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: AppMessage.mandatory,
+                      text: " ${AppMessage.mandatory}",
                       style: TextStyleConfig.textStyle(
                         textColor: AppColors.redColor,
                         fontWeight: FontWeight.w600,
@@ -275,10 +275,25 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  AppMessage.isActive,
-                  style: TextStyleConfig.textStyle(
-                      fontWeight: FontWeight.w600, fontSize: 16),
+                RichText(
+                  textAlign: TextAlign.left,
+                  maxLines: null,
+                  text: TextSpan(
+                      text: AppMessage.isActive,
+                      style: TextStyleConfig.textStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: " ${AppMessage.mandatory}",
+                          style: TextStyleConfig.textStyle(
+                            textColor: AppColors.redColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ]),
                 ).commonSymmetricPadding(vertical: 2),
                 Container(
                   width: Get.width,
