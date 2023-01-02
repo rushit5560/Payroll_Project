@@ -63,7 +63,7 @@ class CompanyDrawerMenu extends StatelessWidget {
                                       companyViewScreenController.companyName,
                                     ]);
                               },
-                              title: AppMessage.employeeNameDrawer,
+                              title: AppMessage.location,
                             ),
                             /*CompanyDrawerTile(
                               onTap: () {
