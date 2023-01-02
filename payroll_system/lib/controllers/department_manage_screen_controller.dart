@@ -12,6 +12,7 @@ import 'package:payroll_system/models/department_manage_screen_models/update_dep
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/utils/extension_methods/user_details.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class DepartmentManageScreenController extends GetxController {
   DepartmentOption departmentOption = Get.arguments[0];
@@ -23,6 +24,7 @@ class DepartmentManageScreenController extends GetxController {
 
   DepartmentListScreenController departmentListScreenController =
       Get.find<DepartmentListScreenController>();
+  UserPreference userPreference = UserPreference();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameFieldController = TextEditingController();
@@ -35,10 +37,14 @@ class DepartmentManageScreenController extends GetxController {
     log('Create department Api Url : $url');
 
     try {
+
+      int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+
       Map<String, dynamic> bodyData = {
         "department_name": nameFieldController.text.trim(),
-        "userid": companyId,
-        "is_active": selectedValue.value == "active" ? "1" : "0"
+        "userid": "$userId", // LoggedIn UserId Put in this field
+        "is_active": selectedValue.value == "active" ? "1" : "0",
+        "cid": companyId // Out here company id
       };
       log("bodyData : $bodyData");
       http.Response response = await http.post(
@@ -58,7 +64,7 @@ class DepartmentManageScreenController extends GetxController {
         await departmentListScreenController.getCompanyWiseDepartmentFunction();
       } else {
         log('createDepartmentFunction Else');
-        if(createDepartmentModel.error.departmentName[0].contains("The department name has already been taken")) {
+        if(createDepartmentModel.error.departmentName[0].toString().contains("The department name has already been taken")) {
           Fluttertoast.showToast(msg: createDepartmentModel.error.departmentName[0].toString());
         }
       }
@@ -72,7 +78,7 @@ class DepartmentManageScreenController extends GetxController {
 
   Future<void> departmentGetByIdFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.getDepartmentDetailsApi}$departmentId";
+    String url = "${ApiUrl.getDepartmentDetailsApi}$departmentId/$companyId";
     log('Department Get By Id Api Url :$url');
 
     try {
@@ -104,11 +110,14 @@ class DepartmentManageScreenController extends GetxController {
     log('Update Department Api Url : $url');
 
     try {
+      int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+
       Map<String, dynamic> bodyData = {
         "department_name": nameFieldController.text.trim(),
-        "userid": "${UserDetails.userId}",
+        "userid": "$userId",
         "id": departmentId,
-        "is_active": selectedValue.value == "active" ? "1" : "0"
+        "is_active": selectedValue.value == "active" ? "1" : "0",
+        "cid": companyId // Out here company id
       };
       log('bodyData : $bodyData');
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
@@ -121,7 +130,7 @@ class DepartmentManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: updateDepartmentModel.messege);
         Get.back();
-        await departmentListScreenController.getAllDepartmentFunction();
+        await departmentListScreenController.getCompanyWiseDepartmentFunction();
       } else {
         log('updateDepartmentFunction Else');
       }

@@ -159,10 +159,10 @@ class LoginController extends GetxController {
           }
         });
       } else {
-        if (loginDetailsModel.error.contains("Email don't match")) {
-          Fluttertoast.showToast(msg: "Email don't match");
-        } else if (loginDetailsModel.error.contains("password don't match")) {
-          Fluttertoast.showToast(msg: "password don't match");
+        if (loginDetailsModel.error.toLowerCase().contains("email don't match")) {
+          Fluttertoast.showToast(msg: loginDetailsModel.error);
+        } else if (loginDetailsModel.error.toLowerCase().contains("password don't match")) {
+          Fluttertoast.showToast(msg: loginDetailsModel.error);
         }
       }
     } catch (e) {

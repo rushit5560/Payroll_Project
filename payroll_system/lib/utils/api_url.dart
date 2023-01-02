@@ -40,16 +40,16 @@ class ApiUrl {
   // static const activeCompanyApi = "${apiMainPath}api/company/active/";
 
   // Department Api's
-  static const allDepartmentApi = "${apiMainPath}api/department";
+  static const allDepartmentApi = "${apiMainPath}api/admin/department";
   static const createDepartmentApi = "${apiMainPath}api/admin/department/store";
-  static const deleteDepartmentApi = "${apiMainPath}api/department/delete/";
-  static const updateDepartmentApi = "${apiMainPath}api/department/update";
+  static const deleteDepartmentApi = "${apiMainPath}api/admin/department/delete/";
+  static const updateDepartmentApi = "${apiMainPath}api/admin/department/update";
   static const getDepartmentDetailsApi = "${apiMainPath}api/admin/department/edit/";
   static const getCompanyDepartmentApi = "${apiMainPath}api/admin/department/";
 
 //Location Api's
   static const allLocationApi = "${apiMainPath}api/admin/location";
-  static const companyWiseLocationApi = "${apiMainPath}api/";
+  static const companyWiseLocationApi = "${apiMainPath}api/admin/location/";
   static const deleteLocationApi = "${apiMainPath}api/admin/location/delete/";
   static const getLocationApi = "${apiMainPath}api/admin/location/edit/";
   static const createLocationApi = "${apiMainPath}api/admin/location/store";
