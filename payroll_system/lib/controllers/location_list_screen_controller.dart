@@ -16,7 +16,7 @@ class LocationListScreenController extends GetxController {
   List<LocationListData> allLocationList = [];
 
   /// Company wise location
-  Future<void> getCompanyWiseLocationFunction(companyId) async {
+  Future<void> getCompanyWiseLocationFunction() async {
     isLoading(true);
     String url = "${ApiUrl.companyWiseLocationApi}$companyId";
     log('Company Wise Location Api Url : $url');
@@ -106,7 +106,7 @@ class LocationListScreenController extends GetxController {
 
   @override
   void onInit() {
-    getCompanyWiseLocationFunction(companyId);
+    getCompanyWiseLocationFunction();
     super.onInit();
   }
 

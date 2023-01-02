@@ -57,7 +57,7 @@ class LocationManageScreenController extends GetxController {
           Get.back();
 
           await allLocationListScreenController
-              .getCompanyWiseLocationFunction(companyId);
+              .getCompanyWiseLocationFunction();
         } else {
           log('locationCreateFunction Else');
           if (locationCreateModel.error.locationName
@@ -134,7 +134,7 @@ class LocationManageScreenController extends GetxController {
           Fluttertoast.showToast(msg: locationUpdateModel.messege);
           Get.back();
           await allLocationListScreenController
-              .getCompanyWiseLocationFunction(companyId);
+              .getCompanyWiseLocationFunction();
         } else {
           log("locationUpdateFunction Else");
         }
