@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:payroll_system/models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 import '../constants/enums.dart';
 import 'package:sizer/sizer.dart';
@@ -81,11 +82,9 @@ class EmployeeManageScreenController extends GetxController {
 
   RxList<String> selectedEmpDepartmentList = RxList<String>([]);
   List<String> selectedEmpDepartmentIdList = [];
-
+  List<DepartmentData> allDepartmentList = [];
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   TextEditingController textEditingController = TextEditingController();
-
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -208,7 +207,7 @@ class EmployeeManageScreenController extends GetxController {
   Future<void> getAllCompanyFunction() async {
     isLoading(true);
     String url = ApiUrl.allCompanyApi;
-    log('Get All Company List Api Url :$url');
+    // log('Get All Company List Api Url :$url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
@@ -226,7 +225,7 @@ class EmployeeManageScreenController extends GetxController {
         companyDDSelectedItem = allCompanyList[0];
 
         // log('companyDDSelectedItem : ${companyDDSelectedItem!.userName}');
-        log('allCompanyList : ${allCompanyList.length}');
+        // log('allCompanyList : ${allCompanyList.length}');
 
         companyStringList.clear();
         for (int i = 0; i < allCompanyList.length; i++) {
@@ -256,7 +255,8 @@ class EmployeeManageScreenController extends GetxController {
       await employeeGetByIdFunction();
     } else if (employeeOption == EmployeeOption.create) {
       // when create new company
-      await getCompanyDepartmentFunction(companyDDSelectedItem!.id.toString());
+      await getCompanyWiseDepartmentFunction();
+
       // isLoading(false);
     }
   }
@@ -264,12 +264,12 @@ class EmployeeManageScreenController extends GetxController {
   Future<void> employeeGetByIdFunction() async {
     isLoading(true);
     String url = "${ApiUrl.getEmployeeDetailsApi}$employeeId";
-    log('Employee Details Get By Id Api Url : $url');
+    // log('Employee Details Get By Id Api Url : $url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      log("employeeGetByIdFunction  ${response.body}");
+      // log("employeeGetByIdFunction  ${response.body}");
       EmployeeGetByIdModel employeeGetByIdModel =
           EmployeeGetByIdModel.fromJson(json.decode(response.body));
 
@@ -350,61 +350,101 @@ class EmployeeManageScreenController extends GetxController {
     // await getCompanyDepartmentFunction(companyId);
   }
 
-  Future<void> getCompanyDepartmentFunction(String companyId) async {
+  Future<void> getCompanyWiseDepartmentFunction() async {
     isLoading(true);
-    String url = ApiUrl.getCompanyDepartmentApi;
-    log('Get CompanyDepartment Api Url :$url');
+    String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
+    // log('Get Company Department Api Url :$url');
 
     try {
-      var request = http.MultipartRequest('POST', Uri.parse(url));
-      request.fields['id'] = companyId.toString();
+      // var request = http.MultipartRequest('POST', Uri.parse(url));
+      // request.fields['id'] = companyId;
+      //
+      // var response = await request.send();
+      //
+      // response.stream
+      //     .transform(const Utf8Decoder())
+      //     .transform(const LineSplitter())
+      //     .listen((value) {
 
-      var response = await request.send();
-
-      response.stream
-          .transform(const Utf8Decoder())
-          .transform(const LineSplitter())
-          .listen((value) {
-        log("getCompanyDepartmentFunction res body :: $value");
-        CompanyDeprtmentModel companyDepartmentModel =
-            CompanyDeprtmentModel.fromJson(json.decode(value));
-        isSuccessStatus = companyDepartmentModel.success.obs;
-
-        if (isSuccessStatus.value) {
-          companyDepartment.clear();
-          companyDepartment.addAll(companyDepartmentModel.data);
-
-          if (employeeOption == EmployeeOption.create) {
-            if (companyDepartment.isNotEmpty) {
-              companyDepartmentData = companyDepartment[0];
-            } else {
-              Fluttertoast.showToast(msg: "No department in this company!");
-            }
-          } else if (employeeOption == EmployeeOption.update) {
-            //update logic here
-            for (int i = 0; i < companyDepartment.length; i++) {
-              // ignore: unrelated_type_equality_checks
-              if (departmentId == companyDepartment[i].id) {
-                companyDepartmentData = companyDepartment[i];
-              }
-            }
+      http.Response response = await http.get(Uri.parse(url));
+      AllDepartmentModel companyDepartmentModel =
+          AllDepartmentModel.fromJson(json.decode(response.body));
+      isSuccessStatus = companyDepartmentModel.success.obs;
+      log("getCompanyWiseDepartmentFunction respose ${response.body}");
+      if (isSuccessStatus.value) {
+        allDepartmentList.clear();
+        allDepartmentList.addAll(companyDepartmentModel.data);
+        if (employeeOption == EmployeeOption.create) {
+          if (companyDepartment.isNotEmpty) {
+            companyDepartmentData = companyDepartment[0];
+          } else {
+            Fluttertoast.showToast(msg: "No department in this company!");
           }
-          departmentStringList.clear();
-          log("companyDepartment ::::$companyDepartment");
+        } else if (employeeOption == EmployeeOption.update) {
+          // update logic here
+
           for (int i = 0; i < companyDepartment.length; i++) {
-            departmentStringList.add(companyDepartment[i].departmentName);
+            if (departmentId == companyDepartment[i].id) {
+              companyDepartmentData = companyDepartment[i];
+            }
           }
-        } else {
-          log('getAllCompanyFunction Else');
         }
-      });
+        departmentStringList.clear();
+
+        for (int i = 0; i < companyDepartment.length; i++) {
+          departmentStringList.add(companyDepartment[i].departmentName);
+        }
+
+        log('allDepartmentList : ${allDepartmentList.length}');
+      } else {
+        log('getAllCompanyFunction Else');
+      }
+      // });
     } catch (e) {
-      Fluttertoast.showToast(msg: "Something went wrong!");
+      Fluttertoast.showToast(msg: "Something went wrong !");
       rethrow;
-    } /* finally {
-      // isLoading(true);
+    } finally {
       isLoading(false);
-    }*/
+    }
+    await getCompanyWiseLocationFunction(companyId);
+  }
+
+  /// Company wise location
+  Future<void> getCompanyWiseLocationFunction(companyId) async {
+    isLoading(true);
+    String url = "${ApiUrl.companyWiseLocationApi}$companyId";
+    // log('Company Wise Location Api Url : $url');
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+      // log('response : ${response.body}');
+
+      AllLocationListModel allLocationListModel =
+          AllLocationListModel.fromJson(json.decode(response.body));
+      isSuccessStatus = allLocationListModel.success.obs;
+
+      if (isSuccessStatus.value) {
+        allLocationList.clear();
+        allLocationList.addAll(allLocationListModel.data);
+        locationListData = allLocationList[0];
+
+        for (int i = 0; i < allLocationList.length; i++) {
+          locationStringList.add(allLocationList[i].locationName);
+        }
+        // allLocationList = allLocationListModel.data;
+
+        // Fluttertoast.showToast(msg: allLocationListModel.messege);
+        // allLocationList.removeAt(index);
+      } else {
+        log('deleteCompanyFunction Else');
+      }
+    } catch (e) {
+      log('deleteCompanyFunction Error :$e');
+      rethrow;
+    }
+    //  finally {
+    //   isLoading(false);
+    // }
 
     if (employeeOption == EmployeeOption.update) {
       await employeeGetByIdFunction();
@@ -412,6 +452,61 @@ class EmployeeManageScreenController extends GetxController {
       isLoading(false);
     }
   }
+  // Future<void> getCompanyDepartmentFunction() async {
+  //   isLoading(true);
+  //   String url = ApiUrl.getCompanyDepartmentApi;
+  //   log('Get CompanyDepartment Api Url :$url');
+
+  //   try {
+  //     var request = http.MultipartRequest('POST', Uri.parse(url));
+  //     request.fields['id'] = companyId.toString();
+
+  //     var response = await request.send();
+
+  //     response.stream
+  //         .transform(const Utf8Decoder())
+  //         .transform(const LineSplitter())
+  //         .listen((value) {
+  //       log("getCompanyDepartmentFunction res body :: $value");
+  //       CompanyDeprtmentModel companyDepartmentModel =
+  //           CompanyDeprtmentModel.fromJson(json.decode(value));
+  //       isSuccessStatus = companyDepartmentModel.success.obs;
+
+  //       if (isSuccessStatus.value) {
+  //         companyDepartment.clear();
+  //         companyDepartment.addAll(companyDepartmentModel.data);
+
+  //         if (employeeOption == EmployeeOption.create) {
+  //           if (companyDepartment.isNotEmpty) {
+  //             companyDepartmentData = companyDepartment[0];
+  //           } else {
+  //             Fluttertoast.showToast(msg: "No department in this company!");
+  //           }
+  //         } else if (employeeOption == EmployeeOption.update) {
+  //           //update logic here
+  //           for (int i = 0; i < companyDepartment.length; i++) {
+  //             // ignore: unrelated_type_equality_checks
+  //             if (departmentId == companyDepartment[i].id) {
+  //               companyDepartmentData = companyDepartment[i];
+  //             }
+  //           }
+  //         }
+  //         departmentStringList.clear();
+  //         log("companyDepartment ::::$companyDepartment");
+  //         for (int i = 0; i < companyDepartment.length; i++) {
+  //           departmentStringList.add(companyDepartment[i].departmentName);
+  //         }
+  //       } else {
+  //         log('getAllCompanyFunction Else');
+  //       }
+  //     });
+  //   } catch (e) {
+  //     Fluttertoast.showToast(msg: "Something went wrong!");
+  //     rethrow;
+  //   }
+
+  //   await getCompanyWiseLocationFunction(companyId);
+  // }
 
   Future<void> employeeCreateFunction() async {
     isLoading(true);
@@ -469,7 +564,8 @@ class EmployeeManageScreenController extends GetxController {
           Fluttertoast.showToast(msg: employeeCreateModel.messege);
 
           Get.back();
-          await employeeListScreenController.getAllEmployeeFunction();
+          await employeeListScreenController
+              .getCompanyWiseEmployeeFunction(companyId);
         } else {
           log('createCompanyFunction Else');
         }
@@ -533,7 +629,8 @@ class EmployeeManageScreenController extends GetxController {
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: updateEmployeeModel.messege);
           Get.back();
-          await employeeListScreenController.getAllEmployeeFunction();
+          await employeeListScreenController
+              .getCompanyWiseEmployeeFunction(companyId);
         } else {
           log('updateCompanyDetailsFunction Else');
         }
@@ -547,49 +644,12 @@ class EmployeeManageScreenController extends GetxController {
     }
   }
 
-  /// Company wise location
-  Future<void> getCompanyWiseLocationFunction(companyId) async {
-    isLoading(true);
-    String url = "${ApiUrl.companyWiseLocationApi}$companyId";
-    log('Company Wise Location Api Url : $url');
-
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-      log('response : ${response.body}');
-
-      AllLocationListModel allLocationListModel =
-          AllLocationListModel.fromJson(json.decode(response.body));
-      isSuccessStatus = allLocationListModel.success.obs;
-
-      if (isSuccessStatus.value) {
-        allLocationList.clear();
-        allLocationList.addAll(allLocationListModel.data);
-        locationListData = allLocationList[0];
-
-        for (int i = 0; i < allLocationList.length; i++) {
-          locationStringList.add(allLocationList[i].locationName);
-        }
-        // allLocationList = allLocationListModel.data;
-
-        // Fluttertoast.showToast(msg: allLocationListModel.messege);
-        // allLocationList.removeAt(index);
-      } else {
-        log('deleteCompanyFunction Else');
-      }
-    } catch (e) {
-      log('deleteCompanyFunction Error :$e');
-      rethrow;
-    } finally {
-      isLoading(false);
-    }
-  }
-
   @override
   void onInit() {
     // getAllCompanyFunction();
+    // String companyTempId = companyId;
     companyDDSelectedStringItem = companyName;
-    getCompanyDepartmentFunction(companyId);
-
+    getCompanyWiseDepartmentFunction();
     /*if(employeeOption == EmployeeOption.create) {
       getCompanyDepartmentFunction(companyId);
     } else if(employeeOption == EmployeeOption.update) {

@@ -25,14 +25,17 @@ class EmployeeListScreenWidgets extends StatelessWidget {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
-      itemCount: employeeListScreenController.allEmployeeList.length,
+      itemCount: employeeListScreenController.allCompanyWiseEmployeeList.length,
       itemBuilder: (context, index) {
-        final value = employeeListScreenController.allEmployeeList[index];
+        final value = employeeListScreenController.allCompanyWiseEmployeeList[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: AppColors.greyColor,width: 2,),
+              border: Border.all(
+                color: AppColors.greyColor,
+                width: 2,
+              ),
             ),
             child: Column(
               children: [
@@ -50,7 +53,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                 SizedBox(height: 1.h),
                 SingleListTileCustom(
                   textKey: AppMessage.phoneNumber,
-                  textValue: value.phoneNo,
+                  textValue: value.mobileNumber,
                 ),
                 SizedBox(height: 2.h),
                 SingleListTileCustom(
@@ -64,23 +67,25 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                 SizedBox(height: 2.h),
                 SingleListTileCustom(
                     textKey: AppMessage.employeeStatus,
-                    textValue:
-                        value.isActive == AppMessage.value ? AppMessage.active : AppMessage.inActive),
+                    textValue: value.isActive == AppMessage.value
+                        ? AppMessage.active
+                        : AppMessage.inActive),
                 SizedBox(height: 2.h),
                 EditAndDeleteButtonModule(
                   onDeleteTap: () async {
-                    bool employeeUpdatePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeEditKey);
+                    bool employeeUpdatePermission =
+                        await userPreference.getBoolPermissionFromPrefs(
+                            keyId: UserPreference.employeeEditKey);
 
-                    if(employeeUpdatePermission == true) {
+                    if (employeeUpdatePermission == true) {
                       CustomAlertDialog().showAlertDialog(
                         context: context,
-                        textContent:
-                        AppMessage.deleteEmployeeAlertMessage,
+                        textContent: AppMessage.deleteEmployeeAlertMessage,
                         onYesTap: () async {
                           log("Delete Employee");
                           await employeeListScreenController
                               .deleteEmployeeFunction(
-                              value.id.toString(), index);
+                                  value.id.toString(), index);
                         },
                         onCancelTap: () {
                           Get.back();
@@ -89,15 +94,15 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                     } else {
                       Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                     }
-
-
                   },
                   onEditTap: () async {
-                    bool employeeDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDeleteKey);
+                    bool employeeDeletePermission =
+                        await userPreference.getBoolPermissionFromPrefs(
+                            keyId: UserPreference.employeeDeleteKey);
 
-                    if(employeeDeletePermission == true) {
+                    if (employeeDeletePermission == true) {
                       Get.to(
-                            () => EmployeeManageScreen(),
+                        () => EmployeeManageScreen(),
                         arguments: [
                           EmployeeOption.update,
                           value.id.toString(),

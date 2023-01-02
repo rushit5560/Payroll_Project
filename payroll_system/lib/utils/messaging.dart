@@ -85,7 +85,7 @@ class AppMessage {
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
   static String salary = 'Salary (\$,₹)';
-  static String payPer = 'Payper';
+  static String payPeriod = 'Pay period';
   static String employmentDate = 'Employment Date';
   static String endDate = 'End Date';
   static String isActive = 'Status';
@@ -114,7 +114,7 @@ class AppMessage {
   static String selectDate = 'Select Date';
   static String exInsertYourDob = 'Ex. Insert your dob';
   static String pleaseSelectPayper = 'Please select payper';
-  static String street = 'Street Address';
+  static String street = 'Street';
   static String landmark = 'Landmark';
   static String zipcode = 'Zipcode';
   static String city = 'City';

@@ -7,6 +7,7 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
+import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -33,15 +34,13 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Text(
-                AppMessage.employeeDetails,
-                style: TextStyleConfig.textStyle(
-                    fontSize: 22.sp, fontWeight: FontWeight.w400),
-              ),
+            Text(
+              AppMessage.employeeDetails,
+              style: TextStyleConfig.textStyle(
+                  fontSize: 22.sp, fontWeight: FontWeight.w400),
             ),
             SizedBox(height: 2.h),
-            ImagePickerCustom(),
+            // ImagePickerCustom(),
             SizedBox(height: 2.h),
             FormSingleFieldModule(
               headerText: AppMessage.firstName,
@@ -108,7 +107,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
-                  text: AppMessage.payPer,
+                  text: AppMessage.payPeriod,
                   style: TextStyleConfig.textStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -183,26 +182,36 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             //       FieldValidation().validateMobileNumber(value),
             // ),
             // const SizedBox(height: 5),
-            FormSingleFieldModule(
-              headerText: AppMessage.hourlyRate,
-              text: AppMessage.hourlyRate,
-              mandatoryText: AppMessage.mandatory,
-              keyboardType: TextInputType.number,
-              textEditingController:
-                  employeeCreteScreenController.hourlyRateController,
-              validate: (value) => FieldValidation().validateHourlyRate(value),
-            ),
-            const SizedBox(height: 5),
-            FormSingleFieldModule(
-              headerText: AppMessage.salary,
-              text: AppMessage.salary,
-              mandatoryText: AppMessage.mandatory,
-              keyboardType: TextInputType.number,
-              textEditingController:
-                  employeeCreteScreenController.salaryController,
-              validate: (value) => FieldValidation().validateSalary(value),
-            ),
-            const SizedBox(height: 5),
+
+            employeeCreteScreenController.selectedValuePayper.value == "Hourly"
+                ? FormSingleFieldModule(
+                    headerText: AppMessage.hourlyRate,
+                    text: AppMessage.hourlyRate,
+                    mandatoryText: AppMessage.mandatory,
+                    keyboardType: TextInputType.number,
+                    textEditingController:
+                        employeeCreteScreenController.hourlyRateController,
+                    validate: (value) =>
+                        FieldValidation().validateHourlyRate(value),
+                  )
+                : employeeCreteScreenController.selectedValuePayper.value ==
+                        "Salary"
+                    ? FormSingleFieldModule(
+                        headerText: AppMessage.salary,
+                        text: AppMessage.salary,
+                        mandatoryText: AppMessage.mandatory,
+                        keyboardType: TextInputType.number,
+                        textEditingController:
+                            employeeCreteScreenController.salaryController,
+                        validate: (value) =>
+                            FieldValidation().validateSalary(value),
+                      )
+                    : Container(),
+            employeeCreteScreenController.selectedValuePayper.value ==
+                    "Choose Option"
+                ? Container()
+                : const SizedBox(height: 5),
+
             FormSingleFieldModule(
               headerText: AppMessage.employmentDate,
               text: AppMessage.selectStartDate,
@@ -539,26 +548,49 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: AppColors.greyColor),
               ),
-              // child: Padding(
-              //   padding: const EdgeInsets.symmetric(vertical: 3),
-              //   child: DropdownButtonHideUnderline(
-              //     child: DropdownButton<String>(
-              //       value: employeeCreteScreenController
-              //           .companyLocationSelectedStringItem,
-              //       items: [employeeCreteScreenController.locationName]
-              //           .map<DropdownMenuItem<String>>((String value) {
-              //         return DropdownMenuItem<String>(
-              //           value: value,
-              //           child: Text(value),
-              //         );
-              //       }).toList(),
-              //       onChanged: (String? value) async {
-              //         employeeCreteScreenController
-              //             .companyLocationSelectedStringItem = value!;
-              //       },
-              //     ).commonOnlyPadding(left: 10, right: 10),
-              //   ),
-              // ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                // child: DropdownButtonHideUnderline(
+                //   child: DropdownButton<LocationListData>(
+                //     value:
+                //         employeeCreteScreenController.locationListData,
+                //     items: employeeCreteScreenController.companyDepartment
+                //         .map<DropdownMenuItem<LocationListData>>(
+                //             (LocationListData value) {
+                //       return DropdownMenuItem<LocationListData>(
+                //         value: value,
+                //         child: Text(value.locationName),
+                //       );
+                //     }).toList(),
+                //     onChanged: (LocationListData? value) async {
+                //       employeeCreteScreenController.isLoading(true);
+                //       // This is called when the user selects an item.
+                //       log('valuevaluevaluevalue :${value!.locationName}');
+                //       // employeeCreteScreenController.isloding(true);
+                //       employeeCreteScreenController.locationListData =
+                //           value;
+                //       employeeCreteScreenController.isLoading(false);
+                //     },
+                //   ).commonOnlyPadding(left: 10, right: 10),
+                // ),
+
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    value: employeeCreteScreenController.locationListData,
+                    items: employeeCreteScreenController.allLocationList
+                        .map<DropdownMenuItem<LocationListData>>(
+                            (LocationListData value) {
+                      return DropdownMenuItem<LocationListData>(
+                          value: value, child: Text(value.locationName));
+                    }).toList(),
+                    onChanged: (LocationListData? value) async {
+                      employeeCreteScreenController.isLoading(true);
+                      employeeCreteScreenController.locationListData = value;
+                      employeeCreteScreenController.isLoading(false);
+                    },
+                  ).commonOnlyPadding(left: 10, right: 10),
+                ),
+              ),
             ),
             const SizedBox(height: 5),
 

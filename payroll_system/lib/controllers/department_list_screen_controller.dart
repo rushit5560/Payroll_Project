@@ -109,7 +109,6 @@ class DepartmentListScreenController extends GetxController {
       // });
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong !");
-
       rethrow;
     } finally {
       isLoading(false);

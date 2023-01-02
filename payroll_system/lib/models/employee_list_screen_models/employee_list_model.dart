@@ -1,17 +1,15 @@
-// To parse this JSON data, do
-//
-//     final aboutDetailsModel = aboutDetailsModelFromJson(jsonString);
+
 
 import 'dart:convert';
 
-AllEmployeeModel aboutDetailsModelFromJson(String str) =>
-    AllEmployeeModel.fromJson(json.decode(str));
+CompanyWiseEmployeeModel companyWiseEmployeeModelFromJson(String str) =>
+    CompanyWiseEmployeeModel.fromJson(json.decode(str));
 
-String aboutDetailsModelToJson(AllEmployeeModel data) =>
+String companyWiseEmployeeModelToJson(CompanyWiseEmployeeModel data) =>
     json.encode(data.toJson());
 
-class AllEmployeeModel {
-  AllEmployeeModel({
+class CompanyWiseEmployeeModel {
+  CompanyWiseEmployeeModel({
     required this.success,
     required this.messege,
     required this.data,
@@ -19,17 +17,14 @@ class AllEmployeeModel {
 
   final bool success;
   final String messege;
-  final List<EmployeeData> data;
+  final List<CopanyWiseDepartmentData> data;
 
-  factory AllEmployeeModel.fromJson(Map<String, dynamic> json) =>
-      AllEmployeeModel(
+  factory CompanyWiseEmployeeModel.fromJson(Map<String, dynamic> json) =>
+      CompanyWiseEmployeeModel(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
-        // data:
-        // List<Datum>.from(json["Data"].map((x) => Datum.fromJson(x))) ?? [],
-
-        data: List<EmployeeData>.from(
-            (json["Data"] ?? []).map((x) => EmployeeData.fromJson(x ?? {}))),
+        data: List<CopanyWiseDepartmentData>.from(
+            json["Data"].map((x) => CopanyWiseDepartmentData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,32 +34,39 @@ class AllEmployeeModel {
       };
 }
 
-class EmployeeData {
-  EmployeeData({
+class CopanyWiseDepartmentData {
+  CopanyWiseDepartmentData({
     required this.id,
     required this.firstName,
     required this.middleName,
     required this.lastName,
     required this.password,
     required this.address,
-    required this.phoneNo,
+    required this.mobileNumber,
     required this.email,
+    required this.companyid,
     required this.departmentId,
+    required this.locationId,
     required this.isActive,
-    required this.createdby,
-    // required this.modifiedby,
-    required this.dateOfBrith,
-    required this.home,
-    required this.homeNo,
-    required this.workPhone,
+    required this.payPeriod,
+    // required this.dateOfBirth,
+    // this.home,
+    // this.homeNo,
+    // this.workPhone,
     required this.hourlyRate,
     required this.salary,
-    required this.startDate,
-    required this.lastDayOfWork,
-    required this.companyid,
-    required this.photo,
-    required this.createdAt,
-    required this.updatedAt,
+    // this.employmentStartDate,
+    // this.employmentEndDate,
+    required this.street,
+    required this.town,
+    required this.state,
+    required this.city,
+    required this.zipcode,
+    // this.photo,
+    required this.createdby,
+    required this.modifiedby,
+    // this.createdAt,
+    // this.updatedAt,
   });
 
   final int id;
@@ -73,76 +75,98 @@ class EmployeeData {
   final String lastName;
   final String password;
   final String address;
-  final String phoneNo;
+  final String mobileNumber;
   final String email;
+  final String companyid;
   final String departmentId;
+  final int locationId;
   final String isActive;
-  final int createdby;
-  // final int modifiedby;
-  final String dateOfBrith;
-  final String home;
-  final String homeNo;
-  final String workPhone;
+  final String payPeriod;
+  // final DateTime dateOfBirth;
+  // final dynamic home;
+  // final dynamic homeNo;
+  // final dynamic workPhone;
   final int hourlyRate;
   final int salary;
-  final String startDate;
-  final int lastDayOfWork;
-  final String companyid;
-  final String photo;
-  final String createdAt;
-  final String updatedAt;
+  // final DateTime employmentStartDate;
+  // final DateTime employmentEndDate;
+  final String street;
+  final String town;
+  final String state;
+  final String city;
+  final String zipcode;
+  // final dynamic photo;
+  final int createdby;
+  final int modifiedby;
+  // final DateTime createdAt;
+  // final DateTime updatedAt;
 
-  factory EmployeeData.fromJson(Map<String, dynamic> json) => EmployeeData(
+  factory CopanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
+      CopanyWiseDepartmentData(
         id: json["id"] ?? 0,
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",
         password: json["password"] ?? "",
         address: json["address"] ?? "",
-        phoneNo: json["phone_no"] ?? "",
+        mobileNumber: json["mobile_number"] ?? "",
         email: json["email"] ?? "",
+        companyid: json["companyid"] ?? "",
         departmentId: json["department_id"] ?? "",
+        locationId: json["location_id"] ?? 0,
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? 0,
-        // modifiedby: json["modifiedby"] == null ? null : json["modifiedby"],
-        dateOfBrith: json["date_of_brith"] ?? "",
-        home: json["home"] ?? "",
-        homeNo: json["home_no"] ?? "",
-        workPhone: json["work_phone"] ?? "",
+        payPeriod: json["pay_period"] ?? "",
+        // dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        // home: json["home"],
+        // homeNo: json["home_no"],
+        // workPhone: json["work_phone"],
         hourlyRate: json["hourly_rate"] ?? 0,
         salary: json["salary"] ?? 0,
-        startDate: json["start_date"] ?? "",
-        lastDayOfWork: json["last_day_of_work"] ?? 0,
-        companyid: json["companyid"] ?? "",
-        photo: json["photo"] ?? "",
-        createdAt: json["created_at"] ?? "",
-        updatedAt: json["updated_at"] ?? "",
+        // employmentStartDate: DateTime.parse(json["employment_start_date"]),
+        // employmentEndDate: DateTime.parse(json["employment_end_date"]),
+        street: json["street"] ?? "",
+        town: json["town"] ?? "",
+        state: json["state"] ?? "",
+        city: json["city"] ?? "",
+        zipcode: json["zipcode"] ?? "",
+        // photo: json["photo"],
+        createdby: json["createdby"] ?? 0,
+        modifiedby: json["modifiedby"] ?? 0,
+        // createdAt: DateTime.parse(json["created_at"]),
+        // updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   // Map<String, dynamic> toJson() => {
-  //       "id": id,
-  //       "first_name": firstName,
-  //       "middle_name": middleName,
-  //       "last_name": lastName,
-  //       "password": password,
-  //       "address": address,
-  //       "phone_no": phoneNo,
-  //       "email": email,
-  //       "department_id": departmentId,
-  //       "is_active": isActive,
-  //       "createdby": createdby,
-  //       // "modifiedby": modifiedby == null ? null : modifiedby,
-  //       "date_of_brith": dateOfBrith,
-  //       "home": home,
-  //       "home_no": homeNo,
-  //       "work_phone": workPhone,
-  //       "hourly_rate": hourlyRate,
-  //       "salary": salary,
-  //       "start_date": startDate,
-  //       "last_day_of_work": lastDayOfWork,
-  //       "companyid": companyid,
-  //       "photo": photo,
-  //       "created_at": createdAt,
-  //       "updated_at": updatedAt,
-  //     };
+  //     "id": id,
+  //     "first_name": firstName,
+  //     "middle_name": middleName,
+  //     "last_name": lastName,
+  //     "password": password,
+  //     "address": address,
+  //     "mobile_number": mobileNumber,
+  //     "email": email,
+  //     "companyid": companyid,
+  //     "department_id": departmentId,
+  //     "location_id": locationId,
+  //     "is_active": isActive,
+  //     "pay_period": payPeriod,
+  //     "date_of_birth": dateOfBirth.toIso8601String(),
+  //     "home": home,
+  //     "home_no": homeNo,
+  //     "work_phone": workPhone,
+  //     "hourly_rate": hourlyRate,
+  //     "salary": salary,
+  //     // "employment_start_date": employmentStartDate.toIso8601String(),
+  //     // "employment_end_date": employmentEndDate.toIso8601String(),
+  //     "street": street,
+  //     "town": town,
+  //     "state": state,
+  //     "city": city,
+  //     "zipcode": zipcode,
+  //     // "photo": photo,
+  //     "createdby": createdby,
+  //     "modifiedby": modifiedby,
+  //     // "created_at": createdAt.toIso8601String(),
+  //     // "updated_at": updatedAt.toIso8601String(),
+  // };
 }

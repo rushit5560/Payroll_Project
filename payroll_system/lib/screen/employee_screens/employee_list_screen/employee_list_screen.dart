@@ -58,7 +58,7 @@ class EmployeeListScreen extends StatelessWidget {
         body: Obx(
           () => employeeListScreenController.isLoading.value
               ? CommonLoader().showLoader()
-              : employeeListScreenController.allEmployeeList.isEmpty
+              : employeeListScreenController.allCompanyWiseEmployeeList.isEmpty
                   ? Center(child: Text(AppMessage.noEmpFound))
                   : Column(
                       children: [

@@ -7,7 +7,6 @@ import '../utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import '../models/employee_manage_screen_models/employee_delete_model.dart';
 
-
 class EmployeeListScreenController extends GetxController {
   String companyId = Get.arguments[0];
   String companyName = Get.arguments[1];
@@ -15,26 +14,28 @@ class EmployeeListScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
-  List<EmployeeData> allEmployeeList = [];
+  List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
 
   // int roleId = 0;
   // int userId = 0;
 
   // Get All Employee
-  Future<void> getAllEmployeeFunction() async {
+  Future<void> getCompanyWiseEmployeeFunction(companyId) async {
     isLoading(true);
-    String url = ApiUrl.allEmployeeApi;
+    String url = "${ApiUrl.allEmployeeApi}$companyId";
     log('Get All Company List Api Url :$url');
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      AllEmployeeModel allEmployeeModel =
-          AllEmployeeModel.fromJson(json.decode(response.body));
-      isSuccessStatus = allEmployeeModel.success.obs;
-
+      CompanyWiseEmployeeModel companyWiseEmployeeModel =
+          CompanyWiseEmployeeModel.fromJson(json.decode(response.body));
+      isSuccessStatus = companyWiseEmployeeModel.success.obs;
+      log("getCompanyWiseEmployeeFunction ${response.body}");
       if (isSuccessStatus.value) {
-        allEmployeeList.clear();
-        allEmployeeList.addAll(allEmployeeModel.data);
+        allCompanyWiseEmployeeList.clear();
+        allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
+
+        allCompanyWiseEmployeeList = companyWiseEmployeeModel.data;
       } else {
         log('getAllCompanyFunction Else');
       }
@@ -50,11 +51,11 @@ class EmployeeListScreenController extends GetxController {
   Future<void> deleteEmployeeFunction(String employeeId, int index) async {
     isLoading(true);
     String url = "${ApiUrl.deleteEmployeeApi}$employeeId";
-    log('Delete Company Api Url :$url');
+    // log('Delete Company Api Url :$url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-      log('response : ${response.body}');
+      // log('response : ${response.body}');
 
       EmployeeDeleteModel deleteCompanyModel =
           EmployeeDeleteModel.fromJson(json.decode(response.body));
@@ -62,7 +63,7 @@ class EmployeeListScreenController extends GetxController {
 
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: deleteCompanyModel.messege);
-        allEmployeeList.removeAt(index);
+        allCompanyWiseEmployeeList.removeAt(index);
         Get.back();
       } else {
         log('deleteCompanyFunction Else');
@@ -76,31 +77,31 @@ class EmployeeListScreenController extends GetxController {
   }
 
   // Company Wise Employee
-  Future<void> getCompanyEmployeeFunction() async {
-    isLoading(true);
-    String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
-    log('Company Wise Employee Api Url : $url');
+  // Future<void> getCompanyEmployeeFunction() async {
+  //   isLoading(true);
+  //   String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
+  //   log('Company Wise Employee Api Url : $url');
 
-    try {
-      http.Response response = await http.get(Uri.parse(url));
+  //   try {
+  //     http.Response response = await http.get(Uri.parse(url));
 
-      AllEmployeeModel allEmployeeModel =
-          AllEmployeeModel.fromJson(json.decode(response.body));
-      isSuccessStatus = allEmployeeModel.success.obs;
+  //     CompanyWiseEmployeeModel companyWiseEmployeeModel =
+  //         CompanyWiseEmployeeModel.fromJson(json.decode(response.body));
+  //     isSuccessStatus = companyWiseEmployeeModel.success.obs;
 
-      if (isSuccessStatus.value) {
-        allEmployeeList.clear();
-        allEmployeeList.addAll(allEmployeeModel.data);
-      } else {
-        log('getAllCompanyFunction Else');
-      }
-    } catch (e) {
-      log('getCompanyEmployeeFunction Error :$e');
-      rethrow;
-    } finally {
-      isLoading(false);
-    }
-  }
+  //     if (isSuccessStatus.value) {
+  //       allCompanyWiseEmployeeList.clear();
+  //       allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
+  //     } else {
+  //       log('getAllCompanyFunction Else');
+  //     }
+  //   } catch (e) {
+  //     log('getCompanyEmployeeFunction Error :$e');
+  //     rethrow;
+  //   } finally {
+  //     isLoading(false);
+  //   }
+  // }
 
   /*getLoggedInUserRole() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -116,8 +117,9 @@ class EmployeeListScreenController extends GetxController {
 
   @override
   void onInit() {
+    getCompanyWiseEmployeeFunction(companyId);
     // getAllEmployeeFunction();
-    getCompanyEmployeeFunction();
+    // getCompanyEmployeeFunction();
     super.onInit();
   }
 }
