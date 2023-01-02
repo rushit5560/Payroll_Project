@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 import '../constants/enums.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,10 @@ class EmployeeManageScreenController extends GetxController {
   String employeeId = Get.arguments[1] ?? "";
   String companyId = Get.arguments[2];
   String companyName = Get.arguments[3];
+  String locationName = Get.arguments[3];
 
+  List<LocationListData> allLocationList = [];
+  LocationListData? locationListData;
   DateTime? chosenDateTime;
   DateTime selectedDate = DateTime.now();
   RxBool isPasswordVisible = true.obs;
@@ -55,6 +59,7 @@ class EmployeeManageScreenController extends GetxController {
 
   List<String> departmentStringList = [];
   List<String> companyStringList = [];
+  List<String> locationStringList = [];
 
   // int companyId = 0;
   int departmentId = 0;
@@ -69,10 +74,10 @@ class EmployeeManageScreenController extends GetxController {
   CompanyData? companyDDSelectedItem;
   String companyDDSelectedStringItem = '';
   CompanyDepartmentData? companyDepartmentData;
+  String companyLocationSelectedStringItem = '';
 
   RxString selectedDepartmentOption = "".obs;
   RxString selectedCompanyOption = "".obs;
-
 
   RxList<String> selectedEmpDepartmentList = RxList<String>([]);
   List<String> selectedEmpDepartmentIdList = [];
@@ -323,18 +328,15 @@ class EmployeeManageScreenController extends GetxController {
 
         log('Photo : ${employeeGetByIdModel.data.photo}');
 
-
         for (int i = 0; i < allCompanyList.length; i++) {
           if (companyId == allCompanyList[i].id.toString()) {
             companyDDSelectedItem = allCompanyList[i];
           }
         }
 
-
         passwordController.text = employeeGetByIdModel.data.password;
         currentAddressController.text = employeeGetByIdModel.data.address;
         homeAddressController.text = employeeGetByIdModel.data.home;
-
       } else {
         log('getEmployeeDetailsFunction Else');
       }
@@ -399,12 +401,12 @@ class EmployeeManageScreenController extends GetxController {
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong!");
       rethrow;
-    }/* finally {
+    } /* finally {
       // isLoading(true);
       isLoading(false);
     }*/
 
-    if(employeeOption == EmployeeOption.update) {
+    if (employeeOption == EmployeeOption.update) {
       await employeeGetByIdFunction();
     } else {
       isLoading(false);
@@ -545,6 +547,43 @@ class EmployeeManageScreenController extends GetxController {
     }
   }
 
+  /// Company wise location
+  Future<void> getCompanyWiseLocationFunction(companyId) async {
+    isLoading(true);
+    String url = "${ApiUrl.companyWiseLocationApi}$companyId";
+    log('Company Wise Location Api Url : $url');
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+      log('response : ${response.body}');
+
+      AllLocationListModel allLocationListModel =
+          AllLocationListModel.fromJson(json.decode(response.body));
+      isSuccessStatus = allLocationListModel.success.obs;
+
+      if (isSuccessStatus.value) {
+        allLocationList.clear();
+        allLocationList.addAll(allLocationListModel.data);
+        locationListData = allLocationList[0];
+
+        for (int i = 0; i < allLocationList.length; i++) {
+          locationStringList.add(allLocationList[i].locationName);
+        }
+        // allLocationList = allLocationListModel.data;
+
+        // Fluttertoast.showToast(msg: allLocationListModel.messege);
+        // allLocationList.removeAt(index);
+      } else {
+        log('deleteCompanyFunction Else');
+      }
+    } catch (e) {
+      log('deleteCompanyFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
   @override
   void onInit() {
     // getAllCompanyFunction();
@@ -556,7 +595,7 @@ class EmployeeManageScreenController extends GetxController {
     } else if(employeeOption == EmployeeOption.update) {
       employeeGetByIdFunction();
     }*/
-        super.onInit();
+    super.onInit();
   }
 
   loadUI() {

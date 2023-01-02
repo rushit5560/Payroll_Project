@@ -7,7 +7,6 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
-import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -74,7 +73,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               validate: (value) => FieldValidation().validateLastName(value),
             ),
             const SizedBox(height: 5),
-
             FormSingleFieldModule(
               headerText: AppMessage.mobileNumber,
               text: AppMessage.mobileNumber,
@@ -110,14 +108,14 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
-                  text: AppMessage.payPeriod,
+                  text: AppMessage.payPer,
                   style: TextStyleConfig.textStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
                   children: [
                     TextSpan(
-                      text: " ${AppMessage.mandatory}",
+                      text: AppMessage.mandatory,
                       style: TextStyleConfig.textStyle(
                         textColor: AppColors.redColor,
                         fontWeight: FontWeight.w600,
@@ -206,7 +204,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.employmentStartDate,
+              headerText: AppMessage.employmentDate,
               text: AppMessage.selectStartDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
@@ -237,8 +235,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             //   validate: (value) => FieldValidation().validateLastDayWork(value),
             // ),
             FormSingleFieldModule(
-              headerText: AppMessage.employmentEndDate,
-              text: AppMessage.employmentEndDate,
+              headerText: AppMessage.endDate,
+              text: AppMessage.endDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:
@@ -363,22 +361,23 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
-                    value: employeeCreteScreenController.companyDDSelectedStringItem,
+                    value: employeeCreteScreenController
+                        .companyDDSelectedStringItem,
                     items: [employeeCreteScreenController.companyName]
-                        .map<DropdownMenuItem<String>>(
-                            (String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                     onChanged: (String? value) async {
-                      employeeCreteScreenController.companyDDSelectedStringItem
-                      = value!;
+                      employeeCreteScreenController
+                          .companyDDSelectedStringItem = value!;
                     },
                   ).commonOnlyPadding(left: 10, right: 10),
                 ),
               ),
+
               /// Company api data wise dropdown
               /*child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
@@ -513,6 +512,55 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 5),
+            RichText(
+              textAlign: TextAlign.left,
+              maxLines: null,
+              text: TextSpan(
+                  text: AppMessage.location,
+                  style: TextStyleConfig.textStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: AppMessage.mandatory,
+                      style: TextStyleConfig.textStyle(
+                        textColor: AppColors.redColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ]),
+            ).commonSymmetricPadding(vertical: 2),
+            Container(
+              width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColors.greyColor),
+              ),
+              // child: Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 3),
+              //   child: DropdownButtonHideUnderline(
+              //     child: DropdownButton<String>(
+              //       value: employeeCreteScreenController
+              //           .companyLocationSelectedStringItem,
+              //       items: [employeeCreteScreenController.locationName]
+              //           .map<DropdownMenuItem<String>>((String value) {
+              //         return DropdownMenuItem<String>(
+              //           value: value,
+              //           child: Text(value),
+              //         );
+              //       }).toList(),
+              //       onChanged: (String? value) async {
+              //         employeeCreteScreenController
+              //             .companyLocationSelectedStringItem = value!;
+              //       },
+              //     ).commonOnlyPadding(left: 10, right: 10),
+              //   ),
+              // ),
+            ),
+            const SizedBox(height: 5),
 
             employeeCreteScreenController.employeeOption ==
                     EmployeeOption.update
@@ -603,7 +651,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     mandatoryText: AppMessage.empty,
                     textEditingController:
-                    employeeCreteScreenController.cityAddressController,
+                        employeeCreteScreenController.cityAddressController,
                     // validate: (value) =>
                     //     FieldValidation().validateCurrentAddress(value),
                   ),
@@ -617,7 +665,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     mandatoryText: AppMessage.empty,
                     textEditingController:
-                    employeeCreteScreenController.stateAddressController,
+                        employeeCreteScreenController.stateAddressController,
                     // validate: (value) =>
                     //     FieldValidation().validateCurrentAddress(value),
                   ),

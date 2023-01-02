@@ -1,6 +1,6 @@
 class AppMessage {
   static String logIn = 'Log In';
-  static String password = 'Enter a password';
+  static String password = 'Password';
   static String mobileNo = 'Mobile number';
   static String fullName = 'Full Name';
   static String email = 'Enter an Email';
@@ -85,9 +85,9 @@ class AppMessage {
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
   static String salary = 'Salary (\$,₹)';
-  static String payPeriod = 'Pay Period';
-  static String employmentStartDate = 'Employment Start Date';
-  static String employmentEndDate = 'Employment End Date';
+  static String payPer = 'Payper';
+  static String employmentDate = 'Employment Date';
+  static String endDate = 'End Date';
   static String isActive = 'Status';
   static String company = 'Company';
   static String employeeEmail = 'Email';
@@ -138,17 +138,15 @@ class AppMessage {
   static String locationCreate = 'Create Location';
   static String locationUpdate = 'Update Location';
   static String locationName = 'Location Name';
-    static String chooseLocation = 'Choose Location'; 
+  static String chooseLocation = 'Choose Location';
 
- static String companyLocation = "Company Location";
-
+  static String companyLocation = "Company Location";
 
   // No Records Message
   static String noEmpFound = 'No Employee Found.';
   static String noDeptFound = 'No Department Found.';
   static String noCompanyFound = 'No Company Found.';
   static String noLocationFound = 'No Location Found.';
-
 
   //validation messages
   static String pleaseEnterYourName = 'Please enter your name';
@@ -166,7 +164,8 @@ class AppMessage {
   static String pleaseEnterYourCompanyAddress =
       'Please enter your company address';
   static String pleaseEnterStreetAddress = 'Please enter your street address';
-  static String pleaseEnterLandmarkAddress = 'Please enter your landmark address';
+  static String pleaseEnterLandmarkAddress =
+      'Please enter your landmark address';
   static String pleaseEnterCity = 'Please enter city';
   static String pleaseEnterState = 'Please enter state';
   static String pleaseEnterZipCode = 'Please enter zipCode';
@@ -218,6 +217,4 @@ class AppMessage {
   //profile
   static String userName = 'User Name';
   static String name = 'Name';
-
-
 }

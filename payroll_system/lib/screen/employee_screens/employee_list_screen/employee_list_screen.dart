@@ -25,15 +25,16 @@ class EmployeeListScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(employeeListScreenController.companyName),
           centerTitle: true,
-
           actions: [
             FloatingActionButton(
               onPressed: () async {
-                bool employeeCreatePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeAddKey);
+                bool employeeCreatePermission =
+                    await userPreference.getBoolPermissionFromPrefs(
+                        keyId: UserPreference.employeeAddKey);
 
                 if (employeeCreatePermission == true) {
                   Get.to(
-                        () => EmployeeManageScreen(),
+                    () => EmployeeManageScreen(),
                     arguments: [
                       EmployeeOption.create,
                       AppMessage.empty,
@@ -53,29 +54,28 @@ class EmployeeListScreen extends StatelessWidget {
               ),
             ),
           ],
-
         ),
-
         body: Obx(
           () => employeeListScreenController.isLoading.value
               ? CommonLoader().showLoader()
               : employeeListScreenController.allEmployeeList.isEmpty
                   ? Center(child: Text(AppMessage.noEmpFound))
                   : Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    AppMessage.employeeList,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.sp,
-                    ),).commonAllSidePadding(10)
-                ],
-              ),
-              Expanded(child: EmployeeListScreenWidgets()),
-            ],
-          ),
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              AppMessage.employeeList,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp,
+                              ),
+                            ).commonAllSidePadding(10)
+                          ],
+                        ),
+                        Expanded(child: EmployeeListScreenWidgets()),
+                      ],
+                    ),
         ),
       ),
     );
