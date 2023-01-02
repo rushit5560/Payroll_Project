@@ -52,7 +52,7 @@ class LocationGetByIdData {
   final String isActive;
   final int createdby;
   // final dynamic modifiedby;
-  final String companyid;
+  final int companyid;
   // final DateTime createdAt;
   // final DateTime updatedAt;
 
@@ -63,7 +63,7 @@ class LocationGetByIdData {
         isActive: json["is_active"] ?? "",
         createdby: json["createdby"] ?? 0,
         // modifiedby: json["modifiedby"],
-        companyid: json["companyid"] ?? "",
+        companyid: json["companyid"] ?? 0,
         // createdAt: DateTime.parse(json["created_at"]),
         // updatedAt: DateTime.parse(json["updated_at"]),
       );

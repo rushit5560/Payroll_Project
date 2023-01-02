@@ -15,9 +15,9 @@ import '../models/location_manage_screen_model/location_update_model.dart';
 class LocationManageScreenController extends GetxController {
   LocationOption locationOption = Get.arguments[0];
   String getLocationId = Get.arguments[1] ?? "";
-  String companyId = Get.arguments[2];
-  String companyName = Get.arguments[3];
 
+  String companyId = Get.arguments[2] ?? "";
+  String companyName = Get.arguments[3];
 
   final allLocationListScreenController =
       Get.find<LocationListScreenController>();
@@ -25,7 +25,6 @@ class LocationManageScreenController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxBool isSuccessStatus = false.obs;
-
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController locationNameController = TextEditingController();
@@ -42,6 +41,7 @@ class LocationManageScreenController extends GetxController {
       request.fields['location_name'] = locationNameController.text.trim();
       request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
       request.fields['userid'] = "${UserDetails.userId}";
+      request.fields['cid'] = companyId;
 
       var response = await request.send();
       response.stream
@@ -56,7 +56,8 @@ class LocationManageScreenController extends GetxController {
           Fluttertoast.showToast(msg: locationCreateModel.messege);
           Get.back();
 
-          await allLocationListScreenController.getCompanyWiseLocationFunction();
+          await allLocationListScreenController
+              .getCompanyWiseLocationFunction(companyId);
         } else {
           log('locationCreateFunction Else');
           if (locationCreateModel.error.locationName
@@ -78,7 +79,7 @@ class LocationManageScreenController extends GetxController {
 
   Future<void> locationGetByIdFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.getLocationApi}$getLocationId";
+    String url = "${ApiUrl.getLocationApi}$getLocationId/$companyId";
     log("Get Location url::   $url");
     try {
       http.Response response = await http.get(Uri.parse(url));
@@ -117,6 +118,7 @@ class LocationManageScreenController extends GetxController {
       request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
       request.fields['id'] = getLocationId;
       request.fields['userid'] = "${UserDetails.userId}";
+      request.fields['cid'] = companyId;
 
       var response = await request.send();
       response.stream
@@ -131,7 +133,8 @@ class LocationManageScreenController extends GetxController {
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: locationUpdateModel.messege);
           Get.back();
-          await allLocationListScreenController.getCompanyWiseLocationFunction();
+          await allLocationListScreenController
+              .getCompanyWiseLocationFunction(companyId);
         } else {
           log("locationUpdateFunction Else");
         }

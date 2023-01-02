@@ -147,6 +147,8 @@ class AppMessage {
   static String noEmpFound = 'No Employee Found.';
   static String noDeptFound = 'No Department Found.';
   static String noCompanyFound = 'No Company Found.';
+  static String noLocationFound = 'No Location Found.';
+
 
   //validation messages
   static String pleaseEnterYourName = 'Please enter your name';
