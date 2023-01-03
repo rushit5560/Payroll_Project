@@ -215,6 +215,7 @@ class AppMessage {
   static String view = 'View';
 
   //profile
+  static String profile= 'Profile';
   static String userName = 'User Name';
   static String name = 'Name';
   static String uploadDocument = 'Upload Document';
