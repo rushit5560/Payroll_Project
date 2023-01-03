@@ -10,7 +10,7 @@ class CompanyViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: CompanyDrawerMenu(),
+      drawer: CompanyDrawerMenu(),
       appBar: AppBar(
         centerTitle: true,
         title: Text(companyViewScreenController.companyName),
