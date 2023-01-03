@@ -25,7 +25,11 @@ class HomeScreen extends StatelessWidget {
       drawer: AdminDrawerMenu(),
       appBar: AppBar(
         centerTitle: true,
-        title: Text(AppMessage.adminText),
+        title: Obx(
+          () => Text(homeScreenController.roleId.value == 1
+              ? AppMessage.adminText
+              : AppMessage.subAdminText),
+        ),
         actions: [
           FloatingActionButton(
             onPressed: () async {
@@ -62,11 +66,12 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                        AppMessage.companiesName,
+                            AppMessage.companiesName,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.sp,
-                            ),).commonAllSidePadding(10)
+                            ),
+                          ).commonAllSidePadding(10)
                         ],
                       ),
                       Expanded(

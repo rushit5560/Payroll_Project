@@ -167,7 +167,7 @@ class CompanyManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: createCompanyModel.messege);
         Get.back();
-        await homeScreenController.getAllCompanyFunction();
+        await homeScreenController.getAllCompanyFunction(userId);
       } else {
         log('createCompanyFunction Else');
       }
@@ -277,7 +277,7 @@ class CompanyManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: updateCompanyModel.messege);
         Get.back();
-        await homeScreenController.getAllCompanyFunction();
+        await homeScreenController.getAllCompanyFunction(userId);
       } else {
         log('updateCompanyDetailsFunction Else');
       }

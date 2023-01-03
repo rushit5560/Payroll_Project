@@ -9,15 +9,16 @@ import 'package:payroll_system/screen/authentication_screens/login_screen/login_
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
+import 'package:payroll_system/screen/payroll_screen/payroll_manage_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 
-
 class CompanyDrawerMenu extends StatelessWidget {
   CompanyDrawerMenu({Key? key}) : super(key: key);
   // final companyDrawerController = Get.put(CompanyDrawerController());
-  final companyViewScreenController = Get.find<CompanyViewScreenController>();
+  // final companyViewScreenController = Get.find<CompanyViewScreenController>();
+  final companyViewScreenController = Get.put(CompanyViewScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,34 +37,46 @@ class CompanyDrawerMenu extends StatelessWidget {
                               onTap: () {
                                 Get.back();
                                 Get.to(() => DepartmentListScreen(),
-                                arguments: [
-                                  companyViewScreenController.companyId.toString(),
-                                  companyViewScreenController.companyName,
-                                ]);
+                                    arguments: [
+                                      companyViewScreenController.companyId
+                                          .toString(),
+                                      companyViewScreenController.companyName,
+                                    ]);
                               },
                               title: AppMessage.departmentNameDrawer,
                             ),
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
-                                Get.to(() => EmployeeListScreen(),
-                                    arguments: [
-                                      companyViewScreenController.companyId.toString(),
-                                      companyViewScreenController.companyName,
-                                    ]);
+                                Get.to(() => EmployeeListScreen(), arguments: [
+                                  companyViewScreenController.companyId
+                                      .toString(),
+                                  companyViewScreenController.companyName,
+                                ]);
                               },
                               title: AppMessage.employeeNameDrawer,
                             ),
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
-                                Get.to(() => LocationListScreen(),
-                                    arguments: [
-                                      companyViewScreenController.companyId.toString(),
-                                      companyViewScreenController.companyName,
-                                    ]);
+                                Get.to(() => LocationListScreen(), arguments: [
+                                  companyViewScreenController.companyId
+                                      .toString(),
+                                  companyViewScreenController.companyName,
+                                ]);
                               },
                               title: AppMessage.location,
+                            ),
+                            CompanyDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => PayRollManageScreen(), arguments: [
+                                  companyViewScreenController.companyId
+                                      .toString(),
+                                  companyViewScreenController.companyName,
+                                ]);
+                              },
+                              title: AppMessage.payRoll,
                             ),
                             /*CompanyDrawerTile(
                               onTap: () {
@@ -82,8 +95,7 @@ class CompanyDrawerMenu extends StatelessWidget {
 
                         CustomAlertDialog().showAlertDialog(
                           context: context,
-                          textContent:
-                          AppMessage.logoutMessage,
+                          textContent: AppMessage.logoutMessage,
                           onYesTap: () async {
                             await UserPreference()
                                 .logoutRemoveUserDetailsFromPrefs()

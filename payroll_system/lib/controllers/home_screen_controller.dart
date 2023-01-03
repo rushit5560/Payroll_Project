@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
@@ -15,19 +14,29 @@ class HomeScreenController extends GetxController {
   List<CompanyData> allCompanyList = [];
   UserPreference userPreference = UserPreference();
   RxInt roleId = 0.obs;
+  RxInt userid = 0.obs;
 
-  /*getRoleIdFunctionFromPrefs() async {
+  getUserIdFunctionFromPrefs() async {
     isLoading(true);
-    int roleIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.roleIdKey);
+    int userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
+    int roleIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.roleIdKey);
+    userid.value = userIdPrefs;
     roleId.value = roleIdPrefs;
-    log('Home Screen Init roleId : $roleId');
+
+    log('Home Screen Init userid : ${userid.value}');
+    await getAllCompanyFunction(userid);
     isLoading(false);
-  }*/
+  }
 
   /// Get All Company
-  Future<void> getAllCompanyFunction() async {
+  Future<void> getAllCompanyFunction(userId) async {
     isLoading(true);
-    String url = ApiUrl.allCompanyApi;
+    // String url = ApiUrl.allCompanyApi;
+    String url = roleId.value == 1
+        ? ApiUrl.allCompanyApi
+        : "${ApiUrl.getSubAdminWiseCompanyApi}$userId";
     log('Get All Company List Api Url :$url');
 
     try {
@@ -36,7 +45,7 @@ class HomeScreenController extends GetxController {
       AllCompanyModel allCompanyModel =
           AllCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = allCompanyModel.success.obs;
-
+      log("getAllCompanyFunction data ::${response.body}");
       if (isSuccessStatus.value) {
         allCompanyList.clear();
         allCompanyList.addAll(allCompanyModel.data);
@@ -54,8 +63,9 @@ class HomeScreenController extends GetxController {
 
   @override
   void onInit() {
+    getUserIdFunctionFromPrefs();
     // getRoleIdFunctionFromPrefs();
-    getAllCompanyFunction();
+    // getAllCompanyFunction();
     super.onInit();
   }
 }

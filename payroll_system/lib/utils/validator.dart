@@ -253,7 +253,7 @@ class FieldValidation {
     }
   }
 
- String? validateEndDayWork(String value) {
+  String? validateEndDayWork(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterLastDayWork;
     } else {
@@ -272,12 +272,11 @@ class FieldValidation {
   String? validateZipCode(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterZipCode;
-    } else if(value.length < 4) {
+    } else if (value.length < 4) {
       return AppMessage.zipCode5CharacterLength;
-    } else if(value.length > 6) {
+    } else if (value.length > 6) {
       return AppMessage.zipCode6CharacterLength;
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -299,6 +298,22 @@ class FieldValidation {
       return AppMessage.confirmPasswordMustBeAtLeast8CharactersLong;
     } else if (value != passwordValue) {
       return AppMessage.newPasswordAndConfirmPasswordMustBeSame;
+    } else {
+      return null;
+    }
+  }
+
+  //payroll
+  String? validateOverTime(String value) {
+    if (value.isEmpty) {
+      return AppMessage.overtimeIsRequired;
+    } else {
+      return null;
+    }
+  }
+    String? validatePayDayWork(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterPayDayWork;
     } else {
       return null;
     }

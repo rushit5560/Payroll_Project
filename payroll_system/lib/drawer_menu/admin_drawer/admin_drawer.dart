@@ -6,13 +6,9 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
-import 'package:payroll_system/screen/company_screens/company_list_screen/company_list_screen.dart';
-import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
-import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
-import '../../screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 
 class AdminDrawerMenu extends StatelessWidget {
   AdminDrawerMenu({Key? key}) : super(key: key);

@@ -9,7 +9,7 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import '../utils/api_url.dart';
 
 class ChangePasswordController extends GetxController {
-  RxBool isLoading = false.obs;
+  RxBool isLoading = false.obs; 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   RxBool isPasswordVisible = true.obs;
   RxBool isnewPasswordVisible = true.obs;
