@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/Utils/extension_methods/user_preference.dart';
-import 'package:payroll_system/screen/company_home_screen/company_home_screen.dart';
+import 'package:payroll_system/screen/company_employee_screens/company_home_screen/company_home_screen.dart';
 import 'package:payroll_system/screen/employee_home_screen/employee_home_screen.dart';
 import '../Models/log_in_model.dart';
 import '../Screen/Home_Screen/home_screen.dart';

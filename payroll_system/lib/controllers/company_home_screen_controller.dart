@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
+import 'package:payroll_system/models/employee_manage_screen_models/employee_delete_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
@@ -45,14 +47,45 @@ class CompanyHomeScreenController extends GetxController {
     }
   }
 
+// Delete Employee
+  Future<void> deleteEmployeeFunction(String employeeId, int index) async {
+    isLoading(true);
+    String url = "${ApiUrl.deleteEmployeeApi}$employeeId/$companyId";
+    log('Delete Company Api Url :$url');
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+      log('response : ${response.body}');
+
+      EmployeeDeleteModel deleteCompanyModel =
+          EmployeeDeleteModel.fromJson(json.decode(response.body));
+      isSuccessStatus = deleteCompanyModel.success.obs;
+
+      if (isSuccessStatus.value) {
+        Fluttertoast.showToast(msg: deleteCompanyModel.messege);
+        allCompanyWiseEmployeeList.removeAt(index);
+        Get.back();
+      } else {
+        log('deleteCompanyFunction Else');
+      }
+    } catch (e) {
+      log('deleteCompanyFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
   getLoggedInUserDataFromPrefs() async {
     companyId = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
+        companyName = await userPreference.getStringValueFromPrefs(keyId: UserPreference.userNameKey);
     await getCompanyWiseEmployeeFunction();
   }
 
   @override
   void onInit() {
+
     getLoggedInUserDataFromPrefs();
     super.onInit();
   }
