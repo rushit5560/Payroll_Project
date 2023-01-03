@@ -6,6 +6,7 @@ import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/company_home_screen_controller.dart';
+import 'package:payroll_system/drawer_menu/company_home_drawer/company_home_drawer.dart';
 import 'package:payroll_system/screen/company_home_screen/company_home_widgets_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -22,7 +23,7 @@ class CompanyHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: CompanyDrawerMenu(),
+      drawer: CompanyHomeDrawer(),
       appBar: AppBar(
         title: Text(AppMessage.company),
         centerTitle: true,
@@ -39,7 +40,7 @@ class CompanyHomeScreen extends StatelessWidget {
                   arguments: [
                     EmployeeOption.create,
                     AppMessage.empty,
-                    companyHomeScreenController.companyId,
+                    companyHomeScreenController.companyId.toString(),
                     companyHomeScreenController.companyName,
                   ],
                 );

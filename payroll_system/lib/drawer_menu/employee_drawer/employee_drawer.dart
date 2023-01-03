@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
+import 'package:payroll_system/common_modules/logout_drawer_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
-import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
+
 
 class EmployeeDrawerMenu extends StatelessWidget {
   const EmployeeDrawerMenu({Key? key}) : super(key: key);
@@ -33,7 +34,8 @@ class EmployeeDrawerMenu extends StatelessWidget {
                 ),
               ),
             ),
-            EmployeeDrawerLogOutTile(
+            /// Getting from common module
+            LogOutDrawerTileModule(
               onTap: () async {
                 CustomAlertDialog().showAlertDialog(
                   context: context,
@@ -84,35 +86,15 @@ class EmployeeDrawerTile extends StatelessWidget {
               style: TextStyleConfig.drawerTextStyle(),
             ),
           ),
-          /*Text(
-            title,
-            textAlign: TextAlign.left,
-            style: TextStyleConfig.drawerTextStyle(),
-          ).commonSymmetricPadding(horizontal: 10, vertical: 10),*/
           const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
         ],
       ),
     );
-    /*return Container(
-      width: Get.width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: AppColors.greyColor,
-        ),
-      ),
 
-      child: Text(
-        AppMessage.companyNameDrawer,
-        textAlign: TextAlign.left,
-        style: TextStyleConfig.drawerTextStyle(),
-      ).commonSymmetricPadding(horizontal: 10, vertical: 5),
-
-    ).commonSymmetricPadding(horizontal: 20, vertical: 10);*/
   }
 }
 
-class EmployeeDrawerLogOutTile extends StatelessWidget {
+/*class EmployeeDrawerLogOutTile extends StatelessWidget {
   Function() onTap;
   String title;
   EmployeeDrawerLogOutTile({Key? key, required this.onTap, required this.title})
@@ -135,16 +117,16 @@ class EmployeeDrawerLogOutTile extends StatelessWidget {
               style: TextStyleConfig.drawerTextStyle(),
             ),
           ),
-          /*Text(
+          *//*Text(
             title,
             textAlign: TextAlign.left,
             style: TextStyleConfig.drawerTextStyle(),
-          ).commonSymmetricPadding(horizontal: 10, vertical: 10),*/
+          ).commonSymmetricPadding(horizontal: 10, vertical: 10),*//*
           const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
         ],
       ),
     );
-    /*return Container(
+    *//*return Container(
       width: Get.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -160,5 +142,6 @@ class EmployeeDrawerLogOutTile extends StatelessWidget {
       ).commonSymmetricPadding(horizontal: 10, vertical: 5),
 
     ).commonSymmetricPadding(horizontal: 20, vertical: 10);*/
+/*
   }
-}
+}*/

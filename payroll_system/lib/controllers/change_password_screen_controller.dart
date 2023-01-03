@@ -12,7 +12,7 @@ class ChangePasswordController extends GetxController {
   RxBool isLoading = false.obs; 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   RxBool isPasswordVisible = true.obs;
-  RxBool isnewPasswordVisible = true.obs;
+  RxBool isNewPasswordVisible = true.obs;
   RxBool isConfirmPasswordVisible = true.obs;
   RxBool successStatus = false.obs;
   UserPreference userPreference = UserPreference();
@@ -20,18 +20,16 @@ class ChangePasswordController extends GetxController {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController newConfirmPasswordController = TextEditingController();
 
-  changePasswordFunction() async {
+  Future<void> changePasswordFunction() async {
     isLoading(true);
     String url = ApiUrl.changePasswordApi;
     log('changePasswordFunction Url : $url');
 
-    int roleId = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.roleIdKey);
+    int roleId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.roleIdKey);
+
     try {
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(url),
-      );
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
       request.fields['userid'] = "$roleId";
       request.fields['oldpassword'] = oldPasswordController.text.trim();
       request.fields['password'] = newPasswordController.text.trim();
@@ -39,6 +37,7 @@ class ChangePasswordController extends GetxController {
           newConfirmPasswordController.text.trim();
       log('changePasswordFunction fields ${request.fields}');
       var response = await request.send();
+
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())

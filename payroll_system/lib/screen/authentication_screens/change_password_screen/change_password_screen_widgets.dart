@@ -58,7 +58,7 @@ class NewPasswordTextFieldModule extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => TextFormField(
-        obscureText: changePasswordScreenController.isnewPasswordVisible.value,
+        obscureText: changePasswordScreenController.isNewPasswordVisible.value,
         controller: changePasswordScreenController.newPasswordController,
         validator: (value) => FieldValidation().validatePassword(value!),
         textInputAction: TextInputAction.next,
@@ -75,11 +75,11 @@ class NewPasswordTextFieldModule extends StatelessWidget {
           labelText: AppMessage.newPassword,
           suffixIcon: IconButton(
             onPressed: () {
-              changePasswordScreenController.isnewPasswordVisible.value =
-                  !changePasswordScreenController.isnewPasswordVisible.value;
+              changePasswordScreenController.isNewPasswordVisible.value =
+                  !changePasswordScreenController.isNewPasswordVisible.value;
             },
             icon: Icon(
-              changePasswordScreenController.isnewPasswordVisible.value
+              changePasswordScreenController.isNewPasswordVisible.value
                   ? Icons.visibility
                   : Icons.visibility_off,
             ),

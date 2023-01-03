@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
+import 'package:payroll_system/common_modules/logout_drawer_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
@@ -10,8 +11,8 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 
-class AdminDrawerMenu extends StatelessWidget {
-  AdminDrawerMenu({Key? key}) : super(key: key);
+class AdminHomeDrawerMenu extends StatelessWidget {
+  AdminHomeDrawerMenu({Key? key}) : super(key: key);
   final adminDrawerController = Get.put(AdminDrawerController());
 
   @override
@@ -63,7 +64,8 @@ class AdminDrawerMenu extends StatelessWidget {
                         ),
                       ),
                     ),
-                    AdminDrawerLogOutTile(
+                    /// Getting from common module
+                    LogOutDrawerTileModule(
                       onTap: () async {
                         log('Logout');
 
@@ -149,7 +151,7 @@ class AdminDrawerTile extends StatelessWidget {
   }
 }
 
-class AdminDrawerLogOutTile extends StatelessWidget {
+/*class AdminDrawerLogOutTile extends StatelessWidget {
   Function() onTap;
   String title;
 
@@ -182,7 +184,7 @@ class AdminDrawerLogOutTile extends StatelessWidget {
         ],
       ),
     );
-    /*return Container(
+    *//*return Container(
       width: Get.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -197,6 +199,6 @@ class AdminDrawerLogOutTile extends StatelessWidget {
         style: TextStyleConfig.drawerTextStyle(),
       ).commonSymmetricPadding(horizontal: 10, vertical: 5),
 
-    ).commonSymmetricPadding(horizontal: 20, vertical: 10);*/
+    ).commonSymmetricPadding(horizontal: 20, vertical: 10);*//*
   }
-}
+}*/
