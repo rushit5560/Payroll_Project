@@ -23,9 +23,9 @@ class EmployeeGetByIdModel {
 
   factory EmployeeGetByIdModel.fromJson(Map<String, dynamic> json) =>
       EmployeeGetByIdModel(
-        success: json["success"],
-        messege: json["messege"],
-        data: EmployeeGEtByIdModelData.fromJson(json["Data"]),
+        success: json["success"] ?? false,
+        messege: json["messege"] ?? "",
+        data: EmployeeGEtByIdModelData.fromJson(json["Data"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,8 +66,8 @@ class EmployeeGEtByIdModelData {
     required this.photo,
     required this.createdby,
     required this.modifiedby,
-    required this.createdAt,
-    required this.updatedAt,
+    // required this.createdAt,
+    // required this.updatedAt,
   });
   int id;
   String firstName;
@@ -98,8 +98,8 @@ class EmployeeGEtByIdModelData {
   String photo;
   int createdby;
   String modifiedby;
-  DateTime createdAt;
-  DateTime updatedAt;
+  // DateTime createdAt;
+  // DateTime updatedAt;
 
   factory EmployeeGEtByIdModelData.fromJson(Map<String, dynamic> json) =>
       EmployeeGEtByIdModelData(
@@ -132,7 +132,7 @@ class EmployeeGEtByIdModelData {
         photo: json["photo"] ?? "",
         createdby: json["createdby"] ?? 0,
         modifiedby: json["modifiedby"] ?? "",
-        createdAt: DateTime.parse(json["created_at"] ?? DateTime.now()),
-        updatedAt: DateTime.parse(json["updated_at"] ?? DateTime.now()),
+        // createdAt: DateTime.parse(json["created_at"] ?? DateTime.now()),
+        // updatedAt: DateTime.parse(json["updated_at"] ?? DateTime.now()),
       );
 }

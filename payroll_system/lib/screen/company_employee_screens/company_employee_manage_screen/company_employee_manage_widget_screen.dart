@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/comapny_employee_manage_screen_controller.dart';
+import 'package:payroll_system/controllers/company_employee_manage_screen_controller.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';

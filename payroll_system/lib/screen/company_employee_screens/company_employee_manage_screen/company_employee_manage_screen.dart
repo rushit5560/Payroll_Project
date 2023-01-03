@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/constants/enums.dart';
-import 'package:payroll_system/controllers/comapny_employee_manage_screen_controller.dart';
+import 'package:payroll_system/controllers/company_employee_manage_screen_controller.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/screen/company_employee_screens/company_employee_manage_screen/company_employee_manage_widget_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';

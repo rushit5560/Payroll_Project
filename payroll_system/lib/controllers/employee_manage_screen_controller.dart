@@ -338,59 +338,6 @@ class EmployeeManageScreenController extends GetxController {
           }
         }
 
-
-        //todo - start here
-
-        // homeNoController.text = employeeGetByIdModel.data.homeNo;
-        // workNoController.text = employeeGetByIdModel.data.workPhone;
-        // // startDateController.text = employeeGetByIdModel.data.startDate;
-        // isActiveController.text = employeeGetByIdModel.data.isActive;
-        // emailController.text = employeeGetByIdModel.data.email;
-        // lastDateController.text = employeeGetByIdModel.data.lastDayOfWork.toString();
-        //
-        // // companyId = employeeGetByIdModel.data.companyid.toString();
-        // departmentId = employeeGetByIdModel.data.departmentId;
-        //
-        // for (int i = 0; i < companyDepartment.length; i++) {
-        //   // ignore: unrelated_type_equality_checks
-        //   if (departmentId == companyDepartment[i].id) {
-        //     companyDepartmentData = companyDepartment[i];
-        //   }
-        // }
-        //
-        // oldImageName = employeeGetByIdModel.data.photo;
-        //
-        // employmentStartDate =
-        //     DateTime.parse(employeeGetByIdModel.data.startDate);
-        // startDateController.text =
-        //     "${employmentStartDate.year}-${employmentStartDate.month}-${employmentStartDate.day}";
-        //
-        // // employmentEndDate =
-        // //     DateTime.parse(employeeGetByIdModel.data.lastDayOfWork);
-        // startDateController.text =
-        //     "${employmentEndDate.year}-${employmentEndDate.month}-${employmentEndDate.day}";
-        //
-        // birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
-        // dateOfBirthController.text =
-        //     "${birthDate.year}-${birthDate.month}-${birthDate.day}";
-        //
-        // selectedValue.value =
-        //     employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
-        //
-        // selectedValuePayper.value =
-        //     employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
-        //
-        // log('Photo : ${employeeGetByIdModel.data.photo}');
-        //
-        // for (int i = 0; i < allCompanyList.length; i++) {
-        //   if (companyId == allCompanyList[i].id.toString()) {
-        //     companyDDSelectedItem = allCompanyList[i];
-        //   }
-        // }
-        //
-        // passwordController.text = employeeGetByIdModel.data.password;
-        // currentAddressController.text = employeeGetByIdModel.data.address;
-        // homeAddressController.text = employeeGetByIdModel.data.home;
       } else {
         log('getEmployeeDetailsFunction Else');
       }

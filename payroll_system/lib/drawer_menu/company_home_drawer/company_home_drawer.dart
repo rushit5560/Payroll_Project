@@ -3,15 +3,17 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/drawer_list_tile_module.dart';
 import 'package:payroll_system/common_modules/logout_drawer_tile_module.dart';
-import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/controllers/company_home_screen_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
+import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
+import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
-import 'package:payroll_system/utils/style.dart';
 
 class CompanyHomeDrawer extends StatelessWidget {
-  const CompanyHomeDrawer({Key? key}) : super(key: key);
+  CompanyHomeDrawer({Key? key}) : super(key: key);
+  final companyHomeScreenController = Get.put(CompanyHomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,28 @@ class CompanyHomeDrawer extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+
+                    DrawerListTileModule(
+                      onTap: () {
+                        Get.back();
+                        Get.to(() => DepartmentListScreen(),
+                            arguments: [
+                              companyHomeScreenController.companyId.toString(),
+                              companyHomeScreenController.companyName,
+                            ]);
+                      },
+                      title: AppMessage.departmentNameDrawer,
+                    ),
+
+                    DrawerListTileModule(
+                      onTap: () {
+                        Get.back();
+                        Get.to(() => LocationListScreen());
+                      },
+                      title: AppMessage.location,
+                    ),
+
+
                     DrawerListTileModule(
                       title: AppMessage.changePasswordDrawer,
                       onTap: () {
@@ -30,6 +54,7 @@ class CompanyHomeDrawer extends StatelessWidget {
                         Get.to(() => ChangePasswordScreen());
                       },
                     ),
+
                   ],
                 ),
               ),

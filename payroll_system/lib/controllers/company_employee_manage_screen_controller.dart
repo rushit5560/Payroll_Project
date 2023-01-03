@@ -308,9 +308,12 @@ class CompanyEmployeeManageScreenController extends GetxController {
         middleNameController.text = employeeGetByIdModel.data.middleName;
         lastNameController.text = employeeGetByIdModel.data.lastName;
         phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
+        log('employeeGetByIdModel.data.dateOfBirth : ${employeeGetByIdModel.data.dateOfBirth}');
+        if(employeeGetByIdModel.data.dateOfBirth.toString().contains(" ")){
         dateOfBirthController.text =
             employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
-        birthDate = employeeGetByIdModel.data.dateOfBirth;
+        }
+        // birthDate = employeeGetByIdModel.data.dateOfBirth;
         selectedValuePayper.value =
             employeeGetByIdModel.data.payPeriod == "salary"
                 ? "Salary"
