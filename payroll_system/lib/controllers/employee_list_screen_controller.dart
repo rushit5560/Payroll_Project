@@ -20,10 +20,10 @@ class EmployeeListScreenController extends GetxController {
   // int userId = 0;
 
   // Get All Employee
-  Future<void> getCompanyWiseEmployeeFunction(companyId) async {
+  Future<void> getCompanyWiseEmployeeFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.allEmployeeApi}$companyId";
-    log('Get All Company List Api Url :$url');
+    String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
+    log('Get Company wise Employee List Api Url :$url');
     try {
       http.Response response = await http.get(Uri.parse(url));
 
@@ -50,12 +50,12 @@ class EmployeeListScreenController extends GetxController {
   // Delete Employee
   Future<void> deleteEmployeeFunction(String employeeId, int index) async {
     isLoading(true);
-    String url = "${ApiUrl.deleteEmployeeApi}$employeeId";
-    // log('Delete Company Api Url :$url');
+    String url = "${ApiUrl.deleteEmployeeApi}$employeeId/$companyId";
+    log('Delete Company Api Url :$url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-      // log('response : ${response.body}');
+      log('response : ${response.body}');
 
       EmployeeDeleteModel deleteCompanyModel =
           EmployeeDeleteModel.fromJson(json.decode(response.body));
@@ -117,7 +117,7 @@ class EmployeeListScreenController extends GetxController {
 
   @override
   void onInit() {
-    getCompanyWiseEmployeeFunction(companyId);
+    getCompanyWiseEmployeeFunction();
     // getAllEmployeeFunction();
     // getCompanyEmployeeFunction();
     super.onInit();

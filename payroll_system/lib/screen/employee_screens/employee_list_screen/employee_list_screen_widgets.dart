@@ -43,7 +43,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                 SingleListTileCustom(
                   textKey: AppMessage.employeeName,
                   textValue:
-                      value.firstName + value.middleName + value.lastName,
+                      "${value.firstName} ${value.middleName} ${value.lastName}",
                 ),
                 SizedBox(height: 1.h),
                 SingleListTileCustom(

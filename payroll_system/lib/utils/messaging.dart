@@ -86,8 +86,8 @@ class AppMessage {
   static String hourlyRate = 'Hourly Rate (\$,₹)';
   static String salary = 'Salary (\$,₹)';
   static String payPeriod = 'Pay period';
-  static String employmentDate = 'Employment Date';
-  static String endDate = 'End Date';
+  static String employmentDate = 'Employment Start Date';
+  static String endDate = 'Employment End Date';
   static String isActive = 'Status';
   static String company = 'Company';
   static String employeeEmail = 'Email';
@@ -107,7 +107,7 @@ class AppMessage {
   static String employeeCurrentAddress = 'Current Address';
   static String employeeHomeAddress = 'Home Address';
   static String labelCompanyAddress = 'Company Address';
-  static String selectStartDate = 'Select employment Start Date';
+  static String selectStartDate = 'Employment Start Date';
   static String departmentCreate = 'Create Department';
   static String departmentUpdate = 'Update Department';
   static String departmentName = 'Department Name';
@@ -217,4 +217,24 @@ class AppMessage {
   //profile
   static String userName = 'User Name';
   static String name = 'Name';
+  static String uploadDocument = 'Upload Document';
+  static String pleaseEnterPayDayWork = 'Please enter firstDayWork';
+
+//Payroll
+  static String payRoll = 'Payroll';
+  // static String payRoll = 'Create Location';
+  // static String locationUpdate = 'Update Location';
+  static String payRollForm = 'Payroll Form';
+  static String startDate = 'Start Date';
+  static String employee = 'Employee ';
+  static String selectPayRollStartDate = 'Select Start Date';
+  static String selectPayRollEndDate = 'Select end Date';
+  static String overtimeIsRequired = 'overtime is required';
+  static String overTime = 'Over time';
+  static String bonus = 'Bonus ';
+  static String otherEarning = 'Other Earning';
+  static String comission = 'Comission';
+  static String payDate = 'Pay Date';
+  static String pleaseSelectEmployee = 'Please select employee';
+
 }

@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:developer';
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
+import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import '../constants/enums.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:payroll_system/Utils/api_url.dart';
 import 'package:payroll_system/utils/messaging.dart';
-import '../Utils/extension_methods/user_details.dart';
 import '../models/company_list_screen_model/get_all_company_model.dart';
 import '../models/employee_manage_screen_models/employee_get_by_id_model.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
@@ -26,7 +27,7 @@ class EmployeeManageScreenController extends GetxController {
   String employeeId = Get.arguments[1] ?? "";
   String companyId = Get.arguments[2];
   String companyName = Get.arguments[3];
-  String locationName = Get.arguments[3];
+  // String locationName = Get.arguments[4];
 
   List<LocationListData> allLocationList = [];
   LocationListData? locationListData;
@@ -34,12 +35,10 @@ class EmployeeManageScreenController extends GetxController {
   DateTime selectedDate = DateTime.now();
   RxBool isPasswordVisible = true.obs;
   List<String> isActiveOptionList = [
-    "Choose Option",
-    "active",
-    "inactive",
-    "Terminated"
+    "Choose Option", "Active", "In-Active", "Terminated"
   ];
   RxString selectedValue = "Choose Option".obs;
+
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   RxString selectedValuePayper = "Choose Option".obs;
   RxString selectedCompanyValue = "Choose Company".obs;
@@ -89,7 +88,7 @@ class EmployeeManageScreenController extends GetxController {
   TextEditingController middleNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNoController = TextEditingController();
-  TextEditingController dateOfBrithController = TextEditingController();
+  TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController departmentController = TextEditingController();
   TextEditingController homeNoController = TextEditingController();
   TextEditingController workNoController = TextEditingController();
@@ -113,6 +112,11 @@ class EmployeeManageScreenController extends GetxController {
   File? images;
   String oldImageName = "";
 
+  List<File> employeeSelectedDocumentList = [];
+
+  int userIdPrefs = 0;
+  UserPreference userPreference = UserPreference();
+
   imageFromCamera() async {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -126,7 +130,7 @@ class EmployeeManageScreenController extends GetxController {
     Get.back();
   }
 
-  imageFromGallary() async {
+  imageFromGallery() async {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (image != null) {
@@ -151,7 +155,7 @@ class EmployeeManageScreenController extends GetxController {
                   onTap: () async {
                     // employeDetailsFormController.getImage(ImageSource.gallery);
 
-                    await imageFromGallary();
+                    await imageFromGallery();
                   },
                 ),
                 ListTile(
@@ -167,6 +171,26 @@ class EmployeeManageScreenController extends GetxController {
             ),
           );
         });
+  }
+
+  Future<void> pickEmployeeDocumentFunction() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf'],
+    );
+
+    if (result != null) {
+      isLoading(true);
+
+      for(int i =0; i < result.paths.length; i++) {
+        employeeSelectedDocumentList.add(File(result.paths[i]!));
+      }
+      log('files Inner :${employeeSelectedDocumentList.length}');
+      isLoading(false);
+    } else {
+      // User canceled the picker
+    }
   }
 
   void showDatePicker(
@@ -263,13 +287,13 @@ class EmployeeManageScreenController extends GetxController {
 
   Future<void> employeeGetByIdFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.getEmployeeDetailsApi}$employeeId";
-    // log('Employee Details Get By Id Api Url : $url');
+    String url = "${ApiUrl.getEmployeeDetailsApi}$employeeId/$companyId";
+    log('Employee Details Get By Id Api Url : $url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
 
-      // log("employeeGetByIdFunction  ${response.body}");
+      log("employeeGetByIdFunction  ${response.body}");
       EmployeeGetByIdModel employeeGetByIdModel =
           EmployeeGetByIdModel.fromJson(json.decode(response.body));
 
@@ -279,64 +303,94 @@ class EmployeeManageScreenController extends GetxController {
         firstNameController.text = employeeGetByIdModel.data.firstName;
         middleNameController.text = employeeGetByIdModel.data.middleName;
         lastNameController.text = employeeGetByIdModel.data.lastName;
-        phoneNoController.text = employeeGetByIdModel.data.phoneNo;
-        dateOfBrithController.text =
-            employeeGetByIdModel.data.dateOfBrith.split(" ")[0];
-        homeNoController.text = employeeGetByIdModel.data.homeNo;
-        workNoController.text = employeeGetByIdModel.data.workPhone;
-
-        hourlyRateController.text =
-            employeeGetByIdModel.data.hourlyRate.toString();
+        phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
+        dateOfBirthController.text = employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+        birthDate = employeeGetByIdModel.data.dateOfBirth;
+        selectedValuePayper.value = employeeGetByIdModel.data.payPeriod == "salary" ? "Salary" : "Hourly";
         salaryController.text = employeeGetByIdModel.data.salary.toString();
-        // startDateController.text = employeeGetByIdModel.data.startDate;
-        isActiveController.text = employeeGetByIdModel.data.isActive;
+        hourlyRateController.text = employeeGetByIdModel.data.hourlyRate.toString();
         emailController.text = employeeGetByIdModel.data.email;
-        lastDateController.text =
-            employeeGetByIdModel.data.lastDayOfWork.toString();
+        streetAddressController.text = employeeGetByIdModel.data.street;
+        landmarkAddressController.text = employeeGetByIdModel.data.town;
+        cityAddressController.text = employeeGetByIdModel.data.city;
+        stateAddressController.text = employeeGetByIdModel.data.state;
+        zipcodeAddressController.text = employeeGetByIdModel.data.zipcode;
 
-        // companyId = employeeGetByIdModel.data.companyid.toString();
-        departmentId = employeeGetByIdModel.data.departmentId;
+        startDateController.text = employeeGetByIdModel.data.employmentStartDate.toString().split(" ")[0];
+        employmentStartDate = employeeGetByIdModel.data.employmentStartDate;
 
-        for (int i = 0; i < companyDepartment.length; i++) {
-          // ignore: unrelated_type_equality_checks
-          if (departmentId == companyDepartment[i].id) {
+        endDateController.text = employeeGetByIdModel.data.employmentEndDate.toString().split(" ")[0];
+        employmentEndDate = employeeGetByIdModel.data.employmentEndDate;
+
+        selectedValue.value = employeeGetByIdModel.data.isActive == "0"
+            ? "In-Active" : employeeGetByIdModel.data.isActive == "1"
+            ? "Active" : "Terminated";
+
+        for(int i = 0 ; i < companyDepartment.length; i++) {
+          if(companyDepartment[i].id == employeeGetByIdModel.data.departmentId) {
             companyDepartmentData = companyDepartment[i];
           }
         }
 
-        oldImageName = employeeGetByIdModel.data.photo;
-
-        employmentStartDate =
-            DateTime.parse(employeeGetByIdModel.data.startDate);
-        startDateController.text =
-            "${employmentStartDate.year}-${employmentStartDate.month}-${employmentStartDate.day}";
-
-        // employmentEndDate =
-        //     DateTime.parse(employeeGetByIdModel.data.lastDayOfWork);
-        startDateController.text =
-            "${employmentEndDate.year}-${employmentEndDate.month}-${employmentEndDate.day}";
-
-        birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
-        dateOfBrithController.text =
-            "${birthDate.year}-${birthDate.month}-${birthDate.day}";
-
-        selectedValue.value =
-            employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
-
-        selectedValuePayper.value =
-            employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
-
-        log('Photo : ${employeeGetByIdModel.data.photo}');
-
-        for (int i = 0; i < allCompanyList.length; i++) {
-          if (companyId == allCompanyList[i].id.toString()) {
-            companyDDSelectedItem = allCompanyList[i];
+        for(int i = 0; i < allLocationList.length; i++) {
+          if(allLocationList[i].id == employeeGetByIdModel.data.locationId) {
+            locationListData = allLocationList[i];
           }
         }
 
-        passwordController.text = employeeGetByIdModel.data.password;
-        currentAddressController.text = employeeGetByIdModel.data.address;
-        homeAddressController.text = employeeGetByIdModel.data.home;
+
+        //todo - start here
+
+        // homeNoController.text = employeeGetByIdModel.data.homeNo;
+        // workNoController.text = employeeGetByIdModel.data.workPhone;
+        // // startDateController.text = employeeGetByIdModel.data.startDate;
+        // isActiveController.text = employeeGetByIdModel.data.isActive;
+        // emailController.text = employeeGetByIdModel.data.email;
+        // lastDateController.text = employeeGetByIdModel.data.lastDayOfWork.toString();
+        //
+        // // companyId = employeeGetByIdModel.data.companyid.toString();
+        // departmentId = employeeGetByIdModel.data.departmentId;
+        //
+        // for (int i = 0; i < companyDepartment.length; i++) {
+        //   // ignore: unrelated_type_equality_checks
+        //   if (departmentId == companyDepartment[i].id) {
+        //     companyDepartmentData = companyDepartment[i];
+        //   }
+        // }
+        //
+        // oldImageName = employeeGetByIdModel.data.photo;
+        //
+        // employmentStartDate =
+        //     DateTime.parse(employeeGetByIdModel.data.startDate);
+        // startDateController.text =
+        //     "${employmentStartDate.year}-${employmentStartDate.month}-${employmentStartDate.day}";
+        //
+        // // employmentEndDate =
+        // //     DateTime.parse(employeeGetByIdModel.data.lastDayOfWork);
+        // startDateController.text =
+        //     "${employmentEndDate.year}-${employmentEndDate.month}-${employmentEndDate.day}";
+        //
+        // birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
+        // dateOfBirthController.text =
+        //     "${birthDate.year}-${birthDate.month}-${birthDate.day}";
+        //
+        // selectedValue.value =
+        //     employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
+        //
+        // selectedValuePayper.value =
+        //     employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
+        //
+        // log('Photo : ${employeeGetByIdModel.data.photo}');
+        //
+        // for (int i = 0; i < allCompanyList.length; i++) {
+        //   if (companyId == allCompanyList[i].id.toString()) {
+        //     companyDDSelectedItem = allCompanyList[i];
+        //   }
+        // }
+        //
+        // passwordController.text = employeeGetByIdModel.data.password;
+        // currentAddressController.text = employeeGetByIdModel.data.address;
+        // homeAddressController.text = employeeGetByIdModel.data.home;
       } else {
         log('getEmployeeDetailsFunction Else');
       }
@@ -353,32 +407,22 @@ class EmployeeManageScreenController extends GetxController {
   Future<void> getCompanyWiseDepartmentFunction() async {
     isLoading(true);
     String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
-    // log('Get Company Department Api Url :$url');
+    log('Get Company Department Api Url :$url');
 
     try {
-      // var request = http.MultipartRequest('POST', Uri.parse(url));
-      // request.fields['id'] = companyId;
-      //
-      // var response = await request.send();
-      //
-      // response.stream
-      //     .transform(const Utf8Decoder())
-      //     .transform(const LineSplitter())
-      //     .listen((value) {
-
       http.Response response = await http.get(Uri.parse(url));
-      AllDepartmentModel companyDepartmentModel =
-          AllDepartmentModel.fromJson(json.decode(response.body));
+      CompanyDeprtmentModel companyDepartmentModel = CompanyDeprtmentModel.fromJson(json.decode(response.body));
       isSuccessStatus = companyDepartmentModel.success.obs;
-      log("getCompanyWiseDepartmentFunction respose ${response.body}");
+      log("getCompanyWiseDepartmentFunction response :${response.body}");
       if (isSuccessStatus.value) {
-        allDepartmentList.clear();
-        allDepartmentList.addAll(companyDepartmentModel.data);
+        companyDepartment.clear();
+        companyDepartment.addAll(companyDepartmentModel.data);
+
         if (employeeOption == EmployeeOption.create) {
           if (companyDepartment.isNotEmpty) {
             companyDepartmentData = companyDepartment[0];
           } else {
-            Fluttertoast.showToast(msg: "No department in this company!");
+            // Fluttertoast.showToast(msg: "No department in this company!");
           }
         } else if (employeeOption == EmployeeOption.update) {
           // update logic here
@@ -395,7 +439,7 @@ class EmployeeManageScreenController extends GetxController {
           departmentStringList.add(companyDepartment[i].departmentName);
         }
 
-        log('allDepartmentList : ${allDepartmentList.length}');
+        log('allDepartmentList : ${companyDepartment.length}');
       } else {
         log('getAllCompanyFunction Else');
       }
@@ -403,9 +447,9 @@ class EmployeeManageScreenController extends GetxController {
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong !");
       rethrow;
-    } finally {
+    } /*finally {
       isLoading(false);
-    }
+    }*/
     await getCompanyWiseLocationFunction(companyId);
   }
 
@@ -452,68 +496,12 @@ class EmployeeManageScreenController extends GetxController {
       isLoading(false);
     }
   }
-  // Future<void> getCompanyDepartmentFunction() async {
-  //   isLoading(true);
-  //   String url = ApiUrl.getCompanyDepartmentApi;
-  //   log('Get CompanyDepartment Api Url :$url');
 
-  //   try {
-  //     var request = http.MultipartRequest('POST', Uri.parse(url));
-  //     request.fields['id'] = companyId.toString();
-
-  //     var response = await request.send();
-
-  //     response.stream
-  //         .transform(const Utf8Decoder())
-  //         .transform(const LineSplitter())
-  //         .listen((value) {
-  //       log("getCompanyDepartmentFunction res body :: $value");
-  //       CompanyDeprtmentModel companyDepartmentModel =
-  //           CompanyDeprtmentModel.fromJson(json.decode(value));
-  //       isSuccessStatus = companyDepartmentModel.success.obs;
-
-  //       if (isSuccessStatus.value) {
-  //         companyDepartment.clear();
-  //         companyDepartment.addAll(companyDepartmentModel.data);
-
-  //         if (employeeOption == EmployeeOption.create) {
-  //           if (companyDepartment.isNotEmpty) {
-  //             companyDepartmentData = companyDepartment[0];
-  //           } else {
-  //             Fluttertoast.showToast(msg: "No department in this company!");
-  //           }
-  //         } else if (employeeOption == EmployeeOption.update) {
-  //           //update logic here
-  //           for (int i = 0; i < companyDepartment.length; i++) {
-  //             // ignore: unrelated_type_equality_checks
-  //             if (departmentId == companyDepartment[i].id) {
-  //               companyDepartmentData = companyDepartment[i];
-  //             }
-  //           }
-  //         }
-  //         departmentStringList.clear();
-  //         log("companyDepartment ::::$companyDepartment");
-  //         for (int i = 0; i < companyDepartment.length; i++) {
-  //           departmentStringList.add(companyDepartment[i].departmentName);
-  //         }
-  //       } else {
-  //         log('getAllCompanyFunction Else');
-  //       }
-  //     });
-  //   } catch (e) {
-  //     Fluttertoast.showToast(msg: "Something went wrong!");
-  //     rethrow;
-  //   }
-
-  //   await getCompanyWiseLocationFunction(companyId);
-  // }
-
+  /// Employee Create - Done
   Future<void> employeeCreateFunction() async {
     isLoading(true);
     String url = ApiUrl.createEmployeeApi;
-    // String url = "https://payroll.omdemo.co.in/api/employee/store";
-
-    log(url);
+    log("Employee Create Api Url : $url");
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -521,35 +509,35 @@ class EmployeeManageScreenController extends GetxController {
       request.fields['first_name'] = firstNameController.text.trim();
       request.fields['middle_name'] = middleNameController.text.trim();
       request.fields['last_name'] = lastNameController.text.trim();
-      request.fields['password'] = passwordController.text.trim();
-      request.fields['address'] = currentAddressController.text.trim();
-      request.fields['phone_no'] = phoneNoController.text.trim();
-      request.fields['email'] = emailController.text.trim();
+      request.fields['mobile_number'] = phoneNoController.text.trim();
+      request.fields['date_of_birth'] = dateOfBirthController.text.trim();
+      request.fields['pay_period'] = selectedValuePayper.value == "Salary" ? "salary" : "hourly";
+      request.fields['salary'] = salaryController.text.trim() == "" ? "0" : salaryController.text.trim();
+      request.fields['hourly_rate'] = hourlyRateController.text.trim() == "" ? "0" : hourlyRateController.text.trim();
+      request.fields['employment_start_date'] = startDateController.text.trim();
+      request.fields['employment_end_date'] = endDateController.text.trim();
+      request.fields['is_active'] = selectedValue.value == "Active" ? "1" : selectedValue.value == "In-Active" ? "0" : "2";
+      request.fields['companyid'] = companyId;
       request.fields['department_id'] = "${companyDepartmentData!.id}";
-      request.fields['date_of_brith'] = dateOfBrithController.text.trim();
-      request.fields['home'] = homeAddressController.text.trim();
-      request.fields['home_no'] = homeNoController.text.trim();
-      request.fields['work_phone'] = workNoController.text.trim();
-      request.fields['hourly_rate'] = hourlyRateController.text.trim();
-      request.fields['salary'] = salaryController.text.trim();
-      request.fields['start_date'] = startDateController.text.trim();
-      request.fields['last_day_of_work'] = lastDateController.text.trim();
-      request.fields['companyid'] = "${companyDDSelectedItem!.id}";
-      request.fields['userid'] = "${UserDetails.userId}";
-      request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
+      request.fields['location_id'] = "${locationListData!.id}";
+      request.fields['email'] = emailController.text.trim();
+      request.fields['password'] = passwordController.text.trim();
+      request.fields['street'] = streetAddressController.text.trim();
+      request.fields['town'] = landmarkAddressController.text.trim();
+      request.fields['state'] = stateAddressController.text.trim();
+      request.fields['city'] = cityAddressController.text.trim();
+      request.fields['zipcode'] = zipcodeAddressController.text.trim();
+      request.fields['userid'] = "$userIdPrefs";
 
-      if (images != null) {
+      /*if (images != null) {
         request.files
             .add(await http.MultipartFile.fromPath("photo", images!.path));
-      }
-
-      request.fields['payper'] =
-          selectedValue.value == "salary" ? "salary" : "Hourly";
+      }*/
 
       log("request.fields : ${request.fields}");
       log("request.files : ${request.files}");
       var response = await request.send();
-      log('getEmployeeStore: $response');
+      log('getEmployeeStore: ${response.statusCode}');
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
@@ -565,7 +553,7 @@ class EmployeeManageScreenController extends GetxController {
 
           Get.back();
           await employeeListScreenController
-              .getCompanyWiseEmployeeFunction(companyId);
+              .getCompanyWiseEmployeeFunction();
         } else {
           log('createCompanyFunction Else');
         }
@@ -587,34 +575,34 @@ class EmployeeManageScreenController extends GetxController {
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
+      request.fields['id'] = employeeId;
       request.fields['first_name'] = firstNameController.text.trim();
       request.fields['middle_name'] = middleNameController.text.trim();
       request.fields['last_name'] = lastNameController.text.trim();
-      request.fields['password'] = passwordController.text.trim();
-      request.fields['address'] = currentAddressController.text.trim();
-      request.fields['phone_no'] = phoneNoController.text.trim();
-      request.fields['email'] = emailController.text.trim();
+      request.fields['mobile_number'] = phoneNoController.text.trim();
+      request.fields['date_of_birth'] = dateOfBirthController.text.trim();
+      request.fields['pay_period'] = selectedValue.value == "Salary" ? "salary" : "hourly";
+      request.fields['salary'] = salaryController.text.trim() == "" ? "0" : salaryController.text.trim();
+      request.fields['hourly_rate'] = hourlyRateController.text.trim() == "" ? "0" : hourlyRateController.text.trim();
+      request.fields['employment_start_date'] = startDateController.text.trim();
+      request.fields['employment_end_date'] = endDateController.text.trim();
+      request.fields['is_active'] = selectedValue.value == "Active" ? "1" : selectedValue.value == "In-Active" ? "0" : "2";
+      request.fields['companyid'] = companyId;
       request.fields['department_id'] = "${companyDepartmentData!.id}";
-      request.fields['date_of_brith'] = dateOfBrithController.text.trim();
-      request.fields['home'] = homeAddressController.text.trim();
-      request.fields['home_no'] = homeNoController.text.trim();
-      request.fields['work_phone'] = workNoController.text.trim();
-      request.fields['hourly_rate'] = hourlyRateController.text.trim();
-      request.fields['salary'] = salaryController.text.trim();
-      request.fields['start_date'] = startDateController.text.trim();
-      request.fields['last_day_of_work'] = lastDateController.text.trim();
-      request.fields['companyid'] = "${companyDDSelectedItem!.id}";
-      request.fields['userid'] = "${UserDetails.userId}";
-      request.fields['showphotos'] = oldImageName;
-      request.fields['id'] = employeeId;
-      request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
-      request.fields['payper'] =
-          selectedValue.value == "salary" ? "salary" : "Hourly";
+      request.fields['location_id'] = "${locationListData!.id}";
+      request.fields['email'] = emailController.text.trim();
+      request.fields['password'] = passwordController.text.trim();
+      request.fields['street'] = streetAddressController.text.trim();
+      request.fields['town'] = landmarkAddressController.text.trim();
+      request.fields['state'] = stateAddressController.text.trim();
+      request.fields['city'] = cityAddressController.text.trim();
+      request.fields['zipcode'] = zipcodeAddressController.text.trim();
+      request.fields['userid'] = "$userIdPrefs";
 
-      if (images != null) {
+      /*if (images != null) {
         request.files
             .add(await http.MultipartFile.fromPath("photo", images!.path));
-      }
+      }*/
       var response = await request.send();
 
       response.stream
@@ -630,7 +618,7 @@ class EmployeeManageScreenController extends GetxController {
           Fluttertoast.showToast(msg: updateEmployeeModel.messege);
           Get.back();
           await employeeListScreenController
-              .getCompanyWiseEmployeeFunction(companyId);
+              .getCompanyWiseEmployeeFunction();
         } else {
           log('updateCompanyDetailsFunction Else');
         }
@@ -644,17 +632,15 @@ class EmployeeManageScreenController extends GetxController {
     }
   }
 
+  getLoggedInUserIdFromPrefs() async {
+    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    await getCompanyWiseDepartmentFunction();
+  }
+
   @override
   void onInit() {
-    // getAllCompanyFunction();
-    // String companyTempId = companyId;
     companyDDSelectedStringItem = companyName;
-    getCompanyWiseDepartmentFunction();
-    /*if(employeeOption == EmployeeOption.create) {
-      getCompanyDepartmentFunction(companyId);
-    } else if(employeeOption == EmployeeOption.update) {
-      employeeGetByIdFunction();
-    }*/
+    getLoggedInUserIdFromPrefs();
     super.onInit();
   }
 

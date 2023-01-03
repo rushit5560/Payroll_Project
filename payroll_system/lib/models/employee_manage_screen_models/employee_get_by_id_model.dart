@@ -31,7 +31,7 @@ class EmployeeGetByIdModel {
   Map<String, dynamic> toJson() => {
         "success": success,
         "messege": messege,
-        "Data": data.toJson(),
+        // "Data": data.toJson(),
       };
 }
 
@@ -43,51 +43,63 @@ class EmployeeGEtByIdModelData {
     required this.lastName,
     required this.password,
     required this.address,
-    required this.phoneNo,
+    required this.mobileNumber,
     required this.email,
+    required this.companyid,
     required this.departmentId,
+    required this.locationId,
     required this.isActive,
-    required this.payper,
-    required this.createdby,
-    required this.modifiedby,
-    required this.dateOfBrith,
+    required this.payPeriod,
+    required this.dateOfBirth,
     required this.home,
     required this.homeNo,
     required this.workPhone,
     required this.hourlyRate,
     required this.salary,
-    required this.startDate,
-    required this.lastDayOfWork,
-    required this.companyid,
+    required this.employmentStartDate,
+    required this.employmentEndDate,
+    required this.street,
+    required this.town,
+    required this.state,
+    required this.city,
+    required this.zipcode,
     required this.photo,
+    required this.createdby,
+    required this.modifiedby,
     required this.createdAt,
     required this.updatedAt,
   });
-  final int id;
-  final String firstName;
-  final String middleName;
-  final String lastName;
-  final String password;
-  final String address;
-  final String phoneNo;
-  final String email;
-  final int departmentId;
-  final String isActive;
-  final String payper;
-  final int createdby;
-  final int modifiedby;
-  final String dateOfBrith;
-  final String home;
-  final String homeNo;
-  final String workPhone;
-  final int hourlyRate;
-  final int salary;
-  final String startDate;
-  final int lastDayOfWork;
-  final int companyid;
-  final String photo;
-  final String createdAt;
-  final String updatedAt;
+  int id;
+  String firstName;
+  String middleName;
+  String lastName;
+  String password;
+  String address;
+  String mobileNumber;
+  String email;
+  int companyid;
+  int departmentId;
+  int locationId;
+  String isActive;
+  String payPeriod;
+  DateTime dateOfBirth;
+  String home;
+  String homeNo;
+  String workPhone;
+  int hourlyRate;
+  int salary;
+  DateTime employmentStartDate;
+  DateTime employmentEndDate;
+  String street;
+  String town;
+  String state;
+  String city;
+  String zipcode;
+  String photo;
+  int createdby;
+  String modifiedby;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   factory EmployeeGEtByIdModelData.fromJson(Map<String, dynamic> json) =>
       EmployeeGEtByIdModelData(
@@ -97,51 +109,30 @@ class EmployeeGEtByIdModelData {
         lastName: json["last_name"] ?? "",
         password: json["password"] ?? "",
         address: json["address"] ?? "",
-        phoneNo: json["phone_no"] ?? "",
+        mobileNumber: json["mobile_number"] ?? "",
         email: json["email"] ?? "",
+        companyid: json["companyid"] ?? 0,
         departmentId: json["department_id"] ?? 0,
+        locationId: json["location_id"] ?? 0,
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? 0,
-        modifiedby: json["modifiedby"] ?? 0,
-        dateOfBrith: json["date_of_brith"] ?? "",
+        payPeriod: json["pay_period"] ?? "",
+        dateOfBirth: DateTime.parse(json["date_of_birth"] ?? DateTime.now()),
         home: json["home"] ?? "",
         homeNo: json["home_no"] ?? "",
         workPhone: json["work_phone"] ?? "",
         hourlyRate: json["hourly_rate"] ?? 0,
         salary: json["salary"] ?? 0,
-        startDate: json["start_date"] ?? "",
-        lastDayOfWork: json["last_day_of_work"] ?? 0,
-        companyid: json["companyid"] ?? 0,
+        employmentStartDate: DateTime.parse(json["employment_start_date"] ?? DateTime.now()),
+        employmentEndDate: DateTime.parse(json["employment_end_date"] ?? DateTime.now()),
+        street: json["street"] ?? "",
+        town: json["town"] ?? "",
+        state: json["state"] ?? "",
+        city: json["city"] ?? "",
+        zipcode: json["zipcode"] ?? "",
         photo: json["photo"] ?? "",
-        createdAt: json["created_at"] ?? "",
-        updatedAt: json["updated_at"] ?? "",
-        payper: json["payper"]??"",
+        createdby: json["createdby"] ?? 0,
+        modifiedby: json["modifiedby"] ?? "",
+        createdAt: DateTime.parse(json["created_at"] ?? DateTime.now()),
+        updatedAt: DateTime.parse(json["updated_at"] ?? DateTime.now()),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "first_name": firstName,
-        "middle_name": middleName,
-        "last_name": lastName,
-        "password": password,
-        "address": address,
-        "phone_no": phoneNo,
-        "email": email,
-        "department_id": departmentId,
-        "is_active": isActive,
-        "createdby": createdby,
-        "modifiedby": modifiedby,
-        "date_of_brith": dateOfBrith,
-        "home": home,
-        "home_no": homeNo,
-        "work_phone": workPhone,
-        "hourly_rate": hourlyRate,
-        "salary": salary,
-        "start_date": startDate,
-        "last_day_of_work": lastDayOfWork,
-        "companyid": companyid,
-        "photo": photo,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
-      };
 }

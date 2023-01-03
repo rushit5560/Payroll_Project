@@ -53,8 +53,8 @@ class UpdateEmployeeModel {
 
   factory UpdateEmployeeModel.fromJson(Map<String, dynamic> json) =>
       UpdateEmployeeModel(
-        success: json["success"],
-        messege: json["messege"],
+        success: json["success"] ?? false,
+        messege: json["messege"] ?? "",
         // data: UpdateEmployeeData.fromJson(json["Data"] ?? {}),
       );
 
