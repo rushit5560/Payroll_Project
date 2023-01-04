@@ -69,7 +69,7 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                               },
                               title: AppMessage.location,
                             ),
-                            CompanyDrawerTile(
+                            /*CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
                                 Get.to(() => PayRollManageScreen(), arguments: [
@@ -79,7 +79,7 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                 ]);
                               },
                               title: AppMessage.payRoll,
-                            ),
+                            ),*/
                             /*CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
