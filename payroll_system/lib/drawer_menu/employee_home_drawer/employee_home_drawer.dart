@@ -75,33 +75,5 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
   }
 }
 
-/*class EmployeeDrawerTile extends StatelessWidget {
-  Function() onTap;
-  String title;
-  EmployeeDrawerTile({Key? key, required this.onTap, required this.title})
-      : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            leading:
-                const Icon(Icons.person_rounded, color: AppColors.blackColor),
-            title: Text(
-              title,
-              textAlign: TextAlign.left,
-              style: TextStyleConfig.drawerTextStyle(),
-            ),
-          ),
-          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
-        ],
-      ),
-    );
-
-  }
-}*/
 

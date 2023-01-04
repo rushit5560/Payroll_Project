@@ -189,24 +189,7 @@ class SplashScreenController extends GetxController {
           int roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
           await userPreference.getUserPrefsAndSaveToLocal();
           await getUserPermissionsFunction(roleId: roleId.toString());
-          // await userPreference.getUserPrefsAndSaveToLocal().whenComplete(() async {
-          //   await getUserPermissionsFunction(userId: UserDetails.userId.toString());
-          // }).whenComplete(
-          //   () {
-          //     /// Role wise route set
-          //     /*if (UserDetails.roleId == 1) {
-          //       Get.off(() => HomeScreen());
-          //     } else if (UserDetails.roleId == 2) {
-          //       Get.off(() => HomeScreen());
-          //     } else if (UserDetails.roleId == 3) {
-          //       Get.off(() => CompanyHomeScreen());
-          //     } else if (UserDetails.roleId == 4) {
-          //       Get.off(() => EmployeeHomeScreen());
-          //     } else {
-          //       Get.off(() => LoginScreen());
-          //     }*/
-          //   },
-          // );
+        
         } else {
           Get.off(() => LoginScreen());
         }

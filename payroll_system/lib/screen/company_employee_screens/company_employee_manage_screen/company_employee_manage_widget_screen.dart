@@ -161,31 +161,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
-            // FormSingleFieldModule(
-            //   headerText: AppMessage.homeNo,
-            //   text: AppMessage.homeNo,
-            //   keyboardType: TextInputType.phone,
-            //   maxLength: 10,
-            //   mandatoryText: AppMessage.empty,
-            //   textEditingController:
-            //       companyEmployeeManageScreenController.homeNoController,
-            //   // validate: (value) =>
-            //   //     FieldValidation().validateMobileNumber(value),
-            // ),
-            // const SizedBox(height: 5),
-            // FormSingleFieldModule(
-            //   headerText: AppMessage.workNO,
-            //   text: AppMessage.workNO,
-            //   keyboardType: TextInputType.phone,
-            //   maxLength: 10,
-            //   mandatoryText: AppMessage.mandatory,
-            //   textEditingController:
-            //       companyEmployeeManageScreenController.workNoController,
-            //   validate: (value) =>
-            //       FieldValidation().validateMobileNumber(value),
-            // ),
-            // const SizedBox(height: 5),
-
             companyEmployeeManageScreenController.selectedValuePayper.value ==
                     "Hourly"
                 ? FormSingleFieldModule(
@@ -227,8 +202,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                   companyEmployeeManageScreenController.startDateController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
-                // DateTime selectedFirstDate =
-                //     companyEmployeeManageScreenController.selectedDate;
                 await _selectDate(
                     context: context,
                     dateTime: companyEmployeeManageScreenController
@@ -242,15 +215,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
-            // FormSingleFieldModule(
-            //   headerText: AppMessage.employeementEndDate,
-            //   text: AppMessage.employeementEndDate,
-            //   keyboardType: TextInputType.number,
-            //   mandatoryText: AppMessage.mandatory,
-            //   textEditingController:
-            //       companyEmployeeManageScreenController.lastDateController,
-            //   validate: (value) => FieldValidation().validateLastDayWork(value),
-            // ),
             FormSingleFieldModule(
               headerText: AppMessage.endDate,
               text: AppMessage.endDate,
@@ -260,8 +224,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                   companyEmployeeManageScreenController.endDateController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
-                // DateTime selectedFirstDate =
-                //     companyEmployeeManageScreenController.selectedDate;
                 await _selectDate(
                   context: context,
                   dateTime:
@@ -275,22 +237,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               },
               validate: (value) => FieldValidation().validateEndDayWork(value),
             ),
-
-            // FormSingleFieldModule(
-            //   headerText: AppMessage.employeementEndDate,
-            //   text: AppMessage.employeementEndDate,
-            //   keyboardType: TextInputType.datetime,
-            //   textEditingController:
-            //       companyEmployeeManageScreenController.lastDateController,
-            //   suffixIcon: Icons.calendar_month,
-            //   onPressed: () {
-            //     DateTime selectedLastDate =
-            //         companyEmployeeManageScreenController.selectedDate;
-            //     _selectDate(context, selectedLastDate,
-            //         companyEmployeeManageScreenController.lastDateController);
-            //   },
-            //   validate: (value) => FieldValidation().validateLastDayWork(value),
-            // ),
 
             const SizedBox(height: 5),
 
@@ -990,89 +936,89 @@ class ButtonCustom extends StatelessWidget {
   }
 }
 
-class ImagePickerCustom extends StatelessWidget {
-  ImagePickerCustom({super.key});
-  final companyEmployeeManageScreenController =
-      Get.find<CompanyEmployeeManageScreenController>();
+// class ImagePickerCustom extends StatelessWidget {
+//   ImagePickerCustom({super.key});
+//   final companyEmployeeManageScreenController =
+//       Get.find<CompanyEmployeeManageScreenController>();
 
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => companyEmployeeManageScreenController.isLoading.value == true
-          ? const CircularProgressIndicator()
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    companyEmployeeManageScreenController.showPicker(context);
-                  },
-                  child: ClipOval(
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey,
-                          ),
-                          child: companyEmployeeManageScreenController
-                                      .employeeOption ==
-                                  EmployeeOption.create
-                              ? companyEmployeeManageScreenController.images !=
-                                      null
-                                  ? Image.file(
-                                      companyEmployeeManageScreenController
-                                          .images!,
-                                      fit: BoxFit.fill,
-                                    )
-                                  : const Icon(
-                                      Icons.camera_alt_outlined,
-                                    )
-                              : companyEmployeeManageScreenController.images !=
-                                      null
-                                  ? Image.file(
-                                      companyEmployeeManageScreenController
-                                          .images!,
-                                      fit: BoxFit.fill,
-                                    )
-                                  : companyEmployeeManageScreenController
-                                              .oldImageName !=
-                                          AppMessage.empty
-                                      ? Image.network(
-                                          "${ApiUrl.apiImagePath}${companyEmployeeManageScreenController.oldImageName}",
-                                          fit: BoxFit.fill,
-                                        )
-                                      : const Icon(
-                                          Icons.camera_alt_outlined,
-                                        ),
-                        ),
-                        companyEmployeeManageScreenController.employeeOption ==
-                                EmployeeOption.update
-                            ? Positioned(
-                                top: 70,
-                                right: 8,
-                                child: Container(
-                                  height: 28,
-                                  width: 28,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.edit,
-                                    size: 15.sp,
-                                  ),
-                                ),
-                              )
-                            : Container(),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Obx(
+//       () => companyEmployeeManageScreenController.isLoading.value == true
+//           ? const CircularProgressIndicator()
+//           : Row(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 GestureDetector(
+//                   onTap: () {
+//                     companyEmployeeManageScreenController.showPicker(context);
+//                   },
+//                   child: ClipOval(
+//                     child: Stack(
+//                       children: [
+//                         Container(
+//                           height: 100,
+//                           width: 100,
+//                           decoration: const BoxDecoration(
+//                             shape: BoxShape.circle,
+//                             color: Colors.grey,
+//                           ),
+//                           child: companyEmployeeManageScreenController
+//                                       .employeeOption ==
+//                                   EmployeeOption.create
+//                               ? companyEmployeeManageScreenController.images !=
+//                                       null
+//                                   ? Image.file(
+//                                       companyEmployeeManageScreenController
+//                                           .images!,
+//                                       fit: BoxFit.fill,
+//                                     )
+//                                   : const Icon(
+//                                       Icons.camera_alt_outlined,
+//                                     )
+//                               : companyEmployeeManageScreenController.images !=
+//                                       null
+//                                   ? Image.file(
+//                                       companyEmployeeManageScreenController
+//                                           .images!,
+//                                       fit: BoxFit.fill,
+//                                     )
+//                                   : companyEmployeeManageScreenController
+//                                               .oldImageName !=
+//                                           AppMessage.empty
+//                                       ? Image.network(
+//                                           "${ApiUrl.apiImagePath}${companyEmployeeManageScreenController.oldImageName}",
+//                                           fit: BoxFit.fill,
+//                                         )
+//                                       : const Icon(
+//                                           Icons.camera_alt_outlined,
+//                                         ),
+//                         ),
+//                         companyEmployeeManageScreenController.employeeOption ==
+//                                 EmployeeOption.update
+//                             ? Positioned(
+//                                 top: 70,
+//                                 right: 8,
+//                                 child: Container(
+//                                   height: 28,
+//                                   width: 28,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.circular(5),
+//                                     color: Colors.white,
+//                                   ),
+//                                   child: Icon(
+//                                     Icons.edit,
+//                                     size: 15.sp,
+//                                   ),
+//                                 ),
+//                               )
+//                             : Container(),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//     );
+//   }
+// }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/messaging.dart';

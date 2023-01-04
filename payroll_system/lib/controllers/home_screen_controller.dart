@@ -64,8 +64,6 @@ class HomeScreenController extends GetxController {
   @override
   void onInit() {
     getUserIdFunctionFromPrefs();
-    // getRoleIdFunctionFromPrefs();
-    // getAllCompanyFunction();
     super.onInit();
   }
 }

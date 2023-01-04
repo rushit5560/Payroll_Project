@@ -194,18 +194,6 @@ class FieldValidation {
     }
   }
 
-  // String? validateHomePhoneNumber(String value) {
-  //   if (value.isEmpty) {
-  //     return 'Please enter Mobile number';
-  //   } else if (value.length < 10) {
-  //     return 'Mobile number must enter 10 characters';
-  //   } else if (value.length > 10) {
-  //     return 'Mobile number enter 10 characters';
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   String? validateWorkPhoneNumber(String value) {
     String pattern = AppMessage.patternRegX;
     RegExp regExp = RegExp(pattern);
@@ -311,7 +299,8 @@ class FieldValidation {
       return null;
     }
   }
-    String? validatePayDayWork(String value) {
+
+  String? validatePayDayWork(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterPayDayWork;
     } else {

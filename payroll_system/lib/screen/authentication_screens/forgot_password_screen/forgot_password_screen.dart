@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/forgot_password_screen_controller.dart';
-import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
-import 'package:payroll_system/utils/messaging.dart';
-import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
 import 'forgot_password_screen_widgets.dart';

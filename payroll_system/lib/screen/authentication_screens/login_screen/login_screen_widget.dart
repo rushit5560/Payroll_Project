@@ -252,29 +252,4 @@ class PrivacyPolicyCustom extends StatelessWidget {
   }
 }
 
-// class CompanyLogInCustom extends StatelessWidget {
-//   const CompanyLogInCustom({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.end,
-//       children: [
-//         Text(AppMessage.dontHaveAnAccount),
-//         SizedBox(width: 2.w),
-//         GestureDetector(
-//           onTap: () {
-//
-//             Get.to(
-//               SignUpScreen(),
-//             );
-//           },
-//           child: Text(
-//             AppMessage.companyLogin,
-//             style: const TextStyle(decoration: TextDecoration.underline),
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }
+

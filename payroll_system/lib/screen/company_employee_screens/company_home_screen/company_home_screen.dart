@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
@@ -12,9 +11,6 @@ import 'package:payroll_system/screen/company_employee_screens/company_home_scre
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../drawer_menu/company_view_drawer/company_view_drawer.dart';
-import '../../employee_screens/employee_manage_screen/employee_manage_screen.dart';
 
 class CompanyHomeScreen extends StatelessWidget {
   CompanyHomeScreen({super.key});

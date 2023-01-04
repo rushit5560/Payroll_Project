@@ -9,8 +9,7 @@ import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class CompanyHomeScreenController extends GetxController {
-  // String companyId = Get.arguments[0];
-  // String companyName = Get.arguments[1];
+
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
   List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];

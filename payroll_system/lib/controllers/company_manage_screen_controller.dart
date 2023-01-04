@@ -9,12 +9,10 @@ import 'package:payroll_system/Models/company_manage_screen_model/create_company
 import 'package:payroll_system/Models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/Models/company_manage_screen_model/update_company_model.dart';
 import 'package:payroll_system/Utils/api_url.dart';
-import 'package:payroll_system/Utils/extension_methods/user_details.dart';
 import 'package:payroll_system/controllers/home_screen_controller.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import '../constants/enums.dart';
-import 'company_list_screen_controller.dart';
 
 class CompanyManageScreenController extends GetxController {
   CompanyOption companyOption = Get.arguments[0];
@@ -54,80 +52,7 @@ class CompanyManageScreenController extends GetxController {
   TextEditingController cityAddressController = TextEditingController();
   TextEditingController stateAddressController = TextEditingController();
 
-  /// Get All Department
-  /*Future<void> getAllDepartmentFunction() async {
-    isLoading(true);
-    String url = ApiUrl.allDepartmentApi;
-    log('Get All Department Api Url :$url');
-
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-
-      AllDepartmentModel allDepartmentModel =
-          AllDepartmentModel.fromJson(json.decode(response.body));
-      isSuccessStatus = allDepartmentModel.success.obs;
-
-      if (isSuccessStatus.value) {
-        departmentList.clear();
-        departmentList.addAll(allDepartmentModel.data);
-
-        departmentStringList.clear();
-        for (int i = 0; i < departmentList.length; i++) {
-          departmentStringList.add(departmentList[i].departmentName);
-          log('${departmentList[i].id} : ${departmentList[i].departmentName}');
-        }
-
-        log('departmentList Length : ${departmentList.length}');
-      } else {
-        log('getAllDepartmentFunction Else');
-      }
-    } catch (e) {
-      log('getAllDepartmentFunction Error :$e');
-      rethrow;
-    } finally {
-      if (companyOption == CompanyOption.update) {
-        // when update company that time
-        await getCompanyDetailsFunction();
-      } else if (companyOption == CompanyOption.create) {
-        // when create new company
-        await getAllLocationListFunction();
-        isLoading(false);
-      }
-    }
-  }*/
-
-  /*Future<void> getAllLocationListFunction() async {
-    isLoading(true);
-    String url = ApiUrl.allLocationApi;
-    log('Get All Location List Api Url :$url');
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-
-      AllLocationListModel allLocationListModel = AllLocationListModel.fromJson(
-        json.decode(response.body),
-      );
-      isSuccessStatus = allLocationListModel.success.obs;
-      if (isSuccessStatus.value) {
-        allLocationList.clear();
-        allLocationList.addAll(allLocationListModel.data);
-        locationStringList.clear();
-        for (int i = 0; i < allLocationList.length; i++) {
-          locationStringList.add(allLocationList[i].locationName);
-
-          log('${allLocationList[i].id} : ${allLocationList[i].locationName}');
-        }
-        log('departmentList Length : ${allLocationList.length}');
-      } else {
-        log('getAllLocationListFunction Else');
-      }
-    } catch (e) {
-      log('getAllDepartmentFunction Error :$e');
-
-      rethrow;
-    } finally {
-      isLoading(false);
-    }
-  }*/
+ 
 
   /// Create Company
   Future<void> createCompanyFunction() async {
@@ -294,8 +219,7 @@ class CompanyManageScreenController extends GetxController {
     if(companyOption == CompanyOption.update) {
       getCompanyDetailsFunction();
     }
-    // getAllDepartmentFunction();
-    // getAllLocationListFunction();
+    
     log("$companyOption");
     super.onInit();
   }

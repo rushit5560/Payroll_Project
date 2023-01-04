@@ -17,16 +17,7 @@ class SplashScreen extends StatelessWidget {
             child: Image.asset(
           AppImages.logoImg,
           width: 70.w,
-        )
-
-            // Text(
-            //   "Splash Screen",
-            //   style: TextStyleConfig.textStyle(
-            //     fontSize: 50,
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            // ),
-            ),
+        )),
       ),
     );
   }

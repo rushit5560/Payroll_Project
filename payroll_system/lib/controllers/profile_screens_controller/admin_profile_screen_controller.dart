@@ -214,8 +214,6 @@ class AdminProfileScreenController extends GetxController {
                   leading: const Icon(Icons.photo_library),
                   title: const Text("Gallery"),
                   onTap: () {
-                    // employeDetailsFormController.getImage(ImageSource.gallery);
-
                     imageFromGallary();
                   },
                 ),
@@ -223,8 +221,6 @@ class AdminProfileScreenController extends GetxController {
                   leading: const Icon(Icons.camera_alt),
                   title: const Text("Camera"),
                   onTap: () {
-                    // employeDetailsFormController.getImage(ImageSource.camera);
-
                     imageFromCamera();
                   },
                 ),

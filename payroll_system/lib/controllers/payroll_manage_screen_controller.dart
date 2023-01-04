@@ -26,11 +26,7 @@ class PayRollManageScreenController extends GetxController {
   TextEditingController hourlyRateController = TextEditingController();
   TextEditingController salaryController = TextEditingController();
   DateTime birthDate = DateTime.now();
-  // var dateRange = DateTimeRange(
-  //         start: DateTime.now(),
-  //         end: DateTime(DateTime.now().year, DateTime.now().month,
-  //             DateTime.now().day + 6))
-  //     .obs;
+
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   DateTime payDate = DateTime.now();
@@ -94,22 +90,6 @@ class PayRollManageScreenController extends GetxController {
     super.onInit();
   }
 
-  // @override
-  // void onClose() {
-  //   chooseDateRangePicker() async {
-  //     DateTimeRange? picked = await showDateRangePicker(
-  //       context: Get.context!,
-  //       firstDate: DateTime(DateTime.now().year - 20),
-  //       lastDate: DateTime(DateTime.now().year + 20),
-  //       initialDateRange: dateRange.value
-  //     );
-  //     if(picked!=null&& picked!=dateRange.value)
-  //     {
-  //       dateRange.value=picked;
-  //     }
-  //   }
-
-  //   super.onClose();
-  // }
+ 
 
 }

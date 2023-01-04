@@ -15,8 +15,7 @@ class DepartmentListScreenController extends GetxController {
 
   List<DepartmentData> allDepartmentList = [];
 
-  // int roleId = 0;
-  // int userId = 0;
+  
 
   /// Get All Department
   Future<void> getAllDepartmentFunction() async {
@@ -83,15 +82,7 @@ class DepartmentListScreenController extends GetxController {
     log('Get Company Department Api Url :$url');
 
     try {
-      // var request = http.MultipartRequest('POST', Uri.parse(url));
-      // request.fields['id'] = companyId;
-      //
-      // var response = await request.send();
-      //
-      // response.stream
-      //     .transform(const Utf8Decoder())
-      //     .transform(const LineSplitter())
-      //     .listen((value) {
+   
       
       http.Response response = await http.get(Uri.parse(url));
         AllDepartmentModel companyDepartmentModel =
@@ -115,19 +106,7 @@ class DepartmentListScreenController extends GetxController {
     }
   }
 
-  /*getUserIdDataFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
-    userId = prefs.getInt(UserPreference.userIdKey) ?? 0;
-
-    log('Department List Screen OnInit Role Id : $roleId');
-    log('Department List Screen OnInit user Id : $userId');
-    if (roleId == 1 || roleId == 2) {
-      await getAllDepartmentFunction();
-    } else if (roleId == 3) {
-      await getCompanyWiseDepartmentFunction();
-    }
-  }*/
+ 
 
   @override
   void onInit() {

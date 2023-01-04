@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
 import 'package:payroll_system/common_modules/single_item_module.dart';
 import 'package:payroll_system/common_modules/view_button_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/company_home_screen_controller.dart';
-import 'package:payroll_system/screen/company_screens/company_view_screen/company_view_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_view_screen/employee_view_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
@@ -102,17 +98,6 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     } else {
                       Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                     }
-                    // Get.to(
-                    //       ()=> CompanyManageScreen(),
-                    //   // arguments: [
-                    //   //   singleItem.id.toString(),
-                    //   //   singleItem.userName.toString(),
-                    //   // ],
-                    //     arguments: [
-                    //       CompanyOption.update,
-                    //       singleItem.id.toString(),
-                    //     ],
-                    // );
                   },
                   viewLabelText: AppMessage.view,
                   editLabelText: AppMessage.edit,

@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -11,12 +9,10 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_manage_screen_controller.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../common_modules/custom_alert_dialog_module.dart';
 import '../../../utils/messaging.dart';
 import '../../../utils/validator.dart';
 import '../../employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
-import '../location_list_screen/location_list_screen.dart';
 
 class LocationManageScreenWidgets extends StatelessWidget {
   LocationManageScreenWidgets({super.key});

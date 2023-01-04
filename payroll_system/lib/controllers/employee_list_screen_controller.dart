@@ -16,9 +16,7 @@ class EmployeeListScreenController extends GetxController {
 
   List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
 
-  // int roleId = 0;
-  // int userId = 0;
-
+  
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {
     isLoading(true);

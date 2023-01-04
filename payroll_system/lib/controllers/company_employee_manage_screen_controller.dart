@@ -18,7 +18,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import '../models/company_list_screen_model/get_all_company_model.dart';
 import '../models/employee_manage_screen_models/employee_get_by_id_model.dart';
-import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/create_employee_model.dart';
 import 'package:payroll_system/models/employee_manage_screen_models/update_employee_model.dart';
@@ -28,7 +27,6 @@ class CompanyEmployeeManageScreenController extends GetxController {
   String employeeId = Get.arguments[1] ?? "";
   String companyId = Get.arguments[2];
   String companyName = Get.arguments[3];
-  // String locationName = Get.arguments[4];
 
   List<LocationListData> allLocationList = [];
   LocationListData? locationListData;
@@ -58,8 +56,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
   final companyHomeScreenController = Get.find<CompanyHomeScreenController>();
 
   RxBool isSuccessStatus = false.obs;
-  // List<DepartmentData> departmentList = [];
-  // List<CompanyData> companyList = [];
+  
 
   List<String> departmentStringList = [];
   List<String> companyStringList = [];
@@ -357,58 +354,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
           }
         }
 
-        //todo - start here
-
-        // homeNoController.text = employeeGetByIdModel.data.homeNo;
-        // workNoController.text = employeeGetByIdModel.data.workPhone;
-        // // startDateController.text = employeeGetByIdModel.data.startDate;
-        // isActiveController.text = employeeGetByIdModel.data.isActive;
-        // emailController.text = employeeGetByIdModel.data.email;
-        // lastDateController.text = employeeGetByIdModel.data.lastDayOfWork.toString();
-        //
-        // // companyId = employeeGetByIdModel.data.companyid.toString();
-        // departmentId = employeeGetByIdModel.data.departmentId;
-        //
-        // for (int i = 0; i < companyDepartment.length; i++) {
-        //   // ignore: unrelated_type_equality_checks
-        //   if (departmentId == companyDepartment[i].id) {
-        //     companyDepartmentData = companyDepartment[i];
-        //   }
-        // }
-        //
-        // oldImageName = employeeGetByIdModel.data.photo;
-        //
-        // employmentStartDate =
-        //     DateTime.parse(employeeGetByIdModel.data.startDate);
-        // startDateController.text =
-        //     "${employmentStartDate.year}-${employmentStartDate.month}-${employmentStartDate.day}";
-        //
-        // // employmentEndDate =
-        // //     DateTime.parse(employeeGetByIdModel.data.lastDayOfWork);
-        // startDateController.text =
-        //     "${employmentEndDate.year}-${employmentEndDate.month}-${employmentEndDate.day}";
-        //
-        // birthDate = DateTime.parse(employeeGetByIdModel.data.dateOfBrith);
-        // dateOfBirthController.text =
-        //     "${birthDate.year}-${birthDate.month}-${birthDate.day}";
-        //
-        // selectedValue.value =
-        //     employeeGetByIdModel.data.isActive == "1" ? "active" : "inactive";
-        //
-        // selectedValuePayper.value =
-        //     employeeGetByIdModel.data.payper == "salary" ? "Hourly" : "salary";
-        //
-        // log('Photo : ${employeeGetByIdModel.data.photo}');
-        //
-        // for (int i = 0; i < allCompanyList.length; i++) {
-        //   if (companyId == allCompanyList[i].id.toString()) {
-        //     companyDDSelectedItem = allCompanyList[i];
-        //   }
-        // }
-        //
-        // passwordController.text = employeeGetByIdModel.data.password;
-        // currentAddressController.text = employeeGetByIdModel.data.address;
-        // homeAddressController.text = employeeGetByIdModel.data.home;
+      
       } else {
         log('getEmployeeDetailsFunction Else');
       }
@@ -494,10 +440,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
         for (int i = 0; i < allLocationList.length; i++) {
           locationStringList.add(allLocationList[i].locationName);
         }
-        // allLocationList = allLocationListModel.data;
-
-        // Fluttertoast.showToast(msg: allLocationListModel.messege);
-        // allLocationList.removeAt(index);
+   
       } else {
         log('deleteCompanyFunction Else');
       }

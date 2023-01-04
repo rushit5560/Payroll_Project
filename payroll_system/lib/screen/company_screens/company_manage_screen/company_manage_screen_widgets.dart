@@ -1,12 +1,6 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:multiselect/multiselect.dart';
-import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/company_manage_screen_controller.dart';
-import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/custom_button_module.dart';

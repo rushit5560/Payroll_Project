@@ -35,7 +35,10 @@ class EmployeeManageScreenController extends GetxController {
   DateTime selectedDate = DateTime.now();
   RxBool isPasswordVisible = true.obs;
   List<String> isActiveOptionList = [
-    "Choose Option", "Active", "In-Active", "Terminated"
+    "Choose Option",
+    "Active",
+    "In-Active",
+    "Terminated"
   ];
   RxString selectedValue = "Choose Option".obs;
 
@@ -183,7 +186,7 @@ class EmployeeManageScreenController extends GetxController {
     if (result != null) {
       isLoading(true);
 
-      for(int i =0; i < result.paths.length; i++) {
+      for (int i = 0; i < result.paths.length; i++) {
         employeeSelectedDocumentList.add(File(result.paths[i]!));
       }
       log('files Inner :${employeeSelectedDocumentList.length}');
@@ -228,63 +231,6 @@ class EmployeeManageScreenController extends GetxController {
     );
   }
 
-  Future<void> getAllCompanyFunction() async {
-    isLoading(true);
-    String url = ApiUrl.allCompanyApi;
-    // log('Get All Company List Api Url :$url');
-
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-
-      // log("getAllCompanyFunction res body ::::${response.body}");
-
-      AllCompanyModel allCompanyModel =
-          AllCompanyModel.fromJson(json.decode(response.body));
-      isSuccessStatus = allCompanyModel.success.obs;
-      // log('GetAllCompany :,${response.body}');
-      if (isSuccessStatus.value) {
-        allCompanyList.clear();
-        allCompanyList.addAll(allCompanyModel.data);
-
-        companyDDSelectedItem = allCompanyList[0];
-
-        // log('companyDDSelectedItem : ${companyDDSelectedItem!.userName}');
-        // log('allCompanyList : ${allCompanyList.length}');
-
-        companyStringList.clear();
-        for (int i = 0; i < allCompanyList.length; i++) {
-          companyStringList.add(allCompanyList[i].userName);
-        }
-      } else {
-        log('getAllCompanyFunction Else');
-      }
-    } catch (e) {
-      log('getAllCompanyFunction Error :$e');
-      rethrow;
-    } finally {
-      /*if (employeeOption == EmployeeOption.update) {
-        // when update company that time
-        await employeeGetByIdFunction();
-      } else if (employeeOption == CompanyOption.create) {
-        // when create new company
-        await getCompanyDepartmentFunction(companyDDSelectedItem!.id);
-        isLoading(false);
-      }*/
-    }
-
-    // isLoading(false);
-
-    if (employeeOption == EmployeeOption.update) {
-      // when update company that time
-      await employeeGetByIdFunction();
-    } else if (employeeOption == EmployeeOption.create) {
-      // when create new company
-      await getCompanyWiseDepartmentFunction();
-
-      // isLoading(false);
-    }
-  }
-
   Future<void> employeeGetByIdFunction() async {
     isLoading(true);
     String url = "${ApiUrl.getEmployeeDetailsApi}$employeeId/$companyId";
@@ -304,11 +250,16 @@ class EmployeeManageScreenController extends GetxController {
         middleNameController.text = employeeGetByIdModel.data.middleName;
         lastNameController.text = employeeGetByIdModel.data.lastName;
         phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
-        dateOfBirthController.text = employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+        dateOfBirthController.text =
+            employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
         birthDate = employeeGetByIdModel.data.dateOfBirth;
-        selectedValuePayper.value = employeeGetByIdModel.data.payPeriod == "salary" ? "Salary" : "Hourly";
+        selectedValuePayper.value =
+            employeeGetByIdModel.data.payPeriod == "salary"
+                ? "Salary"
+                : "Hourly";
         salaryController.text = employeeGetByIdModel.data.salary.toString();
-        hourlyRateController.text = employeeGetByIdModel.data.hourlyRate.toString();
+        hourlyRateController.text =
+            employeeGetByIdModel.data.hourlyRate.toString();
         emailController.text = employeeGetByIdModel.data.email;
         streetAddressController.text = employeeGetByIdModel.data.street;
         landmarkAddressController.text = employeeGetByIdModel.data.town;
@@ -316,28 +267,34 @@ class EmployeeManageScreenController extends GetxController {
         stateAddressController.text = employeeGetByIdModel.data.state;
         zipcodeAddressController.text = employeeGetByIdModel.data.zipcode;
 
-        startDateController.text = employeeGetByIdModel.data.employmentStartDate.toString().split(" ")[0];
+        startDateController.text = employeeGetByIdModel.data.employmentStartDate
+            .toString()
+            .split(" ")[0];
         employmentStartDate = employeeGetByIdModel.data.employmentStartDate;
 
-        endDateController.text = employeeGetByIdModel.data.employmentEndDate.toString().split(" ")[0];
+        endDateController.text = employeeGetByIdModel.data.employmentEndDate
+            .toString()
+            .split(" ")[0];
         employmentEndDate = employeeGetByIdModel.data.employmentEndDate;
 
         selectedValue.value = employeeGetByIdModel.data.isActive == "0"
-            ? "In-Active" : employeeGetByIdModel.data.isActive == "1"
-            ? "Active" : "Terminated";
+            ? "In-Active"
+            : employeeGetByIdModel.data.isActive == "1"
+                ? "Active"
+                : "Terminated";
 
-        for(int i = 0 ; i < companyDepartment.length; i++) {
-          if(companyDepartment[i].id == employeeGetByIdModel.data.departmentId) {
+        for (int i = 0; i < companyDepartment.length; i++) {
+          if (companyDepartment[i].id ==
+              employeeGetByIdModel.data.departmentId) {
             companyDepartmentData = companyDepartment[i];
           }
         }
 
-        for(int i = 0; i < allLocationList.length; i++) {
-          if(allLocationList[i].id == employeeGetByIdModel.data.locationId) {
+        for (int i = 0; i < allLocationList.length; i++) {
+          if (allLocationList[i].id == employeeGetByIdModel.data.locationId) {
             locationListData = allLocationList[i];
           }
         }
-
       } else {
         log('getEmployeeDetailsFunction Else');
       }
@@ -358,7 +315,8 @@ class EmployeeManageScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-      CompanyDeprtmentModel companyDepartmentModel = CompanyDeprtmentModel.fromJson(json.decode(response.body));
+      CompanyDeprtmentModel companyDepartmentModel =
+          CompanyDeprtmentModel.fromJson(json.decode(response.body));
       isSuccessStatus = companyDepartmentModel.success.obs;
       log("getCompanyWiseDepartmentFunction response :${response.body}");
       if (isSuccessStatus.value) {
@@ -369,7 +327,6 @@ class EmployeeManageScreenController extends GetxController {
           if (companyDepartment.isNotEmpty) {
             companyDepartmentData = companyDepartment[0];
           } else {
-            // Fluttertoast.showToast(msg: "No department in this company!");
           }
         } else if (employeeOption == EmployeeOption.update) {
           // update logic here
@@ -458,12 +415,21 @@ class EmployeeManageScreenController extends GetxController {
       request.fields['last_name'] = lastNameController.text.trim();
       request.fields['mobile_number'] = phoneNoController.text.trim();
       request.fields['date_of_birth'] = dateOfBirthController.text.trim();
-      request.fields['pay_period'] = selectedValuePayper.value == "Salary" ? "salary" : "hourly";
-      request.fields['salary'] = salaryController.text.trim() == "" ? "0" : salaryController.text.trim();
-      request.fields['hourly_rate'] = hourlyRateController.text.trim() == "" ? "0" : hourlyRateController.text.trim();
+      request.fields['pay_period'] =
+          selectedValuePayper.value == "Salary" ? "salary" : "hourly";
+      request.fields['salary'] = salaryController.text.trim() == ""
+          ? "0"
+          : salaryController.text.trim();
+      request.fields['hourly_rate'] = hourlyRateController.text.trim() == ""
+          ? "0"
+          : hourlyRateController.text.trim();
       request.fields['employment_start_date'] = startDateController.text.trim();
       request.fields['employment_end_date'] = endDateController.text.trim();
-      request.fields['is_active'] = selectedValue.value == "Active" ? "1" : selectedValue.value == "In-Active" ? "0" : "2";
+      request.fields['is_active'] = selectedValue.value == "Active"
+          ? "1"
+          : selectedValue.value == "In-Active"
+              ? "0"
+              : "2";
       request.fields['companyid'] = companyId;
       request.fields['department_id'] = "${companyDepartmentData!.id}";
       request.fields['location_id'] = "${locationListData!.id}";
@@ -499,8 +465,7 @@ class EmployeeManageScreenController extends GetxController {
           Fluttertoast.showToast(msg: employeeCreateModel.messege);
 
           Get.back();
-          await employeeListScreenController
-              .getCompanyWiseEmployeeFunction();
+          await employeeListScreenController.getCompanyWiseEmployeeFunction();
         } else {
           log('createCompanyFunction Else');
         }
@@ -528,12 +493,21 @@ class EmployeeManageScreenController extends GetxController {
       request.fields['last_name'] = lastNameController.text.trim();
       request.fields['mobile_number'] = phoneNoController.text.trim();
       request.fields['date_of_birth'] = dateOfBirthController.text.trim();
-      request.fields['pay_period'] = selectedValue.value == "Salary" ? "salary" : "hourly";
-      request.fields['salary'] = salaryController.text.trim() == "" ? "0" : salaryController.text.trim();
-      request.fields['hourly_rate'] = hourlyRateController.text.trim() == "" ? "0" : hourlyRateController.text.trim();
+      request.fields['pay_period'] =
+          selectedValue.value == "Salary" ? "salary" : "hourly";
+      request.fields['salary'] = salaryController.text.trim() == ""
+          ? "0"
+          : salaryController.text.trim();
+      request.fields['hourly_rate'] = hourlyRateController.text.trim() == ""
+          ? "0"
+          : hourlyRateController.text.trim();
       request.fields['employment_start_date'] = startDateController.text.trim();
       request.fields['employment_end_date'] = endDateController.text.trim();
-      request.fields['is_active'] = selectedValue.value == "Active" ? "1" : selectedValue.value == "In-Active" ? "0" : "2";
+      request.fields['is_active'] = selectedValue.value == "Active"
+          ? "1"
+          : selectedValue.value == "In-Active"
+              ? "0"
+              : "2";
       request.fields['companyid'] = companyId;
       request.fields['department_id'] = "${companyDepartmentData!.id}";
       request.fields['location_id'] = "${locationListData!.id}";
@@ -564,8 +538,7 @@ class EmployeeManageScreenController extends GetxController {
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: updateEmployeeModel.messege);
           Get.back();
-          await employeeListScreenController
-              .getCompanyWiseEmployeeFunction();
+          await employeeListScreenController.getCompanyWiseEmployeeFunction();
         } else {
           log('updateCompanyDetailsFunction Else');
         }
@@ -580,7 +553,8 @@ class EmployeeManageScreenController extends GetxController {
   }
 
   getLoggedInUserIdFromPrefs() async {
-    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
     await getCompanyWiseDepartmentFunction();
   }
 

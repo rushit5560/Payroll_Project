@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          // home: LoginScreen(),
-          // home: const EmployeDetailsScreen(),
-          // home: ImagePickerCustom(),
+  
           home: SplashScreen(),
         );
       },
@@ -30,5 +28,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-// https://payroll.omdemo.co.in/api/getpermission/2

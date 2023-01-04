@@ -66,33 +66,6 @@ class AdminImageModule extends StatelessWidget {
                                     );
                                   },
                                 ),
-
-                                // CachedNetworkImage(
-                                //   imageUrl: adminProfileScreenController
-                                //               .profileData!.photo ==
-
-                                //           ""
-                                //       ? ""
-                                //       : ApiUrl.apiImagePath +
-                                //           adminProfileScreenController
-                                //               .profileData!.photo,
-                                //   fit: BoxFit.cover,
-                                //   errorWidget: (ctx, obj, st) {
-                                //     return Container(
-                                //       color:
-                                //           AppColors.greyColor.withOpacity(0.35),
-                                //       child: Center(
-                                //         child: Text(
-                                //           "Upload Image",
-                                //           style: TextStyle(
-                                //             color: AppColors.blackColor,
-                                //             fontSize: 10.sp,
-                                //           ),
-                                //         ),
-                                //       ),
-                                //     );
-                                //   },
-                                // ),
                               ),
                       ),
                     ),

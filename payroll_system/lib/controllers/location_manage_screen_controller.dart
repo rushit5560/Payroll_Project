@@ -154,7 +154,6 @@ class LocationManageScreenController extends GetxController {
     if (locationOption == LocationOption.update) {
       locationGetByIdFunction();
     }
-    // TODO: implement onInit
     super.onInit();
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
-import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/change_password_screen_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen_widgets.dart';
 import 'package:payroll_system/utils/extensions.dart';

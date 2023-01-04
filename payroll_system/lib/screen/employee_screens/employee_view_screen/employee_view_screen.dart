@@ -5,7 +5,6 @@ import 'package:payroll_system/controllers/employee_view_screen_controller.dart'
 class EmployeeViewScreen extends StatelessWidget {
   EmployeeViewScreen({Key? key}) : super(key: key);
   final employeeViewScreenController = Get.put(EmployeeViewScreenController());
-  // final companyViewScreenController = Get.find<CompanyViewScreenController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +15,6 @@ class EmployeeViewScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Get.offAll(()=> HomeScreen());
               Get.back();
             },
             icon: const Icon(Icons.home_rounded),

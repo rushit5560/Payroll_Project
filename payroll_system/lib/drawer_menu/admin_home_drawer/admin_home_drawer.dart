@@ -30,31 +30,7 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            /*adminDrawerController.departmentView.value == true
-                                ? AdminDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => DepartmentListScreen());
-                                    },
-                                    title: AppMessage.departmentNameDrawer,
-                                  )
-                                : Container(),*/
-                            /*adminDrawerController.employeeView.value == true
-                                ? AdminDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => EmployeeListScreen());
-                                    },
-                                    title: AppMessage.employeeNameDrawer,
-                                  )
-                                : Container(),*/
-                            /* AdminDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => LocationListScreen());
-                              },
-                              title: AppMessage.location,
-                            ),*/
+                          
 
                             // adminDrawerController.roleId.value == 1
                             //     ? AdminDrawerTile(

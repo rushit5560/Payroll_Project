@@ -5,7 +5,6 @@ import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_manage_screen_controller.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_manage_screen/location_manage_screen_widgets.dart';
-
 import '../../../utils/messaging.dart';
 
 class LocationManageScreen extends StatelessWidget {

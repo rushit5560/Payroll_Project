@@ -49,47 +49,6 @@ class CompanyProfileScreenController extends GetxController {
     isLoading(false);
   }
 
-  /// Get All Department
-  // Future<void> getAllDepartmentFunction() async {
-  //   isLoading(true);
-  //   String url = ApiUrl.allDepartmentApi;
-  //   log('Get All Department Api Url :$url');
-
-  //   try {
-  //     http.Response response = await http.get(Uri.parse(url));
-
-  //     AllDepartmentModel allDepartmentModel =
-  //         AllDepartmentModel.fromJson(json.decode(response.body));
-  //     var isSuccessStatus = allDepartmentModel.success;
-  //     log("gey all department :: ${response.body}");
-  //     if (isSuccessStatus) {
-  //       departmentList.clear();
-  //       departmentList.addAll(allDepartmentModel.data);
-
-  //       departmentStringList.clear();
-  //       for (int i = 0; i < departmentList.length; i++) {
-  //         departmentStringList.add(departmentList[i].departmentName);
-  //         log('${departmentList[i].id} : ${departmentList[i].departmentName}');
-  //       }
-
-  //       log('departmentList Length : ${departmentList.length}');
-  //     } else {
-  //       log('getAllDepartmentFunction Else');
-  //     }
-  //   } catch (e) {
-  //     log('getAllDepartmentFunction Error :$e');
-  //     rethrow;
-  //   } finally {
-  //     // if (companyOption == CompanyOption.update) {
-  //     //   // when update company that time
-  //     //   await getCompanyDetailsFunction();
-  //     // } else if (companyOption == CompanyOption.create) {
-  //     //   // when create new company
-  //     // }
-  //     // isLoading(false);
-  //     getUserProfileFunction();
-  //   }
-  // }
   getCompanyIdIdFunctionFromPrefs() async {
     isLoading(true);
     int userIdPrefs = await userPreference.getIntValueFromPrefs(
@@ -176,7 +135,6 @@ class CompanyProfileScreenController extends GetxController {
                 if (idList[i] == departmentList[j].id) {
                   log("idList.length :: ${idList.length}");
                   log("departmentList.length :: ${departmentList.length}");
-                  // selectedDepartmentList.add(departmentList[i].departmentName);
                   isLoading(true);
                   departmentData = departmentList[i];
                 }

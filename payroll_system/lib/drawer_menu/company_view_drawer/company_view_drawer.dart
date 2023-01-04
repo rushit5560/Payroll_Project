@@ -165,30 +165,11 @@ class CompanyDrawerTile extends StatelessWidget {
               style: TextStyleConfig.drawerTextStyle(),
             ),
           ),
-          // Text(
-          //   title,
-          //   textAlign: TextAlign.left,
-          //   style: TextStyleConfig.drawerTextStyle(),
-          // ).commonSymmetricPadding(horizontal: 10, vertical: 10),
+      
           const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
         ],
       ),
     );
-    /*return Container(
-      width: Get.width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: AppColors.greyColor,
-        ),
-      ),
-
-      child: Text(
-        AppMessage.companyNameDrawer,
-        textAlign: TextAlign.left,
-        style: TextStyleConfig.drawerTextStyle(),
-      ).commonSymmetricPadding(horizontal: 10, vertical: 5),
-
-    ).commonSymmetricPadding(horizontal: 20, vertical: 10);*/
+   
   }
 }

@@ -85,7 +85,6 @@ class SubAdminProfileScreenController extends GetxController {
             imageFile!.path,
           ),
         );
-        // request.headers.addAll(apiHeader.headers);
 
         request.fields['userid'] = UserDetails.userId.toString();
         request.fields['user_name'] = nameController.text;
@@ -241,15 +240,7 @@ class SubAdminProfileScreenController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
-
     getUserProfileFunction();
     super.onInit();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
   }
 }

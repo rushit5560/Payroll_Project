@@ -144,10 +144,7 @@ class LoginController extends GetxController {
                   : false,
         )
             .whenComplete(() {
-          // Reset the form
-          // formKey.currentState!.reset();
-
-          /// Role wise route set
+         
           if (loginDetailsModel.loginData.data.roleId == 1) {
             Get.off(() => HomeScreen());
           } else if (loginDetailsModel.loginData.data.roleId == 2) {
@@ -177,89 +174,4 @@ class LoginController extends GetxController {
     }
   }
 
-  // //User getUserPermissionsFunction
-  // Future<void> getUserPermissionsFunction({
-  //   required BuildContext context,
-  //   required String userId,
-  // }) async {
-  //   isLoading(true);
-  //   String url = ApiUrl.getPermissionApi + userId;
-  //   log("getUserPermissionsFunction Api url : $url");
-
-  //   try {
-  //     http.Response response = await http.get(
-  //       Uri.parse(url),
-  //     );
-
-  //     log("getUserPermissionsFunction response :  ${response.body}");
-
-  //     UserPermissionModel userPermissionModel =
-  //         UserPermissionModel.fromJson(json.decode(response.body));
-  //     isSuccessStatus = userPermissionModel.success.obs;
-
-  //     if (isSuccessStatus.value) {
-  //       log("getUserPermissionsFunction isSuccessStatus :  ${isSuccessStatus.value}");
-
-  //       // Fluttertoast.showToast(msg: userPermissionModel.messege);
-
-  //       UserPreference().setUserPermissionsToPrefsAndLocal(
-  //         // role
-  //         roleAdd: userPermissionModel.data.roleadd == "on" ? true : false,
-  //         roleEdit: userPermissionModel.data.roleedit == "on" ? true : false,
-  //         roleView: userPermissionModel.data.roleview == "on" ? true : false,
-  //         roleDelete:
-  //             userPermissionModel.data.roledelete == "on" ? true : false,
-  //         //company
-  //         companyAdd:
-  //             userPermissionModel.data.companyadd == "on" ? true : false,
-  //         companyEdit:
-  //             userPermissionModel.data.companyedit == "on" ? true : false,
-  //         companyView:
-  //             userPermissionModel.data.companyview == "on" ? true : false,
-  //         companyDelete:
-  //             userPermissionModel.data.companydelete == "on" ? true : false,
-  //         //location
-  //         locationAdd:
-  //             userPermissionModel.data.locationadd == "on" ? true : false,
-  //         locationEdit:
-  //             userPermissionModel.data.locationedit == "on" ? true : false,
-  //         locationView:
-  //             userPermissionModel.data.locationview == "on" ? true : false,
-  //         locationDelete:
-  //             userPermissionModel.data.locationdelete == "on" ? true : false,
-  //         //employee
-  //         employeeAdd:
-  //             userPermissionModel.data.employeeadd == "on" ? true : false,
-  //         employeeEdit:
-  //             userPermissionModel.data.employeeedit == "on" ? true : false,
-  //         employeeView:
-  //             userPermissionModel.data.employeeview == "on" ? true : false,
-  //         employeeDelete:
-  //             userPermissionModel.data.employeedelete == "on" ? true : false,
-  //         //department
-  //         departmentAdd:
-  //             userPermissionModel.data.departmentadd == "on" ? true : false,
-  //         departmentEdit:
-  //             userPermissionModel.data.departmentedit == "on" ? true : false,
-  //         departmentView:
-  //             userPermissionModel.data.departmentview == "on" ? true : false,
-  //         departmentDelete:
-  //             userPermissionModel.data.departmentdelete == "on" ? true : false,
-  //       );
-
-  //       // Fluttertoast.showToast(msg: 'You are successfully login');
-  //     } else {
-  //       Fluttertoast.showToast(msg: 'user permissions not found');
-  //     }
-  //   } catch (e) {
-  //     log("getUserPermissionsFunction error : $e");
-  //   } finally {
-  //     isLoading(false);
-  //   }
-  // }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
 }

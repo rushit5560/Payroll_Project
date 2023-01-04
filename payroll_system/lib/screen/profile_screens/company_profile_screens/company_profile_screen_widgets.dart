@@ -198,11 +198,7 @@ class CompanyFormModule extends StatelessWidget {
                       ),
                     ]),
               ).commonSymmetricPadding(vertical: 2),
-              /*Text(
-                  AppMessage.departmentNameDrawer,
-                  style: TextStyleConfig.textStyle(
-                      fontWeight: FontWeight.w600, fontSize: 16),
-                ).commonSymmetricPadding(vertical: 2),*/
+         
               Container(
                 width: double.infinity,
                 height: 50,
@@ -301,7 +297,7 @@ class CompanySubmitButtonModule extends StatelessWidget {
         onPressed: () async {
           if (companyProfileScreenController.formKey.currentState!.validate()) {
 
-            
+
             await companyProfileScreenController.updateCompanyProfileFunction();
           }
         },

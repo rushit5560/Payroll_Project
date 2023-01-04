@@ -32,8 +32,7 @@ class AdminProfileScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: SingleChildScrollView(
                     child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
+              
                       children: [
                         SizedBox(height: 5.h),
                         AdminImageModule(),

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -10,24 +9,17 @@ import 'package:http/http.dart' as http;
 import 'package:payroll_system/models/user_profile_model/employee_profile_model.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Utils/api_url.dart';
 import '../../Utils/extension_methods/user_details.dart';
 import '../../models/company_manage_screen_model/get_all_department_model.dart';
-import '../../models/log_in_model.dart';
 import '../../models/success_models/success_model.dart';
-import '../../models/user_profile_model/user_profile_model.dart';
 
 class EmployeeProfileScreenController extends GetxController {
   RxBool isLoading = false.obs;
-
   EmployeeDatum? employeeData;
-
   List<DepartmentData> departmentList = [];
   List<String> departmentStringList = [];
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   File? imageFile;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
@@ -127,7 +119,6 @@ class EmployeeProfileScreenController extends GetxController {
             imageFile!.path,
           ),
         );
-        // request.headers.addAll(apiHeader.headers);
 
         request.fields['userid'] = UserDetails.userId.toString();
         request.fields['first_name'] = firstNameController.text;
@@ -168,8 +159,6 @@ class EmployeeProfileScreenController extends GetxController {
             log(successModel.message);
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
-
-            // prefs.setString(UserPreference.userNameKey, nameController.text);
 
             UserDetails.userName =
                 prefs.getString(UserPreference.userNameKey) ?? "";
@@ -276,8 +265,6 @@ class EmployeeProfileScreenController extends GetxController {
                   leading: const Icon(Icons.photo_library),
                   title: const Text("Gallery"),
                   onTap: () {
-                    // employeDetailsFormController.getImage(ImageSource.gallery);
-
                     imageFromGallary();
                   },
                 ),
@@ -285,8 +272,6 @@ class EmployeeProfileScreenController extends GetxController {
                   leading: const Icon(Icons.camera_alt),
                   title: const Text("Camera"),
                   onTap: () {
-                    // employeDetailsFormController.getImage(ImageSource.camera);
-
                     imageFromCamera();
                   },
                 ),
@@ -298,15 +283,7 @@ class EmployeeProfileScreenController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
-
     getEmployeeProfileFunction();
     super.onInit();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
   }
 }

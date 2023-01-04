@@ -122,39 +122,7 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     }
                   },
                 )
-                // ViewAndEditButtonModule(
-                //   onViewTap: () {
-                //     Get.to(
-                //       () => EmployeeViewScreen(),
-                //       arguments: [
-                //         value.id.toString(),
-                //         value.firstName.toString(),
-                //       ],
-                //     );
-                //   },
-                //   onEditTap: () async {
-                //     bool employeeDeletePermission =
-                //         await userPreference.getBoolPermissionFromPrefs(
-                //             keyId: UserPreference.employeeDeleteKey);
-
-                //     if (employeeDeletePermission == true) {
-                //       Get.to(
-                //         () => EmployeeManageScreen(),
-                //         arguments: [
-                //           EmployeeOption.update,
-                //           value.id.toString(),
-                //           companyHomeScreenController.companyId,
-                //           companyHomeScreenController.companyName,
-                //         ],
-                //       );
-                //     } else {
-                //       Fluttertoast.showToast(msg: AppMessage.deniedPermission);
-                //     }
-
-                //   },
-                //   viewLabelText: AppMessage.view,
-                //   editLabelText: AppMessage.edit,
-                // ),
+               
               ],
             ).commonAllSidePadding(5),
           ),
