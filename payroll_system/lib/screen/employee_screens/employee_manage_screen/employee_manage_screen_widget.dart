@@ -241,8 +241,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             //   validate: (value) => FieldValidation().validateLastDayWork(value),
             // ),
             FormSingleFieldModule(
-              headerText: AppMessage.endDate,
-              text: AppMessage.endDate,
+              headerText: AppMessage.employeeEndDate,
+              text: AppMessage.employeeEndDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:

@@ -12,7 +12,6 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 
-
 class CompanyListModule extends StatelessWidget {
   CompanyListModule({Key? key}) : super(key: key);
   final screenController = Get.find<HomeScreenController>();
@@ -29,13 +28,13 @@ class CompanyListModule extends StatelessWidget {
       },
     );
   }
-
 }
 
 class CompanyListTile extends StatelessWidget {
   CompanyData singleItem;
   int index;
-  CompanyListTile({Key? key, required this.singleItem, required this.index}) : super(key: key);
+  CompanyListTile({Key? key, required this.singleItem, required this.index})
+      : super(key: key);
 
   final screenController = Get.find<HomeScreenController>();
   UserPreference userPreference = UserPreference();
@@ -56,7 +55,6 @@ class CompanyListTile extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-
               /// Getting From Common Module
               SingleListTileCustom(
                 textKey: AppMessage.companyName,
@@ -81,24 +79,24 @@ class CompanyListTile extends StatelessWidget {
               ViewAndEditButtonModule(
                 onViewTap: () {
                   Get.to(
-                        ()=> CompanyViewScreen(),
+                    () => CompanyViewScreen(),
                     arguments: [
                       singleItem.id.toString(),
-                      singleItem.userName.toString(),
+                      singleItem.userName,
                     ],
                   );
                 },
                 onEditTap: () {
                   Get.to(
-                        ()=> CompanyManageScreen(),
+                    () => CompanyManageScreen(),
                     // arguments: [
                     //   singleItem.id.toString(),
                     //   singleItem.userName.toString(),
                     // ],
-                      arguments: [
-                        CompanyOption.update,
-                        singleItem.id.toString(),
-                      ],
+                    arguments: [
+                      CompanyOption.update,
+                      singleItem.id.toString(),
+                    ],
                   );
                 },
                 viewLabelText: AppMessage.view,
@@ -180,12 +178,3 @@ class CompanyListTile extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-

@@ -3,17 +3,28 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 
-class PayRollScreenController extends GetxController {
-  String companyId = Get.arguments[0];
-  String companyName = Get.arguments[1];
+class PayRollManageScreenController extends GetxController {
+  PayrollOption payrollOption = Get.arguments[0];
+
+  String companyId = Get.arguments[1];
+  String companyName = Get.arguments[2];
+  // int companyId = 0;
+  // String companyName = "";
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
+  RxString selectedValue = "Choose Option".obs;
+
+  List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController hourlyRateController = TextEditingController();
+  TextEditingController salaryController = TextEditingController();
   DateTime birthDate = DateTime.now();
   // var dateRange = DateTimeRange(
   //         start: DateTime.now(),
@@ -45,44 +56,6 @@ class PayRollScreenController extends GetxController {
 
   List<String> departmentStringList = [];
 
-  Future<void> getAllCompanyFunction() async {
-    isLoading(true);
-    String url = ApiUrl.allCompanyApi;
-    log('Get All Company List Api Url :$url');
-
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-
-      log("getAllCompanyFunction res body ::::${response.body}");
-
-      AllCompanyModel allCompanyModel =
-          AllCompanyModel.fromJson(json.decode(response.body));
-      isSuccessStatus = allCompanyModel.success.obs;
-      // log('GetAllCompany :,${response.body}');
-      if (isSuccessStatus.value) {
-        allCompanyList.clear();
-        allCompanyList.addAll(allCompanyModel.data);
-
-        companyDDSelectedItem = allCompanyList[0];
-
-        companyStringList.clear();
-        for (int i = 0; i < allCompanyList.length; i++) {
-          companyStringList.add(allCompanyList[i].userName);
-        }
-      } else {
-        log('getAllCompanyFunction Else');
-      }
-    } catch (e) {
-      log('getAllCompanyFunction Error :$e');
-      rethrow;
-    } finally {
-      isLoading(false);
-    }
-    await getCompanyWiseEmployeeFunction(companyId);
-
-    // isLoading(false);
-  }
-
   Future<void> getCompanyWiseEmployeeFunction(companyId) async {
     isLoading(true);
     String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
@@ -100,7 +73,6 @@ class PayRollScreenController extends GetxController {
         for (int i = 0; i < allCompanyWiseEmployeeList.length; i++) {
           departmentStringList.add(allCompanyWiseEmployeeList[i].firstName);
         }
-
         allCompanyWiseEmployeeList = companyWiseEmployeeModel.data;
       } else {
         log('getAllCompanyFunction Else');
@@ -115,8 +87,10 @@ class PayRollScreenController extends GetxController {
 
   @override
   void onInit() {
-    companyDDSelectedStringItem = companyName;
-    getAllCompanyFunction();
+    // companyDDSelectedStringItem = companyName;
+    // getAllCompanyFunction();
+
+    getCompanyWiseEmployeeFunction(companyId);
     super.onInit();
   }
 

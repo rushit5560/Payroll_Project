@@ -45,6 +45,8 @@ class LocationListScreenWidgets extends StatelessWidget {
                     textKey: AppMessage.status,
                     textValue: value.isActive == "1" ? "Active" : "In-Active",
                   ),
+                SizedBox(height: 2.h),
+
                   EditAndDeleteButtonModule(
                     onDeleteTap: () {
                       CustomAlertDialog().showAlertDialog(

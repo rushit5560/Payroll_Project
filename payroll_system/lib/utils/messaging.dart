@@ -84,10 +84,12 @@ class AppMessage {
   static String homeNo = 'Home Number';
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
+  static String regularHour = 'Regular Hour';
+
   static String salary = 'Salary (\$,₹)';
   static String payPeriod = 'Pay period';
   static String employmentDate = 'Employment Start Date';
-  static String endDate = 'Employment End Date';
+  static String employeeEndDate = 'Employment End Date';
   static String isActive = 'Status';
   static String company = 'Company';
   static String employeeEmail = 'Email';
@@ -139,7 +141,7 @@ class AppMessage {
   static String locationUpdate = 'Update Location';
   static String locationName = 'Location Name';
   static String chooseLocation = 'Choose Location';
-static String status='Status';
+  static String status = 'Status';
   static String companyLocation = "Company Location";
 
   // No Records Message
@@ -215,7 +217,7 @@ static String status='Status';
   static String view = 'View';
 
   //profile
-  static String profile= 'Profile';
+  static String profile = 'Profile';
   static String userName = 'User Name';
   static String name = 'Name';
   static String uploadDocument = 'Upload Document';
@@ -223,8 +225,16 @@ static String status='Status';
 
 //Payroll
   static String payRoll = 'Payroll';
-  // static String payRoll = 'Create Location';
-  // static String locationUpdate = 'Update Location';
+  static String endDate = 'End Date';
+  static String payRollList = 'Payroll List';
+  static String totalDays = 'Total Days';
+  static String salaryHourlyRate = 'Salary/Hourly Rate';
+  static String subTotal = 'Sub Total';
+  static String finalAmount = 'Final Amount';
+
+  static String payRollCreate = 'Create Payroll';
+  static String payRollUpdate = 'Update Payroll';
+
   static String payRollForm = 'Payroll Form';
   static String startDate = 'Start Date';
   static String employee = 'Employee ';
@@ -237,5 +247,4 @@ static String status='Status';
   static String comission = 'Comission';
   static String payDate = 'Pay Date';
   static String pleaseSelectEmployee = 'Please select employee';
-
 }
