@@ -37,12 +37,12 @@ class LocationListScreenWidgets extends StatelessWidget {
                 children: [
                   SizedBox(height: 1.h),
                   SingleListTileCustom(
-                    textKey: AppMessage.employeeName,
+                    textKey: AppMessage.locationName,
                     textValue: value.locationName,
                   ),
                   SizedBox(height: 1.h),
                   SingleListTileCustom(
-                    textKey: AppMessage.employeeName,
+                    textKey: AppMessage.status,
                     textValue: value.isActive == "1" ? "Active" : "In-Active",
                   ),
                   EditAndDeleteButtonModule(
@@ -87,7 +87,7 @@ class LocationListScreenWidgets extends StatelessWidget {
                         arguments: [
                           LocationOption.update,
                           value.id.toString(),
-                          screenController.companyId,
+                          screenController.companyId.toString(),
                           screenController.companyName,
                         ],
                       );

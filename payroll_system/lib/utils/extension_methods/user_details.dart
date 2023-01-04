@@ -3,6 +3,8 @@ class UserDetails {
   static bool isUserLoggedIn = false;
   static int userId = 0;
   static int roleId = 0;
+static int companyId=0;
+
   static String userName = '';
   static String userEmail = '';
   static String userProfileImage = '';

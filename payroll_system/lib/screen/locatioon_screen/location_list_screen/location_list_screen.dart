@@ -26,7 +26,7 @@ class LocationListScreen extends StatelessWidget {
                 arguments: [
                   LocationOption.create,
                   "",
-                  locationListScreenController.companyId,
+                  locationListScreenController.companyId.toString(),
                   locationListScreenController.companyName,
                 ],
               );

@@ -96,6 +96,22 @@ class AdminDrawerController extends GetxController {
       isLoading(false);
     }
   }*/
+  RxInt roleId = 0.obs;
+  RxInt userid = 0.obs;
+
+  getUserIdFunctionFromPrefs() async {
+    isLoading(true);
+    int userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
+    int roleIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.roleIdKey);
+    userid.value = userIdPrefs;
+    roleId.value = roleIdPrefs;
+
+    log('Home Screen Init userid : ${userid.value}');
+    await getUserPermission();
+    isLoading(false);
+  }
 
   getUserPermission() async {
     isLoading(true);
@@ -113,7 +129,7 @@ class AdminDrawerController extends GetxController {
 
   @override
   void onInit() {
-    getUserPermission();
+    getUserIdFunctionFromPrefs();
     super.onInit();
   }
 }

@@ -139,7 +139,7 @@ class AppMessage {
   static String locationUpdate = 'Update Location';
   static String locationName = 'Location Name';
   static String chooseLocation = 'Choose Location';
-
+static String status='Status';
   static String companyLocation = "Company Location";
 
   // No Records Message

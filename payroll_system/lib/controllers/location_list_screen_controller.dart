@@ -8,8 +8,11 @@ import 'package:payroll_system/utils/api_url.dart';
 import '../models/location_manage_screen_model/location_delete_screen_model.dart';
 
 class LocationListScreenController extends GetxController {
-  String companyId = Get.arguments[0];
-  String companyName = Get.arguments[1];
+  // String companyId = Get.arguments[0];
+  // String companyName = Get.arguments[1];
+
+  int companyId = 0;
+  String companyName = "";
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;

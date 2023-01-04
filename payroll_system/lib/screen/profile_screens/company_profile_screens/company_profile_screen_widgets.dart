@@ -10,7 +10,9 @@ import 'package:payroll_system/controllers/profile_screens_controller/admin_prof
 import 'package:payroll_system/controllers/profile_screens_controller/company_profile_screen_controller.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -117,107 +119,168 @@ class CompanyFormModule extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
     );
 
-    return Obx(
-      () => Form(
-        key: companyProfileScreenController.formKey,
-        child: Column(
-          children: [
-            DropDownMultiSelect(
-              options: companyProfileScreenController.departmentStringList,
+    return Form(
+      key: companyProfileScreenController.formKey,
+      child: Column(
+        children: [
+          // DropDownMultiSelect(
+          //   options: companyProfileScreenController.departmentStringList,
 
-              decoration: InputDecoration(
-                fillColor: AppColors.greyColor.withOpacity(0.25),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: AppMessage.chooseDepartment,
-                border: border,
-                enabledBorder: border,
-                filled: true,
-              ),
+          //   decoration: InputDecoration(
+          //     fillColor: AppColors.greyColor.withOpacity(0.25),
+          //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          //     labelText: AppMessage.chooseDepartment,
+          //     border: border,
+          //     enabledBorder: border,
+          //     filled: true,
+          //   ),
 
-              // whenEmpty: 'Choose Department',
-              validator: (val) {
-                if (val == AppMessage.chooseDepartment) {
-                  return AppMessage.pleaseChooseDepartment;
-                } else {
-                  return AppMessage.empty;
-                }
-              },
-              onChanged: (value) {
-                companyProfileScreenController.selectedDepartmentList.value =
-                    value;
-                // companyProfileScreenController.selectedDepartmentOption.value =
-                //     "";
-                companyProfileScreenController.selectedDepartmentIdList = [];
+          //   // whenEmpty: 'Choose Department',
+          //   validator: (val) {
+          //     if (val == AppMessage.chooseDepartment) {
+          //       return AppMessage.pleaseChooseDepartment;
+          //     } else {
+          //       return AppMessage.empty;
+          //     }
+          //   },
+          //   onChanged: (value) {
+          //     companyProfileScreenController.selectedDepartmentList.value =
+          //         value;
+          //     // companyProfileScreenController.selectedDepartmentOption.value =
+          //     //     "";
+          //     companyProfileScreenController.selectedDepartmentIdList = [];
 
-                // Selected Department generate new id list for send in api
-                for (int i = 0; i < value.length; i++) {
-                  for (int j = 0;
-                      j < companyProfileScreenController.departmentList.length;
-                      j++) {
-                    if (value[i] ==
-                        companyProfileScreenController
-                            .departmentList[j].departmentName) {
-                      companyProfileScreenController.selectedDepartmentIdList
-                          .add(
-                        companyProfileScreenController.departmentList[j].id
-                            .toString(),
-                      );
-                    }
-                  }
-                }
+          //     // Selected Department generate new id list for send in api
+          //     for (int i = 0; i < value.length; i++) {
+          //       for (int j = 0;
+          //           j < companyProfileScreenController.departmentList.length;
+          //           j++) {
+          //         if (value[i] ==
+          //             companyProfileScreenController
+          //                 .departmentList[j].departmentName) {
+          //           companyProfileScreenController.selectedDepartmentIdList
+          //               .add(
+          //             companyProfileScreenController.departmentList[j].id
+          //                 .toString(),
+          //           );
+          //         }
+          //       }
+          //     }
 
-                log('companyProfileScreenController.selectedDepartmentIdList :${companyProfileScreenController.selectedDepartmentIdList}');
-                companyProfileScreenController.loadUI();
-              },
-              // ignore: invalid_use_of_protected_member
-              selectedValues:
-                  companyProfileScreenController.selectedDepartmentList.value,
-            ),
-            SizedBox(height: 2.h),
-            TextFormField(
-              controller: companyProfileScreenController.nameController,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (val) => FieldValidation().validateUserName(val!),
-              decoration: InputDecoration(
-                fillColor: AppColors.greyColor.withOpacity(0.25),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: AppMessage.name,
-                border: border,
-                enabledBorder: border,
-                filled: true,
+          //     log('companyProfileScreenController.selectedDepartmentIdList :${companyProfileScreenController.selectedDepartmentIdList}');
+          //     companyProfileScreenController.loadUI();
+          //   },
+          //   // ignore: invalid_use_of_protected_member
+          //   selectedValues:
+          //       companyProfileScreenController.selectedDepartmentList.value,
+          // ),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RichText(
+                textAlign: TextAlign.left,
+                maxLines: null,
+                text: TextSpan(
+                    text: AppMessage.departmentNameDrawer,
+                    style: TextStyleConfig.textStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: " ${AppMessage.mandatory}",
+                        style: TextStyleConfig.textStyle(
+                          textColor: AppColors.redColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ]),
+              ).commonSymmetricPadding(vertical: 2),
+              /*Text(
+                  AppMessage.departmentNameDrawer,
+                  style: TextStyleConfig.textStyle(
+                      fontWeight: FontWeight.w600, fontSize: 16),
+                ).commonSymmetricPadding(vertical: 2),*/
+              Container(
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColors.greyColor),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<DepartmentData>(
+                      value: companyProfileScreenController.departmentData,
+                      items: companyProfileScreenController.departmentList
+                          .map<DropdownMenuItem<DepartmentData>>(
+                              (DepartmentData value) {
+                        return DropdownMenuItem<DepartmentData>(
+                          value: value,
+                          child: Text(value.departmentName),
+                        );
+                      }).toList(),
+                      onChanged: (DepartmentData? value) async {
+                        companyProfileScreenController.isLoading(true);
+                        // This is called when the user selects an item.
+                        companyProfileScreenController.departmentData = value;
+                        companyProfileScreenController.isLoading(false);
+                      },
+                    ).commonOnlyPadding(left: 10, right: 10),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 2.h),
-            TextFormField(
-              controller: companyProfileScreenController.phoneNumberController,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (val) => FieldValidation().validateMobileNumber(val!),
-              maxLength: 10,
-              decoration: InputDecoration(
-                fillColor: AppColors.greyColor.withOpacity(0.25),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: AppMessage.phoneNumber,
-                border: border,
-                enabledBorder: border,
-                filled: true,
+              SizedBox(height: 2.h),
+              TextFormField(
+                controller: companyProfileScreenController.nameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (val) => FieldValidation().validateUserName(val!),
+                decoration: InputDecoration(
+                  fillColor: AppColors.greyColor.withOpacity(0.25),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  labelText: AppMessage.name,
+                  border: border,
+                  enabledBorder: border,
+                  filled: true,
+                ),
               ),
-            ),
-            SizedBox(height: 2.h),
-            TextFormField(
-              controller: companyProfileScreenController.addressController,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (val) => FieldValidation().validateAddress(val!),
-              decoration: InputDecoration(
-                fillColor: AppColors.greyColor.withOpacity(0.25),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                labelText: AppMessage.address,
-                border: border,
-                enabledBorder: border,
-                filled: true,
+              SizedBox(height: 2.h),
+              TextFormField(
+                controller:
+                    companyProfileScreenController.phoneNumberController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (val) =>
+                    FieldValidation().validateMobileNumber(val!),
+                maxLength: 10,
+                decoration: InputDecoration(
+                  fillColor: AppColors.greyColor.withOpacity(0.25),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  labelText: AppMessage.phoneNumber,
+                  border: border,
+                  enabledBorder: border,
+                  filled: true,
+                ),
               ),
-            ),
-          ],
-        ),
+              SizedBox(height: 2.h),
+              TextFormField(
+                controller: companyProfileScreenController.addressController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (val) => FieldValidation().validateAddress(val!),
+                decoration: InputDecoration(
+                  fillColor: AppColors.greyColor.withOpacity(0.25),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  labelText: AppMessage.address,
+                  border: border,
+                  enabledBorder: border,
+                  filled: true,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -237,6 +300,8 @@ class CompanySubmitButtonModule extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () async {
           if (companyProfileScreenController.formKey.currentState!.validate()) {
+
+            
             await companyProfileScreenController.updateCompanyProfileFunction();
           }
         },

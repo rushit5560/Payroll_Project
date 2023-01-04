@@ -9,6 +9,7 @@ class UserPreference {
   static String isUserLoggedInKey = "isUserLoggedInKey";
   static String userIdKey = "userIdKey";
   static String roleIdKey = "roleIdKey";
+  static String companyIdKey="companyIdKey";
   static String userNameKey = "userNameKey";
   static String userEmailKey = "userEmailKey";
   static String userProfileImageKey = "userProfileImageKey";

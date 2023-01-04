@@ -8,6 +8,7 @@ import 'package:payroll_system/screen/authentication_screens/change_password_scr
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
+import 'package:payroll_system/screen/profile_screens/company_profile_screens/company_profile_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 
@@ -25,19 +26,25 @@ class CompanyHomeDrawer extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-
+                    DrawerListTileModule(
+                      onTap: () {
+                        Get.back();
+                        Get.to(() => CompanyProfileScreen());
+                      },
+                      title: AppMessage.profile,
+                    ),
                     DrawerListTileModule(
                       onTap: () {
                         Get.back();
                         Get.to(() => DepartmentListScreen(),
-                            arguments: [
-                              companyHomeScreenController.companyId.toString(),
-                              companyHomeScreenController.companyName,
-                            ]);
+                        
+                         arguments: [
+                          companyHomeScreenController.companyId.toString(),
+                          companyHomeScreenController.companyName,
+                        ]);
                       },
                       title: AppMessage.departmentNameDrawer,
                     ),
-
                     DrawerListTileModule(
                       onTap: () {
                         Get.back();
@@ -45,8 +52,6 @@ class CompanyHomeDrawer extends StatelessWidget {
                       },
                       title: AppMessage.location,
                     ),
-
-
                     DrawerListTileModule(
                       title: AppMessage.changePasswordDrawer,
                       onTap: () {
@@ -54,7 +59,6 @@ class CompanyHomeDrawer extends StatelessWidget {
                         Get.to(() => ChangePasswordScreen());
                       },
                     ),
-
                   ],
                 ),
               ),
@@ -66,13 +70,12 @@ class CompanyHomeDrawer extends StatelessWidget {
               onTap: () async {
                 CustomAlertDialog().showAlertDialog(
                   context: context,
-                  textContent:
-                  AppMessage.logoutMessage,
+                  textContent: AppMessage.logoutMessage,
                   onYesTap: () async {
                     await UserPreference()
                         .logoutRemoveUserDetailsFromPrefs()
                         .then(
-                          (value) {
+                      (value) {
                         Get.offAll(() => LoginScreen());
                       },
                     );

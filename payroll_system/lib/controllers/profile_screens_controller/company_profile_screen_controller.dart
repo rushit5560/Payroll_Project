@@ -9,16 +9,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Utils/api_url.dart';
 import '../../Utils/extension_methods/user_details.dart';
 import '../../models/company_manage_screen_model/get_all_department_model.dart';
-import '../../models/log_in_model.dart';
 import '../../models/success_models/success_model.dart';
 import '../../models/user_profile_model/company_profile_model.dart';
-import '../../models/user_profile_model/user_profile_model.dart';
 
 class CompanyProfileScreenController extends GetxController {
+  RxInt companyId = 0.obs;
+  RxInt userid = 0.obs;
+
+  // String companyName = "";
+
   RxBool isLoading = false.obs;
 
   File? imageFile;
@@ -26,10 +28,13 @@ class CompanyProfileScreenController extends GetxController {
   CompanyData? companyData;
 
   List<DepartmentData> departmentList = [];
+  DepartmentData? departmentData;
   List<String> departmentStringList = [];
 
   RxList<String> selectedDepartmentList = RxList<String>([]);
   List<String> selectedDepartmentIdList = [];
+  UserPreference userPreference = UserPreference();
+
   // List<String> selectedDepartmentList = [];
   // RxString selectedDepartmentOption = "".obs;
 
@@ -45,9 +50,61 @@ class CompanyProfileScreenController extends GetxController {
   }
 
   /// Get All Department
-  Future<void> getAllDepartmentFunction() async {
+  // Future<void> getAllDepartmentFunction() async {
+  //   isLoading(true);
+  //   String url = ApiUrl.allDepartmentApi;
+  //   log('Get All Department Api Url :$url');
+
+  //   try {
+  //     http.Response response = await http.get(Uri.parse(url));
+
+  //     AllDepartmentModel allDepartmentModel =
+  //         AllDepartmentModel.fromJson(json.decode(response.body));
+  //     var isSuccessStatus = allDepartmentModel.success;
+  //     log("gey all department :: ${response.body}");
+  //     if (isSuccessStatus) {
+  //       departmentList.clear();
+  //       departmentList.addAll(allDepartmentModel.data);
+
+  //       departmentStringList.clear();
+  //       for (int i = 0; i < departmentList.length; i++) {
+  //         departmentStringList.add(departmentList[i].departmentName);
+  //         log('${departmentList[i].id} : ${departmentList[i].departmentName}');
+  //       }
+
+  //       log('departmentList Length : ${departmentList.length}');
+  //     } else {
+  //       log('getAllDepartmentFunction Else');
+  //     }
+  //   } catch (e) {
+  //     log('getAllDepartmentFunction Error :$e');
+  //     rethrow;
+  //   } finally {
+  //     // if (companyOption == CompanyOption.update) {
+  //     //   // when update company that time
+  //     //   await getCompanyDetailsFunction();
+  //     // } else if (companyOption == CompanyOption.create) {
+  //     //   // when create new company
+  //     // }
+  //     // isLoading(false);
+  //     getUserProfileFunction();
+  //   }
+  // }
+  getCompanyIdIdFunctionFromPrefs() async {
     isLoading(true);
-    String url = ApiUrl.allDepartmentApi;
+    int userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
+
+    userid.value = userIdPrefs;
+
+    log('Home Screen Init userid : ${userid.value}');
+    await getAllDepartmentFunction(userid);
+    isLoading(false);
+  }
+
+  Future<void> getAllDepartmentFunction(companyId) async {
+    isLoading(true);
+    String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
     log('Get All Department Api Url :$url');
 
     try {
@@ -55,12 +112,12 @@ class CompanyProfileScreenController extends GetxController {
 
       AllDepartmentModel allDepartmentModel =
           AllDepartmentModel.fromJson(json.decode(response.body));
-      var isSuccessStatus = allDepartmentModel.success;
+      var isSuccessStatus = allDepartmentModel.success.obs;
+      log("getAllDepartmentFunction hhhhhh:  ${response.body}");
 
-      if (isSuccessStatus) {
+      if (isSuccessStatus.value) {
         departmentList.clear();
         departmentList.addAll(allDepartmentModel.data);
-
         departmentStringList.clear();
         for (int i = 0; i < departmentList.length; i++) {
           departmentStringList.add(departmentList[i].departmentName);
@@ -75,12 +132,6 @@ class CompanyProfileScreenController extends GetxController {
       log('getAllDepartmentFunction Error :$e');
       rethrow;
     } finally {
-      // if (companyOption == CompanyOption.update) {
-      //   // when update company that time
-      //   await getCompanyDetailsFunction();
-      // } else if (companyOption == CompanyOption.create) {
-      //   // when create new company
-      // }
       // isLoading(false);
       getUserProfileFunction();
     }
@@ -88,7 +139,7 @@ class CompanyProfileScreenController extends GetxController {
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
-    String url = ApiUrl.profileGetApi + "/${UserDetails.userId}";
+    String url = "${ApiUrl.profileGetApi}/${userid.value}";
     log("getUserProfileFunction Api url : $url");
 
     try {
@@ -111,8 +162,7 @@ class CompanyProfileScreenController extends GetxController {
           addressController.text = companyData!.address;
 
           if (companyData!.departmentId != "") {
-            var companyIdsString =
-                companyData!.departmentId.split("[")[1].split("]")[0];
+            var companyIdsString = companyData!.departmentId;
 
             List<int> idList = companyIdsString.split(",").map(
               (num) {
@@ -126,23 +176,26 @@ class CompanyProfileScreenController extends GetxController {
                 if (idList[i] == departmentList[j].id) {
                   log("idList.length :: ${idList.length}");
                   log("departmentList.length :: ${departmentList.length}");
-                  selectedDepartmentList.add(departmentList[i].departmentName);
+                  // selectedDepartmentList.add(departmentList[i].departmentName);
+                  isLoading(true);
+                  departmentData = departmentList[i];
                 }
               }
             }
-            log("selectedDepartmentIdList is :: ${selectedDepartmentIdList.toString()}");
-            log("selectedDepartmentList is :: ${selectedDepartmentList.toString()}");
+            log("departmentData!.departmentName is :: ${departmentData!.departmentName.toString()}");
           }
         }
+        isLoading(false);
       } else {
         log("else case");
+        isLoading(false);
       }
     } catch (e) {
       log("getUserProfileFunction error  $e");
       rethrow;
     } finally {
       // getAllDepartmentFunction();
-      isLoading(false);
+      // isLoading(false);
     }
   }
 
@@ -167,11 +220,11 @@ class CompanyProfileScreenController extends GetxController {
         );
         // request.headers.addAll(apiHeader.headers);
 
-        request.fields['userid'] = UserDetails.userId.toString();
+        request.fields['userid'] = "${userid.value}";
         request.fields['user_name'] = nameController.text;
         request.fields['phoneno'] = phoneNumberController.text;
         request.fields['address'] = addressController.text;
-        request.fields['department_id'] = "$selectedDepartmentIdList";
+        request.fields['department_id'] = "${departmentData!.id}";
 
         request.fields['showimg'] =
             companyData!.photo.isEmpty ? "" : companyData!.photo;
@@ -215,12 +268,12 @@ class CompanyProfileScreenController extends GetxController {
         log("uploading without a photo");
         var request = http.MultipartRequest('POST', Uri.parse(url));
 
-        request.fields['userid'] = UserDetails.userId.toString();
+        request.fields['userid'] = "${userid.value}";
         request.fields['user_name'] = nameController.text;
         request.fields['phoneno'] = phoneNumberController.text;
         request.fields['address'] = addressController.text;
 
-        request.fields['department_id'] = "$selectedDepartmentIdList";
+        request.fields['department_id'] = "${departmentData!.id}";
         request.fields['showimg'] =
             companyData!.photo.isEmpty ? "" : companyData!.photo;
 
@@ -273,8 +326,8 @@ class CompanyProfileScreenController extends GetxController {
         .pickImage(source: ImageSource.camera, imageQuality: 50);
 
     if (image != null) {
-      imageFile = File(image.path);
       isLoading(true);
+      imageFile = File(image.path);
       isLoading(false);
     }
     Get.back();
@@ -284,8 +337,8 @@ class CompanyProfileScreenController extends GetxController {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (image != null) {
-      imageFile = File(image.path);
       isLoading(true);
+      imageFile = File(image.path);
       isLoading(false);
     }
     Get.back();
@@ -324,9 +377,8 @@ class CompanyProfileScreenController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
-
-    getAllDepartmentFunction();
+    getCompanyIdIdFunctionFromPrefs();
+    // getAllDepartmentFunction(companyId);
     super.onInit();
   }
 

@@ -190,8 +190,8 @@ class SubAdminProfileScreenController extends GetxController {
         .pickImage(source: ImageSource.camera, imageQuality: 50);
 
     if (image != null) {
-      imageFile = File(image.path);
       isLoading(true);
+      imageFile = File(image.path);
       isLoading(false);
     }
     Get.back();
@@ -201,8 +201,8 @@ class SubAdminProfileScreenController extends GetxController {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (image != null) {
-      imageFile = File(image.path);
       isLoading(true);
+      imageFile = File(image.path);
       isLoading(false);
     }
     Get.back();
