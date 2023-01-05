@@ -16,6 +16,7 @@ class ChangePasswordScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        centerTitle: true,
         title: Obx(
           () => Text(changePasswordScreenController.roleId.value == 1
               ? AppMessage.adminText
