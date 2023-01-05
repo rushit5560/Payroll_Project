@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -13,6 +14,11 @@ class CompanyHomeScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
   List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
+  List<CopanyWiseDepartmentData> searchEmployeeList = [];
+
+  
+  final TextEditingController textSearchEditingController = TextEditingController();
+
   int companyId = 0;
   String companyName = "";
 
@@ -35,6 +41,9 @@ class CompanyHomeScreenController extends GetxController {
         allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
 
         allCompanyWiseEmployeeList = companyWiseEmployeeModel.data;
+
+searchEmployeeList=allCompanyWiseEmployeeList;
+
       } else {
         log('getAllCompanyFunction Else');
       }

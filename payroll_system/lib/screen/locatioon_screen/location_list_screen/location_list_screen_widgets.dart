@@ -20,9 +20,9 @@ class LocationListScreenWidgets extends StatelessWidget {
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: screenController.allLocationList.length,
+        itemCount: screenController.searchLocationDataList.length,
         itemBuilder: (context, index) {
-          final value = screenController.allLocationList[index];
+          final value = screenController.searchLocationDataList[index];
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -45,8 +45,7 @@ class LocationListScreenWidgets extends StatelessWidget {
                     textKey: AppMessage.status,
                     textValue: value.isActive == "1" ? "Active" : "In-Active",
                   ),
-                SizedBox(height: 2.h),
-
+                  SizedBox(height: 2.h),
                   EditAndDeleteButtonModule(
                     onDeleteTap: () {
                       CustomAlertDialog().showAlertDialog(

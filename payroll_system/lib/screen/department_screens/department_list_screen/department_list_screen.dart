@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -14,25 +16,27 @@ import 'department_list_screen_widgets.dart';
 class DepartmentListScreen extends StatelessWidget {
   DepartmentListScreen({Key? key}) : super(key: key);
 
-  DepartmentListScreenController departmentListScreenController
-  = Get.put(DepartmentListScreenController());
+  DepartmentListScreenController departmentListScreenController =
+      Get.put(DepartmentListScreenController());
 
   UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: Text(departmentListScreenController.companyName),
         centerTitle: true,
         actions: [
           FloatingActionButton(
             onPressed: () async {
-              bool departmentAddPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentEditKey);
+              bool departmentAddPermission =
+                  await userPreference.getBoolPermissionFromPrefs(
+                      keyId: UserPreference.departmentEditKey);
 
               if (departmentAddPermission == true) {
-                Get.to(() => DepartmentManageScreen(),
+                Get.to(
+                  () => DepartmentManageScreen(),
                   arguments: [
                     DepartmentOption.create,
                     AppMessage.empty,
@@ -51,9 +55,7 @@ class DepartmentListScreen extends StatelessWidget {
             ),
           ),
         ],
-
       ),
-
       body: Obx(
         () => departmentListScreenController.isLoading.value
             ? const Center(child: CircularProgressIndicator())
@@ -61,6 +63,54 @@ class DepartmentListScreen extends StatelessWidget {
                 ? Center(child: Text(AppMessage.noDeptFound))
                 : Column(
                     children: [
+                      TextFormField(
+                        controller: departmentListScreenController
+                            .textSearchEditingController,
+                        onChanged: (value) {
+                          departmentListScreenController.isLoading(true);
+
+                          departmentListScreenController
+                                  .searchDepartmentDataList =
+                              departmentListScreenController.allDepartmentList
+                                  .where((element) => element.departmentName
+                                      .toLowerCase()
+                                      .contains(value))
+                                  .toList();
+
+                          departmentListScreenController.isLoading(false);
+                          log("searchEmployeeList : ${departmentListScreenController.searchDepartmentDataList}");
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Search",
+                          prefixIcon: const Icon(Icons.search),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          suffixIcon: departmentListScreenController
+                                  .textSearchEditingController.text.isEmpty
+                              ? null
+                              : IconButton(
+                                  onPressed: () {
+                                    departmentListScreenController
+                                        .isLoading(true);
+                                    departmentListScreenController
+                                            .searchDepartmentDataList =
+                                        departmentListScreenController
+                                            .allDepartmentList;
+                                    departmentListScreenController
+                                        .textSearchEditingController
+                                        .clear();
+                                    departmentListScreenController
+                                        .isLoading(false);
+                                  },
+                                  icon: const Icon(Icons.close),
+                                ),
+                        ),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
+
+                    
                       Row(
                         children: [
                           Text(

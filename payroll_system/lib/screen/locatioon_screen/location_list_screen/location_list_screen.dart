@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
@@ -44,6 +46,51 @@ class LocationListScreen extends StatelessWidget {
                   )
                 : Column(
                     children: [
+                      TextFormField(
+                        controller: locationListScreenController
+                            .textSearchEditingController,
+                        onChanged: (value) {
+                          locationListScreenController.isLoading(true);
+
+                          locationListScreenController.searchLocationDataList =
+                              locationListScreenController.allLocationList
+                                  .where((element) => element.locationName
+                                      .toLowerCase()
+                                      .contains(value))
+                                  .toList();
+
+                          locationListScreenController.isLoading(false);
+                          log("searchEmployeeList : ${locationListScreenController.searchLocationDataList}");
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Search",
+                          prefixIcon: const Icon(Icons.search),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          suffixIcon: locationListScreenController
+                                  .textSearchEditingController.text.isEmpty
+                              ? null
+                              : IconButton(
+                                  onPressed: () {
+                                    locationListScreenController
+                                        .isLoading(true);
+                                    locationListScreenController
+                                            .searchLocationDataList =
+                                        locationListScreenController
+                                            .allLocationList;
+                                    locationListScreenController
+                                        .textSearchEditingController
+                                        .clear();
+                                    locationListScreenController
+                                        .isLoading(false);
+                                  },
+                                  icon: const Icon(Icons.close),
+                                ),
+                        ),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
                       Row(
                         children: [
                           Text(

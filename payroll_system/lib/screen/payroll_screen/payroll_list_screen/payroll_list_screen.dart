@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/constants/colors.dart';
@@ -41,6 +40,30 @@ class PayRollListScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          TextFormField(
+            controller: pyRollListScreenController.textSearchEditingController,
+            onChanged: (value) {
+              pyRollListScreenController.isLoading(true);
+
+              pyRollListScreenController.isLoading(false);
+            },
+            decoration: InputDecoration(
+              hintText: "Search",
+              prefixIcon: const Icon(Icons.search),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              suffixIcon: pyRollListScreenController
+                      .textSearchEditingController.text.isEmpty
+                  ? null
+                  : IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.close),
+                    ),
+            ),
+          ).commonOnlyPadding(left: 10, right: 10, top: 15),
           Row(
             children: [
               Expanded(

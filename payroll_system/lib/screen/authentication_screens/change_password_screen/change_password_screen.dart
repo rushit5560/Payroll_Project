@@ -15,7 +15,17 @@ class ChangePasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Obx(
+          () => Text(changePasswordScreenController.roleId.value == 1
+              ? AppMessage.adminText
+              : changePasswordScreenController.roleId.value == 2
+                  ? AppMessage.subAdminText
+                  : changePasswordScreenController.roleId.value == 3
+                      ? AppMessage.company
+                      : ""),
+        ),
+      ),
       body: SafeArea(
         child: Scaffold(
           body: Obx(

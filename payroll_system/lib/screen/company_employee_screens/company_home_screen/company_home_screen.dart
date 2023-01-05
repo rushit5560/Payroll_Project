@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -62,6 +64,70 @@ class CompanyHomeScreen extends StatelessWidget {
                 ? Center(child: Text(AppMessage.noEmpFound))
                 : Column(
                     children: [
+                      TextFormField(
+                        controller: companyHomeScreenController
+                            .textSearchEditingController,
+                        onChanged: (value) {
+                          companyHomeScreenController.isLoading(true);
+
+                          companyHomeScreenController.searchEmployeeList =
+                              companyHomeScreenController
+                                  .allCompanyWiseEmployeeList
+                                  .where((element) =>
+                                      element.firstName
+                                          .toLowerCase()
+                                          .contains(value) ||
+                                      element.middleName
+                                          .toLowerCase()
+                                          .contains(value) ||
+                                      element.lastName
+                                          .toLowerCase()
+                                          .contains(value) ||
+                                      element.email
+                                          .toLowerCase()
+                                          .contains(value) ||
+                                      element.mobileNumber
+                                          .toLowerCase()
+                                          .contains(value) ||
+                                      element.departmentId
+                                          .toLowerCase()
+                                          .contains(value) ||
+                                      element.companyid
+                                          .toLowerCase()
+                                          .contains(value))
+                                  .toList();
+
+                          companyHomeScreenController.isLoading(false);
+                          log("searchEmployeeList : ${companyHomeScreenController.searchEmployeeList}");
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Search",
+                          prefixIcon: const Icon(Icons.search),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          suffixIcon: companyHomeScreenController
+                                  .textSearchEditingController.text.isEmpty
+                              ? null
+                              : IconButton(
+                                  onPressed: () {
+                                    companyHomeScreenController.isLoading(true);
+                                    companyHomeScreenController
+                                            .searchEmployeeList =
+                                        companyHomeScreenController
+                                            .allCompanyWiseEmployeeList;
+                                    companyHomeScreenController
+                                        .textSearchEditingController
+                                        .clear();
+                                    companyHomeScreenController
+                                        .isLoading(false);
+                                  },
+                                  icon: const Icon(Icons.close),
+                                ),
+                        ),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
                       Row(
                         children: [
                           Text(

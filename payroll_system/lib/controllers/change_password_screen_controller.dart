@@ -9,7 +9,7 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import '../utils/api_url.dart';
 
 class ChangePasswordController extends GetxController {
-  RxBool isLoading = false.obs; 
+  RxBool isLoading = false.obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   RxBool isPasswordVisible = true.obs;
   RxBool isNewPasswordVisible = true.obs;
@@ -20,12 +20,27 @@ class ChangePasswordController extends GetxController {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController newConfirmPasswordController = TextEditingController();
 
+  RxInt roleId = 0.obs;
+
+  getRoleIdFunctionFromPrefs() async {
+    isLoading(true);
+
+    int roleIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.roleIdKey);
+    roleId.value = roleIdPrefs;
+
+    isLoading(false);
+
+    await changePasswordFunction();
+  }
+
   Future<void> changePasswordFunction() async {
     isLoading(true);
     String url = ApiUrl.changePasswordApi;
     log('changePasswordFunction Url : $url');
 
-    int roleId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.roleIdKey);
+    int roleId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.roleIdKey);
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -69,5 +84,12 @@ class ChangePasswordController extends GetxController {
     oldPasswordController.clear();
     newPasswordController.clear();
     newConfirmPasswordController.clear();
+  }
+
+  @override
+  void onInit() {
+    getRoleIdFunctionFromPrefs();
+
+    super.onInit();
   }
 }

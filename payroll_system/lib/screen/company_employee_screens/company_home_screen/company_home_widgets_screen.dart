@@ -8,14 +8,11 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
 import 'package:payroll_system/common_modules/single_item_module.dart';
-import 'package:payroll_system/common_modules/view_button_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/company_home_screen_controller.dart';
 import 'package:payroll_system/screen/company_employee_screens/company_employee_manage_screen/company_employee_manage_screen.dart';
-import 'package:payroll_system/screen/company_screens/company_view_screen/company_view_screen.dart';
-import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
-import 'package:payroll_system/screen/employee_screens/employee_view_screen/employee_view_screen.dart';
+
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -31,10 +28,9 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
-      itemCount: companyHomeScreenController.allCompanyWiseEmployeeList.length,
+      itemCount: companyHomeScreenController.searchEmployeeList.length,
       itemBuilder: (context, index) {
-        final value =
-            companyHomeScreenController.allCompanyWiseEmployeeList[index];
+        final value = companyHomeScreenController.searchEmployeeList[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Container(
@@ -122,7 +118,6 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     }
                   },
                 )
-               
               ],
             ).commonAllSidePadding(5),
           ),

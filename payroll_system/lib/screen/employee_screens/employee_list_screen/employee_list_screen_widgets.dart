@@ -25,9 +25,9 @@ class EmployeeListScreenWidgets extends StatelessWidget {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
-      itemCount: employeeListScreenController.allCompanyWiseEmployeeList.length,
+      itemCount: employeeListScreenController.searchEmployeeList.length,
       itemBuilder: (context, index) {
-        final value = employeeListScreenController.allCompanyWiseEmployeeList[index];
+        final value = employeeListScreenController.searchEmployeeList[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Container(

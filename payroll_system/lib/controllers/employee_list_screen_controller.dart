@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
@@ -10,13 +11,14 @@ import '../models/employee_manage_screen_models/employee_delete_model.dart';
 class EmployeeListScreenController extends GetxController {
   String companyId = Get.arguments[0];
   String companyName = Get.arguments[1];
+  final TextEditingController textSearchEditingController = TextEditingController();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
   List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
+  List<CopanyWiseDepartmentData> searchEmployeeList = [];
 
-  
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {
     isLoading(true);
@@ -34,6 +36,7 @@ class EmployeeListScreenController extends GetxController {
         allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
 
         allCompanyWiseEmployeeList = companyWiseEmployeeModel.data;
+        searchEmployeeList = allCompanyWiseEmployeeList;
       } else {
         log('getAllCompanyFunction Else');
       }

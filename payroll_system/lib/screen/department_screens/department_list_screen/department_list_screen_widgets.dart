@@ -21,11 +21,12 @@ class DepartmentListModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: screenController.allDepartmentList.length,
+      itemCount: screenController.searchDepartmentDataList.length,
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, i) {
-        DepartmentData singleItem = screenController.allDepartmentList[i];
+        DepartmentData singleItem =
+            screenController.searchDepartmentDataList[i];
         return DepartmentListTile(singleItem: singleItem, index: i);
       },
     );
@@ -67,7 +68,9 @@ class DepartmentListTile extends StatelessWidget {
               /// Getting From Common Module
               SingleListTileCustom(
                 textKey: AppMessage.verifiedStatusName,
-                textValue: singleItem.isActive == AppMessage.value ? AppMessage.active :AppMessage.inActive,
+                textValue: singleItem.isActive == AppMessage.value
+                    ? AppMessage.active
+                    : AppMessage.inActive,
               ),
 
               SizedBox(height: 2.h),
@@ -75,8 +78,10 @@ class DepartmentListTile extends StatelessWidget {
               /// Getting From Common Module
               EditAndDeleteButtonModule(
                 onEditTap: () async {
-                  bool departmentEditPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentEditKey);
-                  if(departmentEditPermission == true) {
+                  bool departmentEditPermission =
+                      await userPreference.getBoolPermissionFromPrefs(
+                          keyId: UserPreference.departmentEditKey);
+                  if (departmentEditPermission == true) {
                     Get.to(
                       () => DepartmentManageScreen(),
                       arguments: [
@@ -90,9 +95,11 @@ class DepartmentListTile extends StatelessWidget {
                   }
                 },
                 onDeleteTap: () async {
-                  bool departmentDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentDeleteKey);
+                  bool departmentDeletePermission =
+                      await userPreference.getBoolPermissionFromPrefs(
+                          keyId: UserPreference.departmentDeleteKey);
 
-                  if(departmentDeletePermission == true) {
+                  if (departmentDeletePermission == true) {
                     CustomAlertDialog().showAlertDialog(
                       textContent: AppMessage.deleteDepartmentAlertMessage,
                       context: context,
@@ -105,7 +112,6 @@ class DepartmentListTile extends StatelessWidget {
                   } else {
                     Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                   }
-
                 },
               ),
             ],

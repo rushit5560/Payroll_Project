@@ -144,7 +144,6 @@ class LoginController extends GetxController {
                   : false,
         )
             .whenComplete(() {
-         
           if (loginDetailsModel.loginData.data.roleId == 1) {
             Get.off(() => HomeScreen());
           } else if (loginDetailsModel.loginData.data.roleId == 2) {
@@ -173,5 +172,4 @@ class LoginController extends GetxController {
       isLoading(false);
     }
   }
-
 }
