@@ -7,6 +7,8 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
+import 'package:payroll_system/screen/profile_screens/admin_profile_screens/admin_profile_screen.dart';
+import 'package:payroll_system/screen/profile_screens/sub_admin_profile_screens/sub_admin_profile_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -29,6 +31,21 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
+                            adminDrawerController.roleId.value == 1
+                                ? AdminDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => AdminProfileScreen());
+                                    },
+                                    title: AppMessage.profile,
+                                  )
+                                : AdminDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => SubAdminProfileScreen());
+                                    },
+                                    title: AppMessage.profile,
+                                  ),
                             AdminDrawerTile(
                               onTap: () {
                                 Get.back();
@@ -36,22 +53,6 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                               },
                               title: AppMessage.role,
                             ),
-                            // adminDrawerController.roleId.value == 1
-                            //     ? AdminDrawerTile(
-                            //         onTap: () {
-                            //           Get.back();
-                            //           Get.to(() => AdminProfileScreen());
-                            //         },
-                            //         title: AppMessage.profile,
-                            //       )
-                            //     : AdminDrawerTile(
-                            //         onTap: () {
-                            //           Get.back();
-                            //           Get.to(() => SubAdminProfileScreen());
-                            //         },
-                            //         title: AppMessage.profile,
-                            //       ),
-                            //SubAdminProfileScreen
                             AdminDrawerTile(
                               onTap: () {
                                 Get.back();

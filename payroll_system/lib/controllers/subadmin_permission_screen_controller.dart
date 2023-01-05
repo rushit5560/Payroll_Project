@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
 class SubAdminPermissionScreenController extends GetxController {
-
-
   RxBool companyInIsViewChecked = false.obs;
   RxBool companyInIsAddChecked = false.obs;
   RxBool companyInIsEditChecked = false.obs;
@@ -22,8 +20,6 @@ class SubAdminPermissionScreenController extends GetxController {
   RxBool locationInIsAddChecked = false.obs;
   RxBool locationInIsEditChecked = false.obs;
   RxBool locationIsDeleteChecked = false.obs;
-
-
 
   RxBool payrollInIsViewChecked = false.obs;
   RxBool payrollInIsAddChecked = false.obs;

@@ -48,7 +48,7 @@ class LocationManageScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-        log('value : $value');
+        // log('value : $value');
         LocationCreateModel locationCreateModel =
             LocationCreateModel.fromJson(json.decode(value.toString()));
         isSuccessStatus = locationCreateModel.success.obs;

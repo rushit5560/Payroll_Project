@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
-class CompanyPermissionScreenController extends GetxController{
- 
-
+class CompanyPermissionScreenController extends GetxController {
   RxBool companyInIsViewChecked = false.obs;
   RxBool companyInIsAddChecked = false.obs;
   RxBool companyInIsEditChecked = false.obs;
@@ -23,16 +21,8 @@ class CompanyPermissionScreenController extends GetxController{
   RxBool locationInIsEditChecked = false.obs;
   RxBool locationIsDeleteChecked = false.obs;
 
- 
-
   RxBool payrollInIsViewChecked = false.obs;
   RxBool payrollInIsAddChecked = false.obs;
   RxBool payrollInIsEditChecked = false.obs;
   RxBool payrollIsDeleteChecked = false.obs;
-
-
-
-
-
-
 }

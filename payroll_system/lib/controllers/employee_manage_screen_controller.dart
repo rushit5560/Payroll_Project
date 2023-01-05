@@ -326,8 +326,7 @@ class EmployeeManageScreenController extends GetxController {
         if (employeeOption == EmployeeOption.create) {
           if (companyDepartment.isNotEmpty) {
             companyDepartmentData = companyDepartment[0];
-          } else {
-          }
+          } else {}
         } else if (employeeOption == EmployeeOption.update) {
           // update logic here
 
@@ -447,15 +446,15 @@ class EmployeeManageScreenController extends GetxController {
             .add(await http.MultipartFile.fromPath("photo", images!.path));
       }*/
 
-      log("request.fields : ${request.fields}");
-      log("request.files : ${request.files}");
+      // log("request.fields : ${request.fields}");
+      // log("request.files : ${request.files}");
       var response = await request.send();
-      log('getEmployeeStore: ${response.statusCode}');
+      // log('getEmployeeStore: ${response.statusCode}');
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-        log('value employee : $value');
+        // log('value employee : $value');
         // log(response.stream.toString());
         CraeteEmployeeModel employeeCreateModel =
             CraeteEmployeeModel.fromJson(json.decode(value.toString()));
@@ -467,9 +466,9 @@ class EmployeeManageScreenController extends GetxController {
           Get.back();
           await employeeListScreenController.getCompanyWiseEmployeeFunction();
         } else {
-          log('createCompanyFunction Else');
+          // log('createCompanyFunction Else');
         }
-        log("Empliyee Details : $employeeCreateModel");
+        // log("Empliyee Details : $employeeCreateModel");
       });
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong !");
@@ -482,7 +481,7 @@ class EmployeeManageScreenController extends GetxController {
   /// Update Employee Details
   Future<void> updateEmployeeDetailsFunction() async {
     String url = ApiUrl.updateEmployeeDetailsApi;
-    log('Update Company Api URl : $url');
+    // log('Update Company Api URl : $url');
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -530,7 +529,7 @@ class EmployeeManageScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-        log('value Updateemployee : $value');
+        // log('value Updateemployee : $value');
         UpdateEmployeeModel updateEmployeeModel =
             UpdateEmployeeModel.fromJson(json.decode(value));
 
@@ -542,7 +541,7 @@ class EmployeeManageScreenController extends GetxController {
         } else {
           log('updateCompanyDetailsFunction Else');
         }
-        log("Empliyee Details : $updateEmployeeModel");
+        // log("Empliyee Details : $updateEmployeeModel");
       });
     } catch (e) {
       log('updateCompanyDetailsFunction Error :$e');

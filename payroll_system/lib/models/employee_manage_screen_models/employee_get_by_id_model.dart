@@ -97,7 +97,7 @@ class EmployeeGEtByIdModelData {
   String zipcode;
   String photo;
   int createdby;
-  String modifiedby;
+  int modifiedby;
   // DateTime createdAt;
   // DateTime updatedAt;
 
@@ -131,7 +131,7 @@ class EmployeeGEtByIdModelData {
         zipcode: json["zipcode"] ?? "",
         photo: json["photo"] ?? "",
         createdby: json["createdby"] ?? 0,
-        modifiedby: json["modifiedby"] ?? "",
+        modifiedby: json["modifiedby"] ?? 0,
         // createdAt: DateTime.parse(json["created_at"] ?? DateTime.now()),
         // updatedAt: DateTime.parse(json["updated_at"] ?? DateTime.now()),
       );

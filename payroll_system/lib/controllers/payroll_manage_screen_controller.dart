@@ -55,14 +55,14 @@ class PayRollManageScreenController extends GetxController {
   Future<void> getCompanyWiseEmployeeFunction(companyId) async {
     isLoading(true);
     String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
-    log('Get All Company List Api Url :$url');
+    // log('Get All Company List Api Url :$url');
     try {
       http.Response response = await http.get(Uri.parse(url));
 
       CompanyWiseEmployeeModel companyWiseEmployeeModel =
           CompanyWiseEmployeeModel.fromJson(json.decode(response.body));
       isSuccessStatus = companyWiseEmployeeModel.success.obs;
-      log("getCompanyWiseEmployeeFunction ${response.body}");
+      // log("getCompanyWiseEmployeeFunction ${response.body}");
       if (isSuccessStatus.value) {
         allCompanyWiseEmployeeList.clear();
         allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);

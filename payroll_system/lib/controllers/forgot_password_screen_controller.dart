@@ -18,21 +18,21 @@ class ForgotPasswordScreenController extends GetxController {
   Future<void> forgotPasswordFunction() async {
     isLoading(true);
     String url = ApiUrl.forgetPasswordApi;
-    log("forgotPasswordFunction Api url : $url");
+    // log("forgotPasswordFunction Api url : $url");
 
     try {
       Map<String, dynamic> bodyData = {
         "email": emailController.text.trim(),
       };
 
-      log("forgotPasswordFunction passing Data :  $bodyData");
+      // log("forgotPasswordFunction passing Data :  $bodyData");
 
       http.Response response = await http.post(
         Uri.parse(url),
         body: bodyData,
       );
 
-      log("forgotPasswordFunction response :  ${response.body}");
+      // log("forgotPasswordFunction response :  ${response.body}");
 
       SuccessModel successModel =
           SuccessModel.fromJson(json.decode(response.body));

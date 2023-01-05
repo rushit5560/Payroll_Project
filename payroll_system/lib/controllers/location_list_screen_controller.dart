@@ -23,11 +23,11 @@ class LocationListScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-      log('response : ${response.body}');
 
       AllLocationListModel allLocationListModel =
           AllLocationListModel.fromJson(json.decode(response.body));
       isSuccessStatus = allLocationListModel.success.obs;
+      // log('response : ${response.body}');
 
       if (isSuccessStatus.value) {
         allLocationList = allLocationListModel.data;

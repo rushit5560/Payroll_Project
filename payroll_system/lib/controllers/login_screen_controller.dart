@@ -26,7 +26,7 @@ class LoginController extends GetxController {
   Future<void> loginUserFunction(BuildContext context) async {
     isLoading(true);
     String url = ApiUrl.loginApi;
-    log("loginUserFunction Api url : $url");
+    // log("loginUserFunction Api url : $url");
 
     try {
       Map<String, dynamic> bodyData = {
@@ -34,7 +34,7 @@ class LoginController extends GetxController {
         "password": loginPasswordController.text.trim()
       };
 
-      log("loginUserFunction passing Data : $bodyData");
+      // log("loginUserFunction passing Data : $bodyData");
 
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
       log("loginUserFunction response :  ${response.body}");

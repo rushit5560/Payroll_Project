@@ -25,7 +25,7 @@ class HomeScreenController extends GetxController {
     userid.value = userIdPrefs;
     roleId.value = roleIdPrefs;
 
-    log('Home Screen Init userid : ${userid.value}');
+    // log('Home Screen Init userid : ${userid.value}');
     await getAllCompanyFunction(userid);
     isLoading(false);
   }
@@ -45,7 +45,7 @@ class HomeScreenController extends GetxController {
       AllCompanyModel allCompanyModel =
           AllCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = allCompanyModel.success.obs;
-      log("getAllCompanyFunction data ::${response.body}");
+      // log("getAllCompanyFunction data ::${response.body}");
       if (isSuccessStatus.value) {
         allCompanyList.clear();
         allCompanyList.addAll(allCompanyModel.data);
