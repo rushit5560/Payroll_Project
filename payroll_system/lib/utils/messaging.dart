@@ -247,4 +247,17 @@ class AppMessage {
   static String comission = 'Comission';
   static String payDate = 'Pay Date';
   static String pleaseSelectEmployee = 'Please select employee';
+
+  //Role
+  static String role = 'Role';
+  static String isView = 'IsView';
+  static String isAdd = 'IsAdd';
+  static String isEdit = 'IsEdit';
+  static String isDelete = 'IsDelete';
+
+  static String permission = "Permission";
+  static String adminPermission = 'Admin Permission';
+  static String companyPermission = 'Company Permission';
+  static String employeePermission = 'Employee Permission';
+  static String subAdminPermission = 'SubAdmin Permission';
 }

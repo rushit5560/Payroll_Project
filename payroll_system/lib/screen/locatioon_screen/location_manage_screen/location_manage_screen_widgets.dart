@@ -102,7 +102,7 @@ class LocationManageScreenWidgets extends StatelessWidget {
                             LocationOption.create) {
                           if (locationManageScreenController
                                   .selectedValue.value ==
-                              "Choose Option") {
+                             AppMessage.chooseOption) {
                             Fluttertoast.showToast(msg: "Please select status");
                           } else {
                             await locationManageScreenController
@@ -114,7 +114,7 @@ class LocationManageScreenWidgets extends StatelessWidget {
                         }
                       }
                     },
-                    text: "Submit",
+                    text:AppMessage.submit,
                     textsize: 15.sp,
                   ),
                 ),
@@ -124,14 +124,14 @@ class LocationManageScreenWidgets extends StatelessWidget {
                   child: ButtonCustom(
                     onPressed: () => CustomAlertDialog().showAlertDialog(
                       context: context,
-                      textContent: 'Are you sure you want to go to back ?',
+                      textContent: AppMessage.permissionMessage,
                       onYesTap: () {
                         Get.back();
                         Get.back();
                       },
                       onCancelTap: () => Get.back(),
                     ),
-                    text: "Back",
+                    text: AppMessage.back,
                     textsize: 15.sp,
                   ),
                 ),

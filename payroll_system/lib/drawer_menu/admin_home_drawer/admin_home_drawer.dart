@@ -7,11 +7,10 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
-import 'package:payroll_system/screen/profile_screens/admin_profile_screens/admin_profile_screen.dart';
-import 'package:payroll_system/screen/profile_screens/sub_admin_profile_screens/sub_admin_profile_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
+import '../../screen/role_screens/role_manage_screen/role_list_screen.dart';
 
 class AdminHomeDrawerMenu extends StatelessWidget {
   AdminHomeDrawerMenu({Key? key}) : super(key: key);
@@ -30,8 +29,13 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                          
-
+                            AdminDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => RoleListScreen());
+                              },
+                              title: AppMessage.role,
+                            ),
                             // adminDrawerController.roleId.value == 1
                             //     ? AdminDrawerTile(
                             //         onTap: () {
