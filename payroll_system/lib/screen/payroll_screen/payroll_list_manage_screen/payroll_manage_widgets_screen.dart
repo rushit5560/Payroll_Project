@@ -1,18 +1,17 @@
-import 'dart:developer';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
-import 'package:payroll_system/common_modules/form_single_field_module.dart';
-import 'package:payroll_system/constants/colors.dart';
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/constants/enums.dart';
+import 'package:payroll_system/utils/validator.dart';
+import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/extensions.dart';
+import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/common_modules/form_single_field_module.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/controllers/payroll_manage_screen_controller.dart';
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
-import 'package:payroll_system/utils/extensions.dart';
-import 'package:payroll_system/utils/messaging.dart';
-import 'package:payroll_system/utils/style.dart';
-import 'package:payroll_system/utils/validator.dart';
-import 'package:sizer/sizer.dart';
 
 class PayRollManageWidgetsScreen extends StatelessWidget {
   PayRollManageWidgetsScreen({super.key});
@@ -160,28 +159,26 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton<CopanyWiseDepartmentData>(
+                  child: DropdownButton<CompanyWiseDepartmentData>(
                     hint: const Text(
                       "Choose Option",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     value:
-                        payRollManageScreenController.copanyWiseDepartmentData,
+                        payRollManageScreenController.companyWiseDepartmentData,
                     items: payRollManageScreenController
                         .allCompanyWiseEmployeeList
-                        .map<DropdownMenuItem<CopanyWiseDepartmentData>>(
-                            (CopanyWiseDepartmentData value) {
-                      return DropdownMenuItem<CopanyWiseDepartmentData>(
+                        .map<DropdownMenuItem<CompanyWiseDepartmentData>>(
+                            (CompanyWiseDepartmentData value) {
+                      return DropdownMenuItem<CompanyWiseDepartmentData>(
                         value: value,
                         child: Text(value.firstName),
                       );
                     }).toList(),
-                    onChanged: (CopanyWiseDepartmentData? value) async {
+                    onChanged: (CompanyWiseDepartmentData? value) async {
                       payRollManageScreenController.isLoading(true);
-                      // This is called when the user selects an item.
-                      log('valuevaluevaluevalue :${value!.firstName}');
-                      // payRollManageScreenController.isloding(true);
-                      payRollManageScreenController.copanyWiseDepartmentData =
+
+                      payRollManageScreenController.companyWiseDepartmentData =
                           value;
                       payRollManageScreenController.isLoading(false);
                     },
@@ -232,6 +229,8 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                       payRollManageScreenController.isLoading(true);
                       payRollManageScreenController.hourlyRateController
                           .clear();
+                      payRollManageScreenController.regularHourController
+                          .clear();
                       payRollManageScreenController.salaryController.clear();
                       payRollManageScreenController.selectedValue.value =
                           value!;
@@ -243,7 +242,8 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
-            payRollManageScreenController.selectedValue.value == "Hourly"
+            payRollManageScreenController.selectedValue.value ==
+                    AppMessage.hourly
                 ? Column(
                     children: [
                       FormSingleFieldModule(
@@ -263,13 +263,14 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                         mandatoryText: AppMessage.mandatory,
                         keyboardType: TextInputType.number,
                         textEditingController:
-                            payRollManageScreenController.hourlyRateController,
+                            payRollManageScreenController.regularHourController,
                         validate: (value) =>
                             FieldValidation().validateHourlyRate(value),
                       ),
                     ],
                   )
-                : payRollManageScreenController.selectedValue.value == "Salary"
+                : payRollManageScreenController.selectedValue.value ==
+                        AppMessage.salaryText
                     ? FormSingleFieldModule(
                         headerText: AppMessage.salary,
                         text: AppMessage.salary,
@@ -281,7 +282,8 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                             FieldValidation().validateSalary(value),
                       )
                     : Container(),
-            payRollManageScreenController.selectedValue.value == "Choose Option"
+            payRollManageScreenController.selectedValue.value ==
+                    AppMessage.chooseOption
                 ? Container()
                 : const SizedBox(height: 5),
 
@@ -348,7 +350,7 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
             ButtonModule(),
             const SizedBox(height: 5),
           ],
-        ).commonOnlyPadding(top: 6.h, right: 6.w, left: 6.w, bottom: 4.h),
+        ).commonOnlyPadding(top: 3.h, right: 6.w, left: 6.w, bottom: 3.h),
       ),
     );
   }

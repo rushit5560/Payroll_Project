@@ -15,4 +15,6 @@ class PayRollListScreenController extends GetxController {
 
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   TextEditingController hourlyRateController = TextEditingController();
+
+  Future<void> getPayrollListFunction() async {}
 }

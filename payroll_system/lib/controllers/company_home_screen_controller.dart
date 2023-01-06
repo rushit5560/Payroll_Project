@@ -13,8 +13,8 @@ class CompanyHomeScreenController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
-  List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
-  List<CopanyWiseDepartmentData> searchEmployeeList = [];
+  List<CompanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
+  List<CompanyWiseDepartmentData> searchEmployeeList = [];
 
   
   final TextEditingController textSearchEditingController = TextEditingController();

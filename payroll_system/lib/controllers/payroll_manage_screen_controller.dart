@@ -23,8 +23,7 @@ class PayRollManageScreenController extends GetxController {
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController hourlyRateController = TextEditingController();
-  TextEditingController salaryController = TextEditingController();
+
   DateTime birthDate = DateTime.now();
 
   DateTime startDate = DateTime.now();
@@ -44,10 +43,13 @@ class PayRollManageScreenController extends GetxController {
   TextEditingController bonusController = TextEditingController();
   TextEditingController otherEarningController = TextEditingController();
   TextEditingController comissionController = TextEditingController();
+  TextEditingController hourlyRateController = TextEditingController();
+  TextEditingController salaryController = TextEditingController();
+  TextEditingController regularHourController = TextEditingController();
 
   //getCompanyWiseEmployeeFunction
-  List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
-  CopanyWiseDepartmentData? copanyWiseDepartmentData;
+  List<CompanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
+  CompanyWiseDepartmentData? companyWiseDepartmentData;
   // List<CompanyDepartmentData> companyDepartment = [];
 
   List<String> departmentStringList = [];
@@ -81,15 +83,13 @@ class PayRollManageScreenController extends GetxController {
     }
   }
 
+  Future<void> getCreatePayrollFunction() async {}
+
   @override
   void onInit() {
     // companyDDSelectedStringItem = companyName;
     // getAllCompanyFunction();
-
     getCompanyWiseEmployeeFunction(companyId);
     super.onInit();
   }
-
- 
-
 }

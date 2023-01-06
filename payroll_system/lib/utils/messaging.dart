@@ -84,9 +84,13 @@ class AppMessage {
   static String homeNo = 'Home Number';
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
+  static String hourly = 'Hourly';
+
   static String regularHour = 'Regular Hour';
 
   static String salary = 'Salary (\$,₹)';
+  static String salaryText = 'Salary';
+
   static String payPeriod = 'Pay period';
   static String employmentDate = 'Employment Start Date';
   static String employeeEndDate = 'Employment End Date';

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/constants/colors.dart';
@@ -30,9 +29,6 @@ class PayRollListScreen extends StatelessWidget {
                   pyRollListScreenController.companyName,
                 ],
               );
-
-              log(" pyRollListScreenController.companyId  ::${pyRollListScreenController.companyId}");
-              log(" pyRollListScreenController.companyName  ::${pyRollListScreenController.companyName}");
             },
             icon: const Icon(Icons.add_rounded),
           ),
@@ -64,6 +60,7 @@ class PayRollListScreen extends StatelessWidget {
                     ),
             ),
           ).commonOnlyPadding(left: 10, right: 10, top: 15),
+          const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
@@ -80,7 +77,6 @@ class PayRollListScreen extends StatelessWidget {
                 () => Expanded(
                   flex: 5,
                   child: Container(
-                    // width: Get.width,
                     height: 45,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),

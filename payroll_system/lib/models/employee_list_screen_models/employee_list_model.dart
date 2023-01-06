@@ -17,14 +17,14 @@ class CompanyWiseEmployeeModel {
 
   final bool success;
   final String messege;
-  final List<CopanyWiseDepartmentData> data;
+  final List<CompanyWiseDepartmentData> data;
 
   factory CompanyWiseEmployeeModel.fromJson(Map<String, dynamic> json) =>
       CompanyWiseEmployeeModel(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
-        data: List<CopanyWiseDepartmentData>.from(
-            json["Data"].map((x) => CopanyWiseDepartmentData.fromJson(x))),
+        data: List<CompanyWiseDepartmentData>.from(
+            json["Data"].map((x) => CompanyWiseDepartmentData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,8 +34,8 @@ class CompanyWiseEmployeeModel {
       };
 }
 
-class CopanyWiseDepartmentData {
-  CopanyWiseDepartmentData({
+class CompanyWiseDepartmentData {
+  CompanyWiseDepartmentData({
     required this.id,
     required this.firstName,
     required this.middleName,
@@ -101,8 +101,8 @@ class CopanyWiseDepartmentData {
   // final DateTime createdAt;
   // final DateTime updatedAt;
 
-  factory CopanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
-      CopanyWiseDepartmentData(
+  factory CompanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
+      CompanyWiseDepartmentData(
         id: json["id"] ?? 0,
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",

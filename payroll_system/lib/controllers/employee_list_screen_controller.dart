@@ -11,13 +11,14 @@ import '../models/employee_manage_screen_models/employee_delete_model.dart';
 class EmployeeListScreenController extends GetxController {
   String companyId = Get.arguments[0];
   String companyName = Get.arguments[1];
-  final TextEditingController textSearchEditingController = TextEditingController();
+  final TextEditingController textSearchEditingController =
+      TextEditingController();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
-  List<CopanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
-  List<CopanyWiseDepartmentData> searchEmployeeList = [];
+  List<CompanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
+  List<CompanyWiseDepartmentData> searchEmployeeList = [];
 
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {
@@ -77,50 +78,9 @@ class EmployeeListScreenController extends GetxController {
     }
   }
 
-  // Company Wise Employee
-  // Future<void> getCompanyEmployeeFunction() async {
-  //   isLoading(true);
-  //   String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
-  //   log('Company Wise Employee Api Url : $url');
-
-  //   try {
-  //     http.Response response = await http.get(Uri.parse(url));
-
-  //     CompanyWiseEmployeeModel companyWiseEmployeeModel =
-  //         CompanyWiseEmployeeModel.fromJson(json.decode(response.body));
-  //     isSuccessStatus = companyWiseEmployeeModel.success.obs;
-
-  //     if (isSuccessStatus.value) {
-  //       allCompanyWiseEmployeeList.clear();
-  //       allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
-  //     } else {
-  //       log('getAllCompanyFunction Else');
-  //     }
-  //   } catch (e) {
-  //     log('getCompanyEmployeeFunction Error :$e');
-  //     rethrow;
-  //   } finally {
-  //     isLoading(false);
-  //   }
-  // }
-
-  /*getLoggedInUserRole() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
-    userId = prefs.getInt(UserPreference.userIdKey) ?? 0;
-
-    if (roleId == 1 || roleId == 2) {
-      await getAllEmployeeFunction();
-    } else if (roleId == 3) {
-      await getCompanyEmployeeFunction();
-    }
-  }*/
-
   @override
   void onInit() {
     getCompanyWiseEmployeeFunction();
-    // getAllEmployeeFunction();
-    // getCompanyEmployeeFunction();
     super.onInit();
   }
 }
