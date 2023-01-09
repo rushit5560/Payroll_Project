@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/common_modules/single_item_module.dart';
-import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/payroll_list_screen_controller.dart';
-import 'package:payroll_system/utils/extensions.dart';
-import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/utils/extensions.dart';
+import 'package:payroll_system/common_modules/single_item_module.dart';
+import 'package:payroll_system/controllers/payroll_list_screen_controller.dart';
 
 class PayRollListScreenWidgets extends StatelessWidget {
   PayRollListScreenWidgets({super.key});
@@ -14,8 +14,10 @@ class PayRollListScreenWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: 4,
+        itemCount: payRollListScreenController.payrollListDataList.length,
         itemBuilder: (context, index) {
+          final payrollListDataListvalue =
+              payRollListScreenController.payrollListDataList[index];
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -31,47 +33,53 @@ class PayRollListScreenWidgets extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.employeeName,
-                    textValue: "employeeName",
+                    textValue: payrollListDataListvalue.firstName +
+                        payrollListDataListvalue.middleName +
+                        payrollListDataListvalue.lastName,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.company,
-                    textValue: "company",
+                    textValue: payrollListDataListvalue.companyname,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.startDate,
-                    textValue: "2022-10-8",
+                    textValue: payrollListDataListvalue.startdate
+                        .toString()
+                        .split(" ")[0],
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.endDate,
-                    textValue: "2023-10-8",
+                    textValue: payrollListDataListvalue.enddate
+                        .toString()
+                        .split(" ")[0],
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.totalDays,
-                    textValue: "15Days",
+                    textValue: payrollListDataListvalue.days,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.payPeriod,
-                    textValue: "hourly",
+                    textValue: payrollListDataListvalue.payPeriod,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.salaryHourlyRate,
-                    textValue: "22",
+                    textValue: payrollListDataListvalue.salary,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.subTotal,
-                    textValue: "\$ 1500.00",
+                    textValue: payrollListDataListvalue.subTotal,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileCustom(
                     textKey: AppMessage.finalAmount,
-                    textValue: "\$ 15000.00",
+                    textValue: payrollListDataListvalue.finalAmount,
                   ),
                   SizedBox(height: 2.h),
                 ],

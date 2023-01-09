@@ -217,7 +217,7 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
-                    value: payRollManageScreenController.selectedValue.value,
+                    value: payRollManageScreenController.selectedValuePayper.value,
                     items: payRollManageScreenController.isPayperList
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
@@ -232,7 +232,7 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                       payRollManageScreenController.regularHourController
                           .clear();
                       payRollManageScreenController.salaryController.clear();
-                      payRollManageScreenController.selectedValue.value =
+                      payRollManageScreenController.selectedValuePayper.value =
                           value!;
                       payRollManageScreenController.isLoading(false);
                     },
@@ -242,7 +242,7 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
-            payRollManageScreenController.selectedValue.value ==
+            payRollManageScreenController.selectedValuePayper.value ==
                     AppMessage.hourly
                 ? Column(
                     children: [
@@ -269,7 +269,7 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                       ),
                     ],
                   )
-                : payRollManageScreenController.selectedValue.value ==
+                : payRollManageScreenController.selectedValuePayper.value ==
                         AppMessage.salaryText
                     ? FormSingleFieldModule(
                         headerText: AppMessage.salary,
@@ -282,7 +282,7 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                             FieldValidation().validateSalary(value),
                       )
                     : Container(),
-            payRollManageScreenController.selectedValue.value ==
+            payRollManageScreenController.selectedValuePayper.value ==
                     AppMessage.chooseOption
                 ? Container()
                 : const SizedBox(height: 5),

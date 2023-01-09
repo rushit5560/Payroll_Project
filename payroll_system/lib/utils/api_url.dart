@@ -27,7 +27,8 @@ class ApiUrl {
   static const createEmployeeApi = "${apiMainPath}api/admin/employee/store";
   static const deleteEmployeeApi = "${apiMainPath}api/admin/employee/delete/";
   static const getEmployeeDetailsApi = "${apiMainPath}api/admin/employee/edit/";
-  static const updateEmployeeDetailsApi = "${apiMainPath}api/admin/employee/update";
+  static const updateEmployeeDetailsApi =
+      "${apiMainPath}api/admin/employee/update";
   static const getCompanyWiseEmployeeApi = "${apiMainPath}api/admin/employee/";
 
   // Company Api's
@@ -37,7 +38,8 @@ class ApiUrl {
   static const getCompanyDetailsApi = "${apiMainPath}api/admin/company/edit/";
   static const updateCompanyDetailsApi =
       "${apiMainPath}api/admin/company/update";
-  static const getSubAdminWiseCompanyApi= "${apiMainPath}api/subadmin/company/";
+  static const getSubAdminWiseCompanyApi =
+      "${apiMainPath}api/subadmin/company/";
   // static const activeCompanyApi = "${apiMainPath}api/company/active/";
 
   // Department Api's
@@ -58,4 +60,8 @@ class ApiUrl {
   static const getLocationApi = "${apiMainPath}api/admin/location/edit/";
   static const createLocationApi = "${apiMainPath}api/admin/location/store";
   static const updateLocationApi = "${apiMainPath}api/admin/location/update";
+
+//Payroll Api's
+  static const getPayrollApi = "${apiMainPath}api/admin/payroll/";
+  static const createPayrollApi = "${apiMainPath}api/admin/payroll/store";
 }
