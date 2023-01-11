@@ -47,7 +47,6 @@ class CompanyWiseDepartmentData {
     required this.locationId,
     required this.isActive,
     required this.payPeriod,
-
     // required this.dateOfBirth,
     // this.home,
     // this.homeNo,
@@ -65,6 +64,18 @@ class CompanyWiseDepartmentData {
     required this.createdby,
     required this.modifiedby,
     required this.isChecked,
+
+
+    required this.regularTextFieldValue,
+    required this.otTextFieldValue,
+    required this.holidayPayTextFieldValue,
+    required this.bonusTextFieldValue,
+    required this.otherEarningTextFieldValue,
+    required this.commissionTextFieldValue,
+    required this.sickPayHoursTextFieldValue,
+    required this.vacationHoursTextFieldValue,
+    required this.tipTextFieldValue,
+    required this.taxTextFieldValue,
 
     // this.createdAt,
     // this.updatedAt,
@@ -103,6 +114,18 @@ class CompanyWiseDepartmentData {
   // final DateTime createdAt;
   // final DateTime updatedAt;
 
+
+  String regularTextFieldValue;
+  String otTextFieldValue;
+  String holidayPayTextFieldValue;
+  String bonusTextFieldValue;
+  String otherEarningTextFieldValue;
+  String commissionTextFieldValue;
+  String sickPayHoursTextFieldValue;
+  String vacationHoursTextFieldValue;
+  String tipTextFieldValue;
+  String taxTextFieldValue;
+
   factory CompanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
       CompanyWiseDepartmentData(
           id: json["id"] ?? 0,
@@ -134,7 +157,19 @@ class CompanyWiseDepartmentData {
           // photo: json["photo"],
           createdby: json["createdby"] ?? "0",
           modifiedby: json["modifiedby"] ?? "0",
-          isChecked: false
+          isChecked: false,
+
+          regularTextFieldValue: "0",
+          otTextFieldValue: "0",
+          holidayPayTextFieldValue: "0",
+          bonusTextFieldValue: "0",
+          otherEarningTextFieldValue: "0",
+          commissionTextFieldValue: "0",
+          sickPayHoursTextFieldValue: "0",
+          vacationHoursTextFieldValue: "0",
+          tipTextFieldValue: "0",
+          taxTextFieldValue: "0",
+
           // createdAt: DateTime.parse(json["created_at"]),
           // updatedAt: DateTime.parse(json["updated_at"]),
           );

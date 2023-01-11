@@ -210,6 +210,7 @@ class AppMessage {
   static String camera = 'Camera';
   //common messages text
   static String mandatory = '*';
+  static String zero = '0';
   static String submit = 'Submit';
   static String permissionMessage = 'Are you sure you want to go to back ?';
   static String back = 'Back';
@@ -258,13 +259,13 @@ class AppMessage {
 // paychecks
 
   static String paycheckes = 'Paycheckes';
-  static String regular = 'Regular';
-  static String ot = 'OT';
-  static String holidayPay = 'HolidayPay';
-  static String sickPayHours = 'Sick Pay Hours';
-  static String vacationHour = 'Vacation Hour';
-  static String tip = 'Tip';
-  static String tax = 'Tax';
+  static String regular = 'Regular (\$)';
+  static String ot = 'OT (\$)';
+  static String holidayPay = 'Holiday Pay (\$)';
+  static String sickPayHours = 'Sick Pay Hours (\$)';
+  static String vacationHour = 'Vacation Hour (\$)';
+  static String tip = 'Tip (\$)';
+  static String tax = 'Tax (\$)';
   static String memo = 'Memo';
 
   //Role

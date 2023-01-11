@@ -16,6 +16,7 @@ class FormSingleFieldModule extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   Color color;
   Function()? onTap;
+  Function(String)? onChanged;
   Size? size;
   TextInputType? keyboardType;
   bool readOnly;
@@ -36,6 +37,7 @@ class FormSingleFieldModule extends StatelessWidget {
       this.size,
       this.textEditingController,
       this.onTap,
+        this.onChanged,
       this.keyboardType,
       this.validate,
       this.maxLength,
@@ -69,16 +71,12 @@ class FormSingleFieldModule extends StatelessWidget {
           ),
         ).commonSymmetricPadding(vertical: 2)
         : Container(),
-        /*Text(
-          headerText,
-          style: TextStyleConfig.textStyle(
-              fontWeight: FontWeight.w600, fontSize: 16),
-        ).commonSymmetricPadding(vertical: 2),*/
         TextFormField(
           // obscureText: loginScreenController.isPasswordVisible.value,
           obscureText: obscureText,
           validator: validate,
           onTap: onTap,
+          onChanged: (value) => onChanged!(value),
           readOnly: readOnly,
           keyboardType: keyboardType,
           controller: textEditingController,
