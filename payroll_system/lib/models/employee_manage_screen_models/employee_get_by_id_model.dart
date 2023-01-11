@@ -69,7 +69,7 @@ class EmployeeGEtByIdModelData {
     // required this.createdAt,
     // required this.updatedAt,
   });
-  int id;
+  String id;
   String firstName;
   String middleName;
   String lastName;
@@ -77,17 +77,17 @@ class EmployeeGEtByIdModelData {
   String address;
   String mobileNumber;
   String email;
-  int companyid;
-  int departmentId;
-  int locationId;
+  String companyid;
+  String departmentId;
+  String locationId;
   String isActive;
   String payPeriod;
   DateTime dateOfBirth;
   String home;
   String homeNo;
   String workPhone;
-  int hourlyRate;
-  int salary;
+  String hourlyRate;
+  String salary;
   DateTime employmentStartDate;
   DateTime employmentEndDate;
   String street;
@@ -96,14 +96,14 @@ class EmployeeGEtByIdModelData {
   String city;
   String zipcode;
   String photo;
-  int createdby;
-  int modifiedby;
+  String createdby;
+  String modifiedby;
   // DateTime createdAt;
   // DateTime updatedAt;
 
   factory EmployeeGEtByIdModelData.fromJson(Map<String, dynamic> json) =>
       EmployeeGEtByIdModelData(
-        id: json["id"] ?? 0,
+        id: json["id"] ?? "0",
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",
@@ -111,17 +111,17 @@ class EmployeeGEtByIdModelData {
         address: json["address"] ?? "",
         mobileNumber: json["mobile_number"] ?? "",
         email: json["email"] ?? "",
-        companyid: json["companyid"] ?? 0,
-        departmentId: json["department_id"] ?? 0,
-        locationId: json["location_id"] ?? 0,
+        companyid: json["companyid"] ?? "0",
+        departmentId: json["department_id"] ?? "0",
+        locationId: json["location_id"] ?? "0",
         isActive: json["is_active"] ?? "",
         payPeriod: json["pay_period"] ?? "",
         dateOfBirth: DateTime.parse(json["date_of_birth"] ?? DateTime.now()),
         home: json["home"] ?? "",
         homeNo: json["home_no"] ?? "",
         workPhone: json["work_phone"] ?? "",
-        hourlyRate: json["hourly_rate"] ?? 0,
-        salary: json["salary"] ?? 0,
+        hourlyRate: json["hourly_rate"] ?? "0",
+        salary: json["salary"] ?? "0",
         employmentStartDate: DateTime.parse(json["employment_start_date"] ?? DateTime.now()),
         employmentEndDate: DateTime.parse(json["employment_end_date"] ?? DateTime.now()),
         street: json["street"] ?? "",
@@ -130,8 +130,8 @@ class EmployeeGEtByIdModelData {
         city: json["city"] ?? "",
         zipcode: json["zipcode"] ?? "",
         photo: json["photo"] ?? "",
-        createdby: json["createdby"] ?? 0,
-        modifiedby: json["modifiedby"] ?? 0,
+        createdby: json["createdby"] ?? "0",
+        modifiedby: json["modifiedby"] ?? "0",
         // createdAt: DateTime.parse(json["created_at"] ?? DateTime.now()),
         // updatedAt: DateTime.parse(json["updated_at"] ?? DateTime.now()),
       );

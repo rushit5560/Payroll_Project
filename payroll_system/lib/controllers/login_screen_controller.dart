@@ -50,8 +50,8 @@ class LoginController extends GetxController {
 
         await userPreference.setUserLoginDetailsToPrefs(
           isLoggedIn: true,
-          userId: loginDetailsModel.loginData.data.id,
-          roleId: loginDetailsModel.loginData.data.roleId,
+          userId: int.parse(loginDetailsModel.loginData.data.id.toString()),
+          roleId: int.parse(loginDetailsModel.loginData.data.roleId.toString()),
           userName: loginDetailsModel.loginData.data.userName,
           userEmail: loginDetailsModel.loginData.data.email,
           userProfileImage: loginDetailsModel.loginData.data.photo,
@@ -144,13 +144,13 @@ class LoginController extends GetxController {
                   : false,
         )
             .whenComplete(() {
-          if (loginDetailsModel.loginData.data.roleId == 1) {
+          if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 1) {
             Get.off(() => HomeScreen());
-          } else if (loginDetailsModel.loginData.data.roleId == 2) {
+          } else if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 2) {
             Get.off(() => HomeScreen());
-          } else if (loginDetailsModel.loginData.data.roleId == 3) {
+          } else if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 3) {
             Get.off(() => CompanyHomeScreen());
-          } else if (loginDetailsModel.loginData.data.roleId == 4) {
+          } else if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 4) {
             Get.off(() => EmployeeHomeScreen());
           }
         });

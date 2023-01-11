@@ -228,10 +228,10 @@ class AppMessage {
   static String uploadDocument = 'Upload Document';
   static String pleaseEnterPayDayWork = 'Please enter firstDayWork';
 
-//Payroll
+  //Payroll
   static String payRoll = 'Payroll';
   static String endDate = 'End Date';
-  static String payRollList = 'Payroll List';
+  static String payRollList = 'Paychecks List';
   static String totalDays = 'Total Days';
   static String salaryHourlyRate = 'Salary/Hourly Rate';
   static String subTotal = 'Sub Total';

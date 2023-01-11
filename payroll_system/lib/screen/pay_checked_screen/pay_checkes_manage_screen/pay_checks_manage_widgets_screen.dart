@@ -182,8 +182,7 @@ class PayChecksWidetsScreen extends StatelessWidget {
                 itemCount: payCheckedManageScreenController
                     .allCompanyWiseEmployeeList.length,
                 itemBuilder: (context, index) {
-                  log(" allCompanyWiseEmployeeList.length:   ${payCheckedManageScreenController.allCompanyWiseEmployeeList.length}");
-                  final employeData = payCheckedManageScreenController
+                  final employeeData = payCheckedManageScreenController
                       .allCompanyWiseEmployeeList[index];
                   return Container(
                     decoration: BoxDecoration(
@@ -195,174 +194,175 @@ class PayChecksWidetsScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "${employeData.firstName} "
-                              "${employeData.middleName} "
-                              "${employeData.lastName}",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyleConfig.textStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
                             Checkbox(
-                              value: employeData.isChecked,
+                              value: employeeData.isChecked,
                               onChanged: (bool? value) {
-                                payCheckedManageScreenController
-                                    .isLoading(true);
-                                employeData.isChecked = !employeData.isChecked;
-                                payCheckedManageScreenController
-                                    .isLoading(false);
+                                payCheckedManageScreenController.isLoading(true);
+                                employeeData.isChecked = !employeeData.isChecked;
+                                payCheckedManageScreenController.isLoading(false);
                                 // payCheckedManageScreenController
                                 //     .isPrivacyChecked.value = value!;
                               },
                             ),
+                            Expanded(
+                              child: Text(
+                                "${employeeData.firstName} "
+                                "${employeeData.middleName} "
+                                "${employeeData.lastName}",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyleConfig.textStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+
                           ],
                         ),
-                        employeData.isChecked == true
-                            ? Column(
-                                children: [
-                                  const SizedBox(height: 5),
-                                  FormSingleFieldModule(
-                                    headerText: AppMessage.regular,
-                                    text: AppMessage.regular,
-                                    mandatoryText: AppMessage.mandatory,
+                        employeeData.isChecked == false
+                            ? Container()
+                            : Column(
+                          children: [
+                            const SizedBox(height: 5),
+                            FormSingleFieldModule(
+                              headerText: AppMessage.regular,
+                              text: AppMessage.regular,
+                              mandatoryText: AppMessage.mandatory,
+                              keyboardType: TextInputType.number,
+                              textEditingController:
+                              payCheckedManageScreenController
+                                  .regularController,
+                              // validate: (value) =>
+                              //     FieldValidation().validateHourlyRate(value),
+                            ),
+                            const SizedBox(height: 5),
+                            FormSingleFieldModule(
+                              headerText: AppMessage.ot,
+                              text: AppMessage.ot,
+                              mandatoryText: AppMessage.mandatory,
+                              keyboardType: TextInputType.number,
+                              textEditingController:
+                              payCheckedManageScreenController
+                                  .overTimeController,
+                              // validate: (value) => FieldValidation().validateOverTime(value),
+                            ),
+                            const SizedBox(height: 5),
+                            FormSingleFieldModule(
+                              headerText: AppMessage.tip,
+                              text: AppMessage.holidayPay,
+                              mandatoryText: AppMessage.mandatory,
+                              keyboardType: TextInputType.number,
+                              textEditingController:
+                              payCheckedManageScreenController
+                                  .tipController,
+                              // validate: (value) =>
+                              //     FieldValidation().validateHourlyRate(value),
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: FormSingleFieldModule(
+                                    headerText: AppMessage.bonus,
+                                    text: AppMessage.bonus,
+                                    mandatoryText: AppMessage.empty,
                                     keyboardType: TextInputType.number,
                                     textEditingController:
-                                        payCheckedManageScreenController
-                                            .regularController,
-                                    // validate: (value) =>
-                                    //     FieldValidation().validateHourlyRate(value),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  FormSingleFieldModule(
-                                    headerText: AppMessage.ot,
-                                    text: AppMessage.ot,
-                                    mandatoryText: AppMessage.mandatory,
-                                    keyboardType: TextInputType.number,
-                                    textEditingController:
-                                        payCheckedManageScreenController
-                                            .overTimeController,
+                                    payCheckedManageScreenController
+                                        .bonusController,
                                     // validate: (value) => FieldValidation().validateOverTime(value),
                                   ),
-                                  const SizedBox(height: 5),
-                                  FormSingleFieldModule(
-                                    headerText: AppMessage.tip,
-                                    text: AppMessage.holidayPay,
-                                    mandatoryText: AppMessage.mandatory,
+                                ),
+                                const SizedBox(width: 5),
+                                Expanded(
+                                  flex: 5,
+                                  child: FormSingleFieldModule(
+                                    headerText: AppMessage.otherEarning,
+                                    text: AppMessage.otherEarning,
+                                    mandatoryText: AppMessage.empty,
                                     keyboardType: TextInputType.number,
                                     textEditingController:
-                                        payCheckedManageScreenController
-                                            .tipController,
+                                    payCheckedManageScreenController
+                                        .otherEarningController,
+                                    // validate: (value) => FieldValidation().validateOverTime(value),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: FormSingleFieldModule(
+                                    headerText: AppMessage.comission,
+                                    text: AppMessage.comission,
+                                    mandatoryText: AppMessage.empty,
+                                    keyboardType: TextInputType.number,
+                                    textEditingController:
+                                    payCheckedManageScreenController
+                                        .comissionController,
+                                    // validate: (value) => FieldValidation().validateOverTime(value),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Expanded(
+                                  flex: 5,
+                                  child: FormSingleFieldModule(
+                                    headerText: AppMessage.sickPayHours,
+                                    text: AppMessage.sickPayHours,
+                                    mandatoryText: AppMessage.empty,
+                                    keyboardType: TextInputType.number,
+                                    textEditingController:
+                                    payCheckedManageScreenController
+                                        .sickPayHoursController,
                                     // validate: (value) =>
                                     //     FieldValidation().validateHourlyRate(value),
                                   ),
-                                  const SizedBox(height: 5),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 5,
-                                        child: FormSingleFieldModule(
-                                          headerText: AppMessage.bonus,
-                                          text: AppMessage.bonus,
-                                          mandatoryText: AppMessage.empty,
-                                          keyboardType: TextInputType.number,
-                                          textEditingController:
-                                              payCheckedManageScreenController
-                                                  .bonusController,
-                                          // validate: (value) => FieldValidation().validateOverTime(value),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        flex: 5,
-                                        child: FormSingleFieldModule(
-                                          headerText: AppMessage.otherEarning,
-                                          text: AppMessage.otherEarning,
-                                          mandatoryText: AppMessage.empty,
-                                          keyboardType: TextInputType.number,
-                                          textEditingController:
-                                              payCheckedManageScreenController
-                                                  .otherEarningController,
-                                          // validate: (value) => FieldValidation().validateOverTime(value),
-                                        ),
-                                      ),
-                                    ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: FormSingleFieldModule(
+                                    headerText: AppMessage.vacationHour,
+                                    text: AppMessage.holidayPay,
+                                    mandatoryText: AppMessage.empty,
+                                    keyboardType: TextInputType.number,
+                                    textEditingController:
+                                    payCheckedManageScreenController
+                                        .vacationHourController,
+                                    // validate: (value) =>
+                                    //     FieldValidation().validateHourlyRate(value),
                                   ),
-                                  const SizedBox(height: 5),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 5,
-                                        child: FormSingleFieldModule(
-                                          headerText: AppMessage.comission,
-                                          text: AppMessage.comission,
-                                          mandatoryText: AppMessage.empty,
-                                          keyboardType: TextInputType.number,
-                                          textEditingController:
-                                              payCheckedManageScreenController
-                                                  .comissionController,
-                                          // validate: (value) => FieldValidation().validateOverTime(value),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        flex: 5,
-                                        child: FormSingleFieldModule(
-                                          headerText: AppMessage.sickPayHours,
-                                          text: AppMessage.sickPayHours,
-                                          mandatoryText: AppMessage.empty,
-                                          keyboardType: TextInputType.number,
-                                          textEditingController:
-                                              payCheckedManageScreenController
-                                                  .sickPayHoursController,
-                                          // validate: (value) =>
-                                          //     FieldValidation().validateHourlyRate(value),
-                                        ),
-                                      ),
-                                    ],
+                                ),
+                                const SizedBox(width: 5),
+                                Expanded(
+                                  flex: 5,
+                                  child: FormSingleFieldModule(
+                                    headerText: AppMessage.tax,
+                                    text: AppMessage.tax,
+                                    mandatoryText: AppMessage.empty,
+                                    keyboardType: TextInputType.number,
+                                    textEditingController:
+                                    payCheckedManageScreenController
+                                        .taxController,
+                                    // validate: (value) =>
+                                    //     FieldValidation().validateHourlyRate(value),
                                   ),
-                                  const SizedBox(height: 5),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 5,
-                                        child: FormSingleFieldModule(
-                                          headerText: AppMessage.vacationHour,
-                                          text: AppMessage.holidayPay,
-                                          mandatoryText: AppMessage.empty,
-                                          keyboardType: TextInputType.number,
-                                          textEditingController:
-                                              payCheckedManageScreenController
-                                                  .vacationHourController,
-                                          // validate: (value) =>
-                                          //     FieldValidation().validateHourlyRate(value),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        flex: 5,
-                                        child: FormSingleFieldModule(
-                                          headerText: AppMessage.tax,
-                                          text: AppMessage.tax,
-                                          mandatoryText: AppMessage.empty,
-                                          keyboardType: TextInputType.number,
-                                          textEditingController:
-                                              payCheckedManageScreenController
-                                                  .taxController,
-                                          // validate: (value) =>
-                                          //     FieldValidation().validateHourlyRate(value),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 5),
-                                ],
-                              )
-                            : Container(),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                          ],
+                        ),
                       ],
-                    ).commonSymmetricPadding(horizontal: 5),
+                    ).commonSymmetricPadding(horizontal: 5, vertical: 3),
                   ).commonOnlyPadding(bottom: 5);
                 }),
             const SizedBox(height: 5),

@@ -44,20 +44,20 @@ class DepartmentData {
     // required this.updatedAt,
   });
 
-  int id;
+  String id;
   String departmentName;
   String isActive;
-  int createdby;
+  String createdby;
   // int modifiedby;
   String companyid;
   // DateTime createdAt;
   // DateTime updatedAt;
 
   factory DepartmentData.fromJson(Map<String, dynamic> json) => DepartmentData(
-        id: json["id"] ?? 0,
+        id: json["id"] ?? "0",
         departmentName: json["department_name"] ?? "",
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "0",
         // modifiedby: json["modifiedby"] == null ? null : json["modifiedby"],
         companyid: json["companyid"] ?? "",
         // createdAt: DateTime.parse(json["created_at"]),

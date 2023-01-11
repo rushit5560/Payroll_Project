@@ -70,7 +70,7 @@ class CompanyWiseDepartmentData {
     // this.updatedAt,
   });
 
-  final int id;
+  final String id;
   final String firstName;
   final String middleName;
   final String lastName;
@@ -80,15 +80,15 @@ class CompanyWiseDepartmentData {
   final String email;
   final String companyid;
   final String departmentId;
-  final int locationId;
+  final String locationId;
   final String isActive;
   final String payPeriod;
   // final DateTime dateOfBirth;
   // final dynamic home;
   // final dynamic homeNo;
   // final dynamic workPhone;
-  final int hourlyRate;
-  final int salary;
+  final String hourlyRate;
+  final String salary;
   // final DateTime employmentStartDate;
   // final DateTime employmentEndDate;
   final String street;
@@ -97,15 +97,15 @@ class CompanyWiseDepartmentData {
   final String city;
   final String zipcode;
   // final dynamic photo;
-  final int createdby;
-  final int modifiedby;
+  final String createdby;
+  final String modifiedby;
   bool isChecked;
   // final DateTime createdAt;
   // final DateTime updatedAt;
 
   factory CompanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
       CompanyWiseDepartmentData(
-          id: json["id"] ?? 0,
+          id: json["id"] ?? "0",
           firstName: json["first_name"] ?? "",
           middleName: json["middle_name"] ?? "",
           lastName: json["last_name"] ?? "",
@@ -115,15 +115,15 @@ class CompanyWiseDepartmentData {
           email: json["email"] ?? "",
           companyid: json["companyid"] ?? "",
           departmentId: json["department_id"] ?? "",
-          locationId: json["location_id"] ?? 0,
+          locationId: json["location_id"] ?? "0",
           isActive: json["is_active"] ?? "",
           payPeriod: json["pay_period"] ?? "",
           // dateOfBirth: DateTime.parse(json["date_of_birth"]),
           // home: json["home"],
           // homeNo: json["home_no"],
           // workPhone: json["work_phone"],
-          hourlyRate: json["hourly_rate"] ?? 0,
-          salary: json["salary"] ?? 0,
+          hourlyRate: json["hourly_rate"] ?? "0",
+          salary: json["salary"] ?? "0",
           // employmentStartDate: DateTime.parse(json["employment_start_date"]),
           // employmentEndDate: DateTime.parse(json["employment_end_date"]),
           street: json["street"] ?? "",
@@ -132,8 +132,8 @@ class CompanyWiseDepartmentData {
           city: json["city"] ?? "",
           zipcode: json["zipcode"] ?? "",
           // photo: json["photo"],
-          createdby: json["createdby"] ?? 0,
-          modifiedby: json["modifiedby"] ?? 0,
+          createdby: json["createdby"] ?? "0",
+          modifiedby: json["modifiedby"] ?? "0",
           isChecked: false
           // createdAt: DateTime.parse(json["created_at"]),
           // updatedAt: DateTime.parse(json["updated_at"]),
