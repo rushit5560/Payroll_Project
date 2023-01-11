@@ -41,7 +41,7 @@ class HomeScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-
+      log('response : ${response.body}');
       AllCompanyModel allCompanyModel =
           AllCompanyModel.fromJson(json.decode(response.body));
       isSuccessStatus = allCompanyModel.success.obs;

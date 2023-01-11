@@ -52,7 +52,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
-                                Get.to(() => EmployeeListScreen(), arguments: [
+                                Get.to(() => EmployeeListScreen(),
+                                    arguments: [
                                   companyViewScreenController.companyId
                                       .toString(),
                                   companyViewScreenController.companyName,

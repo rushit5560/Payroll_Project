@@ -44,7 +44,7 @@ class DepartmentData {
     // required this.updatedAt,
   });
 
-  String id;
+  int id;
   String departmentName;
   String isActive;
   String createdby;
@@ -54,7 +54,7 @@ class DepartmentData {
   // DateTime updatedAt;
 
   factory DepartmentData.fromJson(Map<String, dynamic> json) => DepartmentData(
-        id: json["id"] ?? "0",
+        id: json["id"] ?? 0,
         departmentName: json["department_name"] ?? "",
         isActive: json["is_active"] ?? "",
         createdby: json["createdby"] ?? "0",

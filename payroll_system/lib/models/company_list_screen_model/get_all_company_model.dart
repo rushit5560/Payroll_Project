@@ -49,7 +49,7 @@ class CompanyData {
     // required this.updatedAt,
   });
 
-  String id;
+  int id;
   String userName;
   String email;
   String fullName;
@@ -68,7 +68,7 @@ class CompanyData {
   // dynamic updatedAt;
 
   factory CompanyData.fromJson(Map<String, dynamic> json) => CompanyData(
-    id: json["id"] ?? "0",
+    id: json["id"] ?? 0,
     userName: json["user_name"] ?? "",
     email: json["email"] ?? "",
     fullName: json["full_name"] ?? "",

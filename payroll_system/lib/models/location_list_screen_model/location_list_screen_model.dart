@@ -48,7 +48,7 @@ class LocationListData {
     // required this.updatedAt,
   });
 
-  final String id;
+  final int id;
   final String locationName;
   final String isActive;
   final String createdby;
@@ -59,7 +59,7 @@ class LocationListData {
 
   factory LocationListData.fromJson(Map<String, dynamic> json) =>
       LocationListData(
-        id: json["id"] ?? "0",
+        id: json["id"] ?? 0,
         locationName: json["location_name"] ?? "",
         isActive: json["is_active"] ?? "",
         createdby: json["createdby"] ?? "0",

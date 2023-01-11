@@ -70,7 +70,7 @@ class CompanyWiseDepartmentData {
     // this.updatedAt,
   });
 
-  final String id;
+  final int id;
   final String firstName;
   final String middleName;
   final String lastName;
@@ -105,7 +105,7 @@ class CompanyWiseDepartmentData {
 
   factory CompanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
       CompanyWiseDepartmentData(
-          id: json["id"] ?? "0",
+          id: json["id"] ?? 0,
           firstName: json["first_name"] ?? "",
           middleName: json["middle_name"] ?? "",
           lastName: json["last_name"] ?? "",
