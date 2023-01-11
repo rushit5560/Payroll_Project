@@ -125,6 +125,7 @@ class AppMessage {
   static String zipcode = 'Zipcode';
   static String city = 'City';
   static String state = 'State';
+  static String companyEmployees = 'Employees';
   // change password
   static String changePassword = "Change Password";
   static String oldPassword = "Old Password";
@@ -265,11 +266,6 @@ class AppMessage {
   static String tip = 'Tip';
   static String tax = 'Tax';
   static String memo = 'Memo';
-
-
-
-
-
 
   //Role
   static String role = 'Role';

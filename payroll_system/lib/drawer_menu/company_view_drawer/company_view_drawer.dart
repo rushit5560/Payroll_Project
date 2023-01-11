@@ -10,11 +10,13 @@ import 'package:payroll_system/screen/authentication_screens/login_screen/login_
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
-import 'package:payroll_system/screen/pay_checked_list_screen/pay_checkes_manage_screen.dart';
+import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_manage_screen/pay_checkes_manage_screen.dart';
 import 'package:payroll_system/screen/payroll_screen/payroll_list_screen/payroll_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
+
+import '../../screen/pay_checked_screen/pay_checkes_list_Screen/pay_checkes_list_screen.dart';
 
 class CompanyViewDrawerMenu extends StatelessWidget {
   CompanyViewDrawerMenu({Key? key}) : super(key: key);
@@ -72,7 +74,7 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
-                                Get.to(() => PayCheckedManageScreen(),
+                                Get.to(() => PayCheckesListScreen(),
                                     arguments: [
                                       companyViewScreenController.companyId
                                           .toString(),

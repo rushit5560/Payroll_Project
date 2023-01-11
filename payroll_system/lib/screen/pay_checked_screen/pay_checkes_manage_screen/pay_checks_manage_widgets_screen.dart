@@ -7,13 +7,12 @@ import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/pay_checked_manage_screen_controller.dart';
+import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
-
-import '../employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
 
 class PayChecksWidetsScreen extends StatelessWidget {
   PayChecksWidetsScreen({super.key});
@@ -28,12 +27,13 @@ class PayChecksWidetsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            /*Text(
               AppMessage.createPaychecks,
               style: TextStyleConfig.textStyle(
                   fontSize: 22.sp, fontWeight: FontWeight.w400),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 15),*/
+            /// Pay Period Dropdown module
             RichText(
               textAlign: TextAlign.left,
               maxLines: null,
@@ -85,6 +85,8 @@ class PayChecksWidetsScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
+
+            /// Start & End Date module
             Row(
               children: [
                 Expanded(
@@ -144,6 +146,8 @@ class PayChecksWidetsScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 5),
+
+            /// Pay Date module
             FormSingleFieldModule(
               headerText: AppMessage.payDate,
               text: AppMessage.payDate,
@@ -163,6 +167,15 @@ class PayChecksWidetsScreen extends StatelessWidget {
               validate: (value) => FieldValidation().validatePayDayWork(value),
             ),
             const SizedBox(height: 5),
+
+            /// Employee List module
+            Text(
+              AppMessage.companyEmployees,
+              style: TextStyleConfig.textStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ).commonSymmetricPadding(vertical: 2),
             ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -353,6 +366,8 @@ class PayChecksWidetsScreen extends StatelessWidget {
                   ).commonOnlyPadding(bottom: 5);
                 }),
             const SizedBox(height: 5),
+
+            /// Memo Text Field module
             FormSingleFieldModule(
               headerText: AppMessage.memo,
               text: AppMessage.memo,
@@ -364,6 +379,8 @@ class PayChecksWidetsScreen extends StatelessWidget {
               //     FieldValidation().validateHourlyRate(value),
             ),
             const SizedBox(height: 15),
+
+            /// Submit & Back Button module
             ButtonModule(),
             const SizedBox(height: 5),
           ],

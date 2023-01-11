@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 
 import 'package:payroll_system/controllers/pay_checked_manage_screen_controller.dart';
-import 'package:payroll_system/screen/pay_checked_list_screen/pay_checks_manage_widgets_screen.dart';
+import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_manage_screen/pay_checks_manage_widgets_screen.dart';
 import 'package:payroll_system/utils/messaging.dart';
 
 class PayCheckedManageScreen extends StatelessWidget {
