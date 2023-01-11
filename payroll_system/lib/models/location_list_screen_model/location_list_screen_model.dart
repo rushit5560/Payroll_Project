@@ -48,22 +48,22 @@ class LocationListData {
     // required this.updatedAt,
   });
 
-  final int id;
+  final String id;
   final String locationName;
   final String isActive;
-  final int createdby;
-  final int modifiedby;
+  final String createdby;
+  final String modifiedby;
   final String companyid;
   // final String createdAt;
   // final String updatedAt;
 
   factory LocationListData.fromJson(Map<String, dynamic> json) =>
       LocationListData(
-        id: json["id"] ?? 0,
+        id: json["id"] ?? "0",
         locationName: json["location_name"] ?? "",
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? 0,
-        modifiedby: json["modifiedby"] ?? 0,
+        createdby: json["createdby"] ?? "0",
+        modifiedby: json["modifiedby"] ?? "0",
         companyid: json["companyid"] ?? "",
         // createdAt: json["created_at"],
         // updatedAt: json["updated_at"],

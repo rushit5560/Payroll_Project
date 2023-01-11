@@ -62,27 +62,27 @@ class EmployeeDeleteModel {
 //     // this.updatedAt,
 //   });
 
-//   final int id;
+//   final String id;
 //   final String firstName;
 //   final String middleName;
 //   final String lastName;
 //   final String phoneNo;
 //   final String email;
-//   final int departmentId;
+//   final String departmentId;
 //   final String isActive;
-//   final int companyid;
+//   final String companyid;
 //   // final String password;
 //   // final String address;
-//   // final int createdby;
-//   // final int modifiedby;
+//   // final String createdby;
+//   // final String modifiedby;
 //   // final String dateOfBrith;
 //   // final String home;
 //   // final String homeNo;
 //   // final String workPhone;
-//   // final int hourlyRate;
-//   // final int salary;
+//   // final String hourlyRate;
+//   // final String salary;
 //   // final String startDate;
-//   // final int lastDayOfWork;
+//   // final String lastDayOfWork;
 //   // final String photo;
 //   // final String createdAt;
 //   // final String updatedAt;

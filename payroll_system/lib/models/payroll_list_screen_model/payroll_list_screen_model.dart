@@ -69,27 +69,27 @@ class PayrollListData {
     required this.eid,
   });
 
-  final int id;
+  final String id;
   final String startdate;
   final String enddate;
   final String days;
   final String payPeriod;
-  final int companyid;
-  final int employeeid;
+  final String companyid;
+  final String employeeid;
   final String salary;
-  final int ragularhour;
-  final int overtime;
-  final int bonus;
-  final int otherearning;
+  final String ragularhour;
+  final String overtime;
+  final String bonus;
+  final String otherearning;
   final String sickpay;
   final String vacationhours;
-  final int commission;
+  final String commission;
   final String paydate;
   final String tax;
   final String subTotal;
   final String finalAmount;
   final String isActive;
-  final int createdby;
+  final String createdby;
   final String modifiedby;
   final String createdAt;
   final String updatedAt;
@@ -97,31 +97,31 @@ class PayrollListData {
   final String firstName;
   final String middleName;
   final String lastName;
-  final int eid;
+  final String eid;
 
   factory PayrollListData.fromJson(Map<String, dynamic> json) =>
       PayrollListData(
-        id: json["id"] ?? 0,
+        id: json["id"] ?? "0",
         startdate: json["startdate"] ?? "",
         enddate: json["enddate"] ?? "",
         days: json["days"] ?? "",
         payPeriod: json["pay_period"] ?? "",
-        companyid: json["companyid"] ?? 0,
-        employeeid: json["employeeid"] ?? 0,
+        companyid: json["companyid"] ?? "0",
+        employeeid: json["employeeid"] ?? "0",
         salary: json["salary"] ?? "",
-        ragularhour: json["ragularhour"] ?? 0,
-        overtime: json["overtime"] ?? 0,
-        bonus: json["bonus"] ?? 0,
-        otherearning: json["otherearning"] ?? 0,
+        ragularhour: json["ragularhour"] ?? "0",
+        overtime: json["overtime"] ?? "0",
+        bonus: json["bonus"] ?? "0",
+        otherearning: json["otherearning"] ?? "0",
         sickpay: json["sickpay"] ?? "",
         vacationhours: json["vacationhours"] ?? "",
-        commission: json["commission"] ?? 0,
+        commission: json["commission"] ?? "0",
         paydate: json["paydate"] ?? "",
         tax: json["tax"] ?? "",
         subTotal: json["sub_total"] ?? "",
         finalAmount: json["final_amount"] ?? "",
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "0",
         modifiedby: json["modifiedby"] ?? "",
         createdAt: json["created_at"] ?? "",
         updatedAt: json["updated_at"] ?? "",
@@ -129,7 +129,7 @@ class PayrollListData {
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",
-        eid: json["eid"] ?? 0,
+        eid: json["eid"] ?? "0",
       );
 
   // Map<String, dynamic> toJson() => {

@@ -80,7 +80,7 @@ class CraeteEmployeeData {
   final String updatedAt;
   final String createdAt;
   final String photo;
-  final int id;
+  final String id;
 
   factory CraeteEmployeeData.fromJson(Map<String, dynamic> json) =>
       CraeteEmployeeData(

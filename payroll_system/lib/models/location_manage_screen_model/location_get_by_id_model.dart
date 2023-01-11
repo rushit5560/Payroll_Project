@@ -47,23 +47,23 @@ class LocationGetByIdData {
     // this.updatedAt,
   });
 
-  final int id;
+  final String id;
   final String locationName;
   final String isActive;
-  final int createdby;
+  final String createdby;
   // final dynamic modifiedby;
-  final int companyid;
+  final String companyid;
   // final DateTime createdAt;
   // final DateTime updatedAt;
 
   factory LocationGetByIdData.fromJson(Map<String, dynamic> json) =>
       LocationGetByIdData(
-        id: json["id"] ?? 0,
+        id: json["id"] ?? "0",
         locationName: json["location_name"] ?? "",
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "0",
         // modifiedby: json["modifiedby"],
-        companyid: json["companyid"] ?? 0,
+        companyid: json["companyid"] ?? "0",
         // createdAt: DateTime.parse(json["created_at"]),
         // updatedAt: DateTime.parse(json["updated_at"]),
       );

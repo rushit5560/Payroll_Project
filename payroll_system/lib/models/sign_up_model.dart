@@ -52,21 +52,21 @@ class Data {
   final String fullName;
   final String phoneno;
   final String isActive;
-  final int roleId;
+  final String roleId;
   // final DateTime updatedAt;
   // final DateTime createdAt;
-  final int id;
+  final String id;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        userName: json["user_name"],
-        email: json["email"],
-        fullName: json["full_name"],
-        phoneno: json["phoneno"],
-        isActive: json["is_active"],
-        roleId: json["role_id"],
+        userName: json["user_name"] ?? "",
+        email: json["email"] ?? "",
+        fullName: json["full_name"] ?? "",
+        phoneno: json["phoneno"] ?? "",
+        isActive: json["is_active"] ?? "",
+        roleId: json["role_id"] ?? "0",
         // updatedAt: DateTime.parse(json["updated_at"]),
         // createdAt: DateTime.parse(json["created_at"]),
-        id: json["id"],
+        id: json["id"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

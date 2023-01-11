@@ -57,40 +57,40 @@ class CompanyData {
     required this.updatedAt,
   });
 
-  final int id;
+  final String id;
   final String userName;
   final String email;
   final String fullName;
   final String address;
   final String phoneno;
-  final int roleId;
+  final String roleId;
   final String departmentId;
   final String locationId;
   final String isActive;
   // final dynamic lastlogin;
   final String verified;
-  final int createdby;
-  final int modifiedby;
+  final String createdby;
+  final String modifiedby;
   // final dynamic emailVerifiedAt;
   final String photo;
   final String createdAt;
   final String updatedAt;
 
   factory CompanyData.fromJson(Map<String, dynamic> json) => CompanyData(
-        id: json["id"] ?? 0,
+        id: json["id"] ?? "0",
         userName: json["user_name"] ?? "",
         email: json["email"] ?? "",
         fullName: json["full_name"] ?? "",
         address: json["address"] ?? "",
         phoneno: json["phoneno"] ?? "",
-        roleId: json["role_id"] ?? 0,
+        roleId: json["role_id"] ?? "0",
         departmentId: json["department_id"] ?? "",
         locationId: json["location_id"] ?? "",
         isActive: json["is_active"] ?? "",
         // lastlogin: json["lastlogin"] ?? "",
         verified: json["verified"] ?? "",
-        createdby: json["createdby"] ?? 0,
-        modifiedby: json["modifiedby"] ?? 0,
+        createdby: json["createdby"] ?? "0",
+        modifiedby: json["modifiedby"] ?? "0",
         // emailVerifiedAt: json["email_verified_at"] ?? "",
         photo: json["photo"] ?? "",
         createdAt: json["created_at"] ?? "",

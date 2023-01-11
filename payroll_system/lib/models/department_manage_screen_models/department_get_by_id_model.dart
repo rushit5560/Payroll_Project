@@ -40,7 +40,7 @@ class Data {
     // required this.updatedAt,
   });
 
-  int id;
+  String id;
   String departmentName;
   String isActive;
   // int createdby;
@@ -50,7 +50,7 @@ class Data {
   // DateTime updatedAt;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"] ?? 0,
+    id: json["id"] ?? "0",
     departmentName: json["department_name"] ?? "",
     isActive: json["is_active"] ?? "",
     // createdby: json["createdby"],
