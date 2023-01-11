@@ -15,11 +15,11 @@ import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
-
 class PayChecksWidgetsScreen extends StatelessWidget {
   PayChecksWidgetsScreen({super.key});
 
-  final payCheckedManageScreenController = Get.find<PayCheckedManageScreenController>();
+  final payCheckedManageScreenController =
+      Get.find<PayCheckedManageScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                     }).toList(),
                     onChanged: (String? value) {
                       payCheckedManageScreenController.isLoading(true);
-                      payCheckedManageScreenController.selectedCheckedValue.value = value!;
+                      payCheckedManageScreenController
+                          .selectedCheckedValue.value = value!;
                       payCheckedManageScreenController.isLoading(false);
                     },
                   ).commonOnlyPadding(left: 10, right: 10),
@@ -101,7 +102,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                         payCheckedManageScreenController.startDateController,
                     suffixIcon: Icons.calendar_month,
                     onPressed: () async {
-                      await _selectDate(
+                      await _selectStartDate(
                           context: context,
                           dateTime: payCheckedManageScreenController.startDate,
                           textEditingController:
@@ -132,7 +133,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                         ? Icons.arrow_back_ios
                         : Icons.calendar_month,
                     onPressed: () async {
-                      await _selectDate(
+                      await _selectEndDate(
                           context: context,
                           dateTime: payCheckedManageScreenController.endDate,
                           textEditingController:
@@ -158,7 +159,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                   payCheckedManageScreenController.payDateController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
-                await _selectDate(
+                await _selectPayDate(
                     context: context,
                     dateTime: payCheckedManageScreenController.payDate,
                     textEditingController:
@@ -198,9 +199,12 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                             Checkbox(
                               value: employeeData.isChecked,
                               onChanged: (bool? value) {
-                                payCheckedManageScreenController.isLoading(true);
-                                employeeData.isChecked = !employeeData.isChecked;
-                                payCheckedManageScreenController.isLoading(false);
+                                payCheckedManageScreenController
+                                    .isLoading(true);
+                                employeeData.isChecked =
+                                    !employeeData.isChecked;
+                                payCheckedManageScreenController
+                                    .isLoading(false);
                                 // payCheckedManageScreenController
                                 //     .isPrivacyChecked.value = value!;
                               },
@@ -231,11 +235,11 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                     mandatoryText: AppMessage.mandatory,
                                     keyboardType: TextInputType.number,
                                     onChanged: (value) {
-                                      employeeData.regularTextFieldValue = value;
+                                      employeeData.regularTextFieldValue =
+                                          value;
                                     },
-
-                                    validate: (value) =>
-                                        FieldValidation().validateHourlyRate(value),
+                                    validate: (value) => FieldValidation()
+                                        .validateHourlyRate(value),
                                   ),
                                   const SizedBox(height: 5),
                                   FormSingleFieldModule(
@@ -243,7 +247,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                     text: AppMessage.zero,
                                     mandatoryText: AppMessage.mandatory,
                                     keyboardType: TextInputType.number,
-                                    validate: (value) => FieldValidation().validateOverTime(value),
+                                    validate: (value) => FieldValidation()
+                                        .validateOverTime(value),
                                   ),
                                   const SizedBox(height: 5),
                                   FormSingleFieldModule(
@@ -251,7 +256,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                     text: AppMessage.zero,
                                     mandatoryText: AppMessage.mandatory,
                                     keyboardType: TextInputType.number,
-                                    validate: (value) => FieldValidation().validateHourlyRate(value),
+                                    validate: (value) => FieldValidation()
+                                        .validateHourlyRate(value),
                                   ),
                                   const SizedBox(height: 5),
                                   Row(
@@ -343,7 +349,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                           text: AppMessage.zero,
                                           mandatoryText: AppMessage.empty,
                                           keyboardType: TextInputType.number,
-                                          validate: (value) => FieldValidation().validateHourlyRate(value),
+                                          validate: (value) => FieldValidation()
+                                              .validateHourlyRate(value),
                                         ),
                                       ),
                                     ],
@@ -355,8 +362,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                     mandatoryText: AppMessage.empty,
                                     keyboardType: TextInputType.number,
                                     textEditingController:
-                                    payCheckedManageScreenController
-                                        .taxController,
+                                        payCheckedManageScreenController
+                                            .taxController,
                                     // validate: (value) =>
                                     //     FieldValidation().validateHourlyRate(value),
                                   ),
@@ -391,7 +398,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _selectDate({
+  Future<void> _selectStartDate({
     required BuildContext context,
     required DateTime dateTime,
     required TextEditingController textEditingController,
@@ -412,16 +419,69 @@ class PayChecksWidgetsScreen extends StatelessWidget {
       payCheckedManageScreenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
       // dateTime = d;
-      if (datePickerOption == DatePickerOption.startDate) {
-        payCheckedManageScreenController.startDate = d;
-        //todo
+      // if (datePickerOption == DatePickerOption.startDate) {
+      //   payCheckedManageScreenController.startDate = d;
+      // } else if (datePickerOption == DatePickerOption.endDate) {
+      //   payCheckedManageScreenController.endDate = d;
+      // } else {
+      //   payCheckedManageScreenController.payDate = d;
+      // }
+      payCheckedManageScreenController.isLoading(false);
+    }
+  }
 
+  Future<void> _selectEndDate({
+    required BuildContext context,
+    required DateTime dateTime,
+    required TextEditingController textEditingController,
+    required DatePickerOption datePickerOption,
+    DateTime? firstDate,
+  }) async {
+    final DateTime? d = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: datePickerOption == DatePickerOption.endDate
+          ? firstDate!
+          : DateTime(1950),
+      lastDate: datePickerOption == DatePickerOption.endDate
+          ? DateTime(2080)
+          : DateTime.now(),
+    );
+    if (d != null) {
+      payCheckedManageScreenController.isLoading(true);
+      textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      // dateTime = d;
+      //  if (datePickerOption == DatePickerOption.endDate) {
+      //     payCheckedManageScreenController.endDate = d;
+      //   }
+      payCheckedManageScreenController.isLoading(false);
+    }
+  }
 
-      } else if (datePickerOption == DatePickerOption.endDate) {
-        payCheckedManageScreenController.endDate = d;
-      } else {
-        payCheckedManageScreenController.payDate = d;
-      }
+  Future<void> _selectPayDate({
+    required BuildContext context,
+    required DateTime dateTime,
+    required TextEditingController textEditingController,
+    required DatePickerOption datePickerOption,
+    DateTime? firstDate,
+  }) async {
+    final DateTime? d = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: datePickerOption == DatePickerOption.endDate
+          ? firstDate!
+          : DateTime(1950),
+      lastDate: datePickerOption == DatePickerOption.endDate
+          ? DateTime(2080)
+          : DateTime.now(),
+    );
+    if (d != null) {
+      payCheckedManageScreenController.isLoading(true);
+      textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      // dateTime = d;
+      // if (datePickerOption == DatePickerOption.payDate) {
+      //   payCheckedManageScreenController.payDate = d;
+      // }
       payCheckedManageScreenController.isLoading(false);
     }
   }
@@ -441,8 +501,8 @@ class ButtonModule extends StatelessWidget {
           flex: 5,
           child: ButtonCustom(
             onPressed: () async {
-              if (payCheckedManageScreenController.formKey.currentState!.validate()) {}
-
+              if (payCheckedManageScreenController.formKey.currentState!
+                  .validate()) {}
             },
             text: AppMessage.submit,
             textsize: 15.sp,
