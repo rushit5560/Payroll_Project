@@ -1,7 +1,7 @@
 class ApiUrl {
-  static const apiMainPath = "https://payroll.omdemo.co.in/";
+  static const apiMainPath = "https://appieve.com/";
   static const apiImagePath =
-      "https://payroll.omdemo.co.in/public/images/employee/";
+      "https://appieve.com/public/images/employee/";
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
