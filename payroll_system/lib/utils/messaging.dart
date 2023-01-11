@@ -154,6 +154,7 @@ class AppMessage {
   static String noDeptFound = 'No Department Found.';
   static String noCompanyFound = 'No Company Found.';
   static String noLocationFound = 'No Location Found.';
+  static String noPayCheckesListFound = 'No PayCheckesList Found.';
 
   //validation messages
   static String pleaseEnterYourName = 'Please enter your name';
@@ -267,7 +268,12 @@ class AppMessage {
   static String tip = 'Tip (\$)';
   static String tax = 'Tax (\$)';
   static String memo = 'Memo';
-
+  //paycheckeslisttext
+  static String date = 'Date';
+  static String paycheckesList = 'Paycheckes List';
+  static String hours = 'Hours';
+  static String netAmount = 'Net Amount';
+  static String download = 'Download';
   //Role
   static String role = 'Role';
   static String isView = 'IsView';

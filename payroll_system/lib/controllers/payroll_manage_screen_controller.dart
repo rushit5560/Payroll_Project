@@ -84,28 +84,28 @@ class PayRollManageScreenController extends GetxController {
     }
   }
 
-  Future<void> getCreatePayrollFunction() async {
-    isLoading(true);
-    String url = ApiUrl.createPayrollApi;
-    try {
-      var request = http.MultipartRequest('POST', Uri.parse(url));
-      request.fields['startdate'] = startDateController.text.trim();
-      request.fields['enddate'] = endDateController.text.trim();
-      request.fields['regularhour'] = regularHourController.text.trim();
-      request.fields['salary'] = salaryController.text.trim();
-      request.fields['overtime'] = overTimeController.text.trim();
-      request.fields['bonus'] = bonusController.text.trim();
-      request.fields['otherearning'] = otherEarningController.text.trim();
-      request.fields['commission'] = comissionController.text.trim();
-      request.fields['paydate'] = payDateController.text.trim();
-      request.fields['pay_period'] =
-          selectedValuePayper.value == "Salary" ? "salary" : "hourly";
-      request.fields['userid'] = "$userIdPrefs";
-      request.fields['cid'] = companyId;
-    } catch (e) {
-      rethrow;
-    }
-  }
+  // Future<void> getCreatePayrollFunction() async {
+  //   isLoading(true);
+  //   String url = ApiUrl.createPayrollApi;
+  //   try {
+  //     var request = http.MultipartRequest('POST', Uri.parse(url));
+  //     request.fields['startdate'] = startDateController.text.trim();
+  //     request.fields['enddate'] = endDateController.text.trim();
+  //     request.fields['regularhour'] = regularHourController.text.trim();
+  //     request.fields['salary'] = salaryController.text.trim();
+  //     request.fields['overtime'] = overTimeController.text.trim();
+  //     request.fields['bonus'] = bonusController.text.trim();
+  //     request.fields['otherearning'] = otherEarningController.text.trim();
+  //     request.fields['commission'] = comissionController.text.trim();
+  //     request.fields['paydate'] = payDateController.text.trim();
+  //     request.fields['pay_period'] =
+  //         selectedValuePayper.value == "Salary" ? "salary" : "hourly";
+  //     request.fields['userid'] = "$userIdPrefs";
+  //     request.fields['cid'] = companyId;
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   @override
   void onInit() {

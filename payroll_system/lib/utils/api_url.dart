@@ -1,7 +1,6 @@
 class ApiUrl {
   static const apiMainPath = "https://appieve.com/";
-  static const apiImagePath =
-      "https://appieve.com/public/images/employee/";
+  static const apiImagePath = "https://appieve.com/public/images/employee/";
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
@@ -62,6 +61,6 @@ class ApiUrl {
   static const updateLocationApi = "${apiMainPath}api/admin/location/update";
 
 //Payroll Api's
-  static const getPayrollApi = "${apiMainPath}api/admin/payroll/";
-  static const createPayrollApi = "${apiMainPath}api/admin/payroll/store";
+  static const getPayCheckesListApi = "${apiMainPath}api/admin/payroll/";
+  static const createPayCheckesApi = "${apiMainPath}api/admin/payroll/store";
 }

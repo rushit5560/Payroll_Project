@@ -21,7 +21,7 @@ class PayRollListScreenController extends GetxController {
 
   Future<void> getPayrollListFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.getPayrollApi}$companyId";
+    String url = "${ApiUrl.getPayCheckesListApi}$companyId";
     log("getPayrollListFunction url:   $url");
     log("getPayrollListFunction companyId:   $companyId");
 

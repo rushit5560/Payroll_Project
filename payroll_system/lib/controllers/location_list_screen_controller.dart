@@ -11,7 +11,8 @@ import '../models/location_manage_screen_model/location_delete_screen_model.dart
 class LocationListScreenController extends GetxController {
   String companyId = Get.arguments[0] ?? 0;
   String companyName = Get.arguments[1] ?? "";
-  final TextEditingController textSearchEditingController = TextEditingController();
+  final TextEditingController textSearchEditingController =
+      TextEditingController();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
