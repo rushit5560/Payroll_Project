@@ -307,4 +307,30 @@ class FieldValidation {
       return null;
     }
   }
+
+  String? validateStartDate(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterStartDate;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateEndDate(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterEndDate;
+    } else {
+      return null;
+    }
+  }
+
+  String? validatePayDate(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterPayDate;
+    } else {
+      return null;
+    }
+  }
+
+
 }

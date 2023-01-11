@@ -229,6 +229,9 @@ class AppMessage {
   static String name = 'Name';
   static String uploadDocument = 'Upload Document';
   static String pleaseEnterPayDayWork = 'Please enter firstDayWork';
+  static String pleaseEnterStartDate = 'Please select start date';
+  static String pleaseEnterEndDate = 'Please select end date';
+  static String pleaseEnterPayDate = 'Please select pay date';
 
   //Payroll
   static String payRoll = 'Payroll';
