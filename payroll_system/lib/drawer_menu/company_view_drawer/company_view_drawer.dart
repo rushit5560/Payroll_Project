@@ -10,6 +10,7 @@ import 'package:payroll_system/screen/authentication_screens/login_screen/login_
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
+import 'package:payroll_system/screen/pay_checked_list_screen/pay_checkes_manage_screen.dart';
 import 'package:payroll_system/screen/payroll_screen/payroll_list_screen/payroll_list_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -71,13 +72,14 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
-                                Get.to(() => PayRollListScreen(), arguments: [
-                                  companyViewScreenController.companyId
-                                      .toString(),
-                                  companyViewScreenController.companyName,
-                                ]);
+                                Get.to(() => PayCheckedManageScreen(),
+                                    arguments: [
+                                      companyViewScreenController.companyId
+                                          .toString(),
+                                      companyViewScreenController.companyName,
+                                    ]);
                               },
-                              title: AppMessage.payRoll,
+                              title: AppMessage.paycheckes,
                             ),
                             /*CompanyDrawerTile(
                               onTap: () {
@@ -165,11 +167,9 @@ class CompanyDrawerTile extends StatelessWidget {
               style: TextStyleConfig.drawerTextStyle(),
             ),
           ),
-      
           const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
         ],
       ),
     );
-   
   }
 }

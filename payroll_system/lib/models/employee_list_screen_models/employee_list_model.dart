@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 CompanyWiseEmployeeModel companyWiseEmployeeModelFromJson(String str) =>
@@ -49,6 +47,7 @@ class CompanyWiseDepartmentData {
     required this.locationId,
     required this.isActive,
     required this.payPeriod,
+
     // required this.dateOfBirth,
     // this.home,
     // this.homeNo,
@@ -65,6 +64,8 @@ class CompanyWiseDepartmentData {
     // this.photo,
     required this.createdby,
     required this.modifiedby,
+    required this.isChecked,
+
     // this.createdAt,
     // this.updatedAt,
   });
@@ -98,43 +99,45 @@ class CompanyWiseDepartmentData {
   // final dynamic photo;
   final int createdby;
   final int modifiedby;
+  bool isChecked;
   // final DateTime createdAt;
   // final DateTime updatedAt;
 
   factory CompanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
       CompanyWiseDepartmentData(
-        id: json["id"] ?? 0,
-        firstName: json["first_name"] ?? "",
-        middleName: json["middle_name"] ?? "",
-        lastName: json["last_name"] ?? "",
-        password: json["password"] ?? "",
-        address: json["address"] ?? "",
-        mobileNumber: json["mobile_number"] ?? "",
-        email: json["email"] ?? "",
-        companyid: json["companyid"] ?? "",
-        departmentId: json["department_id"] ?? "",
-        locationId: json["location_id"] ?? 0,
-        isActive: json["is_active"] ?? "",
-        payPeriod: json["pay_period"] ?? "",
-        // dateOfBirth: DateTime.parse(json["date_of_birth"]),
-        // home: json["home"],
-        // homeNo: json["home_no"],
-        // workPhone: json["work_phone"],
-        hourlyRate: json["hourly_rate"] ?? 0,
-        salary: json["salary"] ?? 0,
-        // employmentStartDate: DateTime.parse(json["employment_start_date"]),
-        // employmentEndDate: DateTime.parse(json["employment_end_date"]),
-        street: json["street"] ?? "",
-        town: json["town"] ?? "",
-        state: json["state"] ?? "",
-        city: json["city"] ?? "",
-        zipcode: json["zipcode"] ?? "",
-        // photo: json["photo"],
-        createdby: json["createdby"] ?? 0,
-        modifiedby: json["modifiedby"] ?? 0,
-        // createdAt: DateTime.parse(json["created_at"]),
-        // updatedAt: DateTime.parse(json["updated_at"]),
-      );
+          id: json["id"] ?? 0,
+          firstName: json["first_name"] ?? "",
+          middleName: json["middle_name"] ?? "",
+          lastName: json["last_name"] ?? "",
+          password: json["password"] ?? "",
+          address: json["address"] ?? "",
+          mobileNumber: json["mobile_number"] ?? "",
+          email: json["email"] ?? "",
+          companyid: json["companyid"] ?? "",
+          departmentId: json["department_id"] ?? "",
+          locationId: json["location_id"] ?? 0,
+          isActive: json["is_active"] ?? "",
+          payPeriod: json["pay_period"] ?? "",
+          // dateOfBirth: DateTime.parse(json["date_of_birth"]),
+          // home: json["home"],
+          // homeNo: json["home_no"],
+          // workPhone: json["work_phone"],
+          hourlyRate: json["hourly_rate"] ?? 0,
+          salary: json["salary"] ?? 0,
+          // employmentStartDate: DateTime.parse(json["employment_start_date"]),
+          // employmentEndDate: DateTime.parse(json["employment_end_date"]),
+          street: json["street"] ?? "",
+          town: json["town"] ?? "",
+          state: json["state"] ?? "",
+          city: json["city"] ?? "",
+          zipcode: json["zipcode"] ?? "",
+          // photo: json["photo"],
+          createdby: json["createdby"] ?? 0,
+          modifiedby: json["modifiedby"] ?? 0,
+          isChecked: false
+          // createdAt: DateTime.parse(json["created_at"]),
+          // updatedAt: DateTime.parse(json["updated_at"]),
+          );
 
   // Map<String, dynamic> toJson() => {
   //     "id": id,

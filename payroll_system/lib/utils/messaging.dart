@@ -237,6 +237,8 @@ class AppMessage {
   static String finalAmount = 'Final Amount';
 
   static String payRollCreate = 'Create Payroll';
+  static String createPaychecks = 'Create Paychecks';
+
   static String payRollUpdate = 'Update Payroll';
 
   static String payRollForm = 'Payroll Form';
@@ -251,6 +253,23 @@ class AppMessage {
   static String comission = 'Comission';
   static String payDate = 'Pay Date';
   static String pleaseSelectEmployee = 'Please select employee';
+
+// paychecks
+
+  static String paycheckes = 'Paycheckes';
+  static String regular = 'Regular';
+  static String ot = 'OT';
+  static String holidayPay = 'HolidayPay';
+  static String sickPayHours = 'Sick Pay Hours';
+  static String vacationHour = 'Vacation Hour';
+  static String tip = 'Tip';
+  static String tax = 'Tax';
+  static String memo = 'Memo';
+
+
+
+
+
 
   //Role
   static String role = 'Role';
