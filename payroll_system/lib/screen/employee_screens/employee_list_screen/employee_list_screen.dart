@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 import '../../../constants/enums.dart';
 import 'employee_list_screen_widgets.dart';
@@ -22,11 +24,44 @@ class EmployeeListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.colorLightPurple2,
         appBar: AppBar(
-          title: Text(employeeListScreenController.companyName),
+          title: Text(employeeListScreenController.companyName,
+            style: TextStyle(
+              color: AppColors.colorBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 17.sp,
+            ),
+          ),
           centerTitle: true,
           actions: [
-            FloatingActionButton(
+            IconButton(
+              onPressed: () async {
+                bool employeeCreatePermission =
+                await userPreference.getBoolPermissionFromPrefs(
+                    keyId: UserPreference.employeeAddKey);
+
+                if (employeeCreatePermission == true) {
+                  Get.to(
+                        () => EmployeeManageScreen(),
+                    arguments: [
+                      EmployeeOption.create,
+                      AppMessage.empty,
+                      employeeListScreenController.companyId,
+                      employeeListScreenController.companyName,
+                    ],
+                  );
+                } else {
+                  Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                }
+              },
+              icon: const Icon(
+                Icons.add_rounded,
+                size: 30,
+              ),
+              highlightColor: Colors.transparent,
+            ),
+           /* FloatingActionButton(
               onPressed: () async {
                 bool employeeCreatePermission =
                     await userPreference.getBoolPermissionFromPrefs(
@@ -52,7 +87,7 @@ class EmployeeListScreen extends StatelessWidget {
                 Icons.add_rounded,
                 size: 30,
               ),
-            ),
+            ),*/
           ],
         ),
         body: Obx(
@@ -99,13 +134,19 @@ class EmployeeListScreen extends StatelessWidget {
                             log("searchEmployeeList : ${employeeListScreenController.searchEmployeeList}");
                           },
                           decoration: InputDecoration(
-                            hintText: "Search",
-                            prefixIcon: const Icon(Icons.search),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
+                            enabledBorder: InputFieldStyles().inputBorder(),
+                            focusedBorder: InputFieldStyles().inputBorder(),
+                            errorBorder: InputFieldStyles().inputBorder(),
+                            focusedErrorBorder: InputFieldStyles().inputBorder(),
+                            fillColor: AppColors.colorWhite,
+                            filled: true,
+                            hintText: AppMessage.search,
+                            hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: AppColors.colorLightHintPurple2,
                             ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
                             suffixIcon: employeeListScreenController
                                     .textSearchEditingController.text.isEmpty
                                 ? null

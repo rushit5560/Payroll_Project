@@ -3,12 +3,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_list_screen_controller.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen_widgets.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_manage_screen/location_manage_screen.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 
 class LocationListScreen extends StatelessWidget {
@@ -17,8 +19,14 @@ class LocationListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
-        title: Text(AppMessage.locationList),
+        title: Text(AppMessage.locationList,
+          style: TextStyle(
+            color: AppColors.colorBlack,
+            fontWeight: FontWeight.bold,
+            fontSize: 17.sp,
+          ),),
         centerTitle: true,
         actions: [
           IconButton(
@@ -63,12 +71,18 @@ class LocationListScreen extends StatelessWidget {
                           log("searchEmployeeList : ${locationListScreenController.searchLocationDataList}");
                         },
                         decoration: InputDecoration(
-                          hintText: "Search",
-                          prefixIcon: const Icon(Icons.search),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
+                          enabledBorder: InputFieldStyles().inputBorder(),
+                          focusedBorder: InputFieldStyles().inputBorder(),
+                          errorBorder: InputFieldStyles().inputBorder(),
+                          focusedErrorBorder: InputFieldStyles().inputBorder(),
+                          hintText: AppMessage.search,
+                          fillColor: AppColors.colorWhite,
+                          filled: true,
+                          hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.colorLightHintPurple2,
                           ),
                           suffixIcon: locationListScreenController
                                   .textSearchEditingController.text.isEmpty
@@ -87,7 +101,7 @@ class LocationListScreen extends StatelessWidget {
                                     locationListScreenController
                                         .isLoading(false);
                                   },
-                                  icon: const Icon(Icons.close),
+                            icon: const Icon(Icons.close,color: AppColors.colorLightHintPurple2),
                                 ),
                         ),
                       ).commonOnlyPadding(left: 10, right: 10, top: 15),
@@ -97,12 +111,12 @@ class LocationListScreen extends StatelessWidget {
                             AppMessage.locationList,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18.sp,
-                            ),
-                          ).commonAllSidePadding(10)
+                                fontSize: 14.sp,
+                                color: AppColors.colorBlack),
+                          ).commonAllSidePadding(14)
                         ],
                       ),
-                      LocationListScreenWidgets(),
+                      Expanded(child: LocationListScreenWidgets()),
                     ],
                   ),
       ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:payroll_system/models/company_list_screen_model/get_all_company_model.dart';
@@ -9,7 +10,7 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 class HomeScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
-  // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<CompanyData> allCompanyList = [];
   UserPreference userPreference = UserPreference();

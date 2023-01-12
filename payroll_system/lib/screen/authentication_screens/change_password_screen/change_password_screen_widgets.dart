@@ -154,9 +154,7 @@ class ChangePasswordButtonModule extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           )),
           onPressed: () async {
-            if (changePasswordScreenController.formKey.currentState!
-                .validate()) {
-              log("message");
+            if (changePasswordScreenController.formKey.currentState!.validate()) {
               await changePasswordScreenController.changePasswordFunction();
             }
           },

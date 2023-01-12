@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/utils/style.dart';
 
 class FormSingleFieldModule extends StatelessWidget {
   final String text;
@@ -62,14 +62,14 @@ class FormSingleFieldModule extends StatelessWidget {
               TextSpan(
                 text: ' $mandatoryText',
                 style: TextStyleConfig.textStyle(
-                  textColor: AppColors.redColor,
+                  textColor: AppColors.colorRed,
                     fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
               ),
             ]
           ),
-        ).commonSymmetricPadding(vertical: 2)
+        ).commonSymmetricPadding(vertical: 4)
         : Container(),
         TextFormField(
           // obscureText: loginScreenController.isPasswordVisible.value,
@@ -83,16 +83,19 @@ class FormSingleFieldModule extends StatelessWidget {
           inputFormatters: inputFormatters,
           maxLength: maxLength,
           decoration: InputDecoration(
+            enabledBorder: InputFieldStyles().inputBorder(),
+            focusedBorder: InputFieldStyles().inputBorder(),
+            errorBorder: InputFieldStyles().inputBorder(),
+            focusedErrorBorder: InputFieldStyles().inputBorder(),
             counterText: '',
             hintText: text,
+            fillColor: AppColors.colorWhite,
+            filled: true,
+            hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             suffixIcon:
                 IconButton(onPressed: onPressed, icon: Icon(suffixIcon)),
             errorMaxLines: 2,
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-            ),
           ),
         ),
       ],

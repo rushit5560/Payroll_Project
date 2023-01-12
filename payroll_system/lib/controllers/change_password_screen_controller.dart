@@ -23,15 +23,13 @@ class ChangePasswordController extends GetxController {
   RxInt roleId = 0.obs;
 
   getRoleIdFunctionFromPrefs() async {
-    isLoading(true);
+    // isLoading(true);
 
     int roleIdPrefs = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.roleIdKey);
     roleId.value = roleIdPrefs;
 
-    isLoading(false);
-
-    await changePasswordFunction();
+    // isLoading(false);
   }
 
   Future<void> changePasswordFunction() async {

@@ -121,14 +121,17 @@ class AdminDrawerTile extends StatelessWidget {
         children: [
           ListTile(
             leading:
-                const Icon(Icons.person_rounded, color: AppColors.blackColor),
+                const Icon(Icons.person_rounded, color: AppColors.colorBtBlue),
             title: Text(
               title,
               textAlign: TextAlign.left,
               style: TextStyleConfig.drawerTextStyle(),
             ),
+            trailing: Icon(Icons.arrow_forward_ios_rounded,
+            color: AppColors.colorBtBlue),
           ),
-          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
+          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10,
+          color: AppColors.colorLightPurple2),
         ],
       ),
     );

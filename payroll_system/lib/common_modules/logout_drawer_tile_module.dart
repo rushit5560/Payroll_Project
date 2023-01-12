@@ -15,10 +15,11 @@ class LogOutDrawerTileModule extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
+          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10,
+              color: AppColors.colorLightPurple2),
           ListTile(
             leading:
-            const Icon(Icons.logout_rounded, color: AppColors.blackColor),
+            const Icon(Icons.logout_rounded, color: AppColors.colorBtBlue),
             title: Text(
               title,
               textAlign: TextAlign.left,
@@ -30,7 +31,8 @@ class LogOutDrawerTileModule extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyleConfig.drawerTextStyle(),
           ).commonSymmetricPadding(horizontal: 10, vertical: 10),*/
-          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10),
+          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10,
+          color: AppColors.colorLightPurple2),
         ],
       ),
     );

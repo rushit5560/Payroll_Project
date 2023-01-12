@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/department_manage_screen_controller.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:sizer/sizer.dart';
 
 import 'department_manage_screen_widgets.dart';
 
@@ -31,6 +33,7 @@ class DepartmentManageScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
+        backgroundColor: AppColors.colorLightPurple2,
         appBar: AppBar(
           centerTitle: true,
           title: Text(
@@ -38,6 +41,11 @@ class DepartmentManageScreen extends StatelessWidget {
                     DepartmentOption.create
                 ? AppMessage.departmentCreate
                 : AppMessage.departmentUpdate,
+            style: TextStyle(
+              color: AppColors.colorBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 17.sp,
+            ),
           ),
           leading: departmentManageScreenController.departmentOption ==
                   DepartmentOption.update

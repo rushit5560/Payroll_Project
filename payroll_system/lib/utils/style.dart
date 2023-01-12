@@ -7,11 +7,13 @@ class TextStyleConfig {
     Color textColor = AppColors.blackColor,
     FontWeight fontWeight = FontWeight.normal,
     double fontSize = 15.0,
+    String fontFamily = "Roboto",
   }) {
     return TextStyle(
       color: textColor,
       fontSize: fontSize,
       fontWeight: fontWeight,
+      fontFamily: fontFamily,
     );
   }
 
@@ -26,4 +28,15 @@ class TextStyleConfig {
       fontWeight: fontWeight,
     );
   }
+}
+
+
+class InputFieldStyles {
+  InputBorder inputBorder() {
+    return const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      borderSide: BorderSide(color: Colors.transparent),
+    );
+  }
+
 }

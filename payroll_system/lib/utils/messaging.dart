@@ -296,4 +296,8 @@ class AppMessage {
   static String companyPermission = 'Company Permission';
   static String employeePermission = 'Employee Permission';
   static String subAdminPermission = 'SubAdmin Permission';
+
+  static String acceptText = 'Accept';
+  static String privacyPolicyText = 'Terms & Condition';
+  static String search = 'Search';
 }

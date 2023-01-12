@@ -2,10 +2,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -32,46 +34,115 @@ class EmployeeListScreenWidgets extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.greyColor,
-                width: 2,
-              ),
+              color: AppColors.colorWhite,
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               children: [
-                SizedBox(height: 1.h),
-                SingleListTileCustom(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        bool employeeDeletePermission =
+                        await userPreference.getBoolPermissionFromPrefs(
+                            keyId: UserPreference.employeeDeleteKey);
+
+                        if (employeeDeletePermission == true) {
+                          Get.to(
+                                () => EmployeeManageScreen(),
+                            arguments: [
+                              EmployeeOption.update,
+                              value.id.toString(),
+                              employeeListScreenController.companyId,
+                              employeeListScreenController.companyName,
+                            ],
+                          );
+                        } else {
+                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                        }
+                      },
+                      child: Image.asset(
+                        AppImages.editIcon,
+                        width: 20,
+                        height: 20,
+                        color: AppColors.colorBtBlue,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+
+                    GestureDetector(
+                      onTap: () async {
+                        bool employeeUpdatePermission =
+                        await userPreference.getBoolPermissionFromPrefs(
+                            keyId: UserPreference.employeeEditKey);
+
+                        if (employeeUpdatePermission == true) {
+                          CustomAlertDialog().showAlertDialog(
+                            context: context,
+                            textContent: AppMessage.deleteEmployeeAlertMessage,
+                            onYesTap: () async {
+                              log("Delete Employee");
+                              await employeeListScreenController
+                                  .deleteEmployeeFunction(
+                                  value.id.toString(), index);
+                            },
+                            onCancelTap: () {
+                              Get.back();
+                            },
+                          );
+                        } else {
+                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                        }
+                      },
+                      child: Image.asset(
+                        AppImages.deleteIcon,
+                        width: 20,
+                        height: 20,
+                        color: AppColors.colorRed,
+                      ),
+                    ),
+                  ],
+                ),
+
+                SingleListTileModuleCustom(
+                  image: AppImages.employeeIcon,
                   textKey: AppMessage.employeeName,
                   textValue:
                       "${value.firstName} ${value.middleName} ${value.lastName}",
                 ),
                 SizedBox(height: 1.h),
-                SingleListTileCustom(
+                SingleListTileModuleCustom(
+                  image: AppImages.emailIcon,
                   textKey: AppMessage.employeeEmail,
                   textValue: value.email,
                 ),
                 SizedBox(height: 1.h),
-                SingleListTileCustom(
+                SingleListTileModuleCustom(
+                  image: AppImages.phoneIcon,
                   textKey: AppMessage.phoneNumber,
                   textValue: value.mobileNumber,
                 ),
                 SizedBox(height: 2.h),
-                SingleListTileCustom(
+                SingleListTileModuleCustom(
+                  image: AppImages.departmentIcon,
                   textKey: AppMessage.employeeDepartmentName,
                   textValue: value.departmentId.toString(),
                 ),
                 SizedBox(height: 2.h),
-                SingleListTileCustom(
+                SingleListTileModuleCustom(
+                  image: AppImages.companyIcon,
                     textKey: AppMessage.employeeCompanyName,
                     textValue: value.companyid.toString()),
                 SizedBox(height: 2.h),
-                SingleListTileCustom(
+                SingleListTileModuleCustom(
+                  image: AppImages.verifyIcon,
                     textKey: AppMessage.employeeStatus,
                     textValue: value.isActive == AppMessage.value
                         ? AppMessage.active
                         : AppMessage.inActive),
                 SizedBox(height: 2.h),
-                EditAndDeleteButtonModule(
+                /*EditAndDeleteButtonModule(
                   onDeleteTap: () async {
                     bool employeeUpdatePermission =
                         await userPreference.getBoolPermissionFromPrefs(
@@ -114,9 +185,9 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                       Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                     }
                   },
-                )
+                )*/
               ],
-            ).commonAllSidePadding(5),
+            ).commonAllSidePadding(8),
           ),
         );
       },
