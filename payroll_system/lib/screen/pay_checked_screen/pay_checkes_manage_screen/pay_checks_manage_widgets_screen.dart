@@ -16,8 +16,6 @@ import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
-
-
 class PayChecksWidgetsScreen extends StatelessWidget {
   PayChecksWidgetsScreen({super.key});
 
@@ -74,8 +72,10 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                     }).toList(),
                     onChanged: (String? value) {
                       payCheckedManageScreenController.isLoading(true);
-                      payCheckedManageScreenController.selectedCheckedValue.value = value!;
-                      payCheckedManageScreenController.endDateController.clear();
+                      payCheckedManageScreenController
+                          .selectedCheckedValue.value = value!;
+                      payCheckedManageScreenController.endDateController
+                          .clear();
                       // payCheckedManageScreenController.endDate = DateTime.now();
                       payCheckedManageScreenController.isLoading(false);
                     },
@@ -147,15 +147,17 @@ class PayChecksWidgetsScreen extends StatelessWidget {
               text: AppMessage.payDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
-              textEditingController: payCheckedManageScreenController.payDateController,
+              textEditingController:
+                  payCheckedManageScreenController.payDateController,
               suffixIcon: Icons.calendar_month,
               readOnly: true,
               onPressed: () async {
                 await _selectPayDate(
-                    context: context,
-                    dateTime: payCheckedManageScreenController.payDate,
-                    textEditingController: payCheckedManageScreenController.payDateController,
-                    datePickerOption: DatePickerOption.startDate,
+                  context: context,
+                  dateTime: payCheckedManageScreenController.payDate,
+                  textEditingController:
+                      payCheckedManageScreenController.payDateController,
+                  datePickerOption: DatePickerOption.startDate,
                 );
               },
               validate: (value) => FieldValidation().validatePayDate(value),
@@ -171,86 +173,94 @@ class PayChecksWidgetsScreen extends StatelessWidget {
               ),
             ).commonSymmetricPadding(vertical: 2),
             ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: payCheckedManageScreenController
-                    .allCompanyWiseEmployeeList.length,
-                itemBuilder: (context, index) {
-                  final employeeData = payCheckedManageScreenController
-                      .allCompanyWiseEmployeeList[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.greyColor),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Checkbox(
-                              value: employeeData.isChecked,
-                              onChanged: (bool? value) {
-                                payCheckedManageScreenController
-                                    .isLoading(true);
-                                employeeData.isChecked =
-                                    !employeeData.isChecked;
-                                payCheckedManageScreenController
-                                    .isLoading(false);
-                                // payCheckedManageScreenController
-                                //     .isPrivacyChecked.value = value!;
-                              },
-                            ),
-                            Expanded(
-                              child: Text(
-                                "${employeeData.firstName} "
-                                "${employeeData.middleName} "
-                                "${employeeData.lastName}",
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyleConfig.textStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
-                                ),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: payCheckedManageScreenController
+                  .allCompanyWiseEmployeeList.length,
+              itemBuilder: (context, index) {
+                final employeeData = payCheckedManageScreenController
+                    .allCompanyWiseEmployeeList[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.greyColor),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Checkbox(
+                            value: employeeData.isChecked,
+                            onChanged: (bool? value) {
+                              payCheckedManageScreenController.isLoading(true);
+                              employeeData.isChecked = !employeeData.isChecked;
+                              payCheckedManageScreenController.isLoading(false);
+                              // payCheckedManageScreenController
+                              //     .isPrivacyChecked.value = value!;
+                            },
+                          ),
+                          Expanded(
+                            child: Text(
+                              "${employeeData.firstName} "
+                              "${employeeData.middleName} "
+                              "${employeeData.lastName}",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyleConfig.textStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
                               ),
                             ),
-                          ],
-                        ),
-                        employeeData.isChecked == false
-                            ? Container()
-                            : Column(
+                          ),
+                        ],
+                      ),
+                      employeeData.isChecked == false
+                          ? Container()
+                          : Form(
+                              key: employeeData.isChecked == false
+                                  ? null
+                                  : payCheckedManageScreenController
+                                      .employeeFormKey,
+                              child: Column(
                                 children: [
                                   const SizedBox(height: 5),
-                                  FormSingleFieldModule(
-                                    headerText: AppMessage.regular,
-                                    text: AppMessage.hours,
-                                    mandatoryText: AppMessage.mandatory,
-                                    keyboardType: TextInputType.number,
-                                    onChanged: (value) {
-                                      employeeData.regularTextFieldValue =
-                                          value;
-                                    },
-                                    // validate: (value) => FieldValidation()
-                                    //     .validateHourlyRate(value),
-                                  ),
+
+                                  const RegularTextFormFieldModule(),
+                                  // FormSingleFieldModule(
+                                  //   headerText: AppMessage.regular,
+                                  //   text: AppMessage.hours,
+                                  //   mandatoryText: AppMessage.mandatory,
+                                  //   keyboardType: TextInputType.number,
+                                  //   onChanged: (value) {
+                                  //     employeeData.regularTextFieldValue =
+                                  //         value;
+                                  //   },
+                                  //   // validate: (value) => FieldValidation()
+                                  //   //     .validateHourlyRate(value),
+                                  // ),
                                   const SizedBox(height: 5),
-                                  FormSingleFieldModule(
-                                    headerText: AppMessage.ot,
-                                    text: AppMessage.hours,
-                                    mandatoryText: AppMessage.mandatory,
-                                    keyboardType: TextInputType.number,
-                                    // validate: (value) => FieldValidation()
-                                    //     .validateOverTime(value),
-                                  ),
+
+                                  const OtTextFormFieldModule(),
+                                  // FormSingleFieldModule(
+                                  //   headerText: AppMessage.ot,
+                                  //   text: AppMessage.ot,
+                                  //   mandatoryText: AppMessage.mandatory,
+                                  //   keyboardType: TextInputType.number,
+                                  //   // validate: (value) => FieldValidation()
+                                  //   //     .validateOverTime(value),
+                                  // ),
                                   const SizedBox(height: 5),
-                                  FormSingleFieldModule(
-                                    headerText: AppMessage.holidayPay,
-                                    text: AppMessage.hours,
-                                    mandatoryText: AppMessage.mandatory,
-                                    keyboardType: TextInputType.number,
-                                    // validate: (value) => FieldValidation()
-                                    //     .validateHourlyRate(value),
-                                  ),
+
+                                  const HolidayPayTextFormFieldModule(),
+                                  // FormSingleFieldModule(
+                                  //   headerText: AppMessage.holidayPay,
+                                  //   text: AppMessage.hours,
+                                  //   mandatoryText: AppMessage.mandatory,
+                                  //   keyboardType: TextInputType.number,
+                                  //   // validate: (value) => FieldValidation()
+                                  //   //     .validateHourlyRate(value),
+                                  // ),
                                   const SizedBox(height: 5),
                                   Row(
                                     children: [
@@ -362,10 +372,12 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                   const SizedBox(height: 5),
                                 ],
                               ),
-                      ],
-                    ).commonSymmetricPadding(horizontal: 5, vertical: 3),
-                  ).commonOnlyPadding(bottom: 5);
-                }),
+                            ),
+                    ],
+                  ).commonSymmetricPadding(horizontal: 5, vertical: 3),
+                ).commonOnlyPadding(bottom: 5);
+              },
+            ),
             const SizedBox(height: 5),
 
             /// Memo Text Field module
@@ -413,21 +425,26 @@ class PayChecksWidgetsScreen extends StatelessWidget {
       // if(d.compareTo(payCheckedManageScreenController.endDate) < 0) {
       //   Fluttertoast.showToast(msg: "Please select valid start date");
       // } else {
-        textEditingController.text = "${d.year}-${d.month}-${d.day}";
-        if (payCheckedManageScreenController.selectedCheckedValue.value == "Weekly") {
-          final d1 = d;
-          final d2 = d1.add(const Duration(days: 7));
-          payCheckedManageScreenController.endDateController.text = "${d2.year}-${d2.month}-${d2.day}";
-          payCheckedManageScreenController.endDate = d2;
-        } else
-        if (payCheckedManageScreenController.selectedCheckedValue.value == "Bi-Weekly") {
-          final d1 = d;
-          final d2 = d1.add(const Duration(days: 14));
-          payCheckedManageScreenController.endDateController.text = "${d2.year}-${d2.month}-${d2.day}";
-          payCheckedManageScreenController.endDate = d2;
-        }
-      // }
+      textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      payCheckedManageScreenController.startDate = d;
 
+      if (payCheckedManageScreenController.selectedCheckedValue.value ==
+          "Weekly") {
+        final d1 = d;
+        final d2 = d1.add(const Duration(days: 7));
+        payCheckedManageScreenController.endDateController.text =
+            "${d2.year}-${d2.month}-${d2.day}";
+        payCheckedManageScreenController.endDate = d2;
+      } else if (payCheckedManageScreenController.selectedCheckedValue.value ==
+          "Bi-Weekly") {
+        final d1 = d;
+        final d2 = d1.add(const Duration(days: 14));
+        payCheckedManageScreenController.endDateController.text =
+            "${d2.year}-${d2.month}-${d2.day}";
+        payCheckedManageScreenController.endDate = d2;
+      }
+
+      // }
 
       payCheckedManageScreenController.isLoading(false);
     }
@@ -453,6 +470,22 @@ class PayChecksWidgetsScreen extends StatelessWidget {
     if (d != null) {
       payCheckedManageScreenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      payCheckedManageScreenController.endDate = d;
+      if (payCheckedManageScreenController.selectedCheckedValue.value ==
+              "Others" ||
+          payCheckedManageScreenController.selectedCheckedValue.value ==
+              "Choose Option") {
+        log("start date");
+
+        if (payCheckedManageScreenController.endDate
+            .isBefore(payCheckedManageScreenController.startDate)) {
+          log("11111");
+          Fluttertoast.showToast(msg: "End date must be after startDate");
+          log("message 1111");
+        }
+        log("end date");
+      }
+
       // payCheckedManageScreenController.endDateController.text = "${d.year}-${d.month}-${d.day}";
       payCheckedManageScreenController.isLoading(false);
     }
@@ -502,28 +535,50 @@ class ButtonModule extends StatelessWidget {
           child: ButtonCustom(
             onPressed: () async {
               bool isEmployeeSelected = false;
-                if(payCheckedManageScreenController.selectedCheckedValue.value == "Choose Option") {
-                  Fluttertoast.showToast(msg: "Please select Pay period.");
-                } else {
-                  if (payCheckedManageScreenController.formKey.currentState!.validate()) {
+              if (payCheckedManageScreenController.selectedCheckedValue.value ==
+                  "Choose Option") {
+                Fluttertoast.showToast(msg: "Please select Pay period.");
+              } else {
+                if (payCheckedManageScreenController.formKey.currentState!
+                    .validate()) {
+                  /// Check Any employee select or not... & Then api call
+                  for (int i = 0;
+                      i <
+                          payCheckedManageScreenController
+                              .allCompanyWiseEmployeeList.length;
+                      i++) {
+                    if (payCheckedManageScreenController
+                            .allCompanyWiseEmployeeList[i].isChecked ==
+                        true) {
+                      isEmployeeSelected = true;
+                    }
+                  }
 
-                    /// Check Any employee select or not... & Then api call
-                    for(int i =0; i < payCheckedManageScreenController.allCompanyWiseEmployeeList.length; i++) {
-                      if(payCheckedManageScreenController.allCompanyWiseEmployeeList[i].isChecked == true) {
-                        isEmployeeSelected = true;
+                  if (isEmployeeSelected == true) {
+                    // call api
+                    for (int i = 0;
+                        i <
+                            payCheckedManageScreenController
+                                .allCompanyWiseEmployeeList.length;
+                        i++) {
+                      if (payCheckedManageScreenController
+                              .allCompanyWiseEmployeeList[i].isChecked ==
+                          true) {
+                        if (payCheckedManageScreenController
+                            .employeeFormKey.currentState!
+                            .validate()) {
+                          log("employee done");
+                          // Get.back();
+                        }
                       }
                     }
 
-                    if(isEmployeeSelected == true) {
-                      // call api
-                      log('Done');
-                    } else {
-                      Fluttertoast.showToast(msg: "Please select any employee.");
-                    }
-
+                    log('Done');
+                  } else {
+                    Fluttertoast.showToast(msg: "Please select any employee.");
                   }
                 }
-
+              }
             },
             text: AppMessage.submit,
             textsize: 15.sp,
@@ -551,7 +606,7 @@ class ButtonModule extends StatelessWidget {
   }
 }
 
-
+// ignore: must_be_immutable
 class FormSingleDateFieldModule extends StatelessWidget {
   final String text;
   final String headerText;
@@ -574,53 +629,54 @@ class FormSingleDateFieldModule extends StatelessWidget {
   //  double fontSize = 15.0,
   FormSingleDateFieldModule(
       {Key? key,
-        required this.text,
-        required this.headerText,
-        required this.mandatoryText,
-        // required this.prefixIcon,
-        this.isHeaderTextShow = true,
-        this.inputFormatters,
-        this.suffixIcon,
-        this.color = Colors.grey,
-        this.size,
-        this.textEditingController,
-        this.onTap,
-        this.onChanged,
-        this.keyboardType,
-        this.validate,
-        this.maxLength,
-        this.onPressed,
-        this.obscureText = false,
-        this.readOnly = false})
+      required this.text,
+      required this.headerText,
+      required this.mandatoryText,
+      // required this.prefixIcon,
+      this.isHeaderTextShow = true,
+      this.inputFormatters,
+      this.suffixIcon,
+      this.color = Colors.grey,
+      this.size,
+      this.textEditingController,
+      this.onTap,
+      this.onChanged,
+      this.keyboardType,
+      this.validate,
+      this.maxLength,
+      this.onPressed,
+      this.obscureText = false,
+      this.readOnly = false})
       : super(key: key);
 
   final screenController = Get.find<PayCheckedManageScreenController>();
-
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        isHeaderTextShow == true ? RichText(
-          textAlign: TextAlign.left,
-          maxLines: null,
-          text: TextSpan(
-              text: headerText,
-              style: TextStyleConfig.textStyle(
-                fontWeight: FontWeight.w600, fontSize: 16,),
-              children: [
-                TextSpan(
-                  text: ' $mandatoryText',
-                  style: TextStyleConfig.textStyle(
-                    textColor: AppColors.redColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-              ]
-          ),
-        ).commonSymmetricPadding(vertical: 2)
+        isHeaderTextShow == true
+            ? RichText(
+                textAlign: TextAlign.left,
+                maxLines: null,
+                text: TextSpan(
+                    text: headerText,
+                    style: TextStyleConfig.textStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: ' $mandatoryText',
+                        style: TextStyleConfig.textStyle(
+                          textColor: AppColors.redColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ]),
+              ).commonSymmetricPadding(vertical: 2)
             : Container(),
         TextFormField(
           // obscureText: loginScreenController.isPasswordVisible.value,
@@ -636,10 +692,11 @@ class FormSingleDateFieldModule extends StatelessWidget {
           decoration: InputDecoration(
             counterText: '',
             hintText: text,
-            suffixIcon:
-            screenController.selectedCheckedValue.value == "Weekly" ||
-                screenController.selectedCheckedValue.value == "Bi-Weekly" ?
-            null : IconButton(onPressed: onPressed, icon: Icon(suffixIcon)),
+            suffixIcon: screenController.selectedCheckedValue.value ==
+                        "Weekly" ||
+                    screenController.selectedCheckedValue.value == "Bi-Weekly"
+                ? null
+                : IconButton(onPressed: onPressed, icon: Icon(suffixIcon)),
             errorMaxLines: 2,
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
@@ -652,3 +709,150 @@ class FormSingleDateFieldModule extends StatelessWidget {
     );
   }
 }
+
+class RegularTextFormFieldModule extends StatelessWidget {
+  const RegularTextFormFieldModule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          textAlign: TextAlign.left,
+          maxLines: null,
+          text: TextSpan(
+              text: AppMessage.regular,
+              style: TextStyleConfig.textStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+              children: [
+                TextSpan(
+                  text: " ${AppMessage.mandatory}",
+                  style: TextStyleConfig.textStyle(
+                    textColor: AppColors.redColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+              ]),
+        ).commonSymmetricPadding(vertical: 2),
+        TextFormField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            counterText: '',
+            hintText: AppMessage.regular,
+            errorMaxLines: 2,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+          ),
+          validator: (value) =>
+              FieldValidation().validateRegularRate(value.toString()),
+        )
+      ],
+    );
+  }
+}
+
+class OtTextFormFieldModule extends StatelessWidget {
+  const OtTextFormFieldModule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          textAlign: TextAlign.left,
+          maxLines: null,
+          text: TextSpan(
+              text: AppMessage.ot,
+              style: TextStyleConfig.textStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+              children: [
+                TextSpan(
+                  text: " ${AppMessage.mandatory}",
+                  style: TextStyleConfig.textStyle(
+                    textColor: AppColors.redColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+              ]),
+        ).commonSymmetricPadding(vertical: 2),
+        TextFormField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            counterText: '',
+            hintText: AppMessage.ot,
+            errorMaxLines: 2,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+          ),
+          validator: (value) => FieldValidation().validateOt(value.toString()),
+        )
+      ],
+    );
+  }
+}
+
+class HolidayPayTextFormFieldModule extends StatelessWidget {
+  const HolidayPayTextFormFieldModule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          textAlign: TextAlign.left,
+          maxLines: null,
+          text: TextSpan(
+              text: AppMessage.holidayPay,
+              style: TextStyleConfig.textStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+              children: [
+                TextSpan(
+                  text: " ${AppMessage.mandatory}",
+                  style: TextStyleConfig.textStyle(
+                    textColor: AppColors.redColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+              ]),
+        ).commonSymmetricPadding(vertical: 2),
+        TextFormField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            counterText: '',
+            hintText: AppMessage.holidayPay,
+            errorMaxLines: 2,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+          ),
+          validator: (value) =>
+              FieldValidation().validateHolidayPay(value.toString()),
+        )
+      ],
+    );
+  }
+}
+
+
+
+// https://www.africau.edu/images/default/sample.pdf

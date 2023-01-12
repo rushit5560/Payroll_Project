@@ -308,6 +308,8 @@ class FieldValidation {
     }
   }
 
+//paycheckvalidator
+
   String? validateStartDate(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterStartDate;
@@ -332,5 +334,27 @@ class FieldValidation {
     }
   }
 
+  String? validateRegularRate(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterRegularRate;
+    } else {
+      return null;
+    }
+  }
 
+  String? validateOt(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterOt;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateHolidayPay(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterHolidayPay;
+    } else {
+      return null;
+    }
+  }
 }

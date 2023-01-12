@@ -280,6 +280,10 @@ class AppMessage {
   static String hours = 'Hours';
   static String netAmount = 'Net Amount';
   static String download = 'Download';
+  static String pleaseEnterRegularRate = 'Please Enter Regular Rate';
+  static String pleaseEnterOt = 'Please Enter Ot';
+  static String pleaseEnterHolidayPay = 'Please Enter HolidayPay';
+
   //Role
   static String role = 'Role';
   static String isView = 'IsView';

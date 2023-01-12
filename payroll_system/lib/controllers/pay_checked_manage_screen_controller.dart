@@ -24,9 +24,11 @@ class PayCheckedManageScreenController extends GetxController {
 
   RxString selectedCheckedValue = "Choose Option".obs;
 
-  List<String> isPayCheckedList = ["Choose Option", "Weekly", "Bi-Weekly", "Other"];
+  List<String> isPayCheckedList = ["Choose Option", "Weekly", "Bi-Weekly", "Others"];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> employeeFormKey = GlobalKey<FormState>();
+
 
   DateTime birthDate = DateTime.now();
 
