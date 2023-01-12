@@ -254,9 +254,9 @@ class AppMessage {
   static String selectPayRollEndDate = 'Select end Date';
   static String overtimeIsRequired = 'overtime is required';
   static String overTime = 'Over time';
-  static String bonus = 'Bonus ';
-  static String otherEarning = 'Other Earning';
-  static String comission = 'Comission';
+
+  // static String otherEarning = 'Other Earning';
+  // static String comission = 'Comission';
   static String payDate = 'Pay Date';
   static String pleaseSelectEmployee = 'Please select employee';
 
@@ -270,6 +270,9 @@ class AppMessage {
   static String vacationHour = 'Vacation Hour (\$)';
   static String tip = 'Tip (\$)';
   static String tax = 'Tax (\$)';
+  static String bonus = 'Bonus (\$)';
+  static String otherEarning = 'Other Earning (\$)';
+  static String commission = 'Commission (\$)';
   static String memo = 'Memo';
   //paycheckeslisttext
   static String date = 'Date';

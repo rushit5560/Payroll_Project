@@ -223,7 +223,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                   const SizedBox(height: 5),
                                   FormSingleFieldModule(
                                     headerText: AppMessage.regular,
-                                    text: AppMessage.zero,
+                                    text: AppMessage.hours,
                                     mandatoryText: AppMessage.mandatory,
                                     keyboardType: TextInputType.number,
                                     onChanged: (value) {
@@ -236,7 +236,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                   const SizedBox(height: 5),
                                   FormSingleFieldModule(
                                     headerText: AppMessage.ot,
-                                    text: AppMessage.zero,
+                                    text: AppMessage.hours,
                                     mandatoryText: AppMessage.mandatory,
                                     keyboardType: TextInputType.number,
                                     // validate: (value) => FieldValidation()
@@ -245,7 +245,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                   const SizedBox(height: 5),
                                   FormSingleFieldModule(
                                     headerText: AppMessage.holidayPay,
-                                    text: AppMessage.zero,
+                                    text: AppMessage.hours,
                                     mandatoryText: AppMessage.mandatory,
                                     keyboardType: TextInputType.number,
                                     // validate: (value) => FieldValidation()
@@ -289,7 +289,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                                       Expanded(
                                         flex: 5,
                                         child: FormSingleFieldModule(
-                                          headerText: AppMessage.comission,
+                                          headerText: AppMessage.commission,
                                           text: AppMessage.zero,
                                           mandatoryText: AppMessage.empty,
                                           keyboardType: TextInputType.number,
@@ -409,19 +409,26 @@ class PayChecksWidgetsScreen extends StatelessWidget {
     );
     if (d != null) {
       payCheckedManageScreenController.isLoading(true);
-      textEditingController.text = "${d.year}-${d.month}-${d.day}";
 
-      if(payCheckedManageScreenController.selectedCheckedValue.value == "Weekly") {
-        final d1 = d;
-        final d2 = d1.add(const Duration(days: 7));
-        payCheckedManageScreenController.endDateController.text = "${d2.year}-${d2.month}-${d2.day}";
-        payCheckedManageScreenController.endDate = d2;
-      } else if(payCheckedManageScreenController.selectedCheckedValue.value == "Bi-Weekly") {
-        final d1 = d;
-        final d2 = d1.add(const Duration(days: 14));
-        payCheckedManageScreenController.endDateController.text = "${d2.year}-${d2.month}-${d2.day}";
-        payCheckedManageScreenController.endDate = d2;
-      }
+      // if(d.compareTo(payCheckedManageScreenController.endDate) < 0) {
+      //   Fluttertoast.showToast(msg: "Please select valid start date");
+      // } else {
+        textEditingController.text = "${d.year}-${d.month}-${d.day}";
+        if (payCheckedManageScreenController.selectedCheckedValue.value == "Weekly") {
+          final d1 = d;
+          final d2 = d1.add(const Duration(days: 7));
+          payCheckedManageScreenController.endDateController.text = "${d2.year}-${d2.month}-${d2.day}";
+          payCheckedManageScreenController.endDate = d2;
+        } else
+        if (payCheckedManageScreenController.selectedCheckedValue.value == "Bi-Weekly") {
+          final d1 = d;
+          final d2 = d1.add(const Duration(days: 14));
+          payCheckedManageScreenController.endDateController.text = "${d2.year}-${d2.month}-${d2.day}";
+          payCheckedManageScreenController.endDate = d2;
+        }
+      // }
+
+
       payCheckedManageScreenController.isLoading(false);
     }
   }

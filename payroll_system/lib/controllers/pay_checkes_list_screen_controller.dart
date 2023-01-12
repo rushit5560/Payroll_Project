@@ -23,8 +23,8 @@ class PayCheckesListScreenController extends GetxController {
   Future<void> getPaycheckesListFunction() async {
     isLoading(true);
     String url = "${ApiUrl.getPayCheckesListApi}$companyId";
-    log("getPaycheckesListFunction url:   $url");
-    log("getPaycheckesListFunction companyId:   $companyId");
+    log("getPaycheckesListFunction url:$url");
+    log("getPaycheckesListFunction companyId: $companyId");
 
     try {
       http.Response response = await http.get(Uri.parse(url));

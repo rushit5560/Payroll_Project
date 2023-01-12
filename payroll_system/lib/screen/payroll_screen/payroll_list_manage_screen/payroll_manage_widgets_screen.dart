@@ -319,8 +319,8 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
-              headerText: AppMessage.comission,
-              text: AppMessage.comission,
+              headerText: AppMessage.commission,
+              text: AppMessage.commission,
               mandatoryText: AppMessage.empty,
               keyboardType: TextInputType.number,
               textEditingController:

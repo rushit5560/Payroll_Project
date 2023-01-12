@@ -69,7 +69,7 @@ class EmployeeGEtByIdModelData {
     // required this.createdAt,
     // required this.updatedAt,
   });
-  String id;
+  int id;
   String firstName;
   String middleName;
   String lastName;
@@ -103,7 +103,7 @@ class EmployeeGEtByIdModelData {
 
   factory EmployeeGEtByIdModelData.fromJson(Map<String, dynamic> json) =>
       EmployeeGEtByIdModelData(
-        id: json["id"] ?? "0",
+        id: json["id"] ?? 0,
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",

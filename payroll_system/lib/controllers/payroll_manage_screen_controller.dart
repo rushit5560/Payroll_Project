@@ -55,6 +55,8 @@ class PayRollManageScreenController extends GetxController {
 
   List<String> departmentStringList = [];
 
+
+
   Future<void> getCompanyWiseEmployeeFunction(companyId) async {
     isLoading(true);
     String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";

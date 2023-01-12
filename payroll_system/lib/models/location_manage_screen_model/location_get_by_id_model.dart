@@ -47,7 +47,7 @@ class LocationGetByIdData {
     // this.updatedAt,
   });
 
-  final String id;
+  final int id;
   final String locationName;
   final String isActive;
   final String createdby;
@@ -58,7 +58,7 @@ class LocationGetByIdData {
 
   factory LocationGetByIdData.fromJson(Map<String, dynamic> json) =>
       LocationGetByIdData(
-        id: json["id"] ?? "0",
+        id: json["id"] ?? 0,
         locationName: json["location_name"] ?? "",
         isActive: json["is_active"] ?? "",
         createdby: json["createdby"] ?? "0",
