@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/controllers/company_manage_screen_controller.dart';
 import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
@@ -283,54 +284,77 @@ class CompanyFormModule extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Buttons Module - Submit & Back
-              Row(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: ButtonCustom(
-                      onPressed: () async {
-                        if (screenController.formKey.currentState!.validate()) {
-                          if (screenController.companyOption ==
-                              CompanyOption.create) {
-                            await screenController.createCompanyFunction();
-                            /*if (screenController.selectedDepartmentIdList.isEmpty) {
+              CustomSubmitButtonModule(
+                labelText: AppMessage.submit,
+                onPress: () async {
+                  if (screenController.formKey.currentState!.validate()) {
+                    if (screenController.companyOption ==
+                        CompanyOption.create) {
+                      await screenController.createCompanyFunction();
+                      /*if (screenController.selectedDepartmentIdList.isEmpty) {
                               Fluttertoast.showToast(
                                   msg: AppMessage.pleaseSelectDepartment);
                             } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
 
                             }*/
-                          } else {
-                            await screenController.updateCompanyDetailsFunction();
-                            /*if (screenController.selectedDepartmentIdList.isEmpty) {
+                    } else {
+                      await screenController.updateCompanyDetailsFunction();
+                      /*if (screenController.selectedDepartmentIdList.isEmpty) {
                               Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
                             } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
                             }*/
-                          }
-                        }
-                      },
-                      text: AppMessage.submit,
-                      textsize: 15.sp,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    flex: 5,
-                    child: ButtonCustom(
-                      onPressed: () => CustomAlertDialog().showAlertDialog(
-                        context: context,
-                        textContent: AppMessage.permissionMessage,
-                        onYesTap: () {
-                          Get.back();
-                          Get.back();
-                        },
-                        onCancelTap: () => Get.back(),
-                      ),
-                      text: AppMessage.back,
-                      textsize: 15.sp,
-                    ),
-                  ),
-                ],
+                    }
+                  }
+                },
               ),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       flex: 5,
+              //       child: ButtonCustom(
+              //         onPressed: () async {
+              //           if (screenController.formKey.currentState!.validate()) {
+              //             if (screenController.companyOption ==
+              //                 CompanyOption.create) {
+              //               await screenController.createCompanyFunction();
+              //               /*if (screenController.selectedDepartmentIdList.isEmpty) {
+              //                 Fluttertoast.showToast(
+              //                     msg: AppMessage.pleaseSelectDepartment);
+              //               } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
+              //
+              //               }*/
+              //             } else {
+              //               await screenController.updateCompanyDetailsFunction();
+              //               /*if (screenController.selectedDepartmentIdList.isEmpty) {
+              //                 Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
+              //               } else if (screenController.selectedDepartmentIdList.isNotEmpty) {
+              //               }*/
+              //             }
+              //           }
+              //         },
+              //         text: AppMessage.submit,
+              //         textsize: 15.sp,
+              //       ),
+              //     ),
+              //     const SizedBox(width: 10),
+              //     Expanded(
+              //       flex: 5,
+              //       child: ButtonCustom(
+              //         onPressed: () => CustomAlertDialog().showAlertDialog(
+              //           context: context,
+              //           textContent: AppMessage.permissionMessage,
+              //           onYesTap: () {
+              //             Get.back();
+              //             Get.back();
+              //           },
+              //           onCancelTap: () => Get.back(),
+              //         ),
+              //         text: AppMessage.back,
+              //         textsize: 15.sp,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               const SizedBox(height: 15),
             ],
           ),

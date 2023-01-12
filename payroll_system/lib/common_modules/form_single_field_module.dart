@@ -94,7 +94,7 @@ class FormSingleFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             suffixIcon:
-                IconButton(onPressed: onPressed, icon: Icon(suffixIcon)),
+                IconButton(onPressed: onPressed, icon: Icon(suffixIcon, color: AppColors.colorLightHintPurple2,)),
             errorMaxLines: 2,
           ),
         ),

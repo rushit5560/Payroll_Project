@@ -49,7 +49,7 @@ class LocationManageScreen extends StatelessWidget {
               ),
             ),
             leading: locationManageScreenController.locationOption ==
-                    DepartmentOption.update
+                    LocationOption.update
                 ? IconButton(
                     onPressed: () => CustomAlertDialog().showAlertDialog(
                       context: context,

@@ -24,13 +24,14 @@ class CurrentPasswordTextFieldModule extends StatelessWidget {
         keyboardType: TextInputType.text,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          // filled: true,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
+          enabledBorder: InputFieldStyles().inputBorder(),
+          focusedBorder: InputFieldStyles().inputBorder(),
+          errorBorder: InputFieldStyles().inputBorder(),
+          focusedErrorBorder: InputFieldStyles().inputBorder(),
+          errorMaxLines: 2,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+          fillColor: AppColors.colorWhite,
+          filled: true,
           labelText: AppMessage.oldPassword,
           suffixIcon: IconButton(
             onPressed: () {
@@ -41,6 +42,7 @@ class CurrentPasswordTextFieldModule extends StatelessWidget {
               changePasswordScreenController.isPasswordVisible.value
                   ? Icons.visibility
                   : Icons.visibility_off,
+              color: AppColors.colorLightHintPurple2,
             ),
           ),
         ),
@@ -65,13 +67,14 @@ class NewPasswordTextFieldModule extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          // filled: true,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
+          enabledBorder: InputFieldStyles().inputBorder(),
+          focusedBorder: InputFieldStyles().inputBorder(),
+          errorBorder: InputFieldStyles().inputBorder(),
+          focusedErrorBorder: InputFieldStyles().inputBorder(),
+          errorMaxLines: 2,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+          fillColor: AppColors.colorWhite,
+          filled: true,
           labelText: AppMessage.newPassword,
           suffixIcon: IconButton(
             onPressed: () {
@@ -82,6 +85,7 @@ class NewPasswordTextFieldModule extends StatelessWidget {
               changePasswordScreenController.isNewPasswordVisible.value
                   ? Icons.visibility
                   : Icons.visibility_off,
+              color: AppColors.colorLightHintPurple2,
             ),
           ),
         ),
@@ -110,12 +114,14 @@ class NewConfirmPasswordTextFieldModule extends StatelessWidget {
         keyboardType: TextInputType.text,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
+          enabledBorder: InputFieldStyles().inputBorder(),
+          focusedBorder: InputFieldStyles().inputBorder(),
+          errorBorder: InputFieldStyles().inputBorder(),
+          focusedErrorBorder: InputFieldStyles().inputBorder(),
+          errorMaxLines: 2,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+          fillColor: AppColors.colorWhite,
+          filled: true,
           labelText: AppMessage.newConfirmPassword,
           suffixIcon: IconButton(
             onPressed: () {
@@ -127,6 +133,7 @@ class NewConfirmPasswordTextFieldModule extends StatelessWidget {
               changePasswordScreenController.isConfirmPasswordVisible.value
                   ? Icons.visibility
                   : Icons.visibility_off,
+              color: AppColors.colorLightHintPurple2,
             ),
           ),
         ),

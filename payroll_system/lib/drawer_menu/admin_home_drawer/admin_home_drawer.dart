@@ -9,6 +9,7 @@ import 'package:payroll_system/screen/authentication_screens/change_password_scr
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/profile_screens/admin_profile_screens/admin_profile_screen.dart';
 import 'package:payroll_system/screen/profile_screens/sub_admin_profile_screens/sub_admin_profile_screen.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -38,6 +39,9 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                       Get.to(() => AdminProfileScreen());
                                     },
                                     title: AppMessage.profile,
+                                    imageStatus: false,
+                                    icon: const Icon(Icons.person,
+                                        color: AppColors.colorBtBlue),
                                   )
                                 : AdminDrawerTile(
                                     onTap: () {
@@ -45,6 +49,9 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                       Get.to(() => SubAdminProfileScreen());
                                     },
                                     title: AppMessage.profile,
+                                    imageStatus: false,
+                                    icon: const Icon(Icons.person,
+                                        color: AppColors.colorBtBlue),
                                   ),
                             AdminDrawerTile(
                               onTap: () {
@@ -52,6 +59,8 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                 Get.to(() => RoleListScreen());
                               },
                               title: AppMessage.role,
+                              imageStatus: true,
+                              image: AppImages.roleIcon,
                             ),
                             AdminDrawerTile(
                               onTap: () {
@@ -59,6 +68,8 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                 Get.to(() => ChangePasswordScreen());
                               },
                               title: AppMessage.changePassword,
+                              imageStatus: false,
+                              icon: const Icon(Icons.person, color: AppColors.colorBtBlue),
                             ),
                           ],
                         ),
@@ -108,9 +119,18 @@ class AdminHomeDrawerMenu extends StatelessWidget {
 class AdminDrawerTile extends StatelessWidget {
   Function() onTap;
   String title;
+  bool imageStatus;
+  Icon? icon;
+  String? image;
 
-  AdminDrawerTile({Key? key, required this.onTap, required this.title})
-      : super(key: key);
+  AdminDrawerTile({
+    Key? key,
+    required this.onTap,
+    required this.title,
+    required this.imageStatus,
+    this.icon,
+    this.image,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -120,18 +140,28 @@ class AdminDrawerTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            leading:
-                const Icon(Icons.person_rounded, color: AppColors.colorBtBlue),
+            leading: imageStatus == false
+                ? icon
+                : Image.asset(
+                    image!,
+                    height: 20,
+                    width: 20,
+                    color: AppColors.colorBtBlue,
+                  ),
             title: Text(
               title,
               textAlign: TextAlign.left,
               style: TextStyleConfig.drawerTextStyle(),
             ),
-            trailing: Icon(Icons.arrow_forward_ios_rounded,
-            color: AppColors.colorBtBlue),
+            trailing: const Icon(Icons.arrow_forward_ios_rounded,
+                color: AppColors.colorBtBlue),
           ),
-          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10,
-          color: AppColors.colorLightPurple2),
+          const Divider(
+              height: 1,
+              thickness: 1,
+              indent: 10,
+              endIndent: 10,
+              color: AppColors.colorLightPurple2),
         ],
       ),
     );
@@ -187,7 +217,7 @@ class AdminDrawerTile extends StatelessWidget {
         ],
       ),
     );
-    *//*return Container(
+    */ /*return Container(
       width: Get.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -202,6 +232,6 @@ class AdminDrawerTile extends StatelessWidget {
         style: TextStyleConfig.drawerTextStyle(),
       ).commonSymmetricPadding(horizontal: 10, vertical: 5),
 
-    ).commonSymmetricPadding(horizontal: 20, vertical: 10);*//*
+    ).commonSymmetricPadding(horizontal: 20, vertical: 10);*/ /*
   }
 }*/

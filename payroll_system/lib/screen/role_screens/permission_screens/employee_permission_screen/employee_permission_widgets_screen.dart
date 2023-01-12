@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_button_module.dart';
+import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/controllers/employee_permission_screen_controller.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -126,7 +127,10 @@ class EmployeePermissionWidgetScreen extends StatelessWidget {
                       .locationIsDeleteChecked.value = value!;
                 }),
             const SizedBox(height: 22),
-            employeeBackSubmitButton(context),
+            CustomSubmitButtonModule(
+              labelText: AppMessage.submit,
+              onPress: (){},
+            ),
             const SizedBox(height: 5),
           ],
         ).commonSymmetricPadding(horizontal: 10, vertical: 10),

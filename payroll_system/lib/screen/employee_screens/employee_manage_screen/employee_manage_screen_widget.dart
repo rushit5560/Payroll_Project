@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -34,14 +36,14 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            /*Text(
               AppMessage.employeeDetails,
               style: TextStyleConfig.textStyle(
                   fontSize: 22.sp, fontWeight: FontWeight.w400),
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 2.h),*/
             // ImagePickerCustom(),
-            SizedBox(height: 2.h),
+            // SizedBox(height: 2.h),
             FormSingleFieldModule(
               headerText: AppMessage.firstName,
               text: AppMessage.firstName,
@@ -129,31 +131,43 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               width: Get.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.greyColor),
+                // border: Border.all(color: AppColors.greyColor),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value:
-                        employeeCreteScreenController.selectedValuePayper.value,
-                    items: employeeCreteScreenController.isPayperList
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) {
-                      employeeCreteScreenController.isLoading(true);
-                      employeeCreteScreenController.hourlyRateController
-                          .clear();
-                      employeeCreteScreenController.salaryController.clear();
-                      employeeCreteScreenController.selectedValuePayper.value =
-                          value!;
-                      employeeCreteScreenController.isLoading(false);
-                    },
-                  ).commonOnlyPadding(left: 10, right: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.transparent),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value:
+                          employeeCreteScreenController.selectedValuePayper.value,
+                      items: employeeCreteScreenController.isPayperList
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      borderRadius: BorderRadius.circular(10),
+                      icon: Image.asset(
+                        AppImages.arrowDownIcon,
+                        height: 15,
+                        width: 15,
+                      ).commonSymmetricPadding(horizontal: 10),
+                      onChanged: (String? value) {
+                        employeeCreteScreenController.isLoading(true);
+                        employeeCreteScreenController.hourlyRateController
+                            .clear();
+                        employeeCreteScreenController.salaryController.clear();
+                        employeeCreteScreenController.selectedValuePayper.value =
+                            value!;
+                        employeeCreteScreenController.isLoading(false);
+                      },
+                    ).commonOnlyPadding(left: 10, right: 10),
+                  ),
                 ),
               ),
             ),
@@ -264,32 +278,44 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   width: Get.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.greyColor),
+                    // border: Border.all(color: AppColors.greyColor),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value:
-                            employeeCreteScreenController.selectedValue.value,
-                        items: employeeCreteScreenController.isActiveOptionList
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          employeeCreteScreenController.isLoading(true);
-                          employeeCreteScreenController.selectedValue.value =
-                              value!;
-                          log('value : $value');
-                          // employeeCreteScreenController.loadUI();
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white, borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.transparent),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value:
+                              employeeCreteScreenController.selectedValue.value,
+                          items: employeeCreteScreenController.isActiveOptionList
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          borderRadius: BorderRadius.circular(10),
+                          icon: Image.asset(
+                            AppImages.arrowDownIcon,
+                            height: 15,
+                            width: 15,
+                          ).commonSymmetricPadding(horizontal: 10),
+                          onChanged: (String? value) {
+                            // This is called when the user selects an item.
+                            employeeCreteScreenController.isLoading(true);
+                            employeeCreteScreenController.selectedValue.value =
+                                value!;
+                            log('value : $value');
+                            // employeeCreteScreenController.loadUI();
 
-                          employeeCreteScreenController.isLoading(false);
-                        },
-                      ).commonOnlyPadding(left: 10, right: 10),
+                            employeeCreteScreenController.isLoading(false);
+                          },
+                        ).commonOnlyPadding(left: 10, right: 10),
+                      ),
                     ),
                   ),
                 ),
@@ -319,29 +345,41 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ).commonSymmetricPadding(vertical: 2),
             Container(
               width: double.infinity,
-              height: 50,
+              // height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.greyColor),
+                // border: Border.all(color: AppColors.greyColor),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: employeeCreteScreenController
-                        .companyDDSelectedStringItem,
-                    items: [employeeCreteScreenController.companyName]
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) async {
-                      employeeCreteScreenController
-                          .companyDDSelectedStringItem = value!;
-                    },
-                  ).commonOnlyPadding(left: 10, right: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.transparent),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: employeeCreteScreenController
+                          .companyDDSelectedStringItem,
+                      items: [employeeCreteScreenController.companyName]
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      borderRadius: BorderRadius.circular(10),
+                      icon: Image.asset(
+                        AppImages.arrowDownIcon,
+                        height: 15,
+                        width: 15,
+                      ).commonSymmetricPadding(horizontal: 10),
+                      onChanged: (String? value) async {
+                        employeeCreteScreenController
+                            .companyDDSelectedStringItem = value!;
+                      },
+                    ).commonOnlyPadding(left: 10, right: 10),
+                  ),
                 ),
               ),
 
@@ -413,33 +451,45 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 ).commonSymmetricPadding(vertical: 2),*/
                 Container(
                   width: double.infinity,
-                  height: 50,
+                  // height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.greyColor),
+                    // border: Border.all(color: AppColors.greyColor),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<CompanyDepartmentData>(
-                        value:
-                            employeeCreteScreenController.companyDepartmentData,
-                        items: employeeCreteScreenController.companyDepartment
-                            .map<DropdownMenuItem<CompanyDepartmentData>>(
-                                (CompanyDepartmentData value) {
-                          return DropdownMenuItem<CompanyDepartmentData>(
-                            value: value,
-                            child: Text(value.departmentName),
-                          );
-                        }).toList(),
-                        onChanged: (CompanyDepartmentData? value) async {
-                          employeeCreteScreenController.isLoading(true);
-                          // This is called when the user selects an item.
-                          employeeCreteScreenController.companyDepartmentData =
-                              value;
-                          employeeCreteScreenController.isLoading(false);
-                        },
-                      ).commonOnlyPadding(left: 10, right: 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white, borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.transparent),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<CompanyDepartmentData>(
+                          value:
+                              employeeCreteScreenController.companyDepartmentData,
+                          items: employeeCreteScreenController.companyDepartment
+                              .map<DropdownMenuItem<CompanyDepartmentData>>(
+                                  (CompanyDepartmentData value) {
+                            return DropdownMenuItem<CompanyDepartmentData>(
+                              value: value,
+                              child: Text(value.departmentName),
+                            );
+                          }).toList(),
+                          borderRadius: BorderRadius.circular(10),
+                          icon: Image.asset(
+                            AppImages.arrowDownIcon,
+                            height: 15,
+                            width: 15,
+                          ).commonSymmetricPadding(horizontal: 10),
+                          onChanged: (CompanyDepartmentData? value) async {
+                            employeeCreteScreenController.isLoading(true);
+                            // This is called when the user selects an item.
+                            employeeCreteScreenController.companyDepartmentData =
+                                value;
+                            employeeCreteScreenController.isLoading(false);
+                          },
+                        ).commonOnlyPadding(left: 10, right: 10),
+                      ),
                     ),
                   ),
                 ),
@@ -499,52 +549,40 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ).commonSymmetricPadding(vertical: 2),
             Container(
               width: double.infinity,
-              height: 50,
+              // height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.greyColor),
+                // border: Border.all(color: AppColors.greyColor),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
-                // child: DropdownButtonHideUnderline(
-                //   child: DropdownButton<LocationListData>(
-                //     value:
-                //         employeeCreteScreenController.locationListData,
-                //     items: employeeCreteScreenController.companyDepartment
-                //         .map<DropdownMenuItem<LocationListData>>(
-                //             (LocationListData value) {
-                //       return DropdownMenuItem<LocationListData>(
-                //         value: value,
-                //         child: Text(value.locationName),
-                //       );
-                //     }).toList(),
-                //     onChanged: (LocationListData? value) async {
-                //       employeeCreteScreenController.isLoading(true);
-                //       // This is called when the user selects an item.
-                //       log('valuevaluevaluevalue :${value!.locationName}');
-                //       // employeeCreteScreenController.isloding(true);
-                //       employeeCreteScreenController.locationListData =
-                //           value;
-                //       employeeCreteScreenController.isLoading(false);
-                //     },
-                //   ).commonOnlyPadding(left: 10, right: 10),
-                // ),
-
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    value: employeeCreteScreenController.locationListData,
-                    items: employeeCreteScreenController.allLocationList
-                        .map<DropdownMenuItem<LocationListData>>(
-                            (LocationListData value) {
-                      return DropdownMenuItem<LocationListData>(
-                          value: value, child: Text(value.locationName));
-                    }).toList(),
-                    onChanged: (LocationListData? value) async {
-                      employeeCreteScreenController.isLoading(true);
-                      employeeCreteScreenController.locationListData = value;
-                      employeeCreteScreenController.isLoading(false);
-                    },
-                  ).commonOnlyPadding(left: 10, right: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.transparent),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      value: employeeCreteScreenController.locationListData,
+                      items: employeeCreteScreenController.allLocationList
+                          .map<DropdownMenuItem<LocationListData>>(
+                              (LocationListData value) {
+                        return DropdownMenuItem<LocationListData>(
+                            value: value, child: Text(value.locationName));
+                      }).toList(),
+                      borderRadius: BorderRadius.circular(10),
+                      icon: Image.asset(
+                        AppImages.arrowDownIcon,
+                        height: 15,
+                        width: 15,
+                      ).commonSymmetricPadding(horizontal: 10),
+                      onChanged: (LocationListData? value) async {
+                        employeeCreteScreenController.isLoading(true);
+                        employeeCreteScreenController.locationListData = value;
+                        employeeCreteScreenController.isLoading(false);
+                      },
+                    ).commonOnlyPadding(left: 10, right: 10),
+                  ),
                 ),
               ),
             ),
@@ -774,7 +812,48 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 : Container(),
 
             const SizedBox(height: 15),
-            Row(
+            CustomSubmitButtonModule(
+              labelText: AppMessage.submit,
+              onPress: () async {
+                if (employeeCreteScreenController.formKey.currentState!.validate()) {
+                  if (employeeCreteScreenController.employeeOption == EmployeeOption.create) {
+                    // if (employeeCreteScreenController.images != null) {
+                    if (employeeCreteScreenController.companyDepartmentData!.departmentName == AppMessage.empty) {
+                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
+                    } else if (employeeCreteScreenController
+                        .selectedValuePayper.value ==
+                        AppMessage.chooseOption) {
+                      Fluttertoast.showToast(
+                          msg: AppMessage.pleaseSelectPayper);
+                    } else {
+                      await employeeCreteScreenController
+                          .employeeCreateFunction();
+                    }
+                    // } else {
+                    //   Fluttertoast.showToast(
+                    //       msg: "Please select profile image!");
+                    // }
+                  } else {
+                    log("updateEmployeeDetailsFunction");
+                    if (employeeCreteScreenController
+                        .companyDepartmentData!.departmentName ==
+                        AppMessage.empty) {
+                      Fluttertoast.showToast(
+                          msg: AppMessage.pleaseSelectDepartment);
+                    } else if (employeeCreteScreenController
+                        .selectedValuePayper.value ==
+                        AppMessage.chooseOption) {
+                      Fluttertoast.showToast(
+                          msg: AppMessage.pleaseSelectPayper);
+                    } else {
+                      await employeeCreteScreenController
+                          .updateEmployeeDetailsFunction();
+                    }
+                  }
+                }
+              }
+            ),
+           /* Row(
               children: [
                 Expanded(
                   flex: 5,
@@ -844,9 +923,9 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
+            ),*/
           ],
-        ).commonOnlyPadding(top: 6.h, right: 6.w, left: 6.w, bottom: 4.h),
+        ).commonOnlyPadding(top: 1.h, right: 6.w, left: 6.w, bottom: 4.h),
       ),
     );
   }

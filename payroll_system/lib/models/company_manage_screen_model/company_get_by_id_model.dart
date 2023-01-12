@@ -54,7 +54,7 @@ class Data {
     // required this.updatedAt,
   });
 
-  String id;
+  int id;
   String userName;
   String email;
   String fullName;
@@ -78,7 +78,7 @@ class Data {
   // DateTime updatedAt;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"] ?? "0",
+    id: json["id"] ?? 0,
     userName: json["user_name"] ?? "",
     email: json["email"] ?? "",
     fullName: json["full_name"] ?? "",

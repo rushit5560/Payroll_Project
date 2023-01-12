@@ -12,6 +12,7 @@ import 'package:payroll_system/screen/employee_screens/employee_list_screen/empl
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
 import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_manage_screen/pay_checkes_manage_screen.dart';
 import 'package:payroll_system/screen/payroll_screen/payroll_list_screen/payroll_list_screen.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -48,6 +49,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     ]);
                               },
                               title: AppMessage.departmentNameDrawer,
+                              imageStatus: true,
+                              image: AppImages.departmentIcon,
                             ),
                             CompanyDrawerTile(
                               onTap: () {
@@ -60,6 +63,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                 ]);
                               },
                               title: AppMessage.employeeNameDrawer,
+                              imageStatus: true,
+                              image: AppImages.employeeIcon,
                             ),
                             CompanyDrawerTile(
                               onTap: () {
@@ -71,6 +76,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                 ]);
                               },
                               title: AppMessage.location,
+                              imageStatus: true,
+                              image: AppImages.locationIcon,
                             ),
                             CompanyDrawerTile(
                               onTap: () {
@@ -83,6 +90,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     ]);
                               },
                               title: AppMessage.paycheckes,
+                              imageStatus: false,
+                              icon: const Icon(Icons.person, color: AppColors.colorBtBlue),
                             ),
                             /*CompanyDrawerTile(
                               onTap: () {
@@ -150,9 +159,18 @@ class CompanyViewDrawerMenu extends StatelessWidget {
 class CompanyDrawerTile extends StatelessWidget {
   Function() onTap;
   String title;
+  bool imageStatus;
+  Icon? icon;
+  String? image;
 
-  CompanyDrawerTile({Key? key, required this.onTap, required this.title})
-      : super(key: key);
+  CompanyDrawerTile({
+    Key? key,
+    required this.onTap,
+    required this.title,
+    required this.imageStatus,
+    this.icon,
+    this.image,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -162,8 +180,14 @@ class CompanyDrawerTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            leading:
-                const Icon(Icons.person_rounded, color: AppColors.colorBtBlue),
+            leading: imageStatus == false
+                ? icon
+                : Image.asset(
+                    image!,
+                    height: 20,
+                    width: 20,
+                    color: AppColors.colorBtBlue,
+                  ),
             title: Text(
               title,
               textAlign: TextAlign.left,

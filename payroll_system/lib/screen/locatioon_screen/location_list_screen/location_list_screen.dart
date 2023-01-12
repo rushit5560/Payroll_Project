@@ -26,7 +26,8 @@ class LocationListScreen extends StatelessWidget {
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,
             fontSize: 17.sp,
-          ),),
+          ),
+        ),
         centerTitle: true,
         actions: [
           IconButton(

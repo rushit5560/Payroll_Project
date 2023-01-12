@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
+import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/common_modules/permission_container_module.dart';
 import 'package:payroll_system/controllers/company_Permission_Screen_Controller.dart';
 import 'package:payroll_system/utils/extensions.dart';
@@ -156,7 +157,10 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
                       .payrollIsDeleteChecked.value = value!;
                 }),
             const SizedBox(height: 22),
-            companyBackSubmitButton(context),
+            CustomSubmitButtonModule(
+              labelText: AppMessage.submit,
+              onPress: (){},
+            ),
             const SizedBox(height: 5),
           ],
         ).commonSymmetricPadding(horizontal: 10, vertical: 10),

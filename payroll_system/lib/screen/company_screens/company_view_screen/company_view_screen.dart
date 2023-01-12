@@ -13,9 +13,11 @@ class CompanyViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: companyViewScreenController.scaffoldKey,
+      backgroundColor: AppColors.colorLightPurple2,
       drawer: CompanyViewDrawerMenu(),
       appBar: AppBar(
         centerTitle: true,
+        elevation: 0,
         leading: GestureDetector(
           onTap: ()=> companyViewScreenController.scaffoldKey.currentState!.openDrawer(),
           child: Padding(
@@ -31,7 +33,7 @@ class CompanyViewScreen extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 17.sp,
           ),),
-        actions: [
+        /*actions: [
           IconButton(
             onPressed: () {
               // Get.offAll(()=> HomeScreen());
@@ -39,7 +41,7 @@ class CompanyViewScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.home_rounded),
           ),
-        ],
+        ],*/
       ),
       body: Center(
         child: Text('Welcome To ${companyViewScreenController.companyName}'),

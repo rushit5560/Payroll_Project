@@ -164,7 +164,7 @@ class EmployeeListScreen extends StatelessWidget {
                                       employeeListScreenController
                                           .isLoading(false);
                                     },
-                                    icon: const Icon(Icons.close),
+                                    icon: const Icon(Icons.close, color: AppColors.colorLightHintPurple2),
                                   ),
                           ),
                         ).commonOnlyPadding(left: 10, right: 10, top: 15),

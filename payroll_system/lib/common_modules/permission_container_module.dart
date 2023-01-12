@@ -39,10 +39,8 @@ class PermissionContainerModule extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.greyColor,
-          width: 2,
-        ),
+        color: AppColors.colorWhite,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +50,7 @@ class PermissionContainerModule extends StatelessWidget {
             style: TextStyleConfig.textStyle(
                 fontSize: 19, fontWeight: FontWeight.bold),
           ),
-          const Divider(),
+          const Divider(color: AppColors.colorLightHintPurple2),
           const SizedBox(height: 2),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

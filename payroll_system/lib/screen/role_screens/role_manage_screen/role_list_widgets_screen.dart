@@ -6,6 +6,7 @@ import 'package:payroll_system/screen/role_screens/permission_screens/admin_perm
 import 'package:payroll_system/screen/role_screens/permission_screens/company_permission_screen/company_permission_screen.dart';
 import 'package:payroll_system/screen/role_screens/permission_screens/employee_permission_screen/employee_permission_screen.dart';
 import 'package:payroll_system/screen/role_screens/permission_screens/sub_admin_permission_screen/sub_admin_permission_screen.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -17,18 +18,25 @@ class AdminPermissionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.greyColor,
-          width: 2,
-        ),
+        color: AppColors.colorWhite,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            AppMessage.adminText,
-            style: TextStyleConfig.textStyle(
-              fontSize: 20,
+          Image.asset(
+            AppImages.companyIcon,
+            width: 20,
+            height: 20,
+          ).commonOnlyPadding(right: 8),
+          Expanded(
+            child: Text(
+              AppMessage.adminText,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyleConfig.textStyle(
+                fontSize: 20,
+              ),
             ),
           ),
           PermissionButtonModule(
@@ -49,18 +57,23 @@ class CompanyPermissionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.greyColor,
-          width: 2,
-        ),
+        color: AppColors.colorWhite,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            AppMessage.company,
-            style: TextStyleConfig.textStyle(
-              fontSize: 20,
+          Image.asset(
+            AppImages.companyIcon,
+            width: 20,
+            height: 20,
+          ).commonOnlyPadding(right: 8),
+          Expanded(
+            child: Text(
+              AppMessage.company,
+              style: TextStyleConfig.textStyle(
+                fontSize: 20,
+              ),
             ),
           ),
           PermissionButtonModule(
@@ -81,18 +94,23 @@ class EmployeePermissionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.greyColor,
-          width: 2,
-        ),
+        color: AppColors.colorWhite,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            AppMessage.employee,
-            style: TextStyleConfig.textStyle(
-              fontSize: 20,
+          Image.asset(
+            AppImages.employeeIcon,
+            width: 20,
+            height: 20,
+          ).commonOnlyPadding(right: 8),
+          Expanded(
+            child: Text(
+              AppMessage.employee,
+              style: TextStyleConfig.textStyle(
+                fontSize: 20,
+              ),
             ),
           ),
           PermissionButtonModule(
@@ -113,18 +131,23 @@ class SubAdminPermissionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.greyColor,
-          width: 2,
-        ),
+        color: AppColors.colorWhite,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            AppMessage.subAdminText,
-            style: TextStyleConfig.textStyle(
-              fontSize: 20,
+          Image.asset(
+            AppImages.companyIcon,
+            width: 20,
+            height: 20,
+          ).commonOnlyPadding(right: 8),
+          Expanded(
+            child: Text(
+              AppMessage.subAdminText,
+              style: TextStyleConfig.textStyle(
+                fontSize: 20,
+              ),
             ),
           ),
           PermissionButtonModule(

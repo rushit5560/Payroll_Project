@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/download_button_module.dart';
+import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/common_modules/single_item_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
@@ -30,78 +32,112 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColors.greyColor,
-                  width: 2,
-                ),
+                color: AppColors.colorWhite,
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
                 children: [
-                  const SizedBox(height: 5),
-                  SingleListTileCustom(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: Image.asset(
+                          AppImages.downloadIcon,
+                          width: 30,
+                          height: 30,
+                          color: AppColors.colorBtBlue,
+                        ),
+                      ),
+                    ],
+                  ),
+
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.date,
                     textValue: payrollListDataListvalue.paydate
                         .toString()
                         .split(" ")[0],
+                    image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.name,
                     textValue: payrollListDataListvalue.firstName +
                         payrollListDataListvalue.middleName +
                         payrollListDataListvalue.lastName,
+                    image: AppImages.employeeIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.company,
                     textValue: payrollListDataListvalue.bonus,
+                    image: AppImages.companyIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.startDate,
                     textValue: payrollListDataListvalue.startdate
                         .toString()
                         .split(" ")[0],
+                    image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.endDate,
                     textValue: payrollListDataListvalue.enddate
                         .toString()
                         .split(" ")[0],
+                    image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
                     textValue: payrollListDataListvalue.days,
+                    image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.payPeriod,
                     textValue: payrollListDataListvalue.payPeriod,
+                    image: AppImages.payPeriodIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.hours,
                     textValue: payrollListDataListvalue.type,
+                    image: AppImages.hoursIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.salaryHourlyRate,
                     textValue: payrollListDataListvalue.salary,
+                    image: AppImages.salaryIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.subTotal,
                     textValue: payrollListDataListvalue.subTotal,
+                    image: AppImages.netAmountIcon,
                   ),
                   const SizedBox(height: 5),
-                  SingleListTileCustom(
+                  SingleListTileModuleCustom(
                     textKey: AppMessage.netAmount,
                     textValue: payrollListDataListvalue.finalAmount,
+                    image: AppImages.netAmountIcon,
                   ),
                   SizedBox(height: 2.h),
-                  Row(
+
+
+                  /*Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       DownloadButtonModule(
@@ -112,7 +148,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                           },
                           downloadLabelText: AppMessage.download),
                     ],
-                  )
+                  ),*/
                 ],
               ).commonAllSidePadding(10),
             ),
@@ -136,16 +172,15 @@ class _DownloadDialogState extends State<DownloadDialog> {
 
   void startDownloading() async {
     const String url =
-        'https://firebasestorage.googleapis.com/v0/b/e-commerce-72247.appspot.com/o/195-1950216_led-tv-png-hd-transparent-png.png?alt=media&token=0f8a6dac-1129-4b76-8482-47a6dcc0cd3e';
+        'https://www.africau.edu/images/default/sample.pdf';
 
-    // const String fileName = "dowanload files";
+    const String fileName = "download.pdf";
 
-    // String path = await _getFilePath(fileName);
+    String path = await _getFilePath(fileName);
 
     await dio.download(
       url,
-      ExternalPath.getExternalStoragePublicDirectory(
-          ExternalPath.DIRECTORY_DOWNLOADS),
+      path,
       onReceiveProgress: (recivedBytes, totalBytes) {
         log("dowanload files  111");
         setState(() {
@@ -162,14 +197,14 @@ class _DownloadDialogState extends State<DownloadDialog> {
     });
   }
 
-  // Future<void> _getFilePath() async {
-  //   // final dir = await getApplicationDocumentsDirectory();
-  //   final dir = await ExternalPath.getExternalStoragePublicDirectory(
-  //       ExternalPath.DIRECTORY_DOWNLOADS);
-  //   // return "${dir.path}/$filename";
+  _getFilePath(String fileName) async {
+    // final dir = await getApplicationDocumentsDirectory();
+    final dir = await ExternalPath.getExternalStoragePublicDirectory(
+        ExternalPath.DIRECTORY_DOWNLOADS);
+    return "$dir/$fileName";
 
-  //   // return
-  // }
+    // return dir;
+  }
 
   @override
   void initState() {

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
+import 'package:sizer/sizer.dart';
 import '../../../Utils/messaging.dart';
 import '../../../common_modules/common_loader.dart';
 import '../../../common_modules/custom_alert_dialog_module.dart';
 
 class EmployeeManageScreen extends StatelessWidget {
   EmployeeManageScreen({super.key});
-  final employeeDetailsFormController = Get.put(EmployeeManageScreenController());
+
+  final employeeDetailsFormController =
+      Get.put(EmployeeManageScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +34,37 @@ class EmployeeManageScreen extends StatelessWidget {
       },
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.colorLightPurple2,
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              employeeDetailsFormController.employeeOption == EmployeeOption.create
+              employeeDetailsFormController.employeeOption ==
+                      EmployeeOption.create
                   ? AppMessage.employeeCreate
                   : AppMessage.employeeUpdate,
+              style: TextStyle(
+                color: AppColors.colorBlack,
+                fontWeight: FontWeight.bold,
+                fontSize: 17.sp,
+              ),
             ),
+            leading: employeeDetailsFormController.employeeOption ==
+                    EmployeeOption.update
+                ? IconButton(
+                    onPressed: () => CustomAlertDialog().showAlertDialog(
+                      context: context,
+                      textContent: AppMessage.permissionMessage,
+                      onYesTap: () {
+                        Get.back();
+                        Get.back();
+                      },
+                      onCancelTap: () => Get.back(),
+                    ),
+                    icon: const Icon(
+                      Icons.arrow_back_rounded,
+                    ),
+                  )
+                : null,
           ),
           body: Obx(
             () => employeeDetailsFormController.isLoading.value

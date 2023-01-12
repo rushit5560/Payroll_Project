@@ -16,6 +16,14 @@ class AppImages {
   static const locationIcon = "$rootPath/location.png";
   static const emailIcon = "$rootPath/email.png";
   static const employeeIcon = "$rootPath/employee.png";
+  static const roleIcon = "$rootPath/role.png";
+  static const calendarIcon = "$rootPath/calendar.png";
+  static const totalDaysIcon = "$rootPath/total_day.png";
+  static const payPeriodIcon = "$rootPath/pay_period.png";
+  static const hoursIcon = "$rootPath/hours.png";
+  static const salaryIcon = "$rootPath/salary.png";
+  static const netAmountIcon = "$rootPath/amount.png";
+  static const downloadIcon = "$rootPath/download.png";
 
 
 
