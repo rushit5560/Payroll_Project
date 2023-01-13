@@ -726,7 +726,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
-            Row(
+            /// Upload Document Text Module
+            /*Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -753,9 +754,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
+            ),*/
 
-            employeeCreteScreenController
+            /// Uploaded Document List Module
+            /*employeeCreteScreenController
                     .employeeSelectedDocumentList.isNotEmpty
                 ? ListView.builder(
                     itemCount: employeeCreteScreenController
@@ -774,7 +776,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
 
                       return Container(
                         decoration: BoxDecoration(
-                          border: Border.all(),
+                          color: AppColors.colorWhite,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -809,9 +811,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       ).commonSymmetricPadding(vertical: 5);
                     },
                   )
-                : Container(),
+                : Container(),*/
 
             const SizedBox(height: 15),
+
             CustomSubmitButtonModule(
               labelText: AppMessage.submit,
               onPress: () async {
@@ -820,14 +823,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     // if (employeeCreteScreenController.images != null) {
                     if (employeeCreteScreenController.companyDepartmentData!.departmentName == AppMessage.empty) {
                       Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
-                    } else if (employeeCreteScreenController
-                        .selectedValuePayper.value ==
-                        AppMessage.chooseOption) {
-                      Fluttertoast.showToast(
-                          msg: AppMessage.pleaseSelectPayper);
+                    } else if (employeeCreteScreenController.selectedValuePayper.value == AppMessage.chooseOption) {
+                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectPayper);
                     } else {
-                      await employeeCreteScreenController
-                          .employeeCreateFunction();
+                      await employeeCreteScreenController.employeeCreateFunction();
                     }
                     // } else {
                     //   Fluttertoast.showToast(
@@ -835,95 +834,18 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     // }
                   } else {
                     log("updateEmployeeDetailsFunction");
-                    if (employeeCreteScreenController
-                        .companyDepartmentData!.departmentName ==
-                        AppMessage.empty) {
-                      Fluttertoast.showToast(
-                          msg: AppMessage.pleaseSelectDepartment);
-                    } else if (employeeCreteScreenController
-                        .selectedValuePayper.value ==
-                        AppMessage.chooseOption) {
-                      Fluttertoast.showToast(
-                          msg: AppMessage.pleaseSelectPayper);
+                    if (employeeCreteScreenController.companyDepartmentData!.departmentName == AppMessage.empty) {
+                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
+                    } else if (employeeCreteScreenController.selectedValuePayper.value == AppMessage.chooseOption) {
+                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectPayper);
                     } else {
-                      await employeeCreteScreenController
-                          .updateEmployeeDetailsFunction();
+                      await employeeCreteScreenController.updateEmployeeDetailsFunction();
                     }
                   }
                 }
               }
             ),
-           /* Row(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: ButtonCustom(
-                    onPressed: () async {
-                      if (employeeCreteScreenController.formKey.currentState!
-                          .validate()) {
-                        if (employeeCreteScreenController.employeeOption ==
-                            EmployeeOption.create) {
-                          // if (employeeCreteScreenController.images != null) {
-                          if (employeeCreteScreenController
-                                  .companyDepartmentData!.departmentName ==
-                              AppMessage.empty) {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.pleaseSelectDepartment);
-                          } else if (employeeCreteScreenController
-                                  .selectedValuePayper.value ==
-                              AppMessage.chooseOption) {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.pleaseSelectPayper);
-                          } else {
-                            await employeeCreteScreenController
-                                .employeeCreateFunction();
-                          }
-                          // } else {
-                          //   Fluttertoast.showToast(
-                          //       msg: "Please select profile image!");
-                          // }
-                        } else {
-                          log("updateEmployeeDetailsFunction");
-                          if (employeeCreteScreenController
-                                  .companyDepartmentData!.departmentName ==
-                              AppMessage.empty) {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.pleaseSelectDepartment);
-                          } else if (employeeCreteScreenController
-                                  .selectedValuePayper.value ==
-                              AppMessage.chooseOption) {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.pleaseSelectPayper);
-                          } else {
-                            await employeeCreteScreenController
-                                .updateEmployeeDetailsFunction();
-                          }
-                        }
-                      }
-                    },
-                    text: AppMessage.submit,
-                    textsize: 15.sp,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  flex: 5,
-                  child: ButtonCustom(
-                    onPressed: () => CustomAlertDialog().showAlertDialog(
-                      context: context,
-                      textContent: AppMessage.permissionMessage,
-                      onYesTap: () {
-                        Get.back();
-                        Get.back();
-                      },
-                      onCancelTap: () => Get.back(),
-                    ),
-                    text: AppMessage.back,
-                    textsize: 15.sp,
-                  ),
-                ),
-              ],
-            ),*/
+
           ],
         ).commonOnlyPadding(top: 1.h, right: 6.w, left: 6.w, bottom: 4.h),
       ),

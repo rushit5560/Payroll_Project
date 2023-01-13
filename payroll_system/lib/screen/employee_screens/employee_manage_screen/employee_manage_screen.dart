@@ -12,8 +12,7 @@ import '../../../common_modules/custom_alert_dialog_module.dart';
 class EmployeeManageScreen extends StatelessWidget {
   EmployeeManageScreen({super.key});
 
-  final employeeDetailsFormController =
-      Get.put(EmployeeManageScreenController());
+  final employeeDetailsFormController = Get.put(EmployeeManageScreenController());
 
   @override
   Widget build(BuildContext context) {

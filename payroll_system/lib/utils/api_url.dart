@@ -29,6 +29,9 @@ class ApiUrl {
   static const updateEmployeeDetailsApi =
       "${apiMainPath}api/admin/employee/update";
   static const getCompanyWiseEmployeeApi = "${apiMainPath}api/admin/employee/";
+  static const getEmployeeDocumentApi = "${apiMainPath}api/admin/employee/docget/";
+  static const uploadEmployeeDocumentApi = "${apiMainPath}api/admin/employee/docuploadstore";
+  static const deleteEmployeeDocumentApi = "${apiMainPath}api/admin/employee/docdel/";
 
   // Company Api's
   static const allCompanyApi = "${apiMainPath}api/admin/company";

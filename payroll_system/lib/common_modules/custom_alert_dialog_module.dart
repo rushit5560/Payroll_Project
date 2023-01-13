@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/messaging.dart';
 import 'package:payroll_system/Utils/style.dart';
+import 'package:payroll_system/constants/colors.dart';
+
 
 class CustomAlertDialog {
   void showAlertDialog({
@@ -14,6 +16,7 @@ class CustomAlertDialog {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: AppColors.colorLightPurple2,
           title: Text(
             textContent,
             textAlign: TextAlign.center,
@@ -27,22 +30,23 @@ class CustomAlertDialog {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextButton(
+                OutlinedButton(
                   onPressed: onYesTap,
                   child: Text(
                     AppMessage.yes,
                     style: TextStyleConfig.textStyle(
-                      textColor: Colors.red,
+                      textColor: AppColors.colorBlack,
                       fontSize: 17,
                     ),
                   ),
                 ),
-                TextButton(
+                OutlinedButton(
                   onPressed: onCancelTap,
+                  style: OutlinedButton.styleFrom(backgroundColor: AppColors.colorBtBlue),
                   child: Text(
                     AppMessage.no,
                     style: TextStyleConfig.textStyle(
-                      textColor: Colors.red,
+                      textColor: AppColors.colorWhite,
                       fontSize: 17,
                     ),
                   ),
@@ -71,6 +75,7 @@ class CustomMobileBackPressAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: AppColors.colorLightPurple2,
       title: Text(
         AppMessage.backAlertMessage,
         textAlign: TextAlign.center,
@@ -83,7 +88,7 @@ class CustomMobileBackPressAlertDialog extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextButton(
+            OutlinedButton(
               onPressed: () {
                 Get.back();
                 Get.back();
@@ -91,19 +96,20 @@ class CustomMobileBackPressAlertDialog extends StatelessWidget {
               child: Text(
                 AppMessage.yes,
                 style: TextStyleConfig.textStyle(
-                  textColor: Colors.red,
+                  textColor: AppColors.colorBlack,
                   fontSize: 17,
                 ),
               ),
             ),
-            TextButton(
+            OutlinedButton(
               onPressed: () {
                 Get.back();
               },
+              style: OutlinedButton.styleFrom(backgroundColor: AppColors.colorBtBlue),
               child: Text(
                 AppMessage.no,
                 style: TextStyleConfig.textStyle(
-                  textColor: Colors.red,
+                  textColor: AppColors.colorWhite,
                   fontSize: 17,
                 ),
               ),

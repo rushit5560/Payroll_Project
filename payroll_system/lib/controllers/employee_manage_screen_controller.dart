@@ -284,14 +284,14 @@ class EmployeeManageScreenController extends GetxController {
                 : "Terminated";
 
         for (int i = 0; i < companyDepartment.length; i++) {
-          if (companyDepartment[i].id ==
+          if (companyDepartment[i].id.toString() ==
               employeeGetByIdModel.data.departmentId) {
             companyDepartmentData = companyDepartment[i];
           }
         }
 
         for (int i = 0; i < allLocationList.length; i++) {
-          if (allLocationList[i].id == employeeGetByIdModel.data.locationId) {
+          if (allLocationList[i].id.toString() == employeeGetByIdModel.data.locationId) {
             locationListData = allLocationList[i];
           }
         }
@@ -552,8 +552,7 @@ class EmployeeManageScreenController extends GetxController {
   }
 
   getLoggedInUserIdFromPrefs() async {
-    userIdPrefs = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.userIdKey);
+    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
     await getCompanyWiseDepartmentFunction();
   }
 

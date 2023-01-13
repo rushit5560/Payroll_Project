@@ -21,6 +21,8 @@ class AppMessage {
 
   /// Drawer Name's
   static String companyNameDrawer = "Company";
+  static String noDocumentUploaded = "No document uploaded";
+  static String documentType = "Document Type";
   static String departmentNameDrawer = "Department";
   static String companyDepartmentNameDrawer = "Company Department";
   static String employeeNameDrawer = "Employee";
@@ -44,6 +46,8 @@ class AppMessage {
       'Are you sure you want to delete this employee?';
   static String deleteDepartmentAlertMessage =
       'Are you sure you want to delete this department?';
+  static String deleteDocumentAlertMessage =
+      'Are you sure you want to delete this document?';
   static String deleteCompanyAlertMessage =
       'Are you sure you want to delete this company?';
   static String logoutMessage = "Are you sure you want to logout?";
@@ -227,6 +231,7 @@ class AppMessage {
   static String profile = 'Profile';
   static String userName = 'User Name';
   static String name = 'Name';
+  static String fileName = 'File Name';
   static String uploadDocument = 'Upload Document';
   static String pleaseEnterPayDayWork = 'Please enter firstDayWork';
   static String pleaseEnterStartDate = 'Please select start date';

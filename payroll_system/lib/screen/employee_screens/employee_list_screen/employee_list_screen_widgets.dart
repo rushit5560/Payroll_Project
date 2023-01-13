@@ -7,14 +7,14 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
+import 'package:payroll_system/screen/employee_screens/employee_upload_document_screen/employee_upload_document_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 import '../../../common_modules/custom_alert_dialog_module.dart';
-import '../../../common_modules/edit_and_delete_button_module.dart';
-import '../../../common_modules/single_item_module.dart';
 
 class EmployeeListScreenWidgets extends StatelessWidget {
   EmployeeListScreenWidgets({super.key});
@@ -29,7 +29,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
       shrinkWrap: true,
       itemCount: employeeListScreenController.searchEmployeeList.length,
       itemBuilder: (context, index) {
-        final value = employeeListScreenController.searchEmployeeList[index];
+        final employee = employeeListScreenController.searchEmployeeList[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Container(
@@ -53,7 +53,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                                 () => EmployeeManageScreen(),
                             arguments: [
                               EmployeeOption.update,
-                              value.id.toString(),
+                              employee.id.toString(),
                               employeeListScreenController.companyId,
                               employeeListScreenController.companyName,
                             ],
@@ -85,7 +85,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                               log("Delete Employee");
                               await employeeListScreenController
                                   .deleteEmployeeFunction(
-                                  value.id.toString(), index);
+                                  employee.id.toString(), index);
                             },
                             onCancelTap: () {
                               Get.back();
@@ -109,39 +109,75 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                   image: AppImages.employeeIcon,
                   textKey: AppMessage.employeeName,
                   textValue:
-                      "${value.firstName} ${value.middleName} ${value.lastName}",
+                      "${employee.firstName} ${employee.middleName} ${employee.lastName}",
                 ),
                 SizedBox(height: 1.h),
                 SingleListTileModuleCustom(
                   image: AppImages.emailIcon,
                   textKey: AppMessage.employeeEmail,
-                  textValue: value.email,
+                  textValue: employee.email,
                 ),
                 SizedBox(height: 1.h),
                 SingleListTileModuleCustom(
                   image: AppImages.phoneIcon,
                   textKey: AppMessage.phoneNumber,
-                  textValue: value.mobileNumber,
+                  textValue: employee.mobileNumber,
                 ),
                 SizedBox(height: 2.h),
                 SingleListTileModuleCustom(
                   image: AppImages.departmentIcon,
                   textKey: AppMessage.employeeDepartmentName,
-                  textValue: value.departmentId.toString(),
+                  textValue: employee.departmentId.toString(),
                 ),
                 SizedBox(height: 2.h),
                 SingleListTileModuleCustom(
                   image: AppImages.companyIcon,
                     textKey: AppMessage.employeeCompanyName,
-                    textValue: value.companyid.toString()),
+                    textValue: employee.companyid.toString()),
                 SizedBox(height: 2.h),
                 SingleListTileModuleCustom(
                   image: AppImages.verifyIcon,
                     textKey: AppMessage.employeeStatus,
-                    textValue: value.isActive == AppMessage.value
+                    textValue: employee.isActive == AppMessage.value
                         ? AppMessage.active
                         : AppMessage.inActive),
                 SizedBox(height: 2.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(()=> EmployeeUploadDocumentScreen(),
+                        arguments: [
+                          "${employee.firstName} ${employee.middleName} ${employee.lastName}",
+                          employee.id.toString(),
+                          employeeListScreenController.companyId,
+                        ],
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            AppMessage.uploadDocument,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyleConfig.textStyle(
+                              textColor: AppColors.colorBtBlue,
+                            ),
+                          ).commonOnlyPadding(right: 5),
+                          Image.asset(
+                            AppImages.arrowRightIcon,
+                            width: 20,
+                            height: 20,
+                            color: AppColors.colorBtBlue,
+                          ),
+                        ],
+                      ),
+
+                    ),
+                  ],
+                ),
+                // SizedBox(height: 2.h),
                 /*EditAndDeleteButtonModule(
                   onDeleteTap: () async {
                     bool employeeUpdatePermission =
@@ -176,7 +212,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                         () => EmployeeManageScreen(),
                         arguments: [
                           EmployeeOption.update,
-                          value.id.toString(),
+                          ```value```.id.toString(),
                           employeeListScreenController.companyId,
                           employeeListScreenController.companyName,
                         ],
