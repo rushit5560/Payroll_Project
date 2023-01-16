@@ -268,6 +268,7 @@ class AppMessage {
 // paychecks
 
   static String paycheckes = 'Paycheckes';
+  static String approvePaycheckes = 'Approve Paycheckes';
   static String regular = 'Regular (\$)';
   static String ot = 'OT (\$)';
   static String holidayPay = 'Holiday Pay (\$)';

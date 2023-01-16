@@ -15,14 +15,14 @@ class CompanyWiseEmployeeModel {
 
   final bool success;
   final String messege;
-  final List<CompanyWiseDepartmentData> data;
+  final List<CompanyWiseEmployeeData> data;
 
   factory CompanyWiseEmployeeModel.fromJson(Map<String, dynamic> json) =>
       CompanyWiseEmployeeModel(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
-        data: List<CompanyWiseDepartmentData>.from(
-            json["Data"].map((x) => CompanyWiseDepartmentData.fromJson(x))),
+        data: List<CompanyWiseEmployeeData>.from(
+            json["Data"].map((x) => CompanyWiseEmployeeData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,8 +32,8 @@ class CompanyWiseEmployeeModel {
       };
 }
 
-class CompanyWiseDepartmentData {
-  CompanyWiseDepartmentData({
+class CompanyWiseEmployeeData {
+  CompanyWiseEmployeeData({
     required this.id,
     required this.firstName,
     required this.middleName,
@@ -126,8 +126,8 @@ class CompanyWiseDepartmentData {
   String tipTextFieldValue;
   String taxTextFieldValue;
 
-  factory CompanyWiseDepartmentData.fromJson(Map<String, dynamic> json) =>
-      CompanyWiseDepartmentData(
+  factory CompanyWiseEmployeeData.fromJson(Map<String, dynamic> json) =>
+      CompanyWiseEmployeeData(
           id: json["id"] ?? 0,
           firstName: json["first_name"] ?? "",
           middleName: json["middle_name"] ?? "",

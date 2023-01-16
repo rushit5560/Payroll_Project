@@ -16,7 +16,7 @@ class FormSingleFieldModule extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   Color color;
   Function()? onTap;
-  Function(String)? onChanged;
+  // Function(String)? onChanged;
   Size? size;
   TextInputType? keyboardType;
   bool readOnly;
@@ -37,7 +37,7 @@ class FormSingleFieldModule extends StatelessWidget {
       this.size,
       this.textEditingController,
       this.onTap,
-        this.onChanged,
+        // this.onChanged,
       this.keyboardType,
       this.validate,
       this.maxLength,
@@ -76,7 +76,7 @@ class FormSingleFieldModule extends StatelessWidget {
           obscureText: obscureText,
           validator: validate,
           onTap: onTap,
-          onChanged: (value) => onChanged!(value),
+          // onChanged: (value) => onChanged!(value),
           readOnly: readOnly,
           keyboardType: keyboardType,
           controller: textEditingController,

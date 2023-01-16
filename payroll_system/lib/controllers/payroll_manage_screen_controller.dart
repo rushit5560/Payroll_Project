@@ -49,8 +49,8 @@ class PayRollManageScreenController extends GetxController {
   TextEditingController regularHourController = TextEditingController();
 
   //getCompanyWiseEmployeeFunction
-  List<CompanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
-  CompanyWiseDepartmentData? companyWiseDepartmentData;
+  List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
+  CompanyWiseEmployeeData? companyWiseDepartmentData;
   // List<CompanyDepartmentData> companyDepartment = [];
 
   List<String> departmentStringList = [];

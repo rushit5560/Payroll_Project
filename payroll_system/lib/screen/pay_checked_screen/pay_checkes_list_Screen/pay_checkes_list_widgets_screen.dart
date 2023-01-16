@@ -41,7 +41,10 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          // https://appieve.com/api/admin/payrolldownload/26
+
+                        },
                         child: Image.asset(
                           AppImages.downloadIcon,
                           width: 30,
@@ -119,10 +122,12 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
 
                   SingleListTileModuleCustom(
                     textKey: AppMessage.salaryHourlyRate,
-                    textValue: payrollListDataListvalue.salary,
+                    textValue: payrollListDataListvalue.payPeriod == "salary"
+                    ? payrollListDataListvalue.salary : payrollListDataListvalue.ragularhour,
                     image: AppImages.salaryIcon,
                   ),
                   const SizedBox(height: 5),
+
                   SingleListTileModuleCustom(
                     textKey: AppMessage.subTotal,
                     textValue: payrollListDataListvalue.subTotal,

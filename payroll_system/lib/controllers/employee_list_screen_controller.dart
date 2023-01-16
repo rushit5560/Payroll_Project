@@ -17,8 +17,8 @@ class EmployeeListScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
-  List<CompanyWiseDepartmentData> allCompanyWiseEmployeeList = [];
-  List<CompanyWiseDepartmentData> searchEmployeeList = [];
+  List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
+  List<CompanyWiseEmployeeData> searchEmployeeList = [];
 
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {

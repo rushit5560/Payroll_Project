@@ -159,7 +159,7 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton<CompanyWiseDepartmentData>(
+                  child: DropdownButton<CompanyWiseEmployeeData>(
                     hint: const Text(
                       "Choose Option",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -168,14 +168,14 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                         payRollManageScreenController.companyWiseDepartmentData,
                     items: payRollManageScreenController
                         .allCompanyWiseEmployeeList
-                        .map<DropdownMenuItem<CompanyWiseDepartmentData>>(
-                            (CompanyWiseDepartmentData value) {
-                      return DropdownMenuItem<CompanyWiseDepartmentData>(
+                        .map<DropdownMenuItem<CompanyWiseEmployeeData>>(
+                            (CompanyWiseEmployeeData value) {
+                      return DropdownMenuItem<CompanyWiseEmployeeData>(
                         value: value,
                         child: Text(value.firstName),
                       );
                     }).toList(),
-                    onChanged: (CompanyWiseDepartmentData? value) async {
+                    onChanged: (CompanyWiseEmployeeData? value) async {
                       payRollManageScreenController.isLoading(true);
 
                       payRollManageScreenController.companyWiseDepartmentData =
