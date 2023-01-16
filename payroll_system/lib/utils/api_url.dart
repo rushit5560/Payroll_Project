@@ -29,9 +29,12 @@ class ApiUrl {
   static const updateEmployeeDetailsApi =
       "${apiMainPath}api/admin/employee/update";
   static const getCompanyWiseEmployeeApi = "${apiMainPath}api/admin/employee/";
-  static const getEmployeeDocumentApi = "${apiMainPath}api/admin/employee/docget/";
-  static const uploadEmployeeDocumentApi = "${apiMainPath}api/admin/employee/docuploadstore";
-  static const deleteEmployeeDocumentApi = "${apiMainPath}api/admin/employee/docdel/";
+  static const getEmployeeDocumentApi =
+      "${apiMainPath}api/admin/employee/docget/";
+  static const uploadEmployeeDocumentApi =
+      "${apiMainPath}api/admin/employee/docuploadstore";
+  static const deleteEmployeeDocumentApi =
+      "${apiMainPath}api/admin/employee/docdel/";
 
   // Company Api's
   static const allCompanyApi = "${apiMainPath}api/admin/company";
@@ -66,4 +69,12 @@ class ApiUrl {
 //Payroll Api's
   static const getPayCheckesListApi = "${apiMainPath}api/admin/payroll/";
   static const createPayCheckesApi = "${apiMainPath}api/admin/payroll/store";
+
+  //approve paycheckes Api's
+  static const getApprovePayCheckesListApi =
+      "${apiMainPath}api/admin/payrollapprove/";
+  static const deleteApprovePayCheckesListApi =
+      "${apiMainPath}api/admin/approvedelete/";
+
+  static const payrollapproveApi = "${apiMainPath}api/admin/payrollapprove/";
 }

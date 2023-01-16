@@ -4,14 +4,14 @@
 
 import 'dart:convert';
 
-PayCheckListModel payCheckListModelFromJson(String str) =>
-    PayCheckListModel.fromJson(json.decode(str));
+ApprovePayCheckListModel payCheckListModelFromJson(String str) =>
+    ApprovePayCheckListModel.fromJson(json.decode(str));
 
-String payCheckListModelToJson(PayCheckListModel data) =>
+String payCheckListModelToJson(ApprovePayCheckListModel data) =>
     json.encode(data.toJson());
 
-class PayCheckListModel {
-  PayCheckListModel({
+class ApprovePayCheckListModel {
+  ApprovePayCheckListModel({
     required this.success,
     required this.messege,
     required this.data,
@@ -19,14 +19,14 @@ class PayCheckListModel {
 
   final bool success;
   final String messege;
-  final List<PayCheckesListData> data;
+  final List<ApprovePayCheckListData> data;
 
-  factory PayCheckListModel.fromJson(Map<String, dynamic> json) =>
-      PayCheckListModel(
+  factory ApprovePayCheckListModel.fromJson(Map<String, dynamic> json) =>
+      ApprovePayCheckListModel(
         success: json["success"] ?? false,
         messege: json["messege"] ?? "",
-        data: List<PayCheckesListData>.from(
-            json["Data"].map((x) => PayCheckesListData.fromJson(x)) ?? {}),
+        data: List<ApprovePayCheckListData>.from(
+            json["Data"].map((x) => ApprovePayCheckListData.fromJson(x)) ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +36,8 @@ class PayCheckListModel {
       };
 }
 
-class PayCheckesListData {
-  PayCheckesListData({
+class ApprovePayCheckListData {
+  ApprovePayCheckListData({
     required this.id,
     required this.type,
     required this.startdate,
@@ -80,7 +80,6 @@ class PayCheckesListData {
   final String days;
   final String payPeriod;
   final String companyid;
-
   final String employeeid;
   final String salary;
   final String ragularhour;
@@ -109,8 +108,8 @@ class PayCheckesListData {
   final String lastName;
   final String eid;
 
-  factory PayCheckesListData.fromJson(Map<String, dynamic> json) =>
-      PayCheckesListData(
+  factory ApprovePayCheckListData.fromJson(Map<String, dynamic> json) =>
+      ApprovePayCheckListData(
         id: json["id"] ?? 0,
         type: json["type"] ?? "",
         startdate: json["startdate"] ?? "",

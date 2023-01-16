@@ -40,6 +40,9 @@ class AppMessage {
   static String delete = 'Delete';
   static String yes = 'Yes';
   static String no = 'No';
+  static String documentDownloadDrawer = "Document Download";
+  static String documentUploadDrawer = "Document Upload";
+  static String paychecksDownloadDrawer = "Paychecks Download";
 
   // static String deleteAlertMessage = 'Are you sure you want to delete ?';
   static String deleteEmployeeAlertMessage =
@@ -159,6 +162,8 @@ class AppMessage {
   static String noCompanyFound = 'No Company Found.';
   static String noLocationFound = 'No Location Found.';
   static String noPayCheckesListFound = 'No PayCheckesList Found.';
+  static String noApprovalPayCheckesListFound =
+      'No Approval PayCheckesList Found.';
 
   //validation messages
   static String pleaseEnterYourName = 'Please enter your name';
@@ -244,6 +249,7 @@ class AppMessage {
   static String payRollList = 'Paychecks List';
   static String totalDays = 'Total Days';
   static String salaryHourlyRate = 'Salary/Hourly Rate';
+
   static String subTotal = 'Sub Total';
   static String finalAmount = 'Final Amount';
 
@@ -268,7 +274,16 @@ class AppMessage {
 // paychecks
 
   static String paycheckes = 'Paycheckes';
+  static String approvalPaycheckes = 'Approval Paycheckes';
+  static String approvalPaycheckesList = 'Approval Paycheckes List';
+
+  static String approvePaycheckesDetails = 'Approve Paycheckes Details';
   static String approvePaycheckes = 'Approve Paycheckes';
+
+  static String approved = 'Approved';
+  static String nonApproved = 'Non Approved';
+  static String hours = 'ours';
+
   static String regular = 'Regular (\$)';
   static String ot = 'OT (\$)';
   static String holidayPay = 'Holiday Pay (\$)';
@@ -276,6 +291,9 @@ class AppMessage {
   static String vacationHour = 'Vacation Hour (\$)';
   static String tip = 'Tip (\$)';
   static String tax = 'Tax (\$)';
+  static String totalTax = 'Total Taxs';
+  static String diractDeposit = 'Diract Deposit';
+
   static String bonus = 'Bonus (\$)';
   static String otherEarning = 'Other Earning (\$)';
   static String commission = 'Commission (\$)';
@@ -283,8 +301,10 @@ class AppMessage {
   //paycheckeslisttext
   static String date = 'Date';
   static String paycheckesList = 'Paycheckes List';
-  static String hours = 'Hours';
   static String netAmount = 'Net Amount';
+  static String netPay = 'Net Pay';
+  static String total = 'Total';
+
   static String download = 'Download';
   static String pleaseEnterRegularRate = 'Please Enter Regular Rate';
   static String pleaseEnterOt = 'Please Enter Ot';
