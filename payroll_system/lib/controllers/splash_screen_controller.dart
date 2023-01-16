@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:http/http.dart' as http;
-import 'package:payroll_system/screen/company_employee_screens/company_home_screen/company_home_screen.dart';
+import 'package:payroll_system/screen/company_home_screen/company_home_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_details.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -37,18 +37,23 @@ class CompanyHomeDrawer extends StatelessWidget {
                       onTap: () {
                         Get.back();
                         Get.to(() => DepartmentListScreen(),
-                        
                          arguments: [
                           companyHomeScreenController.companyId.toString(),
                           companyHomeScreenController.companyName,
-                        ]);
+                        ],
+                        );
                       },
                       title: AppMessage.departmentNameDrawer,
                     ),
                     DrawerListTileModule(
                       onTap: () {
                         Get.back();
-                        Get.to(() => LocationListScreen());
+                        Get.to(() => LocationListScreen(),
+                            arguments: [
+                              companyHomeScreenController.companyId.toString(),
+                              companyHomeScreenController.companyName,
+                            ]
+                        );
                       },
                       title: AppMessage.location,
                     ),

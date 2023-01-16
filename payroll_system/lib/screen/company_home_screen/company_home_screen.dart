@@ -5,14 +5,17 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/company_home_screen_controller.dart';
 import 'package:payroll_system/drawer_menu/company_home_drawer/company_home_drawer.dart';
 import 'package:payroll_system/screen/company_employee_screens/company_employee_manage_screen/company_employee_manage_screen.dart';
-import 'package:payroll_system/screen/company_employee_screens/company_home_screen/company_home_widgets_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
+
+import 'company_home_widgets_screen.dart';
 
 class CompanyHomeScreen extends StatelessWidget {
   CompanyHomeScreen({super.key});
@@ -23,20 +26,27 @@ class CompanyHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.colorLightPurple2,
       drawer: CompanyHomeDrawer(),
       appBar: AppBar(
-        title: Text(AppMessage.company),
+        title: Text(AppMessage.company,
+          style: TextStyle(
+            color: AppColors.colorBlack,
+            fontWeight: FontWeight.bold,
+            fontSize: 17.sp,
+          ),),
         centerTitle: true,
         actions: [
-          FloatingActionButton(
+
+          IconButton(
             onPressed: () async {
               bool employeeCreatePermission =
-                  await userPreference.getBoolPermissionFromPrefs(
-                      keyId: UserPreference.employeeAddKey);
+              await userPreference.getBoolPermissionFromPrefs(
+                  keyId: UserPreference.employeeAddKey);
 
               if (employeeCreatePermission == true) {
                 Get.to(
-                  () => CompanyEmployeeManageScreen(),
+                      () => CompanyEmployeeManageScreen(),
                   arguments: [
                     EmployeeOption.create,
                     AppMessage.empty,
@@ -48,13 +58,14 @@ class CompanyHomeScreen extends StatelessWidget {
                 Fluttertoast.showToast(msg: AppMessage.deniedPermission);
               }
             },
-            tooltip: "Add Employee",
-            elevation: 0.0,
-            child: const Icon(
+            icon: const Icon(
               Icons.add_rounded,
               size: 30,
             ),
+            highlightColor: Colors.transparent,
           ),
+
+
         ],
       ),
       body: Obx(
@@ -65,13 +76,11 @@ class CompanyHomeScreen extends StatelessWidget {
                 : Column(
                     children: [
                       TextFormField(
-                        controller: companyHomeScreenController
-                            .textSearchEditingController,
+                        controller: companyHomeScreenController.textSearchEditingController,
                         onChanged: (value) {
                           companyHomeScreenController.isLoading(true);
 
-                          companyHomeScreenController.searchEmployeeList =
-                              companyHomeScreenController
+                          companyHomeScreenController.searchEmployeeList = companyHomeScreenController
                                   .allCompanyWiseEmployeeList
                                   .where((element) =>
                                       element.firstName
@@ -101,13 +110,19 @@ class CompanyHomeScreen extends StatelessWidget {
                           log("searchEmployeeList : ${companyHomeScreenController.searchEmployeeList}");
                         },
                         decoration: InputDecoration(
-                          hintText: "Search",
-                          prefixIcon: const Icon(Icons.search),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
+                          enabledBorder: InputFieldStyles().inputBorder(),
+                          focusedBorder: InputFieldStyles().inputBorder(),
+                          errorBorder: InputFieldStyles().inputBorder(),
+                          focusedErrorBorder: InputFieldStyles().inputBorder(),
+                          fillColor: AppColors.colorWhite,
+                          filled: true,
+                          hintText: AppMessage.search,
+                          hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.colorLightHintPurple2,
                           ),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
                           suffixIcon: companyHomeScreenController
                                   .textSearchEditingController.text.isEmpty
                               ? null
@@ -133,9 +148,9 @@ class CompanyHomeScreen extends StatelessWidget {
                           Text(
                             AppMessage.employeeList,
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.sp,
-                            ),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14.sp,
+                                color: AppColors.colorBlack),
                           ).commonAllSidePadding(10)
                         ],
                       ),
