@@ -64,8 +64,6 @@ class CompanyWiseEmployeeData {
     required this.createdby,
     required this.modifiedby,
     required this.isChecked,
-
-
     required this.regularTextFieldValue,
     required this.otTextFieldValue,
     required this.holidayPayTextFieldValue,
@@ -91,15 +89,15 @@ class CompanyWiseEmployeeData {
   final String email;
   final String companyid;
   final String departmentId;
-  final String locationId;
+  final int locationId;
   final String isActive;
   final String payPeriod;
   // final DateTime dateOfBirth;
   // final dynamic home;
   // final dynamic homeNo;
   // final dynamic workPhone;
-  final String hourlyRate;
-  final String salary;
+  final int hourlyRate;
+  final int salary;
   // final DateTime employmentStartDate;
   // final DateTime employmentEndDate;
   final String street;
@@ -108,12 +106,11 @@ class CompanyWiseEmployeeData {
   final String city;
   final String zipcode;
   // final dynamic photo;
-  final String createdby;
+  final int createdby;
   final String modifiedby;
   bool isChecked;
   // final DateTime createdAt;
   // final DateTime updatedAt;
-
 
   String regularTextFieldValue;
   String otTextFieldValue;
@@ -128,51 +125,51 @@ class CompanyWiseEmployeeData {
 
   factory CompanyWiseEmployeeData.fromJson(Map<String, dynamic> json) =>
       CompanyWiseEmployeeData(
-          id: json["id"] ?? 0,
-          firstName: json["first_name"] ?? "",
-          middleName: json["middle_name"] ?? "",
-          lastName: json["last_name"] ?? "",
-          password: json["password"] ?? "",
-          address: json["address"] ?? "",
-          mobileNumber: json["mobile_number"] ?? "",
-          email: json["email"] ?? "",
-          companyid: json["companyid"] ?? "",
-          departmentId: json["department_id"] ?? "",
-          locationId: json["location_id"] ?? "0",
-          isActive: json["is_active"] ?? "",
-          payPeriod: json["pay_period"] ?? "",
-          // dateOfBirth: DateTime.parse(json["date_of_birth"]),
-          // home: json["home"],
-          // homeNo: json["home_no"],
-          // workPhone: json["work_phone"],
-          hourlyRate: json["hourly_rate"] ?? "0",
-          salary: json["salary"] ?? "0",
-          // employmentStartDate: DateTime.parse(json["employment_start_date"]),
-          // employmentEndDate: DateTime.parse(json["employment_end_date"]),
-          street: json["street"] ?? "",
-          town: json["town"] ?? "",
-          state: json["state"] ?? "",
-          city: json["city"] ?? "",
-          zipcode: json["zipcode"] ?? "",
-          // photo: json["photo"],
-          createdby: json["createdby"] ?? "0",
-          modifiedby: json["modifiedby"] ?? "0",
-          isChecked: false,
+        id: json["id"] ?? 0,
+        firstName: json["first_name"] ?? "",
+        middleName: json["middle_name"] ?? "",
+        lastName: json["last_name"] ?? "",
+        password: json["password"] ?? "",
+        address: json["address"] ?? "",
+        mobileNumber: json["mobile_number"] ?? "",
+        email: json["email"] ?? "",
+        companyid: json["companyid"] ?? "",
+        departmentId: json["department_id"] ?? "",
+        locationId: json["location_id"] ?? 0,
+        isActive: json["is_active"] ?? "",
+        payPeriod: json["pay_period"] ?? "",
+        // dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        // home: json["home"],
+        // homeNo: json["home_no"],
+        // workPhone: json["work_phone"],
+        hourlyRate: json["hourly_rate"] ?? 0,
+        salary: json["salary"] ?? 0,
+        // employmentStartDate: DateTime.parse(json["employment_start_date"]),
+        // employmentEndDate: DateTime.parse(json["employment_end_date"]),
+        street: json["street"] ?? "",
+        town: json["town"] ?? "",
+        state: json["state"] ?? "",
+        city: json["city"] ?? "",
+        zipcode: json["zipcode"] ?? "",
+        // photo: json["photo"],
+        createdby: json["createdby"] ?? 0,
+        modifiedby: json["modifiedby"] ?? "0",
+        isChecked: false,
 
-          regularTextFieldValue: "0",
-          otTextFieldValue: "0",
-          holidayPayTextFieldValue: "0",
-          bonusTextFieldValue: "0",
-          otherEarningTextFieldValue: "0",
-          commissionTextFieldValue: "0",
-          sickPayHoursTextFieldValue: "0",
-          vacationHoursTextFieldValue: "0",
-          tipTextFieldValue: "0",
-          taxTextFieldValue: "0",
+        regularTextFieldValue: "0",
+        otTextFieldValue: "0",
+        holidayPayTextFieldValue: "0",
+        bonusTextFieldValue: "0",
+        otherEarningTextFieldValue: "0",
+        commissionTextFieldValue: "0",
+        sickPayHoursTextFieldValue: "0",
+        vacationHoursTextFieldValue: "0",
+        tipTextFieldValue: "0",
+        taxTextFieldValue: "0",
 
-          // createdAt: DateTime.parse(json["created_at"]),
-          // updatedAt: DateTime.parse(json["updated_at"]),
-          );
+        // createdAt: DateTime.parse(json["created_at"]),
+        // updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
   // Map<String, dynamic> toJson() => {
   //     "id": id,

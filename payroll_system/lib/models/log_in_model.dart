@@ -48,13 +48,13 @@ class LoginData {
     required this.permissiondata,
   });
 
-  final String id;
+  final int id;
   final String token;
   final UserData data;
   final PermissionData permissiondata;
 
   factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
-        id: json["ID"] ?? "0",
+        id: json["ID"] ?? 0,
         token: json["Token"] ?? "",
         data: UserData.fromJson(json["data"] ?? {}),
         permissiondata: PermissionData.fromJson(json["permissiondata"] ?? {}),
@@ -90,18 +90,18 @@ class UserData {
     required this.updatedAt,
   });
 
-  final String id;
+  final int id;
   final String userName;
   final String email;
   final String password;
   final String fullName;
   final String address;
   final String phoneno;
-  final String roleId;
+  final int roleId;
   final String isActive;
   // final dynamic lastlogin;
   final String verified;
-  final String createdby;
+  final int createdby;
   // final dynamic modifiedby;
   final String emailVerifiedAt;
   final String photo;
@@ -110,18 +110,18 @@ class UserData {
   final String updatedAt;
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
-        id: json["id"] ?? "0",
+        id: json["id"] ?? 0,
         userName: json["user_name"] ?? '',
         email: json["email"] ?? '',
         password: json["password"] ?? '',
         fullName: json["full_name"] ?? '',
         address: json["address"] ?? '',
         phoneno: json["phoneno"] ?? '',
-        roleId: json["role_id"] ?? "0",
+        roleId: json["role_id"] ?? 0,
         isActive: json["is_active"] ?? '',
         // lastlogin: json["lastlogin"],
         verified: json["verified"] ?? '',
-        createdby: json["createdby"] ?? "0",
+        createdby: json["createdby"] ?? 0,
         // modifiedby: json["modifiedby"],
         emailVerifiedAt: json["email_verified_at"] ?? '',
         photo: json["photo"] ?? '',

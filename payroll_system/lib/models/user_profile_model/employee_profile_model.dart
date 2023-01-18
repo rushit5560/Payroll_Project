@@ -65,7 +65,7 @@ class EmployeeDatum {
     required this.userid,
   });
 
-  final String id;
+  final int id;
   final String firstName;
   final String middleName;
   final String lastName;
@@ -89,10 +89,10 @@ class EmployeeDatum {
   final String photo;
   // final dynamic createdAt;
   // final String updatedAt;
-  final String userid;
+  final int userid;
 
   factory EmployeeDatum.fromJson(Map<String, dynamic> json) => EmployeeDatum(
-        id: json["id"] ?? "0",
+        id: json["id"] ?? 0,
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",
@@ -112,11 +112,11 @@ class EmployeeDatum {
         // salary: json["salary"] ?? "",
         // startDate: json["start_date"] ?? "",
         // lastDayOfWork: json["last_day_of_work"] ?? "",
-        companyid: json["companyid"] ?? "",
+        companyid: json["companyid"] ?? "0",
         photo: json["photo"] ?? "",
         // createdAt: json["created_at"] ?? "",
         // updatedAt: DateTime.parse(json["updated_at"]) ?? "",
-        userid: json["userid"] ?? "0",
+        userid: json["userid"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {

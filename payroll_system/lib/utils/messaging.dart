@@ -26,10 +26,8 @@ class AppMessage {
   static String departmentNameDrawer = "Department";
   static String companyDepartmentNameDrawer = "Company Department";
   static String employeeNameDrawer = "Employee";
-
   static String logOutNameDrawer = "Logout";
   static String changePasswordDrawer = "Change Password";
-
   static String adminName = "Admin";
   static String companiesName = "Company List";
   static String companyName = "Company Name";
@@ -274,6 +272,8 @@ class AppMessage {
 // paychecks
 
   static String paycheckes = 'Paycheckes';
+  static String paycheckesDowanload = 'Paycheckes Dowanload';
+
   static String approvalPaycheckes = 'Approval Paycheckes';
   static String approvalPaycheckesList = 'Approval Paycheckes List';
 
@@ -326,4 +326,11 @@ class AppMessage {
   static String acceptText = 'Accept';
   static String privacyPolicyText = 'Terms & Condition';
   static String search = 'Search';
+
+  // document
+
+  static String pleaseSelectDocument = 'Please select document';
+  static String pleaseSelectDocumentType = 'Please select document type';
+  static String documentList = 'Document List';
+  static String youReachedAtMaxLength = 'You reached at max length';
 }

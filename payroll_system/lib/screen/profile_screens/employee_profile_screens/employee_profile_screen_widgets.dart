@@ -213,6 +213,7 @@ class EmployeeFormModule extends StatelessWidget {
           SizedBox(height: 2.h),
           TextFormField(
             controller: employeeProfileScreenController.homeNumberController,
+            maxLength: 10,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateAddress(val!),
             decoration: InputDecoration(
@@ -227,6 +228,7 @@ class EmployeeFormModule extends StatelessWidget {
           SizedBox(height: 2.h),
           TextFormField(
             controller: employeeProfileScreenController.workNumberController,
+            maxLength: 10,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (val) => FieldValidation().validateAddress(val!),
             decoration: InputDecoration(

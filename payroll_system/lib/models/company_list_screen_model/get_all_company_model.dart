@@ -1,8 +1,10 @@
 import 'dart:convert';
 
-AllCompanyModel allCompanyModelFromJson(String str) => AllCompanyModel.fromJson(json.decode(str));
+AllCompanyModel allCompanyModelFromJson(String str) =>
+    AllCompanyModel.fromJson(json.decode(str));
 
-String allCompanyModelToJson(AllCompanyModel data) => json.encode(data.toJson());
+String allCompanyModelToJson(AllCompanyModel data) =>
+    json.encode(data.toJson());
 
 class AllCompanyModel {
   AllCompanyModel({
@@ -15,17 +17,19 @@ class AllCompanyModel {
   String messege;
   List<CompanyData> data;
 
-  factory AllCompanyModel.fromJson(Map<String, dynamic> json) => AllCompanyModel(
-    success: json["success"] ?? false,
-    messege: json["messege"] ?? "",
-    data: List<CompanyData>.from((json["Data"] ?? []).map((x) => CompanyData.fromJson(x ?? {}))),
-  );
+  factory AllCompanyModel.fromJson(Map<String, dynamic> json) =>
+      AllCompanyModel(
+        success: json["success"] ?? false,
+        messege: json["messege"] ?? "",
+        data: List<CompanyData>.from(
+            (json["Data"] ?? []).map((x) => CompanyData.fromJson(x ?? {}))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
-    "messege": messege,
-    // "Data": List<dynamic>.from(data.map((x) => x.toJson())),
-  };
+        "success": success,
+        "messege": messege,
+        // "Data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
 }
 
 class CompanyData {
@@ -55,12 +59,12 @@ class CompanyData {
   String fullName;
   String address;
   String phoneno;
-  String roleId;
+  int roleId;
   String departmentId;
   String isActive;
   // dynamic lastlogin;
   String verified;
-  String createdby;
+  int createdby;
   // dynamic modifiedby;
   // dynamic emailVerifiedAt;
   String photo;
@@ -68,24 +72,24 @@ class CompanyData {
   // dynamic updatedAt;
 
   factory CompanyData.fromJson(Map<String, dynamic> json) => CompanyData(
-    id: json["id"] ?? 0,
-    userName: json["user_name"] ?? "",
-    email: json["email"] ?? "",
-    fullName: json["full_name"] ?? "",
-    address: json["address"] ?? "",
-    phoneno: json["phoneno"] ?? "",
-    roleId: json["role_id"] ?? "0",
-    departmentId: (json["department_id"] ?? "0").toString(),
-    isActive: json["is_active"] ?? "",
-    // lastlogin: json["lastlogin"],
-    verified: json["verified"] ?? "",
-    createdby: json["createdby"] ?? "0",
-    // modifiedby: json["modifiedby"],
-    // emailVerifiedAt: json["email_verified_at"],
-    photo: json["photo"] ?? "",
-    // createdAt: DateTime.parse(json["created_at"]),
-    // updatedAt: json["updated_at"],
-  );
+        id: json["id"] ?? 0,
+        userName: json["user_name"] ?? "",
+        email: json["email"] ?? "",
+        fullName: json["full_name"] ?? "",
+        address: json["address"] ?? "",
+        phoneno: json["phoneno"] ?? "",
+        roleId: json["role_id"] ?? 0,
+        departmentId: (json["department_id"] ?? "0").toString(),
+        isActive: json["is_active"] ?? "",
+        // lastlogin: json["lastlogin"],
+        verified: json["verified"] ?? "",
+        createdby: json["createdby"] ?? 0,
+        // modifiedby: json["modifiedby"],
+        // emailVerifiedAt: json["email_verified_at"],
+        photo: json["photo"] ?? "",
+        // createdAt: DateTime.parse(json["created_at"]),
+        // updatedAt: json["updated_at"],
+      );
 
   /*Map<String, dynamic> toJson() => {
     "id": id,

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/employee_upload_document_screen_controller.dart';
-import 'package:payroll_system/utils/messaging.dart';
-import 'package:payroll_system/utils/style.dart';
+import 'package:payroll_system/controllers/upload_document_screen_controller.dart';
+import 'package:payroll_system/screen/employee_screens/document_upload_screen/document_upload_widgets_screen.dart';
+import 'package:payroll_system/utils/extensions.dart';
 import 'package:sizer/sizer.dart';
-import 'employee_upload_document_screen_widgets.dart';
+import '../../../utils/messaging.dart';
+import '../../../utils/style.dart';
 
-class EmployeeUploadDocumentScreen extends StatelessWidget {
-  EmployeeUploadDocumentScreen({Key? key}) : super(key: key);
-  final employeeUploadDocumentScreenController =
-      Get.put(EmployeeUploadDocumentScreenController());
+class DocumentUploadScreen extends StatelessWidget {
+  DocumentUploadScreen({Key? key}) : super(key: key);
+  final uploadDocumentScreenController =
+      Get.put(UploadDocumentScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          employeeUploadDocumentScreenController.employeeName,
+          uploadDocumentScreenController.employeeName,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -38,7 +38,7 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        () => employeeUploadDocumentScreenController.isLoading.value
+        () => uploadDocumentScreenController.isLoading.value
             ? CommonLoader().showLoader()
             : Column(
                 children: [
@@ -54,11 +54,11 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () async {
-                          if (employeeUploadDocumentScreenController
-                                  .employeeSelectedDocumentList.length <=
+                          if (uploadDocumentScreenController
+                                  .selectedDocumentList.length <=
                               5) {
-                            await employeeUploadDocumentScreenController
-                                .pickEmployeeDocumentFunction();
+                            await uploadDocumentScreenController
+                                .pickDocumentFunction();
                           } else {
                             Fluttertoast.showToast(
                                 msg: AppMessage.youReachedAtMaxLength);
@@ -71,45 +71,45 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  EmployeeDocumentListModule(),
+                  DocumentListModule(),
                   SizedBox(height: 2.h),
-                  EmployeeDocumentTypeDropdownModule(),
+                  DocumentTypeDropdownModule(),
                   SizedBox(height: 2.h),
                   CustomSubmitButtonModule(
                     onPress: () async {
-                      if (employeeUploadDocumentScreenController
-                          .employeeSelectedDocumentList.isEmpty) {
+                      if (uploadDocumentScreenController
+                          .selectedDocumentList.isEmpty) {
                         Fluttertoast.showToast(
                             msg: AppMessage.pleaseSelectDocument);
                       } else {
-                        if (employeeUploadDocumentScreenController
+                        if (uploadDocumentScreenController
                                 .documentSelectedTypeValue.value ==
                             AppMessage.chooseOption) {
                           Fluttertoast.showToast(
-                              msg: AppMessage.pleaseSelectDocument);
+                              msg: AppMessage.pleaseSelectDocumentType);
                         } else {
-                          await employeeUploadDocumentScreenController
-                              .uploadEmployeeDocumentFunction();
+                          await uploadDocumentScreenController
+                              .uploadDocumentFunction();
                         }
                       }
                     },
                     labelText: AppMessage.submit,
                   ),
                   SizedBox(height: 2.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppMessage.documentList,
-                        style: TextStyleConfig.textStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.h),
-                  Expanded(child: EmployeeUploadedDocumentListModule()),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       AppMessage.documentList,
+                  //       style: TextStyleConfig.textStyle(
+                  //         fontWeight: FontWeight.w600,
+                  //         fontSize: 16,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: 2.h),
+                  // Expanded(child: UploadedDocumentListModule()),
                 ],
               ).commonAllSidePadding(10),
       ),

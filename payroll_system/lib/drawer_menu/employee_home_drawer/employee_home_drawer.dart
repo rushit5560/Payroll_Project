@@ -7,13 +7,16 @@ import 'package:payroll_system/controllers/employee_home_screen_controller.dart'
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/employee_screens/document_download_screen/document_download_screen.dart';
+import 'package:payroll_system/screen/employee_screens/document_upload_screen/document_uplode_screen.dart';
+import 'package:payroll_system/screen/employee_screens/paycheckes_dowanload_screen/paycheckes_dowanload_screen.dart';
+import 'package:payroll_system/screen/employee_screens/paycheckes_dowanload_screen/paycheckes_dowanload_widgets_screen.dart';
 import 'package:payroll_system/screen/profile_screens/employee_profile_screens/employee_profile_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 
-
+// ignore: must_be_immutable
 class EmployeeHomeDrawerMenu extends StatelessWidget {
   EmployeeHomeDrawerMenu({Key? key}) : super(key: key);
   final employeeHomeScreenController = Get.find<EmployeeHomeScreenController>();
@@ -39,42 +42,70 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                         Get.to(() => EmployeeProfileScreen());
                       },
                     ),
-
                     EmployeeDrawerTile(
                       title: AppMessage.documentDownloadDrawer,
                       imageStatus: false,
                       // image: AppImages.downloadIcon,
-                      icon: const Icon(Icons.file_download_outlined, color: AppColors.colorBtBlue),
+                      icon: const Icon(Icons.file_download_outlined,
+                          color: AppColors.colorBtBlue),
                       onTap: () async {
-                        int employeeId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
-                        String employeeName = await userPreference.getStringValueFromPrefs(keyId: UserPreference.userNameKey);
+                        int employeeId =
+                            await userPreference.getIntValueFromPrefs(
+                                keyId: UserPreference.userIdKey);
+                        String employeeName =
+                            await userPreference.getStringValueFromPrefs(
+                                keyId: UserPreference.userNameKey);
                         Get.back();
-                        Get.to(() => DocumentDownloadScreen(),
-                        arguments: [employeeId.toString(), employeeName],
+                        Get.to(
+                          () => DocumentDownloadScreen(),
+                          arguments: [employeeId.toString(), employeeName],
                         );
                       },
                     ),
-
                     EmployeeDrawerTile(
                       title: AppMessage.documentUploadDrawer,
                       imageStatus: false,
-                      icon: const Icon(Icons.file_upload_outlined, color: AppColors.colorBtBlue),
-                      onTap: () {
+                      icon: const Icon(Icons.file_upload_outlined,
+                          color: AppColors.colorBtBlue),
+                      onTap: () async {
+                        int employeeId =
+                            await userPreference.getIntValueFromPrefs(
+                                keyId: UserPreference.userIdKey);
+                        String employeeName =
+                            await userPreference.getStringValueFromPrefs(
+                                keyId: UserPreference.userNameKey);
                         Get.back();
-                        Get.to(() => EmployeeProfileScreen());
+                        Get.to(
+                          () => DocumentUploadScreen(),
+                          arguments: [
+                            employeeId.toString(),
+                            employeeName,
+                          ],
+                        );
                       },
                     ),
-
                     EmployeeDrawerTile(
                       title: AppMessage.paychecksDownloadDrawer,
                       imageStatus: false,
-                      icon: const Icon(Icons.file_download_outlined, color: AppColors.colorBtBlue),
-                      onTap: () {
+                      icon: const Icon(Icons.file_download_outlined,
+                          color: AppColors.colorBtBlue),
+                      onTap: () async {
+                        int employeeId =
+                            await userPreference.getIntValueFromPrefs(
+                                keyId: UserPreference.userIdKey);
+                        String employeeName =
+                            await userPreference.getStringValueFromPrefs(
+                                keyId: UserPreference.userNameKey);
                         Get.back();
-                        Get.to(() => EmployeeProfileScreen());
+                        Get.to(
+                          () => PayCheckesDowanloadListScreen(),
+                          arguments: [
+                            employeeId.toString(),
+                            employeeName,
+                          ],
+                        );
                       },
                     ),
-
                     EmployeeDrawerTile(
                       title: AppMessage.changePassword,
                       imageStatus: true,
@@ -84,18 +115,17 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                         Get.to(() => ChangePasswordScreen());
                       },
                     ),
-
                   ],
                 ),
               ),
             ),
+
             /// Getting from common module
             LogOutDrawerTileModule(
               onTap: () async {
                 CustomAlertDialog().showAlertDialog(
                   context: context,
-                  textContent:
-                  AppMessage.logoutMessage,
+                  textContent: AppMessage.logoutMessage,
                   onYesTap: () async {
                     await UserPreference()
                         .logoutRemoveUserDetailsFromPrefs()
@@ -146,11 +176,11 @@ class EmployeeDrawerTile extends StatelessWidget {
             leading: imageStatus == false
                 ? icon
                 : Image.asset(
-              image!,
-              height: 20,
-              width: 20,
-              color: AppColors.colorBtBlue,
-            ),
+                    image!,
+                    height: 20,
+                    width: 20,
+                    color: AppColors.colorBtBlue,
+                  ),
             title: Text(
               title,
               textAlign: TextAlign.left,
@@ -159,11 +189,14 @@ class EmployeeDrawerTile extends StatelessWidget {
             trailing: const Icon(Icons.arrow_forward_ios_rounded,
                 color: AppColors.colorBtBlue),
           ),
-          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10,
+          const Divider(
+              height: 1,
+              thickness: 1,
+              indent: 10,
+              endIndent: 10,
               color: AppColors.colorLightPurple2),
         ],
       ),
     );
   }
 }
-

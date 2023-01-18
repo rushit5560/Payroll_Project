@@ -22,13 +22,13 @@ class AdminProfileScreenController extends GetxController {
   File? imageFile;
 
   UserData? profileData;
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController userNameController = TextEditingController();
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
+    // ignore: prefer_interpolation_to_compose_strings
     String url = ApiUrl.profileGetApi + "/${UserDetails.userId}";
     log("getUserProfileFunction Api url : $url");
 
@@ -42,6 +42,7 @@ class AdminProfileScreenController extends GetxController {
       var isSuccessStatus = userProfileModel.success;
 
       if (isSuccessStatus) {
+        // ignore: unnecessary_null_comparison
         if (userProfileModel.data == null) {
           log("data is empty");
         } else {
@@ -232,15 +233,12 @@ class AdminProfileScreenController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
-
     getUserProfileFunction();
     super.onInit();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 }

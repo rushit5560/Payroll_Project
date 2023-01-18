@@ -1,13 +1,12 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/employee_upload_document_screen_controller.dart';
-import 'package:payroll_system/models/employee_upload_document_models/employee_document_model.dart';
+import 'package:payroll_system/controllers/upload_document_screen_controller.dart';
+import 'package:payroll_system/models/uplode_document_screen_model/uplode_document_screen_model.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
@@ -15,21 +14,23 @@ import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 
-class EmployeeDocumentListModule extends StatelessWidget {
-  EmployeeDocumentListModule({Key? key}) : super(key: key);
-  final screenController = Get.find<EmployeeUploadDocumentScreenController>();
+class DocumentListModule extends StatelessWidget {
+  DocumentListModule({Key? key}) : super(key: key);
+  final uploadDocumentScreenController =
+      Get.find<UploadDocumentScreenController>();
 
   @override
   Widget build(BuildContext context) {
-    return screenController.employeeSelectedDocumentList.isNotEmpty
+    return uploadDocumentScreenController.selectedDocumentList.isNotEmpty
         ? ListView.builder(
-            itemCount: screenController.employeeSelectedDocumentList.length,
+            itemCount:
+                uploadDocumentScreenController.selectedDocumentList.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, i) {
               String fileName = "";
-              List<String> tempStringList = screenController
-                  .employeeSelectedDocumentList[i].path
+              List<String> tempStringList = uploadDocumentScreenController
+                  .selectedDocumentList[i].path
                   .split('/');
               for (int i = 0; i < tempStringList.length; i++) {
                 fileName = tempStringList[i];
@@ -65,11 +66,12 @@ class EmployeeDocumentListModule extends StatelessWidget {
                             onCancelTap: () => Get.back(),
                             onYesTap: () async {
                               /// Api Call Delete
-                              screenController.isLoading(true);
-                              screenController.employeeSelectedDocumentList
+                              uploadDocumentScreenController.isLoading(true);
+                              uploadDocumentScreenController
+                                  .selectedDocumentList
                                   .removeAt(i);
                               Get.back();
-                              screenController.isLoading(false);
+                              uploadDocumentScreenController.isLoading(false);
                             });
                       },
                       icon: const Icon(Icons.close_rounded),
@@ -85,9 +87,10 @@ class EmployeeDocumentListModule extends StatelessWidget {
   }
 }
 
-class EmployeeDocumentTypeDropdownModule extends StatelessWidget {
-  EmployeeDocumentTypeDropdownModule({Key? key}) : super(key: key);
-  final screenController = Get.find<EmployeeUploadDocumentScreenController>();
+class DocumentTypeDropdownModule extends StatelessWidget {
+  DocumentTypeDropdownModule({Key? key}) : super(key: key);
+  final uploadDocumentScreenController =
+      Get.find<UploadDocumentScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +103,9 @@ class EmployeeDocumentTypeDropdownModule extends StatelessWidget {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          value: screenController.documentSelectedTypeValue.value,
-          items: screenController.documentTypeList
+          // hint: Text(AppMessage.chooseOption),
+          value: uploadDocumentScreenController.documentSelectedTypeValue.value,
+          items: uploadDocumentScreenController.documentTypeList
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
@@ -115,9 +119,10 @@ class EmployeeDocumentTypeDropdownModule extends StatelessWidget {
             width: 15,
           ).commonSymmetricPadding(horizontal: 10),
           onChanged: (String? value) {
-            screenController.isLoading(true);
-            screenController.documentSelectedTypeValue.value = value!;
-            screenController.isLoading(false);
+            uploadDocumentScreenController.isLoading(true);
+            uploadDocumentScreenController.documentSelectedTypeValue.value =
+                value!;
+            uploadDocumentScreenController.isLoading(false);
           },
         ).commonOnlyPadding(left: 10, right: 10),
       ),
@@ -126,22 +131,24 @@ class EmployeeDocumentTypeDropdownModule extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class EmployeeUploadedDocumentListModule extends StatelessWidget {
-  EmployeeUploadedDocumentListModule({Key? key}) : super(key: key);
-  final screenController = Get.find<EmployeeUploadDocumentScreenController>();
+class UploadedDocumentListModule extends StatelessWidget {
+  UploadedDocumentListModule({Key? key}) : super(key: key);
+  final uploadDocumentScreenController =
+      Get.find<UploadDocumentScreenController>();
   UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
-    return screenController.employeeUploadedDocumentList.isEmpty
+    return uploadDocumentScreenController.uploadedDocumentList.isEmpty
         ? Center(child: Text(AppMessage.noDocumentUploaded))
         : ListView.builder(
-            itemCount: screenController.employeeUploadedDocumentList.length,
+            itemCount:
+                uploadDocumentScreenController.uploadedDocumentList.length,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, i) {
-              DocumentDatum singleDoc =
-                  screenController.employeeUploadedDocumentList[i];
+              DocumentDatumData singleDoc =
+                  uploadDocumentScreenController.uploadedDocumentList[i];
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -166,8 +173,9 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                                     AppMessage.deleteDocumentAlertMessage,
                                 onYesTap: () async {
                                   log("Delete Document");
-                                  await screenController.deleteDocumentFunction(
-                                      singleDoc.id.toString(), i);
+                                  await uploadDocumentScreenController
+                                      .deleteDocumentFunction(
+                                          singleDoc.id.toString(), i);
                                 },
                                 onCancelTap: () {
                                   Get.back();

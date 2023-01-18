@@ -32,6 +32,8 @@ class EmployeeProfileScreenController extends GetxController {
   TextEditingController currentAddressController = TextEditingController();
   TextEditingController homeAddressController = TextEditingController();
 
+  UserPreference userPreference = UserPreference();
+
   Future<void> selectDateOfBirth(BuildContext context) async {
     final DateTime? d = await showDatePicker(
       context: context,
@@ -86,6 +88,8 @@ class EmployeeProfileScreenController extends GetxController {
 
           homeAddressController.text = employeeData!.home;
           currentAddressController.text = employeeData!.address;
+
+          log('employeeData photo12121 : ${employeeData!.photo}');
         }
 
         log(" get employee details success :: ");
@@ -109,120 +113,67 @@ class EmployeeProfileScreenController extends GetxController {
     log('UserDetails.userid: ${UserDetails.userId}');
 
     try {
-      if (imageFile != null) {
-        log("uploading with a photo");
-        var request = http.MultipartRequest('POST', Uri.parse(url));
+      int userId = await userPreference.getIntValueFromPrefs(
+          keyId: UserPreference.userIdKey);
+      var request = http.MultipartRequest('POST', Uri.parse(url));
 
+      if (imageFile != null) {
         request.files.add(
           await http.MultipartFile.fromPath(
             "photo",
             imageFile!.path,
           ),
         );
-
-        request.fields['userid'] = UserDetails.userId.toString();
-        request.fields['first_name'] = firstNameController.text;
-        request.fields['middle_name'] = middleNameController.text;
-        request.fields['last_name'] = lastNameController.text;
-
-        request.fields['phone_no'] = phoneNumberController.text;
-        request.fields['date_of_brith'] = dobFieldController.text;
-        request.fields['address'] = currentAddressController.text;
-        request.fields['home'] = homeAddressController.text;
-        request.fields['home_no'] = dobFieldController.text;
-        request.fields['work_phone'] = dobFieldController.text;
-
-        request.fields['showimg'] =
-            employeeData!.photo.isEmpty ? "" : employeeData!.photo;
-
-        log('request.fields: ${request.fields}');
-        log('request.files: ${request.files}');
-
-        log('request.headers: ${request.headers}');
-
-        var response = await request.send();
-        log('response: ${response.request}');
-
-        response.stream
-            .transform(const Utf8Decoder())
-            .transform(const LineSplitter())
-            .listen((value) async {
-          SuccessModel successModel = SuccessModel.fromJson(json.decode(value));
-          var isSuccessStatus = successModel.success;
-          log('response body is ::: $value');
-
-          if (isSuccessStatus) {
-            Fluttertoast.showToast(
-              msg: "User profile update successfully.",
-              toastLength: Toast.LENGTH_SHORT,
-            );
-            log(successModel.message);
-
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-
-            UserDetails.userName =
-                prefs.getString(UserPreference.userNameKey) ?? "";
-
-            Get.back();
-          } else {
-            log('False False');
-          }
-        });
       } else {
-        log("uploading without a photo");
-        var request = http.MultipartRequest('POST', Uri.parse(url));
-
-        request.fields['userid'] = UserDetails.userId.toString();
-        request.fields['first_name'] = firstNameController.text;
-        request.fields['middle_name'] = middleNameController.text;
-        request.fields['last_name'] = lastNameController.text;
-
-        request.fields['phone_no'] = phoneNumberController.text;
-        request.fields['date_of_brith'] = dobFieldController.text;
-        request.fields['address'] = currentAddressController.text;
-        request.fields['home'] = homeAddressController.text;
-        request.fields['home_no'] = dobFieldController.text;
-        request.fields['work_phone'] = dobFieldController.text;
-
         request.fields['showimg'] =
             employeeData!.photo.isEmpty ? "" : employeeData!.photo;
-
-        log('request.fields: ${request.fields}');
-        log('request.files: ${request.files}');
-
-        log('request.headers: ${request.headers}');
-
-        var response = await request.send();
-        log('response: ${response.request}');
-
-        response.stream
-            .transform(const Utf8Decoder())
-            .transform(const LineSplitter())
-            .listen((value) async {
-          SuccessModel successModel = SuccessModel.fromJson(json.decode(value));
-          var isSuccessStatus = successModel.success;
-          log('response body is ::: $value');
-
-          if (isSuccessStatus) {
-            Fluttertoast.showToast(
-              msg: "User profile update successfully.",
-              toastLength: Toast.LENGTH_SHORT,
-            );
-            log(successModel.message);
-
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-
-            // prefs.setString(UserPreference.userNameKey, nameController.text);
-
-            UserDetails.userName =
-                prefs.getString(UserPreference.userNameKey) ?? "";
-
-            Get.back();
-          } else {
-            log('False False');
-          }
-        });
       }
+
+      request.fields['userid'] = "$userId";
+      request.fields['first_name'] = firstNameController.text;
+      request.fields['middle_name'] = middleNameController.text;
+      request.fields['last_name'] = lastNameController.text;
+
+      request.fields['phone_no'] = phoneNumberController.text;
+      request.fields['date_of_brith'] = dobFieldController.text;
+      request.fields['address'] = currentAddressController.text;
+      request.fields['home'] = homeAddressController.text;
+      request.fields['home_no'] = dobFieldController.text;
+      request.fields['work_phone'] = dobFieldController.text;
+
+      log('request.fields: ${request.fields}');
+      log('request.files: ${request.files}');
+
+      log('request.headers: ${request.headers}');
+
+      var response = await request.send();
+      log('response: ${response.request}');
+
+      response.stream
+          .transform(const Utf8Decoder())
+          .transform(const LineSplitter())
+          .listen((value) async {
+        SuccessModel successModel = SuccessModel.fromJson(json.decode(value));
+        var isSuccessStatus = successModel.success;
+        log('response body is ::: $value');
+
+        if (isSuccessStatus) {
+          Fluttertoast.showToast(
+            msg: "User profile update successfully.",
+            toastLength: Toast.LENGTH_SHORT,
+          );
+          log(successModel.message);
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+
+          UserDetails.userName =
+              prefs.getString(UserPreference.userNameKey) ?? "";
+
+          Get.back();
+        } else {
+          log('False False');
+        }
+      });
     } catch (e) {
       log("updateEmployeeProfileFunction Error ::: $e");
       rethrow;

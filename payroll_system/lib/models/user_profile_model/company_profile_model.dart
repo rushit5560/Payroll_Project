@@ -63,14 +63,14 @@ class CompanyData {
   final String fullName;
   final String address;
   final String phoneno;
-  final String roleId;
+  final int roleId;
   final String departmentId;
   final String locationId;
   final String isActive;
   // final dynamic lastlogin;
   final String verified;
-  final String createdby;
-  final String modifiedby;
+  final int createdby;
+  final int modifiedby;
   // final dynamic emailVerifiedAt;
   final String photo;
   final String createdAt;
@@ -83,14 +83,14 @@ class CompanyData {
         fullName: json["full_name"] ?? "",
         address: json["address"] ?? "",
         phoneno: json["phoneno"] ?? "",
-        roleId: json["role_id"] ?? "0",
+        roleId: json["role_id"] ?? 0,
         departmentId: json["department_id"] ?? "",
         locationId: json["location_id"] ?? "",
         isActive: json["is_active"] ?? "",
         // lastlogin: json["lastlogin"] ?? "",
         verified: json["verified"] ?? "",
-        createdby: json["createdby"] ?? "0",
-        modifiedby: json["modifiedby"] ?? "0",
+        createdby: json["createdby"] ?? 0,
+        modifiedby: json["modifiedby"] ?? 0,
         // emailVerifiedAt: json["email_verified_at"] ?? "",
         photo: json["photo"] ?? "",
         createdAt: json["created_at"] ?? "",

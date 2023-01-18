@@ -26,29 +26,24 @@ class DocumentDownloadScreenController extends GetxController {
       http.Response response = await http.get(Uri.parse(url));
       log("getEmployeeDocumentFunction  :${response.body}");
 
-      EmployeeDocumentModel employeeDocumentModel = EmployeeDocumentModel.fromJson(json.decode(response.body));
+      EmployeeDocumentModel employeeDocumentModel =
+          EmployeeDocumentModel.fromJson(json.decode(response.body));
       isSuccessStatus.value = employeeDocumentModel.success;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         employeeUploadedDocumentList.clear();
         employeeUploadedDocumentList.addAll(employeeDocumentModel.data);
         log('employeeUploadedDocumentList Length : ${employeeUploadedDocumentList.length}');
       } else {
         log('getEmployeeDocumentFunction Else');
       }
-
-
-
-    } catch(e) {
+    } catch (e) {
       log('getEmployeeDocumentFunction Error : $e');
       rethrow;
-    } finally{
+    } finally {
       isLoading(false);
     }
   }
-
-
-
 
   @override
   void onInit() {
@@ -59,6 +54,4 @@ class DocumentDownloadScreenController extends GetxController {
   getLoggedInEmployeeIdFunction() async {
     await getEmployeeDocumentFunction();
   }
-
-
 }
