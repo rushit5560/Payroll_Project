@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/company_profile_screen_controller.dart';
@@ -198,7 +199,7 @@ class CompanyFormModule extends StatelessWidget {
                       ),
                     ]),
               ).commonSymmetricPadding(vertical: 2),
-         
+
               Container(
                 width: double.infinity,
                 height: 50,
@@ -230,50 +231,81 @@ class CompanyFormModule extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.h),
-              TextFormField(
-                controller: companyProfileScreenController.nameController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (val) => FieldValidation().validateUserName(val!),
-                decoration: InputDecoration(
-                  fillColor: AppColors.greyColor.withOpacity(0.25),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                  labelText: AppMessage.name,
-                  border: border,
-                  enabledBorder: border,
-                  filled: true,
-                ),
-              ),
+
+              FormSingleFieldModule(
+                  textEditingController:
+                      companyProfileScreenController.nameController,
+                  validate: (val) => FieldValidation().validateUserName(val!),
+                  maxLength: 10,
+                  text: AppMessage.userName,
+                  headerText: AppMessage.userName,
+                  mandatoryText: " ${AppMessage.mandatory}"),
+
+              // TextFormField(
+              //   controller: companyProfileScreenController.nameController,
+              //   autovalidateMode: AutovalidateMode.onUserInteraction,
+              //   validator: (val) => FieldValidation().validateUserName(val!),
+              //   decoration: InputDecoration(
+              //     fillColor: AppColors.greyColor.withOpacity(0.25),
+              //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              //     labelText: AppMessage.name,
+              //     border: border,
+              //     enabledBorder: border,
+              //     filled: true,
+              //   ),
+              // ),
               SizedBox(height: 2.h),
-              TextFormField(
-                controller:
-                    companyProfileScreenController.phoneNumberController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (val) =>
-                    FieldValidation().validateMobileNumber(val!),
-                maxLength: 10,
-                decoration: InputDecoration(
-                  fillColor: AppColors.greyColor.withOpacity(0.25),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                  labelText: AppMessage.phoneNumber,
-                  border: border,
-                  enabledBorder: border,
-                  filled: true,
-                ),
-              ),
+
+              FormSingleFieldModule(
+                  textEditingController:
+                      companyProfileScreenController.phoneNumberController,
+                  validate: (val) =>
+                      FieldValidation().validateMobileNumber(val!),
+                  maxLength: 10,
+                  text: AppMessage.phoneNumber,
+                  headerText: AppMessage.phoneNumber,
+                  mandatoryText: " ${AppMessage.mandatory}"),
+
+              // TextFormField(
+              //   controller:
+              //       companyProfileScreenController.phoneNumberController,
+              //   autovalidateMode: AutovalidateMode.onUserInteraction,
+              //   validator: (val) =>
+              //       FieldValidation().validateMobileNumber(val!),
+              //   maxLength: 10,
+              //   decoration: InputDecoration(
+              //     fillColor: AppColors.greyColor.withOpacity(0.25),
+              //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              //     labelText: AppMessage.phoneNumber,
+              //     border: border,
+              //     enabledBorder: border,
+              //     filled: true,
+              //   ),
+              // ),
               SizedBox(height: 2.h),
-              TextFormField(
-                controller: companyProfileScreenController.addressController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (val) => FieldValidation().validateAddress(val!),
-                decoration: InputDecoration(
-                  fillColor: AppColors.greyColor.withOpacity(0.25),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                  labelText: AppMessage.address,
-                  border: border,
-                  enabledBorder: border,
-                  filled: true,
-                ),
-              ),
+
+              FormSingleFieldModule(
+                  textEditingController:
+                      companyProfileScreenController.addressController,
+                  validate: (val) => FieldValidation().validateAddress(val!),
+                  maxLength: 10,
+                  text: AppMessage.address,
+                  headerText: AppMessage.address,
+                  mandatoryText: " ${AppMessage.mandatory}"),
+
+              // TextFormField(
+              //   controller: companyProfileScreenController.addressController,
+              //   autovalidateMode: AutovalidateMode.onUserInteraction,
+              //   validator: (val) => FieldValidation().validateAddress(val!),
+              //   decoration: InputDecoration(
+              //     fillColor: AppColors.greyColor.withOpacity(0.25),
+              //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              //     labelText: AppMessage.address,
+              //     border: border,
+              //     enabledBorder: border,
+              //     filled: true,
+              //   ),
+              // ),
             ],
           ),
         ],
@@ -282,40 +314,38 @@ class CompanyFormModule extends StatelessWidget {
   }
 }
 
-class CompanySubmitButtonModule extends StatelessWidget {
-  CompanySubmitButtonModule({super.key});
+// class CompanySubmitButtonModule extends StatelessWidget {
+//   CompanySubmitButtonModule({super.key});
 
-  final companyProfileScreenController =
-      Get.find<CompanyProfileScreenController>();
+//   final companyProfileScreenController =
+//       Get.find<CompanyProfileScreenController>();
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 45,
-      width: 60.w,
-      child: ElevatedButton(
-        onPressed: () async {
-          if (companyProfileScreenController.formKey.currentState!.validate()) {
-
-
-            await companyProfileScreenController.updateCompanyProfileFunction();
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            AppMessage.submitText,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: AppColors.whiteColor,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 45,
+//       width: 60.w,
+//       child: ElevatedButton(
+//         onPressed: () async {
+//           if (companyProfileScreenController.formKey.currentState!.validate()) {
+//             await companyProfileScreenController.updateCompanyProfileFunction();
+//           }
+//         },
+//         style: ElevatedButton.styleFrom(
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(28),
+//           ),
+//         ),
+//         child: Center(
+//           child: Text(
+//             AppMessage.submitText,
+//             style: TextStyle(
+//               fontSize: 14.sp,
+//               color: AppColors.whiteColor,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -110,7 +110,7 @@ class UserData {
   final String updatedAt;
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
-        id: json["id"] ?? "",
+        id: (json["id"] ?? "0").toString(),
         userName: json["user_name"] ?? '',
         email: json["email"] ?? '',
         password: json["password"] ?? '',

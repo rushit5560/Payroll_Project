@@ -126,6 +126,7 @@ class AppMessage {
   static String exInsertYourDob = 'Ex. Insert your dob';
   static String pleaseSelectPayper = 'Please select payper';
   static String street = 'Street';
+  static String town = 'Town';
   static String landmark = 'Landmark';
   static String zipcode = 'Zipcode';
   static String city = 'City';
@@ -176,6 +177,8 @@ class AppMessage {
   static String mobileNumberMustBeDigits = 'Mobile Number must be digits';
   static String pleaseEnterYourCurrentAddress =
       'Please enter your current address';
+
+  static String pleaseEnterYourCity = 'Please enter your city';
   static String pleaseEnterYourCompanyAddress =
       'Please enter your company address';
   static String pleaseEnterStreetAddress = 'Please enter your street address';
@@ -183,6 +186,7 @@ class AppMessage {
       'Please enter your landmark address';
   static String pleaseEnterCity = 'Please enter city';
   static String pleaseEnterState = 'Please enter state';
+  static String pleaseEnterTown = 'Please enter town';
   static String pleaseEnterZipCode = 'Please enter zipCode';
   static String zipCode5CharacterLength = 'Zipcode length atleast 5 characters';
   static String zipCode6CharacterLength = 'Zipcode length max 6 characters';
@@ -281,8 +285,8 @@ class AppMessage {
   static String approvePaycheckes = 'Approve Paycheckes';
 
   static String approved = 'Approved';
-  static String nonApproved = 'Non Approved';
-  static String hours = 'ours';
+  static String nonApproved = 'Not Approved';
+  static String hours = 'Hours';
 
   static String regular = 'Regular (\$)';
   static String ot = 'OT (\$)';

@@ -32,7 +32,7 @@ class EmployeeProfileModel {
   Map<String, dynamic> toJson() => {
         "success": success,
         "messege": messege,
-        "Data": List<dynamic>.from(data.map((x) => x.toJson())),
+        // "Data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 }
 
@@ -46,6 +46,7 @@ class EmployeeDatum {
     required this.address,
     required this.phoneNo,
     required this.email,
+    required this.companyid,
     // this.departmentId,
     required this.isActive,
     // this.createdby,
@@ -54,11 +55,15 @@ class EmployeeDatum {
     required this.home,
     required this.homeNo,
     required this.workPhone,
+    required this.city,
+    required this.state,
+    required this.town,
+    required this.street,
+
     // this.hourlyRate,
     // this.salary,
     // this.startDate,
     // this.lastDayOfWork,
-    required this.companyid,
     required this.photo,
     // this.createdAt,
     // this.updatedAt,
@@ -81,6 +86,11 @@ class EmployeeDatum {
   final String home;
   final String homeNo;
   final String workPhone;
+  final String street;
+  final String town;
+  final String state;
+  final String city;
+
   // final dynamic hourlyRate;
   // final dynamic salary;
   // final dynamic startDate;
@@ -89,7 +99,7 @@ class EmployeeDatum {
   final String photo;
   // final dynamic createdAt;
   // final String updatedAt;
-  final int userid;
+  final String userid;
 
   factory EmployeeDatum.fromJson(Map<String, dynamic> json) => EmployeeDatum(
         id: json["id"] ?? 0,
@@ -98,16 +108,21 @@ class EmployeeDatum {
         lastName: json["last_name"] ?? "",
         password: json["password"] ?? "",
         address: json["address"] ?? "",
-        phoneNo: json["phone_no"] ?? "",
+        phoneNo: json["mobile_number"] ?? "",
         email: json["email"] ?? "",
         // departmentId: json["department_id"] ?? "",
         isActive: json["is_active"] ?? "",
         // createdby: json["createdby"] ?? "",
         // modifiedby: json["modifiedby"] ?? "",
-        dateOfBrith: json["date_of_brith"] ?? "",
+        dateOfBrith: json["date_of_birth"] ?? "",
         home: json["home"] ?? "",
         homeNo: json["home_no"] ?? "",
         workPhone: json["work_phone"] ?? "",
+        city: json["city"] ?? "",
+        street: json["street"] ?? "",
+        town: json["town"] ?? "",
+        state: json["state"] ?? "",
+
         // hourlyRate: json["hourly_rate"] ?? "",
         // salary: json["salary"] ?? "",
         // startDate: json["start_date"] ?? "",
@@ -116,34 +131,34 @@ class EmployeeDatum {
         photo: json["photo"] ?? "",
         // createdAt: json["created_at"] ?? "",
         // updatedAt: DateTime.parse(json["updated_at"]) ?? "",
-        userid: json["userid"] ?? 0,
+        userid: json["userid"] ?? "",
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "first_name": firstName,
-        "middle_name": middleName,
-        "last_name": lastName,
-        "password": password,
-        "address": address,
-        "phone_no": phoneNo,
-        "email": email,
-        // "department_id": departmentId,
-        "is_active": isActive,
-        // "createdby": createdby,
-        // "modifiedby": modifiedby,
-        "date_of_brith": dateOfBrith,
-        "home": home,
-        "home_no": homeNo,
-        "work_phone": workPhone,
-        // "hourly_rate": hourlyRate,
-        // "salary": salary,
-        // "start_date": startDate,
-        // "last_day_of_work": lastDayOfWork,
-        "companyid": companyid,
-        "photo": photo,
-        // "created_at": createdAt,
-        // "updated_at": updatedAt.toIso8601String(),
-        "userid": userid,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "id": id,
+  //       "first_name": firstName,
+  //       "middle_name": middleName,
+  //       "last_name": lastName,
+  //       "password": password,
+  //       "address": address,
+  //       "phone_no": phoneNo,
+  //       "email": email,
+  //       // "department_id": departmentId,
+  //       "is_active": isActive,
+  //       // "createdby": createdby,
+  //       // "modifiedby": modifiedby,
+  //       "date_of_brith": dateOfBrith,
+  //       "home": home,
+  //       "home_no": homeNo,
+  //       "work_phone": workPhone,
+  //       // "hourly_rate": hourlyRate,
+  //       // "salary": salary,
+  //       // "start_date": startDate,
+  //       // "last_day_of_work": lastDayOfWork,
+  //       "companyid": companyid,
+  //       "photo": photo,
+  //       // "created_at": createdAt,
+  //       // "updated_at": updatedAt.toIso8601String(),
+  //       "userid": userid,
+  //     };
 }

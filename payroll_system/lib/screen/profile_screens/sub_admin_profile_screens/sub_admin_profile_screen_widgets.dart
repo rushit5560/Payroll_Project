@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
@@ -115,88 +116,88 @@ class SubAdminFormModule extends StatelessWidget {
       key: subAdminProfileScreenController.formKey,
       child: Column(
         children: [
-          TextFormField(
-            controller: subAdminProfileScreenController.nameController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateUserName(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.name,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: subAdminProfileScreenController.phoneNumberController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateMobileNumber(val!),
-            maxLength: 10,
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText:AppMessage.mobileNo,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: subAdminProfileScreenController.addressController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateAddress(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.address,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
+          FormSingleFieldModule(
+              textEditingController:
+                  subAdminProfileScreenController.nameController,
+              validate: (val) => FieldValidation().validateUserName(val!),
+              maxLength: 10,
+              text: AppMessage.userName,
+              headerText: AppMessage.userName,
+              mandatoryText: " ${AppMessage.mandatory}"),
+
+          // TextFormField(
+          //   controller: subAdminProfileScreenController.nameController,
+          //   autovalidateMode: AutovalidateMode.onUserInteraction,
+          //   validator: (val) => FieldValidation().validateUserName(val!),
+          //   decoration: InputDecoration(
+          //     fillColor: AppColors.greyColor.withOpacity(0.25),
+          //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          //     labelText: AppMessage.name,
+          //     border: border,
+          //     enabledBorder: border,
+          //     filled: true,
+          //   ),
+          // ),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+              textEditingController:
+                  subAdminProfileScreenController.phoneNumberController,
+              validate: (val) => FieldValidation().validateMobileNumber(val!),
+              maxLength: 10,
+              text: AppMessage.mobileNo,
+              headerText: AppMessage.mobileNo,
+              mandatoryText: " ${AppMessage.mandatory}"),
+
+          const SizedBox(height: 5),
+
+          FormSingleFieldModule(
+              textEditingController:
+                  subAdminProfileScreenController.addressController,
+              validate: (val) => FieldValidation().validateAddress(val!),
+              maxLength: 10,
+              text: AppMessage.address,
+              headerText: AppMessage.address,
+              mandatoryText: " ${AppMessage.mandatory}"),
         ],
       ),
     );
   }
 }
 
-class SubAdminSubmitButtonModule extends StatelessWidget {
-  SubAdminSubmitButtonModule({super.key});
+// class SubAdminSubmitButtonModule extends StatelessWidget {
+//   SubAdminSubmitButtonModule({super.key});
 
-  final subAdminProfileScreenController =
-      Get.find<SubAdminProfileScreenController>();
+//   final subAdminProfileScreenController =
+//       Get.find<SubAdminProfileScreenController>();
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 45,
-      width: 60.w,
-      child: ElevatedButton(
-        onPressed: () async {
-          if (subAdminProfileScreenController.formKey.currentState!
-              .validate()) {
-            await subAdminProfileScreenController
-                .updateSubAdminProfileFunction();
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            AppMessage.submitText,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: AppColors.whiteColor,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 45,
+//       width: 60.w,
+//       child: ElevatedButton(
+//         onPressed: () async {
+//           if (subAdminProfileScreenController.formKey.currentState!
+//               .validate()) {
+//             await subAdminProfileScreenController
+//                 .updateSubAdminProfileFunction();
+//           }
+//         },
+//         style: ElevatedButton.styleFrom(
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(28),
+//           ),
+//         ),
+//         child: Center(
+//           child: Text(
+//             AppMessage.submitText,
+//             style: TextStyle(
+//               fontSize: 14.sp,
+//               color: AppColors.whiteColor,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

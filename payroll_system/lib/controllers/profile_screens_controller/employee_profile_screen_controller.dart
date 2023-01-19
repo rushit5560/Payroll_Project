@@ -32,6 +32,11 @@ class EmployeeProfileScreenController extends GetxController {
   TextEditingController currentAddressController = TextEditingController();
   TextEditingController homeAddressController = TextEditingController();
 
+  TextEditingController streetAddressController = TextEditingController();
+  TextEditingController townAddressController = TextEditingController();
+  TextEditingController cityAddressController = TextEditingController();
+  TextEditingController stateAddressController = TextEditingController();
+
   UserPreference userPreference = UserPreference();
 
   Future<void> selectDateOfBirth(BuildContext context) async {
@@ -83,11 +88,16 @@ class EmployeeProfileScreenController extends GetxController {
             dobFieldController.text = employeeData!.dateOfBrith;
           }
 
-          homeNumberController.text = employeeData!.homeNo;
-          workNumberController.text = employeeData!.workPhone;
+          // homeNumberController.text = employeeData!.homeNo;
+          // workNumberController.text = employeeData!.workPhone;
 
-          homeAddressController.text = employeeData!.home;
-          currentAddressController.text = employeeData!.address;
+          // homeAddressController.text = employeeData!.home;
+          // currentAddressController.text = employeeData!.address;
+
+          streetAddressController.text = employeeData!.street;
+          townAddressController.text = employeeData!.town;
+          cityAddressController.text = employeeData!.city;
+          stateAddressController.text = employeeData!.state;
 
           log('employeeData photo12121 : ${employeeData!.photo}');
         }
@@ -134,12 +144,18 @@ class EmployeeProfileScreenController extends GetxController {
       request.fields['middle_name'] = middleNameController.text;
       request.fields['last_name'] = lastNameController.text;
 
-      request.fields['phone_no'] = phoneNumberController.text;
-      request.fields['date_of_brith'] = dobFieldController.text;
-      request.fields['address'] = currentAddressController.text;
-      request.fields['home'] = homeAddressController.text;
-      request.fields['home_no'] = dobFieldController.text;
-      request.fields['work_phone'] = dobFieldController.text;
+      request.fields['mobile_number'] = phoneNumberController.text;
+      request.fields['date_of_birth'] = dobFieldController.text;
+
+      request.fields['street'] = streetAddressController.text;
+      request.fields['town'] = townAddressController.text;
+      request.fields['state'] = stateAddressController.text;
+      request.fields['city'] = cityAddressController.text;
+
+      // request.fields['address'] = currentAddressController.text;
+      // request.fields['home'] = homeAddressController.text;
+      // request.fields['home_no'] = dobFieldController.text;
+      // request.fields['work_phone'] = dobFieldController.text;
 
       log('request.fields: ${request.fields}');
       log('request.files: ${request.files}');

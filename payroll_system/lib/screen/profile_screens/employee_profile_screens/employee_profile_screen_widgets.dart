@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 
 import 'package:payroll_system/utils/api_url.dart';
@@ -106,209 +107,193 @@ class EmployeeFormModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var border = OutlineInputBorder(
-      borderSide: const BorderSide(
-        color: AppColors.greyColor,
-      ),
-      borderRadius: BorderRadius.circular(12),
-    );
-
     return Form(
       key: employeeProfileScreenController.formKey,
       child: Column(
         children: [
-          TextFormField(
-            controller: employeeProfileScreenController.firstNameController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateFirstName(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.firstName,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: employeeProfileScreenController.middleNameController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateMiddleName(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.middleName,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: employeeProfileScreenController.lastNameController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateLastName(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.lastName,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: employeeProfileScreenController.phoneNumberController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateMobileNumber(val!),
-            maxLength: 10,
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.mobileNo,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) => FieldValidation().validateDateOfBirth(value!),
-            onTap: () {
+          FormSingleFieldModule(
+              textEditingController:
+                  employeeProfileScreenController.firstNameController,
+              validate: (val) => FieldValidation().validateFirstName(val!),
+              maxLength: 10,
+              text: AppMessage.firstName,
+              headerText: AppMessage.firstName,
+              mandatoryText: " ${AppMessage.mandatory}"),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+              textEditingController:
+                  employeeProfileScreenController.middleNameController,
+              validate: (val) => FieldValidation().validateMiddleName(val!),
+              maxLength: 10,
+              text: AppMessage.middleName,
+              headerText: AppMessage.middleName,
+              mandatoryText: " ${AppMessage.mandatory}"),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+              textEditingController:
+                  employeeProfileScreenController.lastNameController,
+              validate: (val) => FieldValidation().validateLastName(val!),
+              maxLength: 10,
+              text: AppMessage.lastName,
+              headerText: AppMessage.lastName,
+              mandatoryText: " ${AppMessage.mandatory}"),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+              textEditingController:
+                  employeeProfileScreenController.phoneNumberController,
+              validate: (val) => FieldValidation().validateMobileNumber(val!),
+              maxLength: 10,
+              text: AppMessage.mobileNo,
+              headerText: AppMessage.mobileNo,
+              mandatoryText: " ${AppMessage.mandatory}"),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+            headerText: AppMessage.dateOfBirth,
+            text: AppMessage.exInsertYourDob,
+            mandatoryText: AppMessage.mandatory,
+            keyboardType: TextInputType.datetime,
+            textEditingController:
+                employeeProfileScreenController.dobFieldController,
+            suffixIcon: Icons.calendar_month,
+            onPressed: () {
               FocusScope.of(context).requestFocus(FocusNode());
               employeeProfileScreenController.selectDateOfBirth(context);
             },
-            // readOnly: readOnly,
-            controller: employeeProfileScreenController.dobFieldController,
-            decoration: InputDecoration(
-              isDense: true,
-              labelText: AppMessage.dateOfBirth,
-              hintText: AppMessage.exInsertYourDob,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-            ),
+            validate: (value) => FieldValidation().validateDateOfBirth(value),
           ),
-          // FormSingleFieldModule(
-          //   headerText: AppMessage.dateOfBrith,
-          //   text: "Date Of Birth",
-          //   keyboardType: TextInputType.datetime,
-          //   maxLength: 10,
-          //   textEditingController:
-          //       employeeProfileScreenController.dobFieldController,
-          //   suffixIcon: Icons.calendar_month,
-          //   onPressed: () {
-          //     // DateTime selectedDate =
-          //     //     employeeProfileScreenController.selectedDate;
-          //     employeeProfileScreenController.selectDateOfBirth(context);
+          const SizedBox(height: 5),
 
-          //     // employeeCreteScreenController.showDatePicker(context);
-          //   },
-          //   validate: (value) => FieldValidation().validateDateOfBirth(value),
-          // ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: employeeProfileScreenController.homeNumberController,
-            maxLength: 10,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateAddress(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.homeNo,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
+          FormSingleFieldModule(
+            headerText: AppMessage.address,
+            text: AppMessage.street,
+            keyboardType: TextInputType.text,
+            mandatoryText: AppMessage.mandatory,
+            textEditingController:
+                employeeProfileScreenController.streetAddressController,
+            validate: (value) => FieldValidation().validateStreetAddress(value),
           ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: employeeProfileScreenController.workNumberController,
-            maxLength: 10,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateAddress(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.workNO,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
+          const SizedBox(height: 5),
+
+          FormSingleFieldModule(
+            headerText: AppMessage.empty,
+            isHeaderTextShow: false,
+            text: AppMessage.town,
+            keyboardType: TextInputType.text,
+            mandatoryText: AppMessage.empty,
+            textEditingController:
+                employeeProfileScreenController.townAddressController,
+            validate: (value) =>
+                FieldValidation().validateLandmarkAddress(value),
           ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller:
-                employeeProfileScreenController.currentAddressController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateAddress(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.currentAddress,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
+          const SizedBox(height: 5),
+
+          Row(
+            children: [
+              Expanded(
+                child: FormSingleFieldModule(
+                  headerText: AppMessage.empty,
+                  isHeaderTextShow: false,
+                  text: AppMessage.city,
+                  keyboardType: TextInputType.text,
+                  mandatoryText: AppMessage.mandatory,
+                  textEditingController:
+                      employeeProfileScreenController.cityAddressController,
+                  validate: (value) => FieldValidation().validateCity(value),
+                ),
+              ),
+              const SizedBox(width: 5),
+              Expanded(
+                child: FormSingleFieldModule(
+                  headerText: AppMessage.empty,
+                  isHeaderTextShow: false,
+                  text: AppMessage.state,
+                  keyboardType: TextInputType.text,
+                  mandatoryText: AppMessage.mandatory,
+                  textEditingController:
+                      employeeProfileScreenController.stateAddressController,
+                  validate: (value) => FieldValidation().validateState(value),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 2.h),
-          TextFormField(
-            controller: employeeProfileScreenController.homeAddressController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (val) => FieldValidation().validateAddress(val!),
-            decoration: InputDecoration(
-              fillColor: AppColors.greyColor.withOpacity(0.25),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: AppMessage.homeAddress,
-              border: border,
-              enabledBorder: border,
-              filled: true,
-            ),
-          ),
+
+          // FormSingleFieldModule(
+          //     textEditingController:
+          //         employeeProfileScreenController.homeNumberController,
+          //     validate: (val) =>
+          //         FieldValidation().validateHomePhoneNumber(val!),
+          //     maxLength: 10,
+          //     text: AppMessage.homeNo,
+          //     headerText: AppMessage.homeNo,
+          //     mandatoryText: " ${AppMessage.mandatory}"),
+          // const SizedBox(height: 5),
+          // FormSingleFieldModule(
+          //     textEditingController:
+          //         employeeProfileScreenController.workNumberController,
+          //     validate: (val) =>
+          //         FieldValidation().validateWorkPhoneNumber(val!),
+          //     maxLength: 10,
+          //     text: AppMessage.workNO,
+          //     headerText: AppMessage.workNO,
+          //     mandatoryText: " ${AppMessage.mandatory}"),
+          // const SizedBox(height: 5),
+          // FormSingleFieldModule(
+          //     textEditingController:
+          //         employeeProfileScreenController.currentAddressController,
+          //     validate: (val) => FieldValidation().validateAddress(val!),
+          //     maxLength: 10,
+          //     text: AppMessage.currentAddress,
+          //     headerText: AppMessage.currentAddress,
+          //     mandatoryText: " ${AppMessage.mandatory}"),
+          // const SizedBox(height: 5),
+          // FormSingleFieldModule(
+          //     textEditingController:
+          //         employeeProfileScreenController.homeAddressController,
+          //     validate: (val) => FieldValidation().validateAddress(val!),
+          //     maxLength: 10,
+          //     text: AppMessage.homeAddress,
+          //     headerText: AppMessage.homeAddress,
+          //     mandatoryText: " ${AppMessage.mandatory}"),
         ],
       ),
     );
   }
 }
 
-class EmployeeSubmitButtonModule extends StatelessWidget {
-  EmployeeSubmitButtonModule({super.key});
+// class EmployeeSubmitButtonModule extends StatelessWidget {
+//   EmployeeSubmitButtonModule({super.key});
 
-  final employeeProfileScreenController =
-      Get.find<EmployeeProfileScreenController>();
+//   final employeeProfileScreenController =
+//       Get.find<EmployeeProfileScreenController>();
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 45,
-      width: 60.w,
-      child: ElevatedButton(
-        onPressed: () async {
-          if (employeeProfileScreenController.formKey.currentState!
-              .validate()) {
-            await employeeProfileScreenController
-                .updateEmployeeProfileFunction();
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            AppMessage.submitText,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: AppColors.whiteColor,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 45,
+//       width: 60.w,
+//       child: ElevatedButton(
+//         onPressed: () async {
+//           if (employeeProfileScreenController.formKey.currentState!
+//               .validate()) {
+//             await employeeProfileScreenController
+//                 .updateEmployeeProfileFunction();
+//           }
+//         },
+//         style: ElevatedButton.styleFrom(
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(28),
+//           ),
+//         ),
+//         child: Center(
+//           child: Text(
+//             AppMessage.submitText,
+//             style: TextStyle(
+//               fontSize: 14.sp,
+//               color: AppColors.whiteColor,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

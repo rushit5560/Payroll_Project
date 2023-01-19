@@ -47,7 +47,7 @@ class DocumentDatum {
   int id;
   String name;
   String doctype;
-  int employeeId;
+  String employeeId;
   // String createdby;
   // dynamic modifiedby;
   // DateTime createdAt;
@@ -57,7 +57,7 @@ class DocumentDatum {
         id: json["id"] ?? 0,
         name: json["name"] ?? "",
         doctype: json["doctype"] ?? "",
-        employeeId: json["employee_id"] ?? 0,
+        employeeId: json["employee_id"] ?? "",
         // createdby: json["createdby"] ?? "",
         // modifiedby: json["modifiedby"],
         // createdAt: DateTime.parse(json["created_at"]),

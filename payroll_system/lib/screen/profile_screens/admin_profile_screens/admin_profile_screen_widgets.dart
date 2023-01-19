@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
@@ -112,49 +114,14 @@ class AdminNameFieldModule extends StatelessWidget {
 
     return Form(
       key: adminProfileScreenController.formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          RichText(
-            textAlign: TextAlign.left,
-            maxLines: null,
-            text: TextSpan(
-              text: AppMessage.userName,
-              style: TextStyleConfig.textStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          TextFormField(
-            // obscureText: loginScreenController.isPasswordVisible.value,
-            // obscureText: obscureText,
-            validator: (val) => FieldValidation().validateUserName(val!),
-            // onTap: (){},
-            // onChanged: (value) => onChanged!(value),
-            // readOnly: readOnly,
-            keyboardType: TextInputType.text,
-            controller: adminProfileScreenController.userNameController,
-            // inputFormatters: inputFormatters,
-            maxLength: 1,
-            decoration: InputDecoration(
-              enabledBorder: InputFieldStyles().inputBorder(),
-              focusedBorder: InputFieldStyles().inputBorder(),
-              errorBorder: InputFieldStyles().inputBorder(),
-              focusedErrorBorder: InputFieldStyles().inputBorder(),
-              counterText: '',
-              hintText: AppMessage.userName,
-              fillColor: AppColors.colorWhite,
-              filled: true,
-              hintStyle:
-                  const TextStyle(color: AppColors.colorLightHintPurple2),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-              errorMaxLines: 2,
-            ),
-          ),
-        ],
-      ),
+      child: FormSingleFieldModule(
+          textEditingController:
+              adminProfileScreenController.userNameController,
+          validate: (val) => FieldValidation().validateUserName(val!),
+          maxLength: 10,
+          text: AppMessage.userName,
+          headerText: AppMessage.userName,
+          mandatoryText: " ${AppMessage.mandatory}"),
 
       // TextFormField(
       //   controller: adminProfileScreenController.userNameController,

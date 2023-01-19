@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/employee_profile_screen_controller.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
-
 import 'employee_profile_screen_widgets.dart';
 
 class EmployeeProfileScreen extends StatelessWidget {
@@ -17,13 +17,15 @@ class EmployeeProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          AppMessage.editProfileText,
-          style: TextStyle(
-            fontSize: 13.sp,
-          ),
+          // ignore: prefer_interpolation_to_compose_strings
+          employeeProfileScreenController.firstNameController.text +
+              " ${employeeProfileScreenController.middleNameController.text}" +
+              " ${employeeProfileScreenController.lastNameController.text}",
+          style: TextStyle(fontSize: 13.sp, color: Colors.black),
         ),
       ),
       body: SafeArea(
@@ -42,7 +44,18 @@ class EmployeeProfileScreen extends StatelessWidget {
                         SizedBox(height: 4.h),
                         EmployeeFormModule(),
                         SizedBox(height: 6.h),
-                        EmployeeSubmitButtonModule(),
+
+                        CustomSubmitButtonModule(
+                            onPress: () async {
+                              if (employeeProfileScreenController
+                                  .formKey.currentState!
+                                  .validate()) {
+                                await employeeProfileScreenController
+                                    .updateEmployeeProfileFunction();
+                              }
+                            },
+                            labelText: AppMessage.submit),
+                        // EmployeeSubmitButtonModule(),
                         SizedBox(height: 5.h),
                       ],
                     ),

@@ -80,6 +80,14 @@ class FieldValidation {
     }
   }
 
+  String? validateTown(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterTown;
+    } else {
+      return null;
+    }
+  }
+
   String? validateStreetAddress(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterStreetAddress;

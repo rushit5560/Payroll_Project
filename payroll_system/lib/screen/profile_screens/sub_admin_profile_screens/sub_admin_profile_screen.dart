@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
+import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
@@ -17,6 +19,7 @@ class SubAdminProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
@@ -42,7 +45,18 @@ class SubAdminProfileScreen extends StatelessWidget {
                         SizedBox(height: 4.h),
                         SubAdminFormModule(),
                         SizedBox(height: 6.h),
-                        SubAdminSubmitButtonModule(),
+
+                        CustomSubmitButtonModule(
+                            onPress: () async {
+                              if (subAdminProfileScreenController
+                                  .formKey.currentState!
+                                  .validate()) {
+                                await subAdminProfileScreenController
+                                    .updateSubAdminProfileFunction();
+                              }
+                            },
+                            labelText: AppMessage.submit)
+                        // SubAdminSubmitButtonModule(),
                       ],
                     ),
                   ),

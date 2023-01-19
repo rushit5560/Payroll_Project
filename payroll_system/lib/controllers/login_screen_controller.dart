@@ -26,7 +26,7 @@ class LoginController extends GetxController {
   Future<void> loginUserFunction(BuildContext context) async {
     isLoading(true);
     String url = ApiUrl.loginApi;
-    // log("loginUserFunction Api url : $url");
+    log("loginUserFunction Api url : $url");
 
     try {
       Map<String, dynamic> bodyData = {
@@ -34,7 +34,7 @@ class LoginController extends GetxController {
         "password": loginPasswordController.text.trim()
       };
 
-      // log("loginUserFunction passing Data : $bodyData");
+      log("loginUserFunction passing Data : $bodyData");
 
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
       log("loginUserFunction response :  ${response.body}");
@@ -144,13 +144,20 @@ class LoginController extends GetxController {
                   : false,
         )
             .whenComplete(() {
-          if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 1) {
+          if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) ==
+              1) {
             Get.off(() => HomeScreen());
-          } else if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 2) {
+          } else if (int.parse(
+                  loginDetailsModel.loginData.data.roleId.toString()) ==
+              2) {
             Get.off(() => HomeScreen());
-          } else if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 3) {
+          } else if (int.parse(
+                  loginDetailsModel.loginData.data.roleId.toString()) ==
+              3) {
             Get.off(() => CompanyHomeScreen());
-          } else if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) == 4) {
+          } else if (int.parse(
+                  loginDetailsModel.loginData.data.roleId.toString()) ==
+              4) {
             Get.off(() => EmployeeHomeScreen());
           }
         });
