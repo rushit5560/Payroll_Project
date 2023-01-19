@@ -197,15 +197,15 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                   CompanyWiseEmployeeData employeeData = payCheckedManageScreenController.allCompanyWiseEmployeeList[index];
 
                   TextEditingController regularHourController = TextEditingController();
-                  TextEditingController otController = TextEditingController();
-                  TextEditingController holidayPayController = TextEditingController();
-                  TextEditingController bonusController = TextEditingController();
-                  TextEditingController otherEarningController = TextEditingController();
-                  TextEditingController commissionController = TextEditingController();
-                  TextEditingController sickController = TextEditingController();
-                  TextEditingController vacationController = TextEditingController();
-                  TextEditingController tipController = TextEditingController();
-                  TextEditingController taxController = TextEditingController();
+                  // TextEditingController otController = TextEditingController();
+                  // TextEditingController holidayPayController = TextEditingController();
+                  // TextEditingController bonusController = TextEditingController();
+                  // TextEditingController otherEarningController = TextEditingController();
+                  // TextEditingController commissionController = TextEditingController();
+                  // TextEditingController sickController = TextEditingController();
+                  // TextEditingController vacationController = TextEditingController();
+                  // TextEditingController tipController = TextEditingController();
+                  // TextEditingController taxController = TextEditingController();
 
 
                   return Container(

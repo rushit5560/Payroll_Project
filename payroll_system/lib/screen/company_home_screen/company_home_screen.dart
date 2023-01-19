@@ -10,6 +10,7 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/company_home_screen_controller.dart';
 import 'package:payroll_system/drawer_menu/company_home_drawer/company_home_drawer.dart';
 import 'package:payroll_system/screen/company_employee_screens/company_employee_manage_screen/company_employee_manage_screen.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -26,6 +27,7 @@ class CompanyHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: companyHomeScreenController.scaffoldKey,
       backgroundColor: AppColors.colorLightPurple2,
       drawer: CompanyHomeDrawer(),
       appBar: AppBar(
@@ -36,6 +38,18 @@ class CompanyHomeScreen extends StatelessWidget {
             fontSize: 17.sp,
           ),),
         centerTitle: true,
+
+        leading: GestureDetector(
+          onTap: () =>
+              companyHomeScreenController.scaffoldKey.currentState!.openDrawer(),
+          child: Padding(
+            padding: const EdgeInsets.all(13),
+            child: Image.asset(
+              AppImages.menuDrawerImg,
+            ),
+          ),
+        ),
+
         actions: [
 
           IconButton(

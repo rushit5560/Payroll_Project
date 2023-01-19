@@ -51,12 +51,12 @@ class DocumentListModule extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ).commonOnlyPadding(left: 8),
                     ),
-                    IconButton(
+                   /* IconButton(
                       onPressed: () {
                         Fluttertoast.showToast(msg: "Download");
                       },
                       icon: const Icon(Icons.download_rounded),
-                    ),
+                    ),*/
                     IconButton(
                       onPressed: () {
                         CustomAlertDialog().showAlertDialog(

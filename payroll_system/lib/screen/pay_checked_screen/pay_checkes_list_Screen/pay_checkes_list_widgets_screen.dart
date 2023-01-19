@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
+import 'package:payroll_system/common_modules/new/web_url_launcher_function.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
+import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -15,15 +17,17 @@ import 'package:sizer/sizer.dart';
 
 class PayCheckesListWidgetsScreen extends StatelessWidget {
   PayCheckesListWidgetsScreen({super.key});
+
   final payCheckesListScreenController =
       Get.find<PayCheckesListScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
         itemCount: payCheckesListScreenController.payCheckesListData.length,
         itemBuilder: (context, index) {
-          final payrollListDataListvalue =
+          final payrollListDataListValue =
               payCheckesListScreenController.payCheckesListData[index];
           return Padding(
             padding:
@@ -39,8 +43,9 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          // https://appieve.com/api/admin/payrolldownload/26
+                        onTap: () async {
+                          await WebUrlLauncher().launchPdfInBrowser(
+                              "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
                         },
                         child: Image.asset(
                           AppImages.downloadIcon,
@@ -53,7 +58,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   ),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.date,
-                    textValue: payrollListDataListvalue.paydate
+                    textValue: payrollListDataListValue.paydate
                         .toString()
                         .split(" ")[0],
                     image: AppImages.calendarIcon,
@@ -61,21 +66,21 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.name,
-                    textValue: payrollListDataListvalue.firstName +
-                        payrollListDataListvalue.middleName +
-                        payrollListDataListvalue.lastName,
+                    textValue: payrollListDataListValue.firstName +
+                        payrollListDataListValue.middleName +
+                        payrollListDataListValue.lastName,
                     image: AppImages.employeeIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.company,
-                    textValue: payrollListDataListvalue.companyname,
+                    textValue: payrollListDataListValue.companyname,
                     image: AppImages.companyIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.startDate,
-                    textValue: payrollListDataListvalue.startdate
+                    textValue: payrollListDataListValue.startdate
                         .toString()
                         .split(" ")[0],
                     image: AppImages.calendarIcon,
@@ -83,7 +88,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.endDate,
-                    textValue: payrollListDataListvalue.enddate
+                    textValue: payrollListDataListValue.enddate
                         .toString()
                         .split(" ")[0],
                     image: AppImages.calendarIcon,
@@ -91,39 +96,39 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
-                    textValue: payrollListDataListvalue.days,
+                    textValue: payrollListDataListValue.days,
                     image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.payPeriod,
-                    textValue: payrollListDataListvalue.payPeriod,
+                    textValue: payrollListDataListValue.payPeriod,
                     image: AppImages.payPeriodIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.hours,
-                    textValue: payrollListDataListvalue.type,
+                    textValue: payrollListDataListValue.type,
                     image: AppImages.hoursIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.salaryHourlyRate,
-                    textValue: payrollListDataListvalue.payPeriod == "salary"
-                        ? payrollListDataListvalue.salary
-                        : payrollListDataListvalue.ragularhour.toString(),
+                    textValue: payrollListDataListValue.payPeriod == "salary"
+                        ? payrollListDataListValue.salary
+                        : payrollListDataListValue.ragularhour.toString(),
                     image: AppImages.salaryIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.subTotal,
-                    textValue: payrollListDataListvalue.subTotal.toString(),
+                    textValue: payrollListDataListValue.subTotal.toString(),
                     image: AppImages.netAmountIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.netAmount,
-                    textValue: payrollListDataListvalue.finalAmount,
+                    textValue: payrollListDataListValue.finalAmount,
                     image: AppImages.netAmountIcon,
                   ),
                   SizedBox(height: 2.h),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
+import 'package:payroll_system/common_modules/new/web_url_launcher_function.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/document_download_screen_controller.dart';
 import 'package:payroll_system/models/employee_upload_document_models/employee_document_model.dart';
+import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -36,39 +38,6 @@ class EmployeeDocumentListsModule extends StatelessWidget {
           child: Column(
             children: [
 
-              /*Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      bool employeeUpdatePermission =
-                      await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeEditKey);
-
-                      if (employeeUpdatePermission == true) {
-                        CustomAlertDialog().showAlertDialog(
-                          context: context,
-                          textContent: AppMessage.deleteDocumentAlertMessage,
-                          onYesTap: () async {
-                            log("Delete Document");
-                            await screenController.deleteDocumentFunction(singleDoc.id.toString(), i);
-                          },
-                          onCancelTap: () {
-                            Get.back();
-                          },
-                        );
-                      } else {
-                        Fluttertoast.showToast(msg: AppMessage.deniedPermission);
-                      }
-                    },
-                    child: Image.asset(
-                      AppImages.deleteIcon,
-                      width: 20,
-                      height: 20,
-                      color: AppColors.colorRed,
-                    ),
-                  ),
-                ],
-              ),*/
               SingleListTileModuleCustom(
                 image: AppImages.departmentIcon,
                 textKey: AppMessage.fileName,
@@ -86,7 +55,9 @@ class EmployeeDocumentListsModule extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadFilePath}${singleDoc.name}");
+                    },
                     child: Row(
                       children: [
                         Text(

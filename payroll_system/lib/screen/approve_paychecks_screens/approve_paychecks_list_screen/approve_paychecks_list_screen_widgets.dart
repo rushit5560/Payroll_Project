@@ -98,8 +98,8 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                       textValue:
                           approvePayrollListDataListvalue.approvepaychecks ==
                                   "0"
-                              ? AppMessage.approved
-                              : AppMessage.nonApproved,
+                              ? AppMessage.notApproved
+                              : AppMessage.approved,
                       image: AppImages.verifyIcon,
                       textKey: AppMessage.status),
                   const SizedBox(height: 5),

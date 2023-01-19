@@ -16,7 +16,8 @@ class CompanyHomeScreenController extends GetxController {
   List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
   List<CompanyWiseEmployeeData> searchEmployeeList = [];
 
-  
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   final TextEditingController textSearchEditingController = TextEditingController();
 
   int companyId = 0;
