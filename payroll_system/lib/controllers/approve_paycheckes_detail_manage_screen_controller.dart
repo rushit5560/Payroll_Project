@@ -28,6 +28,8 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
     String url =
         "${ApiUrl.deleteApprovePayCheckesListApi}$companyId/$approvalId";
     log('Delete deleteApprovalFunction Api Url :$url');
+    log('Delete deleteApprovalFunction companyId :$companyId');
+    log('Delete deleteApprovalFunction approvalId :$approvalId');
 
     try {
       http.Response response = await http.get(Uri.parse(url));

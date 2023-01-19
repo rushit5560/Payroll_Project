@@ -80,7 +80,7 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                       textValue:
                           approvePayrollListDataListvalue.payPeriod == "salary"
                               ? approvePayrollListDataListvalue.salary
-                              : approvePayrollListDataListvalue.ragularhour,
+                              : approvePayrollListDataListvalue.ragularhour.toString(),
                       image: AppImages.salaryIcon,
                       textKey: AppMessage.salaryHourlyRate),
                   const SizedBox(height: 5),

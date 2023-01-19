@@ -1,10 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/pay_checkes_dowanload_screen_controller.dart';
 import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_list_Screen/pay_checkes_list_widgets_screen.dart';
-import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_manage_screen/pay_checkes_manage_screen.dart';
 import 'package:payroll_system/utils/extensions.dart';
 
 import 'package:payroll_system/utils/messaging.dart';
@@ -18,6 +19,9 @@ class PayCheckesDowanloadListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("payCheckesDowanloadScreenController employeeId  ${payCheckesDowanloadScreenController.employeeId}");
+    log("payCheckesDowanloadScreenController employeeName  ${payCheckesDowanloadScreenController.employeeName}");
+
     return Scaffold(
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
@@ -30,26 +34,26 @@ class PayCheckesDowanloadListScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(
-                () => PayCheckedManageScreen(),
-                arguments: [
-                  payCheckesDowanloadScreenController.companyId,
-                  payCheckesDowanloadScreenController.companyName,
-                ],
-              );
-            },
-            icon: const Icon(Icons.add_rounded),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Get.to(
+        //         () => PayCheckedManageScreen(),
+        //         arguments: [
+        //           payCheckesDowanloadScreenController.companyId.toString(),
+        //           payCheckesDowanloadScreenController.companyName,
+        //         ],
+        //       );
+        //     },
+        //     icon: const Icon(Icons.add_rounded),
+        //   ),
+        // ],
       ),
       body: Obx(
         () => payCheckesDowanloadScreenController.isLoading.value
             ? CommonLoader().showLoader()
             : payCheckesDowanloadScreenController
-                    .payCheckesDwanloadListData.isEmpty
+                    .payCheckDwanloadListData.isEmpty
                 ? Center(
                     child: Text(AppMessage.noPayCheckesListFound),
                   )

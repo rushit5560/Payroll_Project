@@ -111,13 +111,13 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.salaryHourlyRate,
                     textValue: payrollListDataListvalue.payPeriod == "salary"
                         ? payrollListDataListvalue.salary
-                        : payrollListDataListvalue.ragularhour,
+                        : payrollListDataListvalue.ragularhour.toString(),
                     image: AppImages.salaryIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.subTotal,
-                    textValue: payrollListDataListvalue.subTotal,
+                    textValue: payrollListDataListvalue.subTotal.toString(),
                     image: AppImages.netAmountIcon,
                   ),
                   const SizedBox(height: 5),

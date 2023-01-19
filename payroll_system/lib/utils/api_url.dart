@@ -1,6 +1,6 @@
 class ApiUrl {
-  // static const apiMainPath = "https://appieve.com/";
-  static const apiMainPath = "https://payroll.omdemo.co.in/";
+  static const apiMainPath = "https://appieve.com/";
+  // static const apiMainPath = "https://payroll.omdemo.co.in/";
 
   static const apiImagePath = "https://appieve.com/public/images/employee/";
 
@@ -37,6 +37,8 @@ class ApiUrl {
       "${apiMainPath}api/admin/employee/docuploadstore";
   static const deleteEmployeeDocumentApi =
       "${apiMainPath}api/admin/employee/docdel/";
+  static const payCheckesDowanloadDocumentApi =
+      "${apiMainPath}api/admin/employeewisepayroll/";
 
   // Company Api's
   static const allCompanyApi = "${apiMainPath}api/admin/company";

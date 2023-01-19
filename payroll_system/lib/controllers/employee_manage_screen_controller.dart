@@ -235,6 +235,7 @@ class EmployeeManageScreenController extends GetxController {
     isLoading(true);
     String url = "${ApiUrl.getEmployeeDetailsApi}$employeeId/$companyId";
     log('Employee Details Get By Id Api Url : $url');
+    log('Employee Details Get By employeeId : $employeeId');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
@@ -291,7 +292,8 @@ class EmployeeManageScreenController extends GetxController {
         }
 
         for (int i = 0; i < allLocationList.length; i++) {
-          if (allLocationList[i].id.toString() == employeeGetByIdModel.data.locationId) {
+          if (allLocationList[i].id.toString() ==
+              employeeGetByIdModel.data.locationId) {
             locationListData = allLocationList[i];
           }
         }
@@ -552,7 +554,8 @@ class EmployeeManageScreenController extends GetxController {
   }
 
   getLoggedInUserIdFromPrefs() async {
-    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
     await getCompanyWiseDepartmentFunction();
   }
 

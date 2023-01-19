@@ -122,8 +122,10 @@ class EmployeeGEtByIdModelData {
         workPhone: json["work_phone"] ?? "",
         hourlyRate: json["hourly_rate"] ?? "0",
         salary: json["salary"] ?? "0",
-        employmentStartDate: DateTime.parse(json["employment_start_date"] ?? DateTime.now()),
-        employmentEndDate: DateTime.parse(json["employment_end_date"] ?? DateTime.now()),
+        employmentStartDate:
+            DateTime.parse(json["employment_start_date"] ?? DateTime.now()),
+        employmentEndDate:
+            DateTime.parse(json["employment_end_date"] ?? DateTime.now()),
         street: json["street"] ?? "",
         town: json["town"] ?? "",
         state: json["state"] ?? "",

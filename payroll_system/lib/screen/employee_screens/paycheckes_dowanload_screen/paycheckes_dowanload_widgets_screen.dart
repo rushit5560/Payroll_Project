@@ -19,11 +19,11 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: payCheckesDowanloadScreenController
-            .payCheckesDwanloadListData.length,
+        itemCount:
+            payCheckesDowanloadScreenController.payCheckDwanloadListData.length,
         itemBuilder: (context, index) {
           final payrollListDataListvalue = payCheckesDowanloadScreenController
-              .payCheckesDwanloadListData[index];
+              .payCheckDwanloadListData[index];
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -68,7 +68,7 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.company,
-                    textValue: payrollListDataListvalue.companyname,
+                    textValue: payrollListDataListvalue.companyid,
                     image: AppImages.companyIcon,
                   ),
                   const SizedBox(height: 5),
@@ -110,7 +110,7 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
                     textKey: AppMessage.salaryHourlyRate,
                     textValue: payrollListDataListvalue.payPeriod == "salary"
                         ? payrollListDataListvalue.salary
-                        : payrollListDataListvalue.ragularhour,
+                        : payrollListDataListvalue.ragularhour.toString(),
                     image: AppImages.salaryIcon,
                   ),
                   const SizedBox(height: 5),

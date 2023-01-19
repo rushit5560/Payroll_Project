@@ -89,15 +89,15 @@ class CompanyWiseEmployeeData {
   final String email;
   final String companyid;
   final String departmentId;
-  final int locationId;
+  final String locationId;
   final String isActive;
   final String payPeriod;
   // final DateTime dateOfBirth;
   // final dynamic home;
   // final dynamic homeNo;
   // final dynamic workPhone;
-  final int hourlyRate;
-  final int salary;
+  final String hourlyRate;
+  final String salary;
   // final DateTime employmentStartDate;
   // final DateTime employmentEndDate;
   final String street;
@@ -106,7 +106,7 @@ class CompanyWiseEmployeeData {
   final String city;
   final String zipcode;
   // final dynamic photo;
-  final int createdby;
+  final String createdby;
   final String modifiedby;
   bool isChecked;
   // final DateTime createdAt;
@@ -135,15 +135,15 @@ class CompanyWiseEmployeeData {
         email: json["email"] ?? "",
         companyid: json["companyid"] ?? "",
         departmentId: json["department_id"] ?? "",
-        locationId: json["location_id"] ?? 0,
+        locationId: json["location_id"] ?? "",
         isActive: json["is_active"] ?? "",
         payPeriod: json["pay_period"] ?? "",
         // dateOfBirth: DateTime.parse(json["date_of_birth"]),
         // home: json["home"],
         // homeNo: json["home_no"],
         // workPhone: json["work_phone"],
-        hourlyRate: json["hourly_rate"] ?? 0,
-        salary: json["salary"] ?? 0,
+        hourlyRate: json["hourly_rate"] ?? "",
+        salary: json["salary"] ?? "",
         // employmentStartDate: DateTime.parse(json["employment_start_date"]),
         // employmentEndDate: DateTime.parse(json["employment_end_date"]),
         street: json["street"] ?? "",
@@ -152,7 +152,7 @@ class CompanyWiseEmployeeData {
         city: json["city"] ?? "",
         zipcode: json["zipcode"] ?? "",
         // photo: json["photo"],
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "",
         modifiedby: json["modifiedby"] ?? "0",
         isChecked: false,
 

@@ -47,7 +47,7 @@ class DepartmentData {
   int id;
   String departmentName;
   String isActive;
-  int createdby;
+  String createdby;
   // int modifiedby;
   String companyid;
   // DateTime createdAt;
@@ -57,7 +57,7 @@ class DepartmentData {
         id: json["id"] ?? 0,
         departmentName: json["department_name"] ?? "",
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "",
         // modifiedby: json["modifiedby"] == null ? null : json["modifiedby"],
         companyid: json["companyid"] ?? "",
         // createdAt: DateTime.parse(json["created_at"]),

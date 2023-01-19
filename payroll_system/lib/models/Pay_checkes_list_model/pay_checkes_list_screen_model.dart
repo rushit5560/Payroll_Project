@@ -80,7 +80,6 @@ class PayCheckesListData {
   final String days;
   final String payPeriod;
   final String companyid;
-
   final String employeeid;
   final String salary;
   final String ragularhour;

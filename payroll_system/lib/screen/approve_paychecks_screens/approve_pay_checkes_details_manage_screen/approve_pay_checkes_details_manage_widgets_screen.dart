@@ -94,7 +94,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                 SingleListTileModuleCustom(
                     textValue: approvalDataValue.payPeriod == "salary"
                         ? approvalDataValue.salary
-                        : approvalDataValue.ragularhour,
+                        : approvalDataValue.ragularhour.toString(),
                     image: AppImages.salaryIcon,
                     textKey: AppMessage.hours),
                 const SizedBox(height: 5),
@@ -104,12 +104,12 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.netPay),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: approvalDataValue.tax,
+                    textValue: approvalDataValue.tax.toString(),
                     image: AppImages.netAmountIcon,
                     textKey: AppMessage.totalTax),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: approvalDataValue.tax,
+                    textValue: approvalDataValue.tax.toString(),
                     image: AppImages.netAmountIcon,
                     textKey: AppMessage.diractDeposit),
                 const SizedBox(height: 5),
@@ -138,10 +138,11 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 10),
                 SingleListTileModuleCustom(
                     textValue: approvalDataValue.payPeriod == "salary"
                         ? approvalDataValue.salary
-                        : approvalDataValue.ragularhour,
+                        : approvalDataValue.ragularhour.toString(),
                     image: AppImages.salaryIcon,
                     textKey: AppMessage.hours),
                 const SizedBox(height: 5),
@@ -151,7 +152,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.netPay),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: approvalDataValue.tax,
+                    textValue: approvalDataValue.tax.toString(),
                     image: AppImages.netAmountIcon,
                     textKey: AppMessage.totalTax),
               ],

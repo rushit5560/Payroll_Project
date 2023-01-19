@@ -54,6 +54,7 @@ class EmployeeListScreenController extends GetxController {
     isLoading(true);
     String url = "${ApiUrl.deleteEmployeeApi}$employeeId/$companyId";
     log('Delete Company Api Url :$url');
+    log('Delete Company employeeId :$employeeId');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
