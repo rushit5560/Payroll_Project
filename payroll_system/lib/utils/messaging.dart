@@ -285,7 +285,7 @@ class AppMessage {
   static String approvePaycheckes = 'Approve Paycheckes';
 
   static String approved = 'Approved';
-  static String nonApproved = 'Not Approved';
+  static String notApproved = 'Not Approved';
   static String hours = 'Hours';
 
   static String regular = 'Regular (\$)';
