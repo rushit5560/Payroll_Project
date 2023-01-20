@@ -31,6 +31,7 @@ class SubAdminProfileScreenController extends GetxController {
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
+
     String url = "${ApiUrl.profileGetApi}/${UserDetails.userId}";
     log("getUserProfileFunction Api url : $url");
 

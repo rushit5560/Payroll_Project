@@ -26,29 +26,28 @@ class DepartmentFormModule extends StatelessWidget {
           key: screenController.formKey,
           child: Column(
             children: [
-
               FormSingleFieldModule(
                 headerText: AppMessage.departmentName,
                 text: AppMessage.departmentName,
                 keyboardType: TextInputType.text,
                 mandatoryText: AppMessage.mandatory,
                 textEditingController: screenController.nameFieldController,
-                validate: (value) => FieldValidation().validateDepartmentName(value),
+                validate: (value) =>
+                    FieldValidation().validateDepartmentName(value),
               ),
               const SizedBox(height: 5),
-
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   RichText(
                     textAlign: TextAlign.left,
                     maxLines: null,
                     text: TextSpan(
                         text: AppMessage.isActive,
                         style: TextStyleConfig.textStyle(
-                          fontWeight: FontWeight.w600, fontSize: 16,),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
                         children: [
                           TextSpan(
                             text: " ${AppMessage.mandatory}",
@@ -58,10 +57,8 @@ class DepartmentFormModule extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                        ]
-                    ),
+                        ]),
                   ).commonSymmetricPadding(vertical: 2),
-
                   Container(
                     width: Get.width,
                     decoration: BoxDecoration(
@@ -71,15 +68,30 @@ class DepartmentFormModule extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 3),
                       child: Container(
+                        height: 50,
                         decoration: BoxDecoration(
-                            color: Colors.white, borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.transparent),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.transparent),
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: screenController.selectedValue.value,
+                        // child: DropdownButtonHideUnderline(
+                        child: Center(
+                          child: DropdownButtonFormField<String>(
+                            // dropdownColor: Colors.teal,
+                            validator: (value) {
+                              if (screenController.selectedValue.value ==
+                                  AppMessage.chooseOption) {
+                                return AppMessage.activeStatusMessage;
+                              } else {
+                                return null;
+                              }
+                            },
 
-                            items: screenController.isActiveOptionList.map<DropdownMenuItem<String>>((String value) {
+                            decoration:
+                                const InputDecoration.collapsed(hintText: ''),
+                            value: screenController.selectedValue.value,
+                            items: screenController.isActiveOptionList
+                                .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),
@@ -88,49 +100,49 @@ class DepartmentFormModule extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             icon: Image.asset(
                               AppImages.arrowDownIcon,
-                            height: 15,
-                            width: 15,
+                              height: 15,
+                              width: 15,
                             ).commonSymmetricPadding(horizontal: 10),
-
                             onChanged: (String? value) {
                               // This is called when the user selects an item.
                               screenController.selectedValue.value = value!;
                               screenController.loadUI();
                             },
-                          ).commonOnlyPadding(left: 10, right: 10),
+                          ).commonOnlyPadding(left: 10, right: 10, top: 10),
                         ),
+                        // ),
                       ),
                     ),
                   ),
-
                 ],
               ),
-
               const SizedBox(height: 15),
               CustomSubmitButtonModule(
                 labelText: AppMessage.submit,
                 onPress: () async {
-                  if(screenController.formKey.currentState!.validate()) {
-                    if (screenController.departmentOption == DepartmentOption.create) {
-                      if (screenController.selectedValue.value == AppMessage.chooseOption) {
+                  if (screenController.formKey.currentState!.validate()) {
+                    if (screenController.departmentOption ==
+                        DepartmentOption.create) {
+                      // if (screenController.selectedValue.value ==
+                      //     AppMessage.chooseOption) {
+                      //   Fluttertoast.showToast(
+                      //       msg: AppMessage.activeStatusMessage);
+                      // } else {
+                      await screenController.createDepartmentFunction();
+                      // }
+                    } else {
+                      if (screenController.selectedValue.value ==
+                          AppMessage.chooseOption) {
                         Fluttertoast.showToast(
                             msg: AppMessage.activeStatusMessage);
-                      } else  {
-                        await screenController.createDepartmentFunction();
-                      }
-                    }
-                    else {
-                      if (screenController.selectedValue.value == AppMessage.chooseOption) {
-                        Fluttertoast.showToast(msg: AppMessage.activeStatusMessage);
                       } else {
                         await screenController.updateDepartmentFunction();
                       }
-
                     }
                   }
                 },
               ),
-             /* Row(
+              /* Row(
                 children: [
                   Expanded(
                     flex: 5,
@@ -180,7 +192,6 @@ class DepartmentFormModule extends StatelessWidget {
                 ],
               ),*/
               const SizedBox(height: 15),
-
             ],
           ),
         ),

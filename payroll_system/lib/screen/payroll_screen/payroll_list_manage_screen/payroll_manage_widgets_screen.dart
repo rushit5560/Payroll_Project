@@ -48,8 +48,8 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                         payRollManageScreenController.startDateController,
                     datePickerOption: DatePickerOption.startDate);
               },
-              validate: (value) =>
-                  FieldValidation().validateStartDayWork(value),
+              // validate: (value) =>
+              //     FieldValidation().validateStartDayWork(value),
             ),
             const SizedBox(height: 5),
             FormSingleFieldModule(
@@ -68,8 +68,8 @@ class PayRollManageWidgetsScreen extends StatelessWidget {
                         payRollManageScreenController.startDateController,
                     datePickerOption: DatePickerOption.startDate);
               },
-              validate: (value) =>
-                  FieldValidation().validateStartDayWork(value),
+              // validate: (value) =>
+              //     FieldValidation().validateStartDayWork(value),
             ),
             const SizedBox(height: 5),
             RichText(

@@ -1,8 +1,7 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/Utils/validator.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 import '../../../Utils/style.dart';
 import '../../../constants/colors.dart';
@@ -19,7 +18,7 @@ class CurrentPasswordTextFieldModule extends StatelessWidget {
       () => TextFormField(
         obscureText: changePasswordScreenController.isPasswordVisible.value,
         controller: changePasswordScreenController.oldPasswordController,
-        validator: (value) => FieldValidation().validatePassword(value!),
+        validator: (value) => FieldValidation().validateOldPassword(value!),
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -29,7 +28,8 @@ class CurrentPasswordTextFieldModule extends StatelessWidget {
           errorBorder: InputFieldStyles().inputBorder(),
           focusedErrorBorder: InputFieldStyles().inputBorder(),
           errorMaxLines: 2,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
           fillColor: AppColors.colorWhite,
           filled: true,
           labelText: AppMessage.oldPassword,
@@ -62,7 +62,7 @@ class NewPasswordTextFieldModule extends StatelessWidget {
       () => TextFormField(
         obscureText: changePasswordScreenController.isNewPasswordVisible.value,
         controller: changePasswordScreenController.newPasswordController,
-        validator: (value) => FieldValidation().validatePassword(value!),
+        validator: (value) => FieldValidation().validateNewPassword(value!),
         textInputAction: TextInputAction.next,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.text,
@@ -72,7 +72,8 @@ class NewPasswordTextFieldModule extends StatelessWidget {
           errorBorder: InputFieldStyles().inputBorder(),
           focusedErrorBorder: InputFieldStyles().inputBorder(),
           errorMaxLines: 2,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
           fillColor: AppColors.colorWhite,
           filled: true,
           labelText: AppMessage.newPassword,
@@ -119,7 +120,8 @@ class NewConfirmPasswordTextFieldModule extends StatelessWidget {
           errorBorder: InputFieldStyles().inputBorder(),
           focusedErrorBorder: InputFieldStyles().inputBorder(),
           errorMaxLines: 2,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
           fillColor: AppColors.colorWhite,
           filled: true,
           labelText: AppMessage.newConfirmPassword,
@@ -161,7 +163,8 @@ class ChangePasswordButtonModule extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           )),
           onPressed: () async {
-            if (changePasswordScreenController.formKey.currentState!.validate()) {
+            if (changePasswordScreenController.formKey.currentState!
+                .validate()) {
               await changePasswordScreenController.changePasswordFunction();
             }
           },

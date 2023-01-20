@@ -17,8 +17,6 @@ import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 import '../../../common_modules/form_single_field_module.dart';
 
-
-
 // ignore: must_be_immutable
 class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
   CompanyEmployeeManageWidgetsScreen({
@@ -37,7 +35,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             FormSingleFieldModule(
               headerText: AppMessage.firstName,
               text: AppMessage.firstName,
@@ -89,6 +86,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               text: AppMessage.selectDate,
               mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.datetime,
+              readOnly: true,
               maxLength: 10,
               textEditingController:
                   companyEmployeeManageScreenController.dateOfBirthController,
@@ -136,41 +134,61 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.transparent),
                   ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: companyEmployeeManageScreenController
-                          .selectedValuePayper.value,
-                      items: companyEmployeeManageScreenController.isPayperList
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      borderRadius: BorderRadius.circular(10),
-                      icon: Image.asset(
-                        AppImages.arrowDownIcon,
-                        height: 15,
-                        width: 15,
-                      ).commonSymmetricPadding(horizontal: 10),
-                      onChanged: (String? value) {
-                        companyEmployeeManageScreenController.isLoading(true);
-                        companyEmployeeManageScreenController.hourlyRateController
-                            .clear();
-                        companyEmployeeManageScreenController.salaryController
-                            .clear();
-                        companyEmployeeManageScreenController
-                            .selectedValuePayper.value = value!;
-                        companyEmployeeManageScreenController.isLoading(false);
-                      },
-                    ).commonOnlyPadding(left: 10, right: 10),
+                  // child: DropdownButtonHideUnderline(
+                  child: SizedBox(
+                    height: 50,
+                    child: Center(
+                      child: DropdownButtonFormField<String>(
+                        validator: (value) {
+                          if (companyEmployeeManageScreenController
+                                  .selectedValue.value ==
+                              AppMessage.chooseOption) {
+                            return AppMessage.pleaseSelectPayPeriod;
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration:
+                            const InputDecoration.collapsed(hintText: ''),
+                        value: companyEmployeeManageScreenController
+                            .selectedValuePayper.value,
+                        items: companyEmployeeManageScreenController
+                            .isPayperList
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        borderRadius: BorderRadius.circular(10),
+                        icon: Image.asset(
+                          AppImages.arrowDownIcon,
+                          height: 15,
+                          width: 15,
+                        ).commonSymmetricPadding(horizontal: 10),
+                        onChanged: (String? value) {
+                          companyEmployeeManageScreenController.isLoading(true);
+                          companyEmployeeManageScreenController
+                              .hourlyRateController
+                              .clear();
+                          companyEmployeeManageScreenController.salaryController
+                              .clear();
+                          companyEmployeeManageScreenController
+                              .selectedValuePayper.value = value!;
+                          companyEmployeeManageScreenController
+                              .isLoading(false);
+                        },
+                      ).commonOnlyPadding(left: 10, right: 10),
+                    ),
                   ),
                 ),
               ),
             ),
+            // ),
             const SizedBox(height: 5),
 
             companyEmployeeManageScreenController.selectedValuePayper.value ==
@@ -210,6 +228,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               text: AppMessage.selectStartDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
+              readOnly: true,
               textEditingController:
                   companyEmployeeManageScreenController.startDateController,
               suffixIcon: Icons.calendar_month,
@@ -223,13 +242,14 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                     datePickerOption: DatePickerOption.startDate);
               },
               validate: (value) =>
-                  FieldValidation().validateStartDayWork(value),
+                  FieldValidation().validateEmployeeStartDate(value),
             ),
             const SizedBox(height: 5),
 
             FormSingleFieldModule(
-              headerText: AppMessage.endDate,
-              text: AppMessage.endDate,
+              headerText: AppMessage.employmentEndDate,
+              text: AppMessage.employmentEndDate,
+              readOnly: true,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:
@@ -247,7 +267,8 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                       companyEmployeeManageScreenController.employmentStartDate,
                 );
               },
-              validate: (value) => FieldValidation().validateEndDayWork(value),
+              validate: (value) =>
+                  FieldValidation().pleaseEnterEmployeeEndDate(value),
             ),
 
             const SizedBox(height: 5),
@@ -259,7 +280,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                   maxLines: null,
                   text: TextSpan(
-                      text: AppMessage.isActive,
+                      text: AppMessage.status,
                       style: TextStyleConfig.textStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
@@ -284,44 +305,57 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Container(
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.transparent),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: companyEmployeeManageScreenController
-                              .selectedValue.value,
-                          items: companyEmployeeManageScreenController
-                              .isActiveOptionList
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          borderRadius: BorderRadius.circular(10),
-                          icon: Image.asset(
-                            AppImages.arrowDownIcon,
-                            height: 15,
-                            width: 15,
-                          ).commonSymmetricPadding(horizontal: 10),
-                          onChanged: (String? value) {
-                            // This is called when the user selects an item.
-                            companyEmployeeManageScreenController.isLoading(true);
-                            companyEmployeeManageScreenController
-                                .selectedValue.value = value!;
-                            log('value : $value');
-                            // companyEmployeeManageScreenController.loadUI();
+                      // child: DropdownButtonHideUnderline(
+                      child: DropdownButtonFormField<String>(
+                        validator: (value) {
+                          if (companyEmployeeManageScreenController
+                                  .selectedValue.value ==
+                              AppMessage.chooseOption) {
+                            return AppMessage.pleaseSelectStatus;
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration:
+                            const InputDecoration.collapsed(hintText: ''),
+                        value: companyEmployeeManageScreenController
+                            .selectedValue.value,
+                        items: companyEmployeeManageScreenController
+                            .isActiveOptionList
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        borderRadius: BorderRadius.circular(10),
+                        icon: Image.asset(
+                          AppImages.arrowDownIcon,
+                          height: 15,
+                          width: 15,
+                        ).commonSymmetricPadding(horizontal: 10),
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          companyEmployeeManageScreenController.isLoading(true);
+                          companyEmployeeManageScreenController
+                              .selectedValue.value = value!;
+                          log('value : $value');
+                          // companyEmployeeManageScreenController.loadUI();
 
-                            companyEmployeeManageScreenController
-                                .isLoading(false);
-                          },
-                        ).commonOnlyPadding(left: 10, right: 10),
-                      ),
+                          companyEmployeeManageScreenController
+                              .isLoading(false);
+                        },
+                      ).commonOnlyPadding(left: 10, right: 10),
                     ),
                   ),
                 ),
+                // ),
               ],
             ),
 
@@ -357,7 +391,8 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.transparent),
                   ),
                   child: DropdownButtonHideUnderline(
@@ -454,7 +489,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                 ).commonSymmetricPadding(vertical: 2),*/
                 Container(
                   width: double.infinity,
-                  height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     // border: Border.all(color: AppColors.greyColor),
@@ -462,12 +496,26 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Container(
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.transparent),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<CompanyDepartmentData>(
+                      // child: DropdownButtonHideUnderline(
+                      child: Center(
+                        child: DropdownButtonFormField<CompanyDepartmentData>(
+                          validator: (value) {
+                            if (companyEmployeeManageScreenController
+                                    .selectedValue.value ==
+                                AppMessage.chooseOption) {
+                              return AppMessage.pleaseSelectDepartment;
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ''),
                           value: companyEmployeeManageScreenController
                               .companyDepartmentData,
                           items: companyEmployeeManageScreenController
@@ -476,7 +524,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                                   (CompanyDepartmentData value) {
                             return DropdownMenuItem<CompanyDepartmentData>(
                               value: value,
-                              child: Text(value.departmentName),
+                              child: Text(value.departmentName!),
                             );
                           }).toList(),
                           borderRadius: BorderRadius.circular(10),
@@ -486,7 +534,8 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                             width: 15,
                           ).commonSymmetricPadding(horizontal: 10),
                           onChanged: (CompanyDepartmentData? value) async {
-                            companyEmployeeManageScreenController.isLoading(true);
+                            companyEmployeeManageScreenController
+                                .isLoading(true);
                             // This is called when the user selects an item.
                             companyEmployeeManageScreenController
                                 .companyDepartmentData = value;
@@ -498,7 +547,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
+                // ),
               ],
             ),
             const SizedBox(height: 5),
@@ -524,7 +573,6 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
             ).commonSymmetricPadding(vertical: 2),
             Container(
               width: double.infinity,
-              height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 // border: Border.all(color: AppColors.greyColor),
@@ -532,19 +580,33 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
+                  height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.transparent),
                   ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      value:
-                          companyEmployeeManageScreenController.locationListData,
-                      items: companyEmployeeManageScreenController.allLocationList
+                  // child: DropdownButtonHideUnderline(
+                  child: Center(
+                    child: DropdownButtonFormField(
+                      validator: (value) {
+                        if (companyEmployeeManageScreenController
+                                .selectedValue.value ==
+                            AppMessage.chooseOption) {
+                          return AppMessage.pleaseSelectLocation;
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: const InputDecoration.collapsed(hintText: ''),
+                      value: companyEmployeeManageScreenController
+                          .locationListData,
+                      items: companyEmployeeManageScreenController
+                          .allLocationList
                           .map<DropdownMenuItem<LocationListData>>(
                               (LocationListData value) {
                         return DropdownMenuItem<LocationListData>(
-                            value: value, child: Text(value.locationName));
+                            value: value, child: Text(value.locationName!));
                       }).toList(),
                       borderRadius: BorderRadius.circular(10),
                       icon: Image.asset(
@@ -563,6 +625,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                 ),
               ),
             ),
+            // ),
             const SizedBox(height: 5),
 
             FormSingleFieldModule(
@@ -649,8 +712,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                     mandatoryText: AppMessage.empty,
                     textEditingController: companyEmployeeManageScreenController
                         .cityAddressController,
-                    // validate: (value) =>
-                    //     FieldValidation().validateCurrentAddress(value),
+                    validate: (value) => FieldValidation().validateCity(value),
                   ),
                 ),
                 const SizedBox(width: 5),
@@ -663,8 +725,8 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                     mandatoryText: AppMessage.empty,
                     textEditingController: companyEmployeeManageScreenController
                         .stateAddressController,
-                    // validate: (value) =>
-                    //     FieldValidation().validateCurrentAddress(value),
+                    validate: (value) =>
+                        FieldValidation().validateZipcode(value),
                   ),
                 ),
               ],
@@ -679,12 +741,11 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               mandatoryText: AppMessage.empty,
               textEditingController: companyEmployeeManageScreenController
                   .zipcodeAddressController,
-              // validate: (value) =>
-              //     FieldValidation().validateCurrentAddress(value),
+              validate: (value) => FieldValidation().validateZipCode(value),
             ),
             SizedBox(height: 2.h),
 
-           /* Row(
+            /* Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -848,47 +909,49 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
             CustomSubmitButtonModule(
               labelText: AppMessage.submit,
               onPress: () async {
-                if (companyEmployeeManageScreenController
-                    .formKey.currentState!
+                if (companyEmployeeManageScreenController.formKey.currentState!
                     .validate()) {
-                  if (companyEmployeeManageScreenController
-                      .employeeOption ==
+                  if (companyEmployeeManageScreenController.employeeOption ==
                       EmployeeOption.create) {
                     // if (companyEmployeeManageScreenController.images != null) {
-                    if (companyEmployeeManageScreenController
-                        .companyDepartmentData!.departmentName ==
-                        AppMessage.empty) {
-                      Fluttertoast.showToast(
-                          msg: AppMessage.pleaseSelectDepartment);
-                    } else if (companyEmployeeManageScreenController
-                        .selectedValuePayper.value ==
-                        AppMessage.chooseOption) {
-                      Fluttertoast.showToast(
-                          msg: AppMessage.pleaseSelectPayper);
-                    } else {
-                      await companyEmployeeManageScreenController
-                          .employeeCreateFunction();
-                    }
+                    // if (companyEmployeeManageScreenController
+                    //         .companyDepartmentData!.departmentName ==
+                    //     AppMessage.empty) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectDepartment);
+                    // }
+
+                    // if (companyEmployeeManageScreenController
+                    //         .selectedValuePayper.value ==
+                    //     AppMessage.chooseOption) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectPayper);
+                    // } else {
+                    await companyEmployeeManageScreenController
+                        .employeeCreateFunction();
+                    // }
                     // } else {
                     //   Fluttertoast.showToast(
                     //       msg: "Please select profile image!");
                     // }
                   } else {
                     log("updateEmployeeDetailsFunction");
-                    if (companyEmployeeManageScreenController
-                        .companyDepartmentData!.departmentName ==
-                        AppMessage.empty) {
-                      Fluttertoast.showToast(
-                          msg: AppMessage.pleaseSelectDepartment);
-                    } else if (companyEmployeeManageScreenController
-                        .selectedValuePayper.value ==
-                        AppMessage.chooseOption) {
-                      Fluttertoast.showToast(
-                          msg: AppMessage.pleaseSelectPayper);
-                    } else {
-                      await companyEmployeeManageScreenController
-                          .updateEmployeeDetailsFunction();
-                    }
+                    // if (companyEmployeeManageScreenController
+                    //         .companyDepartmentData!.departmentName ==
+                    //     AppMessage.empty) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectDepartment);
+                    // }
+
+                    // if (companyEmployeeManageScreenController
+                    //         .selectedValuePayper.value ==
+                    //     AppMessage.chooseOption) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectPayper);
+                    // } else {
+                    await companyEmployeeManageScreenController
+                        .updateEmployeeDetailsFunction();
+                    // }
                   }
                 }
               },

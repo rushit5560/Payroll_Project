@@ -108,7 +108,7 @@ class LocationListScreenWidgets extends StatelessWidget {
                   SingleListTileModuleCustom(
                     image: AppImages.locationIcon,
                     textKey: AppMessage.locationName,
-                    textValue: value.locationName,
+                    textValue: value.locationName!,
                   ),
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(

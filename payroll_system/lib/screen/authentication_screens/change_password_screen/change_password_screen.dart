@@ -30,7 +30,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     ? AppMessage.subAdminText
                     : changePasswordScreenController.roleId.value == 3
                         ? AppMessage.company
-                        : "",
+                        : AppMessage.changePassword,
             style: TextStyle(
               color: AppColors.colorBlack,
               fontWeight: FontWeight.bold,
@@ -67,8 +67,11 @@ class ChangePasswordScreen extends StatelessWidget {
                       CustomSubmitButtonModule(
                         labelText: AppMessage.changePassword,
                         onPress: () async {
-                          if (changePasswordScreenController.formKey.currentState!.validate()) {
-                            await changePasswordScreenController.changePasswordFunction();
+                          if (changePasswordScreenController
+                              .formKey.currentState!
+                              .validate()) {
+                            await changePasswordScreenController
+                                .changePasswordFunction();
                           }
                         },
                       ),

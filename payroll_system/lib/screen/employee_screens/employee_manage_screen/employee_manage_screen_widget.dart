@@ -4,7 +4,6 @@ import 'package:payroll_system/common_modules/new/custom_submit_button_module.da
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -13,7 +12,6 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import '../../../common_modules/form_single_field_module.dart';
-import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/controllers/employee_manage_screen_controller.dart';
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
@@ -36,14 +34,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /*Text(
-              AppMessage.employeeDetails,
-              style: TextStyleConfig.textStyle(
-                  fontSize: 22.sp, fontWeight: FontWeight.w400),
-            ),
-            SizedBox(height: 2.h),*/
-            // ImagePickerCustom(),
-            // SizedBox(height: 2.h),
             FormSingleFieldModule(
               headerText: AppMessage.firstName,
               text: AppMessage.firstName,
@@ -54,6 +44,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               validate: (value) => FieldValidation().validateFirstName(value),
             ),
             const SizedBox(height: 5),
+
             FormSingleFieldModule(
               headerText: AppMessage.middleName,
               text: AppMessage.middleName,
@@ -64,6 +55,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               validate: (value) => FieldValidation().validateMiddleName(value),
             ),
             const SizedBox(height: 5),
+
             FormSingleFieldModule(
               headerText: AppMessage.lastName,
               text: AppMessage.lastName,
@@ -74,6 +66,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               validate: (value) => FieldValidation().validateLastName(value),
             ),
             const SizedBox(height: 5),
+
             FormSingleFieldModule(
               headerText: AppMessage.mobileNumber,
               text: AppMessage.mobileNumber,
@@ -86,11 +79,13 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   FieldValidation().validateMobileNumber(value),
             ),
             const SizedBox(height: 5),
+
             FormSingleFieldModule(
               headerText: AppMessage.dateOfBirth,
               text: AppMessage.selectDate,
               mandatoryText: AppMessage.mandatory,
               keyboardType: TextInputType.datetime,
+              readOnly: true,
               maxLength: 10,
               textEditingController:
                   employeeCreteScreenController.dateOfBirthController,
@@ -107,6 +102,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               validate: (value) => FieldValidation().validateDateOfBirth(value),
             ),
             const SizedBox(height: 5),
+
             RichText(
               textAlign: TextAlign.left,
               maxLines: null,
@@ -137,44 +133,61 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.transparent),
                   ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value:
-                          employeeCreteScreenController.selectedValuePayper.value,
-                      items: employeeCreteScreenController.isPayperList
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      borderRadius: BorderRadius.circular(10),
-                      icon: Image.asset(
-                        AppImages.arrowDownIcon,
-                        height: 15,
-                        width: 15,
-                      ).commonSymmetricPadding(horizontal: 10),
-                      onChanged: (String? value) {
-                        employeeCreteScreenController.isLoading(true);
-                        employeeCreteScreenController.hourlyRateController
-                            .clear();
-                        employeeCreteScreenController.salaryController.clear();
-                        employeeCreteScreenController.selectedValuePayper.value =
-                            value!;
-                        employeeCreteScreenController.isLoading(false);
-                      },
-                    ).commonOnlyPadding(left: 10, right: 10),
+                  // child: DropdownButtonHideUnderline(
+                  child: SizedBox(
+                    height: 50,
+                    child: Center(
+                      child: DropdownButtonFormField<String>(
+                        validator: (value) {
+                          if (employeeCreteScreenController
+                                  .selectedValue.value ==
+                              AppMessage.chooseOption) {
+                            return AppMessage.pleaseSelectPayPeriod;
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration:
+                            const InputDecoration.collapsed(hintText: ''),
+                        value: employeeCreteScreenController
+                            .selectedValuePayper.value,
+                        items: employeeCreteScreenController.isPayperList
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        borderRadius: BorderRadius.circular(10),
+                        icon: Image.asset(
+                          AppImages.arrowDownIcon,
+                          height: 15,
+                          width: 15,
+                        ).commonSymmetricPadding(horizontal: 10),
+                        onChanged: (String? value) {
+                          employeeCreteScreenController.isLoading(true);
+                          employeeCreteScreenController.hourlyRateController
+                              .clear();
+                          employeeCreteScreenController.salaryController
+                              .clear();
+                          employeeCreteScreenController
+                              .selectedValuePayper.value = value!;
+                          employeeCreteScreenController.isLoading(false);
+                        },
+                      ).commonOnlyPadding(left: 10, right: 10),
+                    ),
                   ),
                 ),
               ),
             ),
+            // ),
             const SizedBox(height: 5),
 
-            employeeCreteScreenController.selectedValuePayper.value ==
-                    AppMessage.hourly
+            employeeCreteScreenController.selectedValuePayper.value == "Hourly"
                 ? FormSingleFieldModule(
                     headerText: AppMessage.hourlyRate,
                     text: AppMessage.hourlyRate,
@@ -186,7 +199,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                         FieldValidation().validateHourlyRate(value),
                   )
                 : employeeCreteScreenController.selectedValuePayper.value ==
-                        AppMessage.salaryText
+                        "Salary"
                     ? FormSingleFieldModule(
                         headerText: AppMessage.salary,
                         text: AppMessage.salary,
@@ -199,7 +212,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       )
                     : Container(),
             employeeCreteScreenController.selectedValuePayper.value ==
-                    AppMessage.chooseOption
+                    "Choose Option"
                 ? Container()
                 : const SizedBox(height: 5),
 
@@ -208,12 +221,11 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               text: AppMessage.selectStartDate,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
+              readOnly: true,
               textEditingController:
                   employeeCreteScreenController.startDateController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
-                // DateTime selectedFirstDate =
-                //     employeeCreteScreenController.selectedDate;
                 await _selectDate(
                     context: context,
                     dateTime: employeeCreteScreenController.employmentStartDate,
@@ -222,21 +234,20 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     datePickerOption: DatePickerOption.startDate);
               },
               validate: (value) =>
-                  FieldValidation().validateStartDayWork(value),
+                  FieldValidation().validateEmployeeStartDate(value),
             ),
             const SizedBox(height: 5),
 
             FormSingleFieldModule(
-              headerText: AppMessage.employeeEndDate,
-              text: AppMessage.employeeEndDate,
+              headerText: AppMessage.employmentEndDate,
+              text: AppMessage.employmentEndDate,
+              readOnly: true,
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:
                   employeeCreteScreenController.endDateController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
-                // DateTime selectedFirstDate =
-                //     employeeCreteScreenController.selectedDate;
                 await _selectDate(
                   context: context,
                   dateTime: employeeCreteScreenController.employmentEndDate,
@@ -246,7 +257,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   firstDate: employeeCreteScreenController.employmentStartDate,
                 );
               },
-              validate: (value) => FieldValidation().validateEndDayWork(value),
+              validate: (value) =>
+                  FieldValidation().pleaseEnterEmployeeEndDate(value),
             ),
 
             const SizedBox(height: 5),
@@ -258,7 +270,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   textAlign: TextAlign.left,
                   maxLines: null,
                   text: TextSpan(
-                      text: AppMessage.isActive,
+                      text: AppMessage.status,
                       style: TextStyleConfig.textStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
@@ -283,42 +295,55 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Container(
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.transparent),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value:
-                              employeeCreteScreenController.selectedValue.value,
-                          items: employeeCreteScreenController.isActiveOptionList
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          borderRadius: BorderRadius.circular(10),
-                          icon: Image.asset(
-                            AppImages.arrowDownIcon,
-                            height: 15,
-                            width: 15,
-                          ).commonSymmetricPadding(horizontal: 10),
-                          onChanged: (String? value) {
-                            // This is called when the user selects an item.
-                            employeeCreteScreenController.isLoading(true);
-                            employeeCreteScreenController.selectedValue.value =
-                                value!;
-                            log('value : $value');
-                            // employeeCreteScreenController.loadUI();
+                      // child: DropdownButtonHideUnderline(
+                      child: DropdownButtonFormField<String>(
+                        validator: (value) {
+                          if (employeeCreteScreenController
+                                  .selectedValue.value ==
+                              AppMessage.chooseOption) {
+                            return AppMessage.pleaseSelectStatus;
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration:
+                            const InputDecoration.collapsed(hintText: ''),
+                        value:
+                            employeeCreteScreenController.selectedValue.value,
+                        items: employeeCreteScreenController.isActiveOptionList
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        borderRadius: BorderRadius.circular(10),
+                        icon: Image.asset(
+                          AppImages.arrowDownIcon,
+                          height: 15,
+                          width: 15,
+                        ).commonSymmetricPadding(horizontal: 10),
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          employeeCreteScreenController.isLoading(true);
+                          employeeCreteScreenController.selectedValue.value =
+                              value!;
+                          log('value : $value');
+                          // employeeCreteScreenController.loadUI();
 
-                            employeeCreteScreenController.isLoading(false);
-                          },
-                        ).commonOnlyPadding(left: 10, right: 10),
-                      ),
+                          employeeCreteScreenController.isLoading(false);
+                        },
+                      ).commonOnlyPadding(left: 10, right: 10),
                     ),
                   ),
                 ),
+                // ),
               ],
             ),
 
@@ -345,7 +370,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ).commonSymmetricPadding(vertical: 2),
             Container(
               width: double.infinity,
-              // height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 // border: Border.all(color: AppColors.greyColor),
@@ -353,8 +377,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
+                  height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.transparent),
                   ),
                   child: DropdownButtonHideUnderline(
@@ -451,7 +477,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 ).commonSymmetricPadding(vertical: 2),*/
                 Container(
                   width: double.infinity,
-                  // height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     // border: Border.all(color: AppColors.greyColor),
@@ -459,20 +484,34 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Container(
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.transparent),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<CompanyDepartmentData>(
-                          value:
-                              employeeCreteScreenController.companyDepartmentData,
+                      // child: DropdownButtonHideUnderline(
+                      child: Center(
+                        child: DropdownButtonFormField<CompanyDepartmentData>(
+                          validator: (value) {
+                            if (employeeCreteScreenController
+                                    .selectedValue.value ==
+                                AppMessage.chooseOption) {
+                              return AppMessage.pleaseSelectDepartment;
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ''),
+                          value: employeeCreteScreenController
+                              .companyDepartmentData,
                           items: employeeCreteScreenController.companyDepartment
                               .map<DropdownMenuItem<CompanyDepartmentData>>(
                                   (CompanyDepartmentData value) {
                             return DropdownMenuItem<CompanyDepartmentData>(
                               value: value,
-                              child: Text(value.departmentName),
+                              child: Text(value.departmentName!),
                             );
                           }).toList(),
                           borderRadius: BorderRadius.circular(10),
@@ -484,8 +523,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           onChanged: (CompanyDepartmentData? value) async {
                             employeeCreteScreenController.isLoading(true);
                             // This is called when the user selects an item.
-                            employeeCreteScreenController.companyDepartmentData =
-                                value;
+                            employeeCreteScreenController
+                                .companyDepartmentData = value;
                             employeeCreteScreenController.isLoading(false);
                           },
                         ).commonOnlyPadding(left: 10, right: 10),
@@ -493,36 +532,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     ),
                   ),
                 ),
-                // DropDownMultiSelect(
-                //   options: employeeCreteScreenController.departmentStringList,
-                //   whenEmpty: 'Choose Department',
-                //   onChanged: (value) {
-                //     employeeCreteScreenController.selectedDepartmentList.value =
-                //         value;
-                //     employeeCreteScreenController
-                //         .selectedDepartmentOption.value = "";
-                //     employeeCreteScreenController.selectedDepartmentIdList = [];
-
-                //     // Selected Department generate new id list for send in api
-                //     for (int i = 0; i < value.length; i++) {
-                //       for (int j = 0;
-                //           j <
-                //               employeeCreteScreenController
-                //                   .companyDepartment.length;
-                //           j++) {
-                //         if (value[i] ==
-                //             employeeCreteScreenController
-                //                 .companyDepartment[j].departmentName) {
-                //           employeeCreteScreenController.selectedDepartmentIdList
-                //               .add(employeeCreteScreenController
-                //                   .companyDepartment[j].id
-                //                   .toString());
-                //         }
-                //       }
-                //     }
-                //   },
-                //   selectedValues: employeeCreteScreenController
-                //       .selectedDepartmentList.value,
                 // ),
               ],
             ),
@@ -549,7 +558,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ).commonSymmetricPadding(vertical: 2),
             Container(
               width: double.infinity,
-              // height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 // border: Border.all(color: AppColors.greyColor),
@@ -557,18 +565,30 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
+                  height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.transparent),
                   ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
+                  // child: DropdownButtonHideUnderline(
+                  child: Center(
+                    child: DropdownButtonFormField(
+                      validator: (value) {
+                        if (employeeCreteScreenController.selectedValue.value ==
+                            AppMessage.chooseOption) {
+                          return AppMessage.pleaseSelectLocation;
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: const InputDecoration.collapsed(hintText: ''),
                       value: employeeCreteScreenController.locationListData,
                       items: employeeCreteScreenController.allLocationList
                           .map<DropdownMenuItem<LocationListData>>(
                               (LocationListData value) {
                         return DropdownMenuItem<LocationListData>(
-                            value: value, child: Text(value.locationName));
+                            value: value, child: Text(value.locationName!));
                       }).toList(),
                       borderRadius: BorderRadius.circular(10),
                       icon: Image.asset(
@@ -586,29 +606,9 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 ),
               ),
             ),
+            // ),
             const SizedBox(height: 5),
 
-            /*employeeCreteScreenController.employeeOption ==
-                    EmployeeOption.update
-                ? FormSingleFieldModule(
-                    headerText: AppMessage.employeeEmail,
-                    text: AppMessage.employeeEmail,
-                    keyboardType: TextInputType.emailAddress,
-                    mandatoryText: AppMessage.mandatory,
-                    readOnly: employeeCreteScreenController.employeeOption== EmployeeOption.update ? true : false,
-                    textEditingController:
-                        employeeCreteScreenController.emailController,
-                    validate: (value) => FieldValidation().validateEmail(value),
-                  )
-                : FormSingleFieldModule(
-                    headerText: AppMessage.employeeEmail,
-                    text: AppMessage.employeeEmail,
-                    mandatoryText: AppMessage.mandatory,
-                    keyboardType: TextInputType.emailAddress,
-                    textEditingController:
-                        employeeCreteScreenController.emailController,
-                    validate: (value) => FieldValidation().validateEmail(value),
-                  ),*/
             FormSingleFieldModule(
               headerText: AppMessage.employeeEmail,
               text: AppMessage.employeeEmail,
@@ -691,8 +691,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     mandatoryText: AppMessage.empty,
                     textEditingController:
                         employeeCreteScreenController.cityAddressController,
-                    // validate: (value) =>
-                    //     FieldValidation().validateCurrentAddress(value),
+                    validate: (value) => FieldValidation().validateCity(value),
                   ),
                 ),
                 const SizedBox(width: 5),
@@ -705,8 +704,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     mandatoryText: AppMessage.empty,
                     textEditingController:
                         employeeCreteScreenController.stateAddressController,
-                    // validate: (value) =>
-                    //     FieldValidation().validateCurrentAddress(value),
+                    validate: (value) =>
+                        FieldValidation().validateZipcode(value),
                   ),
                 ),
               ],
@@ -721,13 +720,11 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               mandatoryText: AppMessage.empty,
               textEditingController:
                   employeeCreteScreenController.zipcodeAddressController,
-              // validate: (value) =>
-              //     FieldValidation().validateCurrentAddress(value),
+              validate: (value) => FieldValidation().validateZipCode(value),
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: 2.h),
 
-            /// Upload Document Text Module
-            /*Row(
+            /* Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -756,7 +753,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               ],
             ),*/
 
-            /// Uploaded Document List Module
             /*employeeCreteScreenController
                     .employeeSelectedDocumentList.isNotEmpty
                 ? ListView.builder(
@@ -776,7 +772,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
 
                       return Container(
                         decoration: BoxDecoration(
-                          color: AppColors.colorWhite,
+                          border: Border.all(),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -797,11 +793,13 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                employeeCreteScreenController.isLoading(true);
+                                employeeCreteScreenController
+                                    .isLoading(true);
                                 employeeCreteScreenController
                                     .employeeSelectedDocumentList
                                     .removeAt(i);
-                                employeeCreteScreenController.isLoading(false);
+                                employeeCreteScreenController
+                                    .isLoading(false);
                                 log('Length : ${employeeCreteScreenController.employeeSelectedDocumentList}');
                               },
                               icon: const Icon(Icons.close_rounded),
@@ -813,39 +811,130 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   )
                 : Container(),*/
 
-            const SizedBox(height: 15),
-
+            // const SizedBox(height: 15),
+            /*Row(
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: ButtonCustom(
+                    onPressed: () async {
+                      if (employeeCreteScreenController
+                          .formKey.currentState!
+                          .validate()) {
+                        if (employeeCreteScreenController
+                                .employeeOption ==
+                            EmployeeOption.create) {
+                          // if (employeeCreteScreenController.images != null) {
+                          if (employeeCreteScreenController
+                                  .companyDepartmentData!.departmentName ==
+                              AppMessage.empty) {
+                            Fluttertoast.showToast(
+                                msg: AppMessage.pleaseSelectDepartment);
+                          } else if (employeeCreteScreenController
+                                  .selectedValuePayper.value ==
+                              AppMessage.chooseOption) {
+                            Fluttertoast.showToast(
+                                msg: AppMessage.pleaseSelectPayper);
+                          } else {
+                            await employeeCreteScreenController
+                                .employeeCreateFunction();
+                          }
+                          // } else {
+                          //   Fluttertoast.showToast(
+                          //       msg: "Please select profile image!");
+                          // }
+                        } else {
+                          log("updateEmployeeDetailsFunction");
+                          if (employeeCreteScreenController
+                                  .companyDepartmentData!.departmentName ==
+                              AppMessage.empty) {
+                            Fluttertoast.showToast(
+                                msg: AppMessage.pleaseSelectDepartment);
+                          } else if (employeeCreteScreenController
+                                  .selectedValuePayper.value ==
+                              AppMessage.chooseOption) {
+                            Fluttertoast.showToast(
+                                msg: AppMessage.pleaseSelectPayper);
+                          } else {
+                            await employeeCreteScreenController
+                                .updateEmployeeDetailsFunction();
+                          }
+                        }
+                      }
+                    },
+                    text: AppMessage.submit,
+                    textsize: 15.sp,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  flex: 5,
+                  child: ButtonCustom(
+                    onPressed: () => CustomAlertDialog().showAlertDialog(
+                      context: context,
+                      textContent: AppMessage.permissionMessage,
+                      onYesTap: () {
+                        Get.back();
+                        Get.back();
+                      },
+                      onCancelTap: () => Get.back(),
+                    ),
+                    text: AppMessage.back,
+                    textsize: 15.sp,
+                  ),
+                ),
+              ],
+            ),*/
             CustomSubmitButtonModule(
               labelText: AppMessage.submit,
               onPress: () async {
-                if (employeeCreteScreenController.formKey.currentState!.validate()) {
-                  if (employeeCreteScreenController.employeeOption == EmployeeOption.create) {
+                if (employeeCreteScreenController.formKey.currentState!
+                    .validate()) {
+                  if (employeeCreteScreenController.employeeOption ==
+                      EmployeeOption.create) {
                     // if (employeeCreteScreenController.images != null) {
-                    if (employeeCreteScreenController.companyDepartmentData!.departmentName == AppMessage.empty) {
-                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
-                    } else if (employeeCreteScreenController.selectedValuePayper.value == AppMessage.chooseOption) {
-                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectPayper);
-                    } else {
-                      await employeeCreteScreenController.employeeCreateFunction();
-                    }
+                    // if (employeeCreteScreenController
+                    //         .companyDepartmentData!.departmentName ==
+                    //     AppMessage.empty) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectDepartment);
+                    // }
+
+                    // if (employeeCreteScreenController
+                    //         .selectedValuePayper.value ==
+                    //     AppMessage.chooseOption) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectPayper);
+                    // } else {
+                    await employeeCreteScreenController
+                        .employeeCreateFunction();
+                    // }
                     // } else {
                     //   Fluttertoast.showToast(
                     //       msg: "Please select profile image!");
                     // }
                   } else {
                     log("updateEmployeeDetailsFunction");
-                    if (employeeCreteScreenController.companyDepartmentData!.departmentName == AppMessage.empty) {
-                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectDepartment);
-                    } else if (employeeCreteScreenController.selectedValuePayper.value == AppMessage.chooseOption) {
-                      Fluttertoast.showToast(msg: AppMessage.pleaseSelectPayper);
-                    } else {
-                      await employeeCreteScreenController.updateEmployeeDetailsFunction();
-                    }
+                    // if (employeeCreteScreenController
+                    //         .companyDepartmentData!.departmentName ==
+                    //     AppMessage.empty) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectDepartment);
+                    // }
+
+                    // if (employeeCreteScreenController
+                    //         .selectedValuePayper.value ==
+                    //     AppMessage.chooseOption) {
+                    //   Fluttertoast.showToast(
+                    //       msg: AppMessage.pleaseSelectPayper);
+                    // } else {
+                    await employeeCreteScreenController
+                        .updateEmployeeDetailsFunction();
+                    // }
                   }
                 }
-              }
+              },
             ),
-
           ],
         ).commonOnlyPadding(top: 1.h, right: 6.w, left: 6.w, bottom: 4.h),
       ),

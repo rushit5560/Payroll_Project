@@ -11,8 +11,6 @@ import 'package:payroll_system/screen/authentication_screens/login_screen/login_
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
-import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_manage_screen/pay_checkes_manage_screen.dart';
-import 'package:payroll_system/screen/payroll_screen/payroll_list_screen/payroll_list_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -56,8 +54,7 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
-                                Get.to(() => EmployeeListScreen(),
-                                    arguments: [
+                                Get.to(() => EmployeeListScreen(), arguments: [
                                   companyViewScreenController.companyId
                                       .toString(),
                                   companyViewScreenController.companyName,
@@ -91,8 +88,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     ]);
                               },
                               title: AppMessage.paycheckes,
-                              imageStatus: false,
-                              icon: const Icon(Icons.person, color: AppColors.colorBtBlue),
+                              imageStatus: true,
+                              image: AppImages.paycheckIcon,
                             ),
                             CompanyDrawerTile(
                               onTap: () {
@@ -105,8 +102,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     ]);
                               },
                               title: AppMessage.approvePaycheckes,
-                              imageStatus: false,
-                              icon: const Icon(Icons.person, color: AppColors.colorBtBlue),
+                              imageStatus: true,
+                              image: AppImages.approveIcon,
                             ),
                             /*CompanyDrawerTile(
                               onTap: () {
@@ -211,7 +208,11 @@ class CompanyDrawerTile extends StatelessWidget {
             trailing: const Icon(Icons.arrow_forward_ios_rounded,
                 color: AppColors.colorBtBlue),
           ),
-          const Divider(height: 1, thickness: 1, indent: 10, endIndent: 10,
+          const Divider(
+              height: 1,
+              thickness: 1,
+              indent: 10,
+              endIndent: 10,
               color: AppColors.colorLightPurple2),
         ],
       ),

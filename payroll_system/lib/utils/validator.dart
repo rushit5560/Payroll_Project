@@ -3,7 +3,7 @@ import 'package:payroll_system/utils/messaging.dart';
 class FieldValidation {
   String? validateUserName(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourName;
+      return AppMessage.pleaseEnterName;
     } else {
       return null;
     }
@@ -11,7 +11,7 @@ class FieldValidation {
 
   String? validateFirstName(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourFirstName;
+      return AppMessage.pleaseEnterFirstName;
     } else {
       return null;
     }
@@ -19,7 +19,7 @@ class FieldValidation {
 
   String? validateMiddleName(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourMiddleName;
+      return AppMessage.pleaseEnterMiddleName;
     } else {
       return null;
     }
@@ -27,7 +27,7 @@ class FieldValidation {
 
   String? validateCurrentPassword(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourCurrentPassword;
+      return AppMessage.pleaseEnterCurrentPassword;
     } else {
       return null;
     }
@@ -35,7 +35,7 @@ class FieldValidation {
 
   String? validateLastName(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourLastName;
+      return AppMessage.pleaseEnterLastName;
     } else {
       return null;
     }
@@ -58,11 +58,29 @@ class FieldValidation {
 
   String? validateCurrentAddress(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourCurrentAddress;
+      return AppMessage.pleaseEnterCurrentAddress;
     } else {
       return null;
     }
   }
+
+   String? validateZipcode(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterZipcode;
+    } else {
+      return null;
+    }
+  }
+
+
+   String? validateText(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterText;
+    } else {
+      return null;
+    }
+  }
+
 
   String? validateCity(String value) {
     if (value.isEmpty) {
@@ -106,7 +124,7 @@ class FieldValidation {
 
   String? validateCompanyAddress(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourCompanyAddress;
+      return AppMessage.pleaseEnterCompanyAddress;
     } else {
       return null;
     }
@@ -115,7 +133,7 @@ class FieldValidation {
   //location
   String? validateLocationName(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourLocation;
+      return AppMessage.pleaseEnterLocation;
     } else {
       return null;
     }
@@ -123,7 +141,7 @@ class FieldValidation {
 
   String? validateAddress(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourAddress;
+      return AppMessage.pleaseEnterAddress;
     } else {
       return null;
     }
@@ -131,7 +149,7 @@ class FieldValidation {
 
   String? validateHomeAddress(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourHomeAddress;
+      return AppMessage.pleaseEnterHomeAddress;
     } else {
       return null;
     }
@@ -219,7 +237,7 @@ class FieldValidation {
 
   String? validateDateOfBirth(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterYourDateOfBirth;
+      return AppMessage.pleaseEnterDateOfBirth;
     } else {
       return null;
     }
@@ -241,17 +259,17 @@ class FieldValidation {
     }
   }
 
-  String? validateStartDayWork(String value) {
+  String? validateEmployeeStartDate(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterFirstDayWork;
+      return AppMessage.pleaseEnterEmployeeStartDate;
     } else {
       return null;
     }
   }
 
-  String? validateEndDayWork(String value) {
+  String? pleaseEnterEmployeeEndDate(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterLastDayWork;
+      return AppMessage.pleaseEnterEmployeeEndDate;
     } else {
       return null;
     }
@@ -259,7 +277,7 @@ class FieldValidation {
 
   String? validateLastDayWork(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterLastDayWork;
+      return AppMessage.pleaseEnterEmployeeEndDate;
     } else {
       return null;
     }
@@ -277,6 +295,7 @@ class FieldValidation {
     }
   }
 
+
   String? validatePassword(String value) {
     if (value.isEmpty) {
       return AppMessage.passwordIsRequired;
@@ -287,6 +306,26 @@ class FieldValidation {
     }
   }
 
+
+    String? validateOldPassword(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterOldPassword;
+    } else if (value.length < 8) {
+      return AppMessage.passwordMustBeAtleast8CharactersLong;
+    } else {
+      return null;
+    }
+  }
+
+ String? validateNewPassword(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterNewPassword;
+    } else if (value.length < 8) {
+      return AppMessage.passwordMustBeAtleast8CharactersLong;
+    } else {
+      return null;
+    }
+  } 
   String? validateConfirmPassword(String value, String passwordValue) {
     if (value.isEmpty) {
       return AppMessage.confirmPasswordIsRequired;

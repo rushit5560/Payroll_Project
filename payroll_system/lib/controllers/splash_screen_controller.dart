@@ -42,52 +42,86 @@ class SplashScreenController extends GetxController {
         // Fluttertoast.showToast(msg: userPermissionModel.messege);
 
         await userPreference.setAllPermissionIntoPrefs(
-          subAdminView: userPermissionModel.data.subadminview == "on" ? true : false,
+          subAdminView:
+              userPermissionModel.data.subadminview == "on" ? true : false,
           subAdminAdd: roleId == "1" ? true : false,
-          subAdminEdit: userPermissionModel.data.subadminedit == "on" ? true : false,
+          subAdminEdit:
+              userPermissionModel.data.subadminedit == "on" ? true : false,
           subAdminDelete: false,
-
           companyView: roleId == "1" ? true : false,
-          companyAdd: userPermissionModel.data.companyadd == "on" ? true : false,
-          companyEdit: userPermissionModel.data.companyedit == "on" ? true : false,
+          companyAdd:
+              userPermissionModel.data.companyadd == "on" ? true : false,
+          companyEdit:
+              userPermissionModel.data.companyedit == "on" ? true : false,
           companyDelete: false,
-
-          departmentView: userPermissionModel.data.departmentview == "on" ? true : false,
-          departmentAdd: userPermissionModel.data.departmentadd == "on" ? true : false,
-          departmentEdit: userPermissionModel.data.departmentedit == "on" ? true : false,
-          departmentDelete: userPermissionModel.data.departmentdelete == "on" ? true : false,
-
-          locationView: userPermissionModel.data.locationview == "on" ? true : false,
-          locationAdd: userPermissionModel.data.locationadd == "on" ? true : false,
-          locationEdit: userPermissionModel.data.locationedit == "on" ? true : false,
-          locationDelete: userPermissionModel.data.locationdelete == "on" ? true : false,
-
-          employeeView: userPermissionModel.data.employeeview == "on" ? true : false,
-          employeeAdd: userPermissionModel.data.employeeadd == "on" ? true : false,
-          employeeEdit: userPermissionModel.data.employeeedit == "on" ? true : false,
-          employeeDelete: userPermissionModel.data.employeedelete == "on" ? true : false,
-
-          employeeDocumentView: userPermissionModel.data.employeedocumentview == "on" ? true : false,
-          employeeDocumentAdd: userPermissionModel.data.employeedocumentadd == "on" ? true : false,
+          departmentView:
+              userPermissionModel.data.departmentview == "on" ? true : false,
+          departmentAdd:
+              userPermissionModel.data.departmentadd == "on" ? true : false,
+          departmentEdit:
+              userPermissionModel.data.departmentedit == "on" ? true : false,
+          departmentDelete:
+              userPermissionModel.data.departmentdelete == "on" ? true : false,
+          locationView:
+              userPermissionModel.data.locationview == "on" ? true : false,
+          locationAdd:
+              userPermissionModel.data.locationadd == "on" ? true : false,
+          locationEdit:
+              userPermissionModel.data.locationedit == "on" ? true : false,
+          locationDelete:
+              userPermissionModel.data.locationdelete == "on" ? true : false,
+          employeeView:
+              userPermissionModel.data.employeeview == "on" ? true : false,
+          employeeAdd:
+              userPermissionModel.data.employeeadd == "on" ? true : false,
+          employeeEdit:
+              userPermissionModel.data.employeeedit == "on" ? true : false,
+          employeeDelete:
+              userPermissionModel.data.employeedelete == "on" ? true : false,
+          employeeDocumentView:
+              userPermissionModel.data.employeedocumentview == "on"
+                  ? true
+                  : false,
+          employeeDocumentAdd:
+              userPermissionModel.data.employeedocumentadd == "on"
+                  ? true
+                  : false,
           employeeDocumentEdit: false,
-          employeeDocumentDelete: userPermissionModel.data.employeedocumentdelete == "on" ? true : false,
-          employeeDocumentDownload: userPermissionModel.data.employeedocumentdownload == "on" ? true : false,
-
-          payChecksView: userPermissionModel.data.payrollview == "on" ? true : false,
-          payChecksAdd: userPermissionModel.data.payrolladd == "on" ? true : false,
+          employeeDocumentDelete:
+              userPermissionModel.data.employeedocumentdelete == "on"
+                  ? true
+                  : false,
+          employeeDocumentDownload:
+              userPermissionModel.data.employeedocumentdownload == "on"
+                  ? true
+                  : false,
+          payChecksView:
+              userPermissionModel.data.payrollview == "on" ? true : false,
+          payChecksAdd:
+              userPermissionModel.data.payrolladd == "on" ? true : false,
           payChecksEdit: false,
           payChecksDelete: false,
-          payChecksDownload: userPermissionModel.data.payrolldownload == "on" ? true : false,
-
-          approvePayChecksView: userPermissionModel.data.approvepaychecksview == "on" ? true : false,
+          payChecksDownload:
+              userPermissionModel.data.payrolldownload == "on" ? true : false,
+          approvePayChecksView:
+              userPermissionModel.data.approvepaychecksview == "on"
+                  ? true
+                  : false,
           approvePayChecksAdd: false,
-          approvePayChecksEdit: userPermissionModel.data.approvepaychecksedit == "on" ? true : false,
-          approvePayChecksDelete: userPermissionModel.data.approvepaychecksdelete == "on" ? true : false,
-
-          emailTemplateView: userPermissionModel.data.emailtemplateview == "on" ? true : false,
-          emailTemplateAdd: userPermissionModel.data.emailtemplateadd == "on" ? true : false,
-          emailTemplateEdit: userPermissionModel.data.emailtemplateedit == "on" ? true : false,
-
+          approvePayChecksEdit:
+              userPermissionModel.data.approvepaychecksedit == "on"
+                  ? true
+                  : false,
+          approvePayChecksDelete:
+              userPermissionModel.data.approvepaychecksdelete == "on"
+                  ? true
+                  : false,
+          emailTemplateView:
+              userPermissionModel.data.emailtemplateview == "on" ? true : false,
+          emailTemplateAdd:
+              userPermissionModel.data.emailtemplateadd == "on" ? true : false,
+          emailTemplateEdit:
+              userPermissionModel.data.emailtemplateedit == "on" ? true : false,
           roleView: roleId == "1" ? true : false,
           roleEdit: roleId == "1" ? true : false,
         );
@@ -103,7 +137,6 @@ class SplashScreenController extends GetxController {
         } else {
           Get.off(() => LoginScreen());
         }
-
       } else {
         Fluttertoast.showToast(msg: 'user permissions not found');
       }
@@ -127,7 +160,6 @@ class SplashScreenController extends GetxController {
           int roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
           await userPreference.getUserPrefsAndSaveToLocal();
           await getUserPermissionsFunction(roleId: roleId.toString());
-        
         } else {
           Get.off(() => LoginScreen());
         }

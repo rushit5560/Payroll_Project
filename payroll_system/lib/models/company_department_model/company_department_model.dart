@@ -79,6 +79,7 @@ class CompanyDeprtmentModel {
       CompanyDeprtmentModel(
         success: json["success"],
         messege: json["messege"],
+      
         data: List<CompanyDepartmentData>.from(
             json["Data"].map((x) => CompanyDepartmentData.fromJson(x))),
       );
@@ -92,8 +93,8 @@ class CompanyDeprtmentModel {
 
 class CompanyDepartmentData {
   CompanyDepartmentData({
-    required this.id,
-    required this.departmentName,
+    this.id,
+    this.departmentName,
     // this.isActive,
     // this.createdby,
     // this.modifiedby,
@@ -102,8 +103,9 @@ class CompanyDepartmentData {
     // this.updatedAt,
   });
 
-  final int id;
-  final String departmentName;
+  final int? id;
+  final String? departmentName;
+
   // final String isActive;
   // final int createdby;
   // final dynamic modifiedby;

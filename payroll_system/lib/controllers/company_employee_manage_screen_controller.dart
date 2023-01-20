@@ -56,7 +56,6 @@ class CompanyEmployeeManageScreenController extends GetxController {
   final companyHomeScreenController = Get.find<CompanyHomeScreenController>();
 
   RxBool isSuccessStatus = false.obs;
-  
 
   List<String> departmentStringList = [];
   List<String> companyStringList = [];
@@ -306,9 +305,9 @@ class CompanyEmployeeManageScreenController extends GetxController {
         lastNameController.text = employeeGetByIdModel.data.lastName;
         phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
         log('employeeGetByIdModel.data.dateOfBirth : ${employeeGetByIdModel.data.dateOfBirth}');
-        if(employeeGetByIdModel.data.dateOfBirth.toString().contains(" ")){
-        dateOfBirthController.text =
-            employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+        if (employeeGetByIdModel.data.dateOfBirth.toString().contains(" ")) {
+          dateOfBirthController.text =
+              employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
         }
         // birthDate = employeeGetByIdModel.data.dateOfBirth;
         selectedValuePayper.value =
@@ -349,12 +348,11 @@ class CompanyEmployeeManageScreenController extends GetxController {
         }
 
         for (int i = 0; i < allLocationList.length; i++) {
-          if (allLocationList[i].id.toString() == employeeGetByIdModel.data.locationId) {
+          if (allLocationList[i].id.toString() ==
+              employeeGetByIdModel.data.locationId) {
             locationListData = allLocationList[i];
           }
         }
-
-      
       } else {
         log('getEmployeeDetailsFunction Else');
       }
@@ -381,6 +379,8 @@ class CompanyEmployeeManageScreenController extends GetxController {
       log("getCompanyWiseDepartmentFunction response :${response.body}");
       if (isSuccessStatus.value) {
         companyDepartment.clear();
+          companyDepartment
+            .add(CompanyDepartmentData(departmentName: "Choose Option"));
         companyDepartment.addAll(companyDepartmentModel.data);
 
         if (employeeOption == EmployeeOption.create) {
@@ -401,7 +401,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
         departmentStringList.clear();
 
         for (int i = 0; i < companyDepartment.length; i++) {
-          departmentStringList.add(companyDepartment[i].departmentName);
+          departmentStringList.add(companyDepartment[i].departmentName!);
         }
 
         log('allDepartmentList : ${companyDepartment.length}');
@@ -434,13 +434,15 @@ class CompanyEmployeeManageScreenController extends GetxController {
 
       if (isSuccessStatus.value) {
         allLocationList.clear();
+
+          allLocationList
+            .add(LocationListData(locationName: "Choose Option"));
         allLocationList.addAll(allLocationListModel.data);
         locationListData = allLocationList[0];
 
         for (int i = 0; i < allLocationList.length; i++) {
-          locationStringList.add(allLocationList[i].locationName);
+          locationStringList.add(allLocationList[i].locationName!);
         }
-   
       } else {
         log('deleteCompanyFunction Else');
       }

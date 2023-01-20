@@ -14,7 +14,6 @@ import 'package:sizer/sizer.dart';
 import '../../../utils/messaging.dart';
 import '../../../utils/validator.dart';
 
-
 class LocationManageScreenWidgets extends StatelessWidget {
   LocationManageScreenWidgets({super.key});
   final locationManageScreenController =
@@ -67,12 +66,25 @@ class LocationManageScreenWidgets extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
+                  height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.transparent),
                   ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
+                  // child: DropdownButtonHideUnderline(
+                  child: Center(
+                    child: DropdownButtonFormField<String>(
+                      validator: (value) {
+                        if (locationManageScreenController
+                                .selectedValue.value ==
+                            AppMessage.chooseOption) {
+                          return AppMessage.activeStatusMessage;
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: const InputDecoration.collapsed(hintText: ''),
                       value: locationManageScreenController.selectedValue.value,
                       items: locationManageScreenController.isActiveOptionList
                           .map<DropdownMenuItem<String>>((String value) {
@@ -102,6 +114,7 @@ class LocationManageScreenWidgets extends StatelessWidget {
                 ),
               ),
             ),
+            // ),
             const SizedBox(height: 15),
             CustomSubmitButtonModule(
               labelText: AppMessage.submit,
@@ -110,8 +123,7 @@ class LocationManageScreenWidgets extends StatelessWidget {
                     .validate()) {
                   if (locationManageScreenController.locationOption ==
                       LocationOption.create) {
-                    if (locationManageScreenController
-                        .selectedValue.value ==
+                    if (locationManageScreenController.selectedValue.value ==
                         AppMessage.chooseOption) {
                       Fluttertoast.showToast(msg: "Please select status");
                     } else {
@@ -125,7 +137,7 @@ class LocationManageScreenWidgets extends StatelessWidget {
                 }
               },
             ),
-           /* Row(
+            /* Row(
               children: [
                 Expanded(
                   flex: 5,

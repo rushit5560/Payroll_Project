@@ -11,7 +11,6 @@ import 'package:payroll_system/models/department_manage_screen_models/department
 import 'package:payroll_system/models/department_manage_screen_models/update_department_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
-import 'package:payroll_system/utils/extension_methods/user_details.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class DepartmentManageScreenController extends GetxController {
@@ -28,7 +27,7 @@ class DepartmentManageScreenController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameFieldController = TextEditingController();
-  List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
+  List<String> isActiveOptionList = ["Choose Option", "active", "in-active"];
   RxString selectedValue = "Choose Option".obs;
 
   Future<void> createDepartmentFunction() async {
@@ -37,8 +36,8 @@ class DepartmentManageScreenController extends GetxController {
     log('Create department Api Url : $url');
 
     try {
-
-      int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+      int userId = await userPreference.getIntValueFromPrefs(
+          keyId: UserPreference.userIdKey);
 
       Map<String, dynamic> bodyData = {
         "department_name": nameFieldController.text.trim(),
@@ -54,7 +53,7 @@ class DepartmentManageScreenController extends GetxController {
 
       log('response : ${response.body}');
       CreateDepartmentModel createDepartmentModel =
-      CreateDepartmentModel.fromJson(json.decode(response.body));
+          CreateDepartmentModel.fromJson(json.decode(response.body));
 
       isSuccessStatus = createDepartmentModel.success.obs;
 
@@ -64,8 +63,11 @@ class DepartmentManageScreenController extends GetxController {
         await departmentListScreenController.getCompanyWiseDepartmentFunction();
       } else {
         log('createDepartmentFunction Else');
-        if(createDepartmentModel.error.departmentName[0].toString().contains("The department name has already been taken")) {
-          Fluttertoast.showToast(msg: createDepartmentModel.error.departmentName[0].toString());
+        if (createDepartmentModel.error.departmentName[0]
+            .toString()
+            .contains("The department name has already been taken")) {
+          Fluttertoast.showToast(
+              msg: createDepartmentModel.error.departmentName[0].toString());
         }
       }
     } catch (e) {
@@ -110,7 +112,8 @@ class DepartmentManageScreenController extends GetxController {
     log('Update Department Api Url : $url');
 
     try {
-      int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+      int userId = await userPreference.getIntValueFromPrefs(
+          keyId: UserPreference.userIdKey);
 
       Map<String, dynamic> bodyData = {
         "department_name": nameFieldController.text.trim(),

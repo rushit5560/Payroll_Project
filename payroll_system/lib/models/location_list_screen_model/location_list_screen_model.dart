@@ -38,22 +38,22 @@ class AllLocationListModel {
 
 class LocationListData {
   LocationListData({
-    required this.id,
-    required this.locationName,
-    required this.isActive,
-    required this.createdby,
-    required this.modifiedby,
-    required this.companyid,
+     this.id,
+     this.locationName,
+     this.isActive,
+     this.createdby,
+     this.modifiedby,
+     this.companyid,
     // required this.createdAt,
     // required this.updatedAt,
   });
 
-  final int id;
-  final String locationName;
-  final String isActive;
-  final String createdby;
-  final String modifiedby;
-  final String companyid;
+  final int? id;
+  final String? locationName;
+  final String? isActive;
+  final String? createdby;
+  final String? modifiedby;
+  final String? companyid;
   // final String createdAt;
   // final String updatedAt;
 

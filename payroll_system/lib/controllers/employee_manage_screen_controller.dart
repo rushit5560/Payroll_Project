@@ -323,6 +323,8 @@ class EmployeeManageScreenController extends GetxController {
       log("getCompanyWiseDepartmentFunction response :${response.body}");
       if (isSuccessStatus.value) {
         companyDepartment.clear();
+        companyDepartment
+            .add(CompanyDepartmentData(departmentName: "Choose Option"));
         companyDepartment.addAll(companyDepartmentModel.data);
 
         if (employeeOption == EmployeeOption.create) {
@@ -341,7 +343,7 @@ class EmployeeManageScreenController extends GetxController {
         departmentStringList.clear();
 
         for (int i = 0; i < companyDepartment.length; i++) {
-          departmentStringList.add(companyDepartment[i].departmentName);
+          departmentStringList.add(companyDepartment[i].departmentName!);
         }
 
         log('allDepartmentList : ${companyDepartment.length}');
@@ -374,11 +376,13 @@ class EmployeeManageScreenController extends GetxController {
 
       if (isSuccessStatus.value) {
         allLocationList.clear();
+
+        allLocationList.add(LocationListData(locationName: "Choose Option"));
         allLocationList.addAll(allLocationListModel.data);
         locationListData = allLocationList[0];
 
         for (int i = 0; i < allLocationList.length; i++) {
-          locationStringList.add(allLocationList[i].locationName);
+          locationStringList.add(allLocationList[i].locationName!);
         }
         // allLocationList = allLocationListModel.data;
 
@@ -448,15 +452,15 @@ class EmployeeManageScreenController extends GetxController {
             .add(await http.MultipartFile.fromPath("photo", images!.path));
       }*/
 
-      // log("request.fields : ${request.fields}");
-      // log("request.files : ${request.files}");
+      log("request.fields : ${request.fields}");
+      log("request.files : ${request.files}");
       var response = await request.send();
-      // log('getEmployeeStore: ${response.statusCode}');
+      log('getEmployeeStore: ${response.statusCode}');
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-        // log('value employee : $value');
+        log('value employee : $value');
         // log(response.stream.toString());
         CraeteEmployeeModel employeeCreateModel =
             CraeteEmployeeModel.fromJson(json.decode(value.toString()));
@@ -468,9 +472,9 @@ class EmployeeManageScreenController extends GetxController {
           Get.back();
           await employeeListScreenController.getCompanyWiseEmployeeFunction();
         } else {
-          // log('createCompanyFunction Else');
+          log('createCompanyFunction Else');
         }
-        // log("Empliyee Details : $employeeCreateModel");
+        log("Empliyee Details : $employeeCreateModel");
       });
     } catch (e) {
       Fluttertoast.showToast(msg: "Something went wrong !");

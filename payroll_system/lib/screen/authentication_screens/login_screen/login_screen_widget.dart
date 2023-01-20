@@ -6,10 +6,7 @@ import 'package:payroll_system/controllers/login_screen_controller.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
-import '../../../Utils/validator.dart';
 import '../../../constants/colors.dart';
-import '../Forgot_Password_Screen/forgot_password_screen.dart';
-
 
 class ForgotPasswordTextModule extends StatelessWidget {
   ForgotPasswordTextModule({Key? key}) : super(key: key);
@@ -23,7 +20,9 @@ class ForgotPasswordTextModule extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Get.to(() => ForgotPasswordScreen());
+            Fluttertoast.showToast(msg: AppMessage.comingSoon);
+
+            // Get.to(() => ForgotPasswordScreen());
           },
           child: Text(
             AppMessage.forgotPassword,
@@ -43,7 +42,7 @@ class PrivacyPolicyCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => Row(
+      () => Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Checkbox(
@@ -53,26 +52,31 @@ class PrivacyPolicyCustom extends StatelessWidget {
             },
           ),
           Expanded(
-            child: RichText(
-              textAlign: TextAlign.left,
-              maxLines: null,
-              text: TextSpan(
-                text: AppMessage.acceptText,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: AppColors.blackColor,
-                  fontWeight: FontWeight.normal,
-                ),
-                children: [
-                  TextSpan(
-                    text: " ${AppMessage.privacyPolicyText}",
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: AppColors.colorBlue,
-                      fontWeight: FontWeight.normal,
-                    ),
+            child: GestureDetector(
+              onTap: () {
+                Fluttertoast.showToast(msg: AppMessage.comingSoon);
+              },
+              child: RichText(
+                textAlign: TextAlign.left,
+                maxLines: null,
+                text: TextSpan(
+                  text: AppMessage.acceptText,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: AppColors.blackColor,
+                    fontWeight: FontWeight.normal,
                   ),
-                ],
+                  children: [
+                    TextSpan(
+                      text: " ${AppMessage.privacyPolicyText}",
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: AppColors.colorBlue,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -95,10 +99,10 @@ class LoginButtonModule extends StatelessWidget {
         width: Get.width,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.colorBtBlue,
+              backgroundColor: AppColors.colorBtBlue,
               shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          )),
+                borderRadius: BorderRadius.circular(30),
+              )),
           onPressed: () async {
             if (loginScreenController.formKey.currentState!.validate()) {
               if (loginScreenController.isPrivacyChecked.value) {
@@ -121,4 +125,3 @@ class LoginButtonModule extends StatelessWidget {
     );
   }
 }
-

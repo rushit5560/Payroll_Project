@@ -19,7 +19,8 @@ class CompanyViewScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         leading: GestureDetector(
-          onTap: ()=> companyViewScreenController.scaffoldKey.currentState!.openDrawer(),
+          onTap: () => companyViewScreenController.scaffoldKey.currentState!
+              .openDrawer(),
           child: Padding(
             padding: const EdgeInsets.all(13),
             child: Image.asset(
@@ -27,13 +28,15 @@ class CompanyViewScreen extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(companyViewScreenController.companyName,
+        title: Text(
+          companyViewScreenController.companyName,
           style: TextStyle(
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,
             fontSize: 17.sp,
-          ),),
-        /*actions: [
+          ),
+        ),
+        actions: [
           IconButton(
             onPressed: () {
               // Get.offAll(()=> HomeScreen());
@@ -41,7 +44,7 @@ class CompanyViewScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.home_rounded),
           ),
-        ],*/
+        ],
       ),
       body: Center(
         child: Text('Welcome To ${companyViewScreenController.companyName}'),

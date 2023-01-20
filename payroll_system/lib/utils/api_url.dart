@@ -2,7 +2,8 @@ class ApiUrl {
   static const apiMainPath = "https://appieve.com/";
   // static const apiMainPath = "https://payroll.omdemo.co.in/";
   static const apiImagePath = "https://appieve.com/public/images/employee/";
-  static const downloadFilePath = "https://appieve.com/public/images/employee/file/";
+  static const downloadFilePath =
+      "https://appieve.com/public/images/employee/file/";
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
@@ -83,7 +84,8 @@ class ApiUrl {
   static const payrollapproveApi = "${apiMainPath}api/admin/payrollapprove/";
   static const downloadPayrollApi = "${apiMainPath}api/admin/payrolldownload/";
 
+//subadmin
+  static const allSubAdminApi = "${apiMainPath}api/admin/subadmin";
 
-
-
+  static const savePermissionApi = "${apiMainPath}api/admin/permissionadd";
 }

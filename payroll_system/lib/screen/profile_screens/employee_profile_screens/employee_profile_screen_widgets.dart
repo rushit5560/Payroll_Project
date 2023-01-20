@@ -149,7 +149,7 @@ class EmployeeFormModule extends StatelessWidget {
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.dateOfBirth,
-            text: AppMessage.exInsertYourDob,
+            text: AppMessage.exInsertDob,
             mandatoryText: AppMessage.mandatory,
             keyboardType: TextInputType.datetime,
             textEditingController:

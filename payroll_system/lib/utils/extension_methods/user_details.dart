@@ -1,7 +1,7 @@
 class UserDetails {
   // user details save in local variables
   static bool isUserLoggedIn = false;
-  static int userId = 0;
+  static int userId = 1;
   static int roleId = 0;
   static int companyId = 0;
 
