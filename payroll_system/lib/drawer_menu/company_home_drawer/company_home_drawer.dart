@@ -31,7 +31,7 @@ class CompanyHomeDrawer extends StatelessWidget {
                   children: [
 
                     CompanyHomeDrawerTile(
-                      title: AppMessage.profile,
+                      title: AppMessage.updateProfile,
                       onTap: () {
                         Get.back();
                         Get.to(() => CompanyProfileScreen());
@@ -41,7 +41,8 @@ class CompanyHomeDrawer extends StatelessWidget {
                           color: AppColors.colorBtBlue),
                     ),
 
-                    CompanyHomeDrawerTile(
+                    companyHomeScreenController.isDepartmentShowPermission.value == true
+                    ? CompanyHomeDrawerTile(
                       title: AppMessage.departmentNameDrawer,
                       onTap: () {
                         Get.back();
@@ -54,9 +55,10 @@ class CompanyHomeDrawer extends StatelessWidget {
                       },
                       imageStatus: true,
                       image: AppImages.departmentIcon,
-                    ),
+                    ) : const SizedBox(),
 
-                    CompanyHomeDrawerTile(
+                    companyHomeScreenController.isLocationShowPermission.value == true
+                        ? CompanyHomeDrawerTile(
                       title: AppMessage.location,
                       onTap: () {
                         Get.back();
@@ -69,7 +71,7 @@ class CompanyHomeDrawer extends StatelessWidget {
                       },
                       imageStatus: true,
                       image: AppImages.locationIcon,
-                    ),
+                    ) : const SizedBox(),
 
                     CompanyHomeDrawerTile(
                       onTap: () {

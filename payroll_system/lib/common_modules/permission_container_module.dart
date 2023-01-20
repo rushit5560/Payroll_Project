@@ -108,331 +108,143 @@ class PermissionContainerModule extends StatelessWidget {
   }
 }
 
-// class CompanyPermissionContainerModule extends StatelessWidget {
-//   final String labelText;
-//   final String isViewText;
-//   final String isAddText;
-//   final String isEditText;
-//   final String isDeleteText;
-//   final bool isCompanyChecked;
-//   Function(bool?) isComapnyOnChanged;
-//   CompanyPermissionContainerModule({
-//     super.key,
-//     required this.labelText,
-//     required this.isViewText,
-//     required this.isAddText,
-//     required this.isEditText,
-//     required this.isDeleteText,
-//     required this.isCompanyChecked,
-//     required this.isComapnyOnChanged,
-//   });
-//   final adminPermissionScreenController =
-//       Get.find<AdminPermissionScreenController>();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         border: Border.all(
-//           color: AppColors.greyColor,
-//           width: 2,
-//         ),
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             labelText,
-//             style: TextStyleConfig.textStyle(
-//                 fontSize: 19, fontWeight: FontWeight.bold),
-//           ),
-//           const Divider(),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isViewText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isCompanyChecked,
-//                   onChanged: isComapnyOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isAddText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isCompanyChecked,
-//                   onChanged: isComapnyOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isEditText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isCompanyChecked,
-//                   onChanged: isComapnyOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isDeleteText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isCompanyChecked,
-//                   onChanged: isComapnyOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 10),
-//         ],
-//       ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
-//     );
-//   }
-// }
+class PermissionBoxModule extends StatelessWidget {
+  final String labelText;
+  final bool isViewShow;
+  final bool isAddShow;
+  final bool isEditShow;
+  final bool isDeleteShow;
+  final bool isDownloadShow;
 
-// class EmployeePermissionContainerModule extends StatelessWidget {
-//   final String labelText;
-//   final String isViewText;
-//   final String isAddText;
-//   final String isEditText;
-//   final String isDeleteText;
-//   final bool isEmployeeChecked;
-//   Function(bool?) isEmployeeOnChanged;
-//   EmployeePermissionContainerModule({
-//     super.key,
-//     required this.labelText,
-//     required this.isViewText,
-//     required this.isAddText,
-//     required this.isEditText,
-//     required this.isDeleteText,
-//     required this.isEmployeeChecked,
-//     required this.isEmployeeOnChanged,
-//   });
-//   final adminPermissionScreenController =
-//       Get.find<AdminPermissionScreenController>();
+  final bool? isViewValue;
+  Function(bool?)? isViewOnChanged;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         border: Border.all(
-//           color: AppColors.greyColor,
-//           width: 2,
-//         ),
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             labelText,
-//             style: TextStyleConfig.textStyle(
-//                 fontSize: 19, fontWeight: FontWeight.bold),
-//           ),
-//           const Divider(),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isViewText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isEmployeeChecked,
-//                   onChanged: isEmployeeOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isAddText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isEmployeeChecked,
-//                   onChanged: isEmployeeOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isEditText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isEmployeeChecked,
-//                   onChanged: isEmployeeOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isDeleteText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isEmployeeChecked,
-//                   onChanged: isEmployeeOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 10),
-//         ],
-//       ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
-//     );
-//   }
-// }
+  final bool? isAddValue;
+  Function(bool?)? isAddOnChanged;
 
-// class SubAdminPermissionContainerModule extends StatelessWidget {
-//   final String labelText;
-//   final String isViewText;
-//   final String isAddText;
-//   final String isEditText;
-//   final String isDeleteText;
-//   final bool isSubAdminChecked;
-//   Function(bool?) isSubAdminOnChanged;
-//   SubAdminPermissionContainerModule({
-//     super.key,
-//     required this.labelText,
-//     required this.isViewText,
-//     required this.isAddText,
-//     required this.isEditText,
-//     required this.isDeleteText,
-//     required this.isSubAdminChecked,
-//     required this.isSubAdminOnChanged,
-//   });
-//   final adminPermissionScreenController =
-//       Get.find<AdminPermissionScreenController>();
+  final bool? isEditValue;
+  Function(bool?)? isEditOnChanged;
+  //
+  final bool? isDeleteValue;
+  Function(bool?)? isDeleteOnChanged;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         border: Border.all(
-//           color: AppColors.greyColor,
-//           width: 2,
-//         ),
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             labelText,
-//             style: TextStyleConfig.textStyle(
-//                 fontSize: 19, fontWeight: FontWeight.bold),
-//           ),
-//           const Divider(),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isViewText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: isSubAdminChecked,
-//                   onChanged: isSubAdminOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isAddText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                     value: isSubAdminChecked, onChanged: isSubAdminOnChanged),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isEditText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                     value: adminPermissionScreenController
-//                         .subAdminIsEditChecked.value,
-//                     onChanged: isSubAdminOnChanged),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 2),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(
-//                 isDeleteText,
-//                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
-//               ),
-//               Obx(
-//                 () => Checkbox(
-//                   value: adminPermissionScreenController
-//                       .subAdminIsDeleteChecked.value,
-//                   onChanged: isSubAdminOnChanged,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 10),
-//         ],
-//       ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
-//     );
-//   }
-// }
+  final bool? isDownloadValue;
+  Function(bool?)? isDownloadOnChanged;
+
+  PermissionBoxModule({
+    Key? key,
+    required this.labelText,
+    required this.isViewShow,
+    required this.isAddShow,
+    required this.isEditShow,
+    required this.isDeleteShow,
+    required this.isDownloadShow,
+
+    this.isViewValue,
+    this.isViewOnChanged,
+    this.isAddValue,
+    this.isAddOnChanged,
+    this.isEditValue,
+    this.isEditOnChanged,
+    this.isDeleteValue,
+    this.isDeleteOnChanged,
+    this.isDownloadValue,
+    this.isDownloadOnChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.colorWhite,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            labelText,
+            style: TextStyleConfig.textStyle(
+                fontSize: 19, fontWeight: FontWeight.bold),
+          ),
+          const Divider(color: AppColors.colorLightHintPurple2),
+
+          isViewShow == false ? const SizedBox() : const SizedBox(height: 2),
+          isViewShow == false ? const SizedBox() : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppMessage.isView,
+                      style: TextStyleConfig.textStyle(fontSize: 12.sp),
+                    ),
+                    Checkbox(
+                      value: isViewValue,
+                      onChanged: isViewOnChanged,
+                    ),
+                  ],
+                ),
+
+          isAddShow == false ? const SizedBox() : const SizedBox(height: 2),
+          isAddShow == false ? const SizedBox() : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppMessage.isAdd,
+                style: TextStyleConfig.textStyle(fontSize: 12.sp),
+              ),
+              Checkbox(value: isAddValue, onChanged: isAddOnChanged),
+            ],
+          ),
+
+
+          isEditShow == false ? const SizedBox() : const SizedBox(height: 2),
+          isEditShow == false ? const SizedBox() : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppMessage.isEdit,
+                style: TextStyleConfig.textStyle(fontSize: 12.sp),
+              ),
+              Checkbox(value: isEditValue, onChanged: isEditOnChanged),
+            ],
+          ),
+
+
+          isDeleteShow == false ? const SizedBox() : const SizedBox(height: 2),
+          isDeleteShow == false ? const SizedBox() : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppMessage.isDelete,
+                style: TextStyleConfig.textStyle(fontSize: 12.sp),
+              ),
+              Checkbox(
+                value: isDeleteValue,
+                onChanged: isDeleteOnChanged,
+              ),
+            ],
+          ),
+
+          isDownloadShow == false ? const SizedBox() : const SizedBox(height: 2),
+          isDownloadShow == false ? const SizedBox() : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppMessage.isDownload,
+                style: TextStyleConfig.textStyle(fontSize: 12.sp),
+              ),
+              Checkbox(
+                value: isDownloadValue,
+                onChanged: isDownloadOnChanged,
+              ),
+            ],
+          ),
+
+
+          // const SizedBox(height: 10),
+        ],
+      ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+    );
+  }
+}

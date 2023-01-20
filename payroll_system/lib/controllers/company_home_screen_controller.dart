@@ -25,6 +25,9 @@ class CompanyHomeScreenController extends GetxController {
 
   UserPreference userPreference = UserPreference();
 
+  RxBool isDepartmentShowPermission = false.obs;
+  RxBool isLocationShowPermission = false.obs;
+
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {
     isLoading(true);
@@ -94,8 +97,18 @@ searchEmployeeList=allCompanyWiseEmployeeList;
 
   @override
   void onInit() {
-
-    getLoggedInUserDataFromPrefs();
+    initMethod();
     super.onInit();
   }
+
+
+  initMethod() async {
+    isLoading(true);
+    isDepartmentShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentViewKey);
+    isLocationShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationViewKey);
+    await getLoggedInUserDataFromPrefs();
+  }
+
+
+
 }

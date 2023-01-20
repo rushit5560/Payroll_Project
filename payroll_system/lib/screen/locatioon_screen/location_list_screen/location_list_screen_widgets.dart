@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
@@ -8,6 +9,7 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_list_screen_controller.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_manage_screen/location_manage_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:sizer/sizer.dart';
 import '../../../common_modules/custom_alert_dialog_module.dart';
 import '../../../constants/colors.dart';
@@ -16,6 +18,9 @@ import '../../../utils/messaging.dart';
 class LocationListScreenWidgets extends StatelessWidget {
   LocationListScreenWidgets({super.key});
   final screenController = Get.find<LocationListScreenController>();
+
+  UserPreference userPreference = UserPreference();
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -41,30 +46,22 @@ class LocationListScreenWidgets extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          Get.to(
-                                () => LocationManageScreen(),
-                            arguments: [
-                              LocationOption.update,
-                              value.id.toString(),
-                              screenController.companyId.toString(),
-                              screenController.companyName,
-                            ],
-                          );
-                          /*bool departmentEditPermission =
-                          await userPreference.getBoolPermissionFromPrefs(
-                              keyId: UserPreference.departmentEditKey);
-                          if (departmentEditPermission == true) {
+                          bool locationEditPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationEditKey);
+
+                          if(locationEditPermission == true) {
                             Get.to(
-                                  () => DepartmentManageScreen(),
+                                  () => LocationManageScreen(),
                               arguments: [
-                                DepartmentOption.update,
-                                singleItem.id.toString(),
-                                screenController.companyId,
+                                LocationOption.update,
+                                value.id.toString(),
+                                screenController.companyId.toString(),
+                                screenController.companyName,
                               ],
                             );
                           } else {
                             Fluttertoast.showToast(msg: AppMessage.deniedPermission);
-                          }*/
+                          }
+
                         },
                         child: Image.asset(
                           AppImages.editIcon,
@@ -77,18 +74,25 @@ class LocationListScreenWidgets extends StatelessWidget {
 
                       GestureDetector(
                         onTap: () async {
-                          CustomAlertDialog().showAlertDialog(
-                            context: context,
-                            textContent:
-                            'Are youe sure you want to delete location ?',
-                            onYesTap: () async {
-                              await screenController.deleteLocationFunction(
-                                  value.id.toString(), index);
-                            },
-                            onCancelTap: () {
-                              Get.back();
-                            },
-                          );
+                          bool locationDeletePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationDeleteKey);
+
+                          if(locationDeletePermission == true) {
+                            CustomAlertDialog().showAlertDialog(
+                              context: context,
+                              textContent:
+                              'Are you sure you want to delete location?',
+                              onYesTap: () async {
+                                await screenController.deleteLocationFunction(
+                                    value.id.toString(), index);
+                              },
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                            );
+                          } else {
+                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                          }
+
                         },
                         child: Image.asset(
                           AppImages.deleteIcon,

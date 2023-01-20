@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/custom_approval_button_modual.dart';
@@ -8,6 +9,7 @@ import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/approve_paycheckes_detail_manage_screen_controller.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
@@ -17,6 +19,8 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
 
   final approvePayCheckesDetailsScreenController =
       Get.find<ApprovePayCheckesDetailsScreenController>();
+
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +49,11 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        // bool employeeUpdatePermission =
-                        // await userPreference.getBoolPermissionFromPrefs(
-                        //     keyId: UserPreference.employeeEditKey);
+                        bool payChecksDeletePermission =
+                        await userPreference.getBoolPermissionFromPrefs(
+                            keyId: UserPreference.approvePayChecksDeleteKey);
 
-                        // if (employeeUpdatePermission == true) {
+                        if (payChecksDeletePermission == true) {
                         CustomAlertDialog().showAlertDialog(
                           context: context,
                           textContent: AppMessage.deleteEmployeeAlertMessage,
@@ -64,9 +68,9 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                             Get.back();
                           },
                         );
-                        // } else {
-                        //   Fluttertoast.showToast(msg: AppMessage.deniedPermission);
-                        // }
+                        } else {
+                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                        }
                       },
                       child: Image.asset(
                         AppImages.deleteIcon,

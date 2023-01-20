@@ -53,9 +53,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              bool companyCreatePermission =
-              await userPreference.getBoolPermissionFromPrefs(
-                  keyId: UserPreference.companyAddKey);
+              bool companyCreatePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.companyAddKey);
 
               if (companyCreatePermission == true) {
                 Get.to(
@@ -72,28 +70,6 @@ class HomeScreen extends StatelessWidget {
             ),
             highlightColor: Colors.transparent,
           ),
-          /*FloatingActionButton(
-            onPressed: () async {
-              bool companyCreatePermission =
-                  await userPreference.getBoolPermissionFromPrefs(
-                      keyId: UserPreference.companyAddKey);
-
-              if (companyCreatePermission == true) {
-                Get.to(
-                  () => CompanyManageScreen(),
-                  arguments: [CompanyOption.create, ""],
-                );
-              } else if (companyCreatePermission == false) {
-                Fluttertoast.showToast(msg: AppMessage.deniedPermission);
-              }
-            },
-            tooltip: AppMessage.companyCreate,
-            elevation: 0.0,
-            child: const Icon(
-              Icons.add_rounded,
-              size: 30,
-            ),
-          ),*/
         ],
       ),
       body: Obx(

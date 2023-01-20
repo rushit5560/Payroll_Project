@@ -41,7 +41,7 @@ class AdminPermissionContainer extends StatelessWidget {
           ),
           PermissionButtonModule(
             onPermissionTap: () {
-              Get.to(() => AdminPermissionScreen());
+              Get.to(() => AdminPermissionScreen(), arguments: ["1"]);
             },
           ),
         ],
@@ -78,7 +78,7 @@ class CompanyPermissionContainer extends StatelessWidget {
           ),
           PermissionButtonModule(
             onPermissionTap: () {
-              Get.to(() => CompanyPermissionScreen());
+              Get.to(() => CompanyPermissionScreen(), arguments: ["3"]);
             },
           ),
         ],
@@ -115,7 +115,7 @@ class EmployeePermissionContainer extends StatelessWidget {
           ),
           PermissionButtonModule(
             onPermissionTap: () {
-              Get.to(() => EmployeePermissionScreen());
+              Get.to(() => EmployeePermissionScreen(), arguments: ["4"]);
             },
           ),
         ],
@@ -152,7 +152,7 @@ class SubAdminPermissionContainer extends StatelessWidget {
           ),
           PermissionButtonModule(
             onPermissionTap: () {
-              Get.to(() => SubAdminPermissionScreen());
+              Get.to(() => SubAdminPermissionScreen(), arguments: ["2"]);
             },
           ),
         ],

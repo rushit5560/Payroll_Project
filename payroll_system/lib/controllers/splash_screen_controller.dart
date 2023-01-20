@@ -41,116 +41,56 @@ class SplashScreenController extends GetxController {
 
         // Fluttertoast.showToast(msg: userPermissionModel.messege);
 
-        await userPreference.setUserPermissionsToPrefsAndLocal(
-          // role
-          roleAdd: userPermissionModel.data.roleadd == "on" ? true : false,
-          roleEdit: userPermissionModel.data.roleedit == "on" ? true : false,
-          roleView: userPermissionModel.data.roleview == "on" ? true : false,
-          roleDelete:
-              userPermissionModel.data.roledelete == "on" ? true : false,
-          //company
-          companyAdd:
-              userPermissionModel.data.companyadd == "on" ? true : false,
-          companyEdit:
-              userPermissionModel.data.companyedit == "on" ? true : false,
-          companyView:
-              userPermissionModel.data.companyview == "on" ? true : false,
-          companyDelete:
-              userPermissionModel.data.companydelete == "on" ? true : false,
-          //location
-          locationAdd:
-              userPermissionModel.data.locationadd == "on" ? true : false,
-          locationEdit:
-              userPermissionModel.data.locationedit == "on" ? true : false,
-          locationView:
-              userPermissionModel.data.locationview == "on" ? true : false,
-          locationDelete:
-              userPermissionModel.data.locationdelete == "on" ? true : false,
-          //employee
-          employeeAdd:
-              userPermissionModel.data.employeeadd == "on" ? true : false,
-          employeeEdit:
-              userPermissionModel.data.employeeedit == "on" ? true : false,
-          employeeView:
-              userPermissionModel.data.employeeview == "on" ? true : false,
-          employeeDelete:
-              userPermissionModel.data.employeedelete == "on" ? true : false,
-          //department
-          departmentAdd:
-              userPermissionModel.data.departmentadd == "on" ? true : false,
-          departmentEdit:
-              userPermissionModel.data.departmentedit == "on" ? true : false,
-          departmentView:
-              userPermissionModel.data.departmentview == "on" ? true : false,
-          departmentDelete:
-              userPermissionModel.data.departmentdelete == "on" ? true : false,
+        await userPreference.setAllPermissionIntoPrefs(
+          subAdminView: userPermissionModel.data.subadminview == "on" ? true : false,
+          subAdminAdd: roleId == "1" ? true : false,
+          subAdminEdit: userPermissionModel.data.subadminedit == "on" ? true : false,
+          subAdminDelete: false,
+
+          companyView: roleId == "1" ? true : false,
+          companyAdd: userPermissionModel.data.companyadd == "on" ? true : false,
+          companyEdit: userPermissionModel.data.companyedit == "on" ? true : false,
+          companyDelete: false,
+
+          departmentView: userPermissionModel.data.departmentview == "on" ? true : false,
+          departmentAdd: userPermissionModel.data.departmentadd == "on" ? true : false,
+          departmentEdit: userPermissionModel.data.departmentedit == "on" ? true : false,
+          departmentDelete: userPermissionModel.data.departmentdelete == "on" ? true : false,
+
+          locationView: userPermissionModel.data.locationview == "on" ? true : false,
+          locationAdd: userPermissionModel.data.locationadd == "on" ? true : false,
+          locationEdit: userPermissionModel.data.locationedit == "on" ? true : false,
+          locationDelete: userPermissionModel.data.locationdelete == "on" ? true : false,
+
+          employeeView: userPermissionModel.data.employeeview == "on" ? true : false,
+          employeeAdd: userPermissionModel.data.employeeadd == "on" ? true : false,
+          employeeEdit: userPermissionModel.data.employeeedit == "on" ? true : false,
+          employeeDelete: userPermissionModel.data.employeedelete == "on" ? true : false,
+
+          employeeDocumentView: userPermissionModel.data.employeedocumentview == "on" ? true : false,
+          employeeDocumentAdd: userPermissionModel.data.employeedocumentadd == "on" ? true : false,
+          employeeDocumentEdit: false,
+          employeeDocumentDelete: userPermissionModel.data.employeedocumentdelete == "on" ? true : false,
+          employeeDocumentDownload: userPermissionModel.data.employeedocumentdownload == "on" ? true : false,
+
+          payChecksView: userPermissionModel.data.payrollview == "on" ? true : false,
+          payChecksAdd: userPermissionModel.data.payrolladd == "on" ? true : false,
+          payChecksEdit: false,
+          payChecksDelete: false,
+          payChecksDownload: userPermissionModel.data.payrolldownload == "on" ? true : false,
+
+          approvePayChecksView: userPermissionModel.data.approvepaychecksview == "on" ? true : false,
+          approvePayChecksAdd: false,
+          approvePayChecksEdit: userPermissionModel.data.approvepaychecksedit == "on" ? true : false,
+          approvePayChecksDelete: userPermissionModel.data.approvepaychecksdelete == "on" ? true : false,
+
+          emailTemplateView: userPermissionModel.data.emailtemplateview == "on" ? true : false,
+          emailTemplateAdd: userPermissionModel.data.emailtemplateadd == "on" ? true : false,
+          emailTemplateEdit: userPermissionModel.data.emailtemplateedit == "on" ? true : false,
+
+          roleView: roleId == "1" ? true : false,
+          roleEdit: roleId == "1" ? true : false,
         );
-
-        // Set LoggedIn user data
-        UserDetails.roleId = await userPreference.getIntValueFromPrefs(
-            keyId: UserPreference.roleIdKey);
-        UserDetails.userId = await userPreference.getIntValueFromPrefs(
-            keyId: UserPreference.userIdKey);
-        UserDetails.userName = await userPreference.getStringValueFromPrefs(
-            keyId: UserPreference.userNameKey);
-        UserDetails.userEmail = await userPreference.getStringValueFromPrefs(
-            keyId: UserPreference.userEmailKey);
-        UserDetails.userProfileImage = await userPreference
-            .getStringValueFromPrefs(keyId: UserPreference.userProfileImageKey);
-        // Set Role Permission in local variable
-        UserDetails.roleView = await userPreference.getBoolPermissionFromPrefs(
-            keyId: UserPreference.roleViewKey);
-        UserDetails.roleAdd = await userPreference.getBoolPermissionFromPrefs(
-            keyId: UserPreference.roleAddKey);
-        UserDetails.roleEdit = await userPreference.getBoolPermissionFromPrefs(
-            keyId: UserPreference.roleEditKey);
-        UserDetails.roleDelete = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.roleDeleteKey);
-
-        // Set Company Permission in local variable
-        UserDetails.companyView = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.companyViewKey);
-        UserDetails.companyAdd = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.companyAddKey);
-        UserDetails.companyEdit = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.companyEditKey);
-        UserDetails.companyDelete = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.companyDeleteKey);
-
-        // Set Location Permission in local variable
-        UserDetails.locationView = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.locationViewKey);
-        UserDetails.locationAdd = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.locationAddKey);
-        UserDetails.locationEdit = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.locationEditKey);
-        UserDetails.locationDelete =
-            await userPreference.getBoolPermissionFromPrefs(
-                keyId: UserPreference.locationDeleteKey);
-
-        // Set Employee Permission in local variable
-        UserDetails.employeeView = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
-        UserDetails.employeeAdd = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.employeeAddKey);
-        UserDetails.employeeEdit = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.employeeEditKey);
-        UserDetails.employeeDelete =
-            await userPreference.getBoolPermissionFromPrefs(
-                keyId: UserPreference.employeeDeleteKey);
-
-        // Set Department Permission in local variable
-        UserDetails.departmentView =
-            await userPreference.getBoolPermissionFromPrefs(
-                keyId: UserPreference.departmentViewKey);
-        UserDetails.departmentAdd = await userPreference
-            .getBoolPermissionFromPrefs(keyId: UserPreference.departmentAddKey);
-        UserDetails.departmentEdit =
-            await userPreference.getBoolPermissionFromPrefs(
-                keyId: UserPreference.departmentEditKey);
-        UserDetails.departmentDelete =
-            await userPreference.getBoolPermissionFromPrefs(
-                keyId: UserPreference.departmentDeleteKey);
 
         if (UserDetails.roleId == 1) {
           Get.off(() => HomeScreen());
@@ -164,13 +104,11 @@ class SplashScreenController extends GetxController {
           Get.off(() => LoginScreen());
         }
 
-        // Fluttertoast.showToast(msg: 'You are successfully login');
       } else {
         Fluttertoast.showToast(msg: 'user permissions not found');
       }
     } catch (e) {
       log("getUserPermissionsFunction error : $e");
-
       rethrow;
     } finally {
       isLoading(false);

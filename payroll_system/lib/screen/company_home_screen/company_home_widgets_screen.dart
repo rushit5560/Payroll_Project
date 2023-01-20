@@ -52,11 +52,11 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          bool employeeDeletePermission =
-                          await userPreference.getBoolPermissionFromPrefs(
-                              keyId: UserPreference.employeeDeleteKey);
 
-                          if (employeeDeletePermission == true) {
+                          bool employeeUpdatePermission =
+                          await userPreference.getBoolPermissionFromPrefs(
+                              keyId: UserPreference.employeeEditKey);
+                          if (employeeUpdatePermission == true) {
                             Get.to(
                                   () => CompanyEmployeeManageScreen(),
                               arguments: [
@@ -81,11 +81,11 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
 
                       GestureDetector(
                         onTap: () async {
-                          bool employeeUpdatePermission =
+                          bool employeeDeletePermission =
                           await userPreference.getBoolPermissionFromPrefs(
-                              keyId: UserPreference.employeeEditKey);
+                              keyId: UserPreference.employeeDeleteKey);
 
-                          if (employeeUpdatePermission == true) {
+                          if (employeeDeletePermission == true) {
                             CustomAlertDialog().showAlertDialog(
                               context: context,
                               textContent: AppMessage.deleteEmployeeAlertMessage,

@@ -57,91 +57,55 @@ class LoginController extends GetxController {
           userProfileImage: loginDetailsModel.loginData.data.photo,
         );
 
-        await userPreference
-            .setUserPermissionsToPrefsAndLocal(
-          //role
-          roleAdd: loginDetailsModel.loginData.permissiondata.roleadd == "on"
-              ? true
-              : false,
-          roleEdit: loginDetailsModel.loginData.permissiondata.roleedit == "on"
-              ? true
-              : false,
-          roleView: loginDetailsModel.loginData.permissiondata.roleview == "on"
-              ? true
-              : false,
-          roleDelete:
-              loginDetailsModel.loginData.permissiondata.roledelete == "on"
-                  ? true
-                  : false,
-          // company
-          companyAdd:
-              loginDetailsModel.loginData.permissiondata.companyadd == "on"
-                  ? true
-                  : false,
-          companyEdit:
-              loginDetailsModel.loginData.permissiondata.companyedit == "on"
-                  ? true
-                  : false,
-          companyView:
-              loginDetailsModel.loginData.permissiondata.companyview == "on"
-                  ? true
-                  : false,
-          companyDelete:
-              loginDetailsModel.loginData.permissiondata.companydelete == "on"
-                  ? true
-                  : false,
-          // location
-          locationAdd:
-              loginDetailsModel.loginData.permissiondata.locationadd == "on"
-                  ? true
-                  : false,
-          locationEdit:
-              loginDetailsModel.loginData.permissiondata.locationedit == "on"
-                  ? true
-                  : false,
-          locationView:
-              loginDetailsModel.loginData.permissiondata.locationview == "on"
-                  ? true
-                  : false,
-          locationDelete:
-              loginDetailsModel.loginData.permissiondata.locationdelete == "on"
-                  ? true
-                  : false,
-          // employee
-          employeeAdd:
-              loginDetailsModel.loginData.permissiondata.employeeadd == "on"
-                  ? true
-                  : false,
-          employeeEdit:
-              loginDetailsModel.loginData.permissiondata.employeeedit == "on"
-                  ? true
-                  : false,
-          employeeView:
-              loginDetailsModel.loginData.permissiondata.employeeview == "on"
-                  ? true
-                  : false,
-          employeeDelete:
-              loginDetailsModel.loginData.permissiondata.employeedelete == "on"
-                  ? true
-                  : false,
-          // department
-          departmentAdd:
-              loginDetailsModel.loginData.permissiondata.departmentadd == "on"
-                  ? true
-                  : false,
-          departmentEdit:
-              loginDetailsModel.loginData.permissiondata.departmentedit == "on"
-                  ? true
-                  : false,
-          departmentView:
-              loginDetailsModel.loginData.permissiondata.departmentview == "on"
-                  ? true
-                  : false,
-          departmentDelete:
-              loginDetailsModel.loginData.permissiondata.departmentdelete ==
-                      "on"
-                  ? true
-                  : false,
+        await userPreference.setAllPermissionIntoPrefs(
+          subAdminView: loginDetailsModel.loginData.permissiondata.subadminview == "on" ? true : false,
+          subAdminAdd: loginDetailsModel.loginData.data.roleId.toString() == "1" ? true : false,
+          subAdminEdit: loginDetailsModel.loginData.permissiondata.subadminedit == "on" ? true : false,
+          subAdminDelete: false,
+
+          companyView: loginDetailsModel.loginData.data.roleId.toString() == "1" ? true : false,
+          companyAdd: loginDetailsModel.loginData.permissiondata.companyadd == "on" ? true : false,
+          companyEdit: loginDetailsModel.loginData.permissiondata.companyedit == "on" ? true : false,
+          companyDelete: false,
+
+          departmentView: loginDetailsModel.loginData.permissiondata.departmentview == "on" ? true : false,
+          departmentAdd: loginDetailsModel.loginData.permissiondata.departmentadd == "on" ? true : false,
+          departmentEdit: loginDetailsModel.loginData.permissiondata.departmentedit == "on" ? true : false,
+          departmentDelete: loginDetailsModel.loginData.permissiondata.departmentdelete == "on" ? true : false,
+
+          locationView: loginDetailsModel.loginData.permissiondata.locationview == "on" ? true : false,
+          locationAdd: loginDetailsModel.loginData.permissiondata.locationadd == "on" ? true : false,
+          locationEdit: loginDetailsModel.loginData.permissiondata.locationedit == "on" ? true : false,
+          locationDelete: loginDetailsModel.loginData.permissiondata.locationdelete == "on" ? true : false,
+
+          employeeView: loginDetailsModel.loginData.permissiondata.employeeview == "on" ? true : false,
+          employeeAdd: loginDetailsModel.loginData.permissiondata.employeeadd == "on" ? true : false,
+          employeeEdit: loginDetailsModel.loginData.permissiondata.employeeedit == "on" ? true : false,
+          employeeDelete: loginDetailsModel.loginData.permissiondata.employeedelete == "on" ? true : false,
+
+          employeeDocumentView: loginDetailsModel.loginData.permissiondata.employeedocumentview == "on" ? true : false,
+          employeeDocumentAdd: loginDetailsModel.loginData.permissiondata.employeedocumentadd == "on" ? true : false,
+          employeeDocumentEdit: false,
+          employeeDocumentDelete: loginDetailsModel.loginData.permissiondata.employeedocumentdelete == "on" ? true : false,
+          employeeDocumentDownload: loginDetailsModel.loginData.permissiondata.employeedocumentdownload == "on" ? true : false,
+
+          payChecksView: loginDetailsModel.loginData.permissiondata.payrollview == "on" ? true : false,
+          payChecksAdd: loginDetailsModel.loginData.permissiondata.payrolladd == "on" ? true : false,
+          payChecksEdit: false,
+          payChecksDelete: false,
+          payChecksDownload: loginDetailsModel.loginData.permissiondata.payrolldownload == "on" ? true : false,
+
+          approvePayChecksView: loginDetailsModel.loginData.permissiondata.approvepaychecksview == "on" ? true : false,
+          approvePayChecksAdd: false,
+          approvePayChecksEdit: loginDetailsModel.loginData.permissiondata.approvepaychecksedit == "on" ? true : false,
+          approvePayChecksDelete: loginDetailsModel.loginData.permissiondata.approvepaychecksdelete == "on" ? true : false,
+
+          emailTemplateView: loginDetailsModel.loginData.permissiondata.emailtemplateview == "on" ? true : false,
+          emailTemplateAdd: loginDetailsModel.loginData.permissiondata.emailtemplateadd == "on" ? true : false,
+          emailTemplateEdit: loginDetailsModel.loginData.permissiondata.emailtemplateedit == "on" ? true : false,
+
+          roleView: loginDetailsModel.loginData.data.roleId.toString() == "1" ? true : false,
+          roleEdit: loginDetailsModel.loginData.data.roleId.toString() == "1" ? true : false,
         )
             .whenComplete(() {
           if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) ==

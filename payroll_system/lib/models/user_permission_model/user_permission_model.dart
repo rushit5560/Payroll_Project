@@ -37,6 +37,134 @@ class UserPermissionModel {
 
 class PermissionData {
   PermissionData({
+    this.subadminview,
+    this.subadminedit,
+    this.companyadd,
+    this.companyedit,
+    this.departmentview,
+    this.departmentadd,
+    this.departmentedit,
+    this.departmentdelete,
+    this.locationview,
+    this.locationadd,
+    this.locationedit,
+    this.locationdelete,
+    this.employeeview,
+    this.employeeadd,
+    this.employeeedit,
+    this.employeedelete,
+    this.employeedocumentview,
+    this.employeedocumentadd,
+    this.employeedocumentdelete,
+    this.employeedocumentdownload,
+    this.payrollview,
+    this.payrolladd,
+    this.payrolldownload,
+    this.approvepaychecksview,
+    this.approvepaychecksedit,
+    this.approvepaychecksdelete,
+    this.emailtemplateview,
+    this.emailtemplateadd,
+    this.emailtemplateedit,
+  });
+
+  String? subadminview;
+  String? subadminedit;
+  String? companyadd;
+  String? companyedit;
+  String? departmentview;
+  String? departmentadd;
+  String? departmentedit;
+  String? departmentdelete;
+  String? locationview;
+  String? locationadd;
+  String? locationedit;
+  String? locationdelete;
+  String? employeeview;
+  String? employeeadd;
+  String? employeeedit;
+  String? employeedelete;
+  String? employeedocumentview;
+  String? employeedocumentadd;
+  String? employeedocumentdelete;
+  String? employeedocumentdownload;
+  String? payrollview;
+  String? payrolladd;
+  String? payrolldownload;
+  String? approvepaychecksview;
+  String? approvepaychecksedit;
+  String? approvepaychecksdelete;
+  String? emailtemplateview;
+  String? emailtemplateadd;
+  String? emailtemplateedit;
+
+  factory PermissionData.fromJson(Map<String, dynamic> json) => PermissionData(
+    subadminview: json["subadminview"],
+    subadminedit: json["subadminedit"],
+    companyadd: json["companyadd"],
+    companyedit: json["companyedit"],
+    departmentview: json["departmentview"],
+    departmentadd: json["departmentadd"],
+    departmentedit: json["departmentedit"],
+    departmentdelete: json["departmentdelete"],
+    locationview: json["locationview"],
+    locationadd: json["locationadd"],
+    locationedit: json["locationedit"],
+    locationdelete: json["locationdelete"],
+    employeeview: json["employeeview"],
+    employeeadd: json["employeeadd"],
+    employeeedit: json["employeeedit"],
+    employeedelete: json["employeedelete"],
+    employeedocumentview: json["employeedocumentview"],
+    employeedocumentadd: json["employeedocumentadd"],
+    employeedocumentdelete: json["employeedocumentdelete"],
+    employeedocumentdownload: json["employeedocumentdownload"],
+    payrollview: json["payrollview"],
+    payrolladd: json["payrolladd"],
+    payrolldownload: json["payrolldownload"],
+    approvepaychecksview: json["approvepaychecksview"],
+    approvepaychecksedit: json["approvepaychecksedit"],
+    approvepaychecksdelete: json["approvepaychecksdelete"],
+    emailtemplateview: json["emailtemplateview"],
+    emailtemplateadd: json["emailtemplateadd"],
+    emailtemplateedit: json["emailtemplateedit"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "subadminview": subadminview,
+    "subadminedit": subadminedit,
+    "companyadd": companyadd,
+    "companyedit": companyedit,
+    "departmentview": departmentview,
+    "departmentadd": departmentadd,
+    "departmentedit": departmentedit,
+    "departmentdelete": departmentdelete,
+    "locationview": locationview,
+    "locationadd": locationadd,
+    "locationedit": locationedit,
+    "locationdelete": locationdelete,
+    "employeeview": employeeview,
+    "employeeadd": employeeadd,
+    "employeeedit": employeeedit,
+    "employeedelete": employeedelete,
+    "employeedocumentview": employeedocumentview,
+    "employeedocumentadd": employeedocumentadd,
+    "employeedocumentdelete": employeedocumentdelete,
+    "employeedocumentdownload": employeedocumentdownload,
+    "payrollview": payrollview,
+    "payrolladd": payrolladd,
+    "payrolldownload": payrolldownload,
+    "approvepaychecksview": approvepaychecksview,
+    "approvepaychecksedit": approvepaychecksedit,
+    "approvepaychecksdelete": approvepaychecksdelete,
+    "emailtemplateview": emailtemplateview,
+    "emailtemplateadd": emailtemplateadd,
+    "emailtemplateedit": emailtemplateedit,
+  };
+}
+
+/*class PermissionData {
+  PermissionData({
     this.roleadd,
     this.roleedit,
     this.roleview,
@@ -125,4 +253,4 @@ class PermissionData {
         "locationdelete": locationdelete,
         "departmentdelete": departmentdelete,
       };
-}
+}*/

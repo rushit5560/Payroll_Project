@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
@@ -11,6 +12,7 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
@@ -20,6 +22,8 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
 
   final payCheckesListScreenController =
       Get.find<PayCheckesListScreenController>();
+
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +48,18 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          await WebUrlLauncher().launchPdfInBrowser(
-                              "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
+                          bool payChecksDownloadPermission = await userPreference
+                              .getBoolPermissionFromPrefs(
+                              keyId: UserPreference.payChecksDownloadKey);
+
+                          if (payChecksDownloadPermission == true) {
+                            await WebUrlLauncher().launchPdfInBrowser(
+                                "${ApiUrl
+                                    .downloadPayrollApi}${payrollListDataListValue
+                                    .id}");
+                          } else {
+                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                          }
                         },
                         child: Image.asset(
                           AppImages.downloadIcon,

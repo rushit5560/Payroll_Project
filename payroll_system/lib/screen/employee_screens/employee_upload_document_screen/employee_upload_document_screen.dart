@@ -6,6 +6,7 @@ import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_upload_document_screen_controller.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
@@ -15,6 +16,8 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
   EmployeeUploadDocumentScreen({Key? key}) : super(key: key);
   final employeeUploadDocumentScreenController =
       Get.put(EmployeeUploadDocumentScreenController());
+
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -54,15 +57,23 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () async {
-                          if (employeeUploadDocumentScreenController
-                                  .employeeSelectedDocumentList.length <=
-                              5) {
-                            await employeeUploadDocumentScreenController
-                                .pickEmployeeDocumentFunction();
+
+                          bool addUploadDocumentPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentAddKey);
+
+                          if(addUploadDocumentPermission == true) {
+                            if (employeeUploadDocumentScreenController
+                                .employeeSelectedDocumentList.length <=
+                                5) {
+                              await employeeUploadDocumentScreenController
+                                  .pickEmployeeDocumentFunction();
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: AppMessage.youReachedAtMaxLength);
+                            }
                           } else {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.youReachedAtMaxLength);
+                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                           }
+
                         },
                         icon: const Icon(
                           Icons.add_rounded,

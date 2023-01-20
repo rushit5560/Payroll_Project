@@ -16,29 +16,29 @@ class UserPreference {
 
   // user permissions keys
   static String roleAddKey = 'roleAddKey';
-  static String roleEditKey = 'roleEditKey';
-  static String roleViewKey = 'roleViewKey';
+  // static String roleEditKey = 'roleEditKey';
+  // static String roleViewKey = 'roleViewKey';
   static String roleDeleteKey = 'roleDeleteKey';
 
-  static String companyAddKey = 'companyAddKey';
+  /*static String companyAddKey = 'companyAddKey';
   static String companyEditKey = 'companyEditKey';
   static String companyViewKey = 'companyviewKey';
-  static String companyDeleteKey = 'companyDeleteKey';
+  static String companyDeleteKey = 'companyDeleteKey';*/
 
-  static String locationAddKey = 'locationAddKey';
+  /*static String locationAddKey = 'locationAddKey';
   static String locationEditKey = 'locationEditKey';
   static String locationViewKey = 'locationViewKey';
-  static String locationDeleteKey = 'locationDeleteKey';
+  static String locationDeleteKey = 'locationDeleteKey';*/
 
-  static String employeeAddKey = 'employeeAddKey';
+  /*static String employeeAddKey = 'employeeAddKey';
   static String employeeEditKey = 'employeeEditKey';
   static String employeeViewKey = 'employeeViewKey';
-  static String employeeDeleteKey = 'employeeDeleteKey';
+  static String employeeDeleteKey = 'employeeDeleteKey';*/
 
-  static String departmentAddKey = 'departmentAddKey';
+  /*static String departmentAddKey = 'departmentAddKey';
   static String departmentEditKey = 'departmentEditKey';
   static String departmentViewKey = 'departmentViewKey';
-  static String departmentDeleteKey = 'departmentDeleteKey';
+  static String departmentDeleteKey = 'departmentDeleteKey';*/
 
   /// Set user permission common function
   Future<void> setUserPermissionsToPrefsAndLocal({
@@ -177,7 +177,7 @@ class UserPreference {
 
     log("UserDetails.isUserLoggedIn : ${UserDetails.isUserLoggedIn}");
     log("UserDetails.userId : ${UserDetails.userId}");
-    log("UserDetails.roleId : ${UserDetails.roleId}");
+    log("UserDetails.roleId Prefs : ${UserDetails.roleId}");
     log("UserDetails.userName : ${UserDetails.userName}");
     log("UserDetails.userEmail : ${UserDetails.userEmail}");
     log("UserDetails.userProfileImage : ${UserDetails.userProfileImage}");
@@ -377,5 +377,121 @@ class UserPreference {
   Future<int> getIntValueFromPrefs({required String keyId}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt(keyId) ?? 0;
+  }
+
+  /// SubAdmin Key
+  static String subAdminViewKey = 'subAdminViewKey';
+  static String subAdminAddKey = 'subAdminAddKey';
+  static String subAdminEditKey = 'subAdminEditKey';
+  static String subAdminDeleteKey = 'subAdminDeleteKey';
+  /// Company Key
+  static String companyViewKey = 'companyViewKey';
+  static String companyAddKey = 'companyAddKey';
+  static String companyEditKey = 'companyEditKey';
+  static String companyDeleteKey = 'companyDeleteKey';
+  /// Department Key
+  static String departmentViewKey = 'departmentViewKey';
+  static String departmentAddKey = 'departmentAddKey';
+  static String departmentEditKey = 'departmentEditKey';
+  static String departmentDeleteKey = 'departmentDeleteKey';
+  /// Location Key
+  static String locationViewKey = 'locationViewKey';
+  static String locationAddKey = 'locationAddKey';
+  static String locationEditKey = 'locationEditKey';
+  static String locationDeleteKey = 'locationDeleteKey';
+  /// Employee Key
+  static String employeeViewKey = 'employeeViewKey';
+  static String employeeAddKey = 'employeeAddKey';
+  static String employeeEditKey = 'employeeEditKey';
+  static String employeeDeleteKey = 'employeeDeleteKey';
+  /// Employee Document Key
+  static String employeeDocumentViewKey = 'employeeDocumentViewKey';
+  static String employeeDocumentAddKey = 'employeeDocumentAddKey';
+  static String employeeDocumentEditKey = 'employeeDocumentEditKey';
+  static String employeeDocumentDeleteKey = 'employeeDocumentDeleteKey';
+  static String employeeDocumentDownloadKey = 'employeeDocumentDownloadKey';
+  /// Company Paychecks Key
+  static String payChecksViewKey = 'payChecksViewKey';
+  static String payChecksAddKey = 'payChecksAddKey';
+  static String payChecksEditKey = 'payChecksEditKey';
+  static String payChecksDeleteKey = 'payChecksDeleteKey';
+  static String payChecksDownloadKey = 'payChecksDownloadKey';
+  /// Approve Paychecks Key
+  static String approvePayChecksViewKey = 'approvePayChecksViewKey';
+  static String approvePayChecksAddKey = 'approvePayChecksAddKey';
+  static String approvePayChecksEditKey = 'approvePayChecksEditKey';
+  static String approvePayChecksDeleteKey = 'approvePayChecksDeleteKey';
+  /// EmailTemplate Key
+  static String emailTemplateViewKey = 'emailTemplateViewKey';
+  static String emailTemplateAddKey = 'emailTemplateAddKey';
+  static String emailTemplateEditKey = 'emailTemplateEditKey';
+  /// Role Key
+  static String roleEditKey = 'roleEditKey';
+  static String roleViewKey = 'roleViewKey';
+
+
+  Future<void> setAllPermissionIntoPrefs({
+    bool? subAdminView, bool? subAdminAdd, bool? subAdminEdit, bool? subAdminDelete,
+    bool? companyView, bool? companyAdd, bool? companyEdit, bool? companyDelete,
+    bool? departmentView, bool? departmentAdd, bool? departmentEdit, bool? departmentDelete,
+    bool? locationView, bool? locationAdd, bool? locationEdit, bool? locationDelete,
+    bool? employeeView, bool? employeeAdd, bool? employeeEdit, bool? employeeDelete,
+    bool? employeeDocumentView, bool? employeeDocumentAdd, bool? employeeDocumentEdit, bool? employeeDocumentDelete, bool? employeeDocumentDownload,
+    bool? payChecksView, bool? payChecksAdd, bool? payChecksEdit, bool? payChecksDelete, bool? payChecksDownload,
+    bool? approvePayChecksView, bool? approvePayChecksAdd, bool? approvePayChecksEdit, bool? approvePayChecksDelete,
+    bool? emailTemplateView, bool? emailTemplateAdd, bool? emailTemplateEdit,
+    bool? roleView, bool? roleEdit,
+  }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    /// SubAdmin Permission Set
+    prefs.setBool(subAdminViewKey, subAdminView ?? false);
+    prefs.setBool(subAdminAddKey, subAdminAdd ?? false);
+    prefs.setBool(subAdminEditKey, subAdminEdit ?? false);
+    prefs.setBool(subAdminDeleteKey, subAdminDelete ?? false);
+    /// Company Permission Set
+    prefs.setBool(companyViewKey, companyView ?? false);
+    prefs.setBool(companyAddKey, companyAdd ?? false);
+    prefs.setBool(companyEditKey, companyEdit ?? false);
+    prefs.setBool(companyDeleteKey, companyDelete ?? false);
+    /// Department Permission Set
+    prefs.setBool(departmentViewKey, departmentView ?? false);
+    prefs.setBool(departmentAddKey, departmentAdd ?? false);
+    prefs.setBool(departmentEditKey, departmentEdit ?? false);
+    prefs.setBool(departmentDeleteKey, departmentDelete ?? false);
+    /// Location Permission Set
+    prefs.setBool(locationViewKey, locationView ?? false);
+    prefs.setBool(locationAddKey, locationAdd ?? false);
+    prefs.setBool(locationEditKey, locationEdit ?? false);
+    prefs.setBool(locationDeleteKey, locationDelete ?? false);
+    /// Employee Permission Set
+    prefs.setBool(employeeViewKey, employeeView ?? false);
+    prefs.setBool(employeeAddKey, employeeAdd ?? false);
+    prefs.setBool(employeeEditKey, employeeEdit ?? false);
+    prefs.setBool(employeeDeleteKey, employeeDelete ?? false);
+    /// Employee Document Permission Set
+    prefs.setBool(employeeDocumentViewKey, employeeDocumentView ?? false);
+    prefs.setBool(employeeDocumentAddKey, employeeDocumentAdd ?? false);
+    prefs.setBool(employeeDocumentEditKey, employeeDocumentEdit ?? false);
+    prefs.setBool(employeeDocumentDeleteKey, employeeDocumentDelete ?? false);
+    prefs.setBool(employeeDocumentDownloadKey, employeeDocumentDownload ?? false);
+    /// Company Paychecks Permission Set
+    prefs.setBool(payChecksViewKey, payChecksView ?? false);
+    prefs.setBool(payChecksAddKey, payChecksAdd ?? false);
+    prefs.setBool(payChecksEditKey, payChecksEdit ?? false);
+    prefs.setBool(payChecksDeleteKey, payChecksDelete ?? false);
+    prefs.setBool(payChecksDownloadKey, payChecksDownload ?? false);
+    /// Approve Paychecks Permission Set
+    prefs.setBool(approvePayChecksViewKey, approvePayChecksView ?? false);
+    prefs.setBool(approvePayChecksAddKey, approvePayChecksAdd ?? false);
+    prefs.setBool(approvePayChecksEditKey, approvePayChecksEdit ?? false);
+    prefs.setBool(approvePayChecksDeleteKey, approvePayChecksDelete ?? false);
+    /// EmailTemplate Permission Set
+    prefs.setBool(emailTemplateViewKey, emailTemplateView ?? false);
+    prefs.setBool(emailTemplateAddKey, emailTemplateAdd ?? false);
+    prefs.setBool(emailTemplateEditKey, emailTemplateEdit ?? false);
+    /// Role Permission Set
+    prefs.setBool(roleViewKey, roleView ?? false);
+    prefs.setBool(roleEditKey, roleEdit ?? false);
   }
 }

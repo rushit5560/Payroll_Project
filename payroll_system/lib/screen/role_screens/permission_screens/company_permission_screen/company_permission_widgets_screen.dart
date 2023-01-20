@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/common_modules/permission_container_module.dart';
@@ -19,152 +20,189 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Obx(
-        () => Column(
-          children: [
-            PermissionContainerModule(
-                labelText: AppMessage.company,
-                isViewValue: companyPermissionScreenController
-                    .companyInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .companyInIsViewChecked.value = value!;
-                },
-                isAddValue: companyPermissionScreenController
-                    .companyInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .companyInIsAddChecked.value = value!;
-                },
-                isEditValue: companyPermissionScreenController
-                    .companyInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .companyInIsEditChecked.value = value!;
-                },
-                isDeleteValue: companyPermissionScreenController
-                    .companyIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .companyIsDeleteChecked.value = value!;
-                }),
-            const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.department,
-                isViewValue: companyPermissionScreenController
-                    .departmentInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .departmentInIsViewChecked.value = value!;
-                },
-                isAddValue: companyPermissionScreenController
-                    .departmentInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .departmentInIsAddChecked.value = value!;
-                },
-                isEditValue: companyPermissionScreenController
-                    .departmentInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .departmentInIsEditChecked.value = value!;
-                },
-                isDeleteValue: companyPermissionScreenController
-                    .departmentIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .departmentIsDeleteChecked.value = value!;
-                }),
-            const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.employee,
-                isViewValue: companyPermissionScreenController
-                    .employeeInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .employeeInIsViewChecked.value = value!;
-                },
-                isAddValue: companyPermissionScreenController
-                    .employeeInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .employeeInIsAddChecked.value = value!;
-                },
-                isEditValue: companyPermissionScreenController
-                    .employeeInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .employeeInIsEditChecked.value = value!;
-                },
-                isDeleteValue: companyPermissionScreenController
-                    .employeeIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .employeeIsDeleteChecked.value = value!;
-                }),
-            const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.location,
-                isViewValue: companyPermissionScreenController
-                    .locationInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .locationInIsViewChecked.value = value!;
-                },
-                isAddValue: companyPermissionScreenController
-                    .locationInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .locationInIsAddChecked.value = value!;
-                },
-                isEditValue: companyPermissionScreenController
-                    .locationInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .locationInIsEditChecked.value = value!;
-                },
-                isDeleteValue: companyPermissionScreenController
-                    .locationIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .locationIsDeleteChecked.value = value!;
-                }),
-            const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.payRoll,
-                isViewValue: companyPermissionScreenController
-                    .payrollInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .payrollInIsViewChecked.value = value!;
-                },
-                isAddValue: companyPermissionScreenController
-                    .payrollInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .payrollInIsAddChecked.value = value!;
-                },
-                isEditValue: companyPermissionScreenController
-                    .payrollInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .payrollInIsEditChecked.value = value!;
-                },
-                isDeleteValue: companyPermissionScreenController
-                    .payrollIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  companyPermissionScreenController
-                      .payrollIsDeleteChecked.value = value!;
-                }),
-            const SizedBox(height: 22),
-            CustomSubmitButtonModule(
-              labelText: AppMessage.submit,
-              onPress: (){},
-            ),
-            const SizedBox(height: 5),
-          ],
-        ).commonSymmetricPadding(horizontal: 10, vertical: 10),
-      ),
+      child:  Column(
+                children: [
+                  PermissionBoxModule(
+                    labelText: AppMessage.companyDepartmentNameDrawer,
+                    isViewShow: true,
+                    isViewValue: companyPermissionScreenController.departmentInIsViewChecked.value,
+                    isViewOnChanged: (bool? value) {
+                      companyPermissionScreenController.departmentInIsViewChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isAddShow: true,
+                    isAddValue: companyPermissionScreenController.departmentInIsAddChecked.value,
+                    isAddOnChanged: (bool? value) {
+                      companyPermissionScreenController.departmentInIsAddChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isEditShow: true,
+                    isEditValue: companyPermissionScreenController.departmentInIsEditChecked.value,
+                    isEditOnChanged: (bool? value) {
+                      companyPermissionScreenController.departmentInIsEditChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isDeleteShow: true,
+                    isDeleteValue: companyPermissionScreenController.departmentIsDeleteChecked.value,
+                    isDeleteOnChanged: (bool? value) {
+                      companyPermissionScreenController.departmentIsDeleteChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isDownloadShow: false,
+
+                  ),
+
+                  const SizedBox(height: 15),
+                  PermissionBoxModule(
+                    labelText: AppMessage.companyLocation,
+                    isViewShow: true,
+                    isViewValue: companyPermissionScreenController.locationInIsViewChecked.value,
+                    isViewOnChanged: (bool? value) {
+                      companyPermissionScreenController.locationInIsViewChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isAddShow: true,
+                    isAddValue: companyPermissionScreenController.locationInIsAddChecked.value,
+                    isAddOnChanged: (bool? value) {
+                      companyPermissionScreenController.locationInIsAddChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isEditShow: true,
+                    isEditValue: companyPermissionScreenController.locationInIsEditChecked.value,
+                    isEditOnChanged: (bool? value) {
+                      companyPermissionScreenController.locationInIsEditChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isDeleteShow: true,
+                    isDeleteValue: companyPermissionScreenController.locationIsDeleteChecked.value,
+                    isDeleteOnChanged: (bool? value) {
+                      companyPermissionScreenController.locationIsDeleteChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isDownloadShow: false,
+
+                  ),
+
+                  const SizedBox(height: 15),
+                  PermissionBoxModule(
+                    labelText: AppMessage.companyEmployee,
+                    isViewShow: true,
+                    isViewValue: companyPermissionScreenController.employeeInIsViewChecked.value,
+                    isViewOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeInIsViewChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isAddShow: true,
+                    isAddValue: companyPermissionScreenController.employeeInIsAddChecked.value,
+                    isAddOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeInIsAddChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isEditShow: true,
+                    isEditValue: companyPermissionScreenController.employeeInIsEditChecked.value,
+                    isEditOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeInIsEditChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isDeleteShow: true,
+                    isDeleteValue: companyPermissionScreenController.employeeIsDeleteChecked.value,
+                    isDeleteOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeIsDeleteChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                    isDownloadShow: false,
+
+                  ),
+
+                  const SizedBox(height: 15),
+                  PermissionBoxModule(
+                    labelText: AppMessage.companyEmployeeDocument,
+
+                    isViewShow: true,
+                    isViewValue: companyPermissionScreenController.employeeDocumentIsViewChecked.value,
+                    isViewOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeDocumentIsViewChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+
+                    isAddShow: true,
+                    isAddValue: companyPermissionScreenController.employeeDocumentIsAddChecked.value,
+                    isAddOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeDocumentIsAddChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+
+                    isEditShow: true,
+                    isEditValue: companyPermissionScreenController.employeeDocumentIsEditChecked.value,
+                    isEditOnChanged: (bool? value) {
+                      // companyPermissionScreenController.employeeDocumentIsEditChecked.value = value!;
+                    },
+
+
+                    isDeleteShow: true,
+                    isDeleteValue: companyPermissionScreenController.employeeDocumentIsDeleteChecked.value,
+                    isDeleteOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeDocumentIsDeleteChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+
+                    isDownloadShow: true,
+                    isDownloadValue: companyPermissionScreenController.employeeDocumentIsDownloadChecked.value,
+                    isDownloadOnChanged: (bool? value) {
+                      companyPermissionScreenController.employeeDocumentIsDownloadChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                  ) ,
+
+                  const SizedBox(height: 15),
+                  PermissionBoxModule(
+                    labelText: AppMessage.companyPaycheckes,
+
+                    isViewShow: true,
+                    isViewValue: companyPermissionScreenController.companyPayChecksIsViewChecked.value,
+                    isViewOnChanged: (bool? value) {
+                      companyPermissionScreenController.companyPayChecksIsViewChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+
+                    isAddShow: true,
+                    isAddValue: companyPermissionScreenController.companyPayChecksIsAddChecked.value,
+                    isAddOnChanged: (bool? value) {
+                      companyPermissionScreenController.companyPayChecksIsAddChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+
+                    isEditShow: true,
+                    isEditValue: companyPermissionScreenController.companyPayChecksIsEditChecked.value,
+                    isEditOnChanged: (bool? value) {
+                      // companyPermissionScreenController.companyPayChecksIsEditChecked.value = value!;
+                    },
+
+
+                    isDeleteShow: true,
+                    isDeleteValue: companyPermissionScreenController.companyPayChecksIsDeleteChecked.value,
+                    isDeleteOnChanged: (bool? value) {
+                      // companyPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
+                    },
+
+                    isDownloadShow: true,
+                    isDownloadValue: companyPermissionScreenController.companyPayChecksIsDownloadChecked.value,
+                    isDownloadOnChanged: (bool? value) {
+                      companyPermissionScreenController.companyPayChecksIsDownloadChecked.value = value!;
+                      companyPermissionScreenController.loadUI();
+                    },
+                  ) ,
+
+                  const SizedBox(height: 22),
+                  CustomSubmitButtonModule(
+                    labelText: AppMessage.submit,
+                    onPress: () async {
+                      await companyPermissionScreenController.saveUserPermissionFunction();
+                    },
+                  ),
+                  const SizedBox(height: 5),
+                ],
+              ).commonSymmetricPadding(horizontal: 10, vertical: 10),
     );
   }
 

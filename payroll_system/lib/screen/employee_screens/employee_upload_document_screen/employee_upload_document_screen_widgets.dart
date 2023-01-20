@@ -157,11 +157,11 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () async {
-                            bool employeeUpdatePermission =
+                            bool employeeDeletePermission =
                                 await userPreference.getBoolPermissionFromPrefs(
-                                    keyId: UserPreference.employeeEditKey);
+                                    keyId: UserPreference.employeeDocumentDeleteKey);
 
-                            if (employeeUpdatePermission == true) {
+                            if (employeeDeletePermission == true) {
                               CustomAlertDialog().showAlertDialog(
                                 context: context,
                                 textContent:
@@ -207,7 +207,16 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () async {
-                            await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadFilePath}${singleDoc.name}");
+                            bool employeeDocumentViewPermission =
+                            await userPreference.getBoolPermissionFromPrefs(
+                                keyId: UserPreference.employeeDocumentViewKey);
+
+                            if(employeeDocumentViewPermission == true) {
+                              await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadFilePath}${singleDoc.name}");
+                            } else {
+                              Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            }
+
                           },
                           child: Row(
                             children: [

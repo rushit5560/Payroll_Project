@@ -44,11 +44,11 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        bool employeeDeletePermission =
+                        bool employeeUpdatePermission =
                         await userPreference.getBoolPermissionFromPrefs(
-                            keyId: UserPreference.employeeDeleteKey);
+                            keyId: UserPreference.employeeEditKey);
 
-                        if (employeeDeletePermission == true) {
+                        if (employeeUpdatePermission == true) {
                           Get.to(
                                 () => EmployeeManageScreen(),
                             arguments: [
@@ -73,11 +73,12 @@ class EmployeeListScreenWidgets extends StatelessWidget {
 
                     GestureDetector(
                       onTap: () async {
-                        bool employeeUpdatePermission =
-                        await userPreference.getBoolPermissionFromPrefs(
-                            keyId: UserPreference.employeeEditKey);
 
-                        if (employeeUpdatePermission == true) {
+                        bool employeeDeletePermission =
+                        await userPreference.getBoolPermissionFromPrefs(
+                            keyId: UserPreference.employeeDeleteKey);
+
+                        if (employeeDeletePermission == true) {
                           CustomAlertDialog().showAlertDialog(
                             context: context,
                             textContent: AppMessage.deleteEmployeeAlertMessage,
@@ -120,7 +121,7 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                 SizedBox(height: 1.h),
                 SingleListTileModuleCustom(
                   image: AppImages.phoneIcon,
-                  textKey: AppMessage.phoneNumber,
+                  textKey: AppMessage.mobileNumber,
                   textValue: employee.mobileNumber,
                 ),
                 SizedBox(height: 2.h),
@@ -147,12 +148,13 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(()=> EmployeeUploadDocumentScreen(),
-                        arguments: [
-                          "${employee.firstName} ${employee.middleName} ${employee.lastName}",
-                          employee.id.toString(),
-                          employeeListScreenController.companyId,
-                        ],
+                        Get.to(() => EmployeeUploadDocumentScreen(),
+                          arguments: [
+                            "${employee.firstName} ${employee
+                                .middleName} ${employee.lastName}",
+                            employee.id.toString(),
+                            employeeListScreenController.companyId,
+                          ],
                         );
                       },
                       child: Row(

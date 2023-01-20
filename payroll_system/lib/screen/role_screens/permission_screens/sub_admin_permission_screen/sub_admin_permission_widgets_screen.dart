@@ -19,144 +19,282 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
       child: Obx(
         () => Column(
           children: [
-            PermissionContainerModule(
-                labelText: AppMessage.company,
-                isViewValue: subAdminPermissionScreenController
-                    .companyInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .companyInIsViewChecked.value = value!;
-                },
-                isAddValue: subAdminPermissionScreenController
-                    .companyInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .companyInIsAddChecked.value = value!;
-                },
-                isEditValue: subAdminPermissionScreenController
-                    .companyInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .companyInIsEditChecked.value = value!;
-                },
-                isDeleteValue: subAdminPermissionScreenController
-                    .companyIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .companyIsDeleteChecked.value = value!;
-                }),
+
+            // Company
+            PermissionBoxModule(
+              labelText: AppMessage.company,
+
+              isViewShow: true,
+              isViewValue: subAdminPermissionScreenController.companyInIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                subAdminPermissionScreenController.companyInIsViewChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isAddShow: true,
+              isAddValue: subAdminPermissionScreenController.companyInIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                subAdminPermissionScreenController.companyInIsAddChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isEditShow: true,
+              isEditValue: subAdminPermissionScreenController.companyInIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                subAdminPermissionScreenController.companyInIsEditChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: subAdminPermissionScreenController.companyIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                // subAdminPermissionScreenController.companyIsDeleteChecked.value = value!;
+              },
+
+              isDownloadShow: false,
+
+            ),
             const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.department,
-                isViewValue: subAdminPermissionScreenController
-                    .departmentInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .departmentInIsViewChecked.value = value!;
-                },
-                isAddValue: subAdminPermissionScreenController
-                    .departmentInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .departmentInIsAddChecked.value = value!;
-                },
-                isEditValue: subAdminPermissionScreenController
-                    .departmentInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .departmentInIsEditChecked.value = value!;
-                },
-                isDeleteValue: subAdminPermissionScreenController
-                    .departmentIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .departmentIsDeleteChecked.value = value!;
-                }),
+
+            // Department
+            PermissionBoxModule(
+              labelText: AppMessage.companyDepartment,
+
+              isViewShow: true,
+              isViewValue: subAdminPermissionScreenController.departmentInIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                subAdminPermissionScreenController.departmentInIsViewChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isAddShow: true,
+              isAddValue: subAdminPermissionScreenController.departmentInIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                subAdminPermissionScreenController.departmentInIsAddChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isEditShow: true,
+              isEditValue: subAdminPermissionScreenController.departmentInIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                subAdminPermissionScreenController.departmentInIsEditChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: subAdminPermissionScreenController.departmentIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                subAdminPermissionScreenController.departmentIsDeleteChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isDownloadShow: false,
+
+            ),
             const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.employee,
-                isViewValue: subAdminPermissionScreenController
-                    .employeeInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .employeeInIsViewChecked.value = value!;
-                },
-                isAddValue: subAdminPermissionScreenController
-                    .employeeInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .employeeInIsAddChecked.value = value!;
-                },
-                isEditValue: subAdminPermissionScreenController
-                    .employeeInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .employeeInIsEditChecked.value = value!;
-                },
-                isDeleteValue: subAdminPermissionScreenController
-                    .employeeIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .employeeIsDeleteChecked.value = value!;
-                }),
+
+            // Location
+            PermissionBoxModule(
+              labelText: AppMessage.companyLocation,
+
+              isViewShow: true,
+              isViewValue: subAdminPermissionScreenController.locationInIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                subAdminPermissionScreenController.locationInIsViewChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isAddShow: true,
+              isAddValue: subAdminPermissionScreenController.locationInIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                subAdminPermissionScreenController.locationInIsAddChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isEditShow: true,
+              isEditValue: subAdminPermissionScreenController.locationInIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                subAdminPermissionScreenController.locationInIsEditChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: subAdminPermissionScreenController.locationIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                subAdminPermissionScreenController.locationIsDeleteChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isDownloadShow: false,
+            ) ,
             const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.location,
-                isViewValue: subAdminPermissionScreenController
-                    .locationInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .locationInIsViewChecked.value = value!;
-                },
-                isAddValue: subAdminPermissionScreenController
-                    .locationInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .locationInIsAddChecked.value = value!;
-                },
-                isEditValue: subAdminPermissionScreenController
-                    .locationInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .locationInIsEditChecked.value = value!;
-                },
-                isDeleteValue: subAdminPermissionScreenController
-                    .locationIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .locationIsDeleteChecked.value = value!;
-                }),
+
+            // Employee
+            PermissionBoxModule(
+              labelText: AppMessage.companyEmployee,
+
+              isViewShow: true,
+              isViewValue: subAdminPermissionScreenController.employeeInIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeInIsViewChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isAddShow: true,
+              isAddValue: subAdminPermissionScreenController.employeeInIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeInIsAddChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isEditShow: true,
+              isEditValue: subAdminPermissionScreenController.employeeInIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeInIsEditChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: subAdminPermissionScreenController.employeeIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeIsDeleteChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isDownloadShow: false,
+            ),
+            const SizedBox(height: 15) ,
+
+            // Employee Document
+            PermissionBoxModule(
+              labelText: AppMessage.companyEmployeeDocument,
+
+              isViewShow: true,
+              isViewValue: subAdminPermissionScreenController.employeeDocumentIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeDocumentIsViewChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isAddShow: true,
+              isAddValue: subAdminPermissionScreenController.employeeDocumentIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeDocumentIsAddChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isEditShow: true,
+              isEditValue: subAdminPermissionScreenController.employeeDocumentIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                // subAdminPermissionScreenController.employeeDocumentIsEditChecked.value = value!;
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: subAdminPermissionScreenController.employeeDocumentIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeDocumentIsDeleteChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isDownloadShow: true,
+              isDownloadValue: subAdminPermissionScreenController.employeeDocumentIsDownloadChecked.value,
+              isDownloadOnChanged: (bool? value) {
+                subAdminPermissionScreenController.employeeDocumentIsDownloadChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+            ) ,
+            const SizedBox(height: 15) ,
+
+            // Company PayChecks
+            PermissionBoxModule(
+              labelText: AppMessage.companyPaycheckes,
+
+              isViewShow: true,
+              isViewValue: subAdminPermissionScreenController.companyPayChecksIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                subAdminPermissionScreenController.companyPayChecksIsViewChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isAddShow: true,
+              isAddValue: subAdminPermissionScreenController.companyPayChecksIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                subAdminPermissionScreenController.companyPayChecksIsAddChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isEditShow: true,
+              isEditValue: subAdminPermissionScreenController.companyPayChecksIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                // subAdminPermissionScreenController.companyPayChecksIsEditChecked.value = value!;
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: subAdminPermissionScreenController.companyPayChecksIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                // subAdminPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
+              },
+
+              isDownloadShow: true,
+              isDownloadValue: subAdminPermissionScreenController.companyPayChecksIsDownloadChecked.value,
+              isDownloadOnChanged: (bool? value) {
+                subAdminPermissionScreenController.companyPayChecksIsDownloadChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+            ) ,
             const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.payRoll,
-                isViewValue: subAdminPermissionScreenController
-                    .payrollInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .payrollInIsViewChecked.value = value!;
-                },
-                isAddValue: subAdminPermissionScreenController
-                    .payrollInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .payrollInIsAddChecked.value = value!;
-                },
-                isEditValue: subAdminPermissionScreenController
-                    .payrollInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .payrollInIsEditChecked.value = value!;
-                },
-                isDeleteValue: subAdminPermissionScreenController
-                    .payrollIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  subAdminPermissionScreenController
-                      .payrollIsDeleteChecked.value = value!;
-                }),
+
+            // Approve PayChecks
+            PermissionBoxModule(
+              labelText: AppMessage.approvePaycheckes,
+
+              isViewShow: true,
+              isViewValue: subAdminPermissionScreenController.approvePayChecksIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                subAdminPermissionScreenController.approvePayChecksIsViewChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isAddShow: true,
+              isAddValue: subAdminPermissionScreenController.approvePayChecksIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                // subAdminPermissionScreenController.approvePayChecksIsAddChecked.value = value!;
+              },
+
+              isEditShow: true,
+              isEditValue: subAdminPermissionScreenController.approvePayChecksIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                subAdminPermissionScreenController.approvePayChecksIsEditChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: subAdminPermissionScreenController.approvePayChecksIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                subAdminPermissionScreenController.approvePayChecksIsDeleteChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
+              },
+
+              isDownloadShow: false,
+            ) ,
+            const SizedBox(height: 15),
+
+
+
+
             const SizedBox(height: 22),
             CustomSubmitButtonModule(
               labelText: AppMessage.submit,
-              onPress: (){},
+              onPress: () async {
+                await subAdminPermissionScreenController.saveUserPermissionFunction();
+              },
             ),
             const SizedBox(height: 5)
           ],
@@ -165,36 +303,4 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
     );
   }
 
-  subAdminBackSubmitButton(context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 5,
-          child: ButtonCustom(
-            onPressed: () {},
-            text: AppMessage.submit,
-            textsize: 15.sp,
-          ),
-        ),
-        const SizedBox(width: 10),
-        const Divider(),
-        Expanded(
-          flex: 5,
-          child: ButtonCustom(
-            onPressed: () => CustomAlertDialog().showAlertDialog(
-              context: context,
-              textContent: AppMessage.permissionMessage,
-              onYesTap: () {
-                Get.back();
-                Get.back();
-              },
-              onCancelTap: () => Get.back(),
-            ),
-            text: AppMessage.back,
-            textsize: 15.sp,
-          ),
-        ),
-      ],
-    );
-  }
 }

@@ -7,6 +7,7 @@ import 'package:payroll_system/models/company_manage_screen_model/get_all_depart
 import 'package:payroll_system/models/employee_manage_screen_models/employee_delete_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class DepartmentListScreenController extends GetxController {
   String companyId = Get.arguments[0];
@@ -113,9 +114,12 @@ class DepartmentListScreenController extends GetxController {
 
   @override
   void onInit() {
-    // getUserIdDataFromPrefs();
-    getCompanyWiseDepartmentFunction();
-
+    initMethod();
     super.onInit();
   }
+  
+  initMethod() async {
+    await getCompanyWiseDepartmentFunction();
+  }
+  
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
@@ -8,6 +9,7 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_list_screen_controller.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen_widgets.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_manage_screen/location_manage_screen.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -16,6 +18,8 @@ import 'package:sizer/sizer.dart';
 class LocationListScreen extends StatelessWidget {
   LocationListScreen({super.key});
   final locationListScreenController = Get.put(LocationListScreenController());
+  UserPreference userPreference = UserPreference();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,16 +35,24 @@ class LocationListScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {
-              Get.to(
-                () => LocationManageScreen(),
-                arguments: [
-                  LocationOption.create,
-                  "",
-                  locationListScreenController.companyId.toString(),
-                  locationListScreenController.companyName,
-                ],
-              );
+            onPressed: () async {
+              bool locationCreatePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentAddKey);
+
+              if(locationCreatePermission == true) {
+                Get.to(
+                      () => LocationManageScreen(),
+                  arguments: [
+                    LocationOption.create,
+                    "",
+                    locationListScreenController.companyId.toString(),
+                    locationListScreenController.companyName,
+                  ],
+                );
+              } else {
+                Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+              }
+
+
             },
             icon: const Icon(Icons.add_rounded),
           ),
@@ -63,7 +75,7 @@ class LocationListScreen extends StatelessWidget {
 
                           locationListScreenController.searchLocationDataList =
                               locationListScreenController.allLocationList
-                                  .where((element) => element.locationName
+                                  .where((element) => element.locationName!
                                       .toLowerCase()
                                       .contains(value))
                                   .toList();

@@ -33,7 +33,7 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                 child: Column(
                   children: [
                     EmployeeDrawerTile(
-                      title: AppMessage.profile,
+                      title: AppMessage.updateProfile,
                       imageStatus: true,
                       image: AppImages.employeeIcon,
                       onTap: () {
@@ -41,7 +41,8 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                         Get.to(() => EmployeeProfileScreen());
                       },
                     ),
-                    EmployeeDrawerTile(
+                    employeeHomeScreenController.isDocumentDownloadPermission.value == true
+                    ? EmployeeDrawerTile(
                       title: AppMessage.documentDownloadDrawer,
                       imageStatus: false,
                       // image: AppImages.downloadIcon,
@@ -60,8 +61,9 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                           arguments: [employeeId.toString(), employeeName],
                         );
                       },
-                    ),
-                    EmployeeDrawerTile(
+                    ) : const SizedBox(),
+                    employeeHomeScreenController.isDocumentUploadPermission.value == true
+                        ? EmployeeDrawerTile(
                       title: AppMessage.documentUploadDrawer,
                       imageStatus: false,
                       icon: const Icon(Icons.file_upload_outlined,
@@ -82,8 +84,9 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                           ],
                         );
                       },
-                    ),
-                    EmployeeDrawerTile(
+                    ) : const SizedBox(),
+                    employeeHomeScreenController.ispayChecksDownloadPermission.value == true
+                        ? EmployeeDrawerTile(
                       title: AppMessage.paychecksDownloadDrawer,
                       imageStatus: false,
                       icon: const Icon(Icons.file_download_outlined,
@@ -104,7 +107,7 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                           ],
                         );
                       },
-                    ),
+                    ) : const SizedBox(),
                     EmployeeDrawerTile(
                       title: AppMessage.changePassword,
                       imageStatus: true,

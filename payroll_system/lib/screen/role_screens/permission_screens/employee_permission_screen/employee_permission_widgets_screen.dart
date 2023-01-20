@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/common_modules/custom_button_module.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/controllers/employee_permission_screen_controller.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
-import 'package:sizer/sizer.dart';
-import '../../../../common_modules/custom_alert_dialog_module.dart';
 import '../../../../common_modules/permission_container_module.dart';
+
 
 class EmployeePermissionWidgetScreen extends StatelessWidget {
   EmployeePermissionWidgetScreen({super.key});
@@ -19,117 +17,77 @@ class EmployeePermissionWidgetScreen extends StatelessWidget {
       child: Obx(
         () => Column(
           children: [
-            PermissionContainerModule(
-                labelText: AppMessage.company,
-                isViewValue: employeePermissionScreenController
-                    .companyInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .companyInIsViewChecked.value = value!;
-                },
-                isAddValue: employeePermissionScreenController
-                    .companyInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .companyInIsAddChecked.value = value!;
-                },
-                isEditValue: employeePermissionScreenController
-                    .companyInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .companyInIsEditChecked.value = value!;
-                },
-                isDeleteValue: employeePermissionScreenController
-                    .companyIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .companyIsDeleteChecked.value = value!;
-                }),
+            // Employee Document
+            PermissionBoxModule(
+              labelText: AppMessage.employeeDocument,
+              isViewShow: true,
+              isViewValue: employeePermissionScreenController.empDocumentIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                employeePermissionScreenController.empDocumentIsViewChecked.value = value!;
+              },
+              isAddShow: true,
+              isAddValue: employeePermissionScreenController.empDocumentIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                employeePermissionScreenController.empDocumentIsAddChecked.value = value!;
+              },
+              isEditShow: true,
+              isEditValue: employeePermissionScreenController.empDocumentIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                // employeePermissionScreenController.empDocumentIsEditChecked.value = value!;
+              },
+              isDeleteShow: true,
+              isDeleteValue: employeePermissionScreenController.empDocumentIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                // employeePermissionScreenController.empDocumentIsDeleteChecked.value = value!;
+              },
+              isDownloadShow: true,
+              isDownloadValue: employeePermissionScreenController.empDocumentIsDownloadChecked.value,
+              isDownloadOnChanged: (bool? value) {
+                employeePermissionScreenController.empDocumentIsDownloadChecked.value = value!;
+              },
+            ),
             const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.department,
-                isViewValue: employeePermissionScreenController
-                    .departmentInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .departmentInIsViewChecked.value = value!;
-                },
-                isAddValue: employeePermissionScreenController
-                    .departmentInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .departmentInIsAddChecked.value = value!;
-                },
-                isEditValue: employeePermissionScreenController
-                    .departmentInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .departmentInIsEditChecked.value = value!;
-                },
-                isDeleteValue: employeePermissionScreenController
-                    .departmentIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .departmentIsDeleteChecked.value = value!;
-                }),
-            const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.employee,
-                isViewValue: employeePermissionScreenController
-                    .employeeInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .employeeInIsViewChecked.value = value!;
-                },
-                isAddValue: employeePermissionScreenController
-                    .employeeInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .employeeInIsAddChecked.value = value!;
-                },
-                isEditValue: employeePermissionScreenController
-                    .employeeInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .employeeInIsEditChecked.value = value!;
-                },
-                isDeleteValue: employeePermissionScreenController
-                    .employeeIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .employeeIsDeleteChecked.value = value!;
-                }),
-            const SizedBox(height: 15),
-            PermissionContainerModule(
-                labelText: AppMessage.location,
-                isViewValue: employeePermissionScreenController
-                    .locationInIsViewChecked.value,
-                isViewOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .locationInIsViewChecked.value = value!;
-                },
-                isAddValue: employeePermissionScreenController
-                    .locationInIsAddChecked.value,
-                isAddOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .locationInIsAddChecked.value = value!;
-                },
-                isEditValue: employeePermissionScreenController
-                    .locationInIsEditChecked.value,
-                isEditOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .locationInIsEditChecked.value = value!;
-                },
-                isDeleteValue: employeePermissionScreenController
-                    .locationIsDeleteChecked.value,
-                isDeleteOnChanged: (bool? value) {
-                  employeePermissionScreenController
-                      .locationIsDeleteChecked.value = value!;
-                }),
+
+             PermissionBoxModule(
+              labelText: AppMessage.employeePaycheckes,
+
+              isViewShow: true,
+              isViewValue: employeePermissionScreenController.employeePayChecksIsViewChecked.value,
+              isViewOnChanged: (bool? value) {
+                employeePermissionScreenController.employeePayChecksIsViewChecked.value = value!;
+              },
+
+              isAddShow: true,
+              isAddValue: employeePermissionScreenController.employeePayChecksIsAddChecked.value,
+              isAddOnChanged: (bool? value) {
+                // employeePermissionScreenController.employeePayChecksIsAddChecked.value = value!;
+              },
+
+              isEditShow: true,
+              isEditValue: employeePermissionScreenController.employeePayChecksIsEditChecked.value,
+              isEditOnChanged: (bool? value) {
+                // employeePermissionScreenController.employeePayChecksIsEditChecked.value = value!;
+              },
+
+
+              isDeleteShow: true,
+              isDeleteValue: employeePermissionScreenController.employeePayChecksIsDeleteChecked.value,
+              isDeleteOnChanged: (bool? value) {
+                // employeePermissionScreenController.employeePayChecksIsDeleteChecked.value = value!;
+              },
+
+              isDownloadShow: true,
+              isDownloadValue: employeePermissionScreenController.employeePayChecksIsDownloadChecked.value,
+              isDownloadOnChanged: (bool? value) {
+                employeePermissionScreenController.employeePayChecksIsDownloadChecked.value = value!;
+              },
+            ) ,
             const SizedBox(height: 22),
             CustomSubmitButtonModule(
               labelText: AppMessage.submit,
-              onPress: (){},
+              onPress: () async {
+                await employeePermissionScreenController.saveUserPermissionFunction();
+              },
             ),
             const SizedBox(height: 5),
           ],
@@ -138,36 +96,5 @@ class EmployeePermissionWidgetScreen extends StatelessWidget {
     );
   }
 
-  employeeBackSubmitButton(context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 5,
-          child: ButtonCustom(
-            onPressed: () {},
-            text: AppMessage.submit,
-            textsize: 15.sp,
-          ),
-        ),
-        const SizedBox(width: 10),
-        const Divider(),
-        Expanded(
-          flex: 5,
-          child: ButtonCustom(
-            onPressed: () => CustomAlertDialog().showAlertDialog(
-              context: context,
-              textContent: AppMessage.permissionMessage,
-              onYesTap: () {
-                Get.back();
-                Get.back();
-              },
-              onCancelTap: () => Get.back(),
-            ),
-            text: AppMessage.back,
-            textsize: 15.sp,
-          ),
-        ),
-      ],
-    );
-  }
+
 }

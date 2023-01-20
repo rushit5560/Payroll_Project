@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_permission_screen_controller.dart';
 import 'package:payroll_system/screen/role_screens/permission_screens/employee_permission_screen/employee_permission_widgets_screen.dart';
@@ -24,7 +25,10 @@ class EmployeePermissionScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: EmployeePermissionWidgetScreen(),
+      body:  Obx(
+        () => employeePermissionScreenController.isLoading.value
+    ? CommonLoader().showLoader()
+        : EmployeePermissionWidgetScreen(),),
     );
   }
 }

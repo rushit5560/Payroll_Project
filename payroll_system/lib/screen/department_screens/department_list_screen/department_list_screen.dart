@@ -19,8 +19,7 @@ import 'department_list_screen_widgets.dart';
 class DepartmentListScreen extends StatelessWidget {
   DepartmentListScreen({Key? key}) : super(key: key);
 
-  DepartmentListScreenController departmentListScreenController =
-      Get.put(DepartmentListScreenController());
+  DepartmentListScreenController departmentListScreenController = Get.put(DepartmentListScreenController());
 
   UserPreference userPreference = UserPreference();
 

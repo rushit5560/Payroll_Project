@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
@@ -58,14 +59,23 @@ class CompanyListTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        () => CompanyManageScreen(),
-                        arguments: [
-                          CompanyOption.update,
-                          singleItem.id.toString(),
-                        ],
-                      );
+                    onTap: () async {
+                      bool companyViewPermission =
+                          await userPreference.getBoolPermissionFromPrefs(
+                              keyId: UserPreference.companyViewKey);
+
+                      if (companyViewPermission == true) {
+                        Get.to(
+                          () => CompanyManageScreen(),
+                          arguments: [
+                            CompanyOption.update,
+                            singleItem.id.toString(),
+                          ],
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: AppMessage.deniedPermission);
+                      }
                     },
                     child: Image.asset(
                       AppImages.editIcon,

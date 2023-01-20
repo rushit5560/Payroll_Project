@@ -26,11 +26,12 @@ class RoleListScreen extends StatelessWidget {
         children: const [
           AdminPermissionContainer(),
           SizedBox(height: 15),
+          SubAdminPermissionContainer(),
+          SizedBox(height: 15),
           CompanyPermissionContainer(),
           SizedBox(height: 15),
           EmployeePermissionContainer(),
-          SizedBox(height: 15),
-          SubAdminPermissionContainer(),
+
         ],
       ).commonOnlyPadding(top: 20, right: 20, left: 20, bottom: 20),
     );
