@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/common_modules/new/web_url_launcher_function.dart';
 import 'package:payroll_system/constants/colors.dart';
+import 'package:payroll_system/controllers/pay_checkes_dowanload_screen_controller.dart';
 import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/app_images.dart';
@@ -19,8 +20,8 @@ import 'package:payroll_system/utils/messaging.dart';
 class PayCheckesListWidgetsScreen extends StatelessWidget {
   PayCheckesListWidgetsScreen({super.key});
 
-  final payCheckesListScreenController =
-      Get.find<PayCheckesListScreenController>();
+  final screenController =
+      Get.find<PayCheckesDowanloadScreenController>();
 
   UserPreference userPreference = UserPreference();
 
@@ -28,10 +29,10 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: payCheckesListScreenController.payCheckesListData.length,
+        itemCount: screenController.payCheckDwanloadListData.length,
         itemBuilder: (context, index) {
           final payrollListDataListValue =
-              payCheckesListScreenController.payCheckesListData[index];
+          screenController.payCheckDwanloadListData[index];
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -79,15 +80,13 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.employeeName,
-                    textValue: payrollListDataListValue.firstName +
-                        payrollListDataListValue.middleName +
-                        payrollListDataListValue.lastName,
+                    textValue: "${payrollListDataListValue.firstName} ${payrollListDataListValue.middleName} ${payrollListDataListValue.lastName}",
                     image: AppImages.employeeIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.companyLabelName,
-                    textValue: payrollListDataListValue.companyname,
+                    textValue: payrollListDataListValue.companyid,
                     image: AppImages.companyIcon,
                   ),
                   const SizedBox(height: 5),

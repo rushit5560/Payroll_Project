@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
@@ -21,6 +22,7 @@ class UploadDocumentScreenController extends GetxController {
   RxBool isSuccessStatus = false.obs;
 
   UserPreference userPreference = UserPreference();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   List<String> documentTypeList = ["Choose Option", "W-4", "I-9", "W-2s"];
   RxString documentSelectedTypeValue = "Choose Option".obs;
@@ -110,6 +112,7 @@ class UploadDocumentScreenController extends GetxController {
   }
 
   Future<void> uploadDocumentFunction() async {
+    Fluttertoast.showToast(msg: "Please wait");
     isLoading(true);
     String url = ApiUrl.uploadEmployeeDocumentApi;
     log('uploadEmployeeDocumentFunction Api Url :$url');

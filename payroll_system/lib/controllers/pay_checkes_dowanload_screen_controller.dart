@@ -28,7 +28,7 @@ class PayCheckesDowanloadScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-
+      log('getPaycheckesDowanlodeListFunction : ${response.body}');
       PayCheckDwanloadListModel payCheckDwanloadListModel =
           PayCheckDwanloadListModel.fromJson(json.decode(response.body));
       log("getPaycheckesListFunction response  : ${response.body}");

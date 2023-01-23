@@ -50,7 +50,9 @@ class LoginController extends GetxController {
 
         await userPreference.setUserLoginDetailsToPrefs(
           isLoggedIn: true,
-          userId: int.parse(loginDetailsModel.loginData.data.id.toString()),
+          userId: loginDetailsModel.loginData.data.roleId == "4"
+              ? int.parse(loginDetailsModel.loginData.data.employeeId.toString())
+              : int.parse(loginDetailsModel.loginData.data.id.toString()),
           roleId: int.parse(loginDetailsModel.loginData.data.roleId.toString()),
           userName: loginDetailsModel.loginData.data.userName,
           userEmail: loginDetailsModel.loginData.data.email,

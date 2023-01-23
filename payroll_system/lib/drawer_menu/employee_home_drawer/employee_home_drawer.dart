@@ -68,9 +68,10 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                       employeeHomeScreenController.isDocumentUploadPermission.value == true
                                 ? EmployeeDrawerTile(
                                     title: AppMessage.documentUploadDrawer,
-                                    imageStatus: false,
-                                    icon: const Icon(Icons.file_upload_outlined,
-                                        color: AppColors.colorBtBlue),
+                                    imageStatus: true,
+                        image: AppImages.uploadIcon,
+                                    // icon: const Icon(Icons.file_upload_outlined,
+                                    //     color: AppColors.colorBtBlue),
                                     onTap: () async {
                                       int employeeId = await userPreference
                                           .getIntValueFromPrefs(

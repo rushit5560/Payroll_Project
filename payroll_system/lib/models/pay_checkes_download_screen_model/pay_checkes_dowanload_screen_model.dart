@@ -96,90 +96,90 @@ class PayCheckDwanloadListData {
   final String days;
   final String payPeriod;
   final String companyid;
-  final int employeeid;
+  final String employeeid;
   final String salary;
-  final int ragularhour;
+  final String ragularhour;
   final String holidaypay;
-  final int overtime;
-  final int bonus;
-  final int otherearning;
-  final int sickpay;
-  final int vacationhours;
-  final int commission;
+  final String overtime;
+  final String bonus;
+  final String otherearning;
+  final String sickpay;
+  final String vacationhours;
+  final String commission;
   final String paydate;
-  final int tax;
-  final int tip;
+  final String tax;
+  final String tip;
   final String subTotal;
   final String finalAmount;
   final String isActive;
   final String memo;
   final String approvepaychecks;
-  final int createdby;
+  final String createdby;
   final String modifiedby;
   final String createdAt;
   final String updatedAt;
   final String firstName;
   final String middleName;
   final String lastName;
-  final int eid;
+  final String eid;
   final String address;
   final String mobileNumber;
-  final int departmentId;
-  final int locationId;
+  final String departmentId;
+  final String locationId;
   final String street;
   final String town;
   final String state;
   final String city;
   final String zipcode;
   final String email;
-  final int hourlyRate;
+  final String hourlyRate;
 
   factory PayCheckDwanloadListData.fromJson(Map<String, dynamic> json) =>
       PayCheckDwanloadListData(
-        id: json["id"],
-        type: json["type"],
-        startdate: json["startdate"],
-        enddate: json["enddate"],
-        days: json["days"],
-        payPeriod: json["pay_period"],
-        companyid: json["companyid"],
-        employeeid: json["employeeid"],
-        salary: json["salary"],
-        ragularhour: json["ragularhour"],
-        holidaypay: json["holidaypay"],
-        overtime: json["overtime"],
-        bonus: json["bonus"],
-        otherearning: json["otherearning"],
-        sickpay: json["sickpay"],
-        vacationhours: json["vacationhours"],
-        commission: json["commission"],
-        paydate: json["paydate"],
-        tax: json["tax"],
-        tip: json["tip"],
-        subTotal: json["sub_total"],
-        finalAmount: json["final_amount"],
-        isActive: json["is_active"],
-        memo: json["memo"],
-        approvepaychecks: json["approvepaychecks"],
-        createdby: json["createdby"],
-        modifiedby: json["modifiedby"],
-        createdAt: json["created_at"],
-        updatedAt: json["updated_at"],
-        firstName: json["first_name"],
-        middleName: json["middle_name"],
-        lastName: json["last_name"],
-        eid: json["eid"],
-        address: json["address"],
-        mobileNumber: json["mobile_number"],
-        departmentId: json["department_id"],
-        locationId: json["location_id"],
-        street: json["street"],
-        town: json["town"],
-        state: json["state"],
-        city: json["city"],
-        zipcode: json["zipcode"],
-        email: json["email"],
-        hourlyRate: json["hourly_rate"],
+        id: json["id"] ?? 0,
+        type: json["type"] ?? "",
+        startdate: json["startdate"] ?? "",
+        enddate: json["enddate"] ?? "",
+        days: json["days"] ?? "",
+        payPeriod: json["pay_period"] ?? "",
+        companyid: json["companyid"] ?? "",
+        employeeid: json["employeeid"] ?? "",
+        salary: json["salary"] ?? "",
+        ragularhour: json["ragularhour"] ?? "",
+        holidaypay: json["holidaypay"] ?? "",
+        overtime: json["overtime"] ?? "",
+        bonus: json["bonus"] ?? "",
+        otherearning: json["otherearning"] ?? "",
+        sickpay: json["sickpay"] ?? "",
+        vacationhours: json["vacationhours"] ?? "",
+        commission: json["commission"] ?? "",
+        paydate: json["paydate"] ?? "",
+        tax: json["tax"] ?? "",
+        tip: json["tip"] ?? "",
+        subTotal: json["sub_total"] ?? "",
+        finalAmount: json["final_amount"] ?? "",
+        isActive: json["is_active"] ?? "",
+        memo: json["memo"] ?? "",
+        approvepaychecks: json["approvepaychecks"] ?? "",
+        createdby: json["createdby"] ?? "",
+        modifiedby: json["modifiedby"] ?? "",
+        createdAt: json["created_at"] ?? "",
+        updatedAt: json["updated_at"] ?? "",
+        firstName: json["first_name"] ?? "",
+        middleName: json["middle_name"] ?? "",
+        lastName: json["last_name"] ?? "",
+        eid: json["eid"] ?? "",
+        address: json["address"] ?? "",
+        mobileNumber: json["mobile_number"] ?? "",
+        departmentId: json["department_id"] ?? "",
+        locationId: json["location_id"] ?? "",
+        street: json["street"] ?? "",
+        town: json["town"] ?? "",
+        state: json["state"] ?? "",
+        city: json["city"] ?? "",
+        zipcode: json["zipcode"] ?? "",
+        email: json["email"] ?? "",
+        hourlyRate: json["hourly_rate"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

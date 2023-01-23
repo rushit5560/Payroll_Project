@@ -40,78 +40,89 @@ class DocumentUploadScreen extends StatelessWidget {
       body: Obx(
         () => uploadDocumentScreenController.isLoading.value
             ? CommonLoader().showLoader()
-            : Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppMessage.uploadDocument,
-                        style: TextStyleConfig.textStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
+            : Form(
+          key: uploadDocumentScreenController.formKey,
+              child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppMessage.uploadDocument,
+                          style: TextStyleConfig.textStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          if (uploadDocumentScreenController
-                                  .selectedDocumentList.length <=
-                              5) {
-                            await uploadDocumentScreenController
-                                .pickDocumentFunction();
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.youReachedAtMaxLength);
-                          }
-                        },
-                        icon: const Icon(
-                          Icons.add_rounded,
-                          size: 25,
+                        IconButton(
+                          onPressed: () async {
+                            if (uploadDocumentScreenController
+                                    .selectedDocumentList.length <=
+                                5) {
+                              await uploadDocumentScreenController
+                                  .pickDocumentFunction();
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: AppMessage.youReachedAtMaxLength);
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.add_rounded,
+                            size: 25,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  DocumentListModule(),
-                  SizedBox(height: 2.h),
-                  DocumentTypeDropdownModule(),
-                  SizedBox(height: 2.h),
-                  CustomSubmitButtonModule(
-                    onPress: () async {
-                      if (uploadDocumentScreenController
-                          .selectedDocumentList.isEmpty) {
-                        Fluttertoast.showToast(
-                            msg: AppMessage.pleaseSelectDocument);
-                      } else {
-                        if (uploadDocumentScreenController
-                                .documentSelectedTypeValue.value ==
-                            AppMessage.chooseOption) {
-                          Fluttertoast.showToast(
-                              msg: AppMessage.pleaseSelectDocumentType);
+                      ],
+                    ),
+                    DocumentListModule(),
+                    SizedBox(height: 2.h),
+                    Row(
+                      children: [
+                        Text(
+                          AppMessage.documentype,
+                          style: TextStyleConfig.textStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 2.h),
+                    DocumentTypeDropdownModule(),
+                    SizedBox(height: 2.h),
+                    CustomSubmitButtonModule(
+                      onPress: () async {
+                        if (uploadDocumentScreenController.selectedDocumentList.isEmpty) {
+                          Fluttertoast.showToast(msg: AppMessage.pleaseSelectDocument);
                         } else {
-                          await uploadDocumentScreenController
-                              .uploadDocumentFunction();
+                          // if (uploadDocumentScreenController.documentSelectedTypeValue.value == AppMessage.chooseOption) {
+                          //   Fluttertoast.showToast(msg: AppMessage.pleaseSelectDocumentType);
+                          // } else {
+                          if(uploadDocumentScreenController.formKey.currentState!.validate()) {
+                            await uploadDocumentScreenController.uploadDocumentFunction();
+                          }
+                          // }
                         }
-                      }
-                    },
-                    labelText: AppMessage.submit,
-                  ),
-                  SizedBox(height: 2.h),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.start,
-                  //   children: [
-                  //     Text(
-                  //       AppMessage.documentList,
-                  //       style: TextStyleConfig.textStyle(
-                  //         fontWeight: FontWeight.w600,
-                  //         fontSize: 16,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 2.h),
-                  // Expanded(child: UploadedDocumentListModule()),
-                ],
-              ).commonAllSidePadding(10),
+                      },
+                      labelText: AppMessage.submit,
+                    ),
+                    SizedBox(height: 2.h),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   children: [
+                    //     Text(
+                    //       AppMessage.documentList,
+                    //       style: TextStyleConfig.textStyle(
+                    //         fontWeight: FontWeight.w600,
+                    //         fontSize: 16,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(height: 2.h),
+                    // Expanded(child: UploadedDocumentListModule()),
+                  ],
+                ).commonAllSidePadding(10),
+            ),
       ),
     );
   }

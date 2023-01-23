@@ -42,12 +42,16 @@ class CompanyHomeScreen extends StatelessWidget {
         backgroundColor: AppColors.colorLightPurple2,
         drawer: CompanyHomeDrawer(),
         appBar: AppBar(
-          title: Text(
-            companyHomeScreenController.companyName,
-            style: TextStyle(
-              color: AppColors.colorBlack,
-              fontWeight: FontWeight.bold,
-              fontSize: 17.sp,
+          title: Obx(
+            ()=> companyHomeScreenController.isLoading.value
+            ? Container()
+            : Text(
+              companyHomeScreenController.companyName,
+              style: TextStyle(
+                color: AppColors.colorBlack,
+                fontWeight: FontWeight.bold,
+                fontSize: 17.sp,
+              ),
             ),
           ),
           centerTitle: true,

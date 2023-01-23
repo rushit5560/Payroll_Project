@@ -22,7 +22,7 @@ class AppMessage {
 
   /// Drawer Name's
   static String companyNameDrawer = "Company";
-  static String noDocumentUploaded = "No document uploaded";
+  static String noDocumentUploaded = "No document uploaded yet.";
   static String documentsType = "Documents Type";
   static String departmentNameDrawer = "Department";
   static String companyDepartmentNameDrawer = "Company Department";
@@ -366,7 +366,7 @@ static String adminNameLabel = 'Admin Name';
 
   // document
 
-  static String pleaseSelectDocument = 'Please select document';
+  static String pleaseSelectDocument = 'Please upload document';
   static String pleaseSelectDocumentType = 'Please select document type';
   static String documentList = 'Document List';
   static String uplodedDocumentList = 'Uploaded Document List';

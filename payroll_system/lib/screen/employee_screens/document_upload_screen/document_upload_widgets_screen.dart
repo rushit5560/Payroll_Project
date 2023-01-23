@@ -101,31 +101,41 @@ class DocumentTypeDropdownModule extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.transparent),
       ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          // hint: Text(AppMessage.chooseOption),
-          value: uploadDocumentScreenController.documentSelectedTypeValue.value,
-          items: uploadDocumentScreenController.documentTypeList
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          borderRadius: BorderRadius.circular(10),
-          icon: Image.asset(
-            AppImages.arrowDownIcon,
-            height: 15,
-            width: 15,
-          ).commonSymmetricPadding(horizontal: 10),
-          onChanged: (String? value) {
-            uploadDocumentScreenController.isLoading(true);
-            uploadDocumentScreenController.documentSelectedTypeValue.value =
-                value!;
-            uploadDocumentScreenController.isLoading(false);
-          },
-        ).commonOnlyPadding(left: 10, right: 10),
-      ),
+      // child: DropdownButtonHideUnderline(
+        child: Center(
+          child: DropdownButtonFormField<String>(
+            // hint: Text(AppMessage.chooseOption),
+            validator: (value) {
+              if (uploadDocumentScreenController.documentSelectedTypeValue.value == AppMessage.chooseOption) {
+                return AppMessage.activeStatusMessage;
+              } else {
+                return null;
+              }
+            },
+            decoration: const InputDecoration.collapsed(hintText: ''),
+            value: uploadDocumentScreenController.documentSelectedTypeValue.value,
+            items: uploadDocumentScreenController.documentTypeList
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            borderRadius: BorderRadius.circular(10),
+            icon: Image.asset(
+              AppImages.arrowDownIcon,
+              height: 15,
+              width: 15,
+            ).commonSymmetricPadding(horizontal: 10),
+            onChanged: (String? value) {
+              uploadDocumentScreenController.isLoading(true);
+              uploadDocumentScreenController.documentSelectedTypeValue.value =
+                  value!;
+              uploadDocumentScreenController.isLoading(false);
+            },
+          ).commonSymmetricPadding(horizontal: 10, vertical: 12),
+        ),
+      // ),
     );
   }
 }

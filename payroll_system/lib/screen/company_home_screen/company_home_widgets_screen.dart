@@ -145,7 +145,9 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     textKey: AppMessage.employeeStatus,
                     textValue: value.isActive == AppMessage.value
                         ? AppMessage.active
-                        : AppMessage.inActive,
+                        : value.isActive == AppMessage.zero ? AppMessage.inActive : AppMessage.terminated,
+                    valueColor: value.isActive == AppMessage.value
+                    ? AppColors.greenColor : value.isActive == AppMessage.zero ? AppColors.colorRed : AppColors.greyColor,
                   ),
                   SizedBox(height: 2.h),
                   Row(

@@ -29,6 +29,7 @@ class AppImages {
   static const salaryIcon = "$rootPath/salary.png";
   static const netAmountIcon = "$rootPath/amount.png";
   static const downloadIcon = "$rootPath/download.png";
+  static const uploadIcon = "$rootPath/upload.png";
 
 
 
