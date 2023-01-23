@@ -27,77 +27,85 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: AppColors.colorLightPurple2,
       body: SafeArea(
         child: Obx(
-              () => loginScreenController.isLoading.value
+          () => loginScreenController.isLoading.value
               ? CommonLoader().showLoader()
               : SingleChildScrollView(
-            child: Form(
-              key: loginScreenController.formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppImages.logoImg,
-                        width: 70.w,
-                      ),
-                    ],
+                  child: Form(
+                    key: loginScreenController.formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppImages.logoImg,
+                              width: 70.w,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 6.h),
+                        Text(
+                          AppMessage.logIn,
+                          style: TextStyleConfig.textStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25.sp,
+                            textColor: AppColors.colorBtBlue,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
+
+                        /// Getting from common modules
+                        AuthScreenTextFieldModule(
+                          fieldController:
+                              loginScreenController.loginEmailController,
+                          hintText: AppMessage.emailAddress,
+                          validate: (value) =>
+                              FieldValidation().validateEmail(value!),
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        // LogInEmailTextFieldModule(),
+                        SizedBox(height: 2.h),
+
+                        /// Getting from common modules
+                        AuthScreenTextFieldModule(
+                          fieldController:
+                              loginScreenController.loginPasswordController,
+                          hintText: AppMessage.password,
+                          validate: (value) =>
+                              FieldValidation().validatePassword(value!),
+                          keyboardType: TextInputType.text,
+                          obscureText:
+                              loginScreenController.isPasswordVisible.value,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              loginScreenController.isPasswordVisible.value =
+                                  !loginScreenController
+                                      .isPasswordVisible.value;
+                            },
+                            icon: Icon(
+                              loginScreenController.isPasswordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: AppColors.colorLightHintPurple2,
+                            ),
+                          ),
+                        ),
+                        // PasswordTextFieldModule(),
+                        SizedBox(height: 1.h),
+                        // ForgotPasswordTextModule(),
+                        // SizedBox(height: 2.h),
+                        PrivacyPolicyCustom(),
+                        // SizedBox(height: 2.h),
+                        LoginButtonModule(),
+                        // SizedBox(height: 10.h),
+                        // CompanyLogInCustom(),
+                      ],
+                    ).commonSymmetricPadding(horizontal: 3.h, vertical: 8.h),
                   ),
-                  SizedBox(height: 6.h),
-                  Text(
-                    AppMessage.logIn,
-                    style: TextStyleConfig.textStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25.sp,
-                      textColor: AppColors.colorBtBlue,
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  /// Getting from common modules
-                  AuthScreenTextFieldModule(
-                    fieldController: loginScreenController.loginEmailController,
-                    hintText: AppMessage.emailAddress,
-                    validate: (value) => FieldValidation().validateEmail(value!),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  // LogInEmailTextFieldModule(),
-                  SizedBox(height: 2.h),
-                  /// Getting from common modules
-                  AuthScreenTextFieldModule(
-                    fieldController: loginScreenController.loginPasswordController,
-                    hintText: AppMessage.password,
-                    validate: (value) => FieldValidation().validatePassword(value!),
-                    keyboardType: TextInputType.text,
-                    obscureText: loginScreenController.isPasswordVisible.value,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        loginScreenController.isPasswordVisible.value =
-                        !loginScreenController.isPasswordVisible.value;
-                      },
-                      icon: Icon(
-                        loginScreenController.isPasswordVisible.value
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: AppColors.colorLightHintPurple2,
-                      ),
-                    ),
-                  ),
-                  // PasswordTextFieldModule(),
-                  SizedBox(height: 1.h),
-                  ForgotPasswordTextModule(),
-                  // SizedBox(height: 2.h),
-                  PrivacyPolicyCustom(),
-                  // SizedBox(height: 2.h),
-                  LoginButtonModule(),
-                  // SizedBox(height: 10.h),
-                  // CompanyLogInCustom(),
-                ],
-              ).commonSymmetricPadding(horizontal: 3.h, vertical: 8.h),
-            ),
-          ),
+                ),
         ),
       ),
     );

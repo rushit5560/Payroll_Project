@@ -27,6 +27,7 @@ class EmployeeManageScreenController extends GetxController {
   String employeeId = Get.arguments[1] ?? "";
   String companyId = Get.arguments[2];
   String companyName = Get.arguments[3];
+
   // String locationName = Get.arguments[4];
 
   List<LocationListData> allLocationList = [];
@@ -48,6 +49,8 @@ class EmployeeManageScreenController extends GetxController {
   RxString selectedDepartmentValue = "Choose Department".obs;
 
   RxBool isLoading = false.obs;
+  RxBool onError = false.obs;
+
   RxList<String> selectedDepartmentList = RxList<String>([]);
 
   Rx<List<String>> selectedCompanyList = Rx<List<String>>([]);

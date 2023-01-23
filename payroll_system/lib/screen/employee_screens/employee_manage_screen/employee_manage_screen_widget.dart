@@ -286,61 +286,68 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                         ),
                       ]),
                 ).commonSymmetricPadding(vertical: 2),
+
                 Container(
                   width: Get.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     // border: Border.all(color: AppColors.greyColor),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.transparent),
-                      ),
-                      // child: DropdownButtonHideUnderline(
-                      child: DropdownButtonFormField<String>(
-                        validator: (value) {
-                          if (employeeCreteScreenController
-                                  .selectedValue.value ==
-                              AppMessage.chooseOption) {
-                            return AppMessage.pleaseSelectStatus;
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration:
-                            const InputDecoration.collapsed(hintText: ''),
-                        value:
-                            employeeCreteScreenController.selectedValue.value,
-                        items: employeeCreteScreenController.isActiveOptionList
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        borderRadius: BorderRadius.circular(10),
-                        icon: Image.asset(
-                          AppImages.arrowDownIcon,
-                          height: 15,
-                          width: 15,
-                        ).commonSymmetricPadding(horizontal: 10),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          employeeCreteScreenController.isLoading(true);
-                          employeeCreteScreenController.selectedValue.value =
-                              value!;
-                          log('value : $value');
-                          // employeeCreteScreenController.loadUI();
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.transparent),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: Center(
+                            child: DropdownButtonFormField<String>(
+                              validator: (value) {
+                                if (employeeCreteScreenController
+                                        .selectedValue.value ==
+                                    AppMessage.chooseOption) {
+                                  return AppMessage.pleaseSelectStatus;
+                                } else {
+                                  return null;
+                                }
+                              },
+                              decoration:
+                                  const InputDecoration.collapsed(hintText: ''),
+                              value: employeeCreteScreenController
+                                  .selectedValue.value,
+                              items: employeeCreteScreenController
+                                  .isActiveOptionList
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              borderRadius: BorderRadius.circular(10),
+                              icon: Image.asset(
+                                AppImages.arrowDownIcon,
+                                height: 15,
+                                width: 15,
+                              ).commonSymmetricPadding(horizontal: 10),
+                              onChanged: (String? value) {
+                                // This is called when the user selects an item.
+                                employeeCreteScreenController.isLoading(true);
+                                employeeCreteScreenController
+                                    .selectedValue.value = value!;
+                                log('value : $value');
+                                // employeeCreteScreenController.loadUI();
 
-                          employeeCreteScreenController.isLoading(false);
-                        },
-                      ).commonOnlyPadding(left: 10, right: 10),
-                    ),
+                                employeeCreteScreenController.isLoading(false);
+                              },
+                            ).commonOnlyPadding(left: 10, right: 10),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 // ),

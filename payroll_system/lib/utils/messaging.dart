@@ -102,7 +102,7 @@ class AppMessage {
   static String workNO = 'Work Number';
   static String hourlyRate = 'Hourly Rate (\$,₹)';
   static String hourly = 'Hourly';
-  static String isActive = 'isActive';
+  static String isActive = 'Is-Active';
   static String regularHour = 'Regular Hour';
 
   static String salary = 'Salary (\$,₹)';

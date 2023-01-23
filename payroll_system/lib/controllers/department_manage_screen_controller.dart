@@ -27,7 +27,7 @@ class DepartmentManageScreenController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameFieldController = TextEditingController();
-  List<String> isActiveOptionList = ["Choose Option", "active", "in-active"];
+  List<String> isActiveOptionList = ["Choose Option", "Active", "In-Active"];
   RxString selectedValue = "Choose Option".obs;
 
   Future<void> createDepartmentFunction() async {
@@ -42,7 +42,7 @@ class DepartmentManageScreenController extends GetxController {
       Map<String, dynamic> bodyData = {
         "department_name": nameFieldController.text.trim(),
         "userid": "$userId", // LoggedIn UserId Put in this field
-        "is_active": selectedValue.value == "active" ? "1" : "0",
+        "is_active": selectedValue.value == "Active" ? "1" : "0",
         "cid": companyId // Out here company id
       };
       log("bodyData : $bodyData");
@@ -94,7 +94,7 @@ class DepartmentManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         nameFieldController.text = departmentGetByIdModel.data.departmentName;
         selectedValue.value =
-            departmentGetByIdModel.data.isActive == "1" ? "active" : "inactive";
+            departmentGetByIdModel.data.isActive == "1" ? "Active" : "In-Active";
       } else {
         log('departmentGetByIdFunction Else');
       }
@@ -119,7 +119,7 @@ class DepartmentManageScreenController extends GetxController {
         "department_name": nameFieldController.text.trim(),
         "userid": "$userId",
         "id": departmentId,
-        "is_active": selectedValue.value == "active" ? "1" : "0",
+        "is_active": selectedValue.value == "Active" ? "1" : "0",
         "cid": companyId // Out here company id
       };
       log('bodyData : $bodyData');
