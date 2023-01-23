@@ -36,6 +36,7 @@ class EmployeeProfileScreenController extends GetxController {
   TextEditingController townAddressController = TextEditingController();
   TextEditingController cityAddressController = TextEditingController();
   TextEditingController stateAddressController = TextEditingController();
+
   TextEditingController zipcodeAddressController = TextEditingController();
 
   UserPreference userPreference = UserPreference();
@@ -153,6 +154,7 @@ class EmployeeProfileScreenController extends GetxController {
       request.fields['town'] = townAddressController.text;
       request.fields['state'] = stateAddressController.text;
       request.fields['city'] = cityAddressController.text;
+      request.fields['zipcode'] = zipcodeAddressController.text;
 
       // request.fields['address'] = currentAddressController.text;
       // request.fields['home'] = homeAddressController.text;
@@ -177,7 +179,7 @@ class EmployeeProfileScreenController extends GetxController {
 
         if (isSuccessStatus) {
           Fluttertoast.showToast(
-            msg: "User profile update successfully.",
+            msg: successModel.message,
             toastLength: Toast.LENGTH_SHORT,
           );
           log(successModel.message);

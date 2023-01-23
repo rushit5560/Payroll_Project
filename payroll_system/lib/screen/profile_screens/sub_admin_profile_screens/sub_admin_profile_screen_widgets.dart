@@ -26,6 +26,7 @@ class SubAdminImageModule extends StatelessWidget {
               children: [
                 Stack(
                   alignment: Alignment.bottomCenter,
+                  clipBehavior: Clip.none,
                   children: [
                     SizedBox(
                       height: 120,
@@ -33,59 +34,80 @@ class SubAdminImageModule extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
                         child: subAdminProfileScreenController.imageFile != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(200),
-                                child: Image.file(
-                                  subAdminProfileScreenController.imageFile!,
-                                  // height: 100,
-                                  // width: 100,
-                                  fit: BoxFit.contain,
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  shape: BoxShape.circle,
+                                  // color: Colors.pink,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.file(
+                                    subAdminProfileScreenController.imageFile!,
+                                    // height: 100,
+                                    // width: 100,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               )
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(200),
-                                child: Image.network(
-                                  subAdminProfileScreenController.profileData ==
-                                          null
-                                      ? AppMessage.empty
-                                      : ApiUrl.apiImagePath +
-                                          subAdminProfileScreenController
-                                              .profileData!.photo,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (ctx, obj, st) {
-                                    return Container(
-                                      color:
-                                          AppColors.greyColor.withOpacity(0.35),
-                                      child: Center(
-                                        child: Text(
-                                          AppMessage.noImage,
-                                          style: TextStyle(
-                                            color: AppColors.blackColor,
-                                            fontSize: 10.sp,
+                            : Container(
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  shape: BoxShape.circle,
+                                  // color: Colors.pink,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.network(
+                                    subAdminProfileScreenController
+                                                .profileData ==
+                                            null
+                                        ? AppMessage.empty
+                                        : ApiUrl.apiImagePath +
+                                            subAdminProfileScreenController
+                                                .profileData!.photo,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (ctx, obj, st) {
+                                      return Container(
+                                        color: AppColors.greyColor
+                                            .withOpacity(0.35),
+                                        child: Center(
+                                          child: Text(
+                                            AppMessage.noImage,
+                                            style: TextStyle(
+                                              color: AppColors.blackColor,
+                                              fontSize: 10.sp,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        subAdminProfileScreenController
-                            .showPhotoPickerSheet(context);
-                      },
-                      child: Container(
-                        height: 28,
-                        width: 28,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                        ),
-                        child: Icon(
-                          Icons.edit,
-                          size: 15.sp,
+                    Positioned(
+                      right: -5,
+                      bottom: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          subAdminProfileScreenController
+                              .showPhotoPickerSheet(context);
+                        },
+                        child: Container(
+                          height: 28,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
+                          ),
+                          child: Icon(
+                            Icons.edit,
+                            size: 15.sp,
+                          ),
                         ),
                       ),
                     ),
@@ -124,20 +146,6 @@ class SubAdminFormModule extends StatelessWidget {
               text: AppMessage.userName,
               headerText: AppMessage.userName,
               mandatoryText: " ${AppMessage.mandatory}"),
-
-          // TextFormField(
-          //   controller: subAdminProfileScreenController.nameController,
-          //   autovalidateMode: AutovalidateMode.onUserInteraction,
-          //   validator: (val) => FieldValidation().validateUserName(val!),
-          //   decoration: InputDecoration(
-          //     fillColor: AppColors.greyColor.withOpacity(0.25),
-          //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-          //     labelText: AppMessage.name,
-          //     border: border,
-          //     enabledBorder: border,
-          //     filled: true,
-          //   ),
-          // ),
           const SizedBox(height: 5),
           FormSingleFieldModule(
               textEditingController:
@@ -147,17 +155,68 @@ class SubAdminFormModule extends StatelessWidget {
               text: AppMessage.mobileNo,
               headerText: AppMessage.mobileNo,
               mandatoryText: " ${AppMessage.mandatory}"),
-
           const SizedBox(height: 5),
-
           FormSingleFieldModule(
-              textEditingController:
-                  subAdminProfileScreenController.addressController,
-              validate: (val) => FieldValidation().validateAddress(val!),
-              maxLength: 10,
-              text: AppMessage.address,
-              headerText: AppMessage.address,
-              mandatoryText: " ${AppMessage.mandatory}"),
+            headerText: AppMessage.address,
+            text: AppMessage.street,
+            keyboardType: TextInputType.text,
+            mandatoryText: AppMessage.mandatory,
+            textEditingController:
+                subAdminProfileScreenController.streetAddressController,
+            validate: (value) => FieldValidation().validateStreetAddress(value),
+          ),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+            headerText: AppMessage.empty,
+            isHeaderTextShow: false,
+            text: AppMessage.town,
+            keyboardType: TextInputType.text,
+            mandatoryText: AppMessage.empty,
+            textEditingController:
+                subAdminProfileScreenController.townAddressController,
+            validate: (value) => FieldValidation().validateTown(value),
+          ),
+          const SizedBox(height: 5),
+          Row(
+            children: [
+              Expanded(
+                child: FormSingleFieldModule(
+                  headerText: AppMessage.empty,
+                  isHeaderTextShow: false,
+                  text: AppMessage.city,
+                  keyboardType: TextInputType.text,
+                  mandatoryText: AppMessage.mandatory,
+                  textEditingController:
+                      subAdminProfileScreenController.cityAddressController,
+                  validate: (value) => FieldValidation().validateCity(value),
+                ),
+              ),
+              const SizedBox(width: 5),
+              Expanded(
+                child: FormSingleFieldModule(
+                  headerText: AppMessage.empty,
+                  isHeaderTextShow: false,
+                  text: AppMessage.state,
+                  keyboardType: TextInputType.text,
+                  mandatoryText: AppMessage.mandatory,
+                  textEditingController:
+                      subAdminProfileScreenController.stateAddressController,
+                  validate: (value) => FieldValidation().validateState(value),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+            headerText: AppMessage.empty,
+            isHeaderTextShow: false,
+            text: AppMessage.zipcode,
+            keyboardType: TextInputType.number,
+            mandatoryText: AppMessage.mandatory,
+            textEditingController:
+                subAdminProfileScreenController.zipCodeAddressController,
+            validate: (value) => FieldValidation().validateZipCode(value),
+          ),
         ],
       ),
     );

@@ -106,7 +106,8 @@ class AdminProfileScreenController extends GetxController {
           log('response body is ::: $value');
 
           if (isSuccessStatus) {
-            Fluttertoast.showToast(msg: successModel.message, toastLength: Toast.LENGTH_SHORT);
+            Fluttertoast.showToast(
+                msg: successModel.message, toastLength: Toast.LENGTH_SHORT);
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -149,7 +150,7 @@ class AdminProfileScreenController extends GetxController {
 
           if (isSuccessStatus) {
             Fluttertoast.showToast(
-              msg: "User profile update successfully.",
+              msg: successModel.message,
               toastLength: Toast.LENGTH_SHORT,
             );
             log(successModel.message);

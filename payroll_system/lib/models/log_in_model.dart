@@ -82,9 +82,16 @@ class UserData {
     // this.lastlogin,
     required this.verified,
     required this.createdby,
+    required this.city,
+    required this.state,
+    required this.town,
+    required this.street,
     // this.modifiedby,
+    required this.zipcode,
     required this.emailVerifiedAt,
     required this.photo,
+    required this.employeeId,
+
     // this.rememberToken,
     required this.createdAt,
     required this.updatedAt,
@@ -105,6 +112,12 @@ class UserData {
   // final dynamic modifiedby;
   final String emailVerifiedAt;
   final String photo;
+  final String street;
+  final String town;
+  final String state;
+  final String city;
+  String employeeId;
+  final String zipcode;
   // final dynamic rememberToken;
   final String createdAt;
   final String updatedAt;
@@ -124,7 +137,15 @@ class UserData {
         createdby: json["createdby"] ?? "",
         // modifiedby: json["modifiedby"],
         emailVerifiedAt: json["email_verified_at"] ?? '',
+        employeeId: json["employee_id"] ?? "",
+
         photo: json["photo"] ?? '',
+        city: json["city"] ?? "",
+        street: json["street"] ?? "",
+        town: json["town"] ?? "",
+        zipcode: json["zipcode"] ?? "",
+
+        state: json["state"] ?? "",
         // rememberToken: json["remember_token"],
         createdAt: json["created_at"] ?? '',
         updatedAt: json["updated_at"] ?? '',

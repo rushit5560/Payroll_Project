@@ -28,6 +28,11 @@ class SubAdminProfileScreenController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController streetAddressController = TextEditingController();
+  TextEditingController townAddressController = TextEditingController();
+  TextEditingController cityAddressController = TextEditingController();
+  TextEditingController stateAddressController = TextEditingController();
+  TextEditingController zipCodeAddressController = TextEditingController();
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
@@ -52,7 +57,12 @@ class SubAdminProfileScreenController extends GetxController {
 
           nameController.text = profileData!.userName;
           phoneNumberController.text = profileData!.phoneno;
-          addressController.text = profileData!.address;
+          // addressController.text = profileData!.address;
+          streetAddressController.text = profileData!.street;
+          townAddressController.text = profileData!.town;
+          cityAddressController.text = profileData!.city;
+          stateAddressController.text = profileData!.state;
+          zipCodeAddressController.text = profileData!.zipcode;
         }
 
         log(" userName :: ${userProfileModel.data.userName}");
@@ -90,7 +100,12 @@ class SubAdminProfileScreenController extends GetxController {
         request.fields['userid'] = UserDetails.userId.toString();
         request.fields['user_name'] = nameController.text;
         request.fields['phoneno'] = phoneNumberController.text;
-        request.fields['address'] = addressController.text;
+        // request.fields['address'] = addressController.text;
+        request.fields['street'] = streetAddressController.text;
+        request.fields['town'] = townAddressController.text;
+        request.fields['state'] = stateAddressController.text;
+        request.fields['city'] = cityAddressController.text;
+        request.fields['zipcode'] = zipCodeAddressController.text;
 
         request.fields['showimg'] =
             profileData!.photo.isEmpty ? "" : profileData!.photo;
@@ -137,7 +152,13 @@ class SubAdminProfileScreenController extends GetxController {
         request.fields['userid'] = UserDetails.userId.toString();
         request.fields['user_name'] = nameController.text;
         request.fields['phoneno'] = phoneNumberController.text;
-        request.fields['address'] = addressController.text;
+        // request.fields['address'] = addressController.text;
+        request.fields['street'] = streetAddressController.text;
+        request.fields['town'] = townAddressController.text;
+        request.fields['state'] = stateAddressController.text;
+        request.fields['city'] = cityAddressController.text;
+        request.fields['zipcode'] = zipCodeAddressController.text;
+
         request.fields['showimg'] =
             profileData!.photo.isEmpty ? "" : profileData!.photo;
 
@@ -159,7 +180,7 @@ class SubAdminProfileScreenController extends GetxController {
 
           if (isSuccessStatus) {
             Fluttertoast.showToast(
-              msg: "User profile update successfully.",
+              msg:successModel.message,
               toastLength: Toast.LENGTH_SHORT,
             );
             log(successModel.message);

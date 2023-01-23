@@ -47,6 +47,7 @@ class CompanyProfileScreenController extends GetxController {
   TextEditingController townAddressController = TextEditingController();
   TextEditingController cityAddressController = TextEditingController();
   TextEditingController stateAddressController = TextEditingController();
+  TextEditingController zipCodeAddressController = TextEditingController();
 
   loadUI() {
     isLoading(true);
@@ -127,6 +128,7 @@ class CompanyProfileScreenController extends GetxController {
           townAddressController.text = companyData!.town;
           cityAddressController.text = companyData!.city;
           stateAddressController.text = companyData!.state;
+          zipCodeAddressController.text = companyData!.zipcode;
 
           if (companyData!.departmentId != "") {
             var companyIdsString = companyData!.departmentId;
@@ -193,6 +195,8 @@ class CompanyProfileScreenController extends GetxController {
         request.fields['town'] = townAddressController.text;
         request.fields['state'] = stateAddressController.text;
         request.fields['city'] = cityAddressController.text;
+
+        request.fields['zipcode'] = zipCodeAddressController.text;
         // request.fields['department_id'] = "${departmentData!.id}";
 
         request.fields['showimg'] =
@@ -245,6 +249,7 @@ class CompanyProfileScreenController extends GetxController {
         request.fields['town'] = townAddressController.text;
         request.fields['state'] = stateAddressController.text;
         request.fields['city'] = cityAddressController.text;
+        request.fields['zipcode'] = zipCodeAddressController.text;
 
         // request.fields['department_id'] = "${departmentData!.id}";
         request.fields['showimg'] =
@@ -268,7 +273,7 @@ class CompanyProfileScreenController extends GetxController {
 
           if (isSuccessStatus) {
             Fluttertoast.showToast(
-              msg: "User profile update successfully.",
+              msg:successModel.message,
               toastLength: Toast.LENGTH_SHORT,
             );
             log(successModel.message);
@@ -357,7 +362,7 @@ class CompanyProfileScreenController extends GetxController {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+
     super.dispose();
   }
 }

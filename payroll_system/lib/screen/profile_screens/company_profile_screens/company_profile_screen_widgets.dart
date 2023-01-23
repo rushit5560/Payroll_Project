@@ -27,6 +27,9 @@ class CompanyImageModule extends StatelessWidget {
               children: [
                 Stack(
                   alignment: Alignment.bottomCenter,
+
+                  clipBehavior: Clip.none,
+
                   children: [
                     SizedBox(
                       height: 120,
@@ -34,59 +37,79 @@ class CompanyImageModule extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
                         child: companyProfileScreenController.imageFile != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(200),
-                                child: Image.file(
-                                  companyProfileScreenController.imageFile!,
-                                  // height: 100,
-                                  // width: 100,
-                                  fit: BoxFit.contain,
+                            ? Container(
+                               decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  shape: BoxShape.circle,
+                                  // color: Colors.pink,
                                 ),
-                              )
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(200),
-                                child: Image.network(
-                                  companyProfileScreenController.companyData ==
-                                          null
-                                      ? ""
-                                      : ApiUrl.apiImagePath +
-                                          companyProfileScreenController
-                                              .companyData!.photo,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (ctx, obj, st) {
-                                    return Container(
-                                      color:
-                                          AppColors.greyColor.withOpacity(0.35),
-                                      child: Center(
-                                        child: Text(
-                                          "No Image",
-                                          style: TextStyle(
-                                            color: AppColors.blackColor,
-                                            fontSize: 10.sp,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.file(
+                                    companyProfileScreenController.imageFile!,
+                                    // height: 100,
+                                    // width: 100,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                            )
+                            : Container(
+                               decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  shape: BoxShape.circle,
+                                  // color: Colors.pink,
+                                ),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.network(
+                                    companyProfileScreenController.companyData ==
+                                            null
+                                        ? ""
+                                        : ApiUrl.apiImagePath +
+                                            companyProfileScreenController
+                                                .companyData!.photo,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (ctx, obj, st) {
+                                      return Container(
+                                        color:
+                                            AppColors.greyColor.withOpacity(0.35),
+                                        child: Center(
+                                          child: Text(
+                                            "No Image",
+                                            style: TextStyle(
+                                              color: AppColors.blackColor,
+                                              fontSize: 10.sp,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
+                            ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        companyProfileScreenController
-                            .showPhotoPickerSheet(context);
-                      },
-                      child: Container(
-                        height: 28,
-                        width: 28,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                        ),
-                        child: Icon(
-                          Icons.edit,
-                          size: 15.sp,
+                    Positioned(
+                        right: -5,
+                      bottom: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          companyProfileScreenController
+                              .showPhotoPickerSheet(context);
+                        },
+                        child: Container(
+                          height: 28,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
+                          ),
+                          child: Icon(
+                            Icons.edit,
+                            size: 15.sp,
+                          ),
                         ),
                       ),
                     ),
@@ -302,6 +325,17 @@ class CompanyFormModule extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 5),
+          FormSingleFieldModule(
+            headerText: AppMessage.empty,
+            isHeaderTextShow: false,
+            text: AppMessage.zipcode,
+            keyboardType: TextInputType.number,
+            mandatoryText: AppMessage.mandatory,
+            textEditingController:
+                companyProfileScreenController.zipCodeAddressController,
+            validate: (value) => FieldValidation().validateZipCode(value),
+          ),
             ],
           ),
         ],

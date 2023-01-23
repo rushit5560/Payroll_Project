@@ -57,7 +57,9 @@ class SubAdminProfileScreen extends StatelessWidget {
                                     .updateSubAdminProfileFunction();
                               }
                             },
-                            labelText: AppMessage.submit)
+                            labelText: AppMessage.submit),
+                        SizedBox(height: 4.h),
+
                         // SubAdminSubmitButtonModule(),
                       ],
                     ),

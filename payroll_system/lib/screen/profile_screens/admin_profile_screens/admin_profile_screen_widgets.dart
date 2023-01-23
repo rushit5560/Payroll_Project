@@ -6,9 +6,7 @@ import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
-import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
-import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,6 +25,7 @@ class AdminImageModule extends StatelessWidget {
               children: [
                 Stack(
                   alignment: Alignment.bottomCenter,
+                  clipBehavior: Clip.none,
                   children: [
                     SizedBox(
                       height: 120,
@@ -35,10 +34,13 @@ class AdminImageModule extends StatelessWidget {
                         borderRadius: BorderRadius.circular(200),
                         child: adminProfileScreenController.imageFile != null
                             ? Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              shape: BoxShape.circle),
-                              child: ClipRRect(
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  shape: BoxShape.circle,
+                                  // color: Colors.pink,
+                                ),
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.circular(200),
                                   child: Image.file(
                                     adminProfileScreenController.imageFile!,
@@ -47,13 +49,15 @@ class AdminImageModule extends StatelessWidget {
                                     fit: BoxFit.contain,
                                   ),
                                 ),
-                            )
+                              )
                             : Container(
-                          decoration: BoxDecoration(
-
-                              border: Border.all(color: Colors.grey),
-                              shape: BoxShape.circle),
-                              child: ClipRRect(
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  shape: BoxShape.circle,
+                                  // color: Colors.pink,
+                                ),
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.circular(200),
                                   child: Image.network(
                                     adminProfileScreenController.profileData ==
@@ -65,8 +69,8 @@ class AdminImageModule extends StatelessWidget {
                                     fit: BoxFit.contain,
                                     errorBuilder: (ctx, obj, st) {
                                       return Container(
-                                        color:
-                                            AppColors.greyColor.withOpacity(0.35),
+                                        color: AppColors.greyColor
+                                            .withOpacity(0.35),
                                         child: Center(
                                           child: Text(
                                             "No Image",
@@ -80,15 +84,17 @@ class AdminImageModule extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                            ),
+                              ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        adminProfileScreenController
-                            .showPhotoPickerSheet(context);
-                      },
-
+                    Positioned(
+                      right: -5,
+                      bottom: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          adminProfileScreenController
+                              .showPhotoPickerSheet(context);
+                        },
                         child: Container(
                           height: 28,
                           width: 28,
@@ -102,7 +108,7 @@ class AdminImageModule extends StatelessWidget {
                           ),
                         ),
                       ),
-
+                    ),
                   ],
                 ),
               ],
@@ -118,7 +124,6 @@ class AdminNameFieldModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Form(
       key: adminProfileScreenController.formKey,
       child: FormSingleFieldModule(
@@ -130,19 +135,7 @@ class AdminNameFieldModule extends StatelessWidget {
           headerText: AppMessage.adminNameLabel,
           mandatoryText: " ${AppMessage.mandatory}"),
 
-      // TextFormField(
-      //   controller: adminProfileScreenController.userNameController,
-      //   autovalidateMode: AutovalidateMode.onUserInteraction,
-      //   validator: (val) => FieldValidation().validateUserName(val!),
-      //   decoration: InputDecoration(
-      //     fillColor: AppColors.greyColor.withOpacity(0.25),
-      //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-      //     labelText: AppMessage.userName,
-      //     border: border,
-      //     enabledBorder: border,
-      //     filled: true,
-      //   ),
-      // ),
+     
     );
   }
 }
