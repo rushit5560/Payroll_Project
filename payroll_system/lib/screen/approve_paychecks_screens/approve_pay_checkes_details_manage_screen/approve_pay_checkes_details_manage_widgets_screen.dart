@@ -50,26 +50,28 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         bool payChecksDeletePermission =
-                        await userPreference.getBoolPermissionFromPrefs(
-                            keyId: UserPreference.approvePayChecksDeleteKey);
+                            await userPreference.getBoolPermissionFromPrefs(
+                                keyId:
+                                    UserPreference.approvePayChecksDeleteKey);
 
                         if (payChecksDeletePermission == true) {
-                        CustomAlertDialog().showAlertDialog(
-                          context: context,
-                          textContent: AppMessage.deleteEmployeeAlertMessage,
-                          onYesTap: () async {
-                            log("Delete Employee");
-                            await approvePayCheckesDetailsScreenController
-                                .deleteApprovalFunction(
-                              approvalDataValue.id.toString(),
-                            );
-                          },
-                          onCancelTap: () {
-                            Get.back();
-                          },
-                        );
+                          CustomAlertDialog().showAlertDialog(
+                            context: context,
+                            textContent: AppMessage.deleteEmployeeAlertMessage,
+                            onYesTap: () async {
+                              log("Delete Employee");
+                              await approvePayCheckesDetailsScreenController
+                                  .deleteApprovalFunction(
+                                approvalDataValue.id.toString(),
+                              );
+                            },
+                            onCancelTap: () {
+                              Get.back();
+                            },
+                          );
                         } else {
-                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                          Fluttertoast.showToast(
+                              msg: AppMessage.deniedPermission);
                         }
                       },
                       child: Image.asset(
@@ -89,7 +91,8 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.payDate),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: "${approvalDataValue.firstName} ${approvalDataValue.middleName} ${approvalDataValue.lastName}",
+                    textValue:
+                        "${approvalDataValue.firstName} ${approvalDataValue.middleName} ${approvalDataValue.lastName}",
                     image: AppImages.employeeIcon,
                     textKey: AppMessage.employeeName),
                 const SizedBox(height: 5),

@@ -319,7 +319,7 @@ class AppMessage {
   static String tip = 'Tip (\$)';
   static String tax = 'Tax (\$)';
   static String totalTax = 'Total Taxs';
-  static String diractDeposit = 'Direct Deposit';
+  static String directDeposit = 'Direct Deposit';
 
   static String bonus = 'Bonus (\$)';
   static String otherEarning = 'Other Earning (\$)';
