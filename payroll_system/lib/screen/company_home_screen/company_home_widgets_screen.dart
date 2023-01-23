@@ -46,28 +46,28 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
                         onTap: () async {
-
                           bool employeeUpdatePermission =
-                          await userPreference.getBoolPermissionFromPrefs(
-                              keyId: UserPreference.employeeEditKey);
+                              await userPreference.getBoolPermissionFromPrefs(
+                                  keyId: UserPreference.employeeEditKey);
                           if (employeeUpdatePermission == true) {
                             Get.to(
-                                  () => CompanyEmployeeManageScreen(),
+                              () => CompanyEmployeeManageScreen(),
                               arguments: [
                                 EmployeeOption.update,
                                 value.id.toString(),
-                                companyHomeScreenController.companyId.toString(),
+                                companyHomeScreenController.companyId
+                                    .toString(),
                                 companyHomeScreenController.companyName,
                               ],
                             );
                           } else {
-                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            Fluttertoast.showToast(
+                                msg: AppMessage.deniedPermission);
                           }
                         },
                         child: Image.asset(
@@ -78,29 +78,30 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 10),
-
                       GestureDetector(
                         onTap: () async {
                           bool employeeDeletePermission =
-                          await userPreference.getBoolPermissionFromPrefs(
-                              keyId: UserPreference.employeeDeleteKey);
+                              await userPreference.getBoolPermissionFromPrefs(
+                                  keyId: UserPreference.employeeDeleteKey);
 
                           if (employeeDeletePermission == true) {
                             CustomAlertDialog().showAlertDialog(
                               context: context,
-                              textContent: AppMessage.deleteEmployeeAlertMessage,
+                              textContent:
+                                  AppMessage.deleteEmployeeAlertMessage,
                               onYesTap: () async {
                                 log("Delete Employee");
                                 await companyHomeScreenController
                                     .deleteEmployeeFunction(
-                                    value.id.toString(), index);
+                                        value.id.toString(), index);
                               },
                               onCancelTap: () {
                                 Get.back();
                               },
                             );
                           } else {
-                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            Fluttertoast.showToast(
+                                msg: AppMessage.deniedPermission);
                           }
                         },
                         child: Image.asset(
@@ -112,8 +113,6 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                       ),
                     ],
                   ),
-
-
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
                     image: AppImages.employeeIcon,
@@ -121,53 +120,49 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     textValue:
                         value.firstName + value.middleName + value.lastName,
                   ),
-
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
                     image: AppImages.emailIcon,
                     textKey: AppMessage.employeeEmail,
                     textValue: value.email,
                   ),
-
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
                     image: AppImages.phoneIcon,
                     textKey: AppMessage.phoneNumber,
                     textValue: value.mobileNumber,
                   ),
-
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
                     image: AppImages.departmentIcon,
                     textKey: AppMessage.employeeDepartmentName,
                     textValue: value.departmentId.toString(),
                   ),
-
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
-                      image: AppImages.companyIcon,
-                      textKey: AppMessage.employeeCompanyName,
-                      textValue: value.companyid.toString(),
+                    image: AppImages.companyIcon,
+                    textKey: AppMessage.employeeCompanyName,
+                    textValue: value.companyid.toString(),
                   ),
-
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
-                      image: AppImages.verifyIcon,
-                      textKey: AppMessage.employeeStatus,
-                      textValue: value.isActive == AppMessage.value
-                          ? AppMessage.active
-                          : AppMessage.inActive,
+                    image: AppImages.verifyIcon,
+                    textKey: AppMessage.employeeStatus,
+                    textValue: value.isActive == AppMessage.value
+                        ? AppMessage.active
+                        : AppMessage.inActive,
                   ),
-
                   SizedBox(height: 2.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Get.to(()=> EmployeeUploadDocumentScreen(),
+                          Get.to(
+                            () => EmployeeUploadDocumentScreen(),
                             arguments: [
-                              "${value.firstName} ${value.middleName} ${value.lastName}",
+                              // "${value.firstName} ${value.middleName} ${value.lastName}",
+                              companyHomeScreenController.companyName,
                               value.id.toString(),
                               companyHomeScreenController.companyId.toString(),
                             ],
@@ -191,12 +186,11 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                             ),
                           ],
                         ),
-
                       ),
                     ],
                   ),
 
-                 /* SizedBox(height: 2.h),
+                  /* SizedBox(height: 2.h),
                   EditAndDeleteButtonModule(
                     onDeleteTap: () async {
                       bool employeeUpdatePermission =

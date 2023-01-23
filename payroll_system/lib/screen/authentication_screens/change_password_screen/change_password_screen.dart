@@ -62,10 +62,10 @@ class ChangePasswordScreen extends StatelessWidget {
                       NewPasswordTextFieldModule(),
                       SizedBox(height: 2.h),
                       NewConfirmPasswordTextFieldModule(),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 4.h),
                       // ChangePasswordButtonModule(),
                       CustomSubmitButtonModule(
-                        labelText: AppMessage.changePassword,
+                        labelText: AppMessage.submit,
                         onPress: () async {
                           if (changePasswordScreenController
                               .formKey.currentState!

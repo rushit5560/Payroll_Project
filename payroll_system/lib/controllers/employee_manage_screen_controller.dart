@@ -328,12 +328,21 @@ class EmployeeManageScreenController extends GetxController {
         companyDepartment.clear();
         companyDepartment
             .add(CompanyDepartmentData(departmentName: "Choose Option"));
-        companyDepartment.addAll(companyDepartmentModel.data);
+        // Only Active Department Add in list
+        if (companyDepartmentModel.data.isNotEmpty) {
+          for (int i = 0; i < companyDepartmentModel.data.length; i++) {
+            if (companyDepartmentModel.data[i].isActive == "1") {
+              companyDepartment.add(companyDepartmentModel.data[i]);
+            }
+          }
+        }
 
-        if (employeeOption == EmployeeOption.create) {
+        companyDepartmentData = companyDepartment[0];
+
+        /*if (employeeOption == EmployeeOption.create) {
           if (companyDepartment.isNotEmpty) {
             companyDepartmentData = companyDepartment[0];
-          } else {}
+          }
         } else if (employeeOption == EmployeeOption.update) {
           // update logic here
 
@@ -342,7 +351,7 @@ class EmployeeManageScreenController extends GetxController {
               companyDepartmentData = companyDepartment[i];
             }
           }
-        }
+        }*/
         departmentStringList.clear();
 
         for (int i = 0; i < companyDepartment.length; i++) {
@@ -381,16 +390,34 @@ class EmployeeManageScreenController extends GetxController {
         allLocationList.clear();
 
         allLocationList.add(LocationListData(locationName: "Choose Option"));
-        allLocationList.addAll(allLocationListModel.data);
+        // Only Active Location Add in list
+        if (allLocationListModel.data.isNotEmpty) {
+          for (int i = 0; i < allLocationListModel.data.length; i++) {
+            if (allLocationListModel.data[i].isActive == "1") {
+              allLocationList.add(allLocationListModel.data[i]);
+            }
+          }
+        }
         locationListData = allLocationList[0];
 
-        for (int i = 0; i < allLocationList.length; i++) {
-          locationStringList.add(allLocationList[i].locationName!);
-        }
-        // allLocationList = allLocationListModel.data;
+        /*if (employeeOption == EmployeeOption.create) {
+          if (allLocationList.isNotEmpty) {
+            locationListData = allLocationList[0];
+          }
+        } else if (employeeOption == EmployeeOption.update) {
+          // update logic here
 
-        // Fluttertoast.showToast(msg: allLocationListModel.messege);
-        // allLocationList.removeAt(index);
+          for (int i = 0; i < allLocationList.length; i++) {
+            if (departmentId == allLocationList[i].id) {
+              locationListData = allLocationList[i];
+            }
+          }
+        }*/
+
+        // locationListData = allLocationList[0];
+
+        // allLocationList.addAll(allLocationListModel.data);
+
       } else {
         log('deleteCompanyFunction Else');
       }

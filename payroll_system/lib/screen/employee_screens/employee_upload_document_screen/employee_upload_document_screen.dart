@@ -12,6 +12,7 @@ import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 import 'employee_upload_document_screen_widgets.dart';
 
+// ignore: must_be_immutable
 class EmployeeUploadDocumentScreen extends StatelessWidget {
   EmployeeUploadDocumentScreen({Key? key}) : super(key: key);
   final employeeUploadDocumentScreenController =
@@ -57,12 +58,13 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () async {
+                          bool addUploadDocumentPermission =
+                              await userPreference.getBoolPermissionFromPrefs(
+                                  keyId: UserPreference.employeeDocumentAddKey);
 
-                          bool addUploadDocumentPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentAddKey);
-
-                          if(addUploadDocumentPermission == true) {
+                          if (addUploadDocumentPermission == true) {
                             if (employeeUploadDocumentScreenController
-                                .employeeSelectedDocumentList.length <=
+                                    .employeeSelectedDocumentList.length <=
                                 5) {
                               await employeeUploadDocumentScreenController
                                   .pickEmployeeDocumentFunction();
@@ -71,9 +73,9 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                                   msg: AppMessage.youReachedAtMaxLength);
                             }
                           } else {
-                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            Fluttertoast.showToast(
+                                msg: AppMessage.deniedPermission);
                           }
-
                         },
                         icon: const Icon(
                           Icons.add_rounded,

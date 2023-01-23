@@ -93,36 +93,49 @@ class EmployeeDocumentTypeDropdownModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.transparent),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: screenController.documentSelectedTypeValue.value,
-          items: screenController.documentTypeList
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          borderRadius: BorderRadius.circular(10),
-          icon: Image.asset(
-            AppImages.arrowDownIcon,
-            height: 15,
-            width: 15,
-          ).commonSymmetricPadding(horizontal: 10),
-          onChanged: (String? value) {
-            screenController.isLoading(true);
-            screenController.documentSelectedTypeValue.value = value!;
-            screenController.isLoading(false);
-          },
-        ).commonOnlyPadding(left: 10, right: 10),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppMessage.documentType,
+          style: TextStyleConfig.textStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Container(
+          width: Get.width,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.transparent),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value: screenController.documentSelectedTypeValue.value,
+              items: screenController.documentTypeList
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              borderRadius: BorderRadius.circular(10),
+              icon: Image.asset(
+                AppImages.arrowDownIcon,
+                height: 15,
+                width: 15,
+              ).commonSymmetricPadding(horizontal: 10),
+              onChanged: (String? value) {
+                screenController.isLoading(true);
+                screenController.documentSelectedTypeValue.value = value!;
+                screenController.isLoading(false);
+              },
+            ).commonOnlyPadding(left: 10, right: 10),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -159,7 +172,8 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                           onTap: () async {
                             bool employeeDeletePermission =
                                 await userPreference.getBoolPermissionFromPrefs(
-                                    keyId: UserPreference.employeeDocumentDeleteKey);
+                                    keyId: UserPreference
+                                        .employeeDocumentDeleteKey);
 
                             if (employeeDeletePermission == true) {
                               CustomAlertDialog().showAlertDialog(
@@ -208,15 +222,17 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                         GestureDetector(
                           onTap: () async {
                             bool employeeDocumentViewPermission =
-                            await userPreference.getBoolPermissionFromPrefs(
-                                keyId: UserPreference.employeeDocumentViewKey);
+                                await userPreference.getBoolPermissionFromPrefs(
+                                    keyId:
+                                        UserPreference.employeeDocumentViewKey);
 
-                            if(employeeDocumentViewPermission == true) {
-                              await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadFilePath}${singleDoc.name}");
+                            if (employeeDocumentViewPermission == true) {
+                              await WebUrlLauncher().launchPdfInBrowser(
+                                  "${ApiUrl.downloadFilePath}${singleDoc.name}");
                             } else {
-                              Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                              Fluttertoast.showToast(
+                                  msg: AppMessage.deniedPermission);
                             }
-
                           },
                           child: Row(
                             children: [

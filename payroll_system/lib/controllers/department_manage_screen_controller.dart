@@ -93,8 +93,9 @@ class DepartmentManageScreenController extends GetxController {
 
       if (isSuccessStatus.value) {
         nameFieldController.text = departmentGetByIdModel.data.departmentName;
-        selectedValue.value =
-            departmentGetByIdModel.data.isActive == "1" ? "Active" : "In-Active";
+        selectedValue.value = departmentGetByIdModel.data.isActive == "1"
+            ? "Active"
+            : "In-Active";
       } else {
         log('departmentGetByIdFunction Else');
       }
@@ -119,7 +120,7 @@ class DepartmentManageScreenController extends GetxController {
         "department_name": nameFieldController.text.trim(),
         "userid": "$userId",
         "id": departmentId,
-        "is_active": selectedValue.value == "Active" ? "1" : "0",
+        "is_active": selectedValue.value == "ctive" ? "1" : "0",
         "cid": companyId // Out here company id
       };
       log('bodyData : $bodyData');
@@ -135,7 +136,9 @@ class DepartmentManageScreenController extends GetxController {
         Get.back();
         await departmentListScreenController.getCompanyWiseDepartmentFunction();
       } else {
-        log('updateDepartmentFunction Else');
+        Fluttertoast.showToast(
+            msg: updateDepartmentModel.error!.departmentName[0].toString());
+        log(updateDepartmentModel.error!.departmentName[0].toString());
       }
     } catch (e) {
       log("updateDepartmentFunction Error :$e");

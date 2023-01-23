@@ -31,17 +31,18 @@ class CompanyHomeScreen extends StatelessWidget {
       backgroundColor: AppColors.colorLightPurple2,
       drawer: CompanyHomeDrawer(),
       appBar: AppBar(
-        title: Text(AppMessage.company,
+        title: Text(
+          companyHomeScreenController.companyName,
           style: TextStyle(
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,
             fontSize: 17.sp,
-          ),),
+          ),
+        ),
         centerTitle: true,
-
         leading: GestureDetector(
-          onTap: () =>
-              companyHomeScreenController.scaffoldKey.currentState!.openDrawer(),
+          onTap: () => companyHomeScreenController.scaffoldKey.currentState!
+              .openDrawer(),
           child: Padding(
             padding: const EdgeInsets.all(13),
             child: Image.asset(
@@ -49,18 +50,16 @@ class CompanyHomeScreen extends StatelessWidget {
             ),
           ),
         ),
-
         actions: [
-
           IconButton(
             onPressed: () async {
               bool employeeCreatePermission =
-              await userPreference.getBoolPermissionFromPrefs(
-                  keyId: UserPreference.employeeAddKey);
+                  await userPreference.getBoolPermissionFromPrefs(
+                      keyId: UserPreference.employeeAddKey);
 
               if (employeeCreatePermission == true) {
                 Get.to(
-                      () => CompanyEmployeeManageScreen(),
+                  () => CompanyEmployeeManageScreen(),
                   arguments: [
                     EmployeeOption.create,
                     AppMessage.empty,
@@ -78,8 +77,6 @@ class CompanyHomeScreen extends StatelessWidget {
             ),
             highlightColor: Colors.transparent,
           ),
-
-
         ],
       ),
       body: Obx(
@@ -90,11 +87,13 @@ class CompanyHomeScreen extends StatelessWidget {
                 : Column(
                     children: [
                       TextFormField(
-                        controller: companyHomeScreenController.textSearchEditingController,
+                        controller: companyHomeScreenController
+                            .textSearchEditingController,
                         onChanged: (value) {
                           companyHomeScreenController.isLoading(true);
 
-                          companyHomeScreenController.searchEmployeeList = companyHomeScreenController
+                          companyHomeScreenController.searchEmployeeList =
+                              companyHomeScreenController
                                   .allCompanyWiseEmployeeList
                                   .where((element) =>
                                       element.firstName
@@ -131,12 +130,14 @@ class CompanyHomeScreen extends StatelessWidget {
                           fillColor: AppColors.colorWhite,
                           filled: true,
                           hintText: AppMessage.search,
-                          hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
+                          hintStyle: const TextStyle(
+                              color: AppColors.colorLightHintPurple2),
                           prefixIcon: const Icon(
                             Icons.search,
                             color: AppColors.colorLightHintPurple2,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
                           suffixIcon: companyHomeScreenController
                                   .textSearchEditingController.text.isEmpty
                               ? null

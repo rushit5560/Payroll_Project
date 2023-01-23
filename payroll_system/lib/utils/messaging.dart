@@ -170,37 +170,37 @@ class AppMessage {
   static String companyLocation = "Company Location";
 
   // No Records Message
-  static String noEmpFound = 'No Employee Found.';
+  static String noEmpFound = 'No Employee List Found.';
   static String noDeptFound = 'No Department Found.';
   static String noCompanyFound = 'No Company Found.';
   static String noLocationFound = 'No Location Found.';
-  static String noPayCheckesListFound = 'No PayCheckesList Found.';
+  static String noPayCheckesListFound = 'No PayChecksList Found.';
   static String noSubAdminListFound = 'No SubAdmin Found.';
 
   static String noApprovalPayCheckesListFound =
-      'No Approval PayCheckesList Found.';
+      'No Approval PayChecksList Found.';
 
   //validation messages
   static String pleaseEnterName = 'Please enter user name.';
   static String pleaseEnterFirstName = 'Please enter first name.';
   static String pleaseEnterMiddleName = 'Please enter middle name.';
-  static String pleaseEnterCurrentPassword = 'Please enter current password';
+  static String pleaseEnterCurrentPassword = 'Please enter current password.';
   static String pleaseEnterLastName = 'Please enter last name.';
   static String patternRegX = r'(^[0-9]*$)';
-  static String pleaseEnterPhoneNumber = 'Please enter mobile number';
+  static String pleaseEnterPhoneNumber = 'Please enter mobile number.';
   static String mobileNumberMustTenDigits = 'Mobile number must 10 digits.';
   static String mobileNumberMustBeDigits = 'Mobile Number must be digits.';
-  static String pleaseEnterCurrentAddress = 'Please enter  current address';
+  static String pleaseEnterCurrentAddress = 'Please enter  current address.';
   static String pleaseEnterZipcode = 'Please enter zipcode.';
   static String pleaseEnterText = 'Please enter text.';
 
   static String pleaseEnterCity = 'Please enter city.';
-  static String pleaseEnterCompanyAddress = 'Please enter company address';
+  static String pleaseEnterCompanyAddress = 'Please enter company address.';
   static String pleaseEnterStreetAddress = 'Please enter street address.';
   static String pleaseEnterLandmarkAddress = 'Please enter landmark address.';
   static String pleaseEnterState = 'Please enter state.';
   static String pleaseEnterTown = 'Please enter town.';
-  static String pleaseEnterZipCode = 'Please enter zipCode.';
+  static String pleaseEnterZipCode = 'Please enter Zipcode.';
   static String zipCode5CharacterLength =
       'Zipcode length atleast 5 characters.';
   static String zipCode6CharacterLength = 'Zipcode length max 6 characters.';
@@ -212,8 +212,8 @@ class AppMessage {
   static String emailRegExp =
       r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
   static String invalidEmailAddress = 'Invalid email address.';
-  static String pleaseEnterDepartmentId = 'Please enter department id';
-  static String pleaseEnterCompanyId = 'Please enter company id';
+  static String pleaseEnterDepartmentId = 'Please enter department id.';
+  static String pleaseEnterCompanyId = 'Please enter company id.';
   static String pleaseEnterCompanyName = 'Please enter company name.';
   static String pleaseEnterDepartmentName = 'Please enter department name.';
   static String pleaseEnterDateOfBirth = 'Please enter  date of birth.';
@@ -228,12 +228,13 @@ class AppMessage {
   static String pleaseEnterNewPassword = 'Please enter new password.';
 
   static String passwordMustBeAtleast8CharactersLong =
-      'Password must be at least 8 characters long';
+      'Password must be at least 8 characters long.';
   static String confirmPasswordIsRequired = 'Confirm Password is required.';
   static String confirmPasswordMustBeAtLeast8CharactersLong =
       'Confirm Password must be at least 8 characters long.';
   static String newPasswordAndConfirmPasswordMustBeSame =
       'New password & confirm password must be same.';
+  static String days = 'Days';
 
   //controller message
   static String gallery = 'Gallery';
@@ -283,9 +284,9 @@ class AppMessage {
   static String payRollForm = 'Payroll Form';
   static String startDate = 'Start Date';
   static String employee = 'Employee ';
-  static String selectPayRollStartDate = 'Select Start Date';
-  static String selectPayRollEndDate = 'Select end Date';
-  static String overtimeIsRequired = 'overtime is required';
+  static String selectPayRollStartDate = 'Select Start Date.';
+  static String selectPayRollEndDate = 'Select End Date.';
+  static String overtimeIsRequired = 'overtime is required.';
   static String overTime = 'Over time';
 
   // static String otherEarning = 'Other Earning';
@@ -296,10 +297,10 @@ class AppMessage {
 // paychecks
 
   static String paycheckes = 'Paychecks';
-  static String paycheckesDowanload = 'Paycheckes Dowanload';
+  static String paycheckesDowanload = 'Paychecks Dowanload';
 
-  static String approvalPaycheckes = 'Approval Paychecks';
-  static String approvalPaycheckesList = 'Approval Paychecks List';
+  static String approvalPaycheckes = 'Approve Paychecks';
+  static String approvalPaycheckesList = 'Approve Paychecks List';
 
   static String approvePaycheckesDetails = 'Approve Paychecks Details';
   static String approvePaycheckes = 'Approve Paychecks';
@@ -310,15 +311,15 @@ class AppMessage {
   static String companyPaycheckes = 'Company Paychecks';
   static String employeePaycheckes = 'Employee Paychecks';
 
-  static String regular = 'Regular (\$)';
-  static String ot = 'OT (\$)';
-  static String holidayPay = 'Holiday Pay (\$)';
+  static String regular = 'Regular';
+  static String ot = 'OT';
+  static String holidayPay = 'Holiday Pay';
   static String sickPayHours = 'Sick Pay Hours (\$)';
   static String vacationHour = 'Vacation Hour (\$)';
   static String tip = 'Tip (\$)';
   static String tax = 'Tax (\$)';
   static String totalTax = 'Total Taxs';
-  static String diractDeposit = 'Diract Deposit';
+  static String diractDeposit = 'Direct Deposit';
 
   static String bonus = 'Bonus (\$)';
   static String otherEarning = 'Other Earning (\$)';
@@ -327,15 +328,16 @@ class AppMessage {
   //paycheckeslisttext
   static String date = 'Date';
 
-  static String paycheckesList = 'Paycheckes List';
+  static String paycheckesList = 'Paychecks List';
   static String netAmount = 'Net Amount';
   static String netPay = 'Net Pay';
   static String total = 'Total';
+  static String amount = 'Amount';
 
   static String download = 'Download';
-  static String pleaseEnterRegularRate = 'Please Enter Regular Rate';
-  static String pleaseEnterOt = 'Please Enter Ot';
-  static String pleaseEnterHolidayPay = 'Please Enter HolidayPay';
+  static String pleaseEnterRegularRate = 'Please Enter Regular Rate.';
+  static String pleaseEnterOt = 'Please Enter Overtime.';
+  static String pleaseEnterHolidayPay = 'Please Enter Holidaypay.';
 
   //Role
   static String role = 'Role';
@@ -354,6 +356,7 @@ class AppMessage {
   static String acceptText = 'Accept';
   static String privacyPolicyText = 'Terms & Condition';
   static String search = 'Search';
+  static String documentype = 'Document type';
 
   // document
 

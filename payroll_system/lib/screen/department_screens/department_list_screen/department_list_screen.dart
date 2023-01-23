@@ -16,6 +16,7 @@ import 'package:sizer/sizer.dart';
 import '../../../utils/extension_methods/user_preference.dart';
 import 'department_list_screen_widgets.dart';
 
+// ignore: must_be_immutable
 class DepartmentListScreen extends StatelessWidget {
   DepartmentListScreen({Key? key}) : super(key: key);
 
