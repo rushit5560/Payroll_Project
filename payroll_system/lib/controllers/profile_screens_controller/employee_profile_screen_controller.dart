@@ -36,6 +36,7 @@ class EmployeeProfileScreenController extends GetxController {
   TextEditingController townAddressController = TextEditingController();
   TextEditingController cityAddressController = TextEditingController();
   TextEditingController stateAddressController = TextEditingController();
+  TextEditingController zipcodeAddressController = TextEditingController();
 
   UserPreference userPreference = UserPreference();
 
@@ -98,6 +99,7 @@ class EmployeeProfileScreenController extends GetxController {
           townAddressController.text = employeeData!.town;
           cityAddressController.text = employeeData!.city;
           stateAddressController.text = employeeData!.state;
+          zipcodeAddressController.text = employeeData!.zipcode;
 
           log('employeeData photo12121 : ${employeeData!.photo}');
         }

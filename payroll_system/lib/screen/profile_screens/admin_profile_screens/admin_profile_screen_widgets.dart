@@ -34,42 +34,53 @@ class AdminImageModule extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
                         child: adminProfileScreenController.imageFile != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(200),
-                                child: Image.file(
-                                  adminProfileScreenController.imageFile!,
-                                  // height: 100,
-                                  // width: 100,
-                                  fit: BoxFit.cover,
+                            ? Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              shape: BoxShape.circle),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.file(
+                                    adminProfileScreenController.imageFile!,
+                                    // height: 100,
+                                    // width: 100,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                              )
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(200),
-                                child: Image.network(
-                                  adminProfileScreenController.profileData ==
-                                          null
-                                      ? ""
-                                      : ApiUrl.apiImagePath +
-                                          adminProfileScreenController
-                                              .profileData!.photo,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (ctx, obj, st) {
-                                    return Container(
-                                      color:
-                                          AppColors.greyColor.withOpacity(0.35),
-                                      child: Center(
-                                        child: Text(
-                                          "No Image",
-                                          style: TextStyle(
-                                            color: AppColors.blackColor,
-                                            fontSize: 10.sp,
+                            )
+                            : Container(
+                          decoration: BoxDecoration(
+
+                              border: Border.all(color: Colors.grey),
+                              shape: BoxShape.circle),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.network(
+                                    adminProfileScreenController.profileData ==
+                                            null
+                                        ? ""
+                                        : ApiUrl.apiImagePath +
+                                            adminProfileScreenController
+                                                .profileData!.photo,
+                                    fit: BoxFit.contain,
+                                    errorBuilder: (ctx, obj, st) {
+                                      return Container(
+                                        color:
+                                            AppColors.greyColor.withOpacity(0.35),
+                                        child: Center(
+                                          child: Text(
+                                            "No Image",
+                                            style: TextStyle(
+                                              color: AppColors.blackColor,
+                                              fontSize: 10.sp,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
+                            ),
                       ),
                     ),
                     GestureDetector(
@@ -77,19 +88,21 @@ class AdminImageModule extends StatelessWidget {
                         adminProfileScreenController
                             .showPhotoPickerSheet(context);
                       },
-                      child: Container(
-                        height: 28,
-                        width: 28,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                        ),
-                        child: Icon(
-                          Icons.edit,
-                          size: 15.sp,
+
+                        child: Container(
+                          height: 28,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
+                          ),
+                          child: Icon(
+                            Icons.edit,
+                            size: 15.sp,
+                          ),
                         ),
                       ),
-                    ),
+
                   ],
                 ),
               ],
@@ -105,12 +118,6 @@ class AdminNameFieldModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var border = OutlineInputBorder(
-      borderSide: const BorderSide(
-        color: AppColors.greyColor,
-      ),
-      borderRadius: BorderRadius.circular(12),
-    );
 
     return Form(
       key: adminProfileScreenController.formKey,
@@ -120,7 +127,7 @@ class AdminNameFieldModule extends StatelessWidget {
           validate: (val) => FieldValidation().validateUserName(val!),
           maxLength: 10,
           text: AppMessage.userName,
-          headerText: AppMessage.userName,
+          headerText: AppMessage.adminNameLabel,
           mandatoryText: " ${AppMessage.mandatory}"),
 
       // TextFormField(

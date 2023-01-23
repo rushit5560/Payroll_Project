@@ -66,6 +66,7 @@ class PermissionData {
     this.emailtemplateview,
     this.emailtemplateadd,
     this.emailtemplateedit,
+
   });
 
   String? subadminview;

@@ -41,7 +41,7 @@ class EmployeeImageModule extends StatelessWidget {
                                   employeeProfileScreenController.imageFile!,
                                   // height: 100,
                                   // width: 100,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               )
                             : ClipRRect(
@@ -54,7 +54,7 @@ class EmployeeImageModule extends StatelessWidget {
                                       : ApiUrl.apiImagePath +
                                           employeeProfileScreenController
                                               .employeeData!.photo,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                   errorBuilder: (ctx, obj, st) {
                                     return Container(
                                       color:
@@ -152,6 +152,7 @@ class EmployeeFormModule extends StatelessWidget {
             text: AppMessage.exInsertDob,
             mandatoryText: AppMessage.mandatory,
             keyboardType: TextInputType.datetime,
+            readOnly: true,
             textEditingController:
                 employeeProfileScreenController.dobFieldController,
             suffixIcon: Icons.calendar_month,
@@ -177,7 +178,7 @@ class EmployeeFormModule extends StatelessWidget {
           FormSingleFieldModule(
             headerText: AppMessage.empty,
             isHeaderTextShow: false,
-            text: AppMessage.town,
+            text: AppMessage.landmark,
             keyboardType: TextInputType.text,
             mandatoryText: AppMessage.empty,
             textEditingController:
@@ -215,6 +216,17 @@ class EmployeeFormModule extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 5),
+          FormSingleFieldModule(
+            headerText: AppMessage.empty,
+            isHeaderTextShow: false,
+            text: AppMessage.zipcode,
+            keyboardType: TextInputType.number,
+            mandatoryText: AppMessage.empty,
+            textEditingController:
+            employeeProfileScreenController.zipcodeAddressController,
+            validate: (value) => FieldValidation().validateZipCode(value),
           ),
 
           // FormSingleFieldModule(

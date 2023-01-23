@@ -59,6 +59,7 @@ class EmployeeDatum {
     required this.state,
     required this.town,
     required this.street,
+    required this.zipcode,
 
     // this.hourlyRate,
     // this.salary,
@@ -90,6 +91,7 @@ class EmployeeDatum {
   final String town;
   final String state;
   final String city;
+  final String zipcode;
 
   // final dynamic hourlyRate;
   // final dynamic salary;
@@ -122,6 +124,7 @@ class EmployeeDatum {
         street: json["street"] ?? "",
         town: json["town"] ?? "",
         state: json["state"] ?? "",
+        zipcode: json["zipcode"] ?? "",
 
         // hourlyRate: json["hourly_rate"] ?? "",
         // salary: json["salary"] ?? "",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/drawer_menu/employee_home_drawer/employee_home_drawer.dart';
 import 'package:payroll_system/utils/app_images.dart';
@@ -7,18 +8,16 @@ import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 import '../../controllers/employee_home_screen_controller.dart';
 
-
 class EmployeeHomeScreen extends StatelessWidget {
   EmployeeHomeScreen({Key? key}) : super(key: key);
 
   final employeeHomeScreenController = Get.put(EmployeeHomeScreenController());
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: employeeHomeScreenController.scaffoldKey,
-      backgroundColor: AppColors.colorLightHintPurple2,
+      backgroundColor: AppColors.colorLightPurple2,
       drawer: EmployeeHomeDrawerMenu(),
       appBar: AppBar(
         centerTitle: true,
@@ -58,6 +57,14 @@ class EmployeeHomeScreen extends StatelessWidget {
             icon: const Icon(Icons.person_rounded),
           ),
         ],*/
+      ),
+      body: Obx(
+        () => employeeHomeScreenController.isLoading.value
+            ? CommonLoader().showLoader()
+            : Center(
+                child: Text(
+                    'Welcome ${employeeHomeScreenController.employeeName}'),
+              ),
       ),
     );
   }

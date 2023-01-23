@@ -20,12 +20,21 @@ class EmployeeProfileScreen extends StatelessWidget {
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        title: Text(
-          // ignore: prefer_interpolation_to_compose_strings
-          employeeProfileScreenController.firstNameController.text +
-              " ${employeeProfileScreenController.middleNameController.text}" +
-              " ${employeeProfileScreenController.lastNameController.text}",
-          style: TextStyle(fontSize: 13.sp, color: Colors.black),
+        centerTitle: true,
+        title: Obx(
+          ()=> employeeProfileScreenController.isLoading.value
+          ? Container()
+          : Text(
+            // ignore: prefer_interpolation_to_compose_strings
+            employeeProfileScreenController.firstNameController.text +
+                " ${employeeProfileScreenController.middleNameController.text}" +
+                " ${employeeProfileScreenController.lastNameController.text}",
+            style: TextStyle(
+              color: AppColors.colorBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 17.sp,
+            ),
+          ),
         ),
       ),
       body: SafeArea(

@@ -85,7 +85,7 @@ class DepartmentManageScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-      log('response : ${response.body}');
+      log('response8989 : ${response.body}');
 
       DepartmentGetByIdModel departmentGetByIdModel =
           DepartmentGetByIdModel.fromJson(json.decode(response.body));
@@ -120,7 +120,7 @@ class DepartmentManageScreenController extends GetxController {
         "department_name": nameFieldController.text.trim(),
         "userid": "$userId",
         "id": departmentId,
-        "is_active": selectedValue.value == "ctive" ? "1" : "0",
+        "is_active": selectedValue.value == "Active" ? "1" : "0",
         "cid": companyId // Out here company id
       };
       log('bodyData : $bodyData');

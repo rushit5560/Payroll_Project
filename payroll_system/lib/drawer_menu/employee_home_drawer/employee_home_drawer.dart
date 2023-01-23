@@ -25,126 +25,131 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    EmployeeDrawerTile(
-                      title: AppMessage.updateProfile,
-                      imageStatus: true,
-                      image: AppImages.employeeIcon,
-                      onTap: () {
-                        Get.back();
-                        Get.to(() => EmployeeProfileScreen());
-                      },
-                    ),
-                    employeeHomeScreenController.isDocumentDownloadPermission.value == true
-                    ? EmployeeDrawerTile(
-                      title: AppMessage.documentDownloadDrawer,
-                      imageStatus: false,
-                      // image: AppImages.downloadIcon,
-                      icon: const Icon(Icons.file_download_outlined,
-                          color: AppColors.colorBtBlue),
-                      onTap: () async {
-                        int employeeId =
-                            await userPreference.getIntValueFromPrefs(
-                                keyId: UserPreference.userIdKey);
-                        String employeeName =
-                            await userPreference.getStringValueFromPrefs(
-                                keyId: UserPreference.userNameKey);
-                        Get.back();
-                        Get.to(
-                          () => DocumentDownloadScreen(),
-                          arguments: [employeeId.toString(), employeeName],
-                        );
-                      },
-                    ) : const SizedBox(),
-                    employeeHomeScreenController.isDocumentUploadPermission.value == true
-                        ? EmployeeDrawerTile(
-                      title: AppMessage.documentUploadDrawer,
-                      imageStatus: false,
-                      icon: const Icon(Icons.file_upload_outlined,
-                          color: AppColors.colorBtBlue),
-                      onTap: () async {
-                        int employeeId =
-                            await userPreference.getIntValueFromPrefs(
-                                keyId: UserPreference.userIdKey);
-                        String employeeName =
-                            await userPreference.getStringValueFromPrefs(
-                                keyId: UserPreference.userNameKey);
-                        Get.back();
-                        Get.to(
-                          () => DocumentUploadScreen(),
-                          arguments: [
-                            employeeId.toString(),
-                            employeeName,
-                          ],
-                        );
-                      },
-                    ) : const SizedBox(),
-                    employeeHomeScreenController.ispayChecksDownloadPermission.value == true
-                        ? EmployeeDrawerTile(
-                      title: AppMessage.paychecksDownloadDrawer,
-                      imageStatus: false,
-                      icon: const Icon(Icons.file_download_outlined,
-                          color: AppColors.colorBtBlue),
-                      onTap: () async {
-                        int employeeId =
-                            await userPreference.getIntValueFromPrefs(
-                                keyId: UserPreference.userIdKey);
-                        String employeeName =
-                            await userPreference.getStringValueFromPrefs(
-                                keyId: UserPreference.userNameKey);
-                        Get.back();
-                        Get.to(
-                          () => PayCheckesDowanloadListScreen(),
-                          arguments: [
-                            employeeId.toString(),
-                            employeeName,
-                          ],
-                        );
-                      },
-                    ) : const SizedBox(),
-                    EmployeeDrawerTile(
-                      title: AppMessage.changePassword,
-                      imageStatus: true,
-                      image: AppImages.employeeIcon,
-                      onTap: () {
-                        Get.back();
-                        Get.to(() => ChangePasswordScreen());
-                      },
-                    ),
-                  ],
+      child: Obx(
+        ()=> employeeHomeScreenController.isLoading.value
+        ? Container()
+        : SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      EmployeeDrawerTile(
+                        title: AppMessage.updateProfile,
+                        imageStatus: true,
+                        image: AppImages.employeeIcon,
+                        onTap: () {
+                          Get.back();
+                          Get.to(() => EmployeeProfileScreen());
+                        },
+                      ),
+                      employeeHomeScreenController.isDocumentDownloadPermission.value == true
+                      ? EmployeeDrawerTile(
+                        title: AppMessage.documentDownloadDrawer,
+                        imageStatus: true,
+                        image: AppImages.downloadIcon,
+                        // icon: const Icon(Icons.file_download_outlined,
+                        //     color: AppColors.colorBtBlue),
+                        onTap: () async {
+                          int employeeId =
+                              await userPreference.getIntValueFromPrefs(
+                                  keyId: UserPreference.userIdKey);
+                          String employeeName =
+                              await userPreference.getStringValueFromPrefs(
+                                  keyId: UserPreference.userNameKey);
+                          Get.back();
+                          Get.to(
+                            () => DocumentDownloadScreen(),
+                            arguments: [employeeId.toString(), employeeName],
+                          );
+                        },
+                      ) : const SizedBox(),
+                      employeeHomeScreenController.isDocumentUploadPermission.value == true
+                                ? EmployeeDrawerTile(
+                                    title: AppMessage.documentUploadDrawer,
+                                    imageStatus: false,
+                                    icon: const Icon(Icons.file_upload_outlined,
+                                        color: AppColors.colorBtBlue),
+                                    onTap: () async {
+                                      int employeeId = await userPreference
+                                          .getIntValueFromPrefs(
+                                              keyId: UserPreference.userIdKey);
+                                      String employeeName = await userPreference
+                                          .getStringValueFromPrefs(
+                                              keyId:
+                                                  UserPreference.userNameKey);
+                                      Get.back();
+                                      Get.to(
+                                        () => DocumentUploadScreen(),
+                                        arguments: [
+                                          employeeId.toString(),
+                                          employeeName,
+                                        ],
+                                      );
+                                    },
+                                  )
+                                : const SizedBox(),
+                            employeeHomeScreenController.ispayChecksDownloadPermission.value == true
+                          ? EmployeeDrawerTile(
+                        title: AppMessage.paychecksDownloadDrawer,
+                        imageStatus: true,
+                        image: AppImages.downloadIcon,
+                        onTap: () async {
+                          int employeeId =
+                              await userPreference.getIntValueFromPrefs(
+                                  keyId: UserPreference.userIdKey);
+                          String employeeName =
+                              await userPreference.getStringValueFromPrefs(
+                                  keyId: UserPreference.userNameKey);
+                          Get.back();
+                          Get.to(
+                            () => PayCheckesDowanloadListScreen(),
+                            arguments: [
+                              employeeId.toString(),
+                              employeeName,
+                            ],
+                          );
+                        },
+                      ) : const SizedBox(),
+                      EmployeeDrawerTile(
+                        title: AppMessage.changePassword,
+                        imageStatus: true,
+                        image: AppImages.employeeIcon,
+                        onTap: () {
+                          Get.back();
+                          Get.to(() => ChangePasswordScreen());
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-            /// Getting from common module
-            LogOutDrawerTileModule(
-              onTap: () async {
-                CustomAlertDialog().showAlertDialog(
-                  context: context,
-                  textContent: AppMessage.logoutMessage,
-                  onYesTap: () async {
-                    await UserPreference()
-                        .logoutRemoveUserDetailsFromPrefs()
-                        .then(
-                      (value) {
-                        Get.offAll(() => LoginScreen());
-                      },
-                    );
-                  },
-                  onCancelTap: () {
-                    Get.back();
-                  },
-                );
-              },
-              title: AppMessage.logOutNameDrawer,
-            ),
-          ],
+              /// Getting from common module
+              LogOutDrawerTileModule(
+                onTap: () async {
+                  CustomAlertDialog().showAlertDialog(
+                    context: context,
+                    textContent: AppMessage.logoutMessage,
+                    onYesTap: () async {
+                      await UserPreference()
+                          .logoutRemoveUserDetailsFromPrefs()
+                          .then(
+                        (value) {
+                          Get.offAll(() => LoginScreen());
+                        },
+                      );
+                    },
+                    onCancelTap: () {
+                      Get.back();
+                    },
+                  );
+                },
+                title: AppMessage.logOutNameDrawer,
+              ),
+            ],
+          ),
         ),
       ),
     );
