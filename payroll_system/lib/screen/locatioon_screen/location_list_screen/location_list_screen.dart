@@ -25,7 +25,8 @@ class LocationListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
-        title: Text(AppMessage.location,
+        title: Text(
+          AppMessage.location,
           style: TextStyle(
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,
@@ -36,11 +37,13 @@ class LocationListScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              bool locationCreatePermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentAddKey);
+              bool locationCreatePermission =
+                  await userPreference.getBoolPermissionFromPrefs(
+                      keyId: UserPreference.departmentAddKey);
 
-              if(locationCreatePermission == true) {
+              if (locationCreatePermission == true) {
                 Get.to(
-                      () => LocationManageScreen(),
+                  () => LocationManageScreen(),
                   arguments: [
                     LocationOption.create,
                     "",
@@ -51,8 +54,6 @@ class LocationListScreen extends StatelessWidget {
               } else {
                 Fluttertoast.showToast(msg: AppMessage.deniedPermission);
               }
-
-
             },
             icon: const Icon(Icons.add_rounded),
           ),
@@ -91,8 +92,10 @@ class LocationListScreen extends StatelessWidget {
                           hintText: AppMessage.search,
                           fillColor: AppColors.colorWhite,
                           filled: true,
-                          hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+                          hintStyle: const TextStyle(
+                              color: AppColors.colorLightHintPurple2),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
                           prefixIcon: const Icon(
                             Icons.search,
                             color: AppColors.colorLightHintPurple2,
@@ -114,7 +117,8 @@ class LocationListScreen extends StatelessWidget {
                                     locationListScreenController
                                         .isLoading(false);
                                   },
-                            icon: const Icon(Icons.close,color: AppColors.colorLightHintPurple2),
+                                  icon: const Icon(Icons.close,
+                                      color: AppColors.colorLightHintPurple2),
                                 ),
                         ),
                       ).commonOnlyPadding(left: 10, right: 10, top: 15),
@@ -123,7 +127,7 @@ class LocationListScreen extends StatelessWidget {
                           Text(
                             AppMessage.locationList,
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 14.sp,
                                 color: AppColors.colorBlack),
                           ).commonAllSidePadding(14)

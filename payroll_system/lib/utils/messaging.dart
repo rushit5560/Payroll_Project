@@ -23,7 +23,7 @@ class AppMessage {
   /// Drawer Name's
   static String companyNameDrawer = "Company";
   static String noDocumentUploaded = "No document uploaded";
-  static String documentType = "Document Type";
+  static String documentsType = "Documents Type";
   static String departmentNameDrawer = "Department";
   static String companyDepartmentNameDrawer = "Company Department";
   static String employeeNameDrawer = "Employee";
@@ -54,6 +54,9 @@ class AppMessage {
       'Are you sure you want to delete this company?';
   static String logoutMessage = "Are you sure you want to logout?";
   static String backAlertMessage = 'Are you sure you want to go to back?';
+  static String homeBackAlertMessage =
+      'Are you sure you want to exist this app?';
+
   static String activeStatusMessage = 'Please select status';
   static String privacyPolicyMessage = 'Please accept privacy policy';
 
@@ -174,7 +177,7 @@ class AppMessage {
   static String noDeptFound = 'No Department Found.';
   static String noCompanyFound = 'No Company Found.';
   static String noLocationFound = 'No Location Found.';
-  static String noPayCheckesListFound = 'No PayChecksList Found.';
+  static String noPayCheckesListFound = 'No PayChecks List Found.';
   static String noSubAdminListFound = 'No SubAdmin Found.';
 
   static String noApprovalPayCheckesListFound =
@@ -295,6 +298,9 @@ class AppMessage {
   static String pleaseSelectEmployee = 'Please select employee.';
 
 // paychecks
+static String valueZero = "0";
+static String terminated = 'Terminated';
+static String adminNameLabel = 'Admin Name';
 
   static String paycheckes = 'Paychecks';
   static String paycheckesDowanload = 'Paychecks Dowanload';
@@ -363,5 +369,7 @@ class AppMessage {
   static String pleaseSelectDocument = 'Please select document';
   static String pleaseSelectDocumentType = 'Please select document type';
   static String documentList = 'Document List';
+  static String uplodedDocumentList = 'Uploaded Document List';
+
   static String youReachedAtMaxLength = 'You reached at max length';
 }

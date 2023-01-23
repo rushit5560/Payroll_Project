@@ -20,7 +20,8 @@ import 'department_list_screen_widgets.dart';
 class DepartmentListScreen extends StatelessWidget {
   DepartmentListScreen({Key? key}) : super(key: key);
 
-  DepartmentListScreenController departmentListScreenController = Get.put(DepartmentListScreenController());
+  DepartmentListScreenController departmentListScreenController =
+      Get.put(DepartmentListScreenController());
 
   UserPreference userPreference = UserPreference();
 
@@ -28,7 +29,6 @@ class DepartmentListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.colorLightPurple2,
-
       appBar: AppBar(
         title: Text(
           departmentListScreenController.companyName,
@@ -43,12 +43,12 @@ class DepartmentListScreen extends StatelessWidget {
           IconButton(
             onPressed: () async {
               bool departmentAddPermission =
-              await userPreference.getBoolPermissionFromPrefs(
-                  keyId: UserPreference.departmentEditKey);
+                  await userPreference.getBoolPermissionFromPrefs(
+                      keyId: UserPreference.departmentEditKey);
 
               if (departmentAddPermission == true) {
                 Get.to(
-                      () => DepartmentManageScreen(),
+                  () => DepartmentManageScreen(),
                   arguments: [
                     DepartmentOption.create,
                     AppMessage.empty,
@@ -67,8 +67,6 @@ class DepartmentListScreen extends StatelessWidget {
           ),
         ],
       ),
-
-
       body: Obx(
         () => departmentListScreenController.isLoading.value
             ? CommonLoader().showLoader()
@@ -77,14 +75,18 @@ class DepartmentListScreen extends StatelessWidget {
                 : Column(
                     children: [
                       TextFormField(
-                        controller: departmentListScreenController.textSearchEditingController,
+                        controller: departmentListScreenController
+                            .textSearchEditingController,
                         onChanged: (value) {
                           departmentListScreenController.isLoading(true);
 
-                          departmentListScreenController.searchDepartmentDataList =
+                          departmentListScreenController
+                                  .searchDepartmentDataList =
                               departmentListScreenController.allDepartmentList
                                   .where((element) => element.departmentName
-                                      .toLowerCase().contains(value)).toList();
+                                      .toLowerCase()
+                                      .contains(value))
+                                  .toList();
 
                           departmentListScreenController.isLoading(false);
                           log("searchEmployeeList : ${departmentListScreenController.searchDepartmentDataList}");
@@ -97,28 +99,36 @@ class DepartmentListScreen extends StatelessWidget {
                           fillColor: AppColors.colorWhite,
                           filled: true,
                           hintText: AppMessage.search,
-                          hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
+                          hintStyle: const TextStyle(
+                              color: AppColors.colorLightHintPurple2),
                           prefixIcon: const Icon(
                             Icons.search,
                             color: AppColors.colorLightHintPurple2,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-                          suffixIcon: departmentListScreenController.textSearchEditingController.text.isEmpty
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
+                          suffixIcon: departmentListScreenController
+                                  .textSearchEditingController.text.isEmpty
                               ? null
                               : IconButton(
                                   onPressed: () {
-                                    departmentListScreenController.isLoading(true);
-                                    departmentListScreenController.searchDepartmentDataList =
-                                        departmentListScreenController.allDepartmentList;
-                                    departmentListScreenController.textSearchEditingController.clear();
-                                    departmentListScreenController.isLoading(false);
+                                    departmentListScreenController
+                                        .isLoading(true);
+                                    departmentListScreenController
+                                            .searchDepartmentDataList =
+                                        departmentListScreenController
+                                            .allDepartmentList;
+                                    departmentListScreenController
+                                        .textSearchEditingController
+                                        .clear();
+                                    departmentListScreenController
+                                        .isLoading(false);
                                   },
-                                  icon: const Icon(Icons.close,color: AppColors.colorLightHintPurple2),
+                                  icon: const Icon(Icons.close,
+                                      color: AppColors.colorLightHintPurple2),
                                 ),
                         ),
                       ).commonOnlyPadding(left: 10, right: 10, top: 15),
-
-                    
                       Row(
                         children: [
                           Text(

@@ -203,7 +203,7 @@ class UploadedDocumentListModule extends StatelessWidget {
                     SizedBox(height: 2.h),
                     SingleListTileModuleCustom(
                       image: AppImages.departmentIcon,
-                      textKey: AppMessage.documentType,
+                      textKey: AppMessage.documentsType,
                       textValue: singleDoc.doctype,
                     ),
 

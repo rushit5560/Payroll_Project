@@ -1,8 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/constants/colors.dart';

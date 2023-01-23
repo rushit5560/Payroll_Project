@@ -224,11 +224,13 @@ class LoginController extends GetxController {
           }
         });
       } else {
-        if (loginDetailsModel.error
-            .toLowerCase()
-            .contains("Login details not match with our records.")) {
-          Fluttertoast.showToast(msg: loginDetailsModel.error);
-        }
+        Fluttertoast.showToast(msg: loginDetailsModel.error.toString());
+        log(loginDetailsModel.error.toString());
+        // if (loginDetailsModel.error
+        //     .toLowerCase()
+        //     .contains("Login details not match with our records.")) {
+        //   Fluttertoast.showToast(msg: loginDetailsModel.error);
+        // }
         // else if (loginDetailsModel.error
         //     .toLowerCase()
         //     .contains("password don't match")) {

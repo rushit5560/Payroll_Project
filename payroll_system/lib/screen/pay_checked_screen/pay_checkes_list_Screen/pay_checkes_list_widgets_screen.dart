@@ -15,7 +15,6 @@ import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
-import 'package:sizer/sizer.dart';
 
 class PayCheckesListWidgetsScreen extends StatelessWidget {
   PayCheckesListWidgetsScreen({super.key});

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
@@ -19,12 +20,16 @@ class EmployeeUploadDocumentScreenController extends GetxController {
   RxBool isSuccessStatus = false.obs;
 
   UserPreference userPreference = UserPreference();
+  final TextEditingController textSearchEditingController =
+      TextEditingController();
+
 
   List<String> documentTypeList = ["Choose Option", "W-4", "I-9", "W-2s"];
   RxString documentSelectedTypeValue = "Choose Option".obs;
 
   List<File> employeeSelectedDocumentList = [];
   List<DocumentDatum> employeeUploadedDocumentList = [];
+  List<DocumentDatum> searchEmployeeUploadedDocumentList = [];
 
   Future<void> pickEmployeeDocumentFunction() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -55,23 +60,23 @@ class EmployeeUploadDocumentScreenController extends GetxController {
       http.Response response = await http.get(Uri.parse(url));
       log("getEmployeeDocumentFunction  :${response.body}");
 
-      EmployeeDocumentModel employeeDocumentModel = EmployeeDocumentModel.fromJson(json.decode(response.body));
+      EmployeeDocumentModel employeeDocumentModel =
+          EmployeeDocumentModel.fromJson(json.decode(response.body));
       isSuccessStatus.value = employeeDocumentModel.success;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         employeeUploadedDocumentList.clear();
         employeeUploadedDocumentList.addAll(employeeDocumentModel.data);
+        searchEmployeeUploadedDocumentList = employeeUploadedDocumentList;
+
         log('employeeUploadedDocumentList Length : ${employeeUploadedDocumentList.length}');
       } else {
         log('getEmployeeDocumentFunction Else');
       }
-
-
-
-    } catch(e) {
+    } catch (e) {
       log('getEmployeeDocumentFunction Error : $e');
       rethrow;
-    } finally{
+    } finally {
       isLoading(false);
     }
   }
@@ -85,18 +90,19 @@ class EmployeeUploadDocumentScreenController extends GetxController {
       http.Response response = await http.get(Uri.parse(url));
       log('deleteDocumentFunction Response : ${response.body}');
 
-      DeleteAndUploadEmployeeDocumentModel deleteEmployeeDocumentModel = DeleteAndUploadEmployeeDocumentModel.fromJson(json.decode(response.body));
+      DeleteAndUploadEmployeeDocumentModel deleteEmployeeDocumentModel =
+          DeleteAndUploadEmployeeDocumentModel.fromJson(
+              json.decode(response.body));
       isSuccessStatus.value = deleteEmployeeDocumentModel.success;
 
-      if(isSuccessStatus.value) {
+      if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: deleteEmployeeDocumentModel.messege);
         employeeUploadedDocumentList.removeAt(index);
         Get.back();
       } else {
-       log('deleteDocumentFunction Else');
+        log('deleteDocumentFunction Else');
       }
-
-    } catch(e) {
+    } catch (e) {
       log('deleteDocumentFunction Error : $e');
       rethrow;
     } finally {
@@ -121,8 +127,9 @@ class EmployeeUploadDocumentScreenController extends GetxController {
 
       // request.files.add(await http.MultipartFile.fromPath("fileupload[]", employeeSelectedDocumentList));
 
-      for(int i =0; i < employeeSelectedDocumentList.length; i++) {
-        request.files.add(await http.MultipartFile.fromPath("fileupload[]", employeeSelectedDocumentList[i].path));
+      for (int i = 0; i < employeeSelectedDocumentList.length; i++) {
+        request.files.add(await http.MultipartFile.fromPath(
+            "fileupload[]", employeeSelectedDocumentList[i].path));
       }
 
       log('request.fields : ${request.fields}');
@@ -134,11 +141,12 @@ class EmployeeUploadDocumentScreenController extends GetxController {
           .transform(const LineSplitter())
           .listen((value) async {
         log('value : $value');
-        DeleteAndUploadEmployeeDocumentModel uploadEmployeeDocumentModel = DeleteAndUploadEmployeeDocumentModel.fromJson(json.decode(value));
+        DeleteAndUploadEmployeeDocumentModel uploadEmployeeDocumentModel =
+            DeleteAndUploadEmployeeDocumentModel.fromJson(json.decode(value));
         isSuccessStatus.value = uploadEmployeeDocumentModel.success;
         log('uploadEmployeeDocumentModel : ${uploadEmployeeDocumentModel.messege}');
 
-        if(isSuccessStatus.value) {
+        if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: uploadEmployeeDocumentModel.messege);
           employeeSelectedDocumentList.clear();
           documentSelectedTypeValue = "Choose Option".obs;
@@ -147,10 +155,7 @@ class EmployeeUploadDocumentScreenController extends GetxController {
           log('uploadEmployeeDocumentModel : ${uploadEmployeeDocumentModel.messege}');
         }
       });
-
-
-
-    } catch(e) {
+    } catch (e) {
       log('uploadEmployeeDocumentFunction Error :$e');
       rethrow;
     }
@@ -159,7 +164,6 @@ class EmployeeUploadDocumentScreenController extends GetxController {
     // }
     await getEmployeeDocumentFunction();
   }
-
 
   @override
   void onInit() {
@@ -172,6 +176,4 @@ class EmployeeUploadDocumentScreenController extends GetxController {
     log('companyId : $companyId');
     await getEmployeeDocumentFunction();
   }
-
-
 }

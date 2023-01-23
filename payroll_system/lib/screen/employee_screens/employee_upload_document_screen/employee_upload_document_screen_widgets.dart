@@ -97,7 +97,7 @@ class EmployeeDocumentTypeDropdownModule extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppMessage.documentType,
+          AppMessage.documentsType,
           style: TextStyleConfig.textStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16,
@@ -148,7 +148,7 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return screenController.employeeUploadedDocumentList.isEmpty
+    return screenController.searchEmployeeUploadedDocumentList.isEmpty
         ? Center(child: Text(AppMessage.noDocumentUploaded))
         : ListView.builder(
             itemCount: screenController.employeeUploadedDocumentList.length,
@@ -211,7 +211,7 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                     SizedBox(height: 2.h),
                     SingleListTileModuleCustom(
                       image: AppImages.departmentIcon,
-                      textKey: AppMessage.documentType,
+                      textKey: AppMessage.documentsType,
                       textValue: singleDoc.doctype,
                     ),
 

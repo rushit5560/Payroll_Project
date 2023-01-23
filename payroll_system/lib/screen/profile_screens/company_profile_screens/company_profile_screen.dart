@@ -24,10 +24,8 @@ class CompanyProfileScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: Text(
-          AppMessage.editProfileText,
-          style: TextStyle(
-            fontSize: 13.sp,
-          ),
+          AppMessage.updateProfile,
+          style: TextStyle(fontSize: 13.sp, color: Colors.black),
         ),
       ),
       body: SafeArea(
@@ -45,14 +43,16 @@ class CompanyProfileScreen extends StatelessWidget {
                         CompanyFormModule(),
                         SizedBox(height: 6.h),
 
-                         CustomSubmitButtonModule(
+                        CustomSubmitButtonModule(
                             onPress: () async {
-                              if (companyProfileScreenController.formKey.currentState!.validate()) {
-            await companyProfileScreenController.updateCompanyProfileFunction();
-          }
+                              if (companyProfileScreenController
+                                  .formKey.currentState!
+                                  .validate()) {
+                                await companyProfileScreenController
+                                    .updateCompanyProfileFunction();
+                              }
                             },
                             labelText: AppMessage.submit),
-
 
                         // CompanySubmitButtonModule(),
                         SizedBox(height: 3.h),

@@ -53,6 +53,10 @@ class CompanyData {
     required this.modifiedby,
     // this.emailVerifiedAt,
     required this.photo,
+    required this.city,
+    required this.state,
+    required this.town,
+    required this.street,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -67,10 +71,15 @@ class CompanyData {
   final String departmentId;
   final String locationId;
   final String isActive;
+  final String street;
+  final String town;
+  final String state;
+  final String city;
   // final dynamic lastlogin;
   final String verified;
   final String createdby;
   final String modifiedby;
+
   // final dynamic emailVerifiedAt;
   final String photo;
   final String createdAt;
@@ -91,6 +100,10 @@ class CompanyData {
         verified: json["verified"] ?? "",
         createdby: json["createdby"] ?? "",
         modifiedby: json["modifiedby"] ?? "",
+        city: json["city"] ?? "",
+        street: json["street"] ?? "",
+        town: json["town"] ?? "",
+        state: json["state"] ?? "",
         // emailVerifiedAt: json["email_verified_at"] ?? "",
         photo: json["photo"] ?? "",
         createdAt: json["created_at"] ?? "",

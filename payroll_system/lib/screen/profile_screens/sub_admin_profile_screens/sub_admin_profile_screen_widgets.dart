@@ -39,7 +39,7 @@ class SubAdminImageModule extends StatelessWidget {
                                   subAdminProfileScreenController.imageFile!,
                                   // height: 100,
                                   // width: 100,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               )
                             : ClipRRect(

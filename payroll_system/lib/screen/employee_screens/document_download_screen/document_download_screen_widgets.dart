@@ -14,7 +14,6 @@ import 'package:sizer/sizer.dart';
 
 import '../../../utils/extension_methods/user_preference.dart';
 
-
 class EmployeeDocumentListsModule extends StatelessWidget {
   EmployeeDocumentListsModule({Key? key}) : super(key: key);
   final screenController = Get.find<DocumentDownloadScreenController>();
@@ -28,16 +27,16 @@ class EmployeeDocumentListsModule extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, i) {
-        DocumentDatum singleDoc = screenController.employeeUploadedDocumentList[i];
+        DocumentDatum singleDoc =
+            screenController.employeeUploadedDocumentList[i];
         return Container(
           decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.transparent),
           ),
-
           child: Column(
             children: [
-
               SingleListTileModuleCustom(
                 image: AppImages.departmentIcon,
                 textKey: AppMessage.fileName,
@@ -46,7 +45,7 @@ class EmployeeDocumentListsModule extends StatelessWidget {
               SizedBox(height: 2.h),
               SingleListTileModuleCustom(
                 image: AppImages.departmentIcon,
-                textKey: AppMessage.documentType,
+                textKey: AppMessage.documentsType,
                 textValue: singleDoc.doctype,
               ),
 
@@ -56,7 +55,8 @@ class EmployeeDocumentListsModule extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadFilePath}${singleDoc.name}");
+                      await WebUrlLauncher().launchPdfInBrowser(
+                          "${ApiUrl.downloadFilePath}${singleDoc.name}");
                     },
                     child: Row(
                       children: [
@@ -76,12 +76,9 @@ class EmployeeDocumentListsModule extends StatelessWidget {
                         ),
                       ],
                     ),
-
                   ),
                 ],
               ),
-
-
             ],
           ).commonAllSidePadding(8),
         ).commonSymmetricPadding(vertical: 5);

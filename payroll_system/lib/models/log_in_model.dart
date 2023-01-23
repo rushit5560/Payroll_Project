@@ -151,3 +151,23 @@ class UserData {
         "updated_at": updatedAt,
       };
 }
+
+class Error {
+  Error({
+    required this.success,
+    required this.error,
+  });
+
+  final bool success;
+  final String error;
+
+  factory Error.fromJson(Map<String, dynamic> json) => Error(
+        success: json["success"],
+        error: json["error"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "error": error,
+      };
+}

@@ -9,6 +9,7 @@ import 'package:payroll_system/screen/authentication_screens/change_password_scr
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
+import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_list_Screen/pay_checkes_list_screen.dart';
 import 'package:payroll_system/screen/profile_screens/company_profile_screens/company_profile_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
@@ -29,7 +30,6 @@ class CompanyHomeDrawer extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-
                     CompanyHomeDrawerTile(
                       title: AppMessage.updateProfile,
                       onTap: () {
@@ -40,39 +40,55 @@ class CompanyHomeDrawer extends StatelessWidget {
                       icon: const Icon(Icons.person,
                           color: AppColors.colorBtBlue),
                     ),
-
-                    companyHomeScreenController.isDepartmentShowPermission.value == true
-                    ? CompanyHomeDrawerTile(
-                      title: AppMessage.departmentNameDrawer,
-                      onTap: () {
-                        Get.back();
-                        Get.to(() => DepartmentListScreen(),
-                          arguments: [
-                            companyHomeScreenController.companyId.toString(),
-                            companyHomeScreenController.companyName,
-                          ],
-                        );
-                      },
-                      imageStatus: true,
-                      image: AppImages.departmentIcon,
-                    ) : const SizedBox(),
-
-                    companyHomeScreenController.isLocationShowPermission.value == true
+                    companyHomeScreenController
+                                .isDepartmentShowPermission.value ==
+                            true
                         ? CompanyHomeDrawerTile(
-                      title: AppMessage.location,
+                            title: AppMessage.departmentNameDrawer,
+                            onTap: () {
+                              Get.back();
+                              Get.to(
+                                () => DepartmentListScreen(),
+                                arguments: [
+                                  companyHomeScreenController.companyId
+                                      .toString(),
+                                  companyHomeScreenController.companyName,
+                                ],
+                              );
+                            },
+                            imageStatus: true,
+                            image: AppImages.departmentIcon,
+                          )
+                        : const SizedBox(),
+                    companyHomeScreenController
+                                .isLocationShowPermission.value ==
+                            true
+                        ? CompanyHomeDrawerTile(
+                            title: AppMessage.location,
+                            onTap: () {
+                              Get.back();
+                              Get.to(() => LocationListScreen(), arguments: [
+                                companyHomeScreenController.companyId
+                                    .toString(),
+                                companyHomeScreenController.companyName,
+                              ]);
+                            },
+                            imageStatus: true,
+                            image: AppImages.locationIcon,
+                          )
+                        : const SizedBox(),
+                    CompanyHomeDrawerTile(
+                      title: AppMessage.paycheckes,
                       onTap: () {
                         Get.back();
-                        Get.to(() => LocationListScreen(),
-                            arguments: [
-                              companyHomeScreenController.companyId.toString(),
-                              companyHomeScreenController.companyName,
-                            ]
-                        );
+                        Get.to(() => PayCheckesListScreen(), arguments: [
+                          companyHomeScreenController.companyId.toString(),
+                          companyHomeScreenController.companyName,
+                        ]);
                       },
                       imageStatus: true,
-                      image: AppImages.locationIcon,
-                    ) : const SizedBox(),
-
+                      image: AppImages.paycheckIcon,
+                    ),
                     CompanyHomeDrawerTile(
                       onTap: () {
                         Get.back();
@@ -80,9 +96,9 @@ class CompanyHomeDrawer extends StatelessWidget {
                       },
                       title: AppMessage.changePassword,
                       imageStatus: false,
-                      icon: const Icon(Icons.person, color: AppColors.colorBtBlue),
+                      icon: const Icon(Icons.person,
+                          color: AppColors.colorBtBlue),
                     ),
-
                   ],
                 ),
               ),
@@ -117,7 +133,6 @@ class CompanyHomeDrawer extends StatelessWidget {
   }
 }
 
-
 class CompanyHomeDrawerTile extends StatelessWidget {
   Function() onTap;
   String title;
@@ -145,11 +160,11 @@ class CompanyHomeDrawerTile extends StatelessWidget {
             leading: imageStatus == false
                 ? icon
                 : Image.asset(
-              image!,
-              height: 20,
-              width: 20,
-              color: AppColors.colorBtBlue,
-            ),
+                    image!,
+                    height: 20,
+                    width: 20,
+                    color: AppColors.colorBtBlue,
+                  ),
             title: Text(
               title,
               textAlign: TextAlign.left,

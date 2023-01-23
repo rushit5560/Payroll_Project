@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/company_home_screen_controller.dart';
@@ -26,152 +27,166 @@ class CompanyHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: companyHomeScreenController.scaffoldKey,
-      backgroundColor: AppColors.colorLightPurple2,
-      drawer: CompanyHomeDrawer(),
-      appBar: AppBar(
-        title: Text(
-          companyHomeScreenController.companyName,
-          style: TextStyle(
-            color: AppColors.colorBlack,
-            fontWeight: FontWeight.bold,
-            fontSize: 17.sp,
-          ),
-        ),
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () => companyHomeScreenController.scaffoldKey.currentState!
-              .openDrawer(),
-          child: Padding(
-            padding: const EdgeInsets.all(13),
-            child: Image.asset(
-              AppImages.menuDrawerImg,
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return const HomeCustomMobileBackPressAlertDialog();
+          },
+        );
+        return shouldPop!;
+      },
+      child: Scaffold(
+        key: companyHomeScreenController.scaffoldKey,
+        backgroundColor: AppColors.colorLightPurple2,
+        drawer: CompanyHomeDrawer(),
+        appBar: AppBar(
+          title: Text(
+            companyHomeScreenController.companyName,
+            style: TextStyle(
+              color: AppColors.colorBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 17.sp,
             ),
           ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              bool employeeCreatePermission =
-                  await userPreference.getBoolPermissionFromPrefs(
-                      keyId: UserPreference.employeeAddKey);
-
-              if (employeeCreatePermission == true) {
-                Get.to(
-                  () => CompanyEmployeeManageScreen(),
-                  arguments: [
-                    EmployeeOption.create,
-                    AppMessage.empty,
-                    companyHomeScreenController.companyId.toString(),
-                    companyHomeScreenController.companyName,
-                  ],
-                );
-              } else {
-                Fluttertoast.showToast(msg: AppMessage.deniedPermission);
-              }
-            },
-            icon: const Icon(
-              Icons.add_rounded,
-              size: 30,
+          centerTitle: true,
+          leading: GestureDetector(
+            onTap: () => companyHomeScreenController.scaffoldKey.currentState!
+                .openDrawer(),
+            child: Padding(
+              padding: const EdgeInsets.all(13),
+              child: Image.asset(
+                AppImages.menuDrawerImg,
+              ),
             ),
-            highlightColor: Colors.transparent,
           ),
-        ],
-      ),
-      body: Obx(
-        () => companyHomeScreenController.isLoading.value
-            ? CommonLoader().showLoader()
-            : companyHomeScreenController.allCompanyWiseEmployeeList.isEmpty
-                ? Center(child: Text(AppMessage.noEmpFound))
-                : Column(
-                    children: [
-                      TextFormField(
-                        controller: companyHomeScreenController
-                            .textSearchEditingController,
-                        onChanged: (value) {
-                          companyHomeScreenController.isLoading(true);
+          actions: [
+            IconButton(
+              onPressed: () async {
+                bool employeeCreatePermission =
+                    await userPreference.getBoolPermissionFromPrefs(
+                        keyId: UserPreference.employeeAddKey);
 
-                          companyHomeScreenController.searchEmployeeList =
-                              companyHomeScreenController
-                                  .allCompanyWiseEmployeeList
-                                  .where((element) =>
-                                      element.firstName
-                                          .toLowerCase()
-                                          .contains(value) ||
-                                      element.middleName
-                                          .toLowerCase()
-                                          .contains(value) ||
-                                      element.lastName
-                                          .toLowerCase()
-                                          .contains(value) ||
-                                      element.email
-                                          .toLowerCase()
-                                          .contains(value) ||
-                                      element.mobileNumber
-                                          .toLowerCase()
-                                          .contains(value) ||
-                                      element.departmentId
-                                          .toLowerCase()
-                                          .contains(value) ||
-                                      element.companyid
-                                          .toLowerCase()
-                                          .contains(value))
-                                  .toList();
-
-                          companyHomeScreenController.isLoading(false);
-                          log("searchEmployeeList : ${companyHomeScreenController.searchEmployeeList}");
-                        },
-                        decoration: InputDecoration(
-                          enabledBorder: InputFieldStyles().inputBorder(),
-                          focusedBorder: InputFieldStyles().inputBorder(),
-                          errorBorder: InputFieldStyles().inputBorder(),
-                          focusedErrorBorder: InputFieldStyles().inputBorder(),
-                          fillColor: AppColors.colorWhite,
-                          filled: true,
-                          hintText: AppMessage.search,
-                          hintStyle: const TextStyle(
-                              color: AppColors.colorLightHintPurple2),
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: AppColors.colorLightHintPurple2,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 11),
-                          suffixIcon: companyHomeScreenController
-                                  .textSearchEditingController.text.isEmpty
-                              ? null
-                              : IconButton(
-                                  onPressed: () {
-                                    companyHomeScreenController.isLoading(true);
-                                    companyHomeScreenController
-                                            .searchEmployeeList =
-                                        companyHomeScreenController
-                                            .allCompanyWiseEmployeeList;
-                                    companyHomeScreenController
-                                        .textSearchEditingController
-                                        .clear();
-                                    companyHomeScreenController
-                                        .isLoading(false);
-                                  },
-                                  icon: const Icon(Icons.close),
-                                ),
-                        ),
-                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
-                      Row(
-                        children: [
-                          Text(
-                            AppMessage.employeeList,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14.sp,
-                                color: AppColors.colorBlack),
-                          ).commonAllSidePadding(10)
-                        ],
-                      ),
-                      Expanded(child: CompanyHomeScreenWidgets()),
+                if (employeeCreatePermission == true) {
+                  Get.to(
+                    () => CompanyEmployeeManageScreen(),
+                    arguments: [
+                      EmployeeOption.create,
+                      AppMessage.empty,
+                      companyHomeScreenController.companyId.toString(),
+                      companyHomeScreenController.companyName,
                     ],
-                  ),
+                  );
+                } else {
+                  Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                }
+              },
+              icon: const Icon(
+                Icons.add_rounded,
+                size: 30,
+              ),
+              highlightColor: Colors.transparent,
+            ),
+          ],
+        ),
+        body: Obx(
+          () => companyHomeScreenController.isLoading.value
+              ? CommonLoader().showLoader()
+              : companyHomeScreenController.allCompanyWiseEmployeeList.isEmpty
+                  ? Center(child: Text(AppMessage.noEmpFound))
+                  : Column(
+                      children: [
+                        TextFormField(
+                          controller: companyHomeScreenController
+                              .textSearchEditingController,
+                          onChanged: (value) {
+                            companyHomeScreenController.isLoading(true);
+
+                            companyHomeScreenController.searchEmployeeList =
+                                companyHomeScreenController
+                                    .allCompanyWiseEmployeeList
+                                    .where((element) =>
+                                        element
+                                            .firstName
+                                            .toLowerCase()
+                                            .contains(value) ||
+                                        element.middleName
+                                            .toLowerCase()
+                                            .contains(value) ||
+                                        element.lastName
+                                            .toLowerCase()
+                                            .contains(value) ||
+                                        element.email
+                                            .toLowerCase()
+                                            .contains(value) ||
+                                        element.mobileNumber
+                                            .toLowerCase()
+                                            .contains(value) ||
+                                        element.departmentId
+                                            .toLowerCase()
+                                            .contains(value) ||
+                                        element.companyid
+                                            .toLowerCase()
+                                            .contains(value))
+                                    .toList();
+
+                            companyHomeScreenController.isLoading(false);
+                            log("searchEmployeeList : ${companyHomeScreenController.searchEmployeeList}");
+                          },
+                          decoration: InputDecoration(
+                            enabledBorder: InputFieldStyles().inputBorder(),
+                            focusedBorder: InputFieldStyles().inputBorder(),
+                            errorBorder: InputFieldStyles().inputBorder(),
+                            focusedErrorBorder:
+                                InputFieldStyles().inputBorder(),
+                            fillColor: AppColors.colorWhite,
+                            filled: true,
+                            hintText: AppMessage.search,
+                            hintStyle: const TextStyle(
+                                color: AppColors.colorLightHintPurple2),
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: AppColors.colorLightHintPurple2,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 11),
+                            suffixIcon: companyHomeScreenController
+                                    .textSearchEditingController.text.isEmpty
+                                ? null
+                                : IconButton(
+                                    onPressed: () {
+                                      companyHomeScreenController
+                                          .isLoading(true);
+                                      companyHomeScreenController
+                                              .searchEmployeeList =
+                                          companyHomeScreenController
+                                              .allCompanyWiseEmployeeList;
+                                      companyHomeScreenController
+                                          .textSearchEditingController
+                                          .clear();
+                                      companyHomeScreenController
+                                          .isLoading(false);
+                                    },
+                                    icon: const Icon(Icons.close),
+                                  ),
+                          ),
+                        ).commonOnlyPadding(left: 10, right: 10, top: 15),
+                        Row(
+                          children: [
+                            Text(
+                              AppMessage.employeeList,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14.sp,
+                                  color: AppColors.colorBlack),
+                            ).commonAllSidePadding(10)
+                          ],
+                        ),
+                        Expanded(child: CompanyHomeScreenWidgets()),
+                      ],
+                    ),
+        ),
       ),
     );
   }

@@ -1,23 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:multiselect/multiselect.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/form_single_field_module.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/profile_screens_controller/admin_profile_screen_controller.dart';
 import 'package:payroll_system/controllers/profile_screens_controller/company_profile_screen_controller.dart';
-import 'package:payroll_system/controllers/profile_screens_controller/sub_admin_profile_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
-import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../models/company_manage_screen_model/get_all_department_model.dart';
 
 class CompanyImageModule extends StatelessWidget {
   CompanyImageModule({super.key});
@@ -48,7 +40,7 @@ class CompanyImageModule extends StatelessWidget {
                                   companyProfileScreenController.imageFile!,
                                   // height: 100,
                                   // width: 100,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               )
                             : ClipRRect(
@@ -179,58 +171,58 @@ class CompanyFormModule extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                textAlign: TextAlign.left,
-                maxLines: null,
-                text: TextSpan(
-                    text: AppMessage.departmentNameDrawer,
-                    style: TextStyleConfig.textStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: " ${AppMessage.mandatory}",
-                        style: TextStyleConfig.textStyle(
-                          textColor: AppColors.redColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ]),
-              ).commonSymmetricPadding(vertical: 2),
+              // RichText(
+              //   textAlign: TextAlign.left,
+              //   maxLines: null,
+              //   text: TextSpan(
+              //       text: AppMessage.departmentNameDrawer,
+              //       style: TextStyleConfig.textStyle(
+              //         fontWeight: FontWeight.w600,
+              //         fontSize: 16,
+              //       ),
+              //       children: [
+              //         TextSpan(
+              //           text: " ${AppMessage.mandatory}",
+              //           style: TextStyleConfig.textStyle(
+              //             textColor: AppColors.redColor,
+              //             fontWeight: FontWeight.w600,
+              //             fontSize: 16,
+              //           ),
+              //         ),
+              //       ]),
+              // ).commonSymmetricPadding(vertical: 2),
 
-              Container(
-                width: double.infinity,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.greyColor),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 3),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<DepartmentData>(
-                      value: companyProfileScreenController.departmentData,
-                      items: companyProfileScreenController.departmentList
-                          .map<DropdownMenuItem<DepartmentData>>(
-                              (DepartmentData value) {
-                        return DropdownMenuItem<DepartmentData>(
-                          value: value,
-                          child: Text(value.departmentName),
-                        );
-                      }).toList(),
-                      onChanged: (DepartmentData? value) async {
-                        companyProfileScreenController.isLoading(true);
-                        // This is called when the user selects an item.
-                        companyProfileScreenController.departmentData = value;
-                        companyProfileScreenController.isLoading(false);
-                      },
-                    ).commonOnlyPadding(left: 10, right: 10),
-                  ),
-                ),
-              ),
-              SizedBox(height: 2.h),
+              // Container(
+              //   width: double.infinity,
+              //   height: 50,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(10),
+              //     border: Border.all(color: AppColors.greyColor),
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(vertical: 3),
+              //     child: DropdownButtonHideUnderline(
+              //       child: DropdownButton<DepartmentData>(
+              //         value: companyProfileScreenController.departmentData,
+              //         items: companyProfileScreenController.departmentList
+              //             .map<DropdownMenuItem<DepartmentData>>(
+              //                 (DepartmentData value) {
+              //           return DropdownMenuItem<DepartmentData>(
+              //             value: value,
+              //             child: Text(value.departmentName),
+              //           );
+              //         }).toList(),
+              //         onChanged: (DepartmentData? value) async {
+              //           companyProfileScreenController.isLoading(true);
+              //           // This is called when the user selects an item.
+              //           companyProfileScreenController.departmentData = value;
+              //           companyProfileScreenController.isLoading(false);
+              //         },
+              //       ).commonOnlyPadding(left: 10, right: 10),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 2.h),
 
               FormSingleFieldModule(
                   textEditingController:
@@ -240,21 +232,7 @@ class CompanyFormModule extends StatelessWidget {
                   text: AppMessage.userName,
                   headerText: AppMessage.userName,
                   mandatoryText: " ${AppMessage.mandatory}"),
-
-              // TextFormField(
-              //   controller: companyProfileScreenController.nameController,
-              //   autovalidateMode: AutovalidateMode.onUserInteraction,
-              //   validator: (val) => FieldValidation().validateUserName(val!),
-              //   decoration: InputDecoration(
-              //     fillColor: AppColors.greyColor.withOpacity(0.25),
-              //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              //     labelText: AppMessage.name,
-              //     border: border,
-              //     enabledBorder: border,
-              //     filled: true,
-              //   ),
-              // ),
-              SizedBox(height: 2.h),
+              const SizedBox(height: 5),
 
               FormSingleFieldModule(
                   textEditingController:
@@ -262,50 +240,68 @@ class CompanyFormModule extends StatelessWidget {
                   validate: (val) =>
                       FieldValidation().validateMobileNumber(val!),
                   maxLength: 10,
-                  text: AppMessage.phoneNumber,
-                  headerText: AppMessage.phoneNumber,
+                  text: AppMessage.mobileNumber,
+                  headerText: AppMessage.mobileNumber,
                   mandatoryText: " ${AppMessage.mandatory}"),
 
-              // TextFormField(
-              //   controller:
-              //       companyProfileScreenController.phoneNumberController,
-              //   autovalidateMode: AutovalidateMode.onUserInteraction,
-              //   validator: (val) =>
-              //       FieldValidation().validateMobileNumber(val!),
-              //   maxLength: 10,
-              //   decoration: InputDecoration(
-              //     fillColor: AppColors.greyColor.withOpacity(0.25),
-              //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              //     labelText: AppMessage.phoneNumber,
-              //     border: border,
-              //     enabledBorder: border,
-              //     filled: true,
-              //   ),
-              // ),
-              SizedBox(height: 2.h),
+              const SizedBox(height: 5),
 
               FormSingleFieldModule(
-                  textEditingController:
-                      companyProfileScreenController.addressController,
-                  validate: (val) => FieldValidation().validateAddress(val!),
-                  maxLength: 10,
-                  text: AppMessage.address,
-                  headerText: AppMessage.address,
-                  mandatoryText: " ${AppMessage.mandatory}"),
+                headerText: AppMessage.address,
+                text: AppMessage.street,
+                keyboardType: TextInputType.text,
+                mandatoryText: AppMessage.mandatory,
+                textEditingController:
+                    companyProfileScreenController.streetAddressController,
+                validate: (value) =>
+                    FieldValidation().validateStreetAddress(value),
+              ),
+              const SizedBox(height: 5),
 
-              // TextFormField(
-              //   controller: companyProfileScreenController.addressController,
-              //   autovalidateMode: AutovalidateMode.onUserInteraction,
-              //   validator: (val) => FieldValidation().validateAddress(val!),
-              //   decoration: InputDecoration(
-              //     fillColor: AppColors.greyColor.withOpacity(0.25),
-              //     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              //     labelText: AppMessage.address,
-              //     border: border,
-              //     enabledBorder: border,
-              //     filled: true,
-              //   ),
-              // ),
+              FormSingleFieldModule(
+                headerText: AppMessage.empty,
+                isHeaderTextShow: false,
+                text: AppMessage.town,
+                keyboardType: TextInputType.text,
+                mandatoryText: AppMessage.empty,
+                textEditingController:
+                    companyProfileScreenController.townAddressController,
+                validate: (value) =>
+                    FieldValidation().validateLandmarkAddress(value),
+              ),
+              const SizedBox(height: 5),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: FormSingleFieldModule(
+                      headerText: AppMessage.empty,
+                      isHeaderTextShow: false,
+                      text: AppMessage.city,
+                      keyboardType: TextInputType.text,
+                      mandatoryText: AppMessage.mandatory,
+                      textEditingController:
+                          companyProfileScreenController.cityAddressController,
+                      validate: (value) =>
+                          FieldValidation().validateCity(value),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: FormSingleFieldModule(
+                      headerText: AppMessage.empty,
+                      isHeaderTextShow: false,
+                      text: AppMessage.state,
+                      keyboardType: TextInputType.text,
+                      mandatoryText: AppMessage.mandatory,
+                      textEditingController:
+                          companyProfileScreenController.stateAddressController,
+                      validate: (value) =>
+                          FieldValidation().validateState(value),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ],

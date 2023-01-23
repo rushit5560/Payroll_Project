@@ -34,23 +34,6 @@ class UpdateDepartmentModel {
       };
 }
 
-// class Error {
-//   Error({
-//     required this.departmentName,
-//   });
-
-//   final List<String> departmentName;
-
-//   factory Error.fromJson(Map<String, dynamic> json) => Error(
-//         departmentName:
-//             List<String>.from(json["department_name"].map((x) => x) ?? {}),
-//       );
-
-//   // Map<String, dynamic> toJson() => {
-//   //       "department_name": List<dynamic>.from(departmentName.map((x) => x)),
-//   //     };
-// }
-
 class Error {
   Error({
     required this.departmentName,

@@ -19,7 +19,7 @@ class CompanyProfileScreenController extends GetxController {
   RxInt companyId = 0.obs;
   RxInt userid = 0.obs;
 
-  // String companyName = "";
+  String companyName = "";
 
   RxBool isLoading = false.obs;
 
@@ -43,6 +43,10 @@ class CompanyProfileScreenController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController streetAddressController = TextEditingController();
+  TextEditingController townAddressController = TextEditingController();
+  TextEditingController cityAddressController = TextEditingController();
+  TextEditingController stateAddressController = TextEditingController();
 
   loadUI() {
     isLoading(true);
@@ -118,7 +122,11 @@ class CompanyProfileScreenController extends GetxController {
 
           nameController.text = companyData!.userName;
           phoneNumberController.text = companyData!.phoneno;
-          addressController.text = companyData!.address;
+          // addressController.text = companyData!.address;
+          streetAddressController.text = companyData!.street;
+          townAddressController.text = companyData!.town;
+          cityAddressController.text = companyData!.city;
+          stateAddressController.text = companyData!.state;
 
           if (companyData!.departmentId != "") {
             var companyIdsString = companyData!.departmentId;
@@ -181,8 +189,11 @@ class CompanyProfileScreenController extends GetxController {
         request.fields['userid'] = "${userid.value}";
         request.fields['user_name'] = nameController.text;
         request.fields['phoneno'] = phoneNumberController.text;
-        request.fields['address'] = addressController.text;
-        request.fields['department_id'] = "${departmentData!.id}";
+        request.fields['street'] = streetAddressController.text;
+        request.fields['town'] = townAddressController.text;
+        request.fields['state'] = stateAddressController.text;
+        request.fields['city'] = cityAddressController.text;
+        // request.fields['department_id'] = "${departmentData!.id}";
 
         request.fields['showimg'] =
             companyData!.photo.isEmpty ? "" : companyData!.photo;
@@ -229,9 +240,13 @@ class CompanyProfileScreenController extends GetxController {
         request.fields['userid'] = "${userid.value}";
         request.fields['user_name'] = nameController.text;
         request.fields['phoneno'] = phoneNumberController.text;
-        request.fields['address'] = addressController.text;
+        // request.fields['address'] = addressController.text;
+        request.fields['street'] = streetAddressController.text;
+        request.fields['town'] = townAddressController.text;
+        request.fields['state'] = stateAddressController.text;
+        request.fields['city'] = cityAddressController.text;
 
-        request.fields['department_id'] = "${departmentData!.id}";
+        // request.fields['department_id'] = "${departmentData!.id}";
         request.fields['showimg'] =
             companyData!.photo.isEmpty ? "" : companyData!.photo;
 

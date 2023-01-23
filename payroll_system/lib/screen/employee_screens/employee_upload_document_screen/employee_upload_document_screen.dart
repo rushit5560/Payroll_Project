@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -113,7 +115,7 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        AppMessage.documentList,
+                        AppMessage.uplodedDocumentList,
                         style: TextStyleConfig.textStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -121,6 +123,71 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
+
+                   TextFormField(
+                        controller: employeeUploadDocumentScreenController
+                            .textSearchEditingController,
+                        onChanged: (value) {
+                          employeeUploadDocumentScreenController
+                              .isLoading(true);
+
+                          employeeUploadDocumentScreenController
+                                  .searchEmployeeUploadedDocumentList =
+                              employeeUploadDocumentScreenController
+                                  .employeeUploadedDocumentList
+                                  .where((element) =>
+                                      element.name
+                                          .toLowerCase()
+                                          .contains(value) ||
+                                      element.doctype
+                                          .toLowerCase()
+                                          .contains(value))
+                                  .toList();
+
+                          employeeUploadDocumentScreenController
+                              .isLoading(false);
+                          log("searchEmployeeList : ${employeeUploadDocumentScreenController.searchEmployeeUploadedDocumentList}");
+                        },
+                        decoration: InputDecoration(
+                          enabledBorder: InputFieldStyles().inputBorder(),
+                          focusedBorder: InputFieldStyles().inputBorder(),
+                          errorBorder: InputFieldStyles().inputBorder(),
+                          focusedErrorBorder: InputFieldStyles().inputBorder(),
+                          fillColor: AppColors.colorWhite,
+                          filled: true,
+                          hintText: AppMessage.search,
+                          hintStyle: const TextStyle(
+                              color: AppColors.colorLightHintPurple2),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.colorLightHintPurple2,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
+                          suffixIcon: employeeUploadDocumentScreenController
+                                  .textSearchEditingController.text.isEmpty
+                              ? null
+                              : IconButton(
+                                  onPressed: () {
+                                    employeeUploadDocumentScreenController
+                                        .isLoading(true);
+                                    employeeUploadDocumentScreenController
+                                            .searchEmployeeUploadedDocumentList =
+                                        employeeUploadDocumentScreenController
+                                            .employeeUploadedDocumentList;
+                                    employeeUploadDocumentScreenController
+                                        .textSearchEditingController
+                                        .clear();
+                                    employeeUploadDocumentScreenController
+                                        .isLoading(false);
+                                  },
+                                  icon: const Icon(Icons.close,
+                                      color: AppColors.colorLightHintPurple2),
+                                ),
+                        ),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
+
                   SizedBox(height: 2.h),
                   Expanded(child: EmployeeUploadedDocumentListModule()),
                 ],
