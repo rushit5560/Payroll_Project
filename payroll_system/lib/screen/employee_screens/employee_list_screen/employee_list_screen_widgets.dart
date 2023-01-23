@@ -141,7 +141,11 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                     textKey: AppMessage.employeeStatus,
                     textValue: employee.isActive == AppMessage.value
                         ? AppMessage.active
-                        : AppMessage.inActive),
+                        : AppMessage.inActive,
+                  valueColor: employee.isActive == AppMessage.value
+                  ? AppColors.greenColor
+                  : AppColors.colorRed,
+                ),
                 SizedBox(height: 2.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

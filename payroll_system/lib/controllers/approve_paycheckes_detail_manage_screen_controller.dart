@@ -14,6 +14,7 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
   String companyId = Get.arguments[0];
   String companyName = Get.arguments[1];
   ApprovePayCheckListData approvalData = Get.arguments[2];
+
   final approvePaychecksListScreenController =
       Get.find<ApprovePaychecksListScreenController>();
   RxBool isLoading = false.obs;
@@ -21,9 +22,7 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
   List<ApprovePayCheckListData> approvePayCheckListData = [];
 
   // Delete Employee
-  Future<void> deleteApprovalFunction(
-    String approvalId,
-  ) async {
+  Future<void> deleteApprovalFunction(String approvalId) async {
     isLoading(true);
     String url =
         "${ApiUrl.deleteApprovePayCheckesListApi}$companyId/$approvalId";
@@ -85,5 +84,12 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
     } finally {
       isLoading(false);
     }
+  }
+
+
+  @override
+  void onInit() {
+    // log('approvalData : ${approvalData.}');
+    super.onInit();
   }
 }

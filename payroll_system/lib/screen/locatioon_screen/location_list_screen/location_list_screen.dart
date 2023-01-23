@@ -25,7 +25,7 @@ class LocationListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
-        title: Text(AppMessage.locationList,
+        title: Text(AppMessage.location,
           style: TextStyle(
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,

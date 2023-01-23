@@ -48,7 +48,7 @@ class ApprovePaychecksListScreen extends StatelessWidget {
                           ),
                         ],
                       ).commonAllSidePadding(10),
-                      ApprovePaychecksListWidgetsScreen()
+                      ApprovePaychecksListWidgetsScreen(),
                     ],
                   ),
       ),

@@ -50,7 +50,7 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                   SingleListTileModuleCustom(
                       textValue: approvePayrollListDataListvalue.companyname,
                       image: AppImages.companyIcon,
-                      textKey: AppMessage.company),
+                      textKey: AppMessage.companyLabelName),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                       textValue: approvePayrollListDataListvalue.startdate
@@ -67,7 +67,7 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                       textKey: AppMessage.endDate),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                      textValue: approvePayrollListDataListvalue.days,
+                      textValue: "${approvePayrollListDataListvalue.days} ${AppMessage.days}",
                       image: AppImages.totalDaysIcon,
                       textKey: AppMessage.totalDays),
                   const SizedBox(height: 5),
@@ -85,12 +85,12 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                       textKey: AppMessage.salaryHourlyRate),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                      textValue: approvePayrollListDataListvalue.subTotal,
+                      textValue: "\$ ${approvePayrollListDataListvalue.subTotal}",
                       image: AppImages.netAmountIcon,
                       textKey: AppMessage.subTotal),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                      textValue: approvePayrollListDataListvalue.finalAmount,
+                      textValue: "\$ ${approvePayrollListDataListvalue.finalAmount}",
                       image: AppImages.netAmountIcon,
                       textKey: AppMessage.netAmount),
                   const SizedBox(height: 5),
@@ -101,7 +101,10 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                               ? AppMessage.notApproved
                               : AppMessage.approved,
                       image: AppImages.verifyIcon,
-                      textKey: AppMessage.status),
+                      textKey: AppMessage.status,
+                    valueColor: approvePayrollListDataListvalue.approvepaychecks ==
+                        "0" ? AppColors.colorRed : AppColors.greenColor,
+                  ),
                   const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

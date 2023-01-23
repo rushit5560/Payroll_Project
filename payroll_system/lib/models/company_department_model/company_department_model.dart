@@ -95,7 +95,7 @@ class CompanyDepartmentData {
   CompanyDepartmentData({
     this.id,
     this.departmentName,
-    // this.isActive,
+    this.isActive,
     // this.createdby,
     // this.modifiedby,
     // this.companyid,
@@ -106,7 +106,7 @@ class CompanyDepartmentData {
   final int? id;
   final String? departmentName;
 
-  // final String isActive;
+  final String? isActive;
   // final int createdby;
   // final dynamic modifiedby;
   // final dynamic companyid;
@@ -117,7 +117,7 @@ class CompanyDepartmentData {
       CompanyDepartmentData(
         id: json["id"] ?? 0,
         departmentName: json["department_name"] ?? "",
-        // isActive: json["is_active"],
+        isActive: json["is_active"],
         // createdby: json["createdby"],
         // modifiedby: json["modifiedby"],
         // companyid: json["companyid"],

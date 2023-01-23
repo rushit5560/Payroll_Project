@@ -129,7 +129,7 @@ class DepartmentListTile extends StatelessWidget {
               /// Getting From Common Module
               SingleListTileModuleCustom(
                 image: AppImages.verifyIcon,
-                textKey: AppMessage.verifiedStatusName,
+                textKey: AppMessage.employeeStatus,
                 textValue: singleItem.isActive == AppMessage.value
                     ? AppMessage.active
                     : AppMessage.inActive,

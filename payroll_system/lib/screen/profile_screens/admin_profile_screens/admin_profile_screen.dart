@@ -20,10 +20,13 @@ class AdminProfileScreen extends StatelessWidget {
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
         automaticallyImplyLeading: true,
+        centerTitle: true,
         title: Text(
-          AppMessage.editProfileText,
+          AppMessage.updateProfile,
           style: TextStyle(
-            fontSize: 13.sp,
+            fontWeight: FontWeight.bold,
+            fontSize: 17.sp,
+            color: AppColors.colorBlack,
           ),
         ),
       ),

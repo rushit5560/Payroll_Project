@@ -43,7 +43,7 @@ class DepartmentFormModule extends StatelessWidget {
                     textAlign: TextAlign.left,
                     maxLines: null,
                     text: TextSpan(
-                        text: AppMessage.isActive,
+                        text: AppMessage.status,
                         style: TextStyleConfig.textStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,

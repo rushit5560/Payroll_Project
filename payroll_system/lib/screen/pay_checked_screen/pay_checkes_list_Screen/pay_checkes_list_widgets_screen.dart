@@ -71,7 +71,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                     ],
                   ),
                   SingleListTileModuleCustom(
-                    textKey: AppMessage.date,
+                    textKey: AppMessage.payDate,
                     textValue: payrollListDataListValue.paydate
                         .toString()
                         .split(" ")[0],
@@ -79,7 +79,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                    textKey: AppMessage.name,
+                    textKey: AppMessage.employeeName,
                     textValue: payrollListDataListValue.firstName +
                         payrollListDataListValue.middleName +
                         payrollListDataListValue.lastName,
@@ -87,7 +87,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                    textKey: AppMessage.company,
+                    textKey: AppMessage.companyLabelName,
                     textValue: payrollListDataListValue.companyname,
                     image: AppImages.companyIcon,
                   ),
@@ -110,7 +110,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
-                    textValue: payrollListDataListValue.days,
+                    textValue: "${payrollListDataListValue.days} ${AppMessage.days}",
                     image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),
@@ -136,29 +136,29 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.subTotal,
-                    textValue: payrollListDataListValue.subTotal.toString(),
+                    textValue: "\$ ${payrollListDataListValue.subTotal.toString()}",
                     image: AppImages.netAmountIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.netAmount,
-                    textValue: payrollListDataListValue.finalAmount,
+                    textValue: "\$ ${payrollListDataListValue.finalAmount}",
                     image: AppImages.netAmountIcon,
                   ),
-                  SizedBox(height: 2.h),
+                  const SizedBox(height: 5),
+                  SingleListTileModuleCustom(
+                    textValue:
+                    payrollListDataListValue.approvepaychecks ==
+                        "0"
+                        ? AppMessage.notApproved
+                        : AppMessage.approved,
+                    image: AppImages.verifyIcon,
+                    textKey: AppMessage.status,
+                    valueColor: payrollListDataListValue.approvepaychecks ==
+                        "0" ? AppColors.colorRed : AppColors.greenColor,
+                  ),
 
-                  /*Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      DownloadButtonModule(
-                          onDownloadTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) => DownloadDialog());
-                          },
-                          downloadLabelText: AppMessage.download),
-                    ],
-                  ),*/
+
                 ],
               ).commonAllSidePadding(10),
             ),

@@ -51,19 +51,7 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                               imageStatus: true,
                               image: AppImages.departmentIcon,
                             ),
-                            CompanyDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => EmployeeListScreen(), arguments: [
-                                  companyViewScreenController.companyId
-                                      .toString(),
-                                  companyViewScreenController.companyName,
-                                ]);
-                              },
-                              title: AppMessage.employeeNameDrawer,
-                              imageStatus: true,
-                              image: AppImages.employeeIcon,
-                            ),
+
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();
@@ -77,6 +65,21 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                               imageStatus: true,
                               image: AppImages.locationIcon,
                             ),
+
+                            CompanyDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => EmployeeListScreen(), arguments: [
+                                  companyViewScreenController.companyId
+                                      .toString(),
+                                  companyViewScreenController.companyName,
+                                ]);
+                              },
+                              title: AppMessage.employeeNameDrawer,
+                              imageStatus: true,
+                              image: AppImages.employeeIcon,
+                            ),
+
                             CompanyDrawerTile(
                               onTap: () {
                                 Get.back();

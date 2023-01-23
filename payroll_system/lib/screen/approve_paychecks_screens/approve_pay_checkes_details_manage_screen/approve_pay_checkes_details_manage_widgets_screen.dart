@@ -89,9 +89,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.payDate),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: approvalDataValue.firstName +
-                        approvalDataValue.middleName +
-                        approvalDataValue.lastName,
+                    textValue: "${approvalDataValue.firstName} ${approvalDataValue.middleName} ${approvalDataValue.lastName}",
                     image: AppImages.employeeIcon,
                     textKey: AppMessage.employeeName),
                 const SizedBox(height: 5),
@@ -103,7 +101,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.hours),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: approvalDataValue.finalAmount,
+                    textValue: "\$ ${approvalDataValue.finalAmount}",
                     image: AppImages.netAmountIcon,
                     textKey: AppMessage.netPay),
                 const SizedBox(height: 5),
@@ -113,9 +111,9 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.totalTax),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: approvalDataValue.tax.toString(),
+                    textValue: AppMessage.no,
                     image: AppImages.netAmountIcon,
-                    textKey: AppMessage.diractDeposit),
+                    textKey: AppMessage.directDeposit),
                 const SizedBox(height: 5),
               ],
             ).commonAllSidePadding(10),
@@ -151,7 +149,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                     textKey: AppMessage.hours),
                 const SizedBox(height: 5),
                 SingleListTileModuleCustom(
-                    textValue: approvalDataValue.finalAmount,
+                    textValue: "\$ ${approvalDataValue.finalAmount}",
                     image: AppImages.netAmountIcon,
                     textKey: AppMessage.netPay),
                 const SizedBox(height: 5),
