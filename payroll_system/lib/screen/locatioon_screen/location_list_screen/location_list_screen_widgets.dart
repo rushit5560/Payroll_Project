@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Utils/extensions.dart';
-import 'package:payroll_system/common_modules/edit_and_delete_button_module.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
-import 'package:payroll_system/common_modules/single_item_module.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_list_screen_controller.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_manage_screen/location_manage_screen.dart';
@@ -15,6 +13,7 @@ import '../../../common_modules/custom_alert_dialog_module.dart';
 import '../../../constants/colors.dart';
 import '../../../utils/messaging.dart';
 
+// ignore: must_be_immutable
 class LocationListScreenWidgets extends StatelessWidget {
   LocationListScreenWidgets({super.key});
   final screenController = Get.find<LocationListScreenController>();

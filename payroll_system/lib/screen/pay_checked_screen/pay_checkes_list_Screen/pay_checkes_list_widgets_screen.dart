@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/common_modules/new/web_url_launcher_function.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/pay_checkes_dowanload_screen_controller.dart';
 import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/app_images.dart';
@@ -17,11 +16,12 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 
+// ignore: must_be_immutable
 class PayCheckesListWidgetsScreen extends StatelessWidget {
   PayCheckesListWidgetsScreen({super.key});
 
-  final screenController =
-      Get.find<PayCheckesDowanloadScreenController>();
+  final payCheckesListScreenController =
+      Get.find<PayCheckesListScreenController>();
 
   UserPreference userPreference = UserPreference();
 
@@ -29,10 +29,10 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: screenController.payCheckDwanloadListData.length,
+        itemCount: payCheckesListScreenController.payCheckesListData.length,
         itemBuilder: (context, index) {
           final payrollListDataListValue =
-          screenController.payCheckDwanloadListData[index];
+              payCheckesListScreenController.payCheckesListData[index];
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -48,17 +48,16 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          bool payChecksDownloadPermission = await userPreference
-                              .getBoolPermissionFromPrefs(
-                              keyId: UserPreference.payChecksDownloadKey);
+                          bool payChecksDownloadPermission =
+                              await userPreference.getBoolPermissionFromPrefs(
+                                  keyId: UserPreference.payChecksDownloadKey);
 
                           if (payChecksDownloadPermission == true) {
                             await WebUrlLauncher().launchPdfInBrowser(
-                                "${ApiUrl
-                                    .downloadPayrollApi}${payrollListDataListValue
-                                    .id}");
+                                "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
                           } else {
-                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            Fluttertoast.showToast(
+                                msg: AppMessage.deniedPermission);
                           }
                         },
                         child: Image.asset(
@@ -80,7 +79,8 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.employeeName,
-                    textValue: "${payrollListDataListValue.firstName} ${payrollListDataListValue.middleName} ${payrollListDataListValue.lastName}",
+                    textValue:
+                        "${payrollListDataListValue.firstName} ${payrollListDataListValue.middleName} ${payrollListDataListValue.lastName}",
                     image: AppImages.employeeIcon,
                   ),
                   const SizedBox(height: 5),
@@ -108,7 +108,8 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
-                    textValue: "${payrollListDataListValue.days} ${AppMessage.days}",
+                    textValue:
+                        "${payrollListDataListValue.days} ${AppMessage.days}",
                     image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),
@@ -134,7 +135,8 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.subTotal,
-                    textValue: "\$ ${payrollListDataListValue.subTotal.toString()}",
+                    textValue:
+                        "\$ ${payrollListDataListValue.subTotal.toString()}",
                     image: AppImages.netAmountIcon,
                   ),
                   const SizedBox(height: 5),
@@ -145,18 +147,15 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                    textValue:
-                    payrollListDataListValue.approvepaychecks ==
-                        "0"
+                    textValue: payrollListDataListValue.approvepaychecks == "0"
                         ? AppMessage.notApproved
                         : AppMessage.approved,
                     image: AppImages.verifyIcon,
                     textKey: AppMessage.status,
-                    valueColor: payrollListDataListValue.approvepaychecks ==
-                        "0" ? AppColors.colorRed : AppColors.greenColor,
+                    valueColor: payrollListDataListValue.approvepaychecks == "0"
+                        ? AppColors.colorRed
+                        : AppColors.greenColor,
                   ),
-
-
                 ],
               ).commonAllSidePadding(10),
             ),

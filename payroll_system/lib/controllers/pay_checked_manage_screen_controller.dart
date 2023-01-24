@@ -11,7 +11,6 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 import 'pay_checkes_list_screen_controller.dart';
 
-
 class PayCheckedManageScreenController extends GetxController {
   // PayrollOption payrollOption = Get.arguments[0];
   String companyId = Get.arguments[0];
@@ -29,11 +28,15 @@ class PayCheckedManageScreenController extends GetxController {
 
   RxString selectedCheckedValue = "Choose Option".obs;
 
-  List<String> isPayCheckedList = ["Choose Option", "Weekly", "Bi-Weekly", "Others"];
+  List<String> isPayCheckedList = [
+    "Choose Option",
+    "Weekly",
+    "Bi-Weekly",
+    "Others"
+  ];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> employeeFormKey = GlobalKey<FormState>();
-
 
   DateTime birthDate = DateTime.now();
 
@@ -66,7 +69,6 @@ class PayCheckedManageScreenController extends GetxController {
   TextEditingController taxController = TextEditingController();
   TextEditingController memoController = TextEditingController();
 
-
   List<String> regularHoursList = [];
   List<String> overTimeList = [];
   List<String> holidayPayList = [];
@@ -95,8 +97,8 @@ class PayCheckedManageScreenController extends GetxController {
     selectedEmployeeList.clear();
   }
 
-  final payCheckesListScreenController = Get.find<PayCheckesListScreenController>();
-
+  final payCheckesListScreenController =
+      Get.find<PayCheckesListScreenController>();
 
   //getCompanyWiseEmployeeFunction
   List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
@@ -162,7 +164,8 @@ class PayCheckedManageScreenController extends GetxController {
     String url = ApiUrl.createPayCheckesApi;
     log('createPaycheckFunction Api Url :$url');
 
-    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
     int daysCount = endDate.difference(startDate).inDays;
 
     try {
@@ -189,7 +192,6 @@ class PayCheckedManageScreenController extends GetxController {
       // request.fields['tip'] = tipList.toString().replaceAll(" ", "");
       // request.fields['tax'] = taxList.toString().replaceAll(" ", "");
 
-
       log('request.fields : ${request.fields}');
 
       var response = await request.send();
@@ -198,18 +200,19 @@ class PayCheckedManageScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-            log('value : $value');
+        log('value : $value');
 
-            PaychecksCreateModel paychecksCreateModel = PaychecksCreateModel.fromJson(json.decode(value));
-            isSuccessStatus.value = paychecksCreateModel.success;
+        PaychecksCreateModel paychecksCreateModel =
+            PaychecksCreateModel.fromJson(json.decode(value));
+        isSuccessStatus.value = paychecksCreateModel.success;
 
-            if(isSuccessStatus.value) {
-              Fluttertoast.showToast(msg: paychecksCreateModel.messege);
-              Get.back();
-              await payCheckesListScreenController.getPaycheckesListFunction();
-            } else {
-              log('createPaycheckFunction Else');
-            }
+        if (isSuccessStatus.value) {
+          Fluttertoast.showToast(msg: paychecksCreateModel.messege);
+          Get.back();
+          await payCheckesListScreenController.getPaycheckesListFunction();
+        } else {
+          log('createPaycheckFunction Else');
+        }
       });
 
       /*Map<String, dynamic> bodyData = {
@@ -232,13 +235,12 @@ class PayCheckedManageScreenController extends GetxController {
         "memo": memoController.text.trim(),
       };*/
 
-    } catch(e) {
+    } catch (e) {
       log('createPaycheckFunction Error : $e');
       rethrow;
     } finally {
       isLoading(false);
     }
-
   }
 
   @override

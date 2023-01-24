@@ -77,18 +77,23 @@ class CompanyHomeDrawer extends StatelessWidget {
                             image: AppImages.locationIcon,
                           )
                         : const SizedBox(),
-                    CompanyHomeDrawerTile(
-                      title: AppMessage.paycheckes,
-                      onTap: () {
-                        Get.back();
-                        Get.to(() => PayCheckesListScreen(), arguments: [
-                          companyHomeScreenController.companyId.toString(),
-                          companyHomeScreenController.companyName,
-                        ]);
-                      },
-                      imageStatus: true,
-                      image: AppImages.paycheckIcon,
-                    ),
+                    companyHomeScreenController
+                                .isLocationShowPermission.value ==
+                            true
+                        ? CompanyHomeDrawerTile(
+                            title: AppMessage.paycheckes,
+                            onTap: () {
+                              Get.back();
+                              Get.to(() => PayCheckesListScreen(), arguments: [
+                                companyHomeScreenController.companyId
+                                    .toString(),
+                                companyHomeScreenController.companyName,
+                              ]);
+                            },
+                            imageStatus: true,
+                            image: AppImages.paycheckIcon,
+                          )
+                        : const SizedBox(),
                     CompanyHomeDrawerTile(
                       onTap: () {
                         Get.back();

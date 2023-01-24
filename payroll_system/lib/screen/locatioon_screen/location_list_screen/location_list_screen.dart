@@ -39,7 +39,7 @@ class LocationListScreen extends StatelessWidget {
             onPressed: () async {
               bool locationCreatePermission =
                   await userPreference.getBoolPermissionFromPrefs(
-                      keyId: UserPreference.departmentAddKey);
+                      keyId: UserPreference.locationAddKey);
 
               if (locationCreatePermission == true) {
                 Get.to(

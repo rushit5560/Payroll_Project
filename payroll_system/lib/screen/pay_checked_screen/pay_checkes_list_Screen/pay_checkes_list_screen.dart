@@ -12,6 +12,7 @@ import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 
+// ignore: must_be_immutable
 class PayCheckesListScreen extends StatelessWidget {
   PayCheckesListScreen({super.key});
 
@@ -25,20 +26,24 @@ class PayCheckesListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
-        title: Text(AppMessage.paycheckes,
+        title: Text(
+          AppMessage.paycheckes,
           style: TextStyle(
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,
             fontSize: 17.sp,
-          ),),
+          ),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () async {
-              bool payChecksAddPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.payChecksAddKey);
-              if(payChecksAddPermission == true) {
+              bool payChecksAddPermission =
+                  await userPreference.getBoolPermissionFromPrefs(
+                      keyId: UserPreference.payChecksAddKey);
+              if (payChecksAddPermission == true) {
                 Get.to(
-                      () => PayCheckedManageScreen(),
+                  () => PayCheckedManageScreen(),
                   arguments: [
                     payCheckesListScreenController.companyId,
                     payCheckesListScreenController.companyName,
@@ -47,7 +52,6 @@ class PayCheckesListScreen extends StatelessWidget {
               } else {
                 Fluttertoast.showToast(msg: AppMessage.deniedPermission);
               }
-
             },
             icon: const Icon(Icons.add_rounded),
           ),

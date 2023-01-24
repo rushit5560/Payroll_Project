@@ -44,7 +44,7 @@ class DepartmentListScreen extends StatelessWidget {
             onPressed: () async {
               bool departmentAddPermission =
                   await userPreference.getBoolPermissionFromPrefs(
-                      keyId: UserPreference.departmentEditKey);
+                      keyId: UserPreference.departmentAddKey);
 
               if (departmentAddPermission == true) {
                 Get.to(

@@ -63,15 +63,17 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                               imageStatus: true,
                               image: AppImages.roleIcon,
                             ),
-                            AdminDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => SubAdminListScreen());
-                              },
-                              title: AppMessage.subAdminText,
-                              imageStatus: true,
-                              image: AppImages.subAdminIcon,
-                            ),
+                            adminDrawerController.roleId.value == 1
+                                ? AdminDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => SubAdminListScreen());
+                                    },
+                                    title: AppMessage.subAdminText,
+                                    imageStatus: true,
+                                    image: AppImages.subAdminIcon,
+                                  )
+                                : Container(),
                             AdminDrawerTile(
                               onTap: () {
                                 Get.back();
