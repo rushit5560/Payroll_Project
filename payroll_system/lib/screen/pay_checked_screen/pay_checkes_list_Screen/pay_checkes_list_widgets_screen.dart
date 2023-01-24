@@ -1,13 +1,12 @@
 import 'dart:developer';
-
+import 'dart:io';
+import 'package:dio/dio.dart' as ddio;
 import 'package:dio/dio.dart';
+// import 'package:ext_storage/ext_storage.dart';
 import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
-import 'package:payroll_system/common_modules/new/web_url_launcher_function.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
@@ -24,6 +23,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
       Get.find<PayCheckesListScreenController>();
 
   UserPreference userPreference = UserPreference();
+  var dio = Dio();
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +48,31 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          bool payChecksDownloadPermission =
-                              await userPreference.getBoolPermissionFromPrefs(
-                                  keyId: UserPreference.payChecksDownloadKey);
+                          log("11111");
+                          String imageUrl =
+                              "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}";
 
-                          if (payChecksDownloadPermission == true) {
-                            await WebUrlLauncher().launchPdfInBrowser(
-                                "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.deniedPermission);
-                          }
+                          const String fileName = "download.pdf";
+
+                          String fullPath = await _getFilePath(fileName);
+
+                          dowanload(dio, imageUrl, fullPath);
+                          log("imageUrl:: $imageUrl");
+                          log("22222");
+
+                          // bool payChecksDownloadPermission =
+                          //     await userPreference.getBoolPermissionFromPrefs(
+                          //         keyId: UserPreference.payChecksDownloadKey);
+
+                          // if (payChecksDownloadPermission == true) {
+                          //   await
+
+                          //   WebUrlLauncher().launchPdfInBrowser(
+                          //       "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
+                          // } else {
+                          //   Fluttertoast.showToast(
+                          //       msg: AppMessage.deniedPermission);
+                          // }
                         },
                         child: Image.asset(
                           AppImages.downloadIcon,
@@ -166,81 +180,120 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
   }
 }
 
-class DownloadDialog extends StatefulWidget {
-  const DownloadDialog({super.key});
-
-  @override
-  State<DownloadDialog> createState() => _DownloadDialogState();
-}
-
-class _DownloadDialogState extends State<DownloadDialog> {
-  Dio dio = Dio();
+Future dowanload(Dio dio, String imageUrl, String fullPath) async {
+  log("dowanload function");
   double progress = 0.0;
 
-  void startDownloading() async {
-    const String url = 'https://www.africau.edu/images/default/sample.pdf';
+  await dio.download(
+    imageUrl,
+    fullPath,
+    onReceiveProgress: (recivedBytes, totalBytes) {
+      log("dowanload files  111");
 
-    const String fileName = "download.pdf";
+      progress = recivedBytes / totalBytes;
 
-    String path = await _getFilePath(fileName);
+      log("progress ::: $progress");
 
-    await dio.download(
-      url,
-      path,
-      onReceiveProgress: (recivedBytes, totalBytes) {
-        log("dowanload files  111");
-        setState(() {
-          progress = recivedBytes / totalBytes;
-        });
-
-        log("progress ::: ${progress}");
-
-        log("dowanload files  222");
-      },
-      deleteOnError: true,
-    ).then((_) {
-      Navigator.pop(context);
-    });
-  }
-
-  _getFilePath(String fileName) async {
-    // final dir = await getApplicationDocumentsDirectory();
-    final dir = await ExternalPath.getExternalStoragePublicDirectory(
-        ExternalPath.DIRECTORY_DOWNLOADS);
-    return "$dir/$fileName";
-
-    // return dir;
-  }
-
-  @override
-  void initState() {
-    startDownloading();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    String downloadingprogress = (progress * 100).toInt().toString();
-
-    return AlertDialog(
-      backgroundColor: Colors.black,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const CircularProgressIndicator.adaptive(),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            "Downloading: $downloadingprogress%",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+      log("dowanload files  222");
+    },
+    deleteOnError: true,
+  ).then((_) {
+    // Navigator.pop(context);
+  });
 }
+
+_getFilePath(String fileName) async {
+  // final dir = await getApplicationDocumentsDirectory();
+  final dir = await ExternalPath.getExternalStoragePublicDirectory(
+      ExternalPath.DIRECTORY_DOWNLOADS);
+  log("dir/fileName: $dir/$fileName");
+  return "$dir/$fileName";
+
+  // return dir;
+}
+
+
+// void showDownloadProgress(received, total) {
+//   if (total != -1) {
+//     print((received / total * 100).toStringAsFixed(0) + "%");
+//   }
+// }
+
+// class DownloadDialog extends StatefulWidget {
+//   const DownloadDialog({super.key});
+
+//   @override
+//   State<DownloadDialog> createState() => _DownloadDialogState();
+// }
+
+// class _DownloadDialogState extends State<DownloadDialog> {
+//   Dio dio = Dio();
+//   double progress = 0.0;
+
+//   void startDownloading() async {
+//     const String url = 'https://www.africau.edu/images/default/sample.pdf';
+
+//     const String fileName = "download.pdf";
+
+//     String path = await _getFilePath(fileName);
+
+//     await dio.download(
+//       url,
+//       path,
+//       onReceiveProgress: (recivedBytes, totalBytes) {
+//         log("dowanload files  111");
+//         setState(() {
+//           progress = recivedBytes / totalBytes;
+//         });
+
+//         log("progress ::: ${progress}");
+
+//         log("dowanload files  222");
+//       },
+//       deleteOnError: true,
+//     ).then((_) {
+//       Navigator.pop(context);
+//     });
+//   }
+
+//   _getFilePath(String fileName) async {
+//     // final dir = await getApplicationDocumentsDirectory();
+//     final dir = await ExternalPath.getExternalStoragePublicDirectory(
+//         ExternalPath.DIRECTORY_DOWNLOADS);
+//     return "$dir/$fileName";
+
+//     // return dir;
+//   }
+
+//   @override
+//   void initState() {
+//     startDownloading();
+
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     String downloadingprogress = (progress * 100).toInt().toString();
+
+//     return AlertDialog(
+//       backgroundColor: Colors.black,
+//       content: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const CircularProgressIndicator.adaptive(),
+//           const SizedBox(
+//             height: 20,
+//           ),
+//           Text(
+//             "Downloading: $downloadingprogress%",
+//             style: const TextStyle(
+//               color: Colors.white,
+//               fontSize: 17,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

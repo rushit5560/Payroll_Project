@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
@@ -19,7 +20,6 @@ class PayCheckesListScreenController extends GetxController {
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   List<PayCheckesListData> payCheckesListData = [];
   TextEditingController hourlyRateController = TextEditingController();
-
   Future<void> getPaycheckesListFunction() async {
     isLoading(true);
     String url = "${ApiUrl.getPayCheckesListApi}$companyId";

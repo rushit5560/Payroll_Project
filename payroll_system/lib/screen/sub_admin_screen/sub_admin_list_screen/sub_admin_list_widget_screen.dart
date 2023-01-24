@@ -7,6 +7,7 @@ import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/sub_admin_list_screen_controller.dart';
+import 'package:payroll_system/screen/sub_admin_screen/sub_admin_manage_screen/sub_admin_manage_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -42,10 +43,9 @@ class SubAdminListWidgetsScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          // Get.to(
-                          //   () => LocationManageScreen(),
-
-                          // );
+                          Get.to(
+                            () => SubAdminManageScreen(),
+                          );
                         },
                         child: Image.asset(
                           AppImages.editIcon,
