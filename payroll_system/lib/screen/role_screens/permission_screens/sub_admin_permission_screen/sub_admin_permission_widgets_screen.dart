@@ -23,8 +23,8 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
               isViewValue: subAdminPermissionScreenController
                   .companyInIsViewChecked.value,
               isViewOnChanged: (bool? value) {
-                subAdminPermissionScreenController
-                    .companyInIsViewChecked.value = value!;
+                // subAdminPermissionScreenController
+                //     .companyInIsViewChecked.value = value!;
                 subAdminPermissionScreenController.loadUI();
               },
               isAddShow: true,

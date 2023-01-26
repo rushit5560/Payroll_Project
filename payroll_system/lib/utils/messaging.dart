@@ -4,6 +4,8 @@ class AppMessage {
   static String mobileNo = 'Mobile number';
   static String fullName = 'Full Name';
   static String email = 'Enter an Email';
+  static String email1 = 'Email';
+
   static String termsAndConditions = 'I Agree with privacy and policy';
   static String forgotPassword = 'Forgot password ?';
   static String iAgreeWith = 'I Agree with ';
@@ -68,6 +70,7 @@ class AppMessage {
   static String subAdminText = "Sub Admin";
   static String subAdminListText = "SubAdmin List";
   static String varifiedStatus = "Varified Status";
+  static String subAdminUpdate = 'Sub Admin Update';
 
   //company
   static String companyText = "Company";
@@ -184,8 +187,9 @@ class AppMessage {
       'No Approval PayChecksList Found.';
 
   //validation messages
-  static String pleaseEnterName = 'Please enter user name.';
+  static String pleaseEnterName = 'Please enter name.';
   static String pleaseEnterFirstName = 'Please enter first name.';
+
   static String pleaseEnterMiddleName = 'Please enter middle name.';
   static String pleaseEnterCurrentPassword = 'Please enter current password.';
   static String pleaseEnterLastName = 'Please enter last name.';
@@ -298,9 +302,9 @@ class AppMessage {
   static String pleaseSelectEmployee = 'Please select employee.';
 
 // paychecks
-static String valueZero = "0";
-static String terminated = 'Terminated';
-static String adminNameLabel = 'Admin Name';
+  static String valueZero = "0";
+  static String terminated = 'Terminated';
+  static String adminNameLabel = 'Admin Name';
 
   static String paycheckes = 'Paychecks';
   static String paycheckesDowanload = 'Paychecks Dowanload';

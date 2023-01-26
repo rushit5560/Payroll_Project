@@ -16,6 +16,13 @@ class FieldValidation {
       return null;
     }
   }
+  String? validateName(String value) {
+    if (value.isEmpty) {
+      return AppMessage.pleaseEnterName;
+    } else {
+      return null;
+    }
+  }
 
   String? validateMiddleName(String value) {
     if (value.isEmpty) {

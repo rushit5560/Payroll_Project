@@ -5,8 +5,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 SubadminListModel subadminListModelFromJson(String str) =>
     SubadminListModel.fromJson(json.decode(str));
 

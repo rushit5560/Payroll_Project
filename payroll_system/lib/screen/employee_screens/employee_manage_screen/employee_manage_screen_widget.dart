@@ -25,7 +25,6 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
   final employeeCreteScreenController =
       Get.find<EmployeeManageScreenController>();
 
-  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

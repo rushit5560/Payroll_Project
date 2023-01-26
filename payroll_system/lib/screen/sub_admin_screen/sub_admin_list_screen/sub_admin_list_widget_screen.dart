@@ -45,6 +45,7 @@ class SubAdminListWidgetsScreen extends StatelessWidget {
                         onTap: () async {
                           Get.to(
                             () => SubAdminManageScreen(),
+                            arguments: [subAdminValue.id.toString()],
                           );
                         },
                         child: Image.asset(
@@ -82,20 +83,25 @@ class SubAdminListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                       textValue: subAdminValue.userName,
-                      image: AppImages.payPeriodIcon,
+                      image: AppImages.employeeIcon,
                       textKey: AppMessage.name),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                       textValue: subAdminValue.phoneno,
-                      image: AppImages.payPeriodIcon,
+                      image: AppImages.phoneIcon,
                       textKey: AppMessage.mobileNumber),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                       textValue: subAdminValue.isActive == "1"
                           ? AppMessage.active
                           : AppMessage.isActive,
-                      image: AppImages.payPeriodIcon,
-                      textKey: AppMessage.varifiedStatus),
+                      valueColor: subAdminValue.isActive == AppMessage.value
+                          ? AppColors.greenColor
+                          : subAdminValue.isActive == AppMessage.valueZero
+                              ? AppColors.colorRed
+                              : AppColors.greyColor,
+                      image: AppImages.verifyIcon,
+                      textKey: AppMessage.status),
                   const SizedBox(height: 5),
                 ],
               ).commonAllSidePadding(5),

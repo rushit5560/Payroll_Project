@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:payroll_system/models/sub_admin_screen_model/sub_admin_list_screen_model.dart';
+import 'package:payroll_system/models/sub_admin_list_screen_model/sub_admin_list_screen_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
 

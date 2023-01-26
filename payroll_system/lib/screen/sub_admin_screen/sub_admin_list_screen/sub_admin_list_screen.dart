@@ -30,14 +30,14 @@ class SubAdminListScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(Icons.home),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Get.back();
+        //     },
+        //     icon: const Icon(Icons.home),
+        //   ),
+        // ],
       ),
       body:
           // const Center(

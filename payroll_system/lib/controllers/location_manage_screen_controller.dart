@@ -1,16 +1,16 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/constants/enums.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/constants/enums.dart';
+import '../Utils/extension_methods/user_details.dart';
+import '../models/location_manage_screen_model/location_update_model.dart';
 import 'package:payroll_system/controllers/location_list_screen_controller.dart';
 import 'package:payroll_system/models/location_manage_screen_model/location_create_model.dart';
 import 'package:payroll_system/models/location_manage_screen_model/location_get_by_id_model.dart';
-import 'package:payroll_system/utils/api_url.dart';
-import '../Utils/extension_methods/user_details.dart';
-import '../models/location_manage_screen_model/location_update_model.dart';
 
 class LocationManageScreenController extends GetxController {
   LocationOption locationOption = Get.arguments[0];

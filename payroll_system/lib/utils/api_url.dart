@@ -86,6 +86,11 @@ class ApiUrl {
 
 //subadmin
   static const allSubAdminApi = "${apiMainPath}api/admin/subadmin";
+  static const getSubAdminApi = "${apiMainPath}api/admin/subadmin/edit/";
+  static const updateSubAdminApi = "${apiMainPath}api/admin/subadmin/update";
 
+
+
+//permission api
   static const savePermissionApi = "${apiMainPath}api/admin/permissionadd";
 }
