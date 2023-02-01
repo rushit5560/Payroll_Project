@@ -303,7 +303,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Container(
-                      height: 50,
+                      // height: 50,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -349,7 +349,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                           companyEmployeeManageScreenController
                               .isLoading(false);
                         },
-                      ).commonOnlyPadding(left: 10, right: 10),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
                     ),
                   ),
                 ),
@@ -380,7 +380,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
             ).commonSymmetricPadding(vertical: 2),
             Container(
               width: double.infinity,
-              height: 50,
+              // height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 // border: Border.all(color: AppColors.greyColor),

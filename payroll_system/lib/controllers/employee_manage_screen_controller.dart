@@ -71,7 +71,7 @@ class EmployeeManageScreenController extends GetxController {
   int departmentId = 0;
 
   DateTime birthDate = DateTime.now();
-  DateTime employmentStartDate = DateTime.now();
+  DateTime employmentStartDate = DateTime.now().subtract(const Duration(days: 1));
   DateTime employmentEndDate = DateTime.now();
 
   List<CompanyData> allCompanyList = [];

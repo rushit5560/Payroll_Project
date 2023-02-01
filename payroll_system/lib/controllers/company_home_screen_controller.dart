@@ -27,6 +27,12 @@ class CompanyHomeScreenController extends GetxController {
 
   RxBool isDepartmentShowPermission = false.obs;
   RxBool isLocationShowPermission = false.obs;
+  RxBool isEmployeeShowPermission = false.obs;
+  RxBool isPaychecksShowPermission = false.obs;
+
+  List<String> filterList = ["All", "Active", "In-Active", "Terminated"];
+  RxString selectedFilterValue = "All".obs;
+
 
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {
@@ -46,7 +52,7 @@ class CompanyHomeScreenController extends GetxController {
 
         allCompanyWiseEmployeeList = companyWiseEmployeeModel.data;
 
-searchEmployeeList=allCompanyWiseEmployeeList;
+        searchEmployeeList=allCompanyWiseEmployeeList;
 
       } else {
         log('getAllCompanyFunction Else');
@@ -91,8 +97,25 @@ searchEmployeeList=allCompanyWiseEmployeeList;
   getLoggedInUserDataFromPrefs() async {
     companyId = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
-        companyName = await userPreference.getStringValueFromPrefs(keyId: UserPreference.userNameKey);
-    await getCompanyWiseEmployeeFunction();
+    companyName = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.userNameKey);
+    if (isEmployeeShowPermission.value == true) {
+      await getCompanyWiseEmployeeFunction();
+    } else {
+      isLoading(false);
+    }
+  }
+
+  void filterDropdownWiseFunction(String value) {
+    if (value == "All") {
+      searchEmployeeList = allCompanyWiseEmployeeList;
+    } else if (value == "Active") {
+      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "1").toList();
+    } else if (value == "In-Active") {
+      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "0").toList();
+    } else if (value == "Terminated") {
+      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "2").toList();
+    }
   }
 
   @override
@@ -106,6 +129,8 @@ searchEmployeeList=allCompanyWiseEmployeeList;
     isLoading(true);
     isDepartmentShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentViewKey);
     isLocationShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationViewKey);
+    isEmployeeShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
+    isPaychecksShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.payChecksViewKey);
     await getLoggedInUserDataFromPrefs();
   }
 

@@ -23,7 +23,7 @@ class LoginController extends GetxController {
   RxBool isPrivacyChecked = false.obs;
 
   //User login
-  Future<void> loginUserFunction(BuildContext context) async {
+  Future<void> loginUserFunction() async {
     isLoading(true);
     String url = ApiUrl.loginApi;
     log("loginUserFunction Api url : $url");

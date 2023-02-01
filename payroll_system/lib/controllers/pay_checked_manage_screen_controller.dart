@@ -97,22 +97,29 @@ class PayCheckedManageScreenController extends GetxController {
     selectedEmployeeList.clear();
   }
 
-  final payCheckesListScreenController =
-      Get.find<PayCheckesListScreenController>();
+  final payCheckesListScreenController = Get.find<PayCheckesListScreenController>();
 
   //getCompanyWiseEmployeeFunction
   List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
-  CompanyWiseEmployeeData? companyWiseDepartmentData;
+  // CompanyWiseEmployeeData? companyWiseDepartmentData;
   // List<CompanyDepartmentData> companyDepartment = [];
 
   List<String> departmentStringList = [];
 
-  Future<void> getCompanyWiseEmployeeFunction(companyId) async {
+  Future<void> getPaycheckWiseEmployeeFunction() async {
     isLoading(true);
-    String url = "${ApiUrl.getCompanyWiseEmployeeApi}$companyId";
+    String url = ApiUrl.payCheckWiseEmployeeApi;
     log('Get All Company List Api Url :$url');
+    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+
     try {
-      http.Response response = await http.get(Uri.parse(url));
+      Map<String, dynamic> bodyData = {
+        "userid": "$userId",
+        "cid": companyId,
+        "pay_period": "hourly"
+      };
+
+      http.Response response = await http.post(Uri.parse(url),body: bodyData);
 
       CompanyWiseEmployeeModel companyWiseEmployeeModel =
           CompanyWiseEmployeeModel.fromJson(json.decode(response.body));
@@ -124,7 +131,6 @@ class PayCheckedManageScreenController extends GetxController {
         // for (int i = 0; i < allCompanyWiseEmployeeList.length; i++) {
         //   departmentStringList.add(allCompanyWiseEmployeeList[i].firstName);
         // }
-        allCompanyWiseEmployeeList = companyWiseEmployeeModel.data;
       } else {
         log('getAllCompanyFunction Else');
       }
@@ -164,8 +170,7 @@ class PayCheckedManageScreenController extends GetxController {
     String url = ApiUrl.createPayCheckesApi;
     log('createPaycheckFunction Api Url :$url');
 
-    int userId = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.userIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
     int daysCount = endDate.difference(startDate).inDays;
 
     try {
@@ -247,7 +252,11 @@ class PayCheckedManageScreenController extends GetxController {
   void onInit() {
     // companyDDSelectedStringItem = companyName;
     // getAllCompanyFunction();
-    getCompanyWiseEmployeeFunction(companyId);
+    initMethod();
     super.onInit();
+  }
+
+  initMethod() async {
+    await getPaycheckWiseEmployeeFunction();
   }
 }

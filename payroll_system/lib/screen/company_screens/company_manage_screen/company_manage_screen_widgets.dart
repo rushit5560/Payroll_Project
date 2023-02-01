@@ -49,7 +49,7 @@ class CompanyFormModule extends StatelessWidget {
               const SizedBox(height: 5),
 
               FormSingleFieldModule(
-                headerText: AppMessage.companyPhoneNumber,
+                headerText: AppMessage.mobileNumber,
                 text: AppMessage.labelPhoneNo,
                 mandatoryText: AppMessage.mandatory,
                 keyboardType: TextInputType.phone,

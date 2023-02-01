@@ -8,6 +8,7 @@ import 'package:payroll_system/controllers/upload_document_screen_controller.dar
 import 'package:payroll_system/screen/employee_screens/document_upload_screen/document_upload_widgets_screen.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:sizer/sizer.dart';
+import '../../../utils/extension_methods/user_preference.dart';
 import '../../../utils/messaging.dart';
 import '../../../utils/style.dart';
 
@@ -15,6 +16,8 @@ class DocumentUploadScreen extends StatelessWidget {
   DocumentUploadScreen({Key? key}) : super(key: key);
   final uploadDocumentScreenController =
       Get.put(UploadDocumentScreenController());
+
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +50,25 @@ class DocumentUploadScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          AppMessage.uploadDocument,
-                          style: TextStyleConfig.textStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                        RichText(
+                          textAlign: TextAlign.left,
+                          maxLines: null,
+                          text: TextSpan(
+                              text: AppMessage.uploadDocumentWithFormat,
+                              style: TextStyleConfig.textStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyleConfig.textStyle(
+                                    textColor: AppColors.redColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ]),
                         ),
                         IconButton(
                           onPressed: () async {
@@ -77,12 +93,25 @@ class DocumentUploadScreen extends StatelessWidget {
                     SizedBox(height: 2.h),
                     Row(
                       children: [
-                        Text(
-                          AppMessage.documentype,
-                          style: TextStyleConfig.textStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                        RichText(
+                          textAlign: TextAlign.left,
+                          maxLines: null,
+                          text: TextSpan(
+                              text: AppMessage.documentsType,
+                              style: TextStyleConfig.textStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyleConfig.textStyle(
+                                    textColor: AppColors.redColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ]),
                         ),
                       ],
                     ),
@@ -91,17 +120,22 @@ class DocumentUploadScreen extends StatelessWidget {
                     SizedBox(height: 2.h),
                     CustomSubmitButtonModule(
                       onPress: () async {
-                        if (uploadDocumentScreenController.selectedDocumentList.isEmpty) {
-                          Fluttertoast.showToast(msg: AppMessage.pleaseSelectDocument);
-                        } else {
-                          // if (uploadDocumentScreenController.documentSelectedTypeValue.value == AppMessage.chooseOption) {
-                          //   Fluttertoast.showToast(msg: AppMessage.pleaseSelectDocumentType);
-                          // } else {
-                          if(uploadDocumentScreenController.formKey.currentState!.validate()) {
-                            await uploadDocumentScreenController.uploadDocumentFunction();
+
+                        bool isDocumentUploadPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentAddKey);
+
+                        if(isDocumentUploadPermission == true) {
+                          if (uploadDocumentScreenController.selectedDocumentList.isEmpty) {
+                            Fluttertoast.showToast(msg: AppMessage.pleaseSelectDocument);
+                          } else {
+                            if(uploadDocumentScreenController.formKey.currentState!.validate()) {
+                              await uploadDocumentScreenController.uploadDocumentFunction();
+                            }
                           }
-                          // }
+                        } else {
+                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                         }
+
+
                       },
                       labelText: AppMessage.submit,
                     ),

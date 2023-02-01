@@ -63,11 +63,9 @@ class DepartmentManageScreenController extends GetxController {
         await departmentListScreenController.getCompanyWiseDepartmentFunction();
       } else {
         log('createDepartmentFunction Else');
-        if (createDepartmentModel.error.departmentName[0]
-            .toString()
-            .contains("The department name has already been taken")) {
+        if (createDepartmentModel.messege.toString().contains("The department name has already been taken")) {
           Fluttertoast.showToast(
-              msg: createDepartmentModel.error.departmentName[0].toString());
+              msg: createDepartmentModel.messege.toString());
         }
       }
     } catch (e) {

@@ -102,6 +102,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
+            /// Pay Period
             RichText(
               textAlign: TextAlign.left,
               maxLines: null,
@@ -138,18 +139,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   ),
                   // child: DropdownButtonHideUnderline(
                   child: SizedBox(
-                    height: 50,
+                    // height: 50,
                     child: Center(
                       child: DropdownButtonFormField<String>(
-                        validator: (value) {
-                          if (employeeCreteScreenController
-                                  .selectedValue.value ==
-                              AppMessage.chooseOption) {
-                            return AppMessage.pleaseSelectPayPeriod;
-                          } else {
-                            return null;
-                          }
-                        },
+                        validator: (value) => FieldValidation().validateDropdownStatus(value!),
                         decoration:
                             const InputDecoration.collapsed(hintText: ''),
                         value: employeeCreteScreenController
@@ -177,13 +170,12 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                               .selectedValuePayper.value = value!;
                           employeeCreteScreenController.isLoading(false);
                         },
-                      ).commonOnlyPadding(left: 10, right: 10),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
                     ),
                   ),
                 ),
               ),
             ),
-            // ),
             const SizedBox(height: 5),
 
             employeeCreteScreenController.selectedValuePayper.value == "Hourly"
@@ -292,7 +284,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     // border: Border.all(color: AppColors.greyColor),
                   ),
                   child: Container(
-                    height: 50,
+                    // height: 50,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -327,15 +319,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           //       : Container();
                           //   return null;
                           // },
-                          validator: (value) {
-                            if (employeeCreteScreenController
-                                    .selectedValue.value ==
-                                AppMessage.chooseOption) {
-                              return AppMessage.pleaseSelectStatus;
-                            } else {
-                              return null;
-                            }
-                          },
+                          validator: (value) => FieldValidation().validateDropdownStatus(value!),
                           decoration:
                               const InputDecoration.collapsed(hintText: ''),
                           value:
@@ -364,7 +348,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
 
                             employeeCreteScreenController.isLoading(false);
                           },
-                        ).commonOnlyPadding(left: 10, right: 10),
+                        ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
                       ),
                     ),
                     // ),
@@ -510,7 +494,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Container(
-                      height: 50,
+                      // height: 50,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -519,15 +503,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                       // child: DropdownButtonHideUnderline(
                       child: Center(
                         child: DropdownButtonFormField<CompanyDepartmentData>(
-                          validator: (value) {
-                            if (employeeCreteScreenController
-                                    .selectedValue.value ==
-                                AppMessage.chooseOption) {
-                              return AppMessage.pleaseSelectDepartment;
-                            } else {
-                              return null;
-                            }
-                          },
+                          validator: (value) => FieldValidation().validateDropdownDepartment(value!.departmentName!),
                           decoration:
                               const InputDecoration.collapsed(hintText: ''),
                           value: employeeCreteScreenController
@@ -553,7 +529,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                                 .companyDepartmentData = value;
                             employeeCreteScreenController.isLoading(false);
                           },
-                        ).commonOnlyPadding(left: 10, right: 10),
+                        ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
                       ),
                     ),
                   ),
@@ -591,7 +567,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
-                  height: 50,
+                  // height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -600,14 +576,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   // child: DropdownButtonHideUnderline(
                   child: Center(
                     child: DropdownButtonFormField(
-                      validator: (value) {
-                        if (employeeCreteScreenController.selectedValue.value ==
-                            AppMessage.chooseOption) {
-                          return AppMessage.pleaseSelectLocation;
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: (value) => FieldValidation().validateDropdownLocation(value!.locationName!),
                       decoration: const InputDecoration.collapsed(hintText: ''),
                       value: employeeCreteScreenController.locationListData,
                       items: employeeCreteScreenController.allLocationList
@@ -627,7 +596,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                         employeeCreteScreenController.locationListData = value;
                         employeeCreteScreenController.isLoading(false);
                       },
-                    ).commonOnlyPadding(left: 10, right: 10),
+                    ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
                   ),
                 ),
               ),

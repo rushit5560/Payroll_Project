@@ -169,8 +169,9 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
             ? ApprovalPaycheckesButtonModule(
                     onPress: () async {
                       await approvePayCheckesDetailsScreenController
-                          .payrollapproveApiFunction(
-                              approvalDataValue.id.toString());
+                          .payrollApproveApiFunction(
+                              approvalDataValue.id.toString(),
+                      );
                     },
                     labelText: AppMessage.approvePaycheckes)
                 .commonSymmetricPadding(horizontal: 10)

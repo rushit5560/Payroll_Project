@@ -27,7 +27,6 @@ class EmployeeProfileScreen extends StatelessWidget {
           : Text(
             // ignore: prefer_interpolation_to_compose_strings
             employeeProfileScreenController.firstNameController.text +
-                " ${employeeProfileScreenController.middleNameController.text}" +
                 " ${employeeProfileScreenController.lastNameController.text}",
             style: TextStyle(
               color: AppColors.colorBlack,

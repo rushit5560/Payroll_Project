@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -6,6 +5,7 @@ import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/employee_list_screen_controller.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen.dart';
+import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -26,7 +26,8 @@ class EmployeeListScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.colorLightPurple2,
         appBar: AppBar(
-          title: Text(employeeListScreenController.companyName,
+          title: Text(
+            employeeListScreenController.companyName,
             style: TextStyle(
               color: AppColors.colorBlack,
               fontWeight: FontWeight.bold,
@@ -38,12 +39,12 @@ class EmployeeListScreen extends StatelessWidget {
             IconButton(
               onPressed: () async {
                 bool employeeCreatePermission =
-                await userPreference.getBoolPermissionFromPrefs(
-                    keyId: UserPreference.employeeAddKey);
+                    await userPreference.getBoolPermissionFromPrefs(
+                        keyId: UserPreference.employeeAddKey);
 
                 if (employeeCreatePermission == true) {
                   Get.to(
-                        () => EmployeeManageScreen(),
+                    () => EmployeeManageScreen(),
                     arguments: [
                       EmployeeOption.create,
                       AppMessage.empty,
@@ -61,7 +62,7 @@ class EmployeeListScreen extends StatelessWidget {
               ),
               highlightColor: Colors.transparent,
             ),
-           /* FloatingActionButton(
+            /* FloatingActionButton(
               onPressed: () async {
                 bool employeeCreatePermission =
                     await userPreference.getBoolPermissionFromPrefs(
@@ -129,24 +130,27 @@ class EmployeeListScreen extends StatelessWidget {
                                             .toLowerCase()
                                             .contains(value))
                                     .toList();
-
+                            employeeListScreenController
+                                .selectedFilterValue.value = "All";
                             employeeListScreenController.isLoading(false);
-                            log("searchEmployeeList : ${employeeListScreenController.searchEmployeeList}");
                           },
                           decoration: InputDecoration(
                             enabledBorder: InputFieldStyles().inputBorder(),
                             focusedBorder: InputFieldStyles().inputBorder(),
                             errorBorder: InputFieldStyles().inputBorder(),
-                            focusedErrorBorder: InputFieldStyles().inputBorder(),
+                            focusedErrorBorder:
+                                InputFieldStyles().inputBorder(),
                             fillColor: AppColors.colorWhite,
                             filled: true,
                             hintText: AppMessage.search,
-                            hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
+                            hintStyle: const TextStyle(
+                                color: AppColors.colorLightHintPurple2),
                             prefixIcon: const Icon(
                               Icons.search,
                               color: AppColors.colorLightHintPurple2,
                             ),
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 11),
                             suffixIcon: employeeListScreenController
                                     .textSearchEditingController.text.isEmpty
                                 ? null
@@ -164,7 +168,8 @@ class EmployeeListScreen extends StatelessWidget {
                                       employeeListScreenController
                                           .isLoading(false);
                                     },
-                                    icon: const Icon(Icons.close, color: AppColors.colorLightHintPurple2),
+                                    icon: const Icon(Icons.close,
+                                        color: AppColors.colorLightHintPurple2),
                                   ),
                           ),
                         ).commonOnlyPadding(left: 10, right: 10, top: 15),
@@ -176,10 +181,78 @@ class EmployeeListScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.sp,
                               ),
-                            ).commonAllSidePadding(10)
+                            ).commonAllSidePadding(10),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 3),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: Colors.transparent),
+                                    ),
+                                    child: Center(
+                                      child: DropdownButtonFormField<String>(
+                                        decoration:
+                                            const InputDecoration.collapsed(
+                                                hintText: ''),
+                                        value: employeeListScreenController
+                                            .selectedFilterValue.value,
+                                        items: employeeListScreenController
+                                            .filterList
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        borderRadius: BorderRadius.circular(10),
+                                        icon: Image.asset(
+                                          AppImages.arrowDownIcon,
+                                          height: 15,
+                                          width: 15,
+                                        ).commonSymmetricPadding(
+                                            horizontal: 10),
+                                        onChanged: (String? value) {
+                                          employeeListScreenController
+                                              .isLoading(true);
+                                          employeeListScreenController
+                                              .selectedFilterValue
+                                              .value = value!;
+                                          employeeListScreenController
+                                              .textSearchEditingController
+                                              .clear();
+                                          employeeListScreenController
+                                              .filterDropdownWiseFunction(
+                                                  value);
+                                          employeeListScreenController
+                                              .isLoading(false);
+                                        },
+                                      ).commonOnlyPadding(
+                                          left: 10,
+                                          right: 10,
+                                          top: 10,
+                                          bottom: 10),
+                                    ),
+                                  ),
+                                ),
+                              ).commonOnlyPadding(left: 10, right: 10, top: 5),
+                            ),
                           ],
                         ),
-                        Expanded(child: EmployeeListScreenWidgets()),
+                        Expanded(
+                          child: employeeListScreenController
+                                  .searchEmployeeList.isEmpty
+                              ? Center(child: Text(AppMessage.noEmpFound))
+                              : EmployeeListScreenWidgets(),
+                        ),
                       ],
                     ),
         ),

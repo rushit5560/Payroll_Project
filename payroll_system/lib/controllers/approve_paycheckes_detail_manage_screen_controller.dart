@@ -42,7 +42,7 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
         Fluttertoast.showToast(msg: approvalDeleteModel.messege);
         // approvePayCheckListData.removeAt(index);
         isLoading(true);
-        approvePaychecksListScreenController.approvePaycheckesListFunction();
+        await approvePaychecksListScreenController.approvePaycheckesListFunction();
         isLoading(false);
 
         Get.back();
@@ -58,14 +58,15 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
     }
   }
 
-  Future<void> payrollapproveApiFunction(String approvalId) async {
+  Future<void> payrollApproveApiFunction(String approvalId) async {
     isLoading(true);
     log("message");
     String url = "${ApiUrl.payrollapproveApi}$companyId/$approvalId";
-    log('payrollapproveApiFunction Api Url :$url');
+    log('payrollApproveApiFunction Api Url :$url');
 
     try {
       http.Response response = await http.get(Uri.parse(url));
+      log('response : ${response.body}');
 
       ApprovalPermissionModel approvalPermissionModel =
           ApprovalPermissionModel.fromJson(json.decode(response.body));
@@ -73,12 +74,13 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
       isSuccessStatus = approvalPermissionModel.success.obs;
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: approvalPermissionModel.messege);
-        // Get.back();
+        approvalData.approvepaychecks = "1";
+        Get.back();
       } else {
-        log('payrollapproveApiFunction Else');
+        log('payrollApproveApiFunction Else');
       }
     } catch (e) {
-      log('payrollapproveApiFunction Error :$e');
+      log('payrollApproveApiFunction Error :$e');
 
       rethrow;
     } finally {

@@ -1,26 +1,23 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
-import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_list_Screen/pay_checkes_list_widgets_screen.dart';
-import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_manage_screen/pay_checkes_manage_screen.dart';
+import 'package:payroll_system/controllers/salary_paycheks_list_screen_controller.dart';
+import 'package:payroll_system/screen/pay_checked_screen/salary_paycheks_manage_screen/salary_paycheks_manage_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
-
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 
-// ignore: must_be_immutable
-class PayCheckesListScreen extends StatelessWidget {
-  PayCheckesListScreen({super.key});
+import 'salary_paycheks_list_screen_widgets.dart';
 
-  final payCheckesListScreenController =
-      Get.put(PayCheckesListScreenController());
+class SalaryPaychecksListScreen extends StatelessWidget {
+  SalaryPaychecksListScreen({Key? key}) : super(key: key);
+
+  final salaryPaychecksListScreenController =
+      Get.put(SalaryPaychecksListScreenController());
 
   UserPreference userPreference = UserPreference();
 
@@ -30,7 +27,7 @@ class PayCheckesListScreen extends StatelessWidget {
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
         title: Text(
-          AppMessage.hourlyPaycheckes,
+          AppMessage.salaryPaycheckes,
           style: TextStyle(
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,
@@ -46,10 +43,10 @@ class PayCheckesListScreen extends StatelessWidget {
                       keyId: UserPreference.payChecksAddKey);
               if (payChecksAddPermission == true) {
                 Get.to(
-                  () => PayCheckedManageScreen(),
+                  () => SalaryPayChecksManageScreen(),
                   arguments: [
-                    payCheckesListScreenController.companyId,
-                    payCheckesListScreenController.companyName,
+                    salaryPaychecksListScreenController.companyId,
+                    salaryPaychecksListScreenController.companyName,
                   ],
                 );
               } else {
@@ -61,18 +58,18 @@ class PayCheckesListScreen extends StatelessWidget {
         ],
       ),
       body: Obx(
-        () => payCheckesListScreenController.isLoading.value
+        () => salaryPaychecksListScreenController.isLoading.value
             ? CommonLoader().showLoader()
-            : payCheckesListScreenController.payCheckesListData.isEmpty
+            : salaryPaychecksListScreenController.salaryPayChecksList.isEmpty
                 ? Center(
-                    child: Text(AppMessage.noHourlyPayChecksListFound),
+                    child: Text(AppMessage.noSalaryPayChecksListFound),
                   )
                 : Column(
                     children: [
                       Row(
                         children: [
                           Text(
-                            AppMessage.hourlyPaycheckesList,
+                            AppMessage.salaryPaycheckesList,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14.sp,
@@ -98,9 +95,9 @@ class PayCheckesListScreen extends StatelessWidget {
                                       decoration:
                                           const InputDecoration.collapsed(
                                               hintText: ''),
-                                      value: payCheckesListScreenController
+                                      value: salaryPaychecksListScreenController
                                           .selectedFilterValue.value,
-                                      items: payCheckesListScreenController
+                                      items: salaryPaychecksListScreenController
                                           .filterList
                                           .map<DropdownMenuItem<String>>(
                                               (String value) {
@@ -116,38 +113,38 @@ class PayCheckesListScreen extends StatelessWidget {
                                         width: 15,
                                       ).commonSymmetricPadding(horizontal: 10),
                                       onChanged: (String? value) {
-                                        payCheckesListScreenController
+                                        salaryPaychecksListScreenController
                                             .isLoading(true);
-                                        payCheckesListScreenController
+                                        salaryPaychecksListScreenController
                                             .selectedFilterValue.value = value!;
 
                                         if (value == "All") {
-                                          payCheckesListScreenController
-                                                  .filterPayChecksListData =
-                                              payCheckesListScreenController
-                                                  .payCheckesListData;
+                                          salaryPaychecksListScreenController
+                                                  .filterSalaryPayChecksList =
+                                              salaryPaychecksListScreenController
+                                                  .salaryPayChecksList;
                                         } else if (value == "Approved") {
-                                          payCheckesListScreenController
-                                                  .filterPayChecksListData =
-                                              payCheckesListScreenController
-                                                  .payCheckesListData
+                                          salaryPaychecksListScreenController
+                                                  .filterSalaryPayChecksList =
+                                              salaryPaychecksListScreenController
+                                                  .salaryPayChecksList
                                                   .where((element) =>
                                                       element
                                                           .approvepaychecks ==
                                                       "1")
                                                   .toList();
                                         } else if (value == "Not Approved") {
-                                          payCheckesListScreenController
-                                                  .filterPayChecksListData =
-                                              payCheckesListScreenController
-                                                  .payCheckesListData
+                                          salaryPaychecksListScreenController
+                                                  .filterSalaryPayChecksList =
+                                              salaryPaychecksListScreenController
+                                                  .salaryPayChecksList
                                                   .where((element) =>
                                                       element
                                                           .approvepaychecks ==
                                                       "0")
                                                   .toList();
                                         }
-                                        payCheckesListScreenController
+                                        salaryPaychecksListScreenController
                                             .isLoading(false);
                                       },
                                     ).commonOnlyPadding(
@@ -162,16 +159,15 @@ class PayCheckesListScreen extends StatelessWidget {
                           ),
                         ],
                       ).commonAllSidePadding(10),
-                      // const SizedBox(height: 5),
-                      payCheckesListScreenController
-                              .filterPayChecksListData.isEmpty
+                      salaryPaychecksListScreenController
+                              .filterSalaryPayChecksList.isEmpty
                           ? Expanded(
                               child: Center(
                                 child:
-                                    Text(AppMessage.noHourlyPayChecksListFound),
+                                    Text(AppMessage.noSalaryPayChecksListFound),
                               ),
                             )
-                          : PayCheckesListWidgetsScreen(),
+                          : SalaryPaychecksListModule(),
                     ],
                   ),
       ),

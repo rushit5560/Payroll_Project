@@ -26,6 +26,7 @@ class ApiUrl {
 
   // Employee Api's
   static const allEmployeeApi = "${apiMainPath}api/admin/employee/";
+  static const payCheckWiseEmployeeApi = "${apiMainPath}api/admin/paycheckwiseemployee";
   static const createEmployeeApi = "${apiMainPath}api/admin/employee/store";
   static const deleteEmployeeApi = "${apiMainPath}api/admin/employee/delete/";
   static const getEmployeeDetailsApi = "${apiMainPath}api/admin/employee/edit/";
@@ -72,8 +73,10 @@ class ApiUrl {
   static const updateLocationApi = "${apiMainPath}api/admin/location/update";
 
 //Payroll Api's
-  static const getPayCheckesListApi = "${apiMainPath}api/admin/payroll/";
+  static const getPayCheckesListApi = "${apiMainPath}api/admin/payroll/list";
+  static const getSalaryPayChecksListApi = "${apiMainPath}api/admin/paychecks/";
   static const createPayCheckesApi = "${apiMainPath}api/admin/payroll/store";
+  static const createSalaryPayChecksApi = "${apiMainPath}api/admin/paycheck/store";
 
   //approve paycheckes Api's
   static const getApprovePayCheckesListApi =

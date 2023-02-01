@@ -96,7 +96,7 @@ class ApprovePayCheckListData {
   final String finalAmount;
   final String isActive;
   final String memo;
-  final String approvepaychecks;
+  String approvepaychecks;
   final String createdby;
   final String modifiedby;
   final String createdAt;

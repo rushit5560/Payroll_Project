@@ -68,7 +68,7 @@ class DepartmentFormModule extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 3),
                       child: Container(
-                        height: 50,
+                        // height: 50,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -78,15 +78,7 @@ class DepartmentFormModule extends StatelessWidget {
                         child: Center(
                           child: DropdownButtonFormField<String>(
                             // dropdownColor: Colors.teal,
-                            validator: (value) {
-                              if (screenController.selectedValue.value ==
-                                  AppMessage.chooseOption) {
-                                return AppMessage.activeStatusMessage;
-                              } else {
-                                return null;
-                              }
-                            },
-
+                            validator: (value) => FieldValidation().validateDropdownStatus(value!),
                             decoration:
                                 const InputDecoration.collapsed(hintText: ''),
                             value: screenController.selectedValue.value,
@@ -108,7 +100,7 @@ class DepartmentFormModule extends StatelessWidget {
                               screenController.selectedValue.value = value!;
                               screenController.loadUI();
                             },
-                          ).commonOnlyPadding(left: 10, right: 10, top: 10),
+                          ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
                         ),
                         // ),
                       ),

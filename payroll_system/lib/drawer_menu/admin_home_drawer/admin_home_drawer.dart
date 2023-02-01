@@ -54,7 +54,8 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                     icon: const Icon(Icons.person,
                                         color: AppColors.colorBtBlue),
                                   ),
-                            AdminDrawerTile(
+                            adminDrawerController.roleId.value == 1
+                            ? AdminDrawerTile(
                               onTap: () {
                                 Get.back();
                                 Get.to(() => const RoleListScreen());
@@ -62,9 +63,10 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                               title: AppMessage.role,
                               imageStatus: true,
                               image: AppImages.roleIcon,
-                            ),
+                            ) : Container(),
                             adminDrawerController.roleId.value == 1
-                                ? AdminDrawerTile(
+                                ? adminDrawerController.isSubadminShowPermission.value == true
+                            ? AdminDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => SubAdminListScreen());
@@ -72,7 +74,7 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                     title: AppMessage.subAdminText,
                                     imageStatus: true,
                                     image: AppImages.subAdminIcon,
-                                  )
+                                  ) : Container()
                                 : Container(),
                             AdminDrawerTile(
                               onTap: () {

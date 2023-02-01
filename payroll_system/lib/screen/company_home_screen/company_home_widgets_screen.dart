@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -85,7 +84,6 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                               textContent:
                                   AppMessage.deleteEmployeeAlertMessage,
                               onYesTap: () async {
-                                log("Delete Employee");
                                 await companyHomeScreenController
                                     .deleteEmployeeFunction(
                                         value.id.toString(), index);
@@ -113,7 +111,7 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     image: AppImages.employeeIcon,
                     textKey: AppMessage.employeeName,
                     textValue:
-                        value.firstName + value.middleName + value.lastName,
+                        "${value.firstName} ${value.middleName} ${value.lastName}",
                   ),
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
@@ -124,7 +122,7 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                   SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
                     image: AppImages.phoneIcon,
-                    textKey: AppMessage.phoneNumber,
+                    textKey: AppMessage.mobileNumber,
                     textValue: value.mobileNumber,
                   ),
                   SizedBox(height: 1.h),

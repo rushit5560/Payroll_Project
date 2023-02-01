@@ -28,7 +28,7 @@ class LocationManageScreenController extends GetxController {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController locationNameController = TextEditingController();
-  List<String> isActiveOptionList = ["Choose Option", "active", "inactive"];
+  List<String> isActiveOptionList = ["Choose Option", "Active", "In-Active"];
   RxString selectedValue = "Choose Option".obs;
 
   Future<void> locationCreateFunction() async {
@@ -39,7 +39,7 @@ class LocationManageScreenController extends GetxController {
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
       request.fields['location_name'] = locationNameController.text.trim();
-      request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
+      request.fields['is_active'] = selectedValue.value == "Active" ? "1" : "0";
       request.fields['userid'] = "${UserDetails.userId}";
       request.fields['cid'] = companyId;
 
@@ -92,7 +92,7 @@ class LocationManageScreenController extends GetxController {
         locationNameController.text = locationGetByIdModel.data.locationName;
 
         selectedValue.value =
-            locationGetByIdModel.data.isActive == "1" ? "active" : "inactive";
+            locationGetByIdModel.data.isActive == "1" ? "Active" : "In-Active";
       } else {
         log("locationGetByIdFunction else");
       }
@@ -115,7 +115,7 @@ class LocationManageScreenController extends GetxController {
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
       request.fields['location_name'] = locationNameController.text.trim();
-      request.fields['is_active'] = selectedValue.value == "active" ? "1" : "0";
+      request.fields['is_active'] = selectedValue.value == "Active" ? "1" : "0";
       request.fields['id'] = getLocationId;
       request.fields['userid'] = "${UserDetails.userId}";
       request.fields['cid'] = companyId;
@@ -137,6 +137,7 @@ class LocationManageScreenController extends GetxController {
               .getCompanyWiseLocationFunction();
         } else {
           log("locationUpdateFunction Else");
+          Fluttertoast.showToast(msg: "${locationUpdateModel.error.locationName[0]}");
         }
         log("Location update : $locationUpdateModel");
       });

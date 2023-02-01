@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:payroll_system/models/employee_upload_document_models/employee_document_model.dart';
@@ -15,7 +16,10 @@ class DocumentDownloadScreenController extends GetxController {
 
   UserPreference userPreference = UserPreference();
 
+  TextEditingController textSearchEditingController = TextEditingController();
+
   List<DocumentDatum> employeeUploadedDocumentList = [];
+  List<DocumentDatum> searchEmployeeUploadedDocumentList = [];
 
   Future<void> getEmployeeDocumentFunction() async {
     isLoading(true);
@@ -33,6 +37,7 @@ class DocumentDownloadScreenController extends GetxController {
       if (isSuccessStatus.value) {
         employeeUploadedDocumentList.clear();
         employeeUploadedDocumentList.addAll(employeeDocumentModel.data);
+        searchEmployeeUploadedDocumentList = employeeUploadedDocumentList;
         log('employeeUploadedDocumentList Length : ${employeeUploadedDocumentList.length}');
       } else {
         log('getEmployeeDocumentFunction Else');

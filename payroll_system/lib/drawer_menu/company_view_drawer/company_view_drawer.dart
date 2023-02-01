@@ -11,6 +11,7 @@ import 'package:payroll_system/screen/authentication_screens/login_screen/login_
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/employee_screens/employee_list_screen/employee_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
+import 'package:payroll_system/screen/pay_checked_screen/salary_paycheks_list_screen/salary_paycheks_list_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -37,19 +38,14 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            companyViewScreenController
-                                        .isDepartmentShowPermission.value ==
-                                    true
+                            companyViewScreenController.isDepartmentShowPermission.value == true
                                 ? CompanyDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => DepartmentListScreen(),
                                           arguments: [
-                                            companyViewScreenController
-                                                .companyId
-                                                .toString(),
-                                            companyViewScreenController
-                                                .companyName,
+                                            companyViewScreenController.companyId.toString(),
+                                            companyViewScreenController.companyName,
                                           ]);
                                     },
                                     title: AppMessage.departmentNameDrawer,
@@ -57,19 +53,14 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     image: AppImages.departmentIcon,
                                   )
                                 : const SizedBox(),
-                            companyViewScreenController
-                                        .isLocationShowPermission.value ==
-                                    true
+                            companyViewScreenController.isLocationShowPermission.value == true
                                 ? CompanyDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => LocationListScreen(),
                                           arguments: [
-                                            companyViewScreenController
-                                                .companyId
-                                                .toString(),
-                                            companyViewScreenController
-                                                .companyName,
+                                            companyViewScreenController.companyId.toString(),
+                                            companyViewScreenController.companyName,
                                           ]);
                                     },
                                     title: AppMessage.location,
@@ -77,19 +68,14 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     image: AppImages.locationIcon,
                                   )
                                 : const SizedBox(),
-                            companyViewScreenController
-                                        .isEmployeeShowPermission.value ==
-                                    true
+                            companyViewScreenController.isEmployeeShowPermission.value == true
                                 ? CompanyDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => EmployeeListScreen(),
                                           arguments: [
-                                            companyViewScreenController
-                                                .companyId
-                                                .toString(),
-                                            companyViewScreenController
-                                                .companyName,
+                                            companyViewScreenController.companyId.toString(),
+                                            companyViewScreenController.companyName,
                                           ]);
                                     },
                                     title: AppMessage.employeeNameDrawer,
@@ -97,40 +83,46 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     image: AppImages.employeeIcon,
                                   )
                                 : const SizedBox(),
-                            companyViewScreenController
-                                        .isPayChecksShowPermission.value ==
-                                    true
+                            companyViewScreenController.isPayChecksShowPermission.value == true
                                 ? CompanyDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => PayCheckesListScreen(),
                                           arguments: [
-                                            companyViewScreenController
-                                                .companyId
-                                                .toString(),
-                                            companyViewScreenController
-                                                .companyName,
+                                            companyViewScreenController.companyId.toString(),
+                                            companyViewScreenController.companyName,
                                           ]);
                                     },
-                                    title: AppMessage.paycheckes,
+                                    title: AppMessage.hourlyPaycheckes,
                                     imageStatus: true,
                                     image: AppImages.paycheckIcon,
                                   )
                                 : const SizedBox(),
-                            companyViewScreenController
-                                        .isApprovePayChecksShowPermission
-                                        .value ==
-                                    true
+
+                            companyViewScreenController.isPayChecksShowPermission.value == true
+                                ? CompanyDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => SalaryPaychecksListScreen(),
+                                    arguments: [
+                                      companyViewScreenController.companyId.toString(),
+                                      companyViewScreenController.companyName,
+                                    ]);
+                              },
+                              title: AppMessage.salaryPaycheckes,
+                              imageStatus: true,
+                              image: AppImages.paycheckIcon,
+                            )
+                                : const SizedBox(),
+
+                            companyViewScreenController.isApprovePayChecksShowPermission.value == true
                                 ? CompanyDrawerTile(
                                     onTap: () {
                                       Get.back();
                                       Get.to(() => ApprovePaychecksListScreen(),
                                           arguments: [
-                                            companyViewScreenController
-                                                .companyId
-                                                .toString(),
-                                            companyViewScreenController
-                                                .companyName,
+                                            companyViewScreenController.companyId.toString(),
+                                            companyViewScreenController.companyName,
                                           ]);
                                     },
                                     title: AppMessage.approvePaycheckes,
@@ -138,24 +130,7 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     image: AppImages.approveIcon,
                                   )
                                 : const SizedBox(),
-                            /*CompanyDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => PayRollManageScreen(), arguments: [
-                                  companyViewScreenController.companyId
-                                      .toString(),
-                                  companyViewScreenController.companyName,
-                                ]);
-                              },
-                              title: AppMessage.payRoll,
-                            ),*/
-                            /*CompanyDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => ChangePasswordScreen());
-                              },
-                              title: AppMessage.changePassword,
-                            ),*/
+
                           ],
                         ),
                       ),

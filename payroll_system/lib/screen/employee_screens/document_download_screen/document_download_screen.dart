@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
@@ -5,6 +7,7 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/document_download_screen_controller.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 
 import 'document_download_screen_widgets.dart';
@@ -35,7 +38,64 @@ class DocumentDownloadScreen extends StatelessWidget {
               ? CommonLoader().showLoader()
               : documentDownloadScreenController.employeeUploadedDocumentList.isEmpty
           ? Center(child: Text(AppMessage.noDocumentUploaded))
-          : EmployeeDocumentListsModule().commonAllSidePadding(10),
+          : Column(
+            children: [
+              TextFormField(
+                controller: documentDownloadScreenController
+                    .textSearchEditingController,
+                onChanged: (value) {
+                  documentDownloadScreenController.isLoading(true);
+
+                  documentDownloadScreenController.searchEmployeeUploadedDocumentList =
+                      documentDownloadScreenController.employeeUploadedDocumentList.where((element) =>
+                      element.name.toLowerCase().contains(value.toLowerCase()) ||
+                          element.doctype.toLowerCase().contains(value.toLowerCase())
+                      ).toList();
+
+                  documentDownloadScreenController.isLoading(false);
+                  log("searchEmployeeList : ${documentDownloadScreenController.searchEmployeeUploadedDocumentList}");
+                },
+                decoration: InputDecoration(
+                  enabledBorder: InputFieldStyles().inputBorder(),
+                  focusedBorder: InputFieldStyles().inputBorder(),
+                  errorBorder: InputFieldStyles().inputBorder(),
+                  focusedErrorBorder: InputFieldStyles().inputBorder(),
+                  fillColor: AppColors.colorWhite,
+                  filled: true,
+                  hintText: AppMessage.search,
+                  hintStyle: const TextStyle(
+                      color: AppColors.colorLightHintPurple2),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: AppColors.colorLightHintPurple2,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 15, vertical: 11),
+                  suffixIcon: documentDownloadScreenController
+                      .textSearchEditingController.text.isEmpty
+                      ? null
+                      : IconButton(
+                    onPressed: () {
+                      documentDownloadScreenController.isLoading(true);
+                      documentDownloadScreenController.searchEmployeeUploadedDocumentList =
+                          documentDownloadScreenController.employeeUploadedDocumentList;
+                      documentDownloadScreenController.textSearchEditingController.clear();
+                      documentDownloadScreenController.isLoading(false);
+                    },
+                    icon: const Icon(Icons.close,
+                        color: AppColors.colorLightHintPurple2),
+                  ),
+                ),
+              ).commonOnlyPadding(bottom: 1.h),
+              Expanded(
+                  child: documentDownloadScreenController.searchEmployeeUploadedDocumentList.isEmpty
+                  ? Center(
+                    child: Text(AppMessage.noDocumentsFound),
+                  )
+                  : EmployeeDocumentListsModule(),
+              ),
+            ],
+          ).commonAllSidePadding(10),
       ),
     );
   }

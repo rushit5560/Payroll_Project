@@ -17,12 +17,11 @@ class HomeScreenController extends GetxController {
   RxInt roleId = 0.obs;
   RxInt userid = 0.obs;
 
+
   getUserIdFunctionFromPrefs() async {
     isLoading(true);
-    int userIdPrefs = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.userIdKey);
-    int roleIdPrefs = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.roleIdKey);
+    int userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    int roleIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.roleIdKey);
     userid.value = userIdPrefs;
     roleId.value = roleIdPrefs;
 

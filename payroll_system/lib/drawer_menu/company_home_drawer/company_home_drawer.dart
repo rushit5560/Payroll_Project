@@ -10,6 +10,7 @@ import 'package:payroll_system/screen/authentication_screens/login_screen/login_
 import 'package:payroll_system/screen/department_screens/department_list_screen/department_list_screen.dart';
 import 'package:payroll_system/screen/locatioon_screen/location_list_screen/location_list_screen.dart';
 import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_list_Screen/pay_checkes_list_screen.dart';
+import 'package:payroll_system/screen/pay_checked_screen/salary_paycheks_list_screen/salary_paycheks_list_screen.dart';
 import 'package:payroll_system/screen/profile_screens/company_profile_screens/company_profile_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
@@ -40,9 +41,7 @@ class CompanyHomeDrawer extends StatelessWidget {
                       icon: const Icon(Icons.person,
                           color: AppColors.colorBtBlue),
                     ),
-                    companyHomeScreenController
-                                .isDepartmentShowPermission.value ==
-                            true
+                    companyHomeScreenController.isDepartmentShowPermission.value == true
                         ? CompanyHomeDrawerTile(
                             title: AppMessage.departmentNameDrawer,
                             onTap: () {
@@ -50,8 +49,7 @@ class CompanyHomeDrawer extends StatelessWidget {
                               Get.to(
                                 () => DepartmentListScreen(),
                                 arguments: [
-                                  companyHomeScreenController.companyId
-                                      .toString(),
+                                  companyHomeScreenController.companyId.toString(),
                                   companyHomeScreenController.companyName,
                                 ],
                               );
@@ -60,9 +58,7 @@ class CompanyHomeDrawer extends StatelessWidget {
                             image: AppImages.departmentIcon,
                           )
                         : const SizedBox(),
-                    companyHomeScreenController
-                                .isLocationShowPermission.value ==
-                            true
+                    companyHomeScreenController.isLocationShowPermission.value == true
                         ? CompanyHomeDrawerTile(
                             title: AppMessage.location,
                             onTap: () {
@@ -77,11 +73,10 @@ class CompanyHomeDrawer extends StatelessWidget {
                             image: AppImages.locationIcon,
                           )
                         : const SizedBox(),
-                    companyHomeScreenController
-                                .isLocationShowPermission.value ==
-                            true
+
+                    companyHomeScreenController.isPaychecksShowPermission.value == true
                         ? CompanyHomeDrawerTile(
-                            title: AppMessage.paycheckes,
+                            title: AppMessage.hourlyPaycheckes,
                             onTap: () {
                               Get.back();
                               Get.to(() => PayCheckesListScreen(), arguments: [
@@ -94,6 +89,23 @@ class CompanyHomeDrawer extends StatelessWidget {
                             image: AppImages.paycheckIcon,
                           )
                         : const SizedBox(),
+
+                    companyHomeScreenController.isPaychecksShowPermission.value == true
+                        ? CompanyHomeDrawerTile(
+                      title: AppMessage.salaryPaycheckes,
+                      onTap: () {
+                        Get.back();
+                        Get.to(() => SalaryPaychecksListScreen(), arguments: [
+                          companyHomeScreenController.companyId
+                              .toString(),
+                          companyHomeScreenController.companyName,
+                        ]);
+                      },
+                      imageStatus: true,
+                      image: AppImages.paycheckIcon,
+                    )
+                        : const SizedBox(),
+
                     CompanyHomeDrawerTile(
                       onTap: () {
                         Get.back();

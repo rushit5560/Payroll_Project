@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/common_modules/new/web_url_launcher_function.dart';
@@ -23,12 +24,12 @@ class EmployeeDocumentListsModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: screenController.employeeUploadedDocumentList.length,
+      itemCount: screenController.searchEmployeeUploadedDocumentList.length,
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, i) {
         DocumentDatum singleDoc =
-            screenController.employeeUploadedDocumentList[i];
+            screenController.searchEmployeeUploadedDocumentList[i];
         return Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -55,8 +56,16 @@ class EmployeeDocumentListsModule extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      await WebUrlLauncher().launchPdfInBrowser(
-                          "${ApiUrl.downloadFilePath}${singleDoc.name}");
+
+                      bool isDocumentDownloadPermission = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentDownloadKey);
+
+                      if(isDocumentDownloadPermission == true) {
+                        await WebUrlLauncher().launchPdfInBrowser(
+                            "${ApiUrl.downloadFilePath}${singleDoc.name}");
+                      } else {
+                       Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                      }
+
                     },
                     child: Row(
                       children: [

@@ -1,15 +1,14 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/pay_checkes_dowanload_screen_controller.dart';
-import 'package:payroll_system/screen/pay_checked_screen/pay_checkes_list_Screen/pay_checkes_list_widgets_screen.dart';
 import 'package:payroll_system/utils/extensions.dart';
-
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
+
+import 'paycheckes_dowanload_widgets_screen.dart';
 
 class PayCheckesDowanloadListScreen extends StatelessWidget {
   PayCheckesDowanloadListScreen({super.key});
@@ -19,14 +18,14 @@ class PayCheckesDowanloadListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("payCheckesDowanloadScreenController employeeId  ${payCheckesDowanloadScreenController.employeeId}");
-    log("payCheckesDowanloadScreenController employeeName  ${payCheckesDowanloadScreenController.employeeName}");
+    log("payChecksDownloadScreenController employeeId  ${payCheckesDowanloadScreenController.employeeId}");
+    log("payChecksDownloadScreenController employeeName  ${payCheckesDowanloadScreenController.employeeName}");
 
     return Scaffold(
       backgroundColor: AppColors.colorLightPurple2,
       appBar: AppBar(
         title: Text(
-          AppMessage.paycheckesDowanload,
+          AppMessage.paycheckesDownload,
           style: TextStyle(
             color: AppColors.colorBlack,
             fontWeight: FontWeight.bold,
@@ -55,7 +54,7 @@ class PayCheckesDowanloadListScreen extends StatelessWidget {
             : payCheckesDowanloadScreenController
                     .payCheckDwanloadListData.isEmpty
                 ? Center(
-                    child: Text(AppMessage.noPayCheckesListFound),
+                    child: Text(AppMessage.noPayChecksListFound),
                   )
                 : Column(
                     children: [
@@ -71,7 +70,7 @@ class PayCheckesDowanloadListScreen extends StatelessWidget {
                         ],
                       ).commonAllSidePadding(10),
                       // const SizedBox(height: 5),
-                      PayCheckesListWidgetsScreen(),
+                      PayCheckesDowanloadWidgetsListScreen(),
                     ],
                   ),
       ),

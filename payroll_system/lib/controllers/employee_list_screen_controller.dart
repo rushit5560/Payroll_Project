@@ -11,14 +11,16 @@ import '../models/employee_manage_screen_models/employee_delete_model.dart';
 class EmployeeListScreenController extends GetxController {
   String companyId = Get.arguments[0];
   String companyName = Get.arguments[1];
-  final TextEditingController textSearchEditingController =
-      TextEditingController();
+  final textSearchEditingController = TextEditingController();
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
   List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
   List<CompanyWiseEmployeeData> searchEmployeeList = [];
+
+  List<String> filterList = ["All", "Active", "In-Active", "Terminated"];
+  RxString selectedFilterValue = "All".obs;
 
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {
@@ -76,6 +78,19 @@ class EmployeeListScreenController extends GetxController {
       rethrow;
     } finally {
       isLoading(false);
+    }
+  }
+
+
+  void filterDropdownWiseFunction(String value) {
+    if (value == "All") {
+      searchEmployeeList = allCompanyWiseEmployeeList;
+    } else if (value == "Active") {
+      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "1").toList();
+    } else if (value == "In-Active") {
+      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "0").toList();
+    } else if (value == "Terminated") {
+      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "2").toList();
     }
   }
 

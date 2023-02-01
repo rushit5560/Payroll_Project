@@ -62,7 +62,7 @@ class CompanyListTile extends StatelessWidget {
                     onTap: () async {
                       bool companyViewPermission =
                           await userPreference.getBoolPermissionFromPrefs(
-                              keyId: UserPreference.companyViewKey);
+                              keyId: UserPreference.companyEditKey);
 
                       if (companyViewPermission == true) {
                         Get.to(
@@ -97,7 +97,7 @@ class CompanyListTile extends StatelessWidget {
               /// Getting From Common Module
               SingleListTileModuleCustom(
                 image: AppImages.phoneIcon,
-                textKey: AppMessage.phoneNoName,
+                textKey: AppMessage.mobileNumber,
                 textValue: singleItem.phoneno,
               ),
 

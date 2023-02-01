@@ -41,9 +41,7 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                       textKey: AppMessage.payDate),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                      textValue: approvePayrollListDataListvalue.firstName +
-                          approvePayrollListDataListvalue.middleName +
-                          approvePayrollListDataListvalue.lastName,
+                      textValue: "${approvePayrollListDataListvalue.firstName} ${approvePayrollListDataListvalue.middleName} ${approvePayrollListDataListvalue.lastName}",
                       image: AppImages.employeeIcon,
                       textKey: AppMessage.employeeName),
                   const SizedBox(height: 5),
@@ -117,7 +115,10 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                                 approvePaychecksListScreenController
                                     .companyName,
                                 approvePayrollListDataListvalue
-                              ]);
+                              ])!.then((value) {
+                            approvePaychecksListScreenController.isLoading(true);
+                            approvePaychecksListScreenController.isLoading(false);
+                          });
                         },
                         child: Row(
                           children: [

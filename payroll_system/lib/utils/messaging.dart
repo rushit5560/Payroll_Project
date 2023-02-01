@@ -59,7 +59,7 @@ class AppMessage {
   static String homeBackAlertMessage =
       'Are you sure you want to exist this app?';
 
-  static String activeStatusMessage = 'Please select status';
+  static String activeStatusMessage = 'Please select status.';
   static String privacyPolicyMessage = 'Please accept privacy policy';
 
   static String submitText = "Submit";
@@ -100,7 +100,7 @@ class AppMessage {
   static String firstName = 'First Name';
   static String middleName = 'Middle Name';
   static String lastName = 'Last Name';
-  static String mobileNumber = ' Mobile Number ';
+  static String mobileNumber = 'Mobile Number';
   static String dateOfBirth = 'Date Of Birth';
   static String department = 'Department';
   static String departmentList = 'Department List';
@@ -114,7 +114,8 @@ class AppMessage {
   static String salary = 'Salary (\$,₹)';
   static String salaryText = 'Salary';
 
-  static String payPeriod = 'Pay period';
+  static String payPeriod = 'Pay Period';
+  static String type = 'Type';
   static String employmentDate = 'Employment Start Date';
   static String employeeEndDate = 'Employment End Date';
   static String company = 'Company';
@@ -130,7 +131,7 @@ class AppMessage {
   static String labelName = 'Name';
   static String companyLabelName = 'Company Name';
   static String labelEmailName = 'Company Email';
-  static String labelPhoneNo = 'Company Phone Number';
+  static String labelPhoneNo = 'Company Mobile Number';
   static String address = 'Address';
   static String employeeCurrentAddress = 'Current Address';
   static String employeeHomeAddress = 'Home Address';
@@ -141,6 +142,7 @@ class AppMessage {
   static String departmentName = 'Department Name';
   static String selectDate = 'Select Date';
   static String exInsertDob = 'Ex. Insert  dob';
+  static String dobHintText = '(YYYY/MM/DD)';
   static String pleaseSelectPayper = 'Please select payper';
   static String pleaseSelectPayPeriod = 'Please select pay period';
 
@@ -180,7 +182,10 @@ class AppMessage {
   static String noDeptFound = 'No Department Found.';
   static String noCompanyFound = 'No Company Found.';
   static String noLocationFound = 'No Location Found.';
-  static String noPayCheckesListFound = 'No PayChecks List Found.';
+  static String noPayChecksListFound = 'No PayChecks List Found.';
+  static String noHourlyPayChecksListFound = 'No Hourly PayChecks List Found.';
+  static String noSalaryPayChecksListFound = 'No Salary PayChecks List Found.';
+  static String noDocumentsFound = 'No Documents Found.';
   static String noSubAdminListFound = 'No SubAdmin Found.';
 
   static String noApprovalPayCheckesListFound =
@@ -227,9 +232,9 @@ class AppMessage {
   static String pleaseEnterHourlyRate = 'Please enter hourlyRate.';
   static String pleaseEnterSalary = 'Please enter salary.';
   static String pleaseEnterEmployeeStartDate =
-      'Please enter employee start date.';
+      'Please enter employment start date.';
 
-  static String pleaseEnterEmployeeEndDate = 'Please enter employee end date.';
+  static String pleaseEnterEmployeeEndDate = 'Please enter employment end date.';
   static String passwordIsRequired = 'Please enter password.';
   static String pleaseEnterOldPassword = 'Please enter old password.';
   static String pleaseEnterNewPassword = 'Please enter new password.';
@@ -242,6 +247,11 @@ class AppMessage {
   static String newPasswordAndConfirmPasswordMustBeSame =
       'New password & confirm password must be same.';
   static String days = 'Days';
+
+  static String pleaseSelectLocationValidate = 'Please select location.';
+  static String pleaseSelectDepartmentValidate = 'Please select department.';
+  static String pleaseSelectCompanyValidate = 'Please select company.';
+  static String pleaseSelectPayPeriodValidate = 'Please select pay period.';
 
   //controller message
   static String gallery = 'Gallery';
@@ -261,11 +271,12 @@ class AppMessage {
   static String view = 'View';
 
   //profile
-  static String updateProfile = 'Update profile';
+  static String updateProfile = 'Update Profile';
   static String userName = 'User Name';
   static String name = 'Name';
   static String fileName = 'File Name';
   static String uploadDocument = 'Upload Document';
+  static String uploadDocumentWithFormat = 'Upload Documents (Pdf , Image)';
   static String pleaseEnterPayDayWork = 'Please enter firstDayWork.';
   static String pleaseEnterStartDate = 'Please select start date.';
   static String pleaseEnterEndDate = 'Please select end date.';
@@ -274,11 +285,12 @@ class AppMessage {
   //Payroll
   static String payRoll = 'Payroll';
   static String endDate = 'End Date';
-  static String employmentEndDate = 'Employment end Date';
+  static String employmentEndDate = 'Employment End Date';
 
   static String payRollList = 'Paychecks List';
   static String totalDays = 'Total Days';
   static String salaryHourlyRate = 'Salary/Hourly Rate';
+  static String hourlyRateLabel = 'Hourly Rate';
 
   static String subTotal = 'Sub Total';
   static String finalAmount = 'Final Amount';
@@ -307,7 +319,9 @@ class AppMessage {
   static String adminNameLabel = 'Admin Name';
 
   static String paycheckes = 'Paychecks';
-  static String paycheckesDowanload = 'Paychecks Dowanload';
+  static String hourlyPaycheckes = 'Hourly Paychecks';
+  static String salaryPaycheckes = 'Salary Paychecks';
+  static String paycheckesDownload = 'Paychecks Download';
 
   static String approvalPaycheckes = 'Approve Paychecks';
   static String approvalPaycheckesList = 'Approve Paychecks List';
@@ -325,7 +339,7 @@ class AppMessage {
   static String ot = 'OT';
   static String holidayPay = 'Holiday Pay';
   static String sickPayHours = 'Sick Pay Hours (\$)';
-  static String vacationHour = 'Vacation Hour (\$)';
+  static String vacationHour = 'Vacation Hours (\$)';
   static String tip = 'Tip (\$)';
   static String tax = 'Tax (\$)';
   static String totalTax = 'Total Taxs';
@@ -339,6 +353,8 @@ class AppMessage {
   static String date = 'Date';
 
   static String paycheckesList = 'Paychecks List';
+  static String hourlyPaycheckesList = 'Hourly Paychecks List';
+  static String salaryPaycheckesList = 'Salary Paychecks List';
   static String netAmount = 'Net Amount';
   static String netPay = 'Net Pay';
   static String total = 'Total';
@@ -370,8 +386,8 @@ class AppMessage {
 
   // document
 
-  static String pleaseSelectDocument = 'Please upload document';
-  static String pleaseSelectDocumentType = 'Please select document type';
+  static String pleaseSelectDocument = 'Please Upload Document.';
+  static String pleaseSelectDocumentType = 'Please select document type.';
   static String documentList = 'Document List';
   static String uplodedDocumentList = 'Uploaded Document List';
 

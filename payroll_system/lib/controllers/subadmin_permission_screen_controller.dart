@@ -177,7 +177,6 @@ class SubAdminPermissionScreenController extends GetxController {
       rethrow;
     }
 
-
     isLoading(false);
   }
 

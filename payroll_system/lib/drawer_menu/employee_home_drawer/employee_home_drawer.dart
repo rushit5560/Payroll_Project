@@ -91,7 +91,7 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                                     },
                                   )
                                 : const SizedBox(),
-                            employeeHomeScreenController.ispayChecksDownloadPermission.value == true
+                            employeeHomeScreenController.isPayChecksDownloadPermission.value == true
                           ? EmployeeDrawerTile(
                         title: AppMessage.paychecksDownloadDrawer,
                         imageStatus: true,

@@ -51,13 +51,28 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        AppMessage.uploadDocument,
-                        style: TextStyleConfig.textStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
+
+                      RichText(
+                        textAlign: TextAlign.left,
+                        maxLines: null,
+                        text: TextSpan(
+                            text: AppMessage.uploadDocumentWithFormat,
+                            style: TextStyleConfig.textStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyleConfig.textStyle(
+                                  textColor: AppColors.redColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ]),
                       ),
+
                       IconButton(
                         onPressed: () async {
                           bool addUploadDocumentPermission =
@@ -92,20 +107,19 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                   SizedBox(height: 2.h),
                   CustomSubmitButtonModule(
                     onPress: () async {
-                      if (employeeUploadDocumentScreenController
-                          .employeeSelectedDocumentList.isEmpty) {
-                        Fluttertoast.showToast(
-                            msg: AppMessage.pleaseSelectDocument);
+                      if (employeeUploadDocumentScreenController.employeeSelectedDocumentList.isEmpty) {
+                        Fluttertoast.showToast(msg: AppMessage.pleaseSelectDocument);
                       } else {
-                        if (employeeUploadDocumentScreenController
-                                .documentSelectedTypeValue.value ==
-                            AppMessage.chooseOption) {
-                          Fluttertoast.showToast(
-                              msg: AppMessage.pleaseSelectDocument);
-                        } else {
+
+                        if(employeeUploadDocumentScreenController.globalKey.currentState!.validate()){
                           await employeeUploadDocumentScreenController
                               .uploadEmployeeDocumentFunction();
                         }
+
+                        // if (employeeUploadDocumentScreenController.documentSelectedTypeValue.value == AppMessage.chooseOption) {
+                        //   Fluttertoast.showToast(
+                        //       msg: AppMessage.pleaseSelectDocument);
+                        // }
                       }
                     },
                     labelText: AppMessage.submit,
@@ -132,18 +146,11 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                           employeeUploadDocumentScreenController
                               .isLoading(true);
 
-                          employeeUploadDocumentScreenController
-                                  .searchEmployeeUploadedDocumentList =
-                              employeeUploadDocumentScreenController
-                                  .employeeUploadedDocumentList
-                                  .where((element) =>
-                                      element.name
-                                          .toLowerCase()
-                                          .contains(value) ||
-                                      element.doctype
-                                          .toLowerCase()
-                                          .contains(value))
-                                  .toList();
+                          employeeUploadDocumentScreenController.searchEmployeeUploadedDocumentList =
+                              employeeUploadDocumentScreenController.employeeUploadedDocumentList.where((element) =>
+                                      element.name.toLowerCase().contains(value.toLowerCase()) ||
+                                      element.doctype.toLowerCase().contains(value.toLowerCase())
+                              ).toList();
 
                           employeeUploadDocumentScreenController
                               .isLoading(false);

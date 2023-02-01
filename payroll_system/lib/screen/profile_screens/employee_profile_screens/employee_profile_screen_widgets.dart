@@ -171,7 +171,7 @@ class EmployeeFormModule extends StatelessWidget {
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.dateOfBirth,
-            text: AppMessage.exInsertDob,
+            text: AppMessage.dobHintText,
             mandatoryText: AppMessage.mandatory,
             keyboardType: TextInputType.datetime,
             readOnly: true,
@@ -191,8 +191,7 @@ class EmployeeFormModule extends StatelessWidget {
             text: AppMessage.street,
             keyboardType: TextInputType.text,
             mandatoryText: AppMessage.mandatory,
-            textEditingController:
-                employeeProfileScreenController.streetAddressController,
+            textEditingController: employeeProfileScreenController.streetAddressController,
             validate: (value) => FieldValidation().validateStreetAddress(value),
           ),
           const SizedBox(height: 5),
@@ -200,11 +199,10 @@ class EmployeeFormModule extends StatelessWidget {
           FormSingleFieldModule(
             headerText: AppMessage.empty,
             isHeaderTextShow: false,
-            text: AppMessage.town,
+            text: AppMessage.landmark,
             keyboardType: TextInputType.text,
             mandatoryText: AppMessage.empty,
-            textEditingController:
-                employeeProfileScreenController.townAddressController,
+            textEditingController: employeeProfileScreenController.townAddressController,
             validate: (value) =>
                 FieldValidation().validateLandmarkAddress(value),
           ),

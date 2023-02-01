@@ -411,4 +411,46 @@ class FieldValidation {
       return null;
     }
   }
+
+
+  String? validateDropdownStatus(String value) {
+    if (value == AppMessage.chooseOption) {
+      return AppMessage.activeStatusMessage;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateDropdownPayPeriod(String value) {
+    if (value == AppMessage.chooseOption) {
+      return AppMessage.pleaseSelectPayPeriodValidate;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateDropdownCompany(String value) {
+    if (value == AppMessage.chooseOption) {
+      return AppMessage.pleaseSelectCompanyValidate;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateDropdownDepartment(String value) {
+    if (value == AppMessage.chooseOption) {
+      return AppMessage.pleaseSelectDepartmentValidate;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateDropdownLocation(String value) {
+    if (value == AppMessage.chooseOption) {
+      return AppMessage.pleaseSelectLocationValidate;
+    } else {
+      return null;
+    }
+  }
+
 }

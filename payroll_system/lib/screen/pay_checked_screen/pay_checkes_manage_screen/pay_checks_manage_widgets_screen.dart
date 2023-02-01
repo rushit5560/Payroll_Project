@@ -38,7 +38,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
-                  text: AppMessage.payPeriod,
+                  text: AppMessage.type,
                   style: TextStyleConfig.textStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -63,7 +63,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Container(
-                  height: 50,
+                  // height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -72,15 +72,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                   // child: DropdownButtonHideUnderline(
                   child: Center(
                     child: DropdownButtonFormField<String>(
-                      validator: (value) {
-                        if (payCheckedManageScreenController
-                                .selectedCheckedValue.value ==
-                            AppMessage.chooseOption) {
-                          return AppMessage.pleaseSelectPayPeriod;
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: (value) => FieldValidation().validateDropdownStatus(value!),
                       decoration: const InputDecoration.collapsed(hintText: ''),
                       value: payCheckedManageScreenController
                           .selectedCheckedValue.value,
@@ -106,7 +98,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                         // payCheckedManageScreenController.endDate = DateTime.now();
                         payCheckedManageScreenController.isLoading(false);
                       },
-                    ).commonOnlyPadding(left: 10, right: 10),
+                    ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
                   ),
                 ),
               ),
@@ -194,12 +186,25 @@ class PayChecksWidgetsScreen extends StatelessWidget {
             const SizedBox(height: 5),
 
             /// Employee List module
-            Text(
-              AppMessage.companyEmployees,
-              style: TextStyleConfig.textStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
+            RichText(
+              textAlign: TextAlign.left,
+              maxLines: null,
+              text: TextSpan(
+                  text: AppMessage.companyEmployees,
+                  style: TextStyleConfig.textStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyleConfig.textStyle(
+                        textColor: AppColors.redColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ]),
             ).commonSymmetricPadding(vertical: 2),
             Form(
               key: payCheckedManageScreenController.employeeFormKey,
@@ -847,16 +852,17 @@ class OtTextFormFieldModule extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),
-              children: [
-                TextSpan(
-                  text: " ${AppMessage.mandatory}",
-                  style: TextStyleConfig.textStyle(
-                    textColor: AppColors.redColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-              ]),
+              // children: [
+              //   TextSpan(
+              //     text: " ${AppMessage.mandatory}",
+              //     style: TextStyleConfig.textStyle(
+              //       textColor: AppColors.redColor,
+              //       fontWeight: FontWeight.w600,
+              //       fontSize: 16,
+              //     ),
+              //   ),
+              // ],
+          ),
         ).commonSymmetricPadding(vertical: 6),
         TextFormField(
           keyboardType: TextInputType.number,
@@ -877,7 +883,7 @@ class OtTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.hours,
             errorMaxLines: 2,
           ),
-          validator: (value) => FieldValidation().validateOt(value.toString()),
+          // validator: (value) => FieldValidation().validateOt(value.toString()),
         )
       ],
     );
@@ -902,16 +908,17 @@ class HolidayPayTextFormFieldModule extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),
-              children: [
-                TextSpan(
-                  text: " ${AppMessage.mandatory}",
-                  style: TextStyleConfig.textStyle(
-                    textColor: AppColors.redColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-              ]),
+              // children: [
+              //   TextSpan(
+              //     text: " ${AppMessage.mandatory}",
+              //     style: TextStyleConfig.textStyle(
+              //       textColor: AppColors.redColor,
+              //       fontWeight: FontWeight.w600,
+              //       fontSize: 16,
+              //     ),
+              //   ),
+              // ],
+          ),
         ).commonSymmetricPadding(vertical: 6),
         TextFormField(
           keyboardType: TextInputType.number,

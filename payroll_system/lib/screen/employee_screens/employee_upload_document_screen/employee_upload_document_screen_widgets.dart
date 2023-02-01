@@ -93,59 +93,76 @@ class EmployeeDocumentTypeDropdownModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppMessage.documentsType,
-          style: TextStyleConfig.textStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
+    return Form(
+      key: screenController.globalKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          RichText(
+            textAlign: TextAlign.left,
+            maxLines: null,
+            text: TextSpan(
+                text: AppMessage.documentsType,
+                style: TextStyleConfig.textStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+                children: [
+                  TextSpan(
+                    text: ' *',
+                    style: TextStyleConfig.textStyle(
+                      textColor: AppColors.redColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                ]),
           ),
-        ),
-        const SizedBox(height: 5),
-        Container(
-          width: Get.width,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.transparent),
-          ),
-          // child: DropdownButtonHideUnderline(
-            child: Center(
-              child: DropdownButtonFormField<String>(
-                validator: (value) {
-                  if (screenController.documentSelectedTypeValue.value == AppMessage.chooseOption) {
-                    return AppMessage.activeStatusMessage;
-                  } else {
-                    return null;
-                  }
-                },
-                decoration: const InputDecoration.collapsed(hintText: ''),
-                value: screenController.documentSelectedTypeValue.value,
-                items: screenController.documentTypeList
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                borderRadius: BorderRadius.circular(10),
-                icon: Image.asset(
-                  AppImages.arrowDownIcon,
-                  height: 15,
-                  width: 15,
-                ).commonSymmetricPadding(horizontal: 10),
-                onChanged: (String? value) {
-                  screenController.isLoading(true);
-                  screenController.documentSelectedTypeValue.value = value!;
-                  screenController.isLoading(false);
-                },
-              ).commonOnlyPadding(left: 10, right: 10),
+          const SizedBox(height: 5),
+          Container(
+            width: Get.width,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.transparent),
             ),
-          // ),
-        ),
-      ],
+            // child: DropdownButtonHideUnderline(
+              child: Center(
+                child: DropdownButtonFormField<String>(
+                  validator: (value) {
+                    if (screenController.documentSelectedTypeValue.value == AppMessage.chooseOption) {
+                      return AppMessage.activeStatusMessage;
+                    } else {
+                      return null;
+                    }
+                  },
+                  decoration: const InputDecoration.collapsed(hintText: ''),
+                  value: screenController.documentSelectedTypeValue.value,
+                  items: screenController.documentTypeList
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  borderRadius: BorderRadius.circular(10),
+                  icon: Image.asset(
+                    AppImages.arrowDownIcon,
+                    height: 15,
+                    width: 15,
+                  ).commonSymmetricPadding(horizontal: 10),
+                  onChanged: (String? value) {
+                    screenController.isLoading(true);
+                    screenController.documentSelectedTypeValue.value = value!;
+                    screenController.isLoading(false);
+                  },
+                ).commonOnlyPadding(left: 10, right: 10, bottom: 10, top: 10),
+              ),
+            // ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -161,7 +178,7 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
     return screenController.searchEmployeeUploadedDocumentList.isEmpty
         ? Center(child: Text(AppMessage.noDocumentUploaded))
         : ListView.builder(
-            itemCount: screenController.employeeUploadedDocumentList.length,
+            itemCount: screenController.searchEmployeeUploadedDocumentList.length,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, i) {

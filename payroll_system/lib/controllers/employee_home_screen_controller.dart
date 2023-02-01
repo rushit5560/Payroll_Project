@@ -13,7 +13,7 @@ class EmployeeHomeScreenController extends GetxController {
   UserPreference userPreference = UserPreference();
   RxBool isDocumentDownloadPermission = false.obs;
   RxBool isDocumentUploadPermission = false.obs;
-  RxBool ispayChecksDownloadPermission = false.obs;
+  RxBool isPayChecksDownloadPermission = false.obs;
 
   RxString employeeName = "".obs;
 
@@ -25,10 +25,14 @@ class EmployeeHomeScreenController extends GetxController {
 
   initMethod() async {
     isLoading(true);
-    isDocumentDownloadPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentDownloadKey);
-    isDocumentUploadPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentAddKey);
-    ispayChecksDownloadPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.payChecksDownloadKey);
+    isDocumentDownloadPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentViewKey);
+    isDocumentUploadPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentViewKey);
+    isPayChecksDownloadPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.payChecksViewKey);
     employeeName.value = await userPreference.getStringValueFromPrefs(keyId: UserPreference.userNameKey);
+    log('isDocumentDownloadPermission : ${isDocumentDownloadPermission.value}');
+    log('isDocumentUploadPermission : ${isDocumentUploadPermission.value}');
+    log('isPayChecksDownloadPermission : ${isPayChecksDownloadPermission.value}');
+
     isLoading(false);
   }
 }

@@ -14,17 +14,20 @@ class LocationUpdateModel {
   LocationUpdateModel({
     required this.success,
     required this.messege,
+    required this.error,
     // this.data,
   });
 
   final bool success;
   final String messege;
+  Error error;
   // final Data data;
 
   factory LocationUpdateModel.fromJson(Map<String, dynamic> json) =>
       LocationUpdateModel(
-        success: json["success"],
-        messege: json["messege"],
+        success: json["success"] ?? false,
+        messege: json["messege"] ?? "",
+        error: Error.fromJson(json["error"] ?? {}),
         // data: Data.fromJson(json["Data"]),
       );
 
@@ -33,6 +36,22 @@ class LocationUpdateModel {
         "messege": messege,
         // "Data": data.toJson(),
       };
+}
+
+class Error {
+  Error({
+    required this.locationName,
+  });
+
+  List<String> locationName;
+
+  factory Error.fromJson(Map<String, dynamic> json) => Error(
+    locationName: List<String>.from((json["location_name"] ?? []).map((x) => x)),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "location_name": List<dynamic>.from(locationName.map((x) => x)),
+  };
 }
 
 // class Data {
