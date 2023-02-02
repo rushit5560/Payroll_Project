@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/common_modules/permission_container_module.dart';
@@ -22,6 +21,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
     return SingleChildScrollView(
       child:  Column(
                 children: [
+                  // Department
                   PermissionBoxModule(
                     labelText: AppMessage.companyDepartmentNameDrawer,
                     isViewShow: true,
@@ -52,6 +52,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
 
                   ),
 
+                  // Location
                   const SizedBox(height: 15),
                   PermissionBoxModule(
                     labelText: AppMessage.companyLocation,
@@ -83,6 +84,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
 
                   ),
 
+                  // Employee
                   const SizedBox(height: 15),
                   PermissionBoxModule(
                     labelText: AppMessage.companyEmployee,
@@ -114,6 +116,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
 
                   ),
 
+                  // Employee Document
                   const SizedBox(height: 15),
                   PermissionBoxModule(
                     labelText: AppMessage.companyEmployeeDocument,
@@ -137,7 +140,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
                     isEditOnChanged: (bool? value) {
                       // companyPermissionScreenController.employeeDocumentIsEditChecked.value = value!;
                     },
-
+                    isEditFillColor: MaterialStateProperty.all(Colors.grey.shade300),
 
                     isDeleteShow: true,
                     isDeleteValue: companyPermissionScreenController.employeeDocumentIsDeleteChecked.value,
@@ -154,6 +157,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
                     },
                   ) ,
 
+                  // Paychecks
                   const SizedBox(height: 15),
                   PermissionBoxModule(
                     labelText: AppMessage.companyPaycheckes,
@@ -177,6 +181,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
                     isEditOnChanged: (bool? value) {
                       // companyPermissionScreenController.companyPayChecksIsEditChecked.value = value!;
                     },
+                    isEditFillColor: MaterialStateProperty.all(Colors.grey.shade300),
 
 
                     isDeleteShow: true,
@@ -184,6 +189,7 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
                     isDeleteOnChanged: (bool? value) {
                       // companyPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
                     },
+                    isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
 
                     isDownloadShow: true,
                     isDownloadValue: companyPermissionScreenController.companyPayChecksIsDownloadChecked.value,

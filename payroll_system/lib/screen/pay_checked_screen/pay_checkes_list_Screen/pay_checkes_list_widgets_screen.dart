@@ -51,12 +51,11 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           bool payChecksDownloadPermission =
-                              await userPreference.getBoolPermissionFromPrefs(
-                                  keyId: UserPreference.payChecksDownloadKey);
+                              await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.payChecksDownloadKey);
 
                           if (payChecksDownloadPermission == true) {
-                            await WebUrlLauncher().launchPdfInBrowser(
-                                "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
+                            await payCheckesListScreenController.downloadFile();
+                            // await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
                           } else {
                             Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                           }

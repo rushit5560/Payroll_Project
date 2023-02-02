@@ -18,8 +18,7 @@ class CompanyEmployeeManageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (companyEmployeeManageScreenController.employeeOption ==
-            EmployeeOption.update) {
+        if (companyEmployeeManageScreenController.employeeOption == EmployeeOption.update) {
           final shouldPop = await showDialog<bool>(
             context: context,
             builder: (context) {
@@ -31,28 +30,26 @@ class CompanyEmployeeManageScreen extends StatelessWidget {
           return true;
         }
       },
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: AppColors.colorLightPurple2,
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              companyEmployeeManageScreenController.employeeOption ==
-                      EmployeeOption.create
-                  ? AppMessage.employeeCreate
-                  : AppMessage.employeeUpdate,
-              style: TextStyle(
-                color: AppColors.colorBlack,
-                fontWeight: FontWeight.bold,
-                fontSize: 17.sp,
-              ),
+      child: Scaffold(
+        backgroundColor: AppColors.colorLightPurple2,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            companyEmployeeManageScreenController.employeeOption ==
+                    EmployeeOption.create
+                ? AppMessage.employeeCreate
+                : AppMessage.employeeUpdate,
+            style: TextStyle(
+              color: AppColors.colorBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 17.sp,
             ),
           ),
-          body: Obx(
-            () => companyEmployeeManageScreenController.isLoading.value
-                ? CommonLoader().showLoader()
-                : CompanyEmployeeManageWidgetsScreen(),
-          ),
+        ),
+        body: Obx(
+          () => companyEmployeeManageScreenController.isLoading.value
+              ? CommonLoader().showLoader()
+              : CompanyEmployeeManageWidgetsScreen(),
         ),
       ),
     );

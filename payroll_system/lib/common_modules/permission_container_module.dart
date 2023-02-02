@@ -119,18 +119,23 @@ class PermissionBoxModule extends StatelessWidget {
 
   final bool? isViewValue;
   Function(bool?)? isViewOnChanged;
+  MaterialStateProperty<Color>? isViewFillColor;
 
   final bool? isAddValue;
   Function(bool?)? isAddOnChanged;
+  MaterialStateProperty<Color>? isAddFillColor;
 
   final bool? isEditValue;
   Function(bool?)? isEditOnChanged;
+  MaterialStateProperty<Color>? isEditFillColor;
   //
   final bool? isDeleteValue;
   Function(bool?)? isDeleteOnChanged;
+  MaterialStateProperty<Color>? isDeleteFillColor;
 
   final bool? isDownloadValue;
   Function(bool?)? isDownloadOnChanged;
+  MaterialStateProperty<Color>? isDownloadFillColor;
 
   PermissionBoxModule({
     Key? key,
@@ -143,14 +148,19 @@ class PermissionBoxModule extends StatelessWidget {
 
     this.isViewValue,
     this.isViewOnChanged,
+    this.isViewFillColor,
     this.isAddValue,
     this.isAddOnChanged,
+    this.isAddFillColor,
     this.isEditValue,
     this.isEditOnChanged,
+    this.isEditFillColor,
     this.isDeleteValue,
     this.isDeleteOnChanged,
+    this.isDeleteFillColor,
     this.isDownloadValue,
     this.isDownloadOnChanged,
+    this.isDownloadFillColor,
   }) : super(key: key);
 
   @override
@@ -181,6 +191,7 @@ class PermissionBoxModule extends StatelessWidget {
                     Checkbox(
                       value: isViewValue,
                       onChanged: isViewOnChanged,
+                      fillColor: isViewFillColor,
                     ),
                   ],
                 ),
@@ -193,7 +204,8 @@ class PermissionBoxModule extends StatelessWidget {
                 AppMessage.isAdd,
                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
               ),
-              Checkbox(value: isAddValue, onChanged: isAddOnChanged),
+              Checkbox(value: isAddValue, onChanged: isAddOnChanged,
+                fillColor: isAddFillColor,),
             ],
           ),
 
@@ -206,7 +218,11 @@ class PermissionBoxModule extends StatelessWidget {
                 AppMessage.isEdit,
                 style: TextStyleConfig.textStyle(fontSize: 12.sp),
               ),
-              Checkbox(value: isEditValue, onChanged: isEditOnChanged),
+              Checkbox(
+                value: isEditValue,
+                onChanged: isEditOnChanged,
+                fillColor: isEditFillColor,
+              ),
             ],
           ),
 
@@ -222,6 +238,7 @@ class PermissionBoxModule extends StatelessWidget {
               Checkbox(
                 value: isDeleteValue,
                 onChanged: isDeleteOnChanged,
+                fillColor: isDeleteFillColor,
               ),
             ],
           ),
@@ -237,6 +254,7 @@ class PermissionBoxModule extends StatelessWidget {
               Checkbox(
                 value: isDownloadValue,
                 onChanged: isDownloadOnChanged,
+                fillColor: isDownloadFillColor,
               ),
             ],
           ),

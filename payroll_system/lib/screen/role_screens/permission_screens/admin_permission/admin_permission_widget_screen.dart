@@ -40,6 +40,7 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isAddOnChanged: (bool? value) {
               // adminPermissionScreenController.subAdminIsAddChecked.value = value!;
             },
+            isAddFillColor: MaterialStateProperty.all(Colors.blue.shade200),
             isEditShow: true,
             isEditValue:
                 adminPermissionScreenController.subAdminIsEditChecked.value,
@@ -54,6 +55,8 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isDeleteOnChanged: (bool? value) {
               // adminPermissionScreenController.subAdminIsDeleteChecked.value = value!;
             },
+            isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+
             isDownloadShow: false,
           ),
           const SizedBox(height: 15),
@@ -61,12 +64,14 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
           // Company
           PermissionBoxModule(
             labelText: AppMessage.company,
+
             isViewShow: true,
             isViewValue:
                 adminPermissionScreenController.companyInIsViewChecked.value,
             isViewOnChanged: (bool? value) {
               // adminPermissionScreenController.companyInIsViewChecked.value = value!;
             },
+            isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
             isAddShow: true,
             isAddValue:
                 adminPermissionScreenController.companyInIsAddChecked.value,
@@ -89,6 +94,8 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isDeleteOnChanged: (bool? value) {
               // adminPermissionScreenController.companyIsDeleteChecked.value = value!;
             },
+            isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+
             isDownloadShow: false,
           ),
           const SizedBox(height: 15),
@@ -230,11 +237,11 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
               adminPermissionScreenController.loadUI();
             },
             isEditShow: true,
-            isEditValue: adminPermissionScreenController
-                .employeeDocumentIsEditChecked.value,
+            isEditValue: adminPermissionScreenController.employeeDocumentIsEditChecked.value,
             isEditOnChanged: (bool? value) {
               // adminPermissionScreenController.employeeDocumentIsEditChecked.value = value!;
             },
+            isEditFillColor: MaterialStateProperty.all(Colors.grey.shade300),
             isDeleteShow: true,
             isDeleteValue: adminPermissionScreenController
                 .employeeDocumentIsDeleteChecked.value,
@@ -279,12 +286,16 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isEditOnChanged: (bool? value) {
               // adminPermissionScreenController.companyPayChecksIsEditChecked.value = value!;
             },
+            isEditFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+
             isDeleteShow: true,
             isDeleteValue: adminPermissionScreenController
                 .companyPayChecksIsDeleteChecked.value,
             isDeleteOnChanged: (bool? value) {
               // adminPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
             },
+            isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+
             isDownloadShow: true,
             isDownloadValue: adminPermissionScreenController
                 .companyPayChecksIsDownloadChecked.value,
@@ -313,6 +324,7 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isAddOnChanged: (bool? value) {
               // adminPermissionScreenController.approvePayChecksIsAddChecked.value = value!;
             },
+            isAddFillColor: MaterialStateProperty.all(Colors.grey.shade300),
             isEditShow: true,
             isEditValue: adminPermissionScreenController
                 .approvePayChecksIsEditChecked.value,
@@ -379,12 +391,15 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isViewOnChanged: (bool? value) {
               // adminPermissionScreenController.roleIsViewChecked.value = value!;
             },
+            isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
             isEditShow: true,
             isEditValue:
                 adminPermissionScreenController.roleIsEditChecked.value,
             isEditOnChanged: (bool? value) {
               // adminPermissionScreenController.roleIsEditChecked.value = value!;
             },
+            isEditFillColor: MaterialStateProperty.all(Colors.blue.shade200),
+
             isAddShow: false,
             isDeleteShow: false,
             isDownloadShow: false,

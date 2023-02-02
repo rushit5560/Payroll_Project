@@ -749,6 +749,7 @@ class FormSingleDateFieldModule extends StatelessWidget {
             filled: true,
             counterText: '',
             hintText: text,
+            hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             suffixIcon: screenController.selectedCheckedValue.value ==

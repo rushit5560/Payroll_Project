@@ -65,9 +65,9 @@ class SubAdminManageWidgetsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               FormSingleFieldModule(
-                headerText: AppMessage.town,
+                headerText: AppMessage.landmark,
                 isHeaderTextShow: false,
-                text: AppMessage.town,
+                text: AppMessage.landmark,
                 keyboardType: TextInputType.text,
                 mandatoryText: AppMessage.empty,
                 textEditingController:

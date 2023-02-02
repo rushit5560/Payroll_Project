@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
@@ -9,6 +10,7 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/sub_admin_list_screen_controller.dart';
 import 'package:payroll_system/screen/sub_admin_screen/sub_admin_manage_screen/sub_admin_manage_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 
@@ -16,6 +18,9 @@ class SubAdminListWidgetsScreen extends StatelessWidget {
   SubAdminListWidgetsScreen({super.key});
 
   final subAdminListScreenController = Get.find<SubAdminListScreenController>();
+
+  UserPreference userPreference = UserPreference();
+
   @override
   Widget build(BuildContext context) {
     log("len    ${subAdminListScreenController.searchSubadminDataList.length}");
@@ -43,10 +48,19 @@ class SubAdminListWidgetsScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          Get.to(
-                            () => SubAdminManageScreen(),
-                            arguments: [subAdminValue.id.toString()],
-                          );
+
+                          bool subAdminEditPermission = await userPreference.getBoolPermissionFromPrefs(
+                              keyId: UserPreference.subAdminEditKey);
+
+                          if(subAdminEditPermission == true) {
+                            Get.to(() => SubAdminManageScreen(),
+                              arguments: [subAdminValue.id.toString()],
+                            );
+                          } else {
+                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                          }
+
+
                         },
                         child: Image.asset(
                           AppImages.editIcon,
@@ -55,21 +69,30 @@ class SubAdminListWidgetsScreen extends StatelessWidget {
                           color: AppColors.colorBtBlue,
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      GestureDetector(
+                      // const SizedBox(width: 10),
+                      /*GestureDetector(
                         onTap: () async {
-                          CustomAlertDialog().showAlertDialog(
-                            context: context,
-                            textContent:
-                                'Are youe sure you want to delete location ?',
-                            onYesTap: () async {
-                              // await subAdminListScreenController.deleteLocationFunction(
-                              //     value.id.toString(), index);
-                            },
-                            onCancelTap: () {
-                              Get.back();
-                            },
-                          );
+
+                          bool subAdminDeletePermission = await userPreference.getBoolPermissionFromPrefs(
+                              keyId: UserPreference.subAdminDeleteKey);
+
+                          if(subAdminDeletePermission == true) {
+                            CustomAlertDialog().showAlertDialog(
+                              context: context,
+                              textContent: 'Are you sure you want to delete subadmin ?',
+                              onYesTap: () async {
+                                // await subAdminListScreenController.deleteLocationFunction(
+                                //     value.id.toString(), index);
+                              },
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                            );
+                          } else {
+                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                          }
+
+
                         },
                         child: Image.asset(
                           AppImages.deleteIcon,
@@ -77,7 +100,7 @@ class SubAdminListWidgetsScreen extends StatelessWidget {
                           height: 20,
                           color: AppColors.colorRed,
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                   const SizedBox(height: 5),

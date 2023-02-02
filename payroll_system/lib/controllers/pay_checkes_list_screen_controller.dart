@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
@@ -9,6 +10,7 @@ import 'package:payroll_system/models/Pay_checkes_list_model/pay_checkes_list_sc
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PayCheckesListScreenController extends GetxController {
   String companyId = Get.arguments[0];
@@ -75,4 +77,28 @@ class PayCheckesListScreenController extends GetxController {
   initMethod() async {
     await getPaycheckesListFunction();
   }
+
+
+  /// Download Pdf
+
+  Future<void> downloadFile() async {
+    Dio dio = Dio();
+
+    final status = await Permission.storage.request();
+    if (status.isGranted) {
+      String dirLocation = "";
+      dirLocation = await ExternalPath.getExternalStoragePublicDirectory(ExternalPath.DIRECTORY_DOWNLOADS);
+      log('dirLocation : $dirLocation');
+
+      try {
+        // await dio.download();
+      } catch(e) {
+        log('downloadFile Error :$e');
+        rethrow;
+      }
+    }
+
+  }
+
+
 }

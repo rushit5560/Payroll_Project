@@ -2,8 +2,7 @@ class ApiUrl {
   static const apiMainPath = "https://appieve.com/";
   // static const apiMainPath = "https://payroll.omdemo.co.in/";
   static const apiImagePath = "https://appieve.com/public/images/employee/";
-  static const downloadFilePath =
-      "https://appieve.com/public/images/employee/file/";
+  static const downloadFilePath = "https://appieve.com/public/images/employee/file/";
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
@@ -79,8 +78,8 @@ class ApiUrl {
   static const createSalaryPayChecksApi = "${apiMainPath}api/admin/paycheck/store";
 
   //approve paycheckes Api's
-  static const getApprovePayCheckesListApi =
-      "${apiMainPath}api/admin/payrollapprove/";
+  static const getApprovePayCheckesListApi = "${apiMainPath}api/admin/payrollapprove/";
+  static const getApprovePayChecksListApi = "${apiMainPath}api/admin/payroll/";
   static const deleteApprovePayCheckesListApi =
       "${apiMainPath}api/admin/approvedelete/";
 

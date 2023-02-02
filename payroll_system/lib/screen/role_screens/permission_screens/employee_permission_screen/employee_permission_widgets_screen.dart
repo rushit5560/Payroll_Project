@@ -35,11 +35,14 @@ class EmployeePermissionWidgetScreen extends StatelessWidget {
               isEditOnChanged: (bool? value) {
                 // employeePermissionScreenController.empDocumentIsEditChecked.value = value!;
               },
+              isEditFillColor: MaterialStateProperty.all(Colors.grey.shade300),
               isDeleteShow: true,
               isDeleteValue: employeePermissionScreenController.empDocumentIsDeleteChecked.value,
               isDeleteOnChanged: (bool? value) {
                 // employeePermissionScreenController.empDocumentIsDeleteChecked.value = value!;
               },
+              isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+
               isDownloadShow: true,
               isDownloadValue: employeePermissionScreenController.empDocumentIsDownloadChecked.value,
               isDownloadOnChanged: (bool? value) {
@@ -48,7 +51,8 @@ class EmployeePermissionWidgetScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
 
-             PermissionBoxModule(
+            // Employee Paychecks
+            PermissionBoxModule(
               labelText: AppMessage.employeePaycheckes,
 
               isViewShow: true,
@@ -62,12 +66,14 @@ class EmployeePermissionWidgetScreen extends StatelessWidget {
               isAddOnChanged: (bool? value) {
                 // employeePermissionScreenController.employeePayChecksIsAddChecked.value = value!;
               },
+              isAddFillColor: MaterialStateProperty.all(Colors.grey.shade300),
 
               isEditShow: true,
               isEditValue: employeePermissionScreenController.employeePayChecksIsEditChecked.value,
               isEditOnChanged: (bool? value) {
                 // employeePermissionScreenController.employeePayChecksIsEditChecked.value = value!;
               },
+              isEditFillColor: MaterialStateProperty.all(Colors.grey.shade300),
 
 
               isDeleteShow: true,
@@ -75,6 +81,7 @@ class EmployeePermissionWidgetScreen extends StatelessWidget {
               isDeleteOnChanged: (bool? value) {
                 // employeePermissionScreenController.employeePayChecksIsDeleteChecked.value = value!;
               },
+              isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
 
               isDownloadShow: true,
               isDownloadValue: employeePermissionScreenController.employeePayChecksIsDownloadChecked.value,
