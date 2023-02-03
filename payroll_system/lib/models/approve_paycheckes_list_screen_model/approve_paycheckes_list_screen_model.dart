@@ -53,6 +53,7 @@ class ApprovePayCheckListData {
     required this.otherearning,
     required this.sickpay,
     required this.vacationhours,
+    required this.holidaypay,
     required this.commission,
     required this.paydate,
     required this.tax,
@@ -71,6 +72,7 @@ class ApprovePayCheckListData {
     required this.middleName,
     required this.lastName,
     required this.eid,
+    required this.hourlyRate,
   });
 
   final int id;
@@ -83,6 +85,7 @@ class ApprovePayCheckListData {
   final String employeeid;
   final String salary;
   final String ragularhour;
+  final String holidaypay;
   final String overtime;
   final String bonus;
   final String otherearning;
@@ -107,6 +110,7 @@ class ApprovePayCheckListData {
   final String middleName;
   final String lastName;
   final String eid;
+  final String hourlyRate;
 
   factory ApprovePayCheckListData.fromJson(Map<String, dynamic> json) =>
       ApprovePayCheckListData(
@@ -125,6 +129,7 @@ class ApprovePayCheckListData {
         otherearning: json["otherearning"] ?? "",
         sickpay: json["sickpay"] ?? "",
         vacationhours: json["vacationhours"] ?? "",
+        holidaypay: json["holidaypay"] ?? "",
         commission: json["commission"] ?? "",
         paydate: json["paydate"] ?? "",
         tax: json["tax"] ?? "",
@@ -143,6 +148,7 @@ class ApprovePayCheckListData {
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",
         eid: json["eid"] ?? "",
+        hourlyRate: json["hourly_rate"] ?? "",
       );
 
   // Map<String, dynamic> toJson() => {

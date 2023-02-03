@@ -60,12 +60,8 @@ class LocationManageScreenController extends GetxController {
               .getCompanyWiseLocationFunction();
         } else {
           log('locationCreateFunction Else');
-          if (locationCreateModel.error.locationName
-              .toString()
-              .contains("The location name has already been taken")) {
-            Fluttertoast.showToast(
-                msg: locationCreateModel.error.locationName[0].toString());
-          }
+          Fluttertoast.showToast(msg: locationCreateModel.messege);
+
         }
         log("Empliyee Details : $locationCreateModel");
       });
@@ -133,13 +129,12 @@ class LocationManageScreenController extends GetxController {
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: locationUpdateModel.messege);
           Get.back();
-          await allLocationListScreenController
-              .getCompanyWiseLocationFunction();
+          await allLocationListScreenController.getCompanyWiseLocationFunction();
         } else {
           log("locationUpdateFunction Else");
-          Fluttertoast.showToast(msg: "${locationUpdateModel.error.locationName[0]}");
+          log(locationUpdateModel.messege);
+          Fluttertoast.showToast(msg: locationUpdateModel.messege);
         }
-        log("Location update : $locationUpdateModel");
       });
     } catch (e) {
       log('updateLocationFunction Error :$e');

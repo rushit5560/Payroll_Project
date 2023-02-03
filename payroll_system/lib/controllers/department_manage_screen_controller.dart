@@ -123,7 +123,7 @@ class DepartmentManageScreenController extends GetxController {
       };
       log('bodyData : $bodyData');
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
-
+      log('response1212 : ${response.body}');
       UpdateDepartmentModel updateDepartmentModel =
           UpdateDepartmentModel.fromJson(json.decode(response.body));
 
@@ -135,8 +135,8 @@ class DepartmentManageScreenController extends GetxController {
         await departmentListScreenController.getCompanyWiseDepartmentFunction();
       } else {
         Fluttertoast.showToast(
-            msg: updateDepartmentModel.error!.departmentName[0].toString());
-        log(updateDepartmentModel.error!.departmentName[0].toString());
+            msg: updateDepartmentModel.messege);
+        // log(updateDepartmentModel.error!.departmentName[0].toString());
       }
     } catch (e) {
       log("updateDepartmentFunction Error :$e");

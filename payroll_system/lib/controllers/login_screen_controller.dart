@@ -58,6 +58,8 @@ class LoginController extends GetxController {
           userName: loginDetailsModel.loginData.data.userName,
           userEmail: loginDetailsModel.loginData.data.email,
           userProfileImage: loginDetailsModel.loginData.data.photo,
+            employeeLoginId: loginDetailsModel.loginData.data.roleId == "4" ? int.parse(loginDetailsModel.loginData.data.id) : 0,
+          // employeeLoginId: loginDetailsModel.loginData.data.roleId == "4" ? int.parse(loginDetailsModel.loginData.data.id) : 0,
         );
 
         await userPreference

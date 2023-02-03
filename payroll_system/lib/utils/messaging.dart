@@ -145,6 +145,7 @@ class AppMessage {
   static String dobHintText = '(YYYY/MM/DD)';
   static String pleaseSelectPayper = 'Please select payper';
   static String pleaseSelectPayPeriod = 'Please select pay period';
+  static String hoursRate = 'Hours Rate';
 
   static String street = 'Street';
   static String town = 'Town';
@@ -293,6 +294,7 @@ class AppMessage {
   static String hourlyRateLabel = 'Hourly Rate';
 
   static String subTotal = 'Sub Total';
+  static String hourlySubTotal = '(Hourly Rate X Regular Hours) Sub Total';
   static String finalAmount = 'Final Amount';
 
   static String payRollCreate = 'Create Payroll';
@@ -339,15 +341,23 @@ class AppMessage {
   static String ot = 'OT';
   static String holidayPay = 'Holiday Pay';
   static String sickPayHours = 'Sick Pay Hours (\$)';
+  static String sickPayText = 'Sick Pay';
   static String vacationHour = 'Vacation Hours (\$)';
+  static String vacationHourText = 'Vacation Hours';
   static String tip = 'Tip (\$)';
+  static String tipText = 'Tip';
   static String tax = 'Tax (\$)';
+  static String taxText = 'Taxs';
   static String totalTax = 'Total Taxs';
+  static String totalPayable = 'Total Payable';
   static String directDeposit = 'Direct Deposit';
 
   static String bonus = 'Bonus (\$)';
+  static String bonusText = 'Bonus';
   static String otherEarning = 'Other Earning (\$)';
+  static String otherEarningText = 'Other Earning';
   static String commission = 'Commission (\$)';
+  static String commissionText = 'Commission';
   static String memo = 'Memo';
   //paycheckeslisttext
   static String date = 'Date';

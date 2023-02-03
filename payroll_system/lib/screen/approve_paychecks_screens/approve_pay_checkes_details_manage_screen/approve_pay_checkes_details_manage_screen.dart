@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
-import 'package:payroll_system/common_modules/new/custom_approval_button_modual.dart';
 import 'package:payroll_system/screen/approve_paychecks_screens/approve_pay_checkes_details_manage_screen/approve_pay_checkes_details_manage_widgets_screen.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -8,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/approve_paycheckes_detail_manage_screen_controller.dart';
+
 
 class ApprovePayCheckesDetailsManageScreen extends StatelessWidget {
   ApprovePayCheckesDetailsManageScreen({
@@ -50,10 +50,9 @@ class ApprovePayCheckesDetailsManageScreen extends StatelessWidget {
                       ),
                     ],
                   ).commonAllSidePadding(10),
-                  ApprovePayCheckesDetailsManageWidgetsScreen(),
-
-
-                 
+                  Expanded(
+                    child: ApprovePayCheckesDetailsManageWidgetsScreen(),
+                  ),
                 ],
               ),
       ),

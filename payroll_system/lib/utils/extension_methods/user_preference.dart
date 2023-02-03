@@ -13,6 +13,7 @@ class UserPreference {
   static String userNameKey = "userNameKey";
   static String userEmailKey = "userEmailKey";
   static String userProfileImageKey = "userProfileImageKey";
+  static String employeeLoginIdKey = "employeeLoginIdKey";
 
   // user permissions keys
   static String roleAddKey = 'roleAddKey';
@@ -156,6 +157,7 @@ class UserPreference {
     required String userName,
     required String userEmail,
     required String userProfileImage,
+    required int employeeLoginId,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -166,6 +168,7 @@ class UserPreference {
     prefs.setString(userNameKey, userName);
     prefs.setString(userEmailKey, userEmail);
     prefs.setString(userProfileImageKey, userProfileImage);
+    prefs.setInt(employeeLoginIdKey, employeeLoginId);
 
     //  user details save in local vars
     UserDetails.isUserLoggedIn = prefs.getBool(isUserLoggedInKey) ?? false;

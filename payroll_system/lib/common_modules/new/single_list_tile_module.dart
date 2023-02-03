@@ -36,7 +36,7 @@ class SingleListTileModuleCustom extends StatelessWidget {
               Expanded(
                 child: Text(
                   textKey,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyleConfig.textStyle(
                     fontWeight: FontWeight.w500,
