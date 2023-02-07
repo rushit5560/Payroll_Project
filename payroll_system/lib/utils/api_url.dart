@@ -1,7 +1,9 @@
 class ApiUrl {
   static const apiMainPath = "https://appieve.com/";
   static const apiImagePath = "https://appieve.com/public/images/employee/";
-  static const downloadFilePath = "https://appieve.com/public/images/employee/file/";
+  static const downloadFilePath =
+      "https://appieve.com/public/images/employee/file/";
+
   // static const apiMainPath = "https://kpatelcpa.us/";
   // static const apiImagePath = "https://kpatelcpa.us/public/images/employee/";
   // static const downloadFilePath = "https://kpatelcpa.us/public/images/employee/file/";
@@ -27,7 +29,8 @@ class ApiUrl {
 
   // Employee Api's
   static const allEmployeeApi = "${apiMainPath}api/admin/employee/";
-  static const payCheckWiseEmployeeApi = "${apiMainPath}api/admin/paycheckwiseemployee";
+  static const payCheckWiseEmployeeApi =
+      "${apiMainPath}api/admin/paycheckwiseemployee";
   static const createEmployeeApi = "${apiMainPath}api/admin/employee/store";
   static const deleteEmployeeApi = "${apiMainPath}api/admin/employee/delete/";
   static const getEmployeeDetailsApi = "${apiMainPath}api/admin/employee/edit/";
@@ -77,10 +80,12 @@ class ApiUrl {
   static const getPayCheckesListApi = "${apiMainPath}api/admin/payroll/list";
   static const getSalaryPayChecksListApi = "${apiMainPath}api/admin/paychecks/";
   static const createPayCheckesApi = "${apiMainPath}api/admin/payroll/store";
-  static const createSalaryPayChecksApi = "${apiMainPath}api/admin/paycheck/store";
+  static const createSalaryPayChecksApi =
+      "${apiMainPath}api/admin/paycheck/store";
 
   //approve paycheckes Api's
-  static const getApprovePayCheckesListApi = "${apiMainPath}api/admin/payrollapprove/";
+  static const getApprovePayCheckesListApi =
+      "${apiMainPath}api/admin/payrollapprove/";
   static const getApprovePayChecksListApi = "${apiMainPath}api/admin/payroll/";
   static const deleteApprovePayCheckesListApi =
       "${apiMainPath}api/admin/approvedelete/";
@@ -93,8 +98,9 @@ class ApiUrl {
   static const getSubAdminApi = "${apiMainPath}api/admin/subadmin/edit/";
   static const updateSubAdminApi = "${apiMainPath}api/admin/subadmin/update";
 
-
-
 //permission api
   static const savePermissionApi = "${apiMainPath}api/admin/permissionadd";
+  //GenralSettings Api's
+
+  static const getDateFormatApi = "${apiMainPath}api/admin/dateformate";
 }

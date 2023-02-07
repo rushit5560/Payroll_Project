@@ -46,8 +46,10 @@ class AppMessage {
   static String paychecksDownloadDrawer = "Paychecks Download";
 
   // static String deleteAlertMessage = 'Are you sure you want to delete ?';
-  static String deleteEmployeeAlertMessage = 'Are you sure you want to delete this employee?';
-  static String deletePaychecksAlertMessage = 'Are you sure you want to delete this paychecks?';
+  static String deleteEmployeeAlertMessage =
+      'Are you sure you want to delete this employee?';
+  static String deletePaychecksAlertMessage =
+      'Are you sure you want to delete this paychecks?';
   static String deleteDepartmentAlertMessage =
       'Are you sure you want to delete this department?';
   static String deleteDocumentAlertMessage =
@@ -236,7 +238,8 @@ class AppMessage {
   static String pleaseEnterEmployeeStartDate =
       'Please enter employment start date.';
 
-  static String pleaseEnterEmployeeEndDate = 'Please enter employment end date.';
+  static String pleaseEnterEmployeeEndDate =
+      'Please enter employment end date.';
   static String passwordIsRequired = 'Please enter password.';
   static String pleaseEnterOldPassword = 'Please enter old password.';
   static String pleaseEnterNewPassword = 'Please enter new password.';
@@ -403,4 +406,10 @@ class AppMessage {
   static String uplodedDocumentList = 'Uploaded Document List';
 
   static String youReachedAtMaxLength = 'You reached at max length';
+  //GeneralSettingsScreen
+  static String generalSettingsScreen = "General Settings";
+  static String dateFormat = 'Date Format';
+  static String pleaseSelectDateFormat = 'Please select date format.';
+
+
 }

@@ -421,6 +421,16 @@ class FieldValidation {
     }
   }
 
+
+
+    String? validateDropdownDateFormat(String value) {
+    if (value == AppMessage.chooseOption) {
+      return AppMessage.pleaseSelectDateFormat;
+    } else {
+      return null;
+    }
+  }
+
   String? validateDropdownPayPeriod(String value) {
     if (value == AppMessage.chooseOption) {
       return AppMessage.pleaseSelectPayPeriodValidate;

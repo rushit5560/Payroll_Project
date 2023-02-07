@@ -7,6 +7,7 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/drawer_controllers/admin_drawer_controller.dart';
 import 'package:payroll_system/screen/authentication_screens/change_password_screen/change_password_screen.dart';
 import 'package:payroll_system/screen/authentication_screens/login_screen/login_screen.dart';
+import 'package:payroll_system/screen/general_settings_screen/general_settings_screen.dart';
 import 'package:payroll_system/screen/profile_screens/admin_profile_screens/admin_profile_screen.dart';
 import 'package:payroll_system/screen/profile_screens/sub_admin_profile_screens/sub_admin_profile_screen.dart';
 import 'package:payroll_system/screen/sub_admin_screen/sub_admin_list_screen/sub_admin_list_screen.dart';
@@ -55,17 +56,20 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                         color: AppColors.colorBtBlue),
                                   ),
                             adminDrawerController.roleId.value == 1
-                            ? AdminDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => const RoleListScreen());
-                              },
-                              title: AppMessage.role,
-                              imageStatus: true,
-                              image: AppImages.roleIcon,
-                            ) : Container(),
+                                ? AdminDrawerTile(
+                                    onTap: () {
+                                      Get.back();
+                                      Get.to(() => const RoleListScreen());
+                                    },
+                                    title: AppMessage.role,
+                                    imageStatus: true,
+                                    image: AppImages.roleIcon,
+                                  )
+                                : Container(),
                             adminDrawerController.roleId.value == 1
-                                ? adminDrawerController.isSubadminShowPermission.value == true
+                                ? adminDrawerController
+                                            .isSubadminShowPermission.value ==
+                                        true
                                     ? AdminDrawerTile(
                                         onTap: () {
                                           Get.back();
@@ -84,6 +88,17 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                 Get.to(() => ChangePasswordScreen());
                               },
                               title: AppMessage.changePassword,
+                              imageStatus: true,
+                              image: AppImages.roleIcon,
+                            ),
+                            // general settings
+
+                            AdminDrawerTile(
+                              onTap: () {
+                                Get.back();
+                                Get.to(() => GeneralSettingsScreen());
+                              },
+                              title: AppMessage.generalSettingsScreen,
                               imageStatus: true,
                               image: AppImages.roleIcon,
                             ),
