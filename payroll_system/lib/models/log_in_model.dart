@@ -48,13 +48,13 @@ class LoginData {
     required this.permissiondata,
   });
 
-  final int id;
+  final String id;
   final String token;
   final UserData data;
   final PermissionData permissiondata;
 
   factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
-        id: json["ID"] ?? 0,
+        id: json["ID"] ?? "",
         token: json["Token"] ?? "",
         data: UserData.fromJson(json["data"] ?? {}),
         permissiondata: PermissionData.fromJson(json["permissiondata"] ?? {}),
@@ -104,11 +104,11 @@ class UserData {
   final String fullName;
   final String address;
   final String phoneno;
-  final int roleId;
+  final String roleId;
   final String isActive;
   // final dynamic lastlogin;
   final String verified;
-  final int createdby;
+  final String createdby;
   // final dynamic modifiedby;
   final String emailVerifiedAt;
   final String photo;
@@ -130,11 +130,11 @@ class UserData {
         fullName: json["full_name"] ?? '',
         address: json["address"] ?? '',
         phoneno: json["phoneno"] ?? '',
-        roleId: json["role_id"] ?? 0,
+        roleId: json["role_id"] ?? "",
         isActive: json["is_active"] ?? '',
         // lastlogin: json["lastlogin"],
         verified: json["verified"] ?? '',
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "",
         // modifiedby: json["modifiedby"],
         emailVerifiedAt: json["email_verified_at"] ?? '',
         employeeId: json["employee_id"] ?? "",

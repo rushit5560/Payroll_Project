@@ -71,7 +71,7 @@ class SubadminListData {
   final String fullName;
   final String address;
   final String phoneno;
-  final int roleId;
+  final String roleId;
   final String departmentId;
   final String locationId;
   final String street;
@@ -82,7 +82,7 @@ class SubadminListData {
   final String isActive;
   final String lastlogin;
   final String verified;
-  final int createdby;
+  final String createdby;
   final String modifiedby;
   final String emailVerifiedAt;
   final String photo;
@@ -98,7 +98,7 @@ class SubadminListData {
         fullName: json["full_name"] ?? "",
         address: json["address"] ?? "",
         phoneno: json["phoneno"] ?? "",
-        roleId: json["role_id"] ?? 0,
+        roleId: json["role_id"] ?? "",
         departmentId: json["department_id"] ?? "",
         locationId: json["location_id"] ?? "",
         street: json["street"] ?? "",
@@ -109,7 +109,7 @@ class SubadminListData {
         isActive: json["is_active"] ?? "",
         lastlogin: json["lastlogin"] ?? "",
         verified: json["verified"] ?? "",
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "",
         modifiedby: json["modifiedby"] ?? "",
         emailVerifiedAt: json["email_verified_at"] ?? "",
         photo: json["photo"] ?? "",

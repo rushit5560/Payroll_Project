@@ -59,12 +59,12 @@ class CompanyData {
   String fullName;
   String address;
   String phoneno;
-  int roleId;
+  String roleId;
   String departmentId;
   String isActive;
   // dynamic lastlogin;
   String verified;
-  int createdby;
+  String createdby;
   // dynamic modifiedby;
   // dynamic emailVerifiedAt;
   String photo;
@@ -78,12 +78,12 @@ class CompanyData {
         fullName: json["full_name"] ?? "",
         address: json["address"] ?? "",
         phoneno: json["phoneno"] ?? "",
-        roleId: json["role_id"] ?? 0,
+        roleId: json["role_id"] ?? "",
         departmentId: (json["department_id"] ?? "0").toString(),
         isActive: json["is_active"] ?? "",
         // lastlogin: json["lastlogin"],
         verified: json["verified"] ?? "",
-        createdby: json["createdby"] ?? 0,
+        createdby: json["createdby"] ?? "",
         // modifiedby: json["modifiedby"],
         // emailVerifiedAt: json["email_verified_at"],
         photo: json["photo"] ?? "",

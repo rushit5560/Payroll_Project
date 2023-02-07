@@ -60,7 +60,7 @@ class Data {
   String fullName;
   String address;
   String phoneno;
-  int roleId;
+  String roleId;
   String departmentId;
   String isActive;
   String street;
@@ -84,7 +84,7 @@ class Data {
     fullName: json["full_name"] ?? "",
     address: json["address"] ?? "",
     phoneno: json["phoneno"] ?? "",
-    roleId: json["role_id"] ?? 0,
+    roleId: json["role_id"] ?? "0",
     departmentId: json["department_id"] ?? "",
     isActive: json["is_active"] ?? "",
     street: json["street"] ?? "",
