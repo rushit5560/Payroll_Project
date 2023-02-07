@@ -46,6 +46,7 @@ class PayCheckesListScreenController extends GetxController {
         "cid": companyId,
         "pay_period": "hourly"
       };
+      log('bodyData : $bodyData');
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
       log("getPaycheckesListFunction response  : ${response.body}");
 
@@ -80,7 +81,6 @@ class PayCheckesListScreenController extends GetxController {
 
 
   /// Download Pdf
-
   Future<void> downloadFile() async {
     Dio dio = Dio();
 

@@ -43,14 +43,15 @@ class LocationManageScreenController extends GetxController {
       request.fields['userid'] = "${UserDetails.userId}";
       request.fields['cid'] = companyId;
 
+      log('Fields : ${request.fields}');
       var response = await request.send();
+
       response.stream
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
         // log('value : $value');
-        LocationCreateModel locationCreateModel =
-            LocationCreateModel.fromJson(json.decode(value.toString()));
+        LocationCreateModel locationCreateModel = LocationCreateModel.fromJson(json.decode(value.toString()));
         isSuccessStatus = locationCreateModel.success.obs;
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: locationCreateModel.messege);

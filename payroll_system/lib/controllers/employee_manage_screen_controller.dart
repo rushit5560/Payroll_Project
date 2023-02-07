@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:payroll_system/models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import '../constants/enums.dart';
 import 'package:sizer/sizer.dart';
@@ -199,9 +200,7 @@ class EmployeeManageScreenController extends GetxController {
     }
   }
 
-  void showDatePicker(
-    ctx,
-  ) {
+  void showDatePicker(ctx) {
     showCupertinoModalPopup(
       context: ctx,
       builder: (_) => Container(
@@ -271,9 +270,9 @@ class EmployeeManageScreenController extends GetxController {
         stateAddressController.text = employeeGetByIdModel.data.state;
         zipcodeAddressController.text = employeeGetByIdModel.data.zipcode;
 
-        startDateController.text = employeeGetByIdModel.data.employmentStartDate
-            .toString()
-            .split(" ")[0];
+        String sDateText = employeeGetByIdModel.data.employmentStartDate.toString().split(" ")[0];
+        startDateController.text =  sDateText;
+        // startDateController.text =  DateFormatChanger().changeDateFormat(DateTime.parse(sDateText));
         employmentStartDate = employeeGetByIdModel.data.employmentStartDate;
 
         endDateController.text = employeeGetByIdModel.data.employmentEndDate
@@ -565,7 +564,7 @@ class EmployeeManageScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-        // log('value Updateemployee : $value');
+        log('value Update employee : $value');
         UpdateEmployeeModel updateEmployeeModel =
             UpdateEmployeeModel.fromJson(json.decode(value));
 
@@ -577,7 +576,7 @@ class EmployeeManageScreenController extends GetxController {
         } else {
           log('updateCompanyDetailsFunction Else');
         }
-        // log("Empliyee Details : $updateEmployeeModel");
+        // log("Employee Details : $updateEmployeeModel");
       });
     } catch (e) {
       log('updateCompanyDetailsFunction Error :$e');

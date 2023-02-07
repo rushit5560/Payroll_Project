@@ -10,9 +10,9 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/location_manage_screen_controller.dart';
 import 'package:payroll_system/utils/app_images.dart';
-import 'package:sizer/sizer.dart';
 import '../../../utils/messaging.dart';
 import '../../../utils/validator.dart';
+
 
 class LocationManageScreenWidgets extends StatelessWidget {
   LocationManageScreenWidgets({super.key});
@@ -113,20 +113,15 @@ class LocationManageScreenWidgets extends StatelessWidget {
               CustomSubmitButtonModule(
                 labelText: AppMessage.submit,
                 onPress: () async {
-                  if (locationManageScreenController.formKey.currentState!
-                      .validate()) {
-                    if (locationManageScreenController.locationOption ==
-                        LocationOption.create) {
-                      if (locationManageScreenController.selectedValue.value ==
-                          AppMessage.chooseOption) {
+                  if (locationManageScreenController.formKey.currentState!.validate()) {
+                    if (locationManageScreenController.locationOption == LocationOption.create) {
+                      if (locationManageScreenController.selectedValue.value == AppMessage.chooseOption) {
                         Fluttertoast.showToast(msg: "Please select status");
                       } else {
-                        await locationManageScreenController
-                            .locationCreateFunction();
+                        await locationManageScreenController.locationCreateFunction();
                       }
                     } else {
-                      await locationManageScreenController
-                          .locationUpdateFunction();
+                      await locationManageScreenController.locationUpdateFunction();
                     }
                   }
                 },

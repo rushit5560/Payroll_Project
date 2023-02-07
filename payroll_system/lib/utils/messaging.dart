@@ -46,8 +46,8 @@ class AppMessage {
   static String paychecksDownloadDrawer = "Paychecks Download";
 
   // static String deleteAlertMessage = 'Are you sure you want to delete ?';
-  static String deleteEmployeeAlertMessage =
-      'Are you sure you want to delete this employee?';
+  static String deleteEmployeeAlertMessage = 'Are you sure you want to delete this employee?';
+  static String deletePaychecksAlertMessage = 'Are you sure you want to delete this paychecks?';
   static String deleteDepartmentAlertMessage =
       'Are you sure you want to delete this department?';
   static String deleteDocumentAlertMessage =
@@ -68,6 +68,7 @@ class AppMessage {
 
   //sub admin
   static String subAdminText = "Sub Admin";
+  static String subAdminNameText = "Sub Admin Name";
   static String subAdminListText = "SubAdmin List";
   static String varifiedStatus = "Varified Status";
   static String subAdminUpdate = 'Sub Admin Update';
@@ -126,7 +127,7 @@ class AppMessage {
   static String homeAddress = 'Home Address';
   static String employeeDetails = 'Employee Details';
   static String createEmployee = 'Create employee';
-  static String companyEdit = 'Edit Company';
+  static String companyEdit = 'Update Company';
   static String companyCreate = 'Create Company';
   static String labelName = 'Name';
   static String companyLabelName = 'Company Name';

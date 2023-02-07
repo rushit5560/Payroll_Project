@@ -58,7 +58,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                           if (payChecksDeletePermission == true) {
                             CustomAlertDialog().showAlertDialog(
                               context: context,
-                              textContent: AppMessage.deleteEmployeeAlertMessage,
+                              textContent: AppMessage.deletePaychecksAlertMessage,
                               onYesTap: () async {
                                 log("Delete Employee");
                                 await approvePayCheckesDetailsScreenController

@@ -74,7 +74,13 @@ class SalaryPayChecksManageScreenController extends GetxController {
 
       if (isSuccessStatus.value) {
         allSalaryPaychecksWiseEmployeeList.clear();
-        allSalaryPaychecksWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
+        for(int i=0; i < companyWiseEmployeeModel.data.length; i++) {
+          if(companyWiseEmployeeModel.data[i].isActive == "1") {
+            allSalaryPaychecksWiseEmployeeList.add(companyWiseEmployeeModel.data[i]);
+          }
+        }
+
+        // allSalaryPaychecksWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
         log('allSalaryPaychecksWiseEmployeeList : ${allSalaryPaychecksWiseEmployeeList.length}');
       } else {
         log('getAllCompanyFunction Else');

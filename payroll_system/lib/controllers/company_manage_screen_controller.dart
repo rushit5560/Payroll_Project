@@ -205,6 +205,7 @@ class CompanyManageScreenController extends GetxController {
         await homeScreenController.getAllCompanyFunction(userId);
       } else {
         log('updateCompanyDetailsFunction Else');
+        log('${updateCompanyModel.messege}');
       }
     } catch (e) {
       log('updateCompanyDetailsFunction Error :$e');

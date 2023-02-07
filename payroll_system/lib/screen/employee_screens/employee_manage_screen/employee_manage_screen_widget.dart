@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -954,7 +955,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
     );
     if (d != null) {
       employeeCreteScreenController.isLoading(true);
-      textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      // textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      textEditingController.text = DateFormatChanger().changeDateFormat(d);
       // dateTime = d;
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;

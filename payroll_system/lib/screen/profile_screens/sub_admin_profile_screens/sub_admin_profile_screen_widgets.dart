@@ -143,9 +143,9 @@ class SubAdminFormModule extends StatelessWidget {
                   subAdminProfileScreenController.nameController,
               validate: (val) => FieldValidation().validateUserName(val!),
               maxLength: 10,
-              text: AppMessage.userName,
-              headerText: AppMessage.userName,
-              mandatoryText: " ${AppMessage.mandatory}"),
+              text: AppMessage.subAdminNameText,
+              headerText: AppMessage.subAdminNameText,
+              mandatoryText: AppMessage.mandatory),
           const SizedBox(height: 5),
           FormSingleFieldModule(
               textEditingController:
@@ -154,7 +154,7 @@ class SubAdminFormModule extends StatelessWidget {
               maxLength: 10,
               text: AppMessage.mobileNo,
               headerText: AppMessage.mobileNo,
-              mandatoryText: " ${AppMessage.mandatory}"),
+              mandatoryText: AppMessage.mandatory),
           const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.address,
@@ -169,7 +169,7 @@ class SubAdminFormModule extends StatelessWidget {
           FormSingleFieldModule(
             headerText: AppMessage.empty,
             isHeaderTextShow: false,
-            text: AppMessage.town,
+            text: AppMessage.landmark,
             keyboardType: TextInputType.text,
             mandatoryText: AppMessage.empty,
             textEditingController:

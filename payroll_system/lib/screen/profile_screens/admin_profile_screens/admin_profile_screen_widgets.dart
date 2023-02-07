@@ -133,7 +133,7 @@ class AdminNameFieldModule extends StatelessWidget {
           maxLength: 10,
           text: AppMessage.userName,
           headerText: AppMessage.adminNameLabel,
-          mandatoryText: " ${AppMessage.mandatory}"),
+          mandatoryText: AppMessage.mandatory),
 
      
     );

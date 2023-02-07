@@ -53,7 +53,7 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
 
                           if (payChecksDownloadPermission == true) {
                             await WebUrlLauncher().launchPdfInBrowser(
-                                "${ApiUrl.downloadFilePath}${payrollListDataListValue.id}");
+                                "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
                           } else {
                             Fluttertoast.showToast(
                                 msg: AppMessage.deniedPermission);

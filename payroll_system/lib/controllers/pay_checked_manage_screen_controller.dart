@@ -127,7 +127,12 @@ class PayCheckedManageScreenController extends GetxController {
       log("getCompanyWiseEmployeeFunction ${response.body}");
       if (isSuccessStatus.value) {
         allCompanyWiseEmployeeList.clear();
-        allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
+        for(int i=0; i < companyWiseEmployeeModel.data.length; i++) {
+          if(companyWiseEmployeeModel.data[i].isActive == "1") {
+            allCompanyWiseEmployeeList.add(companyWiseEmployeeModel.data[i]);
+          }
+        }
+        // allCompanyWiseEmployeeList.addAll(companyWiseEmployeeModel.data);
         // for (int i = 0; i < allCompanyWiseEmployeeList.length; i++) {
         //   departmentStringList.add(allCompanyWiseEmployeeList[i].firstName);
         // }

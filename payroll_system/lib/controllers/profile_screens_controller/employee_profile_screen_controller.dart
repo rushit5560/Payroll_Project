@@ -59,7 +59,7 @@ class EmployeeProfileScreenController extends GetxController {
     isLoading(true);
 
     var userId = await UserPreference()
-        .getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+        .getIntValueFromPrefs(keyId: UserPreference.employeeLoginIdKey);
     String url = "${ApiUrl.employeeProfileGetApi}$userId";
     log("getEmployeeProfileFunction Api url : $url");
 
