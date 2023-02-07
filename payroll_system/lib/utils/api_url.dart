@@ -103,4 +103,6 @@ class ApiUrl {
   //GenralSettings Api's
 
   static const getDateFormatApi = "${apiMainPath}api/admin/dateformate";
+  static const updateDateFormatApi =
+      "${apiMainPath}api/admin/dateformateupdate";
 }

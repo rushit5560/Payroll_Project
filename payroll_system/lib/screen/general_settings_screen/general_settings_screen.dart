@@ -121,20 +121,12 @@ class GeneralSettingsScreen extends StatelessWidget {
             CustomSubmitButtonModule(
               labelText: AppMessage.submit,
               onPress: () async {
-                // if (generalSettingsScreenController.formKey.currentState!.validate()) {
-                //   if (generalSettingsScreenController.locationOption == LocationOption.create) {
-                //     if (generalSettingsScreenController.selectedValue.value == AppMessage.chooseOption) {
-                //       Fluttertoast.showToast(msg: "Please select status");
-                //     } else {
-                //       await generalSettingsScreenController.locationCreateFunction();
-                //     }
-                //   } else {
-                //     await generalSettingsScreenController.locationUpdateFunction();
-                //   }
-                // }
-
                 if (generalSettingsScreenController.formKey.currentState!
-                    .validate()) {}
+                    .validate()) {
+                  await generalSettingsScreenController
+                      .updateDateFormatFunction();
+                  log("message");
+                }
               },
             ),
           ],
