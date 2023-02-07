@@ -14,6 +14,7 @@ class UserPreference {
   static String userEmailKey = "userEmailKey";
   static String userProfileImageKey = "userProfileImageKey";
   static String employeeLoginIdKey = "employeeLoginIdKey";
+  static String dateFormatKey = "dateFormatKey";
 
   // user permissions keys
   static String roleAddKey = 'roleAddKey';
@@ -362,6 +363,12 @@ class UserPreference {
     log("UserDetails.departmentEdit : ${UserDetails.departmentEdit}");
     log("UserDetails.departmentView : ${UserDetails.departmentView}");
     log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");*/
+  }
+
+  /// Set Date Format in Prefs
+  Future<void> setDateFormatInPrefs({required String dateFormat}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(dateFormatKey, dateFormat);
   }
 
   // Get Bool Permission

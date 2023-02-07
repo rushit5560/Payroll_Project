@@ -155,7 +155,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                           datePickerOption: DatePickerOption.startDate);
                     },
                     validate: (value) =>
-                        FieldValidation().validateEndDate(value),
+                        FieldValidation().validateEndDate(value, payCheckedManageScreenController.endDate),
                   ),
                 ),
               ],
@@ -181,7 +181,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                   datePickerOption: DatePickerOption.startDate,
                 );
               },
-              validate: (value) => FieldValidation().validatePayDate(value),
+              validate: (value) => FieldValidation().validatePayDate(
+                  value, payCheckedManageScreenController.endDate, payCheckedManageScreenController.payDate),
             ),
             const SizedBox(height: 5),
 

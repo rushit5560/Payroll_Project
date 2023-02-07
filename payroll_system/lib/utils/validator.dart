@@ -372,17 +372,26 @@ class FieldValidation {
     }
   }
 
-  String? validateEndDate(String value) {
+  String? validateEndDate(String value, DateTime endTime) {
+
+    DateTime d = DateTime.now();
+
     if (value.isEmpty) {
       return AppMessage.pleaseEnterEndDate;
+    } else if (endTime.compareTo(d) > 0){
+      return "The end date must be a date before ${d.year}-${d.month}-${d.day}.";
     } else {
       return null;
     }
   }
 
-  String? validatePayDate(String value) {
+  String? validatePayDate(String value, DateTime endTime, DateTime payDate) {
+    // DateTime d = DateTime.now();
+
     if (value.isEmpty) {
       return AppMessage.pleaseEnterPayDate;
+    } else if(payDate.compareTo(endTime) < 0) {
+      return "The pay date must be a date after ${endTime.year}-${endTime.month}-${endTime.day}.";
     } else {
       return null;
     }

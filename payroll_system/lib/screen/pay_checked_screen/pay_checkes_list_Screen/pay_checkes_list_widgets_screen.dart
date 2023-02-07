@@ -5,6 +5,7 @@ import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/common_modules/new/web_url_launcher_function.dart';
 import 'package:payroll_system/constants/colors.dart';
@@ -65,6 +66,41 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                           width: 30,
                           height: 30,
                           color: AppColors.colorBtBlue,
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      // Delete Paychecks
+                      GestureDetector(
+                        onTap: () async {
+                          bool payChecksDeletePermission =
+                          await userPreference.getBoolPermissionFromPrefs(
+                              keyId:
+                              UserPreference.approvePayChecksDeleteKey);
+
+                          if (payChecksDeletePermission == true) {
+                            CustomAlertDialog().showAlertDialog(
+                              context: context,
+                              textContent: AppMessage.deletePaychecksAlertMessage,
+                              onYesTap: () async {
+                                log("Delete Employee");
+                                await payCheckesListScreenController
+                                    .deleteHourlyPaychecksFunction(payrollListDataListValue.id.toString(),
+                                );
+                              },
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                            );
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: AppMessage.deniedPermission);
+                          }
+                        },
+                        child: Image.asset(
+                          AppImages.deleteIcon,
+                          width: 20,
+                          height: 20,
+                          color: AppColors.colorRed,
                         ),
                       ),
                     ],

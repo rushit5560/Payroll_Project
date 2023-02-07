@@ -144,7 +144,7 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                         datePickerOption: DatePickerOption.startDate);
                   },
                   validate: (value) =>
-                      FieldValidation().validateEndDate(value),
+                      FieldValidation().validateEndDate(value, screenController.endDate),
                 ),
               ),
             ],
@@ -171,7 +171,7 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                 datePickerOption: DatePickerOption.startDate,
               );
             },
-            validate: (value) => FieldValidation().validatePayDate(value),
+            validate: (value) => FieldValidation().validatePayDate(value, screenController.endDate, screenController.payDate),
           ),
           const SizedBox(height: 5),
           ///

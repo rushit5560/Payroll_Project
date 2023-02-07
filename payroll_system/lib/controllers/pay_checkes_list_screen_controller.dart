@@ -4,9 +4,11 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:payroll_system/models/Pay_checkes_list_model/pay_checkes_list_screen_model.dart';
+import 'package:payroll_system/models/approval_paycheckes_manage_screen_model/approval_paycheckes_delete_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
@@ -63,6 +65,39 @@ class PayCheckesListScreenController extends GetxController {
         log('filterPayChecksListData : ${filterPayChecksListData.length}');
       }
     } catch (e) {
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> deleteHourlyPaychecksFunction(String approvalId) async {
+    isLoading(true);
+    String url =
+        "${ApiUrl.deleteApprovePayCheckesListApi}$companyId/$approvalId";
+    log('Delete deleteApprovalFunction Api Url :$url');
+    log('Delete deleteApprovalFunction companyId :$companyId');
+    log('Delete deleteApprovalFunction approvalId :$approvalId');
+
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+      log('response : ${response.body}');
+
+      ApprovalDeleteModel approvalDeleteModel =
+      ApprovalDeleteModel.fromJson(json.decode(response.body));
+      isSuccessStatus = approvalDeleteModel.success.obs;
+
+      if (isSuccessStatus.value) {
+        Fluttertoast.showToast(msg: approvalDeleteModel.messege);
+        Get.back();
+        await getPaycheckesListFunction();
+
+        // Get.back();
+      } else {
+        log('deleteApprovalFunction Else');
+      }
+    } catch (e) {
+      log('deleteApprovalFunction Error :$e');
       rethrow;
     } finally {
       isLoading(false);

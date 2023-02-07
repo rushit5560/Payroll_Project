@@ -62,8 +62,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                               onYesTap: () async {
                                 log("Delete Employee");
                                 await approvePayCheckesDetailsScreenController
-                                    .deleteApprovalFunction(
-                                  approvalDataValue.id.toString(),
+                                    .deleteApprovalFunction(approvalDataValue.id.toString(),
                                 );
                               },
                               onCancelTap: () {
@@ -258,6 +257,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                       labelText: AppMessage.approvePaycheckes)
                   .commonSymmetricPadding(horizontal: 10)
               : Container(),
+        const SizedBox(height: 10),
       ],
     ),
         );
