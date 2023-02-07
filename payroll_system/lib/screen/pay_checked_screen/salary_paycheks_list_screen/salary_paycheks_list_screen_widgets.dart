@@ -9,6 +9,7 @@ import 'package:payroll_system/controllers/salary_paycheks_list_screen_controlle
 import 'package:payroll_system/models/Pay_checkes_list_model/pay_checkes_list_screen_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -100,7 +101,10 @@ class SalaryPaychecksListModule extends StatelessWidget {
                   ),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.payDate,
-                    textValue: singleItem.paydate.toString().split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(singleItem.paydate),
+                        screenController.prefsDateFormat),
+                    // textValue: singleItem.paydate.toString().split(" ")[0],
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
@@ -119,15 +123,21 @@ class SalaryPaychecksListModule extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.startDate,
-                    textValue: singleItem.startdate
-                        .toString()
-                        .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(singleItem.startdate),
+                        screenController.prefsDateFormat),
+                    // textValue: singleItem.startdate
+                    //     .toString()
+                    //     .split(" ")[0],
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.endDate,
-                    textValue: singleItem.enddate.toString().split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(singleItem.enddate),
+                        screenController.prefsDateFormat),
+                    // textValue: singleItem.enddate.toString().split(" ")[0],
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),

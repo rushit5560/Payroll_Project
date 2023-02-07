@@ -25,6 +25,7 @@ class SalaryPaychecksListScreenController extends GetxController {
   RxString selectedFilterValue = "All".obs;
 
   UserPreference userPreference = UserPreference();
+  String prefsDateFormat = "";
 
   Future<void> getSalaryPaycheckesFunction() async {
     isLoading(true);
@@ -100,6 +101,7 @@ class SalaryPaychecksListScreenController extends GetxController {
   }
 
   initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
     await getSalaryPaycheckesFunction();
   }
 }

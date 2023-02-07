@@ -20,6 +20,7 @@ class ApprovePaychecksListScreenController extends GetxController {
   List<ApprovePayCheckListData> approvePayCheckListdata = [];
 
   UserPreference userPreference = UserPreference();
+  String prefsDateFormat = "";
 
   Future<void> approvePaycheckesListFunction() async {
     isLoading(true);
@@ -53,7 +54,12 @@ class ApprovePaychecksListScreenController extends GetxController {
 
   @override
   void onInit() {
-    approvePaycheckesListFunction();
+    initMethod();
     super.onInit();
+  }
+
+  initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+    await approvePaycheckesListFunction();
   }
 }

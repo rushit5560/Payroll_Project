@@ -116,6 +116,10 @@ class EmployeeManageScreenController extends GetxController {
   TextEditingController cityAddressController = TextEditingController();
   TextEditingController stateAddressController = TextEditingController();
 
+  TextEditingController dateOfBirthShowController = TextEditingController();
+  TextEditingController startDateShowController = TextEditingController();
+  TextEditingController endDateShowController = TextEditingController();
+
   File? images;
   String oldImageName = "";
 
@@ -123,6 +127,8 @@ class EmployeeManageScreenController extends GetxController {
 
   int userIdPrefs = 0;
   UserPreference userPreference = UserPreference();
+  String prefsDateFormat = "";
+
 
   imageFromCamera() async {
     XFile? image = await ImagePicker()
@@ -253,8 +259,8 @@ class EmployeeManageScreenController extends GetxController {
         middleNameController.text = employeeGetByIdModel.data.middleName;
         lastNameController.text = employeeGetByIdModel.data.lastName;
         phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
-        dateOfBirthController.text =
-            employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+        dateOfBirthController.text = employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+        dateOfBirthShowController.text = DateFormater().changeDateFormat(employeeGetByIdModel.data.dateOfBirth, prefsDateFormat);
         birthDate = employeeGetByIdModel.data.dateOfBirth;
         selectedValuePayper.value =
             employeeGetByIdModel.data.payPeriod == "salary"
@@ -272,12 +278,19 @@ class EmployeeManageScreenController extends GetxController {
 
         String sDateText = employeeGetByIdModel.data.employmentStartDate.toString().split(" ")[0];
         startDateController.text =  sDateText;
-        // startDateController.text =  DateFormatChanger().changeDateFormat(DateTime.parse(sDateText));
+        startDateShowController.text = DateFormater().changeDateFormat(
+          employeeGetByIdModel.data.employmentStartDate,
+          prefsDateFormat,
+        );
         employmentStartDate = employeeGetByIdModel.data.employmentStartDate;
 
         endDateController.text = employeeGetByIdModel.data.employmentEndDate
             .toString()
             .split(" ")[0];
+        endDateShowController.text = DateFormater().changeDateFormat(
+          employeeGetByIdModel.data.employmentEndDate,
+          prefsDateFormat,
+        );
         employmentEndDate = employeeGetByIdModel.data.employmentEndDate;
 
         selectedValue.value = employeeGetByIdModel.data.isActive == "0"
@@ -372,7 +385,7 @@ class EmployeeManageScreenController extends GetxController {
   }
 
   /// Company wise location
-  Future<void> getCompanyWiseLocationFunction(companyId) async {
+  Future<void> getCompanyWiseLocationFunction(companyId) async  {
     isLoading(true);
     String url = "${ApiUrl.companyWiseLocationApi}$companyId";
     // log('Company Wise Location Api Url : $url');
@@ -587,8 +600,8 @@ class EmployeeManageScreenController extends GetxController {
   }
 
   getLoggedInUserIdFromPrefs() async {
-    userIdPrefs = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.userIdKey);
+    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
     await getCompanyWiseDepartmentFunction();
   }
 
@@ -598,6 +611,8 @@ class EmployeeManageScreenController extends GetxController {
     getLoggedInUserIdFromPrefs();
     super.onInit();
   }
+
+
 
   loadUI() {
     isLoading(true);

@@ -5,6 +5,7 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/approve_paychecks_list_screen_controller.dart';
 import 'package:payroll_system/screen/approve_paychecks_screens/approve_pay_checkes_details_manage_screen/approve_pay_checkes_details_manage_screen.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -34,9 +35,12 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SingleListTileModuleCustom(
-                      textValue: approvePayrollListDataListvalue.paydate
-                          .toString()
-                          .split(" ")[0],
+                      textValue: DateFormater().changeDateFormat(
+                          DateTime.parse(approvePayrollListDataListvalue.paydate),
+                          approvePaychecksListScreenController.prefsDateFormat),
+                      // textValue: approvePayrollListDataListvalue.paydate
+                      //     .toString()
+                      //     .split(" ")[0],
                       image: AppImages.calendarIcon,
                       textKey: AppMessage.payDate),
                   const SizedBox(height: 5),
@@ -51,16 +55,22 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                       textKey: AppMessage.companyLabelName),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                      textValue: approvePayrollListDataListvalue.startdate
-                          .toString()
-                          .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                      DateTime.parse(approvePayrollListDataListvalue.startdate),
+                        approvePaychecksListScreenController.prefsDateFormat),
+                      // textValue: approvePayrollListDataListvalue.startdate
+                      //     .toString()
+                      //     .split(" ")[0],
                       image: AppImages.calendarIcon,
                       textKey: AppMessage.startDate),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                      textValue: approvePayrollListDataListvalue.enddate
-                          .toString()
-                          .split(" ")[0],
+                      textValue: DateFormater().changeDateFormat(
+                          DateTime.parse(approvePayrollListDataListvalue.enddate),
+                          approvePaychecksListScreenController.prefsDateFormat),
+                      // textValue: approvePayrollListDataListvalue.enddate
+                      //     .toString()
+                      //     .split(" ")[0],
                       image: AppImages.calendarIcon,
                       textKey: AppMessage.endDate),
                   const SizedBox(height: 5),

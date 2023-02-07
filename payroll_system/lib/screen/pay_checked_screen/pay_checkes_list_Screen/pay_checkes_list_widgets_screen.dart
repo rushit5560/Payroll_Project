@@ -108,9 +108,12 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   ),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.payDate,
-                    textValue: payrollListDataListValue.paydate
-                        .toString()
-                        .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(payrollListDataListValue.paydate),
+                        payCheckesListScreenController.prefsDateFormat),
+                    // textValue: payrollListDataListValue.paydate
+                    //     .toString()
+                    //     .split(" ")[0],
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
@@ -140,9 +143,12 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.endDate,
-                    textValue: payrollListDataListValue.enddate
-                        .toString()
-                        .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(payrollListDataListValue.enddate),
+                        payCheckesListScreenController.prefsDateFormat),
+                    // textValue: payrollListDataListValue.enddate
+                    //     .toString()
+                    //     .split(" ")[0],
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),

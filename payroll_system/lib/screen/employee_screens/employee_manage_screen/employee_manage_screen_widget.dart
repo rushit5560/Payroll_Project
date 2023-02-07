@@ -92,7 +92,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               readOnly: true,
               maxLength: 10,
               textEditingController:
-                  employeeCreteScreenController.dateOfBirthController,
+                  employeeCreteScreenController.dateOfBirthShowController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
                 await _selectDate(
@@ -219,7 +219,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               mandatoryText: AppMessage.mandatory,
               readOnly: true,
               textEditingController:
-                  employeeCreteScreenController.startDateController,
+                  employeeCreteScreenController.startDateShowController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
                 await _selectDate(
@@ -241,7 +241,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:
-                  employeeCreteScreenController.endDateController,
+                  employeeCreteScreenController.endDateShowController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
                 await _selectDate(
@@ -962,15 +962,25 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
       String prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
 
       employeeCreteScreenController.isLoading(true);
-      // textEditingController.text = "${d.year}-${d.month}-${d.day}";
-      textEditingController.text = await DateFormater().changeDateFormat(d, prefsDateFormat);
+      textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      // textEditingController.text = await DateFormater().changeDateFormat(d, prefsDateFormat);
       // dateTime = d;
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;
+        employeeCreteScreenController.dateOfBirthShowController.text = DateFormater().changeDateFormat(
+          d, employeeCreteScreenController.prefsDateFormat
+        );
+
       } else if (datePickerOption == DatePickerOption.startDate) {
         employeeCreteScreenController.employmentStartDate = d;
+        employeeCreteScreenController.startDateShowController.text = DateFormater().changeDateFormat(
+            d, employeeCreteScreenController.prefsDateFormat
+        );
       } else {
         employeeCreteScreenController.employmentEndDate = d;
+        employeeCreteScreenController.endDateShowController.text = DateFormater().changeDateFormat(
+            d, employeeCreteScreenController.prefsDateFormat
+        );
       }
       employeeCreteScreenController.isLoading(false);
     }
