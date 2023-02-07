@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/constants/colors.dart';
-import 'package:payroll_system/controllers/general_settings_screen_cotroller.dart';
+import 'package:payroll_system/controllers/general_settings_screen_controller.dart';
 import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
