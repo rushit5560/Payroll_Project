@@ -369,6 +369,7 @@ class UserPreference {
   Future<void> setDateFormatInPrefs({required String dateFormat}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(dateFormatKey, dateFormat);
+    log('Date Format : ${prefs.getString(dateFormatKey)}');
   }
 
   // Get Bool Permission

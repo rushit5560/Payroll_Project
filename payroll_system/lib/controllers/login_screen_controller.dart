@@ -62,6 +62,8 @@ class LoginController extends GetxController {
           // employeeLoginId: loginDetailsModel.loginData.data.roleId == "4" ? int.parse(loginDetailsModel.loginData.data.id) : 0,
         );
 
+        await userPreference.setDateFormatInPrefs(dateFormat: loginDetailsModel.loginData.dateformat);
+
         await userPreference
             .setAllPermissionIntoPrefs(
           subAdminView:

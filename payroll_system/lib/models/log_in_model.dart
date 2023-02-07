@@ -46,18 +46,21 @@ class LoginData {
     required this.token,
     required this.data,
     required this.permissiondata,
+    required this.dateformat,
   });
 
   final String id;
   final String token;
   final UserData data;
   final PermissionData permissiondata;
+  String dateformat;
 
   factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
         id: json["ID"] ?? "",
         token: json["Token"] ?? "",
         data: UserData.fromJson(json["data"] ?? {}),
         permissiondata: PermissionData.fromJson(json["permissiondata"] ?? {}),
+        dateformat: json["dateformat"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,6 +68,7 @@ class LoginData {
         "Token": token,
         "data": data.toJson(),
         "permissiondata": permissiondata.toJson(),
+        "dateformat": dateformat,
       };
 }
 
