@@ -32,6 +32,8 @@ class PayCheckesListScreenController extends GetxController {
   List<String> filterList = ["All", "Approved", "Not Approved"];
   RxString selectedFilterValue = "All".obs;
 
+  String prefsDateFormat = "";
+
 
 
   Future<void> getPaycheckesListFunction() async {
@@ -111,6 +113,8 @@ class PayCheckesListScreenController extends GetxController {
   }
 
   initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+    log('prefsDateFormat Init Method : $prefsDateFormat');
     await getPaycheckesListFunction();
   }
 

@@ -5,10 +5,13 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class DateFormater {
 
-  Future<String> changeDateFormat(DateTime date) async {
+  String changeDateFormat(DateTime date, String prefsDateFormat) {
     String formatedDate = '';
-    UserPreference userPreference = UserPreference();
-    String prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+    log('date :$date');
+    log('prefsDateFormat :$prefsDateFormat');
+    // UserPreference userPreference = UserPreference();
+    // String prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+    // String prefsDateFormat = dateFormat;
 
     if(prefsDateFormat == "m-d-Y") {
       formatedDate = "${date.month}-${date.day}-${date.year}";
@@ -26,15 +29,15 @@ class DateFormater {
       formatedDate = "${date.year}/${date.month}/${date.day}";
     }
     else if(prefsDateFormat == "Y-M-d") {
-      String d = DateFormat("yyyy/MMM/dd").format(DateTime.now());
+      String d = DateFormat("yyyy/MMM/dd").format(date);
       formatedDate = d;
     }
     else if(prefsDateFormat == "M-d-y") {
-      String d = DateFormat("MMM/dd/yyyy").format(DateTime.now());
+      String d = DateFormat("MMM/dd/yyyy").format(date);
       formatedDate = d;
     }
     else if(prefsDateFormat == "d-M-Y") {
-      String d = DateFormat("dd/MMM/yyyy").format(DateTime.now());
+      String d = DateFormat("dd/MMM/yyyy").format(date);
       formatedDate = d;
     }
 

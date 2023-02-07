@@ -12,6 +12,7 @@ import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/pay_checkes_list_screen_controller.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -128,9 +129,12 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.startDate,
-                    textValue: payrollListDataListValue.startdate
-                        .toString()
-                        .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                      DateTime.parse(payrollListDataListValue.startdate),
+                        payCheckesListScreenController.prefsDateFormat),
+                    // textValue: payrollListDataListValue.startdate
+                    //     .toString()
+                    //     .split(" ")[0],
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),

@@ -17,6 +17,8 @@ import 'package:payroll_system/controllers/employee_manage_screen_controller.dar
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 
+import '../../../utils/extension_methods/user_preference.dart';
+
 // ignore: must_be_immutable
 class EmployeeManageScreenWidgets extends StatelessWidget {
   EmployeeManageScreenWidgets({
@@ -25,6 +27,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
 
   final employeeCreteScreenController =
       Get.find<EmployeeManageScreenController>();
+
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -954,9 +958,12 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
           : DateTime.now(),
     );
     if (d != null) {
+
+      String prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+
       employeeCreteScreenController.isLoading(true);
       // textEditingController.text = "${d.year}-${d.month}-${d.day}";
-      textEditingController.text = await DateFormater().changeDateFormat(d);
+      textEditingController.text = await DateFormater().changeDateFormat(d, prefsDateFormat);
       // dateTime = d;
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;

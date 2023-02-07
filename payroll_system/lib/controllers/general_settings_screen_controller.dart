@@ -43,6 +43,8 @@ class GeneralSettingsScreenController extends GetxController {
       log("getCompanyWiseEmployeeFunction ${response.body}");
       if (isSuccessStatus.value) {
         selectedValue.value = genralSettingModel.data;
+        await userPreference.setDateFormatInPrefs(dateFormat: selectedValue.value);
+
         log("getDateFormatFunction :: ${selectedValue.value}");
       } else {
         log('getAllCompanyFunction Else');
@@ -80,6 +82,7 @@ class GeneralSettingsScreenController extends GetxController {
 
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: dateFormatUpdateModel.messege);
+          await userPreference.setDateFormatInPrefs(dateFormat: selectedValue.value);
           Get.back();
         } else {
           log("updateDateFormatFunction");
