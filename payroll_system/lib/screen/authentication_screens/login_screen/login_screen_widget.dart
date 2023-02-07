@@ -105,8 +105,7 @@ class LoginButtonModule extends StatelessWidget {
               )),
           onPressed: () async {
             if (loginScreenController.formKey.currentState!.validate()) {
-              if (loginScreenController.isPrivacyChecked.value) {
-                await loginScreenController.loginUserFunction();
+              if (loginScreenController.isPrivacyChecked.value) {await loginScreenController.loginUserFunction();
               } else {
                 Fluttertoast.showToast(msg: AppMessage.privacyPolicyMessage);
               }
