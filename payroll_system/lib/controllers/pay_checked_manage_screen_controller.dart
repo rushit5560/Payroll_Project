@@ -33,7 +33,7 @@ class PayCheckedManageScreenController extends GetxController {
     "Choose Option",
     "Weekly",
     "Bi-Weekly",
-    "Others"
+    "Other"
   ];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -212,26 +212,26 @@ class PayCheckedManageScreenController extends GetxController {
 
       log('request.fields : ${request.fields}');
 
-      // var response = await request.send();
+      var response = await request.send();
 
-      // response.stream
-      //     .transform(const Utf8Decoder())
-      //     .transform(const LineSplitter())
-      //     .listen((value) async {
-      //   log('value : $value');
+      response.stream
+          .transform(const Utf8Decoder())
+          .transform(const LineSplitter())
+          .listen((value) async {
+        log('value : $value');
 
-      //   PaychecksCreateModel paychecksCreateModel =
-      //       PaychecksCreateModel.fromJson(json.decode(value));
-      //   isSuccessStatus.value = paychecksCreateModel.success;
+        PaychecksCreateModel paychecksCreateModel =
+            PaychecksCreateModel.fromJson(json.decode(value));
+        isSuccessStatus.value = paychecksCreateModel.success;
 
-      //   if (isSuccessStatus.value) {
-      //     Fluttertoast.showToast(msg: paychecksCreateModel.messege);
-      //     Get.back();
-      //     await payCheckesListScreenController.getPaycheckesListFunction();
-      //   } else {
-      //     log('createPaycheckFunction Else');
-      //   }
-      // });
+        if (isSuccessStatus.value) {
+          Fluttertoast.showToast(msg: paychecksCreateModel.messege);
+          Get.back();
+          await payCheckesListScreenController.getPaycheckesListFunction();
+        } else {
+          log('createPaycheckFunction Else');
+        }
+      });
 
       /*Map<String, dynamic> bodyData = {
         "cid": companyId,
