@@ -17,6 +17,7 @@ class SalaryPayChecksManageScreenController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
+  String prefsDateFormat = "";
 
   final salaryPaychecksListScreenController =
       Get.find<SalaryPaychecksListScreenController>();
@@ -41,6 +42,10 @@ class SalaryPayChecksManageScreenController extends GetxController {
   TextEditingController endDateController = TextEditingController();
   TextEditingController payDateController = TextEditingController();
   TextEditingController memoController = TextEditingController();
+
+  TextEditingController startDateShowController = TextEditingController();
+  TextEditingController endDateShowController = TextEditingController();
+  TextEditingController payDateShowController = TextEditingController();
 
   List<Map<String, dynamic>> data = [];
 
@@ -155,6 +160,8 @@ class SalaryPayChecksManageScreenController extends GetxController {
   }
 
   initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
     await getSalaryPaycheckWiseEmployeeFunction();
   }
 }

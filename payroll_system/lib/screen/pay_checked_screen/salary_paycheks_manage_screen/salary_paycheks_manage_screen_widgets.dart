@@ -11,6 +11,7 @@ import 'package:payroll_system/constants/enums.dart';
 import 'package:payroll_system/controllers/salary_paycheks_manage_screen_controller.dart';
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -113,7 +114,8 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                   text: AppMessage.selectPayRollStartDate,
                   keyboardType: TextInputType.datetime,
                   mandatoryText: AppMessage.mandatory,
-                  textEditingController: screenController.startDateController,
+                  textEditingController:
+                      screenController.startDateShowController,
                   suffixIcon: Icons.calendar_month,
                   readOnly: true,
                   onPressed: () async {
@@ -136,7 +138,7 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                   text: AppMessage.selectPayRollEndDate,
                   keyboardType: TextInputType.datetime,
                   mandatoryText: AppMessage.mandatory,
-                  textEditingController: screenController.endDateController,
+                  textEditingController: screenController.endDateShowController,
                   suffixIcon: Icons.calendar_month,
                   readOnly: true,
                   onPressed: () async {
@@ -155,15 +157,13 @@ class SalaryPayChecksFormModule extends StatelessWidget {
           ),
           const SizedBox(height: 5),
 
-          ///
-
           /// Pay Date module
           FormSingleFieldModule(
             headerText: AppMessage.payDate,
             text: AppMessage.payDate,
             keyboardType: TextInputType.datetime,
             mandatoryText: AppMessage.mandatory,
-            textEditingController: screenController.payDateController,
+            textEditingController: screenController.payDateShowController,
             suffixIcon: Icons.calendar_month,
             readOnly: true,
             onPressed: () async {
@@ -178,8 +178,6 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                 value, screenController.endDate, screenController.payDate),
           ),
           const SizedBox(height: 5),
-
-          ///
 
           /// Employee List module
           RichText(
@@ -457,12 +455,17 @@ class SalaryPayChecksFormModule extends StatelessWidget {
           : DateTime.now(),
     );
     if (d != null) {
+      // String prefsDateFormat = await userPreference.getStringValueFromPrefs(
+      //     keyId: UserPreference.dateFormatKey);
       screenController.isLoading(true);
 
       // if(d.compareTo(screenController.endDate) < 0) {
       //   Fluttertoast.showToast(msg: "Please select valid start date");
       // } else {
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      screenController.startDateShowController.text =
+          DateFormater().changeDateFormat(d, screenController.prefsDateFormat);
+
       screenController.startDate = d;
 
       if (screenController.selectedSalaryChecksValue.value == "Weekly") {
@@ -470,6 +473,8 @@ class SalaryPayChecksFormModule extends StatelessWidget {
         final d2 = d1.add(const Duration(days: 7));
         screenController.endDateController.text =
             "${d2.year}-${d2.month}-${d2.day}";
+        screenController.endDateShowController.text = DateFormater()
+            .changeDateFormat(d2, screenController.prefsDateFormat);
         screenController.endDate = d2;
       } else if (screenController.selectedSalaryChecksValue.value ==
           "Bi-Weekly") {
@@ -478,9 +483,10 @@ class SalaryPayChecksFormModule extends StatelessWidget {
         screenController.endDateController.text =
             "${d2.year}-${d2.month}-${d2.day}";
         screenController.endDate = d2;
-      }
 
-      // }
+        screenController.endDateShowController.text = DateFormater()
+            .changeDateFormat(d2, screenController.prefsDateFormat);
+      }
 
       screenController.isLoading(false);
     }
@@ -506,7 +512,10 @@ class SalaryPayChecksFormModule extends StatelessWidget {
     if (d != null) {
       screenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      screenController.endDateShowController.text =
+          DateFormater().changeDateFormat(d, screenController.prefsDateFormat);
       screenController.endDate = d;
+
       if (screenController.selectedSalaryChecksValue.value == "Others" ||
           screenController.selectedSalaryChecksValue.value == "Choose Option") {
         if (screenController.endDate.isBefore(screenController.startDate)) {
@@ -530,8 +539,14 @@ class SalaryPayChecksFormModule extends StatelessWidget {
       lastDate: DateTime.now().subtract(const Duration(days: 1)),
     );
     if (d != null) {
+      // String prefsDateFormat = await userPreference.getStringValueFromPrefs(
+      //     keyId: UserPreference.dateFormatKey);
+
       screenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      screenController.payDateShowController.text =
+          DateFormater().changeDateFormat(d, screenController.prefsDateFormat);
+
       screenController.payDate = d;
       screenController.isLoading(false);
     }
