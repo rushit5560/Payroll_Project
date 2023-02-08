@@ -9,6 +9,7 @@ import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/controllers/approve_paycheckes_detail_manage_screen_controller.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
@@ -85,8 +86,11 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   SingleListTileModuleCustom(
-                      textValue:
-                          approvalDataValue.paydate.toString().split(" ")[0],
+                      textValue: DateFormater().changeDateFormat(
+                          DateTime.parse(approvalDataValue.startdate),
+                          approvePayCheckesDetailsScreenController.prefsDateFormat),
+                      // textValue:
+                      //     approvalDataValue.paydate.toString().split(" ")[0],
                       image: AppImages.calendarIcon,
                       textKey: AppMessage.payDate),
                   const SizedBox(height: 5),

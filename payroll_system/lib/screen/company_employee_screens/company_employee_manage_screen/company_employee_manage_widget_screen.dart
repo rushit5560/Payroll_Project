@@ -8,6 +8,7 @@ import 'package:payroll_system/controllers/company_employee_manage_screen_contro
 import 'package:payroll_system/models/company_department_model/company_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
@@ -87,7 +88,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               readOnly: true,
               maxLength: 10,
               textEditingController:
-                  companyEmployeeManageScreenController.dateOfBirthController,
+                  companyEmployeeManageScreenController.dateOfBirthShowController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
                 await _selectDate(
@@ -228,7 +229,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               mandatoryText: AppMessage.mandatory,
               readOnly: true,
               textEditingController:
-                  companyEmployeeManageScreenController.startDateController,
+                  companyEmployeeManageScreenController.startDateShowController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
                 await _selectDate(
@@ -251,7 +252,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:
-                  companyEmployeeManageScreenController.endDateController,
+                  companyEmployeeManageScreenController.endDateShowController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
                 await _selectDate(
@@ -980,13 +981,22 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
     if (d != null) {
       companyEmployeeManageScreenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
-      // dateTime = d;
+
       if (datePickerOption == DatePickerOption.dob) {
         companyEmployeeManageScreenController.birthDate = d;
+        companyEmployeeManageScreenController.dateOfBirthShowController.text = DateFormater().changeDateFormat(
+            d, companyEmployeeManageScreenController.prefsDateFormat
+        );
       } else if (datePickerOption == DatePickerOption.startDate) {
         companyEmployeeManageScreenController.employmentStartDate = d;
+        companyEmployeeManageScreenController.startDateShowController.text = DateFormater().changeDateFormat(
+            d, companyEmployeeManageScreenController.prefsDateFormat
+        );
       } else {
         companyEmployeeManageScreenController.employmentEndDate = d;
+        companyEmployeeManageScreenController.endDateShowController.text = DateFormater().changeDateFormat(
+            d, companyEmployeeManageScreenController.prefsDateFormat
+        );
       }
       companyEmployeeManageScreenController.isLoading(false);
     }

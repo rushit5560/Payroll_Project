@@ -7,6 +7,7 @@ import 'package:payroll_system/controllers/company_home_screen_controller.dart';
 import 'package:payroll_system/models/company_manage_screen_model/get_all_department_model.dart';
 import 'package:payroll_system/models/location_list_screen_model/location_list_screen_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import '../constants/enums.dart';
 import 'package:sizer/sizer.dart';
@@ -109,6 +110,10 @@ class CompanyEmployeeManageScreenController extends GetxController {
   TextEditingController cityAddressController = TextEditingController();
   TextEditingController stateAddressController = TextEditingController();
 
+  TextEditingController dateOfBirthShowController = TextEditingController();
+  TextEditingController startDateShowController = TextEditingController();
+  TextEditingController endDateShowController = TextEditingController();
+
   File? images;
   String oldImageName = "";
 
@@ -116,6 +121,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
 
   int userIdPrefs = 0;
   UserPreference userPreference = UserPreference();
+  String prefsDateFormat = "";
 
   imageFromCamera() async {
     XFile? image = await ImagePicker()
@@ -193,9 +199,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
     }
   }
 
-  void showDatePicker(
-    ctx,
-  ) {
+  void showDatePicker(ctx) {
     showCupertinoModalPopup(
       context: ctx,
       builder: (_) => Container(
@@ -306,8 +310,9 @@ class CompanyEmployeeManageScreenController extends GetxController {
         phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
         log('employeeGetByIdModel.data.dateOfBirth : ${employeeGetByIdModel.data.dateOfBirth}');
         if (employeeGetByIdModel.data.dateOfBirth.toString().contains(" ")) {
-          dateOfBirthController.text =
-              employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+          dateOfBirthController.text = employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+          birthDate = employeeGetByIdModel.data.dateOfBirth;
+          dateOfBirthShowController.text = DateFormater().changeDateFormat(employeeGetByIdModel.data.dateOfBirth, prefsDateFormat);
         }
         // birthDate = employeeGetByIdModel.data.dateOfBirth;
         selectedValuePayper.value =
@@ -328,11 +333,19 @@ class CompanyEmployeeManageScreenController extends GetxController {
             .toString()
             .split(" ")[0];
         employmentStartDate = employeeGetByIdModel.data.employmentStartDate;
+        startDateShowController.text = DateFormater().changeDateFormat(
+          employeeGetByIdModel.data.employmentStartDate,
+          prefsDateFormat,
+        );
 
         endDateController.text = employeeGetByIdModel.data.employmentEndDate
             .toString()
             .split(" ")[0];
         employmentEndDate = employeeGetByIdModel.data.employmentEndDate;
+        endDateShowController.text = DateFormater().changeDateFormat(
+          employeeGetByIdModel.data.employmentEndDate,
+          prefsDateFormat,
+        );
 
         selectedValue.value = employeeGetByIdModel.data.isActive == "0"
             ? "In-Active"
@@ -615,6 +628,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
   getLoggedInUserIdFromPrefs() async {
     userIdPrefs = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
     await getCompanyWiseDepartmentFunction();
   }
 

@@ -9,6 +9,7 @@ import 'package:payroll_system/models/approve_paycheckes_list_screen_model/appro
 import 'package:payroll_system/models/approve_paycheckes_list_screen_model/approve_paycheckes_model.dart';
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:http/http.dart' as http;
+import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class ApprovePayCheckesDetailsScreenController extends GetxController {
   String companyId = Get.arguments[0];
@@ -20,6 +21,9 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
   List<ApprovePayCheckListData> approvePayCheckListData = [];
+
+  UserPreference userPreference = UserPreference();
+  String prefsDateFormat = "";
 
   // Delete Employee
   Future<void> deleteApprovalFunction(String approvalId) async {
@@ -91,7 +95,11 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
 
   @override
   void onInit() {
-    // log('approvalData : ${approvalData.}');
+    initMethod();
     super.onInit();
+  }
+
+  initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
   }
 }

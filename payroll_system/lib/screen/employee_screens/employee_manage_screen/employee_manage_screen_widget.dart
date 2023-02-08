@@ -958,13 +958,9 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
           : DateTime.now(),
     );
     if (d != null) {
-
-      String prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
-
       employeeCreteScreenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
-      // textEditingController.text = await DateFormater().changeDateFormat(d, prefsDateFormat);
-      // dateTime = d;
+
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;
         employeeCreteScreenController.dateOfBirthShowController.text = DateFormater().changeDateFormat(
