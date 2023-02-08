@@ -13,17 +13,21 @@ import 'package:payroll_system/controllers/pay_checked_manage_screen_controller.
 import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
 import 'package:payroll_system/screen/employee_screens/employee_manage_screen/employee_manage_screen_widget.dart';
 import 'package:payroll_system/utils/app_images.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:payroll_system/utils/style.dart';
 import 'package:payroll_system/utils/validator.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../utils/extension_methods/user_preference.dart';
+
 class PayChecksWidgetsScreen extends StatelessWidget {
   PayChecksWidgetsScreen({super.key});
 
   final payCheckedManageScreenController =
       Get.find<PayCheckedManageScreenController>();
+  UserPreference userPreference = UserPreference();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +76,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                   // child: DropdownButtonHideUnderline(
                   child: Center(
                     child: DropdownButtonFormField<String>(
-                      validator: (value) => FieldValidation().validateDropdownStatus(value!),
+                      validator: (value) =>
+                          FieldValidation().validateDropdownStatus(value!),
                       decoration: const InputDecoration.collapsed(hintText: ''),
                       value: payCheckedManageScreenController
                           .selectedCheckedValue.value,
@@ -98,7 +103,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                         // payCheckedManageScreenController.endDate = DateTime.now();
                         payCheckedManageScreenController.isLoading(false);
                       },
-                    ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+                    ).commonOnlyPadding(
+                        left: 10, right: 10, top: 10, bottom: 10),
                   ),
                 ),
               ),
@@ -116,8 +122,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                     text: AppMessage.selectPayRollStartDate,
                     keyboardType: TextInputType.datetime,
                     mandatoryText: AppMessage.mandatory,
-                    textEditingController:
-                        payCheckedManageScreenController.startDateController,
+                    textEditingController: payCheckedManageScreenController
+                        .startDateShowController,
                     suffixIcon: Icons.calendar_month,
                     readOnly: true,
                     onPressed: () async {
@@ -142,7 +148,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                     keyboardType: TextInputType.datetime,
                     mandatoryText: AppMessage.mandatory,
                     textEditingController:
-                        payCheckedManageScreenController.endDateController,
+                        payCheckedManageScreenController.endDateShowController,
                     suffixIcon: Icons.calendar_month,
                     readOnly: true,
                     onPressed: () async {
@@ -152,10 +158,12 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                           textEditingController:
                               payCheckedManageScreenController
                                   .endDateController,
-                          datePickerOption: DatePickerOption.startDate);
+                          datePickerOption: DatePickerOption.endDate,
+                          firstDate:
+                              payCheckedManageScreenController.startDate);
                     },
-                    validate: (value) =>
-                        FieldValidation().validateEndDate(value, payCheckedManageScreenController.endDate),
+                    validate: (value) => FieldValidation().validateEndDate(
+                        value, payCheckedManageScreenController.endDate),
                   ),
                 ),
               ],
@@ -169,7 +177,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
               keyboardType: TextInputType.datetime,
               mandatoryText: AppMessage.mandatory,
               textEditingController:
-                  payCheckedManageScreenController.payDateController,
+                  payCheckedManageScreenController.payDateShowController,
               suffixIcon: Icons.calendar_month,
               readOnly: true,
               onPressed: () async {
@@ -182,7 +190,9 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                 );
               },
               validate: (value) => FieldValidation().validatePayDate(
-                  value, payCheckedManageScreenController.endDate, payCheckedManageScreenController.payDate),
+                  value,
+                  payCheckedManageScreenController.endDate,
+                  payCheckedManageScreenController.payDate),
             ),
             const SizedBox(height: 5),
 
@@ -490,12 +500,18 @@ class PayChecksWidgetsScreen extends StatelessWidget {
           : DateTime.now(),
     );
     if (d != null) {
+      // String prefsDateFormat = await userPreference.getStringValueFromPrefs(
+      //     keyId: UserPreference.dateFormatKey);
       payCheckedManageScreenController.isLoading(true);
 
       // if(d.compareTo(payCheckedManageScreenController.endDate) < 0) {
       //   Fluttertoast.showToast(msg: "Please select valid start date");
       // } else {
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      payCheckedManageScreenController.startDateShowController.text =
+          DateFormater().changeDateFormat(
+              d, payCheckedManageScreenController.prefsDateFormat);
+
       payCheckedManageScreenController.startDate = d;
 
       if (payCheckedManageScreenController.selectedCheckedValue.value ==
@@ -504,6 +520,9 @@ class PayChecksWidgetsScreen extends StatelessWidget {
         final d2 = d1.add(const Duration(days: 7));
         payCheckedManageScreenController.endDateController.text =
             "${d2.year}-${d2.month}-${d2.day}";
+        payCheckedManageScreenController.endDateShowController.text =
+            DateFormater().changeDateFormat(
+                d2, payCheckedManageScreenController.prefsDateFormat);
         payCheckedManageScreenController.endDate = d2;
       } else if (payCheckedManageScreenController.selectedCheckedValue.value ==
           "Bi-Weekly") {
@@ -512,9 +531,11 @@ class PayChecksWidgetsScreen extends StatelessWidget {
         payCheckedManageScreenController.endDateController.text =
             "${d2.year}-${d2.month}-${d2.day}";
         payCheckedManageScreenController.endDate = d2;
-      }
 
-      // }
+        payCheckedManageScreenController.endDateShowController.text =
+            DateFormater().changeDateFormat(
+                d2, payCheckedManageScreenController.prefsDateFormat);
+      }
 
       payCheckedManageScreenController.isLoading(false);
     }
@@ -540,7 +561,11 @@ class PayChecksWidgetsScreen extends StatelessWidget {
     if (d != null) {
       payCheckedManageScreenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      payCheckedManageScreenController.endDateShowController.text =
+          DateFormater().changeDateFormat(
+              d, payCheckedManageScreenController.prefsDateFormat);
       payCheckedManageScreenController.endDate = d;
+
       if (payCheckedManageScreenController.selectedCheckedValue.value ==
               "Others" ||
           payCheckedManageScreenController.selectedCheckedValue.value ==
@@ -567,8 +592,15 @@ class PayChecksWidgetsScreen extends StatelessWidget {
       lastDate: DateTime.now().subtract(const Duration(days: 1)),
     );
     if (d != null) {
+      // String prefsDateFormat = await userPreference.getStringValueFromPrefs(
+      //     keyId: UserPreference.dateFormatKey);
+
       payCheckedManageScreenController.isLoading(true);
       textEditingController.text = "${d.year}-${d.month}-${d.day}";
+      payCheckedManageScreenController.payDateShowController.text =
+          DateFormater().changeDateFormat(
+              d, payCheckedManageScreenController.prefsDateFormat);
+
       payCheckedManageScreenController.payDate = d;
       payCheckedManageScreenController.isLoading(false);
     }
@@ -791,21 +823,21 @@ class RegularTextFormFieldModule extends StatelessWidget {
           textAlign: TextAlign.left,
           maxLines: null,
           text: TextSpan(
-              text: AppMessage.regular,
-              style: TextStyleConfig.textStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-              children: [
-                TextSpan(
-                  text: " ${AppMessage.mandatory}",
-                  style: TextStyleConfig.textStyle(
-                    textColor: AppColors.redColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
+            text: AppMessage.regular,
+            style: TextStyleConfig.textStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+            children: [
+              TextSpan(
+                text: " ${AppMessage.mandatory}",
+                style: TextStyleConfig.textStyle(
+                  textColor: AppColors.redColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
                 ),
-              ],
+              ),
+            ],
           ),
         ).commonSymmetricPadding(vertical: 6),
         TextFormField(
@@ -849,21 +881,21 @@ class OtTextFormFieldModule extends StatelessWidget {
           textAlign: TextAlign.left,
           maxLines: null,
           text: TextSpan(
-              text: AppMessage.ot,
-              style: TextStyleConfig.textStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-              // children: [
-              //   TextSpan(
-              //     text: " ${AppMessage.mandatory}",
-              //     style: TextStyleConfig.textStyle(
-              //       textColor: AppColors.redColor,
-              //       fontWeight: FontWeight.w600,
-              //       fontSize: 16,
-              //     ),
-              //   ),
-              // ],
+            text: AppMessage.ot,
+            style: TextStyleConfig.textStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+            // children: [
+            //   TextSpan(
+            //     text: " ${AppMessage.mandatory}",
+            //     style: TextStyleConfig.textStyle(
+            //       textColor: AppColors.redColor,
+            //       fontWeight: FontWeight.w600,
+            //       fontSize: 16,
+            //     ),
+            //   ),
+            // ],
           ),
         ).commonSymmetricPadding(vertical: 6),
         TextFormField(
@@ -905,21 +937,21 @@ class HolidayPayTextFormFieldModule extends StatelessWidget {
           textAlign: TextAlign.left,
           maxLines: null,
           text: TextSpan(
-              text: AppMessage.holidayPay,
-              style: TextStyleConfig.textStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-              // children: [
-              //   TextSpan(
-              //     text: " ${AppMessage.mandatory}",
-              //     style: TextStyleConfig.textStyle(
-              //       textColor: AppColors.redColor,
-              //       fontWeight: FontWeight.w600,
-              //       fontSize: 16,
-              //     ),
-              //   ),
-              // ],
+            text: AppMessage.holidayPay,
+            style: TextStyleConfig.textStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+            // children: [
+            //   TextSpan(
+            //     text: " ${AppMessage.mandatory}",
+            //     style: TextStyleConfig.textStyle(
+            //       textColor: AppColors.redColor,
+            //       fontWeight: FontWeight.w600,
+            //       fontSize: 16,
+            //     ),
+            //   ),
+            // ],
           ),
         ).commonSymmetricPadding(vertical: 6),
         TextFormField(

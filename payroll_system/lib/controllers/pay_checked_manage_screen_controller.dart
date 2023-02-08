@@ -20,6 +20,7 @@ class PayCheckedManageScreenController extends GetxController {
   // String companyName = "";
   int userIdPrefs = 0;
   RxBool isPrivacyChecked = false.obs;
+  String prefsDateFormat = "";
 
   // int companyId = 0;
   // String companyName = "";
@@ -69,6 +70,10 @@ class PayCheckedManageScreenController extends GetxController {
   TextEditingController taxController = TextEditingController();
   TextEditingController memoController = TextEditingController();
 
+  TextEditingController startDateShowController = TextEditingController();
+  TextEditingController endDateShowController = TextEditingController();
+  TextEditingController payDateShowController = TextEditingController();
+
   List<String> regularHoursList = [];
   List<String> overTimeList = [];
   List<String> holidayPayList = [];
@@ -97,7 +102,8 @@ class PayCheckedManageScreenController extends GetxController {
     selectedEmployeeList.clear();
   }
 
-  final payCheckesListScreenController = Get.find<PayCheckesListScreenController>();
+  final payCheckesListScreenController =
+      Get.find<PayCheckesListScreenController>();
 
   //getCompanyWiseEmployeeFunction
   List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
@@ -110,7 +116,8 @@ class PayCheckedManageScreenController extends GetxController {
     isLoading(true);
     String url = ApiUrl.payCheckWiseEmployeeApi;
     log('Get All Company List Api Url :$url');
-    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
 
     try {
       Map<String, dynamic> bodyData = {
@@ -119,7 +126,7 @@ class PayCheckedManageScreenController extends GetxController {
         "pay_period": "hourly"
       };
 
-      http.Response response = await http.post(Uri.parse(url),body: bodyData);
+      http.Response response = await http.post(Uri.parse(url), body: bodyData);
 
       CompanyWiseEmployeeModel companyWiseEmployeeModel =
           CompanyWiseEmployeeModel.fromJson(json.decode(response.body));
@@ -127,8 +134,8 @@ class PayCheckedManageScreenController extends GetxController {
       log("getCompanyWiseEmployeeFunction ${response.body}");
       if (isSuccessStatus.value) {
         allCompanyWiseEmployeeList.clear();
-        for(int i=0; i < companyWiseEmployeeModel.data.length; i++) {
-          if(companyWiseEmployeeModel.data[i].isActive == "1") {
+        for (int i = 0; i < companyWiseEmployeeModel.data.length; i++) {
+          if (companyWiseEmployeeModel.data[i].isActive == "1") {
             allCompanyWiseEmployeeList.add(companyWiseEmployeeModel.data[i]);
           }
         }
@@ -175,7 +182,8 @@ class PayCheckedManageScreenController extends GetxController {
     String url = ApiUrl.createPayCheckesApi;
     log('createPaycheckFunction Api Url :$url');
 
-    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
     int daysCount = endDate.difference(startDate).inDays;
 
     try {
@@ -204,26 +212,26 @@ class PayCheckedManageScreenController extends GetxController {
 
       log('request.fields : ${request.fields}');
 
-      var response = await request.send();
+      // var response = await request.send();
 
-      response.stream
-          .transform(const Utf8Decoder())
-          .transform(const LineSplitter())
-          .listen((value) async {
-        log('value : $value');
+      // response.stream
+      //     .transform(const Utf8Decoder())
+      //     .transform(const LineSplitter())
+      //     .listen((value) async {
+      //   log('value : $value');
 
-        PaychecksCreateModel paychecksCreateModel =
-            PaychecksCreateModel.fromJson(json.decode(value));
-        isSuccessStatus.value = paychecksCreateModel.success;
+      //   PaychecksCreateModel paychecksCreateModel =
+      //       PaychecksCreateModel.fromJson(json.decode(value));
+      //   isSuccessStatus.value = paychecksCreateModel.success;
 
-        if (isSuccessStatus.value) {
-          Fluttertoast.showToast(msg: paychecksCreateModel.messege);
-          Get.back();
-          await payCheckesListScreenController.getPaycheckesListFunction();
-        } else {
-          log('createPaycheckFunction Else');
-        }
-      });
+      //   if (isSuccessStatus.value) {
+      //     Fluttertoast.showToast(msg: paychecksCreateModel.messege);
+      //     Get.back();
+      //     await payCheckesListScreenController.getPaycheckesListFunction();
+      //   } else {
+      //     log('createPaycheckFunction Else');
+      //   }
+      // });
 
       /*Map<String, dynamic> bodyData = {
         "cid": companyId,
@@ -262,6 +270,8 @@ class PayCheckedManageScreenController extends GetxController {
   }
 
   initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
     await getPaycheckWiseEmployeeFunction();
   }
 }
