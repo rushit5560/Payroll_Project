@@ -38,8 +38,8 @@ class CompanyHomeDrawer extends StatelessWidget {
                         Get.to(() => CompanyProfileScreen());
                       },
                       imageStatus: false,
-                      icon: const Icon(Icons.person,
-                          color: AppColors.colorBtBlue),
+                      icon: Icon(Icons.person_outline,
+                          color: AppColors.colorBtBlue.withOpacity(0.6)),
                     ),
                     companyHomeScreenController.isDepartmentShowPermission.value == true
                         ? CompanyHomeDrawerTile(

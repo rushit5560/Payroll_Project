@@ -439,6 +439,10 @@ class UserPreference {
   /// Role Key
   static String roleEditKey = 'roleEditKey';
   static String roleViewKey = 'roleViewKey';
+  /// Date Format Key
+  static String generalSettingViewKey = 'generalSettingViewKey';
+  static String generalSettingEditKey = 'generalSettingEditKey';
+
 
 
   Future<void> setAllPermissionIntoPrefs({
@@ -452,6 +456,7 @@ class UserPreference {
     bool? approvePayChecksView, bool? approvePayChecksAdd, bool? approvePayChecksEdit, bool? approvePayChecksDelete,
     bool? emailTemplateView, bool? emailTemplateAdd, bool? emailTemplateEdit,
     bool? roleView, bool? roleEdit,
+    bool? generalSettingView, bool? generalSettingEdit,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -504,5 +509,8 @@ class UserPreference {
     /// Role Permission Set
     prefs.setBool(roleViewKey, roleView ?? false);
     prefs.setBool(roleEditKey, roleEdit ?? false);
+    /// Date Format Set
+    prefs.setBool(generalSettingViewKey, generalSettingView ?? false);
+    prefs.setBool(generalSettingEditKey, generalSettingEdit ?? false);
   }
 }

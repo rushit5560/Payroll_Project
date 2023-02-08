@@ -381,6 +381,7 @@ class AppMessage {
 
   //Role
   static String role = 'Role';
+  static String generalSetting = 'General Setting';
   static String isView = 'View';
   static String isAdd = 'Add';
   static String isEdit = 'Edit';

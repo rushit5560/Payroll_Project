@@ -406,6 +406,30 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 15),
 
+          // General Setting
+          PermissionBoxModule(
+            labelText: AppMessage.generalSetting,
+            isViewShow: true,
+            isViewValue: adminPermissionScreenController.generalSettingViewChecked.value,
+            isViewOnChanged: (bool? value) {
+              adminPermissionScreenController.generalSettingViewChecked.value = value!;
+              adminPermissionScreenController.loadUI();
+            },
+            // isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
+            isEditShow: true,
+            isEditValue: adminPermissionScreenController.generalSettingEditChecked.value,
+            isEditOnChanged: (bool? value) {
+              adminPermissionScreenController.generalSettingEditChecked.value = value!;
+              adminPermissionScreenController.loadUI();
+            },
+            // isEditFillColor: MaterialStateProperty.all(Colors.blue.shade200),
+
+            isAddShow: false,
+            isDeleteShow: false,
+            isDownloadShow: false,
+          ),
+          const SizedBox(height: 15),
+
           CustomSubmitButtonModule(
             labelText: AppMessage.submit,
             onPress: () async {

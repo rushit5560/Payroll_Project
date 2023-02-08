@@ -66,6 +66,8 @@ class PermissionData {
     this.emailtemplateview,
     this.emailtemplateadd,
     this.emailtemplateedit,
+    this.generalsettingview,
+    this.generalsettingedit,
 
   });
 
@@ -98,6 +100,8 @@ class PermissionData {
   String? emailtemplateview;
   String? emailtemplateadd;
   String? emailtemplateedit;
+  String? generalsettingview;
+  String? generalsettingedit;
 
   factory PermissionData.fromJson(Map<String, dynamic> json) => PermissionData(
     subadminview: json["subadminview"],
@@ -129,6 +133,8 @@ class PermissionData {
     emailtemplateview: json["emailtemplateview"],
     emailtemplateadd: json["emailtemplateadd"],
     emailtemplateedit: json["emailtemplateedit"],
+    generalsettingview: json["generalsettingview"],
+    generalsettingedit: json["generalsettingedit"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -161,6 +167,8 @@ class PermissionData {
     "emailtemplateview": emailtemplateview,
     "emailtemplateadd": emailtemplateadd,
     "emailtemplateedit": emailtemplateedit,
+    "generalsettingview": generalsettingview,
+    "generalsettingedit": generalsettingedit,
   };
 }
 

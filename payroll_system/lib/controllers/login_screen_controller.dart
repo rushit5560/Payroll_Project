@@ -211,6 +211,10 @@ class LoginController extends GetxController {
           roleEdit: loginDetailsModel.loginData.data.roleId.toString() == "1"
               ? true
               : false,
+            generalSettingView: loginDetailsModel.loginData.permissiondata.generalsettingview == "on"
+            ? true : false,
+            generalSettingEdit: loginDetailsModel.loginData.permissiondata.generalsettingedit == "on"
+            ? true : false,
         )
             .whenComplete(() {
           if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) ==

@@ -66,6 +66,10 @@ class AdminPermissionScreenController extends GetxController {
   RxBool roleIsViewChecked = false.obs;
   RxBool roleIsEditChecked = false.obs;
 
+  RxBool generalSettingViewChecked = false.obs;
+  RxBool generalSettingEditChecked = false.obs;
+
+
 
   Future<void> getUserPermissionsFunction({required String roleId}) async {
     isLoading(true);
@@ -132,6 +136,9 @@ class AdminPermissionScreenController extends GetxController {
 
           roleView: roleId == "1" ? true : false,
           roleEdit: roleId == "1" ? true : false,
+
+          generalSettingView: userPermissionModel.data.generalsettingview == "on" ? true : false,
+          generalSettingEdit: userPermissionModel.data.generalsettingedit == "on" ? true : false,
         );
 
         subAdminIsViewChecked.value = userPermissionModel.data.subadminview == "on" ? true : false;
@@ -182,6 +189,9 @@ class AdminPermissionScreenController extends GetxController {
 
         roleIsViewChecked.value = true;
         roleIsEditChecked.value = true;
+
+        generalSettingViewChecked.value = userPermissionModel.data.generalsettingview == "on" ? true : false;
+        generalSettingEditChecked.value = userPermissionModel.data.generalsettingedit == "on" ? true : false;
 
       } else {
         log('getUserPermissionsFunction Else');
@@ -276,6 +286,9 @@ class AdminPermissionScreenController extends GetxController {
     if(emailTemplateIsViewChecked.value == true){data.addAll({"emailtemplateview" : "on"});}
     if(emailTemplateIsAddChecked.value == true){data.addAll({"emailtemplateadd" : "on"});}
     if(emailTemplateIsEditChecked.value == true){data.addAll({"emailtemplateedit" : "on"});}
+
+    if(generalSettingViewChecked.value == true){data.addAll({"generalsettingview" : "on"});}
+    if(generalSettingEditChecked.value == true){data.addAll({"generalsettingedit" : "on"});}
 
     return data;
   }

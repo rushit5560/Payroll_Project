@@ -29,6 +29,8 @@ class GeneralSettingsScreenController extends GetxController {
   ];
   RxString selectedValue = "Choose Option".obs;
 
+  RxBool isGeneralSettingEditPermission = false.obs;
+
   Future<void> getDateFormatFunction() async {
     log("userIdPrefsuserIdPrefs:   $userIdPrefs");
     isLoading(true);
@@ -97,8 +99,8 @@ class GeneralSettingsScreenController extends GetxController {
   }
 
   getLoggedInUserIdFromPrefs() async {
-    userIdPrefs = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.userIdKey);
+    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    isGeneralSettingEditPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.generalSettingEditKey);
     await getDateFormatFunction();
   }
 

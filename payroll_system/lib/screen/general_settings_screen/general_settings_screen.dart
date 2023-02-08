@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
@@ -128,12 +129,13 @@ class GeneralSettingsScreen extends StatelessWidget {
                     CustomSubmitButtonModule(
                       labelText: AppMessage.submit,
                       onPress: () async {
-                        if (generalSettingsScreenController
-                            .formKey.currentState!
-                            .validate()) {
-                          await generalSettingsScreenController
-                              .updateDateFormatFunction();
-                          log("message");
+                        if(generalSettingsScreenController.isGeneralSettingEditPermission.value) {
+                          if (generalSettingsScreenController.formKey.currentState!.validate()) {
+                            await generalSettingsScreenController.updateDateFormatFunction();
+                          }
+                        } else {
+                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+
                         }
                       },
                     ),

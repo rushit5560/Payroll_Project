@@ -15,6 +15,7 @@ class AdminDrawerController extends GetxController {
   RxInt roleId = 0.obs;
   RxInt userid = 0.obs;
   RxBool isSubadminShowPermission = false.obs;
+  RxBool isGeneralSettingShowPermission = false.obs;
 
   getUserIdFunctionFromPrefs() async {
     isLoading(true);
@@ -40,6 +41,7 @@ class AdminDrawerController extends GetxController {
         keyId: UserPreference.employeeViewKey);
 
     isSubadminShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.subAdminViewKey);
+    isGeneralSettingShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.generalSettingViewKey);
 
 
     log('companyView1111111111111111111 : ${companyView.value}');

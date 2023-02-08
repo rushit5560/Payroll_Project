@@ -124,6 +124,8 @@ class SplashScreenController extends GetxController {
               userPermissionModel.data.emailtemplateedit == "on" ? true : false,
           roleView: roleId == "1" ? true : false,
           roleEdit: roleId == "1" ? true : false,
+          generalSettingView: userPermissionModel.data.generalsettingview == "on" ? true : false,
+          generalSettingEdit: userPermissionModel.data.generalsettingedit == "on" ? true : false,
         );
 
         if (UserDetails.roleId == 1) {

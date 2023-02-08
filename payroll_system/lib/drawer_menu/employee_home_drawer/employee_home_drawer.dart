@@ -69,7 +69,7 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                                 ? EmployeeDrawerTile(
                                     title: AppMessage.documentUploadDrawer,
                                     imageStatus: true,
-                        image: AppImages.uploadIcon,
+                                    image: AppImages.uploadIcon,
                                     // icon: const Icon(Icons.file_upload_outlined,
                                     //     color: AppColors.colorBtBlue),
                                     onTap: () async {
@@ -93,26 +93,28 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                                 : const SizedBox(),
                             employeeHomeScreenController.isPayChecksDownloadPermission.value == true
                           ? EmployeeDrawerTile(
-                        title: AppMessage.paychecksDownloadDrawer,
-                        imageStatus: true,
-                        image: AppImages.downloadIcon,
-                        onTap: () async {
-                          int employeeId =
-                              await userPreference.getIntValueFromPrefs(
-                                  keyId: UserPreference.userIdKey);
-                          String employeeName =
-                              await userPreference.getStringValueFromPrefs(
-                                  keyId: UserPreference.userNameKey);
-                          Get.back();
-                          Get.to(
-                            () => PayCheckesDowanloadListScreen(),
-                            arguments: [
-                              employeeId.toString(),
-                              employeeName,
-                            ],
-                          );
-                        },
-                      ) : const SizedBox(),
+                                    title: AppMessage.paychecksDownloadDrawer,
+                                    imageStatus: true,
+                                    image: AppImages.downloadIcon,
+                                    onTap: () async {
+                                      int employeeId = await userPreference
+                                          .getIntValueFromPrefs(
+                                              keyId: UserPreference.userIdKey);
+                                      String employeeName = await userPreference
+                                          .getStringValueFromPrefs(
+                                              keyId:
+                                                  UserPreference.userNameKey);
+                                      Get.back();
+                                      Get.to(
+                                        () => PayCheckesDowanloadListScreen(),
+                                        arguments: [
+                                          employeeId.toString(),
+                                          employeeName,
+                                        ],
+                                      );
+                                    },
+                                  )
+                                : const SizedBox(),
                       EmployeeDrawerTile(
                         title: AppMessage.changePassword,
                         imageStatus: true,
