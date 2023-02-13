@@ -56,7 +56,7 @@ class LoginData {
   String dateformat;
 
   factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
-        id: json["ID"] ?? "",
+        id: (json["ID"] ?? 0).toString(),
         token: json["Token"] ?? "",
         data: UserData.fromJson(json["data"] ?? {}),
         permissiondata: PermissionData.fromJson(json["permissiondata"] ?? {}),
@@ -127,21 +127,21 @@ class UserData {
   final String updatedAt;
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
-        id: (json["id"] ?? "0").toString(),
+        id: (json["id"] ?? 0).toString(),
         userName: json["user_name"] ?? '',
         email: json["email"] ?? '',
         password: json["password"] ?? '',
         fullName: json["full_name"] ?? '',
         address: json["address"] ?? '',
         phoneno: json["phoneno"] ?? '',
-        roleId: json["role_id"] ?? "",
+        roleId: (json["role_id"] ?? 0).toString(),
         isActive: json["is_active"] ?? '',
         // lastlogin: json["lastlogin"],
         verified: json["verified"] ?? '',
-        createdby: json["createdby"] ?? "",
+        createdby: (json["createdby"] ?? 0).toString(),
         // modifiedby: json["modifiedby"],
         emailVerifiedAt: json["email_verified_at"] ?? '',
-        employeeId: json["employee_id"] ?? "",
+        employeeId: (json["employee_id"] ?? 0).toString(),
 
         photo: json["photo"] ?? '',
         city: json["city"] ?? "",

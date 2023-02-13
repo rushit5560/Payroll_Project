@@ -7,8 +7,9 @@ class DateFormater {
 
   String changeDateFormat(DateTime date, String prefsDateFormat) {
     String formatedDate = '';
-    log('date :$date');
-    log('prefsDateFormat :$prefsDateFormat');
+    // log('date :$date');
+    // log('prefsDateFormat :$prefsDateFormat');
+    // DateTime date = DateTime.now();
     // UserPreference userPreference = UserPreference();
     // String prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
     // String prefsDateFormat = dateFormat;
@@ -32,7 +33,7 @@ class DateFormater {
       String d = DateFormat("yyyy/MMM/dd").format(date);
       formatedDate = d;
     }
-    else if(prefsDateFormat == "M-d-y") {
+    else if(prefsDateFormat == "M-d-Y") {
       String d = DateFormat("MMM/dd/yyyy").format(date);
       formatedDate = d;
     }
@@ -41,7 +42,7 @@ class DateFormater {
       formatedDate = d;
     }
 
-
+    // log('formatedDate : $formatedDate');
     // formatedDate = "${date.month}-${date.day}-${date.year}";
     return formatedDate;
   }

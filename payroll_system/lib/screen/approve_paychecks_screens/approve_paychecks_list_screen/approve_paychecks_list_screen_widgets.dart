@@ -87,7 +87,7 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                   SingleListTileModuleCustom(
                       textValue:
                           approvePayrollListDataListvalue.payPeriod == "salary"
-                              ? approvePayrollListDataListvalue.salary
+                              ? "\$ ${approvePayrollListDataListvalue.salary}"
                               : approvePayrollListDataListvalue.ragularhour.toString(),
                       image: AppImages.salaryIcon,
                       textKey: AppMessage.salaryHourlyRate),

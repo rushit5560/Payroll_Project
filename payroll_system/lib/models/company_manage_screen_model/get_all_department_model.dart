@@ -57,7 +57,7 @@ class DepartmentData {
         id: json["id"] ?? 0,
         departmentName: json["department_name"] ?? "",
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? "",
+        createdby: (json["createdby"] ?? 0).toString(),
         // modifiedby: json["modifiedby"] == null ? null : json["modifiedby"],
         companyid: json["companyid"] ?? "",
         // createdAt: DateTime.parse(json["created_at"]),

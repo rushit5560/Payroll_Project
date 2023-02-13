@@ -49,6 +49,7 @@ class PayCheckesListData {
     required this.salary,
     required this.ragularhour,
     required this.overtime,
+    required this.holidaypay,
     required this.bonus,
     required this.otherearning,
     required this.sickpay,
@@ -73,7 +74,7 @@ class PayCheckesListData {
     required this.eid,
   });
 
-  final int id;
+  final String id;
   final String type;
   final String startdate;
   final String enddate;
@@ -84,6 +85,7 @@ class PayCheckesListData {
   final String salary;
   final String ragularhour;
   final String overtime;
+  final String holidaypay;
   final String bonus;
   final String otherearning;
   final String sickpay;
@@ -110,31 +112,32 @@ class PayCheckesListData {
 
   factory PayCheckesListData.fromJson(Map<String, dynamic> json) =>
       PayCheckesListData(
-        id: json["id"] ?? 0,
+        id: (json["id"] ?? 0).toString(),
         type: json["type"] ?? "",
         startdate: json["startdate"] ?? "",
         enddate: json["enddate"] ?? "",
         days: json["days"] ?? "",
         payPeriod: json["pay_period"] ?? "",
-        companyid: json["companyid"] ?? "",
-        employeeid: json["employeeid"] ?? "",
+        companyid: (json["companyid"] ?? 0).toString(),
+        employeeid: (json["employeeid"] ?? 0).toString(),
         salary: json["salary"] ?? "",
-        ragularhour: json["ragularhour"] ?? "",
-        overtime: json["overtime"] ?? "",
+        ragularhour: (json["ragularhour"] ?? 0).toString(),
+        overtime: (json["overtime"] ?? 0).toString(),
+        holidaypay: (json["holidaypay"] ?? 0).toString(),
         bonus: json["bonus"] ?? "",
         otherearning: json["otherearning"] ?? "",
         sickpay: json["sickpay"] ?? "",
         vacationhours: json["vacationhours"] ?? "",
         commission: json["commission"] ?? "",
         paydate: json["paydate"] ?? "",
-        tax: json["tax"] ?? "",
-        tip: json["tip"] ?? "",
+        tax: (json["tax"] ?? 0).toString(),
+        tip: (json["tip"] ?? 0).toString(),
         subTotal: json["sub_total"] ?? "",
         finalAmount: json["final_amount"] ?? "",
         isActive: json["is_active"] ?? "",
         memo: json["memo"] ?? "",
         approvepaychecks: json["approvepaychecks"] ?? "",
-        createdby: json["createdby"] ?? "",
+        createdby: (json["createdby"] ?? 0).toString(),
         modifiedby: json["modifiedby"] ?? "",
         createdAt: json["created_at"] ?? "",
         updatedAt: json["updated_at"] ?? "",
@@ -142,41 +145,7 @@ class PayCheckesListData {
         firstName: json["first_name"] ?? "",
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",
-        eid: json["eid"] ?? "",
+        eid: (json["eid"] ?? 0).toString(),
       );
 
-  // Map<String, dynamic> toJson() => {
-  //     "id": id,
-  //     "type": type,
-  //     "startdate": startdate.toIso8601String(),
-  //     "enddate": enddate.toIso8601String(),
-  //     "days": days,
-  //     "pay_period": payPeriod,
-  //     "companyid": companyid,
-  //     "employeeid": employeeid,
-  //     "salary": salary,
-  //     "ragularhour": ragularhour,
-  //     "overtime": overtime,
-  //     "bonus": bonus,
-  //     "otherearning": otherearning,
-  //     "sickpay": sickpay,
-  //     "vacationhours": vacationhours,
-  //     "commission": commission,
-  //     "paydate": paydate.toIso8601String(),
-  //     "tax": tax,
-  //     "tip": tip,
-  //     "sub_total": subTotal,
-  //     "final_amount": finalAmount,
-  //     "is_active": isActive,
-  //     "memo": memo,
-  //     "approvepaychecks": approvepaychecks,
-  //     "createdby": createdby,
-  //     "modifiedby": modifiedby,
-  //     "created_at": createdAt.toIso8601String(),
-  //     "updated_at": updatedAt.toIso8601String(),
-  //     "first_name": firstName,
-  //     "middle_name": middleName,
-  //     "last_name": lastName,
-  //     "eid": eid,
-  // };
 }

@@ -61,9 +61,9 @@ class LocationGetByIdData {
         id: json["id"] ?? 0,
         locationName: json["location_name"] ?? "",
         isActive: json["is_active"] ?? "",
-        createdby: json["createdby"] ?? "0",
+        createdby: (json["createdby"] ?? 0).toString(),
         // modifiedby: json["modifiedby"],
-        companyid: json["companyid"] ?? "0",
+        companyid: (json["companyid"] ?? 0).toString(),
         // createdAt: DateTime.parse(json["created_at"]),
         // updatedAt: DateTime.parse(json["updated_at"]),
       );

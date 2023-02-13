@@ -964,8 +964,10 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;
         employeeCreteScreenController.dateOfBirthShowController.text = DateFormater().changeDateFormat(
-          d, employeeCreteScreenController.prefsDateFormat
+          DateTime.parse(d.toString()), employeeCreteScreenController.prefsDateFormat
         );
+        log('D: $d');
+        log('DOB DAte : ${employeeCreteScreenController.dateOfBirthShowController.text}');
 
       } else if (datePickerOption == DatePickerOption.startDate) {
         employeeCreteScreenController.employmentStartDate = d;

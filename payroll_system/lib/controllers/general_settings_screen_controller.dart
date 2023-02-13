@@ -45,6 +45,7 @@ class GeneralSettingsScreenController extends GetxController {
       log("getCompanyWiseEmployeeFunction ${response.body}");
       if (isSuccessStatus.value) {
         selectedValue.value = genralSettingModel.data;
+        log('Date Format Api: ${selectedValue.value}');
         await userPreference.setDateFormatInPrefs(dateFormat: selectedValue.value);
 
         log("getDateFormatFunction :: ${selectedValue.value}");

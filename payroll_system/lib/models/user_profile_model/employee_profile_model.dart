@@ -134,7 +134,7 @@ class EmployeeDatum {
         photo: json["photo"] ?? "",
         // createdAt: json["created_at"] ?? "",
         // updatedAt: DateTime.parse(json["updated_at"]) ?? "",
-        userid: json["userid"] ?? "",
+        userid: (json["userid"] ?? 0).toString(),
       );
 
   // Map<String, dynamic> toJson() => {

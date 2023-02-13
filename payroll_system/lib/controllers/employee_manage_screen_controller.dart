@@ -392,7 +392,7 @@ class EmployeeManageScreenController extends GetxController {
 
     try {
       http.Response response = await http.get(Uri.parse(url));
-      // log('response : ${response.body}');
+      log('response : ${response.body}');
 
       AllLocationListModel allLocationListModel =
           AllLocationListModel.fromJson(json.decode(response.body));

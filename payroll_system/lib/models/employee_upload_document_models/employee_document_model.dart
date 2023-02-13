@@ -57,7 +57,7 @@ class DocumentDatum {
         id: json["id"] ?? 0,
         name: json["name"] ?? "",
         doctype: json["doctype"] ?? "",
-        employeeId: json["employee_id"] ?? "",
+        employeeId: (json["employee_id"] ?? 0).toString(),
         // createdby: json["createdby"] ?? "",
         // modifiedby: json["modifiedby"],
         // createdAt: DateTime.parse(json["created_at"]),
