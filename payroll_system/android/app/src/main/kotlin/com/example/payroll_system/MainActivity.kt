@@ -1,4 +1,4 @@
-package com.example.payroll_system
+package com.payroll_system
 
 import io.flutter.embedding.android.FlutterActivity
 
