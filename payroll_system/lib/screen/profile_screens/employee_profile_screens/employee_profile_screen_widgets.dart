@@ -49,7 +49,7 @@ class EmployeeImageModule extends StatelessWidget {
                                     employeeProfileScreenController.imageFile!,
                                     // height: 100,
                                     // width: 100,
-                                    fit: BoxFit.contain,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               )
@@ -70,7 +70,7 @@ class EmployeeImageModule extends StatelessWidget {
                                         : ApiUrl.apiImagePath +
                                             employeeProfileScreenController
                                                 .employeeData!.photo,
-                                    fit: BoxFit.contain,
+                                    fit: BoxFit.fill,
                                     errorBuilder: (ctx, obj, st) {
                                       return Container(
                                         color: AppColors.greyColor
@@ -191,7 +191,8 @@ class EmployeeFormModule extends StatelessWidget {
             text: AppMessage.street,
             keyboardType: TextInputType.text,
             mandatoryText: AppMessage.mandatory,
-            textEditingController: employeeProfileScreenController.streetAddressController,
+            textEditingController:
+                employeeProfileScreenController.streetAddressController,
             validate: (value) => FieldValidation().validateStreetAddress(value),
           ),
           const SizedBox(height: 5),
@@ -202,7 +203,8 @@ class EmployeeFormModule extends StatelessWidget {
             text: AppMessage.landmark,
             keyboardType: TextInputType.text,
             mandatoryText: AppMessage.empty,
-            textEditingController: employeeProfileScreenController.townAddressController,
+            textEditingController:
+                employeeProfileScreenController.townAddressController,
             validate: (value) =>
                 FieldValidation().validateLandmarkAddress(value),
           ),
@@ -237,7 +239,7 @@ class EmployeeFormModule extends StatelessWidget {
               ),
             ],
           ),
-            const SizedBox(height: 5),
+          const SizedBox(height: 5),
           FormSingleFieldModule(
             headerText: AppMessage.empty,
             isHeaderTextShow: false,

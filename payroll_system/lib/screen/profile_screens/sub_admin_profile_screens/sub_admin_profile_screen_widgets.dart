@@ -47,7 +47,7 @@ class SubAdminImageModule extends StatelessWidget {
                                     subAdminProfileScreenController.imageFile!,
                                     // height: 100,
                                     // width: 100,
-                                    fit: BoxFit.contain,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               )
@@ -68,7 +68,7 @@ class SubAdminImageModule extends StatelessWidget {
                                         : ApiUrl.apiImagePath +
                                             subAdminProfileScreenController
                                                 .profileData!.photo,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                     errorBuilder: (ctx, obj, st) {
                                       return Container(
                                         color: AppColors.greyColor

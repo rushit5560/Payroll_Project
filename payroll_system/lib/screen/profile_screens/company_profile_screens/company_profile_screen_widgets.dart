@@ -27,9 +27,7 @@ class CompanyImageModule extends StatelessWidget {
               children: [
                 Stack(
                   alignment: Alignment.bottomCenter,
-
                   clipBehavior: Clip.none,
-
                   children: [
                     SizedBox(
                       height: 120,
@@ -38,43 +36,44 @@ class CompanyImageModule extends StatelessWidget {
                         borderRadius: BorderRadius.circular(200),
                         child: companyProfileScreenController.imageFile != null
                             ? Container(
-                               decoration: BoxDecoration(
+                                decoration: BoxDecoration(
                                   border:
                                       Border.all(color: Colors.grey, width: 2),
                                   shape: BoxShape.circle,
                                   // color: Colors.pink,
                                 ),
-                              child: ClipRRect(
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.circular(200),
                                   child: Image.file(
                                     companyProfileScreenController.imageFile!,
                                     // height: 100,
                                     // width: 100,
-                                    fit: BoxFit.contain,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
-                            )
+                              )
                             : Container(
-                               decoration: BoxDecoration(
+                                decoration: BoxDecoration(
                                   border:
                                       Border.all(color: Colors.grey, width: 2),
                                   shape: BoxShape.circle,
                                   // color: Colors.pink,
                                 ),
-                              child: ClipRRect(
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.circular(200),
                                   child: Image.network(
-                                    companyProfileScreenController.companyData ==
+                                    companyProfileScreenController
+                                                .companyData ==
                                             null
                                         ? ""
                                         : ApiUrl.apiImagePath +
                                             companyProfileScreenController
                                                 .companyData!.photo,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                     errorBuilder: (ctx, obj, st) {
                                       return Container(
-                                        color:
-                                            AppColors.greyColor.withOpacity(0.35),
+                                        color: AppColors.greyColor
+                                            .withOpacity(0.35),
                                         child: Center(
                                           child: Text(
                                             "No Image",
@@ -88,11 +87,11 @@ class CompanyImageModule extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                            ),
+                              ),
                       ),
                     ),
                     Positioned(
-                        right: -5,
+                      right: -5,
                       bottom: 20,
                       child: GestureDetector(
                         onTap: () {
@@ -326,16 +325,16 @@ class CompanyFormModule extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 5),
-          FormSingleFieldModule(
-            headerText: AppMessage.empty,
-            isHeaderTextShow: false,
-            text: AppMessage.zipcode,
-            keyboardType: TextInputType.number,
-            mandatoryText: AppMessage.mandatory,
-            textEditingController:
-                companyProfileScreenController.zipCodeAddressController,
-            validate: (value) => FieldValidation().validateZipCode(value),
-          ),
+              FormSingleFieldModule(
+                headerText: AppMessage.empty,
+                isHeaderTextShow: false,
+                text: AppMessage.zipcode,
+                keyboardType: TextInputType.number,
+                mandatoryText: AppMessage.mandatory,
+                textEditingController:
+                    companyProfileScreenController.zipCodeAddressController,
+                validate: (value) => FieldValidation().validateZipCode(value),
+              ),
             ],
           ),
         ],

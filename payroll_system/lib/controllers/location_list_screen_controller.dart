@@ -70,7 +70,10 @@ class LocationListScreenController extends GetxController {
 
         Get.back();
       } else {
-        log('deleteCompanyFunction Else');
+        Fluttertoast.showToast(
+            msg: "This Location Is Not Deleted, Location Is Used.");
+        // allLocationList.removeAt(index);
+        Get.back();
       }
     } catch (e) {
       log('deleteCompanyFunction Error :$e');

@@ -46,7 +46,7 @@ class AdminImageModule extends StatelessWidget {
                                     adminProfileScreenController.imageFile!,
                                     // height: 100,
                                     // width: 100,
-                                    fit: BoxFit.contain,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               )
@@ -66,7 +66,7 @@ class AdminImageModule extends StatelessWidget {
                                         : ApiUrl.apiImagePath +
                                             adminProfileScreenController
                                                 .profileData!.photo,
-                                    fit: BoxFit.contain,
+                                    fit: BoxFit.fill,
                                     errorBuilder: (ctx, obj, st) {
                                       return Container(
                                         color: AppColors.greyColor
@@ -134,8 +134,6 @@ class AdminNameFieldModule extends StatelessWidget {
           text: AppMessage.userName,
           headerText: AppMessage.adminNameLabel,
           mandatoryText: AppMessage.mandatory),
-
-     
     );
   }
 }

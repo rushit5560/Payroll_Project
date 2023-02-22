@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:payroll_system/Utils/style.dart';
 import 'package:payroll_system/constants/colors.dart';
 
+// ignore: must_be_immutable
 class ButtonCustom extends StatelessWidget {
   final String text;
   Color textColor;

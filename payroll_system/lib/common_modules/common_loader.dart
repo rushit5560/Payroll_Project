@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CommonLoader {
   showLoader() {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(),
     );
   }
