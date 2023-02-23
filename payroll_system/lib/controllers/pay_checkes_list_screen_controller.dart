@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
-import 'package:external_path/external_path.dart';
+// import 'package:dio/dio.dart';
+// import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -120,24 +120,23 @@ class PayCheckesListScreenController extends GetxController {
 
 
   /// Download Pdf
-  Future<void> downloadFile() async {
-    Dio dio = Dio();
-
-    final status = await Permission.storage.request();
-    if (status.isGranted) {
-      String dirLocation = "";
-      dirLocation = await ExternalPath.getExternalStoragePublicDirectory(ExternalPath.DIRECTORY_DOWNLOADS);
-      log('dirLocation : $dirLocation');
-
-      try {
-        // await dio.download();
-      } catch(e) {
-        log('downloadFile Error :$e');
-        rethrow;
-      }
-    }
-
-  }
+  // Future<void> downloadFile() async {
+  //   Dio dio = Dio();
+  //
+  //   final status = await Permission.storage.request();
+  //   if (status.isGranted) {
+  //     String dirLocation = "";
+  //     dirLocation = await ExternalPath.getExternalStoragePublicDirectory(ExternalPath.DIRECTORY_DOWNLOADS);
+  //     log('dirLocation : $dirLocation');
+  //
+  //     try {
+  //       // await dio.download();
+  //     } catch(e) {
+  //       log('downloadFile Error :$e');
+  //       rethrow;
+  //     }
+  //   }
+  // }
 
 
 }

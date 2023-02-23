@@ -45,12 +45,12 @@ dependencies:
   # image_cropper: ^3.0.1
   shared_preferences: ^2.0.15
   cached_network_image: ^3.2.3
-  path_provider: any
-  flutter_downloader: ^1.10.1
-  image_gallery_saver: ^1.7.1
-  dio: ^4.0.6
-  external_path: ^1.0.3
-  random_pk: any
+  #path_provider: any
+  #flutter_downloader: ^1.10.1
+  #image_gallery_saver: ^1.7.1
+  #dio: ^4.0.6
+  #external_path: ^1.0.3
+  #random_pk: any
   # ext_storage: ^1.0.3
   file_picker: ^5.2.4
   permission_handler: ^10.2.0

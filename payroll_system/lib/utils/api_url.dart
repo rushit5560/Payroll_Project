@@ -1,11 +1,11 @@
 class ApiUrl {
-  // static const apiMainPath = "https://appieve.com/";
-  // static const apiImagePath = "https://appieve.com/public/images/employee/";
-  // static const downloadFilePath = "https://appieve.com/public/images/employee/file/";
+  static const apiMainPath = "https://appieve.com/";
+  static const apiImagePath = "https://appieve.com/public/images/employee/";
+  static const downloadFilePath = "https://appieve.com/public/images/employee/file/";
 
-  static const apiMainPath = "https://kpatelcpa.us/";
-  static const apiImagePath = "https://kpatelcpa.us/public/images/employee/";
-  static const downloadFilePath = "https://kpatelcpa.us/public/images/employee/file/";
+  // static const apiMainPath = "https://kpatelcpa.us/";
+  // static const apiImagePath = "https://kpatelcpa.us/public/images/employee/";
+  // static const downloadFilePath = "https://kpatelcpa.us/public/images/employee/file/";
 
   // static const apiMainPath = "https://payroll.omdemo.co.in/";
   // static const apiImagePath = "https://payroll.omdemo.co.in/public/images/employee/";
