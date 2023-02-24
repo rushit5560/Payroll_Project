@@ -55,7 +55,8 @@ class SingleListTileModuleCustom extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyleConfig.textStyle(
-              textColor: valueColor ?? AppColors.colorBlack
+              textColor: valueColor ?? AppColors.colorBlack,
+              fontSize: 11.sp,
             ),
           ),
         ),

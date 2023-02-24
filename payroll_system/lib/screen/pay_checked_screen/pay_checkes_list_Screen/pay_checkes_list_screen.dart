@@ -152,7 +152,7 @@ class PayCheckesListScreen extends StatelessWidget {
                                       },
                                     ).commonOnlyPadding(
                                         left: 10,
-                                        right: 10,
+                                        right: 5,
                                         top: 10,
                                         bottom: 10),
                                   ),

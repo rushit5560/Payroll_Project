@@ -1,6 +1,6 @@
-import 'dart:developer';
-import 'package:dio/dio.dart';
-import 'package:external_path/external_path.dart';
+// import 'dart:developer';
+// import 'package:dio/dio.dart';
+// import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -166,81 +166,81 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
   }
 }
 
-class DownloadDialog extends StatefulWidget {
-  const DownloadDialog({super.key});
+// class DownloadDialog extends StatefulWidget {
+//   const DownloadDialog({super.key});
+//
+//   @override
+//   State<DownloadDialog> createState() => _DownloadDialogState();
+// }
 
-  @override
-  State<DownloadDialog> createState() => _DownloadDialogState();
-}
-
-class _DownloadDialogState extends State<DownloadDialog> {
-  Dio dio = Dio();
-  double progress = 0.0;
-
-  void startDownloading() async {
-    const String url = 'https://www.africau.edu/images/default/sample.pdf';
-
-    const String fileName = "download.pdf";
-
-    String path = await _getFilePath(fileName);
-
-    await dio.download(
-      url,
-      path,
-      onReceiveProgress: (recivedBytes, totalBytes) {
-        log("dowanload files  111");
-        setState(() {
-          progress = recivedBytes / totalBytes;
-        });
-
-        log("progress ::: ${progress}");
-
-        log("dowanload files  222");
-      },
-      deleteOnError: true,
-    ).then((_) {
-      Navigator.pop(context);
-    });
-  }
-
-  _getFilePath(String fileName) async {
-    // final dir = await getApplicationDocumentsDirectory();
-    final dir = await ExternalPath.getExternalStoragePublicDirectory(
-        ExternalPath.DIRECTORY_DOWNLOADS);
-    return "$dir/$fileName";
-
-    // return dir;
-  }
-
-  @override
-  void initState() {
-    startDownloading();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    String downloadingprogress = (progress * 100).toInt().toString();
-
-    return AlertDialog(
-      backgroundColor: Colors.black,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const CircularProgressIndicator.adaptive(),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            "Downloading: $downloadingprogress%",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class _DownloadDialogState extends State<DownloadDialog> {
+//   Dio dio = Dio();
+//   double progress = 0.0;
+//
+//   void startDownloading() async {
+//     const String url = 'https://www.africau.edu/images/default/sample.pdf';
+//
+//     const String fileName = "download.pdf";
+//
+//     String path = await _getFilePath(fileName);
+//
+//     await dio.download(
+//       url,
+//       path,
+//       onReceiveProgress: (recivedBytes, totalBytes) {
+//         log("dowanload files  111");
+//         setState(() {
+//           progress = recivedBytes / totalBytes;
+//         });
+//
+//         log("progress ::: ${progress}");
+//
+//         log("dowanload files  222");
+//       },
+//       deleteOnError: true,
+//     ).then((_) {
+//       Navigator.pop(context);
+//     });
+//   }
+//
+//   // _getFilePath(String fileName) async {
+//   //   // final dir = await getApplicationDocumentsDirectory();
+//   //   final dir = await ExternalPath.getExternalStoragePublicDirectory(
+//   //       ExternalPath.DIRECTORY_DOWNLOADS);
+//   //   return "$dir/$fileName";
+//   //
+//   //   // return dir;
+//   // }
+//
+//   @override
+//   void initState() {
+//     startDownloading();
+//
+//     super.initState();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     String downloadingprogress = (progress * 100).toInt().toString();
+//
+//     return AlertDialog(
+//       backgroundColor: Colors.black,
+//       content: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const CircularProgressIndicator.adaptive(),
+//           const SizedBox(
+//             height: 20,
+//           ),
+//           Text(
+//             "Downloading: $downloadingprogress%",
+//             style: const TextStyle(
+//               color: Colors.white,
+//               fontSize: 17,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

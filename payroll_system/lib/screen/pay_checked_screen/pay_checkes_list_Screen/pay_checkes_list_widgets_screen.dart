@@ -1,7 +1,7 @@
 import 'dart:developer';
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 // import 'package:ext_storage/ext_storage.dart';
-import 'package:external_path/external_path.dart';
+// import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -25,7 +25,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
       Get.find<PayCheckesListScreenController>();
 
   UserPreference userPreference = UserPreference();
-  var dio = Dio();
+  // var dio = Dio();
 
   @override
   Widget build(BuildContext context) {
