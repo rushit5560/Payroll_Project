@@ -22,35 +22,35 @@ class CompanyPermissionWidgetScreen extends StatelessWidget {
       child:  Column(
                 children: [
                   // Department
-                  PermissionBoxModule(
-                    labelText: AppMessage.companyDepartmentNameDrawer,
-                    isViewShow: true,
-                    isViewValue: companyPermissionScreenController.departmentInIsViewChecked.value,
-                    isViewOnChanged: (bool? value) {
-                      companyPermissionScreenController.departmentInIsViewChecked.value = value!;
-                      companyPermissionScreenController.loadUI();
-                    },
-                    isAddShow: true,
-                    isAddValue: companyPermissionScreenController.departmentInIsAddChecked.value,
-                    isAddOnChanged: (bool? value) {
-                      companyPermissionScreenController.departmentInIsAddChecked.value = value!;
-                      companyPermissionScreenController.loadUI();
-                    },
-                    isEditShow: true,
-                    isEditValue: companyPermissionScreenController.departmentInIsEditChecked.value,
-                    isEditOnChanged: (bool? value) {
-                      companyPermissionScreenController.departmentInIsEditChecked.value = value!;
-                      companyPermissionScreenController.loadUI();
-                    },
-                    isDeleteShow: true,
-                    isDeleteValue: companyPermissionScreenController.departmentIsDeleteChecked.value,
-                    isDeleteOnChanged: (bool? value) {
-                      companyPermissionScreenController.departmentIsDeleteChecked.value = value!;
-                      companyPermissionScreenController.loadUI();
-                    },
-                    isDownloadShow: false,
+                  // PermissionBoxModule(
+                  //   labelText: AppMessage.companyDepartmentNameDrawer,
+                  //   isViewShow: true,
+                  //   isViewValue: companyPermissionScreenController.departmentInIsViewChecked.value,
+                  //   isViewOnChanged: (bool? value) {
+                  //     companyPermissionScreenController.departmentInIsViewChecked.value = value!;
+                  //     companyPermissionScreenController.loadUI();
+                  //   },
+                  //   isAddShow: true,
+                  //   isAddValue: companyPermissionScreenController.departmentInIsAddChecked.value,
+                  //   isAddOnChanged: (bool? value) {
+                  //     companyPermissionScreenController.departmentInIsAddChecked.value = value!;
+                  //     companyPermissionScreenController.loadUI();
+                  //   },
+                  //   isEditShow: true,
+                  //   isEditValue: companyPermissionScreenController.departmentInIsEditChecked.value,
+                  //   isEditOnChanged: (bool? value) {
+                  //     companyPermissionScreenController.departmentInIsEditChecked.value = value!;
+                  //     companyPermissionScreenController.loadUI();
+                  //   },
+                  //   isDeleteShow: true,
+                  //   isDeleteValue: companyPermissionScreenController.departmentIsDeleteChecked.value,
+                  //   isDeleteOnChanged: (bool? value) {
+                  //     companyPermissionScreenController.departmentIsDeleteChecked.value = value!;
+                  //     companyPermissionScreenController.loadUI();
+                  //   },
+                  //   isDownloadShow: false,
 
-                  ),
+                  // ),
 
                   // Location
                   const SizedBox(height: 15),

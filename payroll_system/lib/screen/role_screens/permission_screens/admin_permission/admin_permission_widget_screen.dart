@@ -56,7 +56,6 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
               // adminPermissionScreenController.subAdminIsDeleteChecked.value = value!;
             },
             isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
-
             isDownloadShow: false,
           ),
           const SizedBox(height: 15),
@@ -64,7 +63,6 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
           // Company
           PermissionBoxModule(
             labelText: AppMessage.company,
-
             isViewShow: true,
             isViewValue:
                 adminPermissionScreenController.companyInIsViewChecked.value,
@@ -95,49 +93,48 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
               // adminPermissionScreenController.companyIsDeleteChecked.value = value!;
             },
             isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
-
             isDownloadShow: false,
           ),
           const SizedBox(height: 15),
 
           // Department
-          PermissionBoxModule(
-            labelText: AppMessage.companyDepartment,
-            isViewShow: true,
-            isViewValue:
-                adminPermissionScreenController.departmentInIsViewChecked.value,
-            isViewOnChanged: (bool? value) {
-              adminPermissionScreenController.departmentInIsViewChecked.value =
-                  value!;
-              adminPermissionScreenController.loadUI();
-            },
-            isAddShow: true,
-            isAddValue:
-                adminPermissionScreenController.departmentInIsAddChecked.value,
-            isAddOnChanged: (bool? value) {
-              adminPermissionScreenController.departmentInIsAddChecked.value =
-                  value!;
-              adminPermissionScreenController.loadUI();
-            },
-            isEditShow: true,
-            isEditValue:
-                adminPermissionScreenController.departmentInIsEditChecked.value,
-            isEditOnChanged: (bool? value) {
-              adminPermissionScreenController.departmentInIsEditChecked.value =
-                  value!;
-              adminPermissionScreenController.loadUI();
-            },
-            isDeleteShow: true,
-            isDeleteValue:
-                adminPermissionScreenController.departmentIsDeleteChecked.value,
-            isDeleteOnChanged: (bool? value) {
-              adminPermissionScreenController.departmentIsDeleteChecked.value =
-                  value!;
-              adminPermissionScreenController.loadUI();
-            },
-            isDownloadShow: false,
-          ),
-          const SizedBox(height: 15),
+          // PermissionBoxModule(
+          //   labelText: AppMessage.companyDepartment,
+          //   isViewShow: true,
+          //   isViewValue:
+          //       adminPermissionScreenController.departmentInIsViewChecked.value,
+          //   isViewOnChanged: (bool? value) {
+          //     adminPermissionScreenController.departmentInIsViewChecked.value =
+          //         value!;
+          //     adminPermissionScreenController.loadUI();
+          //   },
+          //   isAddShow: true,
+          //   isAddValue:
+          //       adminPermissionScreenController.departmentInIsAddChecked.value,
+          //   isAddOnChanged: (bool? value) {
+          //     adminPermissionScreenController.departmentInIsAddChecked.value =
+          //         value!;
+          //     adminPermissionScreenController.loadUI();
+          //   },
+          //   isEditShow: true,
+          //   isEditValue:
+          //       adminPermissionScreenController.departmentInIsEditChecked.value,
+          //   isEditOnChanged: (bool? value) {
+          //     adminPermissionScreenController.departmentInIsEditChecked.value =
+          //         value!;
+          //     adminPermissionScreenController.loadUI();
+          //   },
+          //   isDeleteShow: true,
+          //   isDeleteValue:
+          //       adminPermissionScreenController.departmentIsDeleteChecked.value,
+          //   isDeleteOnChanged: (bool? value) {
+          //     adminPermissionScreenController.departmentIsDeleteChecked.value =
+          //         value!;
+          //     adminPermissionScreenController.loadUI();
+          //   },
+          //   isDownloadShow: false,
+          // ),
+          // const SizedBox(height: 15),
 
           // Location
           PermissionBoxModule(
@@ -237,7 +234,8 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
               adminPermissionScreenController.loadUI();
             },
             isEditShow: true,
-            isEditValue: adminPermissionScreenController.employeeDocumentIsEditChecked.value,
+            isEditValue: adminPermissionScreenController
+                .employeeDocumentIsEditChecked.value,
             isEditOnChanged: (bool? value) {
               // adminPermissionScreenController.employeeDocumentIsEditChecked.value = value!;
             },
@@ -287,7 +285,6 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
               // adminPermissionScreenController.companyPayChecksIsEditChecked.value = value!;
             },
             isEditFillColor: MaterialStateProperty.all(Colors.grey.shade300),
-
             isDeleteShow: true,
             isDeleteValue: adminPermissionScreenController
                 .companyPayChecksIsDeleteChecked.value,
@@ -295,7 +292,6 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
               // adminPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
             },
             isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
-
             isDownloadShow: true,
             isDownloadValue: adminPermissionScreenController
                 .companyPayChecksIsDownloadChecked.value,
@@ -399,7 +395,6 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
               // adminPermissionScreenController.roleIsEditChecked.value = value!;
             },
             isEditFillColor: MaterialStateProperty.all(Colors.blue.shade200),
-
             isAddShow: false,
             isDeleteShow: false,
             isDownloadShow: false,
@@ -410,16 +405,20 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
           PermissionBoxModule(
             labelText: AppMessage.generalSetting,
             isViewShow: true,
-            isViewValue: adminPermissionScreenController.generalSettingViewChecked.value,
+            isViewValue:
+                adminPermissionScreenController.generalSettingViewChecked.value,
             isViewOnChanged: (bool? value) {
-              adminPermissionScreenController.generalSettingViewChecked.value = value!;
+              adminPermissionScreenController.generalSettingViewChecked.value =
+                  value!;
               adminPermissionScreenController.loadUI();
             },
             // isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
             isEditShow: true,
-            isEditValue: adminPermissionScreenController.generalSettingEditChecked.value,
+            isEditValue:
+                adminPermissionScreenController.generalSettingEditChecked.value,
             isEditOnChanged: (bool? value) {
-              adminPermissionScreenController.generalSettingEditChecked.value = value!;
+              adminPermissionScreenController.generalSettingEditChecked.value =
+                  value!;
               adminPermissionScreenController.loadUI();
             },
             // isEditFillColor: MaterialStateProperty.all(Colors.blue.shade200),

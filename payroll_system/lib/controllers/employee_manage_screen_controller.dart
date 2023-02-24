@@ -72,7 +72,8 @@ class EmployeeManageScreenController extends GetxController {
   int departmentId = 0;
 
   DateTime birthDate = DateTime.now();
-  DateTime employmentStartDate = DateTime.now().subtract(const Duration(days: 1));
+  DateTime employmentStartDate =
+      DateTime.now().subtract(const Duration(days: 1));
   DateTime employmentEndDate = DateTime.now();
 
   List<CompanyData> allCompanyList = [];
@@ -128,7 +129,6 @@ class EmployeeManageScreenController extends GetxController {
   int userIdPrefs = 0;
   UserPreference userPreference = UserPreference();
   String prefsDateFormat = "";
-
 
   imageFromCamera() async {
     XFile? image = await ImagePicker()
@@ -259,8 +259,10 @@ class EmployeeManageScreenController extends GetxController {
         middleNameController.text = employeeGetByIdModel.data.middleName;
         lastNameController.text = employeeGetByIdModel.data.lastName;
         phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
-        dateOfBirthController.text = employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
-        dateOfBirthShowController.text = DateFormater().changeDateFormat(employeeGetByIdModel.data.dateOfBirth, prefsDateFormat);
+        dateOfBirthController.text =
+            employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+        dateOfBirthShowController.text = DateFormater().changeDateFormat(
+            employeeGetByIdModel.data.dateOfBirth, prefsDateFormat);
         birthDate = employeeGetByIdModel.data.dateOfBirth;
         selectedValuePayper.value =
             employeeGetByIdModel.data.payPeriod == "salary"
@@ -276,8 +278,10 @@ class EmployeeManageScreenController extends GetxController {
         stateAddressController.text = employeeGetByIdModel.data.state;
         zipcodeAddressController.text = employeeGetByIdModel.data.zipcode;
 
-        String sDateText = employeeGetByIdModel.data.employmentStartDate.toString().split(" ")[0];
-        startDateController.text =  sDateText;
+        String sDateText = employeeGetByIdModel.data.employmentStartDate
+            .toString()
+            .split(" ")[0];
+        startDateController.text = sDateText;
         startDateShowController.text = DateFormater().changeDateFormat(
           employeeGetByIdModel.data.employmentStartDate,
           prefsDateFormat,
@@ -325,67 +329,67 @@ class EmployeeManageScreenController extends GetxController {
     // await getCompanyDepartmentFunction(companyId);
   }
 
-  Future<void> getCompanyWiseDepartmentFunction() async {
-    isLoading(true);
-    String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
-    log('Get Company Department Api Url :$url');
+  // Future<void> getCompanyWiseDepartmentFunction() async {
+  //   isLoading(true);
+  //   String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
+  //   log('Get Company Department Api Url :$url');
 
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-      CompanyDeprtmentModel companyDepartmentModel =
-          CompanyDeprtmentModel.fromJson(json.decode(response.body));
-      isSuccessStatus = companyDepartmentModel.success.obs;
-      log("getCompanyWiseDepartmentFunction response :${response.body}");
-      if (isSuccessStatus.value) {
-        companyDepartment.clear();
-        companyDepartment
-            .add(CompanyDepartmentData(departmentName: "Choose Option"));
-        // Only Active Department Add in list
-        if (companyDepartmentModel.data.isNotEmpty) {
-          for (int i = 0; i < companyDepartmentModel.data.length; i++) {
-            if (companyDepartmentModel.data[i].isActive == "1") {
-              companyDepartment.add(companyDepartmentModel.data[i]);
-            }
-          }
-        }
+  //   try {
+  //     http.Response response = await http.get(Uri.parse(url));
+  //     CompanyDeprtmentModel companyDepartmentModel =
+  //         CompanyDeprtmentModel.fromJson(json.decode(response.body));
+  //     isSuccessStatus = companyDepartmentModel.success.obs;
+  //     log("getCompanyWiseDepartmentFunction response :${response.body}");
+  //     if (isSuccessStatus.value) {
+  //       companyDepartment.clear();
+  //       companyDepartment
+  //           .add(CompanyDepartmentData(departmentName: "Choose Option"));
+  //       // Only Active Department Add in list
+  //       if (companyDepartmentModel.data.isNotEmpty) {
+  //         for (int i = 0; i < companyDepartmentModel.data.length; i++) {
+  //           if (companyDepartmentModel.data[i].isActive == "1") {
+  //             companyDepartment.add(companyDepartmentModel.data[i]);
+  //           }
+  //         }
+  //       }
 
-        companyDepartmentData = companyDepartment[0];
+  //       companyDepartmentData = companyDepartment[0];
 
-        /*if (employeeOption == EmployeeOption.create) {
-          if (companyDepartment.isNotEmpty) {
-            companyDepartmentData = companyDepartment[0];
-          }
-        } else if (employeeOption == EmployeeOption.update) {
-          // update logic here
+  //       /*if (employeeOption == EmployeeOption.create) {
+  //         if (companyDepartment.isNotEmpty) {
+  //           companyDepartmentData = companyDepartment[0];
+  //         }
+  //       } else if (employeeOption == EmployeeOption.update) {
+  //         // update logic here
 
-          for (int i = 0; i < companyDepartment.length; i++) {
-            if (departmentId == companyDepartment[i].id) {
-              companyDepartmentData = companyDepartment[i];
-            }
-          }
-        }*/
-        departmentStringList.clear();
+  //         for (int i = 0; i < companyDepartment.length; i++) {
+  //           if (departmentId == companyDepartment[i].id) {
+  //             companyDepartmentData = companyDepartment[i];
+  //           }
+  //         }
+  //       }*/
+  //       departmentStringList.clear();
 
-        for (int i = 0; i < companyDepartment.length; i++) {
-          departmentStringList.add(companyDepartment[i].departmentName!);
-        }
+  //       for (int i = 0; i < companyDepartment.length; i++) {
+  //         departmentStringList.add(companyDepartment[i].departmentName!);
+  //       }
 
-        log('allDepartmentList : ${companyDepartment.length}');
-      } else {
-        log('getAllCompanyFunction Else');
-      }
-      // });
-    } catch (e) {
-      Fluttertoast.showToast(msg: "Something went wrong !");
-      rethrow;
-    } /*finally {
-      isLoading(false);
-    }*/
-    await getCompanyWiseLocationFunction(companyId);
-  }
+  //       log('allDepartmentList : ${companyDepartment.length}');
+  //     } else {
+  //       log('getAllCompanyFunction Else');
+  //     }
+  //     // });
+  //   } catch (e) {
+  //     Fluttertoast.showToast(msg: "Something went wrong !");
+  //     rethrow;
+  //   } /*finally {
+  //     isLoading(false);
+  //   }*/
+  //   await getCompanyWiseLocationFunction(companyId);
+  // }
 
   /// Company wise location
-  Future<void> getCompanyWiseLocationFunction(companyId) async  {
+  Future<void> getCompanyWiseLocationFunction(companyId) async {
     isLoading(true);
     String url = "${ApiUrl.companyWiseLocationApi}$companyId";
     // log('Company Wise Location Api Url : $url');
@@ -600,9 +604,11 @@ class EmployeeManageScreenController extends GetxController {
   }
 
   getLoggedInUserIdFromPrefs() async {
-    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
-    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
-    await getCompanyWiseDepartmentFunction();
+    userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
+    await getCompanyWiseLocationFunction(companyId);
   }
 
   @override
@@ -611,8 +617,6 @@ class EmployeeManageScreenController extends GetxController {
     getLoggedInUserIdFromPrefs();
     super.onInit();
   }
-
-
 
   loadUI() {
     isLoading(true);

@@ -123,9 +123,9 @@ class EmployeeListScreen extends StatelessWidget {
                                         element.mobileNumber
                                             .toLowerCase()
                                             .contains(value) ||
-                                        element.departmentId
-                                            .toLowerCase()
-                                            .contains(value) ||
+                                        // element.departmentId
+                                        //     .toLowerCase()
+                                        //     .contains(value) ||
                                         element.companyid
                                             .toLowerCase()
                                             .contains(value))

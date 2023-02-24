@@ -41,8 +41,8 @@ class AppMessage {
   static String delete = 'Delete';
   static String yes = 'Yes';
   static String no = 'No';
-  static String documentDownloadDrawer = "Document Download";
-  static String documentUploadDrawer = "Document Upload";
+  static String documentDownloadDrawer = "Download Document";
+  static String documentUploadDrawer = "Upload Document";
   static String paychecksDownloadDrawer = "Paychecks Download";
 
   // static String deleteAlertMessage = 'Are you sure you want to delete ?';
@@ -411,6 +411,4 @@ class AppMessage {
   static String generalSettingsScreen = "General Settings";
   static String dateFormat = 'Date Format';
   static String pleaseSelectDateFormat = 'Please select date format.';
-
-
 }

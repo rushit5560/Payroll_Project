@@ -87,8 +87,8 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               keyboardType: TextInputType.datetime,
               readOnly: true,
               maxLength: 10,
-              textEditingController:
-                  companyEmployeeManageScreenController.dateOfBirthShowController,
+              textEditingController: companyEmployeeManageScreenController
+                  .dateOfBirthShowController,
               suffixIcon: Icons.calendar_month,
               onPressed: () async {
                 await _selectDate(
@@ -350,7 +350,8 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                           companyEmployeeManageScreenController
                               .isLoading(false);
                         },
-                      ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+                      ).commonOnlyPadding(
+                          left: 10, right: 10, top: 10, bottom: 10),
                     ),
                   ),
                 ),
@@ -457,98 +458,98 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
                 ),
               ),*/
             ),
-            const SizedBox(height: 5),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RichText(
-                  textAlign: TextAlign.left,
-                  maxLines: null,
-                  text: TextSpan(
-                      text: AppMessage.departmentNameDrawer,
-                      style: TextStyleConfig.textStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: " ${AppMessage.mandatory}",
-                          style: TextStyleConfig.textStyle(
-                            textColor: AppColors.redColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ]),
-                ).commonSymmetricPadding(vertical: 2),
-                /*Text(
-                  AppMessage.departmentNameDrawer,
-                  style: TextStyleConfig.textStyle(
-                      fontWeight: FontWeight.w600, fontSize: 16),
-                ).commonSymmetricPadding(vertical: 2),*/
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    // border: Border.all(color: AppColors.greyColor),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.transparent),
-                      ),
-                      // child: DropdownButtonHideUnderline(
-                      child: Center(
-                        child: DropdownButtonFormField<CompanyDepartmentData>(
-                          validator: (value) {
-                            if (companyEmployeeManageScreenController
-                                    .selectedValue.value ==
-                                AppMessage.chooseOption) {
-                              return AppMessage.pleaseSelectDepartment;
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration:
-                              const InputDecoration.collapsed(hintText: ''),
-                          value: companyEmployeeManageScreenController
-                              .companyDepartmentData,
-                          items: companyEmployeeManageScreenController
-                              .companyDepartment
-                              .map<DropdownMenuItem<CompanyDepartmentData>>(
-                                  (CompanyDepartmentData value) {
-                            return DropdownMenuItem<CompanyDepartmentData>(
-                              value: value,
-                              child: Text(value.departmentName!),
-                            );
-                          }).toList(),
-                          borderRadius: BorderRadius.circular(10),
-                          icon: Image.asset(
-                            AppImages.arrowDownIcon,
-                            height: 15,
-                            width: 15,
-                          ).commonSymmetricPadding(horizontal: 10),
-                          onChanged: (CompanyDepartmentData? value) async {
-                            companyEmployeeManageScreenController
-                                .isLoading(true);
-                            // This is called when the user selects an item.
-                            companyEmployeeManageScreenController
-                                .companyDepartmentData = value;
-                            companyEmployeeManageScreenController
-                                .isLoading(false);
-                          },
-                        ).commonOnlyPadding(left: 10, right: 10),
-                      ),
-                    ),
-                  ),
-                ),
-                // ),
-              ],
-            ),
+            // const SizedBox(height: 5),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     RichText(
+            //       textAlign: TextAlign.left,
+            //       maxLines: null,
+            //       text: TextSpan(
+            //           text: AppMessage.departmentNameDrawer,
+            //           style: TextStyleConfig.textStyle(
+            //             fontWeight: FontWeight.w600,
+            //             fontSize: 16,
+            //           ),
+            //           children: [
+            //             TextSpan(
+            //               text: " ${AppMessage.mandatory}",
+            //               style: TextStyleConfig.textStyle(
+            //                 textColor: AppColors.redColor,
+            //                 fontWeight: FontWeight.w600,
+            //                 fontSize: 16,
+            //               ),
+            //             ),
+            //           ]),
+            //     ).commonSymmetricPadding(vertical: 2),
+            //     /*Text(
+            //       AppMessage.departmentNameDrawer,
+            //       style: TextStyleConfig.textStyle(
+            //           fontWeight: FontWeight.w600, fontSize: 16),
+            //     ).commonSymmetricPadding(vertical: 2),*/
+            //     Container(
+            //       width: double.infinity,
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(10),
+            //         // border: Border.all(color: AppColors.greyColor),
+            //       ),
+            //       child: Padding(
+            //         padding: const EdgeInsets.symmetric(vertical: 3),
+            //         child: Container(
+            //           height: 50,
+            //           decoration: BoxDecoration(
+            //             color: Colors.white,
+            //             borderRadius: BorderRadius.circular(10),
+            //             border: Border.all(color: Colors.transparent),
+            //           ),
+            //           // child: DropdownButtonHideUnderline(
+            //           child: Center(
+            //             child: DropdownButtonFormField<CompanyDepartmentData>(
+            //               validator: (value) {
+            //                 if (companyEmployeeManageScreenController
+            //                         .selectedValue.value ==
+            //                     AppMessage.chooseOption) {
+            //                   return AppMessage.pleaseSelectDepartment;
+            //                 } else {
+            //                   return null;
+            //                 }
+            //               },
+            //               decoration:
+            //                   const InputDecoration.collapsed(hintText: ''),
+            //               value: companyEmployeeManageScreenController
+            //                   .companyDepartmentData,
+            //               items: companyEmployeeManageScreenController
+            //                   .companyDepartment
+            //                   .map<DropdownMenuItem<CompanyDepartmentData>>(
+            //                       (CompanyDepartmentData value) {
+            //                 return DropdownMenuItem<CompanyDepartmentData>(
+            //                   value: value,
+            //                   child: Text(value.departmentName!),
+            //                 );
+            //               }).toList(),
+            //               borderRadius: BorderRadius.circular(10),
+            //               icon: Image.asset(
+            //                 AppImages.arrowDownIcon,
+            //                 height: 15,
+            //                 width: 15,
+            //               ).commonSymmetricPadding(horizontal: 10),
+            //               onChanged: (CompanyDepartmentData? value) async {
+            //                 companyEmployeeManageScreenController
+            //                     .isLoading(true);
+            //                 // This is called when the user selects an item.
+            //                 companyEmployeeManageScreenController
+            //                     .companyDepartmentData = value;
+            //                 companyEmployeeManageScreenController
+            //                     .isLoading(false);
+            //               },
+            //             ).commonOnlyPadding(left: 10, right: 10),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     // ),
+            //   ],
+            // ),
             const SizedBox(height: 5),
             RichText(
               textAlign: TextAlign.left,
@@ -984,19 +985,19 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
 
       if (datePickerOption == DatePickerOption.dob) {
         companyEmployeeManageScreenController.birthDate = d;
-        companyEmployeeManageScreenController.dateOfBirthShowController.text = DateFormater().changeDateFormat(
-            d, companyEmployeeManageScreenController.prefsDateFormat
-        );
+        companyEmployeeManageScreenController.dateOfBirthShowController.text =
+            DateFormater().changeDateFormat(
+                d, companyEmployeeManageScreenController.prefsDateFormat);
       } else if (datePickerOption == DatePickerOption.startDate) {
         companyEmployeeManageScreenController.employmentStartDate = d;
-        companyEmployeeManageScreenController.startDateShowController.text = DateFormater().changeDateFormat(
-            d, companyEmployeeManageScreenController.prefsDateFormat
-        );
+        companyEmployeeManageScreenController.startDateShowController.text =
+            DateFormater().changeDateFormat(
+                d, companyEmployeeManageScreenController.prefsDateFormat);
       } else {
         companyEmployeeManageScreenController.employmentEndDate = d;
-        companyEmployeeManageScreenController.endDateShowController.text = DateFormater().changeDateFormat(
-            d, companyEmployeeManageScreenController.prefsDateFormat
-        );
+        companyEmployeeManageScreenController.endDateShowController.text =
+            DateFormater().changeDateFormat(
+                d, companyEmployeeManageScreenController.prefsDateFormat);
       }
       companyEmployeeManageScreenController.isLoading(false);
     }

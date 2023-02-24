@@ -45,12 +45,12 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         bool employeeUpdatePermission =
-                        await userPreference.getBoolPermissionFromPrefs(
-                            keyId: UserPreference.employeeEditKey);
+                            await userPreference.getBoolPermissionFromPrefs(
+                                keyId: UserPreference.employeeEditKey);
 
                         if (employeeUpdatePermission == true) {
                           Get.to(
-                                () => EmployeeManageScreen(),
+                            () => EmployeeManageScreen(),
                             arguments: [
                               EmployeeOption.update,
                               employee.id.toString(),
@@ -59,7 +59,8 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                             ],
                           );
                         } else {
-                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                          Fluttertoast.showToast(
+                              msg: AppMessage.deniedPermission);
                         }
                       },
                       child: Image.asset(
@@ -70,13 +71,11 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-
                     GestureDetector(
                       onTap: () async {
-
                         bool employeeDeletePermission =
-                        await userPreference.getBoolPermissionFromPrefs(
-                            keyId: UserPreference.employeeDeleteKey);
+                            await userPreference.getBoolPermissionFromPrefs(
+                                keyId: UserPreference.employeeDeleteKey);
 
                         if (employeeDeletePermission == true) {
                           CustomAlertDialog().showAlertDialog(
@@ -86,14 +85,15 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                               log("Delete Employee");
                               await employeeListScreenController
                                   .deleteEmployeeFunction(
-                                  employee.id.toString(), index);
+                                      employee.id.toString(), index);
                             },
                             onCancelTap: () {
                               Get.back();
                             },
                           );
                         } else {
-                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                          Fluttertoast.showToast(
+                              msg: AppMessage.deniedPermission);
                         }
                       },
                       child: Image.asset(
@@ -124,27 +124,31 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                   textKey: AppMessage.mobileNumber,
                   textValue: employee.mobileNumber,
                 ),
+                // SizedBox(height: 2.h),
+                // SingleListTileModuleCustom(
+                //   image: AppImages.departmentIcon,
+                //   textKey: AppMessage.employeeDepartmentName,
+                //   textValue: employee.departmentId.toString(),
+                // ),
                 SizedBox(height: 2.h),
                 SingleListTileModuleCustom(
-                  image: AppImages.departmentIcon,
-                  textKey: AppMessage.employeeDepartmentName,
-                  textValue: employee.departmentId.toString(),
-                ),
-                SizedBox(height: 2.h),
-                SingleListTileModuleCustom(
-                  image: AppImages.companyIcon,
+                    image: AppImages.companyIcon,
                     textKey: AppMessage.employeeCompanyName,
                     textValue: employee.companyid.toString()),
                 SizedBox(height: 2.h),
                 SingleListTileModuleCustom(
                   image: AppImages.verifyIcon,
-                    textKey: AppMessage.employeeStatus,
-                    textValue: employee.isActive == AppMessage.value
-                        ? AppMessage.active
-                        : employee.isActive == AppMessage.valueZero ? AppMessage.inActive : AppMessage.terminated,
+                  textKey: AppMessage.employeeStatus,
+                  textValue: employee.isActive == AppMessage.value
+                      ? AppMessage.active
+                      : employee.isActive == AppMessage.valueZero
+                          ? AppMessage.inActive
+                          : AppMessage.terminated,
                   valueColor: employee.isActive == AppMessage.value
-                  ? AppColors.greenColor
-                  : employee.isActive == AppMessage.valueZero ? AppColors.colorRed : AppColors.greyColor,
+                      ? AppColors.greenColor
+                      : employee.isActive == AppMessage.valueZero
+                          ? AppColors.colorRed
+                          : AppColors.greyColor,
                 ),
                 SizedBox(height: 2.h),
                 Row(
@@ -152,10 +156,10 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => EmployeeUploadDocumentScreen(),
+                        Get.to(
+                          () => EmployeeUploadDocumentScreen(),
                           arguments: [
-                            "${employee.firstName} ${employee
-                                .middleName} ${employee.lastName}",
+                            "${employee.firstName} ${employee.middleName} ${employee.lastName}",
                             employee.id.toString(),
                             employeeListScreenController.companyId,
                           ],
@@ -179,7 +183,6 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                           ),
                         ],
                       ),
-
                     ),
                   ],
                 ),

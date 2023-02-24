@@ -283,7 +283,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
       await employeeGetByIdFunction();
     } else if (employeeOption == EmployeeOption.create) {
       // when create new company
-      await getCompanyWiseDepartmentFunction();
+      await getCompanyWiseLocationFunction(companyId);
 
       // isLoading(false);
     }
@@ -310,9 +310,11 @@ class CompanyEmployeeManageScreenController extends GetxController {
         phoneNoController.text = employeeGetByIdModel.data.mobileNumber;
         log('employeeGetByIdModel.data.dateOfBirth : ${employeeGetByIdModel.data.dateOfBirth}');
         if (employeeGetByIdModel.data.dateOfBirth.toString().contains(" ")) {
-          dateOfBirthController.text = employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
+          dateOfBirthController.text =
+              employeeGetByIdModel.data.dateOfBirth.toString().split(" ")[0];
           birthDate = employeeGetByIdModel.data.dateOfBirth;
-          dateOfBirthShowController.text = DateFormater().changeDateFormat(employeeGetByIdModel.data.dateOfBirth, prefsDateFormat);
+          dateOfBirthShowController.text = DateFormater().changeDateFormat(
+              employeeGetByIdModel.data.dateOfBirth, prefsDateFormat);
         }
         // birthDate = employeeGetByIdModel.data.dateOfBirth;
         selectedValuePayper.value =
@@ -379,57 +381,57 @@ class CompanyEmployeeManageScreenController extends GetxController {
     // await getCompanyDepartmentFunction(companyId);
   }
 
-  Future<void> getCompanyWiseDepartmentFunction() async {
-    isLoading(true);
-    String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
-    log('Get Company Department Api Url :$url');
+  // Future<void> getCompanyWiseDepartmentFunction() async {
+  //   isLoading(true);
+  //   String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
+  //   log('Get Company Department Api Url :$url');
 
-    try {
-      http.Response response = await http.get(Uri.parse(url));
-      CompanyDeprtmentModel companyDepartmentModel =
-          CompanyDeprtmentModel.fromJson(json.decode(response.body));
-      isSuccessStatus = companyDepartmentModel.success.obs;
-      log("getCompanyWiseDepartmentFunction response :${response.body}");
-      if (isSuccessStatus.value) {
-        companyDepartment.clear();
-          companyDepartment
-            .add(CompanyDepartmentData(departmentName: "Choose Option"));
-        companyDepartment.addAll(companyDepartmentModel.data);
+  //   try {
+  //     http.Response response = await http.get(Uri.parse(url));
+  //     CompanyDeprtmentModel companyDepartmentModel =
+  //         CompanyDeprtmentModel.fromJson(json.decode(response.body));
+  //     isSuccessStatus = companyDepartmentModel.success.obs;
+  //     log("getCompanyWiseDepartmentFunction response :${response.body}");
+  //     if (isSuccessStatus.value) {
+  //       companyDepartment.clear();
+  //         companyDepartment
+  //           .add(CompanyDepartmentData(departmentName: "Choose Option"));
+  //       companyDepartment.addAll(companyDepartmentModel.data);
 
-        if (employeeOption == EmployeeOption.create) {
-          if (companyDepartment.isNotEmpty) {
-            companyDepartmentData = companyDepartment[0];
-          } else {
-            // Fluttertoast.showToast(msg: "No department in this company!");
-          }
-        } else if (employeeOption == EmployeeOption.update) {
-          // update logic here
+  //       if (employeeOption == EmployeeOption.create) {
+  //         if (companyDepartment.isNotEmpty) {
+  //           companyDepartmentData = companyDepartment[0];
+  //         } else {
+  //           // Fluttertoast.showToast(msg: "No department in this company!");
+  //         }
+  //       } else if (employeeOption == EmployeeOption.update) {
+  //         // update logic here
 
-          for (int i = 0; i < companyDepartment.length; i++) {
-            if (departmentId == companyDepartment[i].id) {
-              companyDepartmentData = companyDepartment[i];
-            }
-          }
-        }
-        departmentStringList.clear();
+  //         for (int i = 0; i < companyDepartment.length; i++) {
+  //           if (departmentId == companyDepartment[i].id) {
+  //             companyDepartmentData = companyDepartment[i];
+  //           }
+  //         }
+  //       }
+  //       departmentStringList.clear();
 
-        for (int i = 0; i < companyDepartment.length; i++) {
-          departmentStringList.add(companyDepartment[i].departmentName!);
-        }
+  //       for (int i = 0; i < companyDepartment.length; i++) {
+  //         departmentStringList.add(companyDepartment[i].departmentName!);
+  //       }
 
-        log('allDepartmentList : ${companyDepartment.length}');
-      } else {
-        log('getAllCompanyFunction Else');
-      }
-      // });
-    } catch (e) {
-      Fluttertoast.showToast(msg: "Something went wrong !");
-      rethrow;
-    } /*finally {
-      isLoading(false);
-    }*/
-    await getCompanyWiseLocationFunction(companyId);
-  }
+  //       log('allDepartmentList : ${companyDepartment.length}');
+  //     } else {
+  //       log('getAllCompanyFunction Else');
+  //     }
+  //     // });
+  //   } catch (e) {
+  //     Fluttertoast.showToast(msg: "Something went wrong !");
+  //     rethrow;
+  //   } /*finally {
+  //     isLoading(false);
+  //   }*/
+  //   await getCompanyWiseLocationFunction(companyId);
+  // }
 
   /// Company wise location
   Future<void> getCompanyWiseLocationFunction(companyId) async {
@@ -448,8 +450,7 @@ class CompanyEmployeeManageScreenController extends GetxController {
       if (isSuccessStatus.value) {
         allLocationList.clear();
 
-          allLocationList
-            .add(LocationListData(locationName: "Choose Option"));
+        allLocationList.add(LocationListData(locationName: "Choose Option"));
         allLocationList.addAll(allLocationListModel.data);
         locationListData = allLocationList[0];
 
@@ -628,8 +629,9 @@ class CompanyEmployeeManageScreenController extends GetxController {
   getLoggedInUserIdFromPrefs() async {
     userIdPrefs = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
-    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
-    await getCompanyWiseDepartmentFunction();
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
+    await getCompanyWiseLocationFunction(companyId);
   }
 
   @override

@@ -50,49 +50,50 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
               isDeleteOnChanged: (bool? value) {
                 // subAdminPermissionScreenController.companyIsDeleteChecked.value = value!;
               },
-              isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+              isDeleteFillColor:
+                  MaterialStateProperty.all(Colors.grey.shade300),
               isDownloadShow: false,
             ),
             const SizedBox(height: 15),
 
             // Department
-            PermissionBoxModule(
-              labelText: AppMessage.companyDepartment,
-              isViewShow: true,
-              isViewValue: subAdminPermissionScreenController
-                  .departmentInIsViewChecked.value,
-              isViewOnChanged: (bool? value) {
-                subAdminPermissionScreenController
-                    .departmentInIsViewChecked.value = value!;
-                subAdminPermissionScreenController.loadUI();
-              },
-              isAddShow: true,
-              isAddValue: subAdminPermissionScreenController
-                  .departmentInIsAddChecked.value,
-              isAddOnChanged: (bool? value) {
-                subAdminPermissionScreenController
-                    .departmentInIsAddChecked.value = value!;
-                subAdminPermissionScreenController.loadUI();
-              },
-              isEditShow: true,
-              isEditValue: subAdminPermissionScreenController
-                  .departmentInIsEditChecked.value,
-              isEditOnChanged: (bool? value) {
-                subAdminPermissionScreenController
-                    .departmentInIsEditChecked.value = value!;
-                subAdminPermissionScreenController.loadUI();
-              },
-              isDeleteShow: true,
-              isDeleteValue: subAdminPermissionScreenController
-                  .departmentIsDeleteChecked.value,
-              isDeleteOnChanged: (bool? value) {
-                subAdminPermissionScreenController
-                    .departmentIsDeleteChecked.value = value!;
-                subAdminPermissionScreenController.loadUI();
-              },
-              isDownloadShow: false,
-            ),
-            const SizedBox(height: 15),
+            // PermissionBoxModule(
+            //   labelText: AppMessage.companyDepartment,
+            //   isViewShow: true,
+            //   isViewValue: subAdminPermissionScreenController
+            //       .departmentInIsViewChecked.value,
+            //   isViewOnChanged: (bool? value) {
+            //     subAdminPermissionScreenController
+            //         .departmentInIsViewChecked.value = value!;
+            //     subAdminPermissionScreenController.loadUI();
+            //   },
+            //   isAddShow: true,
+            //   isAddValue: subAdminPermissionScreenController
+            //       .departmentInIsAddChecked.value,
+            //   isAddOnChanged: (bool? value) {
+            //     subAdminPermissionScreenController
+            //         .departmentInIsAddChecked.value = value!;
+            //     subAdminPermissionScreenController.loadUI();
+            //   },
+            //   isEditShow: true,
+            //   isEditValue: subAdminPermissionScreenController
+            //       .departmentInIsEditChecked.value,
+            //   isEditOnChanged: (bool? value) {
+            //     subAdminPermissionScreenController
+            //         .departmentInIsEditChecked.value = value!;
+            //     subAdminPermissionScreenController.loadUI();
+            //   },
+            //   isDeleteShow: true,
+            //   isDeleteValue: subAdminPermissionScreenController
+            //       .departmentIsDeleteChecked.value,
+            //   isDeleteOnChanged: (bool? value) {
+            //     subAdminPermissionScreenController
+            //         .departmentIsDeleteChecked.value = value!;
+            //     subAdminPermissionScreenController.loadUI();
+            //   },
+            //   isDownloadShow: false,
+            // ),
+            // const SizedBox(height: 15),
 
             // Location
             PermissionBoxModule(
@@ -249,7 +250,8 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
               isDeleteOnChanged: (bool? value) {
                 // subAdminPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
               },
-              isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+              isDeleteFillColor:
+                  MaterialStateProperty.all(Colors.grey.shade300),
               isDownloadShow: true,
               isDownloadValue: subAdminPermissionScreenController
                   .companyPayChecksIsDownloadChecked.value,

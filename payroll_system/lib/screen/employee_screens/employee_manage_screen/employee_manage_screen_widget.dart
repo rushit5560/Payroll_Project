@@ -147,7 +147,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                     // height: 50,
                     child: Center(
                       child: DropdownButtonFormField<String>(
-                        validator: (value) => FieldValidation().validateDropdownStatus(value!),
+                        validator: (value) =>
+                            FieldValidation().validateDropdownStatus(value!),
                         decoration:
                             const InputDecoration.collapsed(hintText: ''),
                         value: employeeCreteScreenController
@@ -175,7 +176,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                               .selectedValuePayper.value = value!;
                           employeeCreteScreenController.isLoading(false);
                         },
-                      ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+                      ).commonOnlyPadding(
+                          left: 10, right: 10, top: 10, bottom: 10),
                     ),
                   ),
                 ),
@@ -324,7 +326,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                           //       : Container();
                           //   return null;
                           // },
-                          validator: (value) => FieldValidation().validateDropdownStatus(value!),
+                          validator: (value) =>
+                              FieldValidation().validateDropdownStatus(value!),
                           decoration:
                               const InputDecoration.collapsed(hintText: ''),
                           value:
@@ -353,7 +356,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
 
                             employeeCreteScreenController.isLoading(false);
                           },
-                        ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+                        ).commonOnlyPadding(
+                            left: 10, right: 10, top: 10, bottom: 10),
                       ),
                     ),
                     // ),
@@ -461,87 +465,87 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                 ),
               ),*/
             ),
-            const SizedBox(height: 5),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RichText(
-                  textAlign: TextAlign.left,
-                  maxLines: null,
-                  text: TextSpan(
-                      text: AppMessage.departmentNameDrawer,
-                      style: TextStyleConfig.textStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: " ${AppMessage.mandatory}",
-                          style: TextStyleConfig.textStyle(
-                            textColor: AppColors.redColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ]),
-                ).commonSymmetricPadding(vertical: 2),
-                /*Text(
-                  AppMessage.departmentNameDrawer,
-                  style: TextStyleConfig.textStyle(
-                      fontWeight: FontWeight.w600, fontSize: 16),
-                ).commonSymmetricPadding(vertical: 2),*/
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    // border: Border.all(color: AppColors.greyColor),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: Container(
-                      // height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.transparent),
-                      ),
-                      // child: DropdownButtonHideUnderline(
-                      child: Center(
-                        child: DropdownButtonFormField<CompanyDepartmentData>(
-                          validator: (value) => FieldValidation().validateDropdownDepartment(value!.departmentName!),
-                          decoration:
-                              const InputDecoration.collapsed(hintText: ''),
-                          value: employeeCreteScreenController
-                              .companyDepartmentData,
-                          items: employeeCreteScreenController.companyDepartment
-                              .map<DropdownMenuItem<CompanyDepartmentData>>(
-                                  (CompanyDepartmentData value) {
-                            return DropdownMenuItem<CompanyDepartmentData>(
-                              value: value,
-                              child: Text(value.departmentName!),
-                            );
-                          }).toList(),
-                          borderRadius: BorderRadius.circular(10),
-                          icon: Image.asset(
-                            AppImages.arrowDownIcon,
-                            height: 15,
-                            width: 15,
-                          ).commonSymmetricPadding(horizontal: 10),
-                          onChanged: (CompanyDepartmentData? value) async {
-                            employeeCreteScreenController.isLoading(true);
-                            // This is called when the user selects an item.
-                            employeeCreteScreenController
-                                .companyDepartmentData = value;
-                            employeeCreteScreenController.isLoading(false);
-                          },
-                        ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
-                      ),
-                    ),
-                  ),
-                ),
-                // ),
-              ],
-            ),
+            // const SizedBox(height: 5),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     RichText(
+            //       textAlign: TextAlign.left,
+            //       maxLines: null,
+            //       text: TextSpan(
+            //           text: AppMessage.departmentNameDrawer,
+            //           style: TextStyleConfig.textStyle(
+            //             fontWeight: FontWeight.w600,
+            //             fontSize: 16,
+            //           ),
+            //           children: [
+            //             TextSpan(
+            //               text: " ${AppMessage.mandatory}",
+            //               style: TextStyleConfig.textStyle(
+            //                 textColor: AppColors.redColor,
+            //                 fontWeight: FontWeight.w600,
+            //                 fontSize: 16,
+            //               ),
+            //             ),
+            //           ]),
+            //     ).commonSymmetricPadding(vertical: 2),
+            //     /*Text(
+            //       AppMessage.departmentNameDrawer,
+            //       style: TextStyleConfig.textStyle(
+            //           fontWeight: FontWeight.w600, fontSize: 16),
+            //     ).commonSymmetricPadding(vertical: 2),*/
+            //     Container(
+            //       width: double.infinity,
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(10),
+            //         // border: Border.all(color: AppColors.greyColor),
+            //       ),
+            //       child: Padding(
+            //         padding: const EdgeInsets.symmetric(vertical: 3),
+            //         child: Container(
+            //           // height: 50,
+            //           decoration: BoxDecoration(
+            //             color: Colors.white,
+            //             borderRadius: BorderRadius.circular(10),
+            //             border: Border.all(color: Colors.transparent),
+            //           ),
+            //           // child: DropdownButtonHideUnderline(
+            //           child: Center(
+            //             child: DropdownButtonFormField<CompanyDepartmentData>(
+            //               validator: (value) => FieldValidation().validateDropdownDepartment(value!.departmentName!),
+            //               decoration:
+            //                   const InputDecoration.collapsed(hintText: ''),
+            //               value: employeeCreteScreenController
+            //                   .companyDepartmentData,
+            //               items: employeeCreteScreenController.companyDepartment
+            //                   .map<DropdownMenuItem<CompanyDepartmentData>>(
+            //                       (CompanyDepartmentData value) {
+            //                 return DropdownMenuItem<CompanyDepartmentData>(
+            //                   value: value,
+            //                   child: Text(value.departmentName!),
+            //                 );
+            //               }).toList(),
+            //               borderRadius: BorderRadius.circular(10),
+            //               icon: Image.asset(
+            //                 AppImages.arrowDownIcon,
+            //                 height: 15,
+            //                 width: 15,
+            //               ).commonSymmetricPadding(horizontal: 10),
+            //               onChanged: (CompanyDepartmentData? value) async {
+            //                 employeeCreteScreenController.isLoading(true);
+            //                 // This is called when the user selects an item.
+            //                 employeeCreteScreenController
+            //                     .companyDepartmentData = value;
+            //                 employeeCreteScreenController.isLoading(false);
+            //               },
+            //             ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     // ),
+            //   ],
+            // ),
             const SizedBox(height: 5),
             RichText(
               textAlign: TextAlign.left,
@@ -581,7 +585,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                   // child: DropdownButtonHideUnderline(
                   child: Center(
                     child: DropdownButtonFormField(
-                      validator: (value) => FieldValidation().validateDropdownLocation(value!.locationName!),
+                      validator: (value) => FieldValidation()
+                          .validateDropdownLocation(value!.locationName!),
                       decoration: const InputDecoration.collapsed(hintText: ''),
                       value: employeeCreteScreenController.locationListData,
                       items: employeeCreteScreenController.allLocationList
@@ -601,7 +606,8 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
                         employeeCreteScreenController.locationListData = value;
                         employeeCreteScreenController.isLoading(false);
                       },
-                    ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+                    ).commonOnlyPadding(
+                        left: 10, right: 10, top: 10, bottom: 10),
                   ),
                 ),
               ),
@@ -963,22 +969,21 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
 
       if (datePickerOption == DatePickerOption.dob) {
         employeeCreteScreenController.birthDate = d;
-        employeeCreteScreenController.dateOfBirthShowController.text = DateFormater().changeDateFormat(
-          DateTime.parse(d.toString()), employeeCreteScreenController.prefsDateFormat
-        );
+        employeeCreteScreenController.dateOfBirthShowController.text =
+            DateFormater().changeDateFormat(DateTime.parse(d.toString()),
+                employeeCreteScreenController.prefsDateFormat);
         log('D: $d');
         log('DOB DAte : ${employeeCreteScreenController.dateOfBirthShowController.text}');
-
       } else if (datePickerOption == DatePickerOption.startDate) {
         employeeCreteScreenController.employmentStartDate = d;
-        employeeCreteScreenController.startDateShowController.text = DateFormater().changeDateFormat(
-            d, employeeCreteScreenController.prefsDateFormat
-        );
+        employeeCreteScreenController.startDateShowController.text =
+            DateFormater().changeDateFormat(
+                d, employeeCreteScreenController.prefsDateFormat);
       } else {
         employeeCreteScreenController.employmentEndDate = d;
-        employeeCreteScreenController.endDateShowController.text = DateFormater().changeDateFormat(
-            d, employeeCreteScreenController.prefsDateFormat
-        );
+        employeeCreteScreenController.endDateShowController.text =
+            DateFormater().changeDateFormat(
+                d, employeeCreteScreenController.prefsDateFormat);
       }
       employeeCreteScreenController.isLoading(false);
     }

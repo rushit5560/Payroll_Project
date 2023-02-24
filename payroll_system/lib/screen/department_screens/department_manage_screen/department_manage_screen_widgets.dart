@@ -78,7 +78,8 @@ class DepartmentFormModule extends StatelessWidget {
                         child: Center(
                           child: DropdownButtonFormField<String>(
                             // dropdownColor: Colors.teal,
-                            validator: (value) => FieldValidation().validateDropdownStatus(value!),
+                            validator: (value) => FieldValidation()
+                                .validateDropdownStatus(value!),
                             decoration:
                                 const InputDecoration.collapsed(hintText: ''),
                             value: screenController.selectedValue.value,
@@ -100,7 +101,8 @@ class DepartmentFormModule extends StatelessWidget {
                               screenController.selectedValue.value = value!;
                               screenController.loadUI();
                             },
-                          ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+                          ).commonOnlyPadding(
+                              left: 10, right: 10, top: 10, bottom: 10),
                         ),
                         // ),
                       ),
