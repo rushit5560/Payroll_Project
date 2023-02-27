@@ -55,6 +55,7 @@ class LoginController extends GetxController {
                   loginDetailsModel.loginData.data.employeeId.toString())
               : int.parse(loginDetailsModel.loginData.data.id.toString()),
           roleId: int.parse(loginDetailsModel.loginData.data.roleId.toString()),
+          employeeId: int.parse(loginDetailsModel.loginData.data.id.toString()),
           userName: loginDetailsModel.loginData.data.userName,
           userEmail: loginDetailsModel.loginData.data.email,
           userProfileImage: loginDetailsModel.loginData.data.photo,

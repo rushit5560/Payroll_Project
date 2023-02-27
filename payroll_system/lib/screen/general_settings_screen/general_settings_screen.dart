@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -69,6 +68,45 @@ class GeneralSettingsScreen extends StatelessWidget {
                             ),
                           ]),
                     ).commonSymmetricPadding(vertical: 2),
+
+                    // Container(
+                    //   width: Get.width,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     // border: Border.all(color: AppColors.greyColor),
+                    //   ),
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.symmetric(vertical: 3),
+                    //     child: Container(
+                    //       // height: 50,
+                    //       decoration: BoxDecoration(
+                    //         color: Colors.white,
+                    //         borderRadius: BorderRadius.circular(10),
+                    //         border: Border.all(color: Colors.transparent),
+                    //       ),
+                    //       // child: DropdownButtonHideUnderline(
+                    //       child: Center(
+                    //               child: DropdownButtonFormField(
+                    //                   validator: (value) => FieldValidation()
+                    //                       .validateDropdownDateFormat(value!),
+                    //                   decoration:
+                    //                       const InputDecoration.collapsed(
+                    //                           hintText: ''),
+                    //                   // value: generalSettingsScreenController
+                    //                   //     .selectedValue.value,
+                    //                   items: generalSettingsScreenController
+                    //                       .generalSettingsOptionList
+                    //                       .map<DropdownMenuItem<String>>(
+                    //                           (String value) {
+                    //                     return DropdownMenuItem(
+                    //                         value: value, child: Text(value));
+                    //                   }).toList(),
+                    //                   onChanged: (String? value) {}))
+                    //           .commonOnlyPadding(
+                    //               left: 10, right: 10, bottom: 10, top: 10),
+                    //     ),
+                    //   ),
+                    // ),
                     Container(
                       width: Get.width,
                       decoration: BoxDecoration(
@@ -129,13 +167,17 @@ class GeneralSettingsScreen extends StatelessWidget {
                     CustomSubmitButtonModule(
                       labelText: AppMessage.submit,
                       onPress: () async {
-                        if(generalSettingsScreenController.isGeneralSettingEditPermission.value) {
-                          if (generalSettingsScreenController.formKey.currentState!.validate()) {
-                            await generalSettingsScreenController.updateDateFormatFunction();
+                        if (generalSettingsScreenController
+                            .isGeneralSettingEditPermission.value) {
+                          if (generalSettingsScreenController
+                              .formKey.currentState!
+                              .validate()) {
+                            await generalSettingsScreenController
+                                .updateDateFormatFunction();
                           }
                         } else {
-                          Fluttertoast.showToast(msg: AppMessage.deniedPermission);
-
+                          Fluttertoast.showToast(
+                              msg: AppMessage.deniedPermission);
                         }
                       },
                     ),

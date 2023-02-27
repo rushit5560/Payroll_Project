@@ -248,7 +248,7 @@ class EmployeeFormModule extends StatelessWidget {
             mandatoryText: AppMessage.mandatory,
             textEditingController:
                 employeeProfileScreenController.zipcodeAddressController,
-            validate: (value) => FieldValidation().validateZipCode(value),
+            // validate: (value) => FieldValidation().validateZipCode(value),
           ),
 
           // FormSingleFieldModule(

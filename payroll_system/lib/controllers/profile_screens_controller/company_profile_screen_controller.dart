@@ -39,7 +39,6 @@ class CompanyProfileScreenController extends GetxController {
   // RxString selectedDepartmentOption = "".obs;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -168,6 +167,7 @@ class CompanyProfileScreenController extends GetxController {
   }
 
   updateCompanyProfileFunction() async {
+    log("userid 1111: ${userid.value}");
     isLoading(true);
 
     String url = ApiUrl.companyProfileUpdateApi;
@@ -273,7 +273,7 @@ class CompanyProfileScreenController extends GetxController {
 
           if (isSuccessStatus) {
             Fluttertoast.showToast(
-              msg:successModel.message,
+              msg: successModel.message,
               toastLength: Toast.LENGTH_SHORT,
             );
             log(successModel.message);
@@ -362,7 +362,6 @@ class CompanyProfileScreenController extends GetxController {
 
   @override
   void dispose() {
-
     super.dispose();
   }
 }

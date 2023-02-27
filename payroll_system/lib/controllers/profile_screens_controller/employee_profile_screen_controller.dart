@@ -62,6 +62,7 @@ class EmployeeProfileScreenController extends GetxController {
         .getIntValueFromPrefs(keyId: UserPreference.employeeLoginIdKey);
     String url = "${ApiUrl.employeeProfileGetApi}$userId";
     log("getEmployeeProfileFunction Api url : $url");
+    log("getEmployeeProfileFunction user id : $userId");
 
     try {
       http.Response response = await http.get(Uri.parse(url));
@@ -127,7 +128,7 @@ class EmployeeProfileScreenController extends GetxController {
 
     try {
       int userId = await userPreference.getIntValueFromPrefs(
-          keyId: UserPreference.userIdKey);
+          keyId: UserPreference.employeeIdKey);
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
       if (imageFile != null) {
@@ -137,10 +138,11 @@ class EmployeeProfileScreenController extends GetxController {
             imageFile!.path,
           ),
         );
-      } else {
+      }
+      /*else {
         request.fields['showimg'] =
             employeeData!.photo.isEmpty ? "" : employeeData!.photo;
-      }
+      }*/
 
       request.fields['userid'] = "$userId";
       request.fields['first_name'] = firstNameController.text;
@@ -167,7 +169,7 @@ class EmployeeProfileScreenController extends GetxController {
       log('request.headers: ${request.headers}');
 
       var response = await request.send();
-      log('response: ${response.request}');
+      // log('response: ${response.request}');
 
       response.stream
           .transform(const Utf8Decoder())

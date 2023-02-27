@@ -15,6 +15,7 @@ class UserPreference {
   static String userProfileImageKey = "userProfileImageKey";
   static String employeeLoginIdKey = "employeeLoginIdKey";
   static String dateFormatKey = "dateFormatKey";
+  static String employeeIdKey = "employeeIdKey";
 
   // user permissions keys
   static String roleAddKey = 'roleAddKey';
@@ -150,7 +151,7 @@ class UserPreference {
     log("UserDetails.departmentDelete : ${UserDetails.departmentDelete}");*/
   }
 
-  /// Set User Login Details
+  /// Set User Login Drequired bool isLoggedIn, etails
   Future<void> setUserLoginDetailsToPrefs({
     required bool isLoggedIn,
     required int userId,
@@ -159,6 +160,7 @@ class UserPreference {
     required String userEmail,
     required String userProfileImage,
     required int employeeLoginId,
+    required int employeeId,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -170,6 +172,7 @@ class UserPreference {
     prefs.setString(userEmailKey, userEmail);
     prefs.setString(userProfileImageKey, userProfileImage);
     prefs.setInt(employeeLoginIdKey, employeeLoginId);
+    prefs.setInt(employeeIdKey, employeeId);
 
     //  user details save in local vars
     UserDetails.isUserLoggedIn = prefs.getBool(isUserLoggedInKey) ?? false;

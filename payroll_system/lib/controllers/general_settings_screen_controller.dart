@@ -24,7 +24,7 @@ class GeneralSettingsScreenController extends GetxController {
     "m/d/Y",
     "Y/m/d",
     "Y-M-d",
-    "M-d-y",
+    "M-d-Y",
     "d-M-Y"
   ];
   RxString selectedValue = "Choose Option".obs;
@@ -46,7 +46,8 @@ class GeneralSettingsScreenController extends GetxController {
       if (isSuccessStatus.value) {
         selectedValue.value = genralSettingModel.data;
         log('Date Format Api: ${selectedValue.value}');
-        await userPreference.setDateFormatInPrefs(dateFormat: selectedValue.value);
+        await userPreference.setDateFormatInPrefs(
+            dateFormat: selectedValue.value);
 
         log("getDateFormatFunction :: ${selectedValue.value}");
       } else {
@@ -85,7 +86,8 @@ class GeneralSettingsScreenController extends GetxController {
 
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: dateFormatUpdateModel.messege);
-          await userPreference.setDateFormatInPrefs(dateFormat: selectedValue.value);
+          await userPreference.setDateFormatInPrefs(
+              dateFormat: selectedValue.value);
           Get.back();
         } else {
           log("updateDateFormatFunction");
@@ -100,8 +102,11 @@ class GeneralSettingsScreenController extends GetxController {
   }
 
   getLoggedInUserIdFromPrefs() async {
-    userIdPrefs = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
-    isGeneralSettingEditPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.generalSettingEditKey);
+    userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
+    isGeneralSettingEditPermission.value =
+        await userPreference.getBoolPermissionFromPrefs(
+            keyId: UserPreference.generalSettingEditKey);
     await getDateFormatFunction();
   }
 

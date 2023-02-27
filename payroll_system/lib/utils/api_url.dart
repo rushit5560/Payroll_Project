@@ -31,6 +31,7 @@ class ApiUrl {
       "${apiMainPath}api/profile/companyupdate";
   static const employeeProfileGetApi =
       "${apiMainPath}api/profile/employeegetdata/";
+
   static const employeeProfileUpdateApi =
       "${apiMainPath}api/profile/employeeupdate";
 
