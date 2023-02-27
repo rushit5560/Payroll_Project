@@ -126,7 +126,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.companyLabelName,
-                    textValue: payrollListDataListValue.companyid,
+                    textValue: payrollListDataListValue.companyname,
                     image: AppImages.companyIcon,
                   ),
                   const SizedBox(height: 5),

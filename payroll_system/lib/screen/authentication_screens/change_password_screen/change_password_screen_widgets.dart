@@ -58,7 +58,7 @@ class CurrentPasswordTextFieldModule extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
                 fillColor: AppColors.colorWhite,
                 filled: true,
-                labelText: AppMessage.oldPassword,
+                // labelText: AppMessage.oldPassword,
                 suffixIcon: IconButton(
                   onPressed: () {
                     changePasswordScreenController.isPasswordVisible.value =
@@ -128,7 +128,7 @@ class NewPasswordTextFieldModule extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
               fillColor: AppColors.colorWhite,
               filled: true,
-              labelText: AppMessage.newPassword,
+              // labelText: AppMessage.newPassword,
               suffixIcon: IconButton(
                 onPressed: () {
                   changePasswordScreenController.isNewPasswordVisible.value =
@@ -204,7 +204,7 @@ class NewConfirmPasswordTextFieldModule extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
               fillColor: AppColors.colorWhite,
               filled: true,
-              labelText: AppMessage.newConfirmPassword,
+              // labelText: AppMessage.newConfirmPassword,
               suffixIcon: IconButton(
                 onPressed: () {
                   changePasswordScreenController

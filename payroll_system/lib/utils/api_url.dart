@@ -4,16 +4,16 @@ class ApiUrl {
   // static const downloadFilePath =
   //     "https://appieve.com/public/images/employee/file/";
 
-  static const apiMainPath = "https://kpatelcpa.us/";
-  static const apiImagePath = "https://kpatelcpa.us/public/images/employee/";
-  static const downloadFilePath =
-      "https://kpatelcpa.us/public/images/employee/file/";
-
-  // static const apiMainPath = "https://payroll.omdemo.co.in/";
-  // static const apiImagePath =
-  //     "https://payroll.omdemo.co.in/public/images/employee/";
+  // static const apiMainPath = "https://kpatelcpa.us/";
+  // static const apiImagePath = "https://kpatelcpa.us/public/images/employee/";
   // static const downloadFilePath =
-  //     "https://payroll.omdemo.co.in/public/images/employee/file/";
+  //     "https://kpatelcpa.us/public/images/employee/file/";
+
+  static const apiMainPath = "https://payroll.omdemo.co.in/";
+  static const apiImagePath =
+      "https://payroll.omdemo.co.in/public/images/employee/";
+  static const downloadFilePath =
+      "https://payroll.omdemo.co.in/public/images/employee/file/";
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";

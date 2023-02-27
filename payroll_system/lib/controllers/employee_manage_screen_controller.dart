@@ -46,6 +46,7 @@ class EmployeeManageScreenController extends GetxController {
 
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   RxString selectedValuePayper = "Choose Option".obs;
+
   RxString selectedCompanyValue = "Choose Company".obs;
   RxString selectedDepartmentValue = "Choose Department".obs;
 
@@ -265,9 +266,9 @@ class EmployeeManageScreenController extends GetxController {
             employeeGetByIdModel.data.dateOfBirth, prefsDateFormat);
         birthDate = employeeGetByIdModel.data.dateOfBirth;
         selectedValuePayper.value =
-            employeeGetByIdModel.data.payPeriod == "salary"
-                ? "Salary"
-                : "Hourly";
+            employeeGetByIdModel.data.payPeriod == "hourly"
+                ? "Hourly"
+                : "Salary";
         salaryController.text = employeeGetByIdModel.data.salary.toString();
         hourlyRateController.text =
             employeeGetByIdModel.data.hourlyRate.toString();
@@ -482,7 +483,7 @@ class EmployeeManageScreenController extends GetxController {
               ? "0"
               : "2";
       request.fields['companyid'] = companyId;
-      request.fields['department_id'] = "${companyDepartmentData!.id}";
+      // request.fields['department_id'] = "${companyDepartmentData!.id}";
       request.fields['location_id'] = "${locationListData!.id}";
       request.fields['email'] = emailController.text.trim();
       request.fields['password'] = passwordController.text.trim();
@@ -533,7 +534,7 @@ class EmployeeManageScreenController extends GetxController {
   /// Update Employee Details
   Future<void> updateEmployeeDetailsFunction() async {
     String url = ApiUrl.updateEmployeeDetailsApi;
-    // log('Update Company Api URl : $url');
+    log('Update Company Api URl : $url');
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -544,8 +545,7 @@ class EmployeeManageScreenController extends GetxController {
       request.fields['last_name'] = lastNameController.text.trim();
       request.fields['mobile_number'] = phoneNoController.text.trim();
       request.fields['date_of_birth'] = dateOfBirthController.text.trim();
-      request.fields['pay_period'] =
-          selectedValue.value == "Salary" ? "salary" : "hourly";
+      request.fields['pay_period'] = selectedValuePayper.value == "Salary" ? "salary" : "hourly";
       request.fields['salary'] = salaryController.text.trim() == ""
           ? "0"
           : salaryController.text.trim();
@@ -560,7 +560,7 @@ class EmployeeManageScreenController extends GetxController {
               ? "0"
               : "2";
       request.fields['companyid'] = companyId;
-      request.fields['department_id'] = "${companyDepartmentData!.id}";
+      // request.fields['department_id'] = "${companyDepartmentData!.id}";
       request.fields['location_id'] = "${locationListData!.id}";
       request.fields['email'] = emailController.text.trim();
       request.fields['password'] = passwordController.text.trim();
@@ -575,6 +575,7 @@ class EmployeeManageScreenController extends GetxController {
         request.files
             .add(await http.MultipartFile.fromPath("photo", images!.path));
       }*/
+      log('Request Data : ${request.fields}');
       var response = await request.send();
 
       response.stream

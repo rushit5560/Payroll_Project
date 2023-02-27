@@ -38,7 +38,7 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            companyViewScreenController.isDepartmentShowPermission.value == true
+                            /*companyViewScreenController.isDepartmentShowPermission.value == true
                                 ? CompanyDrawerTile(
                                     onTap: () {
                                       Get.back();
@@ -50,9 +50,8 @@ class CompanyViewDrawerMenu extends StatelessWidget {
                                     },
                                     title: AppMessage.departmentNameDrawer,
                                     imageStatus: true,
-                                    image: AppImages.departmentIcon,
                                   )
-                                : const SizedBox(),
+                                : const SizedBox(),*/
                             companyViewScreenController.isLocationShowPermission.value == true
                                 ? CompanyDrawerTile(
                                     onTap: () {

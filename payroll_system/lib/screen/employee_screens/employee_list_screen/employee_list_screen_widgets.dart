@@ -130,12 +130,12 @@ class EmployeeListScreenWidgets extends StatelessWidget {
                 //   textKey: AppMessage.employeeDepartmentName,
                 //   textValue: employee.departmentId.toString(),
                 // ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 1.h),
                 SingleListTileModuleCustom(
                     image: AppImages.companyIcon,
                     textKey: AppMessage.employeeCompanyName,
                     textValue: employee.companyid.toString()),
-                SizedBox(height: 2.h),
+                SizedBox(height: 1.h),
                 SingleListTileModuleCustom(
                   image: AppImages.verifyIcon,
                   textKey: AppMessage.employeeStatus,
