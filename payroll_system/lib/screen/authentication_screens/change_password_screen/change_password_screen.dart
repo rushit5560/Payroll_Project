@@ -30,7 +30,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     ? AppMessage.subAdminText
                     : changePasswordScreenController.roleId.value == 3
                         ? AppMessage.company
-                        : AppMessage.changePassword,
+                        : AppMessage.employeeText,
             style: TextStyle(
               color: AppColors.colorBlack,
               fontWeight: FontWeight.bold,

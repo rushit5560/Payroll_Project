@@ -28,6 +28,8 @@ class ChangePasswordController extends GetxController {
     int roleIdPrefs = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.roleIdKey);
     roleId.value = roleIdPrefs;
+    log('roleIdPrefs: $roleIdPrefs');
+    log('roleId: ${roleId.value}');
 
     // isLoading(false);
   }
