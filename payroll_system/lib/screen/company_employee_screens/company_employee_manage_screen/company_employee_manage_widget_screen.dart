@@ -738,6 +738,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
               isHeaderTextShow: false,
               text: AppMessage.zipcode,
               keyboardType: TextInputType.number,
+              maxLength: 6,
               mandatoryText: AppMessage.empty,
               textEditingController: companyEmployeeManageScreenController
                   .zipcodeAddressController,

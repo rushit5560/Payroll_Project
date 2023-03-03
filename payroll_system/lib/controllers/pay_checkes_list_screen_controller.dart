@@ -35,6 +35,23 @@ class PayCheckesListScreenController extends GetxController {
   String prefsDateFormat = "";
 
 
+  searchListFromSearchTextFunction(String value) {
+    // List<PayCheckesListData> tempList = [];
+
+    filterPayChecksListData = payCheckesListData.where((element) =>
+        element.firstName.toLowerCase().contains(value) ||
+            element.middleName.toLowerCase().contains(value) ||
+            element.lastName.toLowerCase().contains(value) ||
+            element.companyname.toLowerCase().contains(value)
+    ).toList();
+    log('Search List = ${filterPayChecksListData.length}');
+    // filterPayChecksListData = tempList;
+  }
+
+  // setDefaultListFunction() {
+  //   List<PayCheckesListData> tempList = [];
+  //   tempList
+  // }
 
   Future<void> getPaycheckesListFunction() async {
     isLoading(true);
@@ -64,7 +81,7 @@ class PayCheckesListScreenController extends GetxController {
         filterPayChecksListData = payCheckesListData;
 
         log('payCheckesListData : ${payCheckesListData.length}');
-        log('filterPayChecksListData : ${filterPayChecksListData.length}');
+        // log('filterPayChecksListData : ${filterPayChecksListData.length}');
       }
     } catch (e) {
       rethrow;

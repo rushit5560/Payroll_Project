@@ -13,6 +13,7 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
@@ -69,7 +70,7 @@ class PayCheckesListScreen extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      Row(
+                      /*Row(
                         children: [
                           Text(
                             AppMessage.hourlyPaycheckesList,
@@ -161,8 +162,47 @@ class PayCheckesListScreen extends StatelessWidget {
                             ),
                           ),
                         ],
-                      ).commonAllSidePadding(10),
-                      // const SizedBox(height: 5),
+                      ).commonAllSidePadding(10),*/
+                      TextFormField(
+                        controller: payCheckesListScreenController
+                            .textSearchEditingController,
+                        onChanged: (value) {
+                          payCheckesListScreenController.isLoading(true);
+                          payCheckesListScreenController.searchListFromSearchTextFunction(value);
+                          payCheckesListScreenController.isLoading(false);
+                        },
+                        decoration: InputDecoration(
+                          enabledBorder: InputFieldStyles().inputBorder(),
+                          focusedBorder: InputFieldStyles().inputBorder(),
+                          errorBorder: InputFieldStyles().inputBorder(),
+                          focusedErrorBorder: InputFieldStyles().inputBorder(),
+                          fillColor: AppColors.colorWhite,
+                          filled: true,
+                          hintText: AppMessage.search,
+                          hintStyle: const TextStyle(
+                              color: AppColors.colorLightHintPurple2),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.colorLightHintPurple2,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
+                          suffixIcon: payCheckesListScreenController
+                                  .textSearchEditingController.text.isEmpty
+                              ? null
+                              : IconButton(
+                                  onPressed: () {
+                                    payCheckesListScreenController.isLoading(true);
+                                    payCheckesListScreenController.filterPayChecksListData
+                                    = payCheckesListScreenController.payCheckesListData;
+                                    payCheckesListScreenController.textSearchEditingController.clear();
+                                    payCheckesListScreenController.isLoading(false);
+                                  },
+                                  icon: const Icon(Icons.close,
+                                      color: AppColors.colorLightHintPurple2),
+                                ),
+                        ),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
                       payCheckesListScreenController
                               .filterPayChecksListData.isEmpty
                           ? Expanded(

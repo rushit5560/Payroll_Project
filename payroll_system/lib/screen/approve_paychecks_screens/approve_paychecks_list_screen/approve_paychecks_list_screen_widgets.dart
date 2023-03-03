@@ -19,11 +19,11 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         itemCount:
-            approvePaychecksListScreenController.approvePaychecksList.length,
+            approvePaychecksListScreenController.searchApprovePayCheckList.length,
         itemBuilder: (context, index) {
           final approvePayrollListDataListvalue =
               approvePaychecksListScreenController
-                  .approvePayCheckListdata[index];
+                  .searchApprovePayCheckList[index];
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -125,9 +125,10 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                                 approvePaychecksListScreenController
                                     .companyName,
                                 approvePayrollListDataListvalue
-                              ])!.then((value) {
-                            approvePaychecksListScreenController.isLoading(true);
-                            approvePaychecksListScreenController.isLoading(false);
+                              ])!.then((value) async {
+                            // approvePaychecksListScreenController.isLoading(true);
+                            await approvePaychecksListScreenController.approvePaycheckesListFunction();
+                            // approvePaychecksListScreenController.isLoading(false);
                           });
                         },
                         child: Row(

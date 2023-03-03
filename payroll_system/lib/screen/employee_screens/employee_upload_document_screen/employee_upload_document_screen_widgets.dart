@@ -242,10 +242,31 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                       textValue: singleDoc.doctype,
                     ),
 
-                    // SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        GestureDetector(
+                          onTap: () async {
+                            bool employeeDownloadDownloadPermission =
+                            await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeDocumentDownloadKey);
+
+                            if (employeeDownloadDownloadPermission == true) {
+                              // await payCheckesListScreenController.downloadFile();
+                              await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadPayrollApi}${singleDoc.id}");
+                            } else {
+                              Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            }
+                          },
+                          child: Image.asset(
+                            AppImages.downloadIcon,
+                            width: 25,
+                            height: 25,
+                            color: AppColors.colorBtBlue,
+                          ),
+                        ),
+
+
                         GestureDetector(
                           onTap: () async {
                             bool employeeDocumentViewPermission =

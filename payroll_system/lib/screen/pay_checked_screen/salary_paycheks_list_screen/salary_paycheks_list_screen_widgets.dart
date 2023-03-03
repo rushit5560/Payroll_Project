@@ -25,11 +25,11 @@ class SalaryPaychecksListModule extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: screenController.salaryPayChecksList.length,
+        itemCount: screenController.filterSalaryPayChecksList.length,
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, i) {
-          PayCheckesListData singleItem = screenController.salaryPayChecksList[i];
+          PayCheckesListData singleItem = screenController.filterSalaryPayChecksList[i];
           return Padding(
             padding:
             const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),

@@ -111,9 +111,8 @@ class CompanyHomeDrawer extends StatelessWidget {
                         Get.to(() => ChangePasswordScreen());
                       },
                       title: AppMessage.changePassword,
-                      imageStatus: false,
-                      icon: const Icon(Icons.person,
-                          color: AppColors.colorBtBlue),
+                      imageStatus: true,
+                      image: AppImages.roleIcon,
                     ),
                   ],
                 ),

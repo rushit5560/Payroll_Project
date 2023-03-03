@@ -6,6 +6,7 @@ import 'package:payroll_system/controllers/approve_paychecks_list_screen_control
 import 'package:payroll_system/screen/approve_paychecks_screens/approve_paychecks_list_screen/approve_paychecks_list_screen_widgets.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 
 class ApprovePaychecksListScreen extends StatelessWidget {
@@ -48,7 +49,51 @@ class ApprovePaychecksListScreen extends StatelessWidget {
                           ),
                         ],
                       ).commonAllSidePadding(10),
-                      ApprovePaychecksListWidgetsScreen(),
+
+                      TextFormField(
+                        controller: approvePaychecksListScreenController
+                            .textSearchEditingController,
+                        onChanged: (value) {
+                          approvePaychecksListScreenController.isLoading(true);
+                          approvePaychecksListScreenController.searchListFromSearchTextFunction(value);
+                          approvePaychecksListScreenController.isLoading(false);
+                        },
+                        decoration: InputDecoration(
+                          enabledBorder: InputFieldStyles().inputBorder(),
+                          focusedBorder: InputFieldStyles().inputBorder(),
+                          errorBorder: InputFieldStyles().inputBorder(),
+                          focusedErrorBorder: InputFieldStyles().inputBorder(),
+                          fillColor: AppColors.colorWhite,
+                          filled: true,
+                          hintText: AppMessage.search,
+                          hintStyle: const TextStyle(
+                              color: AppColors.colorLightHintPurple2),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.colorLightHintPurple2,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
+                          suffixIcon: approvePaychecksListScreenController
+                              .textSearchEditingController.text.isEmpty
+                              ? null
+                              : IconButton(
+                            onPressed: () {
+                              approvePaychecksListScreenController.isLoading(true);
+                              approvePaychecksListScreenController.searchApprovePayCheckList
+                              = approvePaychecksListScreenController.approvePaychecksList;
+                              approvePaychecksListScreenController.textSearchEditingController.clear();
+                              approvePaychecksListScreenController.isLoading(false);
+                            },
+                            icon: const Icon(Icons.close,
+                                color: AppColors.colorLightHintPurple2),
+                          ),
+                        ),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
+
+                      approvePaychecksListScreenController.searchApprovePayCheckList.isEmpty
+                      ? Center(child: Text(AppMessage.noApprovalPayCheckesListFound))
+                      : ApprovePaychecksListWidgetsScreen(),
                     ],
                   ),
       ),

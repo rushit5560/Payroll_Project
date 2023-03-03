@@ -176,7 +176,7 @@ class EmployeeFormModule extends StatelessWidget {
             keyboardType: TextInputType.datetime,
             readOnly: true,
             textEditingController:
-                employeeProfileScreenController.dobFieldController,
+                employeeProfileScreenController.dobFieldShowController,
             suffixIcon: Icons.calendar_month,
             onPressed: () {
               FocusScope.of(context).requestFocus(FocusNode());

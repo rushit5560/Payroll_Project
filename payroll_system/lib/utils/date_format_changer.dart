@@ -30,15 +30,15 @@ class DateFormater {
       formatedDate = "${date.year}/${date.month}/${date.day}";
     }
     else if(prefsDateFormat == "Y-M-d") {
-      String d = DateFormat("yyyy/MMM/dd").format(date);
+      String d = DateFormat("yyyy-MMM-dd").format(date);
       formatedDate = d;
     }
     else if(prefsDateFormat == "M-d-Y") {
-      String d = DateFormat("MMM/dd/yyyy").format(date);
+      String d = DateFormat("MMM-dd-yyyy").format(date);
       formatedDate = d;
     }
     else if(prefsDateFormat == "d-M-Y") {
-      String d = DateFormat("dd/MMM/yyyy").format(date);
+      String d = DateFormat("dd-MMM-yyyy").format(date);
       formatedDate = d;
     }
 

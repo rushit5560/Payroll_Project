@@ -118,7 +118,7 @@ class EmployeeHomeDrawerMenu extends StatelessWidget {
                       EmployeeDrawerTile(
                         title: AppMessage.changePassword,
                         imageStatus: true,
-                        image: AppImages.employeeIcon,
+                        image: AppImages.roleIcon,
                         onTap: () {
                           Get.back();
                           Get.to(() => ChangePasswordScreen());

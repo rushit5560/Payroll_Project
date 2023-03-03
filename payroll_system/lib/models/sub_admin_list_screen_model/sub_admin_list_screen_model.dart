@@ -110,7 +110,7 @@ class SubadminListData {
         lastlogin: json["lastlogin"] ?? "",
         verified: json["verified"] ?? "",
         createdby: (json["createdby"] ?? 0).toString(),
-        modifiedby: json["modifiedby"] ?? "",
+        modifiedby: (json["modifiedby"] ?? 0).toString(),
         emailVerifiedAt: json["email_verified_at"] ?? "",
         photo: json["photo"] ?? "",
         employeeId: json["employee_id"] ?? "",

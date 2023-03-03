@@ -22,18 +22,18 @@ class EmployeeProfileScreen extends StatelessWidget {
         automaticallyImplyLeading: true,
         centerTitle: true,
         title: Obx(
-          ()=> employeeProfileScreenController.isLoading.value
-          ? Container()
-          : Text(
-            // ignore: prefer_interpolation_to_compose_strings
-            employeeProfileScreenController.firstNameController.text +
-                " ${employeeProfileScreenController.lastNameController.text}",
-            style: TextStyle(
-              color: AppColors.colorBlack,
-              fontWeight: FontWeight.bold,
-              fontSize: 17.sp,
-            ),
-          ),
+          () => employeeProfileScreenController.isLoading.value
+              ? Container()
+              : Text(
+                  // ignore: prefer_interpolation_to_compose_strings
+                  employeeProfileScreenController.firstNameController.text +
+                      " ${employeeProfileScreenController.lastNameController.text}",
+                  style: TextStyle(
+                    color: AppColors.colorBlack,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.sp,
+                  ),
+                ),
         ),
       ),
       body: SafeArea(

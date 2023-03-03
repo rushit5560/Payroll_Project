@@ -721,6 +721,7 @@ class EmployeeManageScreenWidgets extends StatelessWidget {
               headerText: AppMessage.empty,
               isHeaderTextShow: false,
               text: AppMessage.zipcode,
+              maxLength: 6,
               keyboardType: TextInputType.number,
               mandatoryText: AppMessage.empty,
               textEditingController:

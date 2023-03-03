@@ -6,7 +6,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:payroll_system/models/genral_setting_model/genral_setting_model.dart';
 import 'package:payroll_system/models/user_profile_model/employee_profile_model.dart';
+import 'package:payroll_system/utils/date_format_changer.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/api_url.dart';
@@ -16,6 +18,7 @@ import '../../models/success_models/success_model.dart';
 
 class EmployeeProfileScreenController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool isSuccessStatus = false.obs;
   EmployeeDatum? employeeData;
   List<DepartmentData> departmentList = [];
   List<String> departmentStringList = [];
@@ -26,6 +29,7 @@ class EmployeeProfileScreenController extends GetxController {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController dobFieldController = TextEditingController();
+  TextEditingController dobFieldShowController = TextEditingController();
   TextEditingController homeNumberController = TextEditingController();
   TextEditingController workNumberController = TextEditingController();
 
@@ -41,6 +45,11 @@ class EmployeeProfileScreenController extends GetxController {
 
   UserPreference userPreference = UserPreference();
 
+  String prefsDateFormat = "";
+
+  int userIdPrefs = 0;
+  RxString selectedValue = "".obs;
+
   Future<void> selectDateOfBirth(BuildContext context) async {
     final DateTime? d = await showDatePicker(
       context: context,
@@ -51,6 +60,9 @@ class EmployeeProfileScreenController extends GetxController {
     if (d != null) {
       isLoading(true);
       dobFieldController.text = "${d.year}-${d.month}-${d.day}";
+
+      dobFieldShowController.text = DateFormater().changeDateFormat(DateTime.parse(d.toString()), prefsDateFormat);
+
       isLoading(false);
     }
   }
@@ -84,11 +96,22 @@ class EmployeeProfileScreenController extends GetxController {
           lastNameController.text = employeeData!.lastName;
 
           phoneNumberController.text = employeeData!.phoneNo;
+          log('employeeData!.dateOfBrith : ${employeeData!.dateOfBrith}');
 
           if (employeeData!.dateOfBrith != "") {
             dobFieldController.text = employeeData!.dateOfBrith.split(" ")[0];
+            dobFieldShowController.text = DateFormater().
+            changeDateFormat(
+              DateTime.parse(
+                  employeeData!.dateOfBrith.split(" ")[0].toString()),
+                  prefsDateFormat,
+            );
           } else {
             dobFieldController.text = employeeData!.dateOfBrith;
+            dobFieldShowController.text = DateFormater().changeDateFormat(
+              DateTime.parse(employeeData!.dateOfBrith),
+              prefsDateFormat,
+            );
           }
 
           // homeNumberController.text = employeeData!.homeNo;
@@ -227,6 +250,41 @@ class EmployeeProfileScreenController extends GetxController {
     Get.back();
   }
 
+
+  // Get Date Format Api
+  Future<void> getDateFormatFunction() async {
+    log("userIdPrefsuserIdPrefs:   $userIdPrefs");
+    isLoading(true);
+    String url = ApiUrl.getDateFormatApi;
+    log('Get getDateFormatFunction Api Url :$url');
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+
+      GenralSettingModel genralSettingModel =
+      GenralSettingModel.fromJson(json.decode(response.body));
+      isSuccessStatus = genralSettingModel.success.obs;
+      log("getCompanyWiseEmployeeFunction ${response.body}");
+      if (isSuccessStatus.value) {
+        selectedValue.value = genralSettingModel.data;
+        log('Date Format Api: ${selectedValue.value}');
+        prefsDateFormat = selectedValue.value;
+        await userPreference.setDateFormatInPrefs(
+            dateFormat: selectedValue.value);
+
+        log("getDateFormatFunction :: ${selectedValue.value}");
+      } else {
+        log('getAllCompanyFunction Else');
+      }
+    } catch (e) {
+      log('getAllCompanyFunction Error :$e');
+      rethrow;
+    } /*finally {
+      isLoading(false);
+    }*/
+
+    await getEmployeeProfileFunction();
+  }
+
   void showPhotoPickerSheet(BuildContext context) async {
     showModalBottomSheet(
         context: context,
@@ -256,7 +314,17 @@ class EmployeeProfileScreenController extends GetxController {
 
   @override
   void onInit() {
-    getEmployeeProfileFunction();
+    initMethod();
     super.onInit();
+  }
+
+  initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
+    userIdPrefs = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
+    log('prefsDateFormat : $prefsDateFormat');
+    await getDateFormatFunction();
+    // await getEmployeeProfileFunction();
   }
 }

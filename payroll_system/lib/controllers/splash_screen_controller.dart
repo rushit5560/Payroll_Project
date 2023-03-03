@@ -162,6 +162,7 @@ class SplashScreenController extends GetxController {
           int roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
           await userPreference.getUserPrefsAndSaveToLocal();
           await getUserPermissionsFunction(roleId: roleId.toString());
+
         } else {
           Get.off(() => LoginScreen());
         }

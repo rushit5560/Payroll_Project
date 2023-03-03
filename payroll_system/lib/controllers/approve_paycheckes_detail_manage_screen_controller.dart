@@ -100,6 +100,9 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
   }
 
   initMethod() async {
+    isLoading(true);
     prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+    log('approvalData : ${approvalData.paydate}');
+    isLoading(false);
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -16,8 +17,10 @@ class ApprovePaychecksListScreenController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
 
-  List approvePaychecksList = [];
-  List<ApprovePayCheckListData> approvePayCheckListdata = [];
+  List<ApprovePayCheckListData> approvePaychecksList = [];
+  List<ApprovePayCheckListData> searchApprovePayCheckList = [];
+
+  TextEditingController textSearchEditingController = TextEditingController();
 
   UserPreference userPreference = UserPreference();
   String prefsDateFormat = "";
@@ -38,16 +41,28 @@ class ApprovePaychecksListScreenController extends GetxController {
 
       isSuccessStatus = approvePayCheckListModel.success.obs;
       if (isSuccessStatus.value) {
-        approvePayCheckListdata.clear();
-        approvePayCheckListdata.addAll(approvePayCheckListModel.data);
-
-        approvePaychecksList = approvePayCheckListModel.data;
+        approvePaychecksList.clear();
+        approvePaychecksList.addAll(approvePayCheckListModel.data);
+        searchApprovePayCheckList = approvePaychecksList;
       }
     } catch (e) {
       rethrow;
     } finally {
       isLoading(false);
     }
+  }
+
+  searchListFromSearchTextFunction(String value) {
+    // List<PayCheckesListData> tempList = [];
+
+    searchApprovePayCheckList = approvePaychecksList.where((element) =>
+    element.firstName.toLowerCase().contains(value) ||
+        element.middleName.toLowerCase().contains(value) ||
+        element.lastName.toLowerCase().contains(value) ||
+        element.companyname.toLowerCase().contains(value)
+    ).toList();
+    log('Search List = ${searchApprovePayCheckList.length}');
+    // filterPayChecksListData = tempList;
   }
 
  

@@ -9,6 +9,7 @@ import 'package:payroll_system/utils/app_images.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
+import 'package:payroll_system/utils/style.dart';
 import 'package:sizer/sizer.dart';
 
 import 'salary_paycheks_list_screen_widgets.dart';
@@ -66,7 +67,7 @@ class SalaryPaychecksListScreen extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      Row(
+                      /*Row(
                         children: [
                           Text(
                             AppMessage.salaryPaycheckesList,
@@ -158,7 +159,47 @@ class SalaryPaychecksListScreen extends StatelessWidget {
                             ),
                           ),
                         ],
-                      ).commonAllSidePadding(10),
+                      ).commonAllSidePadding(10),*/
+                      TextFormField(
+                        controller: salaryPaychecksListScreenController
+                            .textSearchEditingController,
+                        onChanged: (value) {
+                          salaryPaychecksListScreenController.isLoading(true);
+                          salaryPaychecksListScreenController.searchListFromSearchTextFunction(value);
+                          salaryPaychecksListScreenController.isLoading(false);
+                        },
+                        decoration: InputDecoration(
+                          enabledBorder: InputFieldStyles().inputBorder(),
+                          focusedBorder: InputFieldStyles().inputBorder(),
+                          errorBorder: InputFieldStyles().inputBorder(),
+                          focusedErrorBorder: InputFieldStyles().inputBorder(),
+                          fillColor: AppColors.colorWhite,
+                          filled: true,
+                          hintText: AppMessage.search,
+                          hintStyle: const TextStyle(
+                              color: AppColors.colorLightHintPurple2),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.colorLightHintPurple2,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
+                          suffixIcon: salaryPaychecksListScreenController
+                              .textSearchEditingController.text.isEmpty
+                              ? null
+                              : IconButton(
+                            onPressed: () {
+                              salaryPaychecksListScreenController.isLoading(true);
+                              salaryPaychecksListScreenController.filterSalaryPayChecksList
+                              = salaryPaychecksListScreenController.salaryPayChecksList;
+                              salaryPaychecksListScreenController.textSearchEditingController.clear();
+                              salaryPaychecksListScreenController.isLoading(false);
+                            },
+                            icon: const Icon(Icons.close,
+                                color: AppColors.colorLightHintPurple2),
+                          ),
+                        ),
+                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
                       salaryPaychecksListScreenController
                               .filterSalaryPayChecksList.isEmpty
                           ? Expanded(

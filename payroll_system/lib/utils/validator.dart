@@ -293,7 +293,7 @@ class FieldValidation {
   String? validateZipCode(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterZipCode;
-    } else if (value.length < 4) {
+    } else if (value.length < 5) {
       return AppMessage.zipCode5CharacterLength;
     } else if (value.length > 6) {
       return AppMessage.zipCode6CharacterLength;

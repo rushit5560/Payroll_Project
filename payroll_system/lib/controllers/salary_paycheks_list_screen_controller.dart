@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/models/Pay_checkes_list_model/pay_checkes_list_screen_model.dart';
@@ -20,6 +21,8 @@ class SalaryPaychecksListScreenController extends GetxController {
 
   List<PayCheckesListData> salaryPayChecksList = [];
   List<PayCheckesListData> filterSalaryPayChecksList = [];
+
+  TextEditingController textSearchEditingController = TextEditingController();
 
   List<String> filterList = ["All", "Approved", "Not Approved"];
   RxString selectedFilterValue = "All".obs;
@@ -91,6 +94,19 @@ class SalaryPaychecksListScreenController extends GetxController {
     } finally {
       isLoading(false);
     }
+  }
+
+  searchListFromSearchTextFunction(String value) {
+    // List<PayCheckesListData> tempList = [];
+
+    filterSalaryPayChecksList = salaryPayChecksList.where((element) =>
+    element.firstName.toLowerCase().contains(value) ||
+        element.middleName.toLowerCase().contains(value) ||
+        element.lastName.toLowerCase().contains(value) ||
+        element.companyname.toLowerCase().contains(value)
+    ).toList();
+    log('Search List = ${filterSalaryPayChecksList.length}');
+    // filterPayChecksListData = tempList;
   }
 
 
