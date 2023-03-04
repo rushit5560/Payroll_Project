@@ -1,19 +1,15 @@
 class ApiUrl {
   // static const apiMainPath = "https://appieve.com/";
   // static const apiImagePath = "https://appieve.com/public/images/employee/";
-  // static const downloadFilePath =
-  //     "https://appieve.com/public/images/employee/file/";
+  // static const downloadFilePath = "https://appieve.com/public/images/employee/file/";
 
   // static const apiMainPath = "https://kpatelcpa.us/";
   // static const apiImagePath = "https://kpatelcpa.us/public/images/employee/";
-  // static const downloadFilePath =
-  //     "https://kpatelcpa.us/public/images/employee/file/";
+  // static const downloadFilePath = "https://kpatelcpa.us/public/images/employee/file/";
 
   static const apiMainPath = "https://payroll.omdemo.co.in/";
-  static const apiImagePath =
-      "https://payroll.omdemo.co.in/public/images/employee/";
-  static const downloadFilePath =
-      "https://payroll.omdemo.co.in/public/images/employee/file/";
+  static const apiImagePath = "https://payroll.omdemo.co.in/public/images/employee/";
+  static const downloadFilePath = "https://payroll.omdemo.co.in/public/images/employee/file/";
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
@@ -108,8 +104,8 @@ class ApiUrl {
 
 //permission api
   static const savePermissionApi = "${apiMainPath}api/admin/permissionadd";
-  //GenralSettings Api's
 
+  //GeneralSettings Api
   static const getDateFormatApi = "${apiMainPath}api/admin/dateformate";
   static const updateDateFormatApi =
       "${apiMainPath}api/admin/dateformateupdate";

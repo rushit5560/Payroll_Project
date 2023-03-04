@@ -914,7 +914,7 @@ class OtTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.hours,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) => FieldValidation().validateOt(value.toString()),
@@ -970,7 +970,7 @@ class HolidayPayTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.hours,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>
@@ -1017,7 +1017,7 @@ class BonusTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.amount,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>
@@ -1064,7 +1064,7 @@ class OtherEarningTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.amount,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>
@@ -1111,7 +1111,7 @@ class CommissionTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.amount,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>
@@ -1158,7 +1158,7 @@ class SickPayTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.amount,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>
@@ -1205,7 +1205,7 @@ class VacationTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.amount,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>
@@ -1252,7 +1252,7 @@ class TipTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.amount,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>
@@ -1299,7 +1299,7 @@ class TaxTextFormFieldModule extends StatelessWidget {
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-            hintText: AppMessage.amount,
+            hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
           // validator: (value) =>

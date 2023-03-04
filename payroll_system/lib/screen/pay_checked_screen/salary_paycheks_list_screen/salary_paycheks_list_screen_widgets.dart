@@ -117,7 +117,7 @@ class SalaryPaychecksListModule extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.companyLabelName,
-                    textValue: singleItem.companyid,
+                    textValue: singleItem.companyname,
                     image: AppImages.companyIcon,
                   ),
                   const SizedBox(height: 5),

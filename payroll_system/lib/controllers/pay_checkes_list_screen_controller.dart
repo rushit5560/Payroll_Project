@@ -77,7 +77,14 @@ class PayCheckesListScreenController extends GetxController {
       isSuccessStatus = payCheckListModel.success.obs;
       if (isSuccessStatus.value) {
         payCheckesListData.clear();
-        payCheckesListData.addAll(payCheckListModel.data);
+        if(payCheckListModel.data.isNotEmpty){
+          for(int i = 0; i < payCheckListModel.data.length; i++) {
+            if(payCheckListModel.data[i].approvepaychecks == "1") {
+              payCheckesListData.add(payCheckListModel.data[i]);
+            }
+          }
+        }
+        // payCheckesListData.addAll(payCheckListModel.data);
         filterPayChecksListData = payCheckesListData;
 
         log('payCheckesListData : ${payCheckesListData.length}');

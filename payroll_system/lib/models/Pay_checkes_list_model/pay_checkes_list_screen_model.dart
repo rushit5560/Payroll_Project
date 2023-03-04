@@ -72,6 +72,7 @@ class PayCheckesListData {
     required this.middleName,
     required this.lastName,
     required this.eid,
+    required this.employeehourlyRate,
   });
 
   final String id;
@@ -109,6 +110,7 @@ class PayCheckesListData {
   final String middleName;
   final String lastName;
   final String eid;
+  final String employeehourlyRate;
 
   factory PayCheckesListData.fromJson(Map<String, dynamic> json) =>
       PayCheckesListData(
@@ -146,6 +148,7 @@ class PayCheckesListData {
         middleName: json["middle_name"] ?? "",
         lastName: json["last_name"] ?? "",
         eid: (json["eid"] ?? 0).toString(),
+        employeehourlyRate: (json["employeehourly_rate"] ?? 0).toString(),
       );
 
 }

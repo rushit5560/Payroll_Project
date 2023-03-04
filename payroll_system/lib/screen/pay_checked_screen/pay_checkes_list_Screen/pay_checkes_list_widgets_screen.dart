@@ -173,7 +173,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),*/
                   SingleListTileModuleCustom(
                     textKey: AppMessage.hourlyRateLabel,
-                    textValue: "\$ ${payrollListDataListValue.ragularhour.toString()}",
+                    textValue: "\$ ${payrollListDataListValue.employeehourlyRate.toString()}",
                     image: AppImages.salaryIcon,
                   ),
                   const SizedBox(height: 5),

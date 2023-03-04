@@ -50,7 +50,14 @@ class SalaryPaychecksListScreenController extends GetxController {
       isSuccessStatus = payCheckListModel.success.obs;
       if (isSuccessStatus.value) {
         salaryPayChecksList.clear();
-        salaryPayChecksList.addAll(payCheckListModel.data);
+        if(payCheckListModel.data.isNotEmpty) {
+          for(int i=0; i < payCheckListModel.data.length; i++) {
+            if(payCheckListModel.data[i].approvepaychecks == "1") {
+              salaryPayChecksList.add(payCheckListModel.data[i]);
+            }
+          }
+        }
+        // salaryPayChecksList.addAll(payCheckListModel.data);
         filterSalaryPayChecksList = salaryPayChecksList;
         // payrollListDataList = payrollListModel.data;
       } else {
