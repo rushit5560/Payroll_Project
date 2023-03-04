@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:payroll_system/constants/colors.dart';
 
@@ -30,7 +29,6 @@ class TextStyleConfig {
   }
 }
 
-
 class InputFieldStyles {
   InputBorder inputBorder() {
     return const OutlineInputBorder(
@@ -38,5 +36,4 @@ class InputFieldStyles {
       borderSide: BorderSide(color: Colors.transparent),
     );
   }
-
 }

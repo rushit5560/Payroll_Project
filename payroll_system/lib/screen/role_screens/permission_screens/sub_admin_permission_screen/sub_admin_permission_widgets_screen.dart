@@ -23,11 +23,11 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
               isViewValue: subAdminPermissionScreenController
                   .companyInIsViewChecked.value,
               isViewOnChanged: (bool? value) {
-                // subAdminPermissionScreenController
-                //     .companyInIsViewChecked.value = value!;
+                subAdminPermissionScreenController
+                    .companyInIsViewChecked.value = value!;
                 subAdminPermissionScreenController.loadUI();
               },
-              isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
+              // isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
               isAddShow: true,
               isAddValue: subAdminPermissionScreenController
                   .companyInIsAddChecked.value,
@@ -248,10 +248,15 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
               isDeleteValue: subAdminPermissionScreenController
                   .companyPayChecksIsDeleteChecked.value,
               isDeleteOnChanged: (bool? value) {
-                // subAdminPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
+                // subAdminPermissionScreenController
+                //     .companyPayChecksIsDeleteChecked.value = value!;
+                subAdminPermissionScreenController.loadUI();
               },
               isDeleteFillColor:
-                  MaterialStateProperty.all(Colors.grey.shade300),
+                  MaterialStateProperty.all(Colors.blue.shade200),
+
+              // isDeleteFillColor:
+              //     MaterialStateProperty.all(Colors.grey.shade300),
               isDownloadShow: true,
               isDownloadValue: subAdminPermissionScreenController
                   .companyPayChecksIsDownloadChecked.value,

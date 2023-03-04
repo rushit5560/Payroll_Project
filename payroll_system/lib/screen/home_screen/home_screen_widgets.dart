@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:payroll_system/common_modules/new/single_list_tile_module.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
@@ -35,6 +32,7 @@ class CompanyListModule extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CompanyListTile extends StatelessWidget {
   CompanyData singleItem;
   int index;
@@ -47,7 +45,7 @@ class CompanyListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0,right: 10, bottom: 15),
+      padding: const EdgeInsets.only(left: 10.0, right: 10, bottom: 15),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.colorWhite,
@@ -57,17 +55,16 @@ class CompanyListTile extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      bool companyViewPermission =
+                      bool companyEditPermission =
                           await userPreference.getBoolPermissionFromPrefs(
                               keyId: UserPreference.companyEditKey);
 
-                      if (companyViewPermission == true) {
+                      if (companyEditPermission == true) {
                         Get.to(
                           () => CompanyManageScreen(),
                           arguments: [
@@ -108,8 +105,11 @@ class CompanyListTile extends StatelessWidget {
               SingleListTileModuleCustom(
                 image: AppImages.verifyIcon,
                 textKey: AppMessage.verifiedStatusName,
-                textValue: singleItem.verified.toString().capitalizeFirstLetter(),
-                valueColor: singleItem.verified == "active" ? AppColors.greenColor : AppColors.redColor,
+                textValue:
+                    singleItem.verified.toString().capitalizeFirstLetter(),
+                valueColor: singleItem.verified == "active"
+                    ? AppColors.greenColor
+                    : AppColors.redColor,
               ),
 
               // SizedBox(height: 2.h),
@@ -117,14 +117,22 @@ class CompanyListTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Get.to(
-                            () => CompanyViewScreen(),
-                        arguments: [
-                          singleItem.id.toString(),
-                          singleItem.userName,
-                        ],
-                      );
+                    onTap: () async {
+                      bool companyViewPermission =
+                          await userPreference.getBoolPermissionFromPrefs(
+                              keyId: UserPreference.companyViewKey);
+                      if (companyViewPermission == true) {
+                        Get.to(
+                          () => CompanyViewScreen(),
+                          arguments: [
+                            singleItem.id.toString(),
+                            singleItem.userName,
+                          ],
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: AppMessage.deniedPermission);
+                      }
                     },
                     child: Row(
                       children: [
@@ -144,7 +152,6 @@ class CompanyListTile extends StatelessWidget {
                         ),
                       ],
                     ),
-
                   ),
                 ],
               ),
@@ -176,7 +183,6 @@ class CompanyListTile extends StatelessWidget {
                 viewLabelText: AppMessage.view,
                 editLabelText: AppMessage.edit,
               ),*/
-
             ],
           ),
         ),
