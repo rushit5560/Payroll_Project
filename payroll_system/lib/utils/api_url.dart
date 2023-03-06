@@ -31,7 +31,7 @@ class ApiUrl {
   static const employeeProfileUpdateApi =
       "${apiMainPath}api/profile/employeeupdate";
 
-  // Employee Api's
+  // Employee Api
   static const allEmployeeApi = "${apiMainPath}api/admin/employee/";
   static const payCheckWiseEmployeeApi =
       "${apiMainPath}api/admin/paycheckwiseemployee";
@@ -50,7 +50,7 @@ class ApiUrl {
   static const payCheckesDowanloadDocumentApi =
       "${apiMainPath}api/admin/employeewisepayroll/";
 
-  // Company Api's
+  // Company Api
   static const allCompanyApi = "${apiMainPath}api/admin/company";
   static const createCompanyApi = "${apiMainPath}api/admin/company/store";
   static const deleteCompanyApi = "${apiMainPath}api/admin/company/delete/";
@@ -61,7 +61,7 @@ class ApiUrl {
       "${apiMainPath}api/subadmin/company/";
   // static const activeCompanyApi = "${apiMainPath}api/company/active/";
 
-  // Department Api's
+  // Department Api
   static const allDepartmentApi = "${apiMainPath}api/admin/department";
   static const createDepartmentApi = "${apiMainPath}api/admin/department/store";
   static const deleteDepartmentApi =
@@ -72,7 +72,7 @@ class ApiUrl {
       "${apiMainPath}api/admin/department/edit/";
   static const getCompanyDepartmentApi = "${apiMainPath}api/admin/department/";
 
-//Location Api's
+//Location Api
   static const allLocationApi = "${apiMainPath}api/admin/location";
   static const companyWiseLocationApi = "${apiMainPath}api/admin/location/";
   static const deleteLocationApi = "${apiMainPath}api/admin/location/delete/";
@@ -80,14 +80,14 @@ class ApiUrl {
   static const createLocationApi = "${apiMainPath}api/admin/location/store";
   static const updateLocationApi = "${apiMainPath}api/admin/location/update";
 
-//Payroll Api's
+//Payroll Api
   static const getPayCheckesListApi = "${apiMainPath}api/admin/payroll/list";
   static const getSalaryPayChecksListApi = "${apiMainPath}api/admin/paychecks/";
   static const createPayCheckesApi = "${apiMainPath}api/admin/payroll/store";
   static const createSalaryPayChecksApi =
       "${apiMainPath}api/admin/paycheck/store";
 
-  //approve paycheckes Api's
+  //approve paychecks Api
   static const getApprovePayCheckesListApi =
       "${apiMainPath}api/admin/payrollapprove/";
   static const getApprovePayChecksListApi = "${apiMainPath}api/admin/payroll/";
