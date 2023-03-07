@@ -128,7 +128,7 @@ class SubAdminProfileScreenController extends GetxController {
 
           if (isSuccessStatus) {
             Fluttertoast.showToast(
-              msg: "User profile update successfully.",
+              msg: successModel.message,
               toastLength: Toast.LENGTH_SHORT,
             );
             log(successModel.message);

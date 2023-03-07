@@ -25,7 +25,6 @@ class EmployeeUploadDocumentScreenController extends GetxController {
 
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
-
   List<String> documentTypeList = ["Choose Option", "W-4", "I-9", "W-2s"];
   RxString documentSelectedTypeValue = "Choose Option".obs;
 

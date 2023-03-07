@@ -61,44 +61,44 @@ class CompanyProfileScreenController extends GetxController {
     userid.value = userIdPrefs;
 
     log('Home Screen Init userid : ${userid.value}');
-    await getAllDepartmentFunction(userid);
+    await getUserProfileFunction();
     isLoading(false);
   }
 
-  Future<void> getAllDepartmentFunction(companyId) async {
-    isLoading(true);
-    String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
-    log('Get All Department Api Url :$url');
+  // Future<void> getAllDepartmentFunction(companyId) async {
+  //   isLoading(true);
+  //   String url = "${ApiUrl.getCompanyDepartmentApi}$companyId";
+  //   log('Get All Department Api Url :$url');
 
-    try {
-      http.Response response = await http.get(Uri.parse(url));
+  //   try {
+  //     http.Response response = await http.get(Uri.parse(url));
 
-      AllDepartmentModel allDepartmentModel =
-          AllDepartmentModel.fromJson(json.decode(response.body));
-      var isSuccessStatus = allDepartmentModel.success.obs;
-      log("getAllDepartmentFunction hhhhhh:  ${response.body}");
+  //     AllDepartmentModel allDepartmentModel =
+  //         AllDepartmentModel.fromJson(json.decode(response.body));
+  //     var isSuccessStatus = allDepartmentModel.success.obs;
+  //     log("getAllDepartmentFunction hhhhhh:  ${response.body}");
 
-      if (isSuccessStatus.value) {
-        departmentList.clear();
-        departmentList.addAll(allDepartmentModel.data);
-        departmentStringList.clear();
-        for (int i = 0; i < departmentList.length; i++) {
-          departmentStringList.add(departmentList[i].departmentName);
-          log('${departmentList[i].id} : ${departmentList[i].departmentName}');
-        }
+  //     if (isSuccessStatus.value) {
+  //       departmentList.clear();
+  //       departmentList.addAll(allDepartmentModel.data);
+  //       departmentStringList.clear();
+  //       for (int i = 0; i < departmentList.length; i++) {
+  //         departmentStringList.add(departmentList[i].departmentName);
+  //         log('${departmentList[i].id} : ${departmentList[i].departmentName}');
+  //       }
 
-        log('departmentList Length : ${departmentList.length}');
-      } else {
-        log('getAllDepartmentFunction Else');
-      }
-    } catch (e) {
-      log('getAllDepartmentFunction Error :$e');
-      rethrow;
-    } finally {
-      // isLoading(false);
-      getUserProfileFunction();
-    }
-  }
+  //       log('departmentList Length : ${departmentList.length}');
+  //     } else {
+  //       log('getAllDepartmentFunction Else');
+  //     }
+  //   } catch (e) {
+  //     log('getAllDepartmentFunction Error :$e');
+  //     rethrow;
+  //   } finally {
+  //     // isLoading(false);
+  //     getUserProfileFunction();
+  //   }
+  // }
 
   Future<void> getUserProfileFunction() async {
     isLoading(true);
@@ -220,7 +220,7 @@ class CompanyProfileScreenController extends GetxController {
 
           if (isSuccessStatus) {
             Fluttertoast.showToast(
-              msg: "User profile update successfully.",
+              msg: successModel.message,
               toastLength: Toast.LENGTH_SHORT,
             );
             log(successModel.message);

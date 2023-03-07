@@ -10,8 +10,6 @@ import 'package:payroll_system/models/approval_paycheckes_manage_screen_model/ap
 import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
-
-
 class SalaryPaychecksListScreenController extends GetxController {
   String companyId = Get.arguments[0];
   String companyName = Get.arguments[1];
@@ -29,13 +27,15 @@ class SalaryPaychecksListScreenController extends GetxController {
 
   UserPreference userPreference = UserPreference();
   String prefsDateFormat = "";
+  int roleId = 1;
 
   Future<void> getSalaryPaycheckesFunction() async {
     isLoading(true);
     String url = ApiUrl.getPayCheckesListApi;
     log("getSalaryPaycheckesFunction url:$url");
     log("getSalaryPaycheckesFunction companyId: $companyId");
-    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
 
     try {
       Map<String, dynamic> bodyData = {
@@ -44,19 +44,27 @@ class SalaryPaychecksListScreenController extends GetxController {
         "pay_period": "salary"
       };
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
-      log("getSalaryPaycheckesFunction response  : ${response.body}");
+      // log("getSalaryPaycheckesFunction response  : ${response.body}");
 
-      PayCheckListModel payCheckListModel = PayCheckListModel.fromJson(json.decode(response.body));
+      PayCheckListModel payCheckListModel =
+          PayCheckListModel.fromJson(json.decode(response.body));
       isSuccessStatus = payCheckListModel.success.obs;
       if (isSuccessStatus.value) {
+        log('Salary List Length : ${payCheckListModel.data.length}');
         salaryPayChecksList.clear();
-        if(payCheckListModel.data.isNotEmpty) {
-          for(int i=0; i < payCheckListModel.data.length; i++) {
-            if(payCheckListModel.data[i].approvepaychecks == "1") {
-              salaryPayChecksList.add(payCheckListModel.data[i]);
+
+        if (roleId == 3) {
+          salaryPayChecksList.addAll(payCheckListModel.data);
+        } else {
+          if (payCheckListModel.data.isNotEmpty) {
+            for (int i = 0; i < payCheckListModel.data.length; i++) {
+              if (payCheckListModel.data[i].approvepaychecks == "1") {
+                salaryPayChecksList.add(payCheckListModel.data[i]);
+              }
             }
           }
         }
+
         // salaryPayChecksList.addAll(payCheckListModel.data);
         filterSalaryPayChecksList = salaryPayChecksList;
         // payrollListDataList = payrollListModel.data;
@@ -83,7 +91,7 @@ class SalaryPaychecksListScreenController extends GetxController {
       log('response : ${response.body}');
 
       ApprovalDeleteModel approvalDeleteModel =
-      ApprovalDeleteModel.fromJson(json.decode(response.body));
+          ApprovalDeleteModel.fromJson(json.decode(response.body));
       isSuccessStatus = approvalDeleteModel.success.obs;
 
       if (isSuccessStatus.value) {
@@ -106,16 +114,16 @@ class SalaryPaychecksListScreenController extends GetxController {
   searchListFromSearchTextFunction(String value) {
     // List<PayCheckesListData> tempList = [];
 
-    filterSalaryPayChecksList = salaryPayChecksList.where((element) =>
-    element.firstName.toLowerCase().contains(value) ||
-        element.middleName.toLowerCase().contains(value) ||
-        element.lastName.toLowerCase().contains(value) ||
-        element.companyname.toLowerCase().contains(value)
-    ).toList();
+    filterSalaryPayChecksList = salaryPayChecksList
+        .where((element) =>
+            element.firstName.toLowerCase().contains(value) ||
+            element.middleName.toLowerCase().contains(value) ||
+            element.lastName.toLowerCase().contains(value) ||
+            element.companyname.toLowerCase().contains(value))
+        .toList();
     log('Search List = ${filterSalaryPayChecksList.length}');
     // filterPayChecksListData = tempList;
   }
-
 
   @override
   void onInit() {
@@ -124,7 +132,11 @@ class SalaryPaychecksListScreenController extends GetxController {
   }
 
   initMethod() async {
-    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
+    roleId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.roleIdKey);
+    log('roleId :$roleId');
     await getSalaryPaycheckesFunction();
   }
 }

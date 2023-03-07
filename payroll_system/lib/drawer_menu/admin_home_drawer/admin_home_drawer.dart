@@ -43,17 +43,23 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                     title: AppMessage.updateProfile,
                                     imageStatus: false,
                                     icon: Icon(Icons.person_outline,
-                                        color: AppColors.colorBtBlue.withOpacity(0.6)),
+                                        color: AppColors.colorBtBlue
+                                            .withOpacity(0.6)),
                                   )
                                 : AdminDrawerTile(
                                     onTap: () {
                                       Get.back();
-                                      Get.to(() => SubAdminProfileScreen());
+                                      Get.to(
+                                        () => SubAdminProfileScreen(),
+                                      );
                                     },
                                     title: AppMessage.updateProfile,
                                     imageStatus: false,
-                                    icon: Icon(Icons.person,
-                                        color: AppColors.colorBtBlue.withOpacity(0.6)),
+                                    icon: Icon(
+                                      Icons.person,
+                                      color: AppColors.colorBtBlue
+                                          .withOpacity(0.6),
+                                    ),
                                   ),
                             adminDrawerController.roleId.value == 1
                                 ? AdminDrawerTile(
@@ -94,7 +100,10 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                             // general settings
 
                             adminDrawerController.roleId.value == 1
-                                ? adminDrawerController.isGeneralSettingShowPermission.value == true
+                                ? adminDrawerController
+                                            .isGeneralSettingShowPermission
+                                            .value ==
+                                        true
                                     ? AdminDrawerTile(
                                         onTap: () {
                                           Get.back();
@@ -104,7 +113,8 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                         imageStatus: false,
                                         // image: AppImages.roleIcon,
                                         icon: Icon(Icons.settings_outlined,
-                                        color: AppColors.colorBtBlue.withOpacity(0.6)),
+                                            color: AppColors.colorBtBlue
+                                                .withOpacity(0.6)),
                                       )
                                     : Container()
                                 : Container(),

@@ -137,7 +137,7 @@ class PermissionBoxModule extends StatelessWidget {
   Function(bool?)? isDownloadOnChanged;
   MaterialStateProperty<Color>? isDownloadFillColor;
 
-  PermissionBoxModule({
+    PermissionBoxModule({
     Key? key,
     required this.labelText,
     required this.isViewShow,

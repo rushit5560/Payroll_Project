@@ -59,11 +59,14 @@ class LoginController extends GetxController {
           userName: loginDetailsModel.loginData.data.userName,
           userEmail: loginDetailsModel.loginData.data.email,
           userProfileImage: loginDetailsModel.loginData.data.photo,
-            employeeLoginId: loginDetailsModel.loginData.data.roleId == "4" ? int.parse(loginDetailsModel.loginData.data.id) : 0,
+          employeeLoginId: loginDetailsModel.loginData.data.roleId == "4"
+              ? int.parse(loginDetailsModel.loginData.data.id)
+              : 0,
           // employeeLoginId: loginDetailsModel.loginData.data.roleId == "4" ? int.parse(loginDetailsModel.loginData.data.id) : 0,
         );
 
-        await userPreference.setDateFormatInPrefs(dateFormat: loginDetailsModel.loginData.dateformat);
+        await userPreference.setDateFormatInPrefs(
+            dateFormat: loginDetailsModel.loginData.dateformat);
 
         await userPreference
             .setAllPermissionIntoPrefs(
@@ -170,7 +173,7 @@ class LoginController extends GetxController {
                   ? true
                   : false,
           payChecksEdit: false,
-          payChecksDelete: false,
+          payChecksDelete: true,
           payChecksDownload:
               loginDetailsModel.loginData.permissiondata.payrolldownload == "on"
                   ? true
@@ -212,10 +215,16 @@ class LoginController extends GetxController {
           roleEdit: loginDetailsModel.loginData.data.roleId.toString() == "1"
               ? true
               : false,
-            generalSettingView: loginDetailsModel.loginData.permissiondata.generalsettingview == "on"
-            ? true : false,
-            generalSettingEdit: loginDetailsModel.loginData.permissiondata.generalsettingedit == "on"
-            ? true : false,
+          generalSettingView:
+              loginDetailsModel.loginData.permissiondata.generalsettingview ==
+                      "on"
+                  ? true
+                  : false,
+          generalSettingEdit:
+              loginDetailsModel.loginData.permissiondata.generalsettingedit ==
+                      "on"
+                  ? true
+                  : false,
         )
             .whenComplete(() {
           if (int.parse(loginDetailsModel.loginData.data.roleId.toString()) ==

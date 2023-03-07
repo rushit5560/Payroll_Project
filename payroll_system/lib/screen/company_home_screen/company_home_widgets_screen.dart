@@ -126,12 +126,12 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     textValue: value.mobileNumber,
                   ),
                   SizedBox(height: 1.h),
-                  SingleListTileModuleCustom(
-                    image: AppImages.departmentIcon,
-                    textKey: AppMessage.employeeDepartmentName,
-                    textValue: value.departmentId.toString(),
-                  ),
-                  SizedBox(height: 1.h),
+                  // SingleListTileModuleCustom(
+                  //   image: AppImages.departmentIcon,
+                  //   textKey: AppMessage.employeeDepartmentName,
+                  //   textValue: value.departmentId.toString(),
+                  // ),
+                  // SizedBox(height: 1.h),
                   SingleListTileModuleCustom(
                     image: AppImages.companyIcon,
                     textKey: AppMessage.employeeCompanyName,
@@ -143,9 +143,14 @@ class CompanyHomeScreenWidgets extends StatelessWidget {
                     textKey: AppMessage.employeeStatus,
                     textValue: value.isActive == AppMessage.value
                         ? AppMessage.active
-                        : value.isActive == AppMessage.zero ? AppMessage.inActive : AppMessage.terminated,
+                        : value.isActive == AppMessage.zero
+                            ? AppMessage.inActive
+                            : AppMessage.terminated,
                     valueColor: value.isActive == AppMessage.value
-                    ? AppColors.greenColor : value.isActive == AppMessage.zero ? AppColors.colorRed : AppColors.greyColor,
+                        ? AppColors.greenColor
+                        : value.isActive == AppMessage.zero
+                            ? AppColors.colorRed
+                            : AppColors.greyColor,
                   ),
                   SizedBox(height: 2.h),
                   Row(

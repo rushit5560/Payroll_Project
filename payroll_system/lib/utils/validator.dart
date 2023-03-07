@@ -16,6 +16,7 @@ class FieldValidation {
       return null;
     }
   }
+
   String? validateName(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterName;
@@ -71,7 +72,7 @@ class FieldValidation {
     }
   }
 
-   String? validateZipcode(String value) {
+  String? validateZipcode(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterZipcode;
     } else {
@@ -79,15 +80,13 @@ class FieldValidation {
     }
   }
 
-
-   String? validateText(String value) {
+  String? validateText(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterText;
     } else {
       return null;
     }
   }
-
 
   String? validateCity(String value) {
     if (value.isEmpty) {
@@ -302,7 +301,6 @@ class FieldValidation {
     }
   }
 
-
   String? validatePassword(String value) {
     if (value.isEmpty) {
       return AppMessage.passwordIsRequired;
@@ -313,8 +311,7 @@ class FieldValidation {
     }
   }
 
-
-    String? validateOldPassword(String value) {
+  String? validateOldPassword(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterOldPassword;
     } else if (value.length < 8) {
@@ -324,7 +321,7 @@ class FieldValidation {
     }
   }
 
- String? validateNewPassword(String value) {
+  String? validateNewPassword(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterNewPassword;
     } else if (value.length < 8) {
@@ -332,7 +329,8 @@ class FieldValidation {
     } else {
       return null;
     }
-  } 
+  }
+
   String? validateConfirmPassword(String value, String passwordValue) {
     if (value.isEmpty) {
       return AppMessage.confirmPasswordIsRequired;
@@ -373,12 +371,11 @@ class FieldValidation {
   }
 
   String? validateEndDate(String value, DateTime endTime) {
-
     DateTime d = DateTime.now();
 
     if (value.isEmpty) {
       return AppMessage.pleaseEnterEndDate;
-    } else if (endTime.compareTo(d) > 0){
+    } else if (endTime.compareTo(d) > 0) {
       return "The end date must be a date before ${d.year}-${d.month}-${d.day}.";
     } else {
       return null;
@@ -390,7 +387,7 @@ class FieldValidation {
 
     if (value.isEmpty) {
       return AppMessage.pleaseEnterPayDate;
-    } else if(payDate.compareTo(endTime) < 0) {
+    } else if (payDate.compareTo(endTime) < 0) {
       return "The pay date must be a date after ${endTime.year}-${endTime.month}-${endTime.day}.";
     } else {
       return null;
@@ -400,7 +397,11 @@ class FieldValidation {
   String? validateRegularRate(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterRegularRate;
-    } else {
+    } else if (value == "0" || value.contains("-")) {
+      return AppMessage.valueGreterOne;
+    }
+    // 0// }
+    else {
       return null;
     }
   }
@@ -421,7 +422,6 @@ class FieldValidation {
     }
   }
 
-
   String? validateDropdownStatus(String value) {
     if (value == AppMessage.chooseOption) {
       return AppMessage.activeStatusMessage;
@@ -430,9 +430,7 @@ class FieldValidation {
     }
   }
 
-
-
-    String? validateDropdownDateFormat(String value) {
+  String? validateDropdownDateFormat(String value) {
     if (value == AppMessage.chooseOption) {
       return AppMessage.pleaseSelectDateFormat;
     } else {
@@ -471,5 +469,4 @@ class FieldValidation {
       return null;
     }
   }
-
 }

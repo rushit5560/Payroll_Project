@@ -233,6 +233,4 @@ class AdminProfileScreenController extends GetxController {
     getUserProfileFunction();
     super.onInit();
   }
-
- 
 }

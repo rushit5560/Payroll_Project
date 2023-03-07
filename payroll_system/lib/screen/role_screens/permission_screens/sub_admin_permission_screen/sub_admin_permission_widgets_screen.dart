@@ -250,7 +250,7 @@ class SubadminPermissionWidgetScreen extends StatelessWidget {
               isDeleteOnChanged: (bool? value) {
                 // subAdminPermissionScreenController
                 //     .companyPayChecksIsDeleteChecked.value = value!;
-                subAdminPermissionScreenController.loadUI();
+                // subAdminPermissionScreenController.loadUI();
               },
               isDeleteFillColor:
                   MaterialStateProperty.all(Colors.blue.shade200),

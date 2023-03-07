@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:payroll_system/common_modules/common_loader.dart';
 import 'package:payroll_system/common_modules/custom_alert_dialog_module.dart';
 import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
 import 'package:payroll_system/common_modules/permission_container_module.dart';
@@ -10,7 +8,6 @@ import 'package:payroll_system/controllers/admin_permission_screen_controller.da
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../company_employee_screens/company_employee_manage_screen/company_employee_manage_widget_screen.dart';
 
 class AdminPermissionWidgetsScreen extends StatelessWidget {
@@ -288,10 +285,10 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isDeleteShow: true,
             isDeleteValue: adminPermissionScreenController
                 .companyPayChecksIsDeleteChecked.value,
-            isDeleteOnChanged: (bool? value) {
-              // adminPermissionScreenController.companyPayChecksIsDeleteChecked.value = value!;
-            },
-            isDeleteFillColor: MaterialStateProperty.all(Colors.grey.shade300),
+            isDeleteOnChanged: (bool? value) {},
+
+            isDeleteFillColor: MaterialStateProperty.all(Colors.blue.shade200),
+            // isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
             isDownloadShow: true,
             isDownloadValue: adminPermissionScreenController
                 .companyPayChecksIsDownloadChecked.value,

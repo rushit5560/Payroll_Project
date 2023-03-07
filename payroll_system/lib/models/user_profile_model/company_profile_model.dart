@@ -101,7 +101,7 @@ class CompanyData {
         // lastlogin: json["lastlogin"] ?? "",
         verified: json["verified"] ?? "",
         createdby: (json["createdby"] ?? 0).toString(),
-        modifiedby: json["modifiedby"] ?? "",
+        modifiedby: (json["modifiedby"] ?? 0).toString(),
 
         city: json["city"] ?? "",
         street: json["street"] ?? "",

@@ -33,17 +33,18 @@ class PayCheckesListScreenController extends GetxController {
   RxString selectedFilterValue = "All".obs;
 
   String prefsDateFormat = "";
-
+  int roleId = 1;
 
   searchListFromSearchTextFunction(String value) {
     // List<PayCheckesListData> tempList = [];
 
-    filterPayChecksListData = payCheckesListData.where((element) =>
-        element.firstName.toLowerCase().contains(value) ||
+    filterPayChecksListData = payCheckesListData
+        .where((element) =>
+            element.firstName.toLowerCase().contains(value) ||
             element.middleName.toLowerCase().contains(value) ||
             element.lastName.toLowerCase().contains(value) ||
-            element.companyname.toLowerCase().contains(value)
-    ).toList();
+            element.companyname.toLowerCase().contains(value))
+        .toList();
     log('Search List = ${filterPayChecksListData.length}');
     // filterPayChecksListData = tempList;
   }
@@ -59,7 +60,8 @@ class PayCheckesListScreenController extends GetxController {
     log("getPaycheckesListFunction url:$url");
     log("getPaycheckesListFunction companyId: $companyId");
 
-    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
 
     try {
       Map<String, dynamic> bodyData = {
@@ -69,18 +71,24 @@ class PayCheckesListScreenController extends GetxController {
       };
       log('bodyData : $bodyData');
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
-      log("getPaycheckesListFunction response  : ${response.body}");
+      // log("getPaycheckesListFunction response  : ${response.body}");
 
       PayCheckListModel payCheckListModel =
           PayCheckListModel.fromJson(json.decode(response.body));
 
       isSuccessStatus = payCheckListModel.success.obs;
       if (isSuccessStatus.value) {
+        log('Hourly Paychecks List Length : ${payCheckListModel.data.length}');
         payCheckesListData.clear();
-        if(payCheckListModel.data.isNotEmpty){
-          for(int i = 0; i < payCheckListModel.data.length; i++) {
-            if(payCheckListModel.data[i].approvepaychecks == "1") {
-              payCheckesListData.add(payCheckListModel.data[i]);
+
+        if (roleId == 3) {
+          payCheckesListData.addAll(payCheckListModel.data);
+        } else {
+          if (payCheckListModel.data.isNotEmpty) {
+            for (int i = 0; i < payCheckListModel.data.length; i++) {
+              if (payCheckListModel.data[i].approvepaychecks == "1") {
+                payCheckesListData.add(payCheckListModel.data[i]);
+              }
             }
           }
         }
@@ -110,7 +118,7 @@ class PayCheckesListScreenController extends GetxController {
       log('response : ${response.body}');
 
       ApprovalDeleteModel approvalDeleteModel =
-      ApprovalDeleteModel.fromJson(json.decode(response.body));
+          ApprovalDeleteModel.fromJson(json.decode(response.body));
       isSuccessStatus = approvalDeleteModel.success.obs;
 
       if (isSuccessStatus.value) {
@@ -137,11 +145,14 @@ class PayCheckesListScreenController extends GetxController {
   }
 
   initMethod() async {
-    prefsDateFormat = await userPreference.getStringValueFromPrefs(keyId: UserPreference.dateFormatKey);
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
     log('prefsDateFormat Init Method : $prefsDateFormat');
+    roleId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.roleIdKey);
+    log('roleId :$roleId');
     await getPaycheckesListFunction();
   }
-
 
   /// Download Pdf
   // Future<void> downloadFile() async {
@@ -161,6 +172,5 @@ class PayCheckesListScreenController extends GetxController {
   //     }
   //   }
   // }
-
 
 }

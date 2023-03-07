@@ -51,7 +51,6 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
                       RichText(
                         textAlign: TextAlign.left,
                         maxLines: null,
@@ -72,7 +71,6 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                               ),
                             ]),
                       ),
-
                       IconButton(
                         onPressed: () async {
                           bool addUploadDocumentPermission =
@@ -107,11 +105,14 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                   SizedBox(height: 2.h),
                   CustomSubmitButtonModule(
                     onPress: () async {
-                      if (employeeUploadDocumentScreenController.employeeSelectedDocumentList.isEmpty) {
-                        Fluttertoast.showToast(msg: AppMessage.pleaseSelectDocument);
+                      if (employeeUploadDocumentScreenController
+                          .employeeSelectedDocumentList.isEmpty) {
+                        Fluttertoast.showToast(
+                            msg: AppMessage.pleaseSelectDocument);
                       } else {
-
-                        if(employeeUploadDocumentScreenController.globalKey.currentState!.validate()){
+                        if (employeeUploadDocumentScreenController
+                            .globalKey.currentState!
+                            .validate()) {
                           await employeeUploadDocumentScreenController
                               .uploadEmployeeDocumentFunction();
                         }
@@ -137,64 +138,66 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  TextFormField(
+                    controller: employeeUploadDocumentScreenController
+                        .textSearchEditingController,
+                    onChanged: (value) {
+                      employeeUploadDocumentScreenController.isLoading(true);
 
-
-                   TextFormField(
-                        controller: employeeUploadDocumentScreenController
-                            .textSearchEditingController,
-                        onChanged: (value) {
+                      employeeUploadDocumentScreenController
+                              .searchEmployeeUploadedDocumentList =
                           employeeUploadDocumentScreenController
-                              .isLoading(true);
+                              .employeeUploadedDocumentList
+                              .where((element) =>
+                                  element.name
+                                      .toLowerCase()
+                                      .contains(value.toLowerCase()) ||
+                                  element.doctype
+                                      .toLowerCase()
+                                      .contains(value.toLowerCase()))
+                              .toList();
 
-                          employeeUploadDocumentScreenController.searchEmployeeUploadedDocumentList =
-                              employeeUploadDocumentScreenController.employeeUploadedDocumentList.where((element) =>
-                                      element.name.toLowerCase().contains(value.toLowerCase()) ||
-                                      element.doctype.toLowerCase().contains(value.toLowerCase())
-                              ).toList();
-
-                          employeeUploadDocumentScreenController
-                              .isLoading(false);
-                          log("searchEmployeeList : ${employeeUploadDocumentScreenController.searchEmployeeUploadedDocumentList}");
-                        },
-                        decoration: InputDecoration(
-                          enabledBorder: InputFieldStyles().inputBorder(),
-                          focusedBorder: InputFieldStyles().inputBorder(),
-                          errorBorder: InputFieldStyles().inputBorder(),
-                          focusedErrorBorder: InputFieldStyles().inputBorder(),
-                          fillColor: AppColors.colorWhite,
-                          filled: true,
-                          hintText: AppMessage.search,
-                          hintStyle: const TextStyle(
-                              color: AppColors.colorLightHintPurple2),
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: AppColors.colorLightHintPurple2,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 11),
-                          suffixIcon: employeeUploadDocumentScreenController
-                                  .textSearchEditingController.text.isEmpty
-                              ? null
-                              : IconButton(
-                                  onPressed: () {
+                      employeeUploadDocumentScreenController.isLoading(false);
+                      log("searchEmployeeList : ${employeeUploadDocumentScreenController.searchEmployeeUploadedDocumentList}");
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: InputFieldStyles().inputBorder(),
+                      focusedBorder: InputFieldStyles().inputBorder(),
+                      errorBorder: InputFieldStyles().inputBorder(),
+                      focusedErrorBorder: InputFieldStyles().inputBorder(),
+                      fillColor: AppColors.colorWhite,
+                      filled: true,
+                      hintText: AppMessage.search,
+                      hintStyle: const TextStyle(
+                          color: AppColors.colorLightHintPurple2),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: AppColors.colorLightHintPurple2,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 11),
+                      suffixIcon: employeeUploadDocumentScreenController
+                              .textSearchEditingController.text.isEmpty
+                          ? null
+                          : IconButton(
+                              onPressed: () {
+                                employeeUploadDocumentScreenController
+                                    .isLoading(true);
+                                employeeUploadDocumentScreenController
+                                        .searchEmployeeUploadedDocumentList =
                                     employeeUploadDocumentScreenController
-                                        .isLoading(true);
-                                    employeeUploadDocumentScreenController
-                                            .searchEmployeeUploadedDocumentList =
-                                        employeeUploadDocumentScreenController
-                                            .employeeUploadedDocumentList;
-                                    employeeUploadDocumentScreenController
-                                        .textSearchEditingController
-                                        .clear();
-                                    employeeUploadDocumentScreenController
-                                        .isLoading(false);
-                                  },
-                                  icon: const Icon(Icons.close,
-                                      color: AppColors.colorLightHintPurple2),
-                                ),
-                        ),
-                      ).commonOnlyPadding(left: 10, right: 10, top: 15),
-
+                                        .employeeUploadedDocumentList;
+                                employeeUploadDocumentScreenController
+                                    .textSearchEditingController
+                                    .clear();
+                                employeeUploadDocumentScreenController
+                                    .isLoading(false);
+                              },
+                              icon: const Icon(Icons.close,
+                                  color: AppColors.colorLightHintPurple2),
+                            ),
+                    ),
+                  ).commonOnlyPadding(left: 10, right: 10, top: 15),
                   SizedBox(height: 2.h),
                   Expanded(child: EmployeeUploadedDocumentListModule()),
                 ],
