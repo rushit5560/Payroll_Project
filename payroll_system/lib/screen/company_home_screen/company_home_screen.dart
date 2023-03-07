@@ -43,16 +43,16 @@ class CompanyHomeScreen extends StatelessWidget {
         drawer: CompanyHomeDrawer(),
         appBar: AppBar(
           title: Obx(
-            ()=> companyHomeScreenController.isLoading.value
-            ? Container()
-            : Text(
-              companyHomeScreenController.companyName,
-              style: TextStyle(
-                color: AppColors.colorBlack,
-                fontWeight: FontWeight.bold,
-                fontSize: 17.sp,
-              ),
-            ),
+            () => companyHomeScreenController.isLoading.value
+                ? Container()
+                : Text(
+                    companyHomeScreenController.companyName,
+                    style: TextStyle(
+                      color: AppColors.colorBlack,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17.sp,
+                    ),
+                  ),
           ),
           centerTitle: true,
           leading: GestureDetector(
@@ -97,9 +97,11 @@ class CompanyHomeScreen extends StatelessWidget {
         body: Obx(
           () => companyHomeScreenController.isLoading.value
               ? CommonLoader().showLoader()
-              : companyHomeScreenController.isEmployeeShowPermission.value == false
+              : companyHomeScreenController.isEmployeeShowPermission.value ==
+                      false
                   ? Center(child: Text(AppMessage.deniedPermission))
-                  : companyHomeScreenController.allCompanyWiseEmployeeList.isEmpty
+                  : companyHomeScreenController
+                          .allCompanyWiseEmployeeList.isEmpty
                       ? Center(child: Text(AppMessage.noEmpFound))
                       : Column(
                           children: [
@@ -135,7 +137,8 @@ class CompanyHomeScreen extends StatelessWidget {
                                                 .toLowerCase()
                                                 .contains(value))
                                         .toList();
-                                companyHomeScreenController.selectedFilterValue.value = "All";
+                                companyHomeScreenController
+                                    .selectedFilterValue.value = "All";
                                 companyHomeScreenController.isLoading(false);
                                 log("searchEmployeeList : ${companyHomeScreenController.searchEmployeeList}");
                               },
@@ -194,54 +197,74 @@ class CompanyHomeScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 3),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 3),
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(10),
-                                          border: Border.all(color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: Colors.transparent),
                                         ),
                                         child: Center(
-                                          child: DropdownButtonFormField<String>(
-                                            decoration: const InputDecoration.collapsed(
-                                                hintText: ''),
+                                          child:
+                                              DropdownButtonFormField<String>(
+                                            decoration:
+                                                const InputDecoration.collapsed(
+                                                    hintText: ''),
                                             value: companyHomeScreenController
                                                 .selectedFilterValue.value,
                                             items: companyHomeScreenController
                                                 .filterList
                                                 .map<DropdownMenuItem<String>>(
                                                     (String value) {
-                                                  return DropdownMenuItem<String>(
-                                                    value: value,
-                                                    child: Text(value),
-                                                  );
-                                                }).toList(),
-                                            borderRadius: BorderRadius.circular(10),
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                             icon: Image.asset(
                                               AppImages.arrowDownIcon,
                                               height: 15,
                                               width: 15,
-                                            ).commonSymmetricPadding(horizontal: 10),
+                                            ).commonSymmetricPadding(
+                                                horizontal: 10),
                                             onChanged: (String? value) {
-                                              companyHomeScreenController.isLoading(true);
-                                              companyHomeScreenController.selectedFilterValue.value = value!;
-                                              companyHomeScreenController.textSearchEditingController.clear();
-                                              companyHomeScreenController.filterDropdownWiseFunction(value);
-                                              companyHomeScreenController.isLoading(false);
+                                              companyHomeScreenController
+                                                  .isLoading(true);
+                                              companyHomeScreenController
+                                                  .selectedFilterValue
+                                                  .value = value!;
+                                              companyHomeScreenController
+                                                  .textSearchEditingController
+                                                  .clear();
+                                              companyHomeScreenController
+                                                  .filterDropdownWiseFunction(
+                                                      value);
+                                              companyHomeScreenController
+                                                  .isLoading(false);
                                             },
                                           ).commonOnlyPadding(
-                                              left: 10, right: 10, top: 10, bottom: 10),
+                                                  left: 10,
+                                                  right: 10,
+                                                  top: 10,
+                                                  bottom: 10),
                                         ),
                                       ),
                                     ),
-                                  ).commonOnlyPadding(left: 10, right: 10, top: 5),
+                                  ).commonOnlyPadding(
+                                      left: 10, right: 10, top: 5),
                                 ),
                               ],
                             ),
                             Expanded(
-                                child: companyHomeScreenController.searchEmployeeList.isEmpty
-                                ? Center(child: Text(AppMessage.noEmpFound))
-                                : CompanyHomeScreenWidgets(),
+                              child: companyHomeScreenController
+                                      .searchEmployeeList.isEmpty
+                                  ? Center(child: Text(AppMessage.noEmpFound))
+                                  : CompanyHomeScreenWidgets(),
                             ),
                           ],
                         ),

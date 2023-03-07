@@ -149,12 +149,8 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                           employeeUploadDocumentScreenController
                               .employeeUploadedDocumentList
                               .where((element) =>
-                                  element.name
-                                      .toLowerCase()
-                                      .contains(value.toLowerCase()) ||
-                                  element.doctype
-                                      .toLowerCase()
-                                      .contains(value.toLowerCase()))
+                                  element.name.toLowerCase().contains(value) ||
+                                  element.doctype.toLowerCase().contains(value))
                               .toList();
 
                       employeeUploadDocumentScreenController.isLoading(false);

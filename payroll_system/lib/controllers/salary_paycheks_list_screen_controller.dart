@@ -21,7 +21,7 @@ class SalaryPaychecksListScreenController extends GetxController {
   List<PayCheckesListData> filterSalaryPayChecksList = [];
 
   TextEditingController textSearchEditingController = TextEditingController();
-
+  bool payChecksDeletePermission = false;
   List<String> filterList = ["All", "Approved", "Not Approved"];
   RxString selectedFilterValue = "All".obs;
 

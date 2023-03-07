@@ -21,6 +21,7 @@ class PayCheckesListScreenController extends GetxController {
       TextEditingController();
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
+  bool payChecksDeletePermission = false;
   RxString selectedValue = "Choose Option".obs;
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   List<PayCheckesListData> payCheckesListData = [];

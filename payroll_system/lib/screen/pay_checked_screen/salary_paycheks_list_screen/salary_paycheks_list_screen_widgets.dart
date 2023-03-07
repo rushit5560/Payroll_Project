@@ -14,7 +14,6 @@ import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 
-
 class SalaryPaychecksListModule extends StatelessWidget {
   SalaryPaychecksListModule({Key? key}) : super(key: key);
   final screenController = Get.find<SalaryPaychecksListScreenController>();
@@ -29,10 +28,11 @@ class SalaryPaychecksListModule extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, i) {
-          PayCheckesListData singleItem = screenController.filterSalaryPayChecksList[i];
+          PayCheckesListData singleItem =
+              screenController.filterSalaryPayChecksList[i];
           return Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.colorWhite,
@@ -46,14 +46,15 @@ class SalaryPaychecksListModule extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           bool payChecksDownloadPermission =
-                          await userPreference.getBoolPermissionFromPrefs(
-                              keyId: UserPreference.payChecksDownloadKey);
+                              await userPreference.getBoolPermissionFromPrefs(
+                                  keyId: UserPreference.payChecksDownloadKey);
 
                           if (payChecksDownloadPermission == true) {
                             await WebUrlLauncher().launchPdfInBrowser(
                                 "${ApiUrl.downloadPayrollApi}${singleItem.id}");
                           } else {
-                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            Fluttertoast.showToast(
+                                msg: AppMessage.deniedPermission);
                           }
                         },
                         child: Image.asset(
@@ -65,38 +66,46 @@ class SalaryPaychecksListModule extends StatelessWidget {
                       ),
                       const SizedBox(width: 15),
                       // Delete Paychecks
-                      GestureDetector(
-                        onTap: () async {
-                          bool payChecksDeletePermission =
-                          await userPreference.getBoolPermissionFromPrefs(
-                              keyId:
-                              UserPreference.approvePayChecksDeleteKey);
+                      screenController.roleId == 1 ||
+                              screenController.roleId == 2
+                          ? GestureDetector(
+                              onTap: () async {
+                                screenController.payChecksDeletePermission =
+                                    await userPreference
+                                        .getBoolPermissionFromPrefs(
+                                            keyId: UserPreference
+                                                .approvePayChecksDeleteKey);
 
-                          if (payChecksDeletePermission == true) {
-                            CustomAlertDialog().showAlertDialog(
-                              context: context,
-                              textContent: AppMessage.deletePaychecksAlertMessage,
-                              onYesTap: () async {
-                                await screenController
-                                    .deleteSalaryPaychecksFunction(singleItem.id.toString(),
-                                );
+                                if (screenController
+                                        .payChecksDeletePermission ==
+                                    true) {
+                                  CustomAlertDialog().showAlertDialog(
+                                    context: context,
+                                    textContent:
+                                        AppMessage.deletePaychecksAlertMessage,
+                                    onYesTap: () async {
+                                      await screenController
+                                          .deleteSalaryPaychecksFunction(
+                                        singleItem.id.toString(),
+                                      );
+                                    },
+                                    onCancelTap: () {
+                                      Get.back();
+                                    },
+                                  );
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: AppMessage.deniedPermission);
+                                }
                               },
-                              onCancelTap: () {
-                                Get.back();
-                              },
-                            );
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.deniedPermission);
-                          }
-                        },
-                        child: Image.asset(
-                          AppImages.deleteIcon,
-                          width: 20,
-                          height: 20,
-                          color: AppColors.colorRed,
-                        ),
-                      ),
+                              child: Image.asset(
+                                AppImages.deleteIcon,
+                                width: 20,
+                                height: 20,
+                                color: AppColors.colorRed,
+                              ),
+                            )
+                          : Container(),
                     ],
                   ),
                   SingleListTileModuleCustom(
@@ -111,7 +120,7 @@ class SalaryPaychecksListModule extends StatelessWidget {
                   SingleListTileModuleCustom(
                     textKey: AppMessage.employeeName,
                     textValue:
-                    "${singleItem.firstName} ${singleItem.middleName} ${singleItem.lastName}",
+                        "${singleItem.firstName} ${singleItem.middleName} ${singleItem.lastName}",
                     image: AppImages.employeeIcon,
                   ),
                   const SizedBox(height: 5),
@@ -143,8 +152,7 @@ class SalaryPaychecksListModule extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
-                    textValue:
-                    "${singleItem.days} ${AppMessage.days}",
+                    textValue: "${singleItem.days} ${AppMessage.days}",
                     image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),
@@ -168,8 +176,7 @@ class SalaryPaychecksListModule extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.subTotal,
-                    textValue:
-                    "\$ ${singleItem.subTotal.toString()}",
+                    textValue: "\$ ${singleItem.subTotal.toString()}",
                     image: AppImages.netAmountIcon,
                   ),
                   const SizedBox(height: 5),
@@ -197,5 +204,4 @@ class SalaryPaychecksListModule extends StatelessWidget {
       ),
     );
   }
-
 }

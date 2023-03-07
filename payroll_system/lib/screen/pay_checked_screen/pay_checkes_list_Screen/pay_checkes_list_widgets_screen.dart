@@ -31,7 +31,8 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: payCheckesListScreenController.filterPayChecksListData.length,
+        itemCount:
+            payCheckesListScreenController.filterPayChecksListData.length,
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
@@ -53,13 +54,16 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           bool payChecksDownloadPermission =
-                              await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.payChecksDownloadKey);
+                              await userPreference.getBoolPermissionFromPrefs(
+                                  keyId: UserPreference.payChecksDownloadKey);
 
                           if (payChecksDownloadPermission == true) {
                             // await payCheckesListScreenController.downloadFile();
-                            await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
+                            await WebUrlLauncher().launchPdfInBrowser(
+                                "${ApiUrl.downloadPayrollApi}${payrollListDataListValue.id}");
                           } else {
-                            Fluttertoast.showToast(msg: AppMessage.deniedPermission);
+                            Fluttertoast.showToast(
+                                msg: AppMessage.deniedPermission);
                           }
                         },
                         child: Image.asset(
@@ -71,39 +75,48 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 15),
                       // Delete Paychecks
-                      GestureDetector(
-                        onTap: () async {
-                          bool payChecksDeletePermission =
-                          await userPreference.getBoolPermissionFromPrefs(
-                              keyId:
-                              UserPreference.approvePayChecksDeleteKey);
+                      payCheckesListScreenController.roleId == 1 ||
+                              payCheckesListScreenController.roleId == 2
+                          ? GestureDetector(
+                              onTap: () async {
+                                payCheckesListScreenController
+                                        .payChecksDeletePermission =
+                                    await userPreference
+                                        .getBoolPermissionFromPrefs(
+                                            keyId: UserPreference
+                                                .approvePayChecksDeleteKey);
 
-                          if (payChecksDeletePermission == true) {
-                            CustomAlertDialog().showAlertDialog(
-                              context: context,
-                              textContent: AppMessage.deletePaychecksAlertMessage,
-                              onYesTap: () async {
-                                log("Delete Employee");
-                                await payCheckesListScreenController
-                                    .deleteHourlyPaychecksFunction(payrollListDataListValue.id.toString(),
-                                );
+                                if (payCheckesListScreenController
+                                        .payChecksDeletePermission ==
+                                    true) {
+                                  CustomAlertDialog().showAlertDialog(
+                                    context: context,
+                                    textContent:
+                                        AppMessage.deletePaychecksAlertMessage,
+                                    onYesTap: () async {
+                                      log("Delete Employee");
+                                      await payCheckesListScreenController
+                                          .deleteHourlyPaychecksFunction(
+                                        payrollListDataListValue.id.toString(),
+                                      );
+                                    },
+                                    onCancelTap: () {
+                                      Get.back();
+                                    },
+                                  );
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: AppMessage.deniedPermission);
+                                }
                               },
-                              onCancelTap: () {
-                                Get.back();
-                              },
-                            );
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: AppMessage.deniedPermission);
-                          }
-                        },
-                        child: Image.asset(
-                          AppImages.deleteIcon,
-                          width: 20,
-                          height: 20,
-                          color: AppColors.colorRed,
-                        ),
-                      ),
+                              child: Image.asset(
+                                AppImages.deleteIcon,
+                                width: 20,
+                                height: 20,
+                                color: AppColors.colorRed,
+                              ),
+                            )
+                          : Container(),
                     ],
                   ),
                   SingleListTileModuleCustom(
@@ -133,7 +146,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   SingleListTileModuleCustom(
                     textKey: AppMessage.startDate,
                     textValue: DateFormater().changeDateFormat(
-                      DateTime.parse(payrollListDataListValue.startdate),
+                        DateTime.parse(payrollListDataListValue.startdate),
                         payCheckesListScreenController.prefsDateFormat),
                     // textValue: payrollListDataListValue.startdate
                     //     .toString()
@@ -173,7 +186,8 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   const SizedBox(height: 5),*/
                   SingleListTileModuleCustom(
                     textKey: AppMessage.hourlyRateLabel,
-                    textValue: "\$ ${payrollListDataListValue.employeehourlyRate.toString()}",
+                    textValue:
+                        "\$ ${payrollListDataListValue.employeehourlyRate.toString()}",
                     image: AppImages.salaryIcon,
                   ),
                   const SizedBox(height: 5),

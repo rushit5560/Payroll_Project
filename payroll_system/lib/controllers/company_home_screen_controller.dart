@@ -10,7 +10,6 @@ import 'package:payroll_system/utils/api_url.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
 class CompanyHomeScreenController extends GetxController {
-
   RxBool isLoading = false.obs;
   RxBool isSuccessStatus = false.obs;
   List<CompanyWiseEmployeeData> allCompanyWiseEmployeeList = [];
@@ -18,7 +17,8 @@ class CompanyHomeScreenController extends GetxController {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final TextEditingController textSearchEditingController = TextEditingController();
+  final TextEditingController textSearchEditingController =
+      TextEditingController();
 
   int companyId = 0;
   String companyName = "";
@@ -32,7 +32,6 @@ class CompanyHomeScreenController extends GetxController {
 
   List<String> filterList = ["All", "Active", "In-Active", "Terminated"];
   RxString selectedFilterValue = "All".obs;
-
 
   // Get All Employee
   Future<void> getCompanyWiseEmployeeFunction() async {
@@ -52,8 +51,7 @@ class CompanyHomeScreenController extends GetxController {
 
         allCompanyWiseEmployeeList = companyWiseEmployeeModel.data;
 
-        searchEmployeeList=allCompanyWiseEmployeeList;
-
+        searchEmployeeList = allCompanyWiseEmployeeList;
       } else {
         log('getAllCompanyFunction Else');
       }
@@ -110,11 +108,17 @@ class CompanyHomeScreenController extends GetxController {
     if (value == "All") {
       searchEmployeeList = allCompanyWiseEmployeeList;
     } else if (value == "Active") {
-      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "1").toList();
+      searchEmployeeList = allCompanyWiseEmployeeList
+          .where((element) => element.isActive == "1")
+          .toList();
     } else if (value == "In-Active") {
-      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "0").toList();
+      searchEmployeeList = allCompanyWiseEmployeeList
+          .where((element) => element.isActive == "0")
+          .toList();
     } else if (value == "Terminated") {
-      searchEmployeeList = allCompanyWiseEmployeeList.where((element) => element.isActive == "2").toList();
+      searchEmployeeList = allCompanyWiseEmployeeList
+          .where((element) => element.isActive == "2")
+          .toList();
     }
   }
 
@@ -124,16 +128,16 @@ class CompanyHomeScreenController extends GetxController {
     super.onInit();
   }
 
-
   initMethod() async {
     isLoading(true);
-    isDepartmentShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.departmentViewKey);
-    isLocationShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.locationViewKey);
-    isEmployeeShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
-    isPaychecksShowPermission.value = await userPreference.getBoolPermissionFromPrefs(keyId: UserPreference.payChecksViewKey);
+    isDepartmentShowPermission.value = await userPreference
+        .getBoolPermissionFromPrefs(keyId: UserPreference.departmentViewKey);
+    isLocationShowPermission.value = await userPreference
+        .getBoolPermissionFromPrefs(keyId: UserPreference.locationViewKey);
+    isEmployeeShowPermission.value = await userPreference
+        .getBoolPermissionFromPrefs(keyId: UserPreference.employeeViewKey);
+    isPaychecksShowPermission.value = await userPreference
+        .getBoolPermissionFromPrefs(keyId: UserPreference.payChecksViewKey);
     await getLoggedInUserDataFromPrefs();
   }
-
-
-
 }

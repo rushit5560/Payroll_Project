@@ -71,6 +71,7 @@ class EmployeeUploadDocumentScreenController extends GetxController {
         searchEmployeeUploadedDocumentList = employeeUploadedDocumentList;
 
         log('employeeUploadedDocumentList Length : ${employeeUploadedDocumentList.length}');
+        log("searchEmployeeUploadedDocumentList:: ${searchEmployeeUploadedDocumentList.length}");
       } else {
         log('getEmployeeDocumentFunction Else');
       }

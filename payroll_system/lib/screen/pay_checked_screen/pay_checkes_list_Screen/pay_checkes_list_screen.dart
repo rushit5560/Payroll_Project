@@ -168,7 +168,8 @@ class PayCheckesListScreen extends StatelessWidget {
                             .textSearchEditingController,
                         onChanged: (value) {
                           payCheckesListScreenController.isLoading(true);
-                          payCheckesListScreenController.searchListFromSearchTextFunction(value);
+                          payCheckesListScreenController
+                              .searchListFromSearchTextFunction(value);
                           payCheckesListScreenController.isLoading(false);
                         },
                         decoration: InputDecoration(
@@ -192,11 +193,17 @@ class PayCheckesListScreen extends StatelessWidget {
                               ? null
                               : IconButton(
                                   onPressed: () {
-                                    payCheckesListScreenController.isLoading(true);
-                                    payCheckesListScreenController.filterPayChecksListData
-                                    = payCheckesListScreenController.payCheckesListData;
-                                    payCheckesListScreenController.textSearchEditingController.clear();
-                                    payCheckesListScreenController.isLoading(false);
+                                    payCheckesListScreenController
+                                        .isLoading(true);
+                                    payCheckesListScreenController
+                                            .filterPayChecksListData =
+                                        payCheckesListScreenController
+                                            .payCheckesListData;
+                                    payCheckesListScreenController
+                                        .textSearchEditingController
+                                        .clear();
+                                    payCheckesListScreenController
+                                        .isLoading(false);
                                   },
                                   icon: const Icon(Icons.close,
                                       color: AppColors.colorLightHintPurple2),
