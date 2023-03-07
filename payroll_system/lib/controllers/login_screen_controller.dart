@@ -65,6 +65,8 @@ class LoginController extends GetxController {
           // employeeLoginId: loginDetailsModel.loginData.data.roleId == "4" ? int.parse(loginDetailsModel.loginData.data.id) : 0,
         );
 
+        // log('Company View :${loginDetailsModel.loginData.permissiondata.com}')
+
         await userPreference.setDateFormatInPrefs(
             dateFormat: loginDetailsModel.loginData.dateformat);
 
@@ -84,7 +86,7 @@ class LoginController extends GetxController {
           subAdminDelete: false,
           companyView: loginDetailsModel.loginData.data.roleId.toString() == "1"
               ? true
-              : false,
+              : loginDetailsModel.loginData.permissiondata.companyview == "on" ? true : false,
           companyAdd:
               loginDetailsModel.loginData.permissiondata.companyadd == "on"
                   ? true

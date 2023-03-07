@@ -41,6 +41,7 @@ class PermissionData {
     this.subadminedit,
     this.companyadd,
     this.companyedit,
+    this.companyview,
     this.departmentview,
     this.departmentadd,
     this.departmentedit,
@@ -74,6 +75,7 @@ class PermissionData {
   String? subadminedit;
   String? companyadd;
   String? companyedit;
+  String? companyview;
   String? departmentview;
   String? departmentadd;
   String? departmentedit;
@@ -107,6 +109,7 @@ class PermissionData {
         subadminedit: json["subadminedit"],
         companyadd: json["companyadd"],
         companyedit: json["companyedit"],
+        companyview: json["companyview"],
         departmentview: json["departmentview"],
         departmentadd: json["departmentadd"],
         departmentedit: json["departmentedit"],

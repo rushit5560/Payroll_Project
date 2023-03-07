@@ -253,7 +253,7 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
 
                             if (employeeDownloadDownloadPermission == true) {
                               // await payCheckesListScreenController.downloadFile();
-                              await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadPayrollApi}${singleDoc.id}");
+                              await WebUrlLauncher().launchPdfInBrowser("${ApiUrl.downloadFilePath}${singleDoc.name}");
                             } else {
                               Fluttertoast.showToast(msg: AppMessage.deniedPermission);
                             }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -121,6 +123,7 @@ class CompanyListTile extends StatelessWidget {
                       bool companyViewPermission =
                           await userPreference.getBoolPermissionFromPrefs(
                               keyId: UserPreference.companyViewKey);
+                      log('companyViewPermission : $companyViewPermission');
                       if (companyViewPermission == true) {
                         Get.to(
                           () => CompanyViewScreen(),
