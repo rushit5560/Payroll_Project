@@ -1,31 +1,38 @@
 import 'dart:convert';
 
-CreateCompanyModel createCompanyModelFromJson(String str) => CreateCompanyModel.fromJson(json.decode(str));
+CreateCompanyModel createCompanyModelFromJson(String str) =>
+    CreateCompanyModel.fromJson(json.decode(str));
 
-String createCompanyModelToJson(CreateCompanyModel data) => json.encode(data.toJson());
+String createCompanyModelToJson(CreateCompanyModel data) =>
+    json.encode(data.toJson());
 
 class CreateCompanyModel {
   CreateCompanyModel({
     required this.success,
     required this.messege,
     // required this.data,
+    required this.error,
   });
 
   bool success;
   String messege;
+  Error error;
   // Data data;
 
-  factory CreateCompanyModel.fromJson(Map<String, dynamic> json) => CreateCompanyModel(
-    success: json["success"] ?? false,
-    messege: json["messege"] ?? "",
-    // data: Data.fromJson(json["Data"] ?? {}),
-  );
+  factory CreateCompanyModel.fromJson(Map<String, dynamic> json) =>
+      CreateCompanyModel(
+        success: json["success"] ?? false,
+        messege: json["messege"] ?? "",
+        // data: Data.fromJson(json["Data"] ?? {}),
+        error: Error.fromJson(json["error"]??{}),
+      );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
-    "messege": messege,
-    // "Data": data.toJson(),
-  };
+        "success": success,
+        "messege": messege,
+        "error": error.toJson(),
+        // "Data": data.toJson(),
+      };
 }
 
 // class Data {
@@ -83,3 +90,18 @@ class CreateCompanyModel {
 //     "id": id,
 //   };
 // }
+class Error {
+  Error({
+    required this.email,
+  });
+
+  List<String> email;
+
+  factory Error.fromJson(Map<String, dynamic> json) => Error(
+        email: List<String>.from((json["email"] ?? []).map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "email": List<dynamic>.from(email.map((x) => x)),
+      };
+}

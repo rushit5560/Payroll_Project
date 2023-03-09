@@ -398,7 +398,7 @@ class AppMessage {
   static String acceptText = 'Accept';
   static String privacyPolicyText = 'Terms & Condition';
   static String search = 'Search';
-  static String documentype = 'Document type';
+  // static String documentype = 'Document type';
 
   // document
 

@@ -99,7 +99,8 @@ class EmployeeUploadDocumentScreenController extends GetxController {
 
       if (isSuccessStatus.value) {
         Fluttertoast.showToast(msg: deleteEmployeeDocumentModel.messege);
-        employeeUploadedDocumentList.removeAt(index);
+        await getEmployeeDocumentFunction();
+        // employeeUploadedDocumentList.removeAt(index);
         Get.back();
       } else {
         log('deleteDocumentFunction Else');
@@ -167,12 +168,11 @@ class EmployeeUploadDocumentScreenController extends GetxController {
     await getEmployeeDocumentFunction();
   }
 
-
   searchDocumentListFunction(String value) {
     return employeeUploadedDocumentList
         .where((element) =>
-    element.name.toLowerCase().contains(value.toLowerCase()) ||
-        element.doctype.toLowerCase().contains(value.toLowerCase()))
+            element.name.toLowerCase().contains(value.toLowerCase()) ||
+            element.doctype.toLowerCase().contains(value.toLowerCase()))
         .toList();
   }
 
@@ -188,3 +188,6 @@ class EmployeeUploadDocumentScreenController extends GetxController {
     await getEmployeeDocumentFunction();
   }
 }
+
+
+//

@@ -29,7 +29,7 @@ class ChangePasswordController extends GetxController {
         keyId: UserPreference.roleIdKey);
     roleId.value = roleIdPrefs;
     log('roleIdPrefs: $roleIdPrefs');
-    log('roleId: ${roleId.value}');
+    log('userid: ${roleId.value}');
 
     // isLoading(false);
   }
@@ -39,13 +39,13 @@ class ChangePasswordController extends GetxController {
     String url = ApiUrl.changePasswordApi;
     log('changePasswordFunction Url : $url');
 
-    int roleId = await userPreference.getIntValueFromPrefs(
-        keyId: UserPreference.roleIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
-
-      request.fields['userid'] = "$roleId";
+      log("userid:: $userId");
+      request.fields['userid'] = "$userId";
       request.fields['oldpassword'] = oldPasswordController.text.trim();
       request.fields['password'] = newPasswordController.text.trim();
       request.fields['password_confirmation'] =

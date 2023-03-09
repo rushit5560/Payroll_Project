@@ -181,9 +181,9 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
             itemCount: screenController.searchEmployeeUploadedDocumentList.length,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, i) {
+            itemBuilder: (context, index) {
               DocumentDatum singleDoc =
-                  screenController.employeeUploadedDocumentList[i];
+                  screenController.employeeUploadedDocumentList[index];
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -210,7 +210,7 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
                                 onYesTap: () async {
                                   log("Delete Document");
                                   await screenController.deleteDocumentFunction(
-                                      singleDoc.id.toString(), i);
+                                      singleDoc.id.toString(), index);
                                 },
                                 onCancelTap: () {
                                   Get.back();

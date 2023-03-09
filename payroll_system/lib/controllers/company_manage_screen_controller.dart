@@ -33,8 +33,6 @@ class CompanyManageScreenController extends GetxController {
   RxList<String> selectedDepartmentList = RxList<String>([]);
   RxList<String> selectedLocationList = RxList<String>([]);
 
-
-
   List<String> selectedDepartmentIdList = [];
   List<String> selectedLocationIdList = [];
   RxString selectedDepartmentOption = "".obs;
@@ -45,14 +43,13 @@ class CompanyManageScreenController extends GetxController {
   TextEditingController nameFieldController = TextEditingController();
   TextEditingController emailFieldController = TextEditingController();
   TextEditingController phoneNumberFieldController = TextEditingController();
-  TextEditingController passwordFieldController = TextEditingController(text: '12345678');
+  TextEditingController passwordFieldController =
+      TextEditingController(text: '12345678');
   TextEditingController streetAddressController = TextEditingController();
   TextEditingController landmarkAddressController = TextEditingController();
   TextEditingController zipcodeAddressController = TextEditingController();
   TextEditingController cityAddressController = TextEditingController();
   TextEditingController stateAddressController = TextEditingController();
-
- 
 
   /// Create Company
   Future<void> createCompanyFunction() async {
@@ -60,7 +57,8 @@ class CompanyManageScreenController extends GetxController {
     String url = ApiUrl.createCompanyApi;
     log('Create Company Api Url :$url');
 
-    int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
+    int userId = await userPreference.getIntValueFromPrefs(
+        keyId: UserPreference.userIdKey);
 
     try {
       Map<String, dynamic> bodyData = {
@@ -94,6 +92,12 @@ class CompanyManageScreenController extends GetxController {
         Get.back();
         await homeScreenController.getAllCompanyFunction(userId);
       } else {
+       if (createCompanyModel.error.email.isNotEmpty) {
+            log("error");
+            log("employeeCreateModel.error : ${createCompanyModel.error}");
+            Fluttertoast.showToast(msg: createCompanyModel.error.email[0]);
+          }
+
         log('createCompanyFunction Else');
       }
     } catch (e) {
@@ -168,12 +172,9 @@ class CompanyManageScreenController extends GetxController {
     String url = ApiUrl.updateCompanyDetailsApi;
     log('Update Company Api URl : $url');
 
-
-
     try {
-
-      int userId = await userPreference.getIntValueFromPrefs(keyId: UserPreference.userIdKey);
-
+      int userId = await userPreference.getIntValueFromPrefs(
+          keyId: UserPreference.userIdKey);
 
       Map<String, dynamic> bodyData = {
         "id": companyId,
@@ -217,10 +218,10 @@ class CompanyManageScreenController extends GetxController {
 
   @override
   void onInit() {
-    if(companyOption == CompanyOption.update) {
+    if (companyOption == CompanyOption.update) {
       getCompanyDetailsFunction();
     }
-    
+
     log("$companyOption");
     super.onInit();
   }

@@ -15,7 +15,7 @@ class ApiUrl {
 
   static const registerApi = "${apiMainPath}api/register";
   static const loginApi = "${apiMainPath}api/login";
-  static const forgetPasswordApi = "${apiMainPath}api/forgetpassword";
+  // static const forgetPasswordApi = "${apiMainPath}api/forgetpassword";
   static const changePasswordApi = "${apiMainPath}api/change/password";
 
   static const getPermissionApi = "${apiMainPath}api/getpermission/";

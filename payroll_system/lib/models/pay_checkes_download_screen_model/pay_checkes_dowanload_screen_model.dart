@@ -172,14 +172,14 @@ class PayCheckDwanloadListData {
         address: json["address"] ?? "",
         mobileNumber: json["mobile_number"] ?? "",
         departmentId: json["department_id"] ?? "",
-        locationId: json["location_id"] ?? "",
+        locationId: (json["location_id"] ?? 0).toString(),
         street: json["street"] ?? "",
         town: json["town"] ?? "",
         state: json["state"] ?? "",
         city: json["city"] ?? "",
         zipcode: json["zipcode"] ?? "",
         email: json["email"] ?? "",
-        hourlyRate: json["hourly_rate"] ?? "",
+        hourlyRate: (json["hourly_rate"] ?? 0).toString(),
       );
 
   Map<String, dynamic> toJson() => {

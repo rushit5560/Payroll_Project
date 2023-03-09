@@ -507,19 +507,31 @@ class EmployeeManageScreenController extends GetxController {
           .transform(const Utf8Decoder())
           .transform(const LineSplitter())
           .listen((value) async {
-        log('value employee : $value');
+        log('value employee11111111111 : $value');
         // log(response.stream.toString());
-        CraeteEmployeeModel employeeCreateModel =
-            CraeteEmployeeModel.fromJson(json.decode(value.toString()));
+        CraeteEmployeeModel employeeCreateModel = CraeteEmployeeModel.fromJson(
+          json.decode(
+            value.toString(),
+          ),
+        );
 
         isSuccessStatus = employeeCreateModel.success.obs;
         if (isSuccessStatus.value) {
           Fluttertoast.showToast(msg: employeeCreateModel.messege);
-
           Get.back();
           await employeeListScreenController.getCompanyWiseEmployeeFunction();
         } else {
-          log('createCompanyFunction Else');
+          // Fluttertoast.showToast(msg: "The email has already been taken.");
+
+          if (employeeCreateModel.error.email.isNotEmpty) {
+            log("error");
+            log("employeeCreateModel.error : ${employeeCreateModel.error}");
+            Fluttertoast.showToast(msg: employeeCreateModel.error.email[0]);
+          }
+          // log('createCompanyFunction Else');
+
+          // log("employeeCreateModel.error : ${employeeCreateModel.error}");
+
         }
         log("Empliyee Details : $employeeCreateModel");
       });
@@ -545,7 +557,8 @@ class EmployeeManageScreenController extends GetxController {
       request.fields['last_name'] = lastNameController.text.trim();
       request.fields['mobile_number'] = phoneNoController.text.trim();
       request.fields['date_of_birth'] = dateOfBirthController.text.trim();
-      request.fields['pay_period'] = selectedValuePayper.value == "Salary" ? "salary" : "hourly";
+      request.fields['pay_period'] =
+          selectedValuePayper.value == "Salary" ? "salary" : "hourly";
       request.fields['salary'] = salaryController.text.trim() == ""
           ? "0"
           : salaryController.text.trim();
