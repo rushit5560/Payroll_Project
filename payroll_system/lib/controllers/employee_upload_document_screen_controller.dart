@@ -167,6 +167,15 @@ class EmployeeUploadDocumentScreenController extends GetxController {
     await getEmployeeDocumentFunction();
   }
 
+
+  searchDocumentListFunction(String value) {
+    return employeeUploadedDocumentList
+        .where((element) =>
+    element.name.toLowerCase().contains(value.toLowerCase()) ||
+        element.doctype.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+  }
+
   @override
   void onInit() {
     initMethod();

@@ -144,14 +144,8 @@ class EmployeeUploadDocumentScreen extends StatelessWidget {
                     onChanged: (value) {
                       employeeUploadDocumentScreenController.isLoading(true);
 
-                      employeeUploadDocumentScreenController
-                              .searchEmployeeUploadedDocumentList =
-                          employeeUploadDocumentScreenController
-                              .employeeUploadedDocumentList
-                              .where((element) =>
-                                  element.name.toLowerCase().contains(value) ||
-                                  element.doctype.toLowerCase().contains(value))
-                              .toList();
+                      employeeUploadDocumentScreenController.searchEmployeeUploadedDocumentList =
+                          employeeUploadDocumentScreenController.searchDocumentListFunction(value);
 
                       employeeUploadDocumentScreenController.isLoading(false);
                       log("searchEmployeeList : ${employeeUploadDocumentScreenController.searchEmployeeUploadedDocumentList}");
