@@ -144,7 +144,7 @@ class AdminPermissionScreenController extends GetxController {
           payChecksAdd:
               userPermissionModel.data.payrolladd == "on" ? true : false,
           payChecksEdit: false,
-          payChecksDelete: false,
+          payChecksDelete: userPermissionModel.data.payrolldelete == "on" ? true : false,
           payChecksDownload:
               userPermissionModel.data.payrolldownload == "on" ? true : false,
           approvePayChecksView:

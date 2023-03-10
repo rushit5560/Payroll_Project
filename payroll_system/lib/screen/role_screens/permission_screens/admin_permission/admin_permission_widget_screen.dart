@@ -285,9 +285,13 @@ class AdminPermissionWidgetsScreen extends StatelessWidget {
             isDeleteShow: true,
             isDeleteValue: adminPermissionScreenController
                 .companyPayChecksIsDeleteChecked.value,
-            isDeleteOnChanged: (bool? value) {},
+            isDeleteOnChanged: (bool? value) {
+              adminPermissionScreenController
+                  .companyPayChecksIsDeleteChecked.value = value!;
+              adminPermissionScreenController.loadUI();
+            },
 
-            isDeleteFillColor: MaterialStateProperty.all(Colors.blue.shade200),
+            // isDeleteFillColor: MaterialStateProperty.all(Colors.blue.shade200),
             // isViewFillColor: MaterialStateProperty.all(Colors.blue.shade200),
             isDownloadShow: true,
             isDownloadValue: adminPermissionScreenController

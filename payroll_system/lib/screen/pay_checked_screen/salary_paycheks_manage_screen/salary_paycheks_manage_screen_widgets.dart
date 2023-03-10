@@ -29,340 +29,326 @@ class SalaryPayChecksFormModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// Type Text & Dropdown Module
-          RichText(
-            textAlign: TextAlign.left,
-            maxLines: null,
-            text: TextSpan(
-                text: AppMessage.type,
-                style: TextStyleConfig.textStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-                children: [
-                  TextSpan(
-                    text: " ${AppMessage.mandatory}",
-                    style: TextStyleConfig.textStyle(
-                      textColor: AppColors.redColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
+      child: Form(
+        key: screenController.formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Type Text & Dropdown Module
+            RichText(
+              textAlign: TextAlign.left,
+              maxLines: null,
+              text: TextSpan(
+                  text: AppMessage.type,
+                  style: TextStyleConfig.textStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
                   ),
-                ]),
-          ).commonSymmetricPadding(vertical: 2),
-          Container(
-            width: Get.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              // border: Border.all(color: AppColors.greyColor),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 3),
-              child: Container(
-                // height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.transparent),
-                ),
-                // child: DropdownButtonHideUnderline(
-                child: Center(
-                  child: DropdownButtonFormField<String>(
-                    validator: (value) =>
-                        FieldValidation().validateDropdownStatus(value!),
-                    decoration: const InputDecoration.collapsed(hintText: ''),
-                    value: screenController.selectedSalaryChecksValue.value,
-                    items: screenController.isSalaryPayChecksList
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    borderRadius: BorderRadius.circular(10),
-                    icon: Image.asset(
-                      AppImages.arrowDownIcon,
-                      height: 15,
-                      width: 15,
-                    ).commonSymmetricPadding(horizontal: 10),
-                    onChanged: (String? value) {
-                      screenController.isLoading(true);
-                      screenController.selectedSalaryChecksValue.value = value!;
-                      screenController.endDateController.clear();
-                      // screenController.endDate = DateTime.now();
-                      screenController.isLoading(false);
-                    },
-                  ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 15),
-
-          ///
-
-          /// Start & End Date module
-          Row(
-            children: [
-              Expanded(
-                flex: 5,
-                child: FormSingleFieldModule(
-                  headerText: AppMessage.startDate,
-                  text: AppMessage.selectPayRollStartDate,
-                  keyboardType: TextInputType.datetime,
-                  mandatoryText: AppMessage.mandatory,
-                  textEditingController:
-                      screenController.startDateShowController,
-                  suffixIcon: Icons.calendar_month,
-                  readOnly: true,
-                  onPressed: () async {
-                    await _selectStartDate(
-                        context: context,
-                        dateTime: screenController.startDate,
-                        textEditingController:
-                            screenController.startDateController,
-                        datePickerOption: DatePickerOption.startDate);
-                  },
-                  validate: (value) =>
-                      FieldValidation().validateStartDate(value),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                flex: 5,
-                child: SalaryFormSingleDateFieldModule(
-                  headerText: AppMessage.endDate,
-                  text: AppMessage.selectPayRollEndDate,
-                  keyboardType: TextInputType.datetime,
-                  mandatoryText: AppMessage.mandatory,
-                  textEditingController: screenController.endDateShowController,
-                  suffixIcon: Icons.calendar_month,
-                  readOnly: true,
-                  onPressed: () async {
-                    await _selectEndDate(
-                        context: context,
-                        dateTime: screenController.endDate,
-                        textEditingController:
-                            screenController.endDateController,
-                        datePickerOption: DatePickerOption.startDate);
-                  },
-                  validate: (value) => FieldValidation()
-                      .validateEndDate(value, screenController.endDate),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 5),
-
-          /// Pay Date module
-          FormSingleFieldModule(
-            headerText: AppMessage.payDate,
-            text: AppMessage.payDate,
-            keyboardType: TextInputType.datetime,
-            mandatoryText: AppMessage.mandatory,
-            textEditingController: screenController.payDateShowController,
-            suffixIcon: Icons.calendar_month,
-            readOnly: true,
-            onPressed: () async {
-              await _selectPayDate(
-                context: context,
-                dateTime: screenController.payDate,
-                textEditingController: screenController.payDateController,
-                datePickerOption: DatePickerOption.startDate,
-              );
-            },
-            validate: (value) => FieldValidation().validatePayDate(
-                value, screenController.endDate, screenController.payDate),
-          ),
-          const SizedBox(height: 5),
-
-          /// Employee List module
-          RichText(
-            textAlign: TextAlign.left,
-            maxLines: null,
-            text: TextSpan(
-                text: AppMessage.companyEmployees,
-                style: TextStyleConfig.textStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-                children: [
-                  TextSpan(
-                    text: ' *',
-                    style: TextStyleConfig.textStyle(
-                      textColor: AppColors.redColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
-                ]),
-          ).commonSymmetricPadding(vertical: 2),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount:
-                screenController.allSalaryPaychecksWiseEmployeeList.length,
-            itemBuilder: (context, index) {
-              CompanyWiseEmployeeData employeeData =
-                  screenController.allSalaryPaychecksWiseEmployeeList[index];
-
-              // TextEditingController regularHourController = TextEditingController();
-
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.transparent),
-                ),
-                child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Checkbox(
-                          value: employeeData.isChecked,
-                          onChanged: (bool? value) {
-                            screenController.isLoading(true);
-                            employeeData.isChecked = !employeeData.isChecked;
-                            screenController.isLoading(false);
-                            // screenController
-                            //     .isPrivacyChecked.value = value!;
-                          },
-                        ),
-                        Expanded(
-                          child: Text(
-                            "${employeeData.firstName} "
-                            "${employeeData.middleName} "
-                            "${employeeData.lastName}",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyleConfig.textStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ],
+                    TextSpan(
+                      text: " ${AppMessage.mandatory}",
+                      style: TextStyleConfig.textStyle(
+                        textColor: AppColors.redColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
                     ),
-                    employeeData.isChecked == false
-                        ? Container()
-                        : Column(
-                            children: [
-                              // const SizedBox(height: 5),
-                              // RegularTextFormFieldModule(
-                              //   employeeData: employeeData,
-                              //   regularHourController: regularHourController,
-                              // ),
-                              // const SizedBox(height: 5),
-                              // OtTextFormFieldModule(employeeData: employeeData),
-                              // const SizedBox(height: 5),
-                              // HolidayPayTextFormFieldModule(employeeData: employeeData),
-                              const SizedBox(height: 5),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: BonusTextFormFieldModule(
-                                        employeeData: employeeData),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: OtherEarningTextFormFieldModule(
-                                        employeeData: employeeData),
-                                  ),
-                                ],
+                  ]),
+            ).commonSymmetricPadding(vertical: 2),
+            Container(
+              width: Get.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                // border: Border.all(color: AppColors.greyColor),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Container(
+                  // height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.transparent),
+                  ),
+                  // child: DropdownButtonHideUnderline(
+                  child: Center(
+                    child: DropdownButtonFormField<String>(
+                      validator: (value) =>
+                          FieldValidation().validateDropdownStatus(value!),
+                      decoration: const InputDecoration.collapsed(hintText: ''),
+                      value: screenController.selectedSalaryChecksValue.value,
+                      items: screenController.isSalaryPayChecksList
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      borderRadius: BorderRadius.circular(10),
+                      icon: Image.asset(
+                        AppImages.arrowDownIcon,
+                        height: 15,
+                        width: 15,
+                      ).commonSymmetricPadding(horizontal: 10),
+                      onChanged: (String? value) {
+                        screenController.isLoading(true);
+                        screenController.selectedSalaryChecksValue.value = value!;
+                        screenController.endDateController.clear();
+                        // screenController.endDate = DateTime.now();
+                        screenController.isLoading(false);
+                      },
+                    ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+
+            ///
+
+            /// Start & End Date module
+            Row(
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: FormSingleFieldModule(
+                    headerText: AppMessage.startDate,
+                    text: AppMessage.selectPayRollStartDate,
+                    keyboardType: TextInputType.datetime,
+                    mandatoryText: AppMessage.mandatory,
+                    textEditingController:
+                        screenController.startDateShowController,
+                    suffixIcon: Icons.calendar_month,
+                    readOnly: true,
+                    onPressed: () async {
+                      await _selectStartDate(
+                          context: context,
+                          dateTime: screenController.startDate,
+                          textEditingController:
+                              screenController.startDateController,
+                          datePickerOption: DatePickerOption.startDate);
+                    },
+                    validate: (value) =>
+                        FieldValidation().validateStartDate(value),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  flex: 5,
+                  child: SalaryFormSingleDateFieldModule(
+                    headerText: AppMessage.endDate,
+                    text: AppMessage.selectPayRollEndDate,
+                    keyboardType: TextInputType.datetime,
+                    mandatoryText: AppMessage.mandatory,
+                    textEditingController: screenController.endDateShowController,
+                    suffixIcon: Icons.calendar_month,
+                    readOnly: true,
+                    onPressed: () async {
+                      await _selectEndDate(
+                          context: context,
+                          dateTime: screenController.endDate,
+                          textEditingController:
+                              screenController.endDateController,
+                          datePickerOption: DatePickerOption.startDate);
+                    },
+                    validate: (value) => FieldValidation()
+                        .validateEndDate(value, screenController.endDate),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+
+            /// Pay Date module
+            FormSingleFieldModule(
+              headerText: AppMessage.payDate,
+              text: AppMessage.payDate,
+              keyboardType: TextInputType.datetime,
+              mandatoryText: AppMessage.mandatory,
+              textEditingController: screenController.payDateShowController,
+              suffixIcon: Icons.calendar_month,
+              readOnly: true,
+              onPressed: () async {
+                await _selectPayDate(
+                  context: context,
+                  dateTime: screenController.payDate,
+                  textEditingController: screenController.payDateController,
+                  datePickerOption: DatePickerOption.startDate,
+                );
+              },
+              validate: (value) => FieldValidation().validatePayDate(
+                  value, screenController.endDate, screenController.payDate),
+            ),
+            const SizedBox(height: 5),
+
+            /// Employee List module
+            RichText(
+              textAlign: TextAlign.left,
+              maxLines: null,
+              text: TextSpan(
+                  text: AppMessage.companyEmployees,
+                  style: TextStyleConfig.textStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyleConfig.textStyle(
+                        textColor: AppColors.redColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ]),
+            ).commonSymmetricPadding(vertical: 2),
+            Form(
+              key: screenController.employeeFormKey,
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount:
+                    screenController.allSalaryPaychecksWiseEmployeeList.length,
+                itemBuilder: (context, index) {
+                  CompanyWiseEmployeeData employeeData =
+                      screenController.allSalaryPaychecksWiseEmployeeList[index];
+
+                  // TextEditingController regularHourController = TextEditingController();
+
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.transparent),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Checkbox(
+                              value: employeeData.isChecked,
+                              onChanged: (bool? value) {
+                                screenController.isLoading(true);
+                                employeeData.isChecked = !employeeData.isChecked;
+                                screenController.isLoading(false);
+                                // screenController
+                                //     .isPrivacyChecked.value = value!;
+                              },
+                            ),
+                            Expanded(
+                              child: Text(
+                                "${employeeData.firstName} "
+                                "${employeeData.middleName} "
+                                "${employeeData.lastName}",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyleConfig.textStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
                               ),
-                              const SizedBox(height: 5),
-                              Row(
+                            ),
+                          ],
+                        ),
+                        employeeData.isChecked == false
+                            ? Container()
+                            : Column(
                                 children: [
-                                  Expanded(
-                                    child: CommissionTextFormFieldModule(
-                                        employeeData: employeeData),
+                                  // const SizedBox(height: 5),
+                                  // RegularTextFormFieldModule(
+                                  //   employeeData: employeeData,
+                                  //   regularHourController: regularHourController,
+                                  // ),
+                                  // const SizedBox(height: 5),
+                                  // OtTextFormFieldModule(employeeData: employeeData),
+                                  // const SizedBox(height: 5),
+                                  // HolidayPayTextFormFieldModule(employeeData: employeeData),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: BonusTextFormFieldModule(
+                                            employeeData: employeeData),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: OtherEarningTextFormFieldModule(
+                                            employeeData: employeeData),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: SickPayTextFormFieldModule(
-                                        employeeData: employeeData),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: CommissionTextFormFieldModule(
+                                            employeeData: employeeData),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: SickPayTextFormFieldModule(
+                                            employeeData: employeeData),
+                                      ),
+                                    ],
                                   ),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: VacationTextFormFieldModule(
+                                            employeeData: employeeData),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: TipTextFormFieldModule(
+                                            employeeData: employeeData),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5),
+                                  TaxTextFormFieldModule(
+                                      employeeData: employeeData),
+                                  const SizedBox(height: 5),
                                 ],
-                              ),
-                              const SizedBox(height: 5),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: VacationTextFormFieldModule(
-                                        employeeData: employeeData),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: TipTextFormFieldModule(
-                                        employeeData: employeeData),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 5),
-                              TaxTextFormFieldModule(
-                                  employeeData: employeeData),
-                              const SizedBox(height: 5),
-                            ],
-                          ).commonSymmetricPadding(horizontal: 5),
-                  ],
-                ).commonSymmetricPadding(horizontal: 5, vertical: 3),
-              ).commonOnlyPadding(bottom: 5);
-            },
-          ),
-          const SizedBox(height: 5),
+                              ).commonSymmetricPadding(horizontal: 5),
+                      ],
+                    ).commonSymmetricPadding(horizontal: 5, vertical: 3),
+                  ).commonOnlyPadding(bottom: 5);
+                },
+              ),
+            ),
+            const SizedBox(height: 5),
 
-          ///
+            ///
 
-          /// Memo Text Field module
-          FormSingleFieldModule(
-            headerText: AppMessage.memo,
-            text: AppMessage.memo,
-            mandatoryText: AppMessage.empty,
-            keyboardType: TextInputType.text,
-            textEditingController: screenController.memoController,
-            // validate: (value) =>
-            //     FieldValidation().validateHourlyRate(value),
-          ),
-          const SizedBox(height: 15),
+            /// Memo Text Field module
+            FormSingleFieldModule(
+              headerText: AppMessage.memo,
+              text: AppMessage.memo,
+              mandatoryText: AppMessage.empty,
+              keyboardType: TextInputType.text,
+              textEditingController: screenController.memoController,
+              // validate: (value) =>
+              //     FieldValidation().validateHourlyRate(value),
+            ),
+            const SizedBox(height: 15),
 
-          ///
+            ///
 
-          /// Submit Button module
-          CustomSubmitButtonModule(
-              labelText: AppMessage.submit,
-              onPress: () async {
-                bool isEmployeeSelected = false;
-                // if (screenController
-                //         .selectedSalaryChecksValue.value ==
-                //     "Choose Option") {
-                //   Fluttertoast.showToast(msg: "Please select Pay period.");
-                // } else {
+            /// Submit Button module
+            CustomSubmitButtonModule(
+                labelText: AppMessage.submit,
+                onPress: () async {
+                  bool isEmployeeSelected = false;
+                  // if (screenController
+                  //         .selectedSalaryChecksValue.value ==
+                  //     "Choose Option") {
+                  //   Fluttertoast.showToast(msg: "Please select Pay period.");
+                  // } else {
 
-                // if (screenController.formKey.currentState!.validate()) {
-                /// Check Any employee select or not... & Then api call
-                for (int i = 0;
-                    i <
-                        screenController
-                            .allSalaryPaychecksWiseEmployeeList.length;
-                    i++) {
-                  if (screenController
-                          .allSalaryPaychecksWiseEmployeeList[i].isChecked ==
-                      true) {
-                    isEmployeeSelected = true;
-                  }
-                }
-
-                if (isEmployeeSelected == true) {
-                  // screenController.clearAllTextFieldsList();
-                  screenController.data.clear();
-                  // call api
-                  List<bool> isApiCallStatusList =
-                      []; // Set validate status on this list
-
+                  if (screenController.formKey.currentState!.validate()) {
+                  /// Check Any employee select or not... & Then api call
                   for (int i = 0;
                       i <
                           screenController
@@ -371,69 +357,89 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                     if (screenController
                             .allSalaryPaychecksWiseEmployeeList[i].isChecked ==
                         true) {
-                      // if (screenController.employeeFormKey.currentState!.validate()) {
-                      isApiCallStatusList.add(true);
-                      // todo
-                      screenController.data.add({
-                        "employee": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i].id
-                            .toString(),
-                        // "regularhour": screenController.allCompanyWiseEmployeeList[i].regularTextFieldValue,
-                        // "overtime": screenController.allCompanyWiseEmployeeList[i].otTextFieldValue,
-                        // "holidaypay": screenController.allCompanyWiseEmployeeList[i].holidayPayTextFieldValue,
-                        "bonus": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i]
-                            .bonusTextFieldValue,
-                        "otherearning": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i]
-                            .otherEarningTextFieldValue,
-                        "commission": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i]
-                            .commissionTextFieldValue,
-                        "sickpay": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i]
-                            .sickPayHoursTextFieldValue,
-                        "vacationhours": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i]
-                            .vacationHoursTextFieldValue,
-                        "tip": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i]
-                            .tipTextFieldValue,
-                        "tax": screenController
-                            .allSalaryPaychecksWiseEmployeeList[i]
-                            .taxTextFieldValue,
-                      });
-                      // } else {
-                      //   isApiCallStatusList.add(false);
-                      // }
+                      isEmployeeSelected = true;
                     }
                   }
 
-                  // If any formKey Current Status not valid then api not call - set this type of logic here
-                  bool apiCallFinalStatus = true;
-                  for (int i = 0; i < isApiCallStatusList.length; i++) {
-                    if (isApiCallStatusList[i] == false) {
-                      apiCallFinalStatus = false;
-                    }
-                  }
+                  if (isEmployeeSelected == true) {
+                    // screenController.clearAllTextFieldsList();
+                    screenController.data.clear();
+                    // call api
+                    List<bool> isApiCallStatusList =
+                        []; // Set validate status on this list
 
-                  if (apiCallFinalStatus == true) {
-                    // api call
-                    log('Api Call');
-                    await screenController.createSalaryPaycheckFunction();
+                    for (int i = 0;
+                        i <
+                            screenController
+                                .allSalaryPaychecksWiseEmployeeList.length;
+                        i++) {
+                      if (screenController
+                              .allSalaryPaychecksWiseEmployeeList[i].isChecked ==
+                          true) {
+                        if (screenController.employeeFormKey.currentState!.validate()) {
+                        isApiCallStatusList.add(true);
+                        // todo
+                        screenController.data.add({
+                          "employee": screenController
+                              .allSalaryPaychecksWiseEmployeeList[i].id
+                              .toString(),
+                          // "regularhour": screenController.allCompanyWiseEmployeeList[i].regularTextFieldValue,
+                          // "overtime": screenController.allCompanyWiseEmployeeList[i].otTextFieldValue,
+                          // "holidaypay": screenController.allCompanyWiseEmployeeList[i].holidayPayTextFieldValue,
+                          "bonus": screenController.allSalaryPaychecksWiseEmployeeList[i].bonusTextFieldValue.isEmpty == true
+                              ? "0"
+                              : screenController.allSalaryPaychecksWiseEmployeeList[i].bonusTextFieldValue,
+                          "otherearning": screenController.allSalaryPaychecksWiseEmployeeList[i].otherEarningTextFieldValue.isEmpty == true
+                          ? "0"
+                          : screenController.allSalaryPaychecksWiseEmployeeList[i].otherEarningTextFieldValue,
+                          "commission": screenController.allSalaryPaychecksWiseEmployeeList[i].commissionTextFieldValue.isEmpty == true
+                          ? "0"
+                          : screenController.allSalaryPaychecksWiseEmployeeList[i].commissionTextFieldValue,
+                          "sickpay": screenController.allSalaryPaychecksWiseEmployeeList[i].sickPayHoursTextFieldValue.isEmpty == true
+                          ? "0"
+                          : screenController.allSalaryPaychecksWiseEmployeeList[i].sickPayHoursTextFieldValue,
+                          "vacationhours": screenController.allSalaryPaychecksWiseEmployeeList[i].vacationHoursTextFieldValue.isEmpty == true
+                          ? "0"
+                          : screenController.allSalaryPaychecksWiseEmployeeList[i].vacationHoursTextFieldValue,
+                          "tip": screenController.allSalaryPaychecksWiseEmployeeList[i].tipTextFieldValue.isEmpty == true
+                          ? "0"
+                          : screenController.allSalaryPaychecksWiseEmployeeList[i].tipTextFieldValue,
+                          "tax": screenController.allSalaryPaychecksWiseEmployeeList[i].taxTextFieldValue.isEmpty == true
+                          ? "0"
+                          : screenController.allSalaryPaychecksWiseEmployeeList[i].taxTextFieldValue,
+                        });
+                        } else {
+                          isApiCallStatusList.add(false);
+                        }
+                      }
+                    }
+
+                    // If any formKey Current Status not valid then api not call - set this type of logic here
+                    bool apiCallFinalStatus = true;
+                    for (int i = 0; i < isApiCallStatusList.length; i++) {
+                      if (isApiCallStatusList[i] == false) {
+                        apiCallFinalStatus = false;
+                      }
+                    }
+
+                    if (apiCallFinalStatus == true) {
+                      // api call
+                      log('Api Call');
+                      await screenController.createSalaryPaycheckFunction();
+                    }
+                  } else {
+                    Fluttertoast.showToast(msg: "Please select any employee.");
                   }
-                } else {
-                  Fluttertoast.showToast(msg: "Please select any employee.");
+                  }
                 }
-                // }
-              }
-              // },
-              ),
-          const SizedBox(height: 5),
+                // },
+                ),
+            const SizedBox(height: 5),
 
-          ///
-        ],
-      ).commonOnlyPadding(top: 3.h, right: 6.w, left: 6.w, bottom: 3.h),
+            ///
+          ],
+        ).commonOnlyPadding(top: 3.h, right: 6.w, left: 6.w, bottom: 3.h),
+      ),
     );
   }
 
@@ -707,8 +713,8 @@ class BonusTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -754,8 +760,8 @@ class OtherEarningTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -801,8 +807,8 @@ class CommissionTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -848,8 +854,8 @@ class SickPayTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -895,8 +901,8 @@ class VacationTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -942,8 +948,8 @@ class TipTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -989,8 +995,8 @@ class TaxTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );

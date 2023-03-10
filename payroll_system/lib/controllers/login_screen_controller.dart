@@ -175,7 +175,8 @@ class LoginController extends GetxController {
                   ? true
                   : false,
           payChecksEdit: false,
-          payChecksDelete: true,
+          payChecksDelete: loginDetailsModel.loginData.permissiondata.payrolldelete == "on"
+          ? true : false,
           payChecksDownload:
               loginDetailsModel.loginData.permissiondata.payrolldownload == "on"
                   ? true

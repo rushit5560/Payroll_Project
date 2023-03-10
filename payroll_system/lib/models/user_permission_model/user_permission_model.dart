@@ -61,6 +61,7 @@ class PermissionData {
     this.payrollview,
     this.payrolladd,
     this.payrolldownload,
+    this.payrolldelete,
     this.approvepaychecksview,
     this.approvepaychecksedit,
     this.approvepaychecksdelete,
@@ -95,6 +96,7 @@ class PermissionData {
   String? payrollview;
   String? payrolladd;
   String? payrolldownload;
+  String? payrolldelete;
   String? approvepaychecksview;
   String? approvepaychecksedit;
   String? approvepaychecksdelete;
@@ -129,6 +131,7 @@ class PermissionData {
         payrollview: json["payrollview"],
         payrolladd: json["payrolladd"],
         payrolldownload: json["payrolldownload"],
+        payrolldelete: json["payrolldelete"],
         approvepaychecksview: json["approvepaychecksview"],
         approvepaychecksedit: json["approvepaychecksedit"],
         approvepaychecksdelete: json["approvepaychecksdelete"],

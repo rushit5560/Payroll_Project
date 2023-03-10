@@ -77,6 +77,7 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
 
       isSuccessStatus = approvalPermissionModel.success.obs;
       if (isSuccessStatus.value) {
+        log('approvalPermissionModel.messege121212 : ${approvalPermissionModel.messege}');
         Fluttertoast.showToast(msg: approvalPermissionModel.messege);
         approvalData.approvepaychecks = "1";
         Get.back();

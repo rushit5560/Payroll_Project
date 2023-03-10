@@ -32,143 +32,104 @@ class CompanyViewDrawerMenu extends StatelessWidget {
         child: Obx(
           () => companyViewScreenController.isLoading.value
               ? CommonLoader().showLoader()
-              : Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            /*companyViewScreenController.isDepartmentShowPermission.value == true
-                                ? CompanyDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => DepartmentListScreen(),
-                                          arguments: [
-                                            companyViewScreenController.companyId.toString(),
-                                            companyViewScreenController.companyName,
-                                          ]);
-                                    },
-                                    title: AppMessage.departmentNameDrawer,
-                                    imageStatus: true,
-                                  )
-                                : const SizedBox(),*/
-                            companyViewScreenController.isLocationShowPermission.value == true
-                                ? CompanyDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => LocationListScreen(),
-                                          arguments: [
-                                            companyViewScreenController.companyId.toString(),
-                                            companyViewScreenController.companyName,
-                                          ]);
-                                    },
-                                    title: AppMessage.location,
-                                    imageStatus: true,
-                                    image: AppImages.locationIcon,
-                                  )
-                                : const SizedBox(),
-                            companyViewScreenController.isEmployeeShowPermission.value == true
-                                ? CompanyDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => EmployeeListScreen(),
-                                          arguments: [
-                                            companyViewScreenController.companyId.toString(),
-                                            companyViewScreenController.companyName,
-                                          ]);
-                                    },
-                                    title: AppMessage.employeeNameDrawer,
-                                    imageStatus: true,
-                                    image: AppImages.employeeIcon,
-                                  )
-                                : const SizedBox(),
-                            companyViewScreenController.isPayChecksShowPermission.value == true
-                                ? CompanyDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => PayCheckesListScreen(),
-                                          arguments: [
-                                            companyViewScreenController.companyId.toString(),
-                                            companyViewScreenController.companyName,
-                                          ]);
-                                    },
-                                    title: AppMessage.hourlyPaycheckes,
-                                    imageStatus: true,
-                                    image: AppImages.paycheckIcon,
-                                  )
-                                : const SizedBox(),
+              : SingleChildScrollView(
+            child: Column(
+              children: [
+                /*companyViewScreenController.isDepartmentShowPermission.value == true
+                              ? CompanyDrawerTile(
+                                  onTap: () {
+                                    Get.back();
+                                    Get.to(() => DepartmentListScreen(),
+                                        arguments: [
+                                          companyViewScreenController.companyId.toString(),
+                                          companyViewScreenController.companyName,
+                                        ]);
+                                  },
+                                  title: AppMessage.departmentNameDrawer,
+                                  imageStatus: true,
+                                )
+                              : const SizedBox(),*/
+                companyViewScreenController.isLocationShowPermission.value == true
+                    ? CompanyDrawerTile(
+                  onTap: () {
+                    Get.back();
+                    Get.to(() => LocationListScreen(),
+                        arguments: [
+                          companyViewScreenController.companyId.toString(),
+                          companyViewScreenController.companyName,
+                        ]);
+                  },
+                  title: AppMessage.location,
+                  imageStatus: true,
+                  image: AppImages.locationIcon,
+                )
+                    : const SizedBox(),
+                companyViewScreenController.isEmployeeShowPermission.value == true
+                    ? CompanyDrawerTile(
+                  onTap: () {
+                    Get.back();
+                    Get.to(() => EmployeeListScreen(),
+                        arguments: [
+                          companyViewScreenController.companyId.toString(),
+                          companyViewScreenController.companyName,
+                        ]);
+                  },
+                  title: AppMessage.employeeNameDrawer,
+                  imageStatus: true,
+                  image: AppImages.employeeIcon,
+                )
+                    : const SizedBox(),
+                companyViewScreenController.isPayChecksShowPermission.value == true
+                    ? CompanyDrawerTile(
+                  onTap: () {
+                    Get.back();
+                    Get.to(() => PayCheckesListScreen(),
+                        arguments: [
+                          companyViewScreenController.companyId.toString(),
+                          companyViewScreenController.companyName,
+                        ]);
+                  },
+                  title: AppMessage.hourlyPaycheckes,
+                  imageStatus: true,
+                  image: AppImages.paycheckIcon,
+                )
+                    : const SizedBox(),
 
-                            companyViewScreenController.isPayChecksShowPermission.value == true
-                                ? CompanyDrawerTile(
-                              onTap: () {
-                                Get.back();
-                                Get.to(() => SalaryPaychecksListScreen(),
-                                    arguments: [
-                                      companyViewScreenController.companyId.toString(),
-                                      companyViewScreenController.companyName,
-                                    ]);
-                              },
-                              title: AppMessage.salaryPaycheckes,
-                              imageStatus: true,
-                              image: AppImages.paycheckIcon,
-                            )
-                                : const SizedBox(),
+                companyViewScreenController.isPayChecksShowPermission.value == true
+                    ? CompanyDrawerTile(
+                  onTap: () {
+                    Get.back();
+                    Get.to(() => SalaryPaychecksListScreen(),
+                        arguments: [
+                          companyViewScreenController.companyId.toString(),
+                          companyViewScreenController.companyName,
+                        ]);
+                  },
+                  title: AppMessage.salaryPaycheckes,
+                  imageStatus: true,
+                  image: AppImages.paycheckIcon,
+                )
+                    : const SizedBox(),
 
-                            companyViewScreenController.isApprovePayChecksShowPermission.value == true
-                                ? CompanyDrawerTile(
-                                    onTap: () {
-                                      Get.back();
-                                      Get.to(() => ApprovePaychecksListScreen(),
-                                          arguments: [
-                                            companyViewScreenController.companyId.toString(),
-                                            companyViewScreenController.companyName,
-                                          ]);
-                                    },
-                                    title: AppMessage.approvePaycheckes,
-                                    imageStatus: true,
-                                    image: AppImages.approveIcon,
-                                  )
-                                : const SizedBox(),
+                companyViewScreenController.isApprovePayChecksShowPermission.value == true
+                    ? CompanyDrawerTile(
+                  onTap: () {
+                    Get.back();
+                    Get.to(() => ApprovePaychecksListScreen(),
+                        arguments: [
+                          companyViewScreenController.companyId.toString(),
+                          companyViewScreenController.companyName,
+                        ]);
+                  },
+                  title: AppMessage.approvePaycheckes,
+                  imageStatus: true,
+                  image: AppImages.approveIcon,
+                )
+                    : const SizedBox(),
 
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    /// Getting from common module
-                    LogOutDrawerTileModule(
-                      onTap: () async {
-                        log('Logout');
-
-                        CustomAlertDialog().showAlertDialog(
-                          context: context,
-                          textContent: AppMessage.logoutMessage,
-                          onYesTap: () async {
-                            await UserPreference()
-                                .logoutRemoveUserDetailsFromPrefs()
-                                .then(
-                              (value) {
-                                Get.offAll(() => LoginScreen());
-                              },
-                            );
-                          },
-                          onCancelTap: () {
-                            Get.back();
-                          },
-                        );
-
-                        // await UserPreference()
-                        //     .logoutRemoveUserDetailsFromPrefs()
-                        //     .then(
-                        //   (value) {
-                        //     Get.offAll(() => LoginScreen());
-                        //   },
-                        // );
-                      },
-                      title: AppMessage.logOutNameDrawer,
-                    ),
-                  ],
-                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

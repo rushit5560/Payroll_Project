@@ -87,7 +87,7 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                           const SizedBox(height: 10),
                           SingleListTileModuleCustom(
                               textValue: DateFormater().changeDateFormat(
-                                  DateTime.parse(approvalDataValue.startdate
+                                  DateTime.parse(approvalDataValue.paydate
                                       .split(" ")[0]),
                                   approvePayCheckesDetailsScreenController
                                       .prefsDateFormat),
@@ -179,12 +179,12 @@ class ApprovePayCheckesDetailsManageWidgetsScreen extends StatelessWidget {
                             textKey: AppMessage.tipText,
                           ),
                           const SizedBox(height: 5),
-                          SingleListTileModuleCustom(
-                            textValue: "\$ ${approvalDataValue.tax}",
-                            image: AppImages.salaryIcon,
-                            textKey: AppMessage.taxText,
-                          ),
-                          const SizedBox(height: 5),
+                          // SingleListTileModuleCustom(
+                          //   textValue: "\$ ${approvalDataValue.tax}",
+                          //   image: AppImages.salaryIcon,
+                          //   textKey: AppMessage.taxText,
+                          // ),
+                          // const SizedBox(height: 5),
 
                           /*SingleListTileModuleCustom(
                         textValue: "\$ ${approvalDataValue.finalAmount}",

@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:payroll_system/Screen/authentication_screens/login_screen/login_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:payroll_system/models/genral_setting_model/genral_setting_model.dart';
 import 'package:payroll_system/screen/company_home_screen/company_home_screen.dart';
 import 'package:payroll_system/utils/extension_methods/user_details.dart';
 import 'package:payroll_system/utils/extension_methods/user_preference.dart';
@@ -19,6 +20,9 @@ class SplashScreenController extends GetxController {
   RxBool isSuccessStatus = false.obs;
 
   UserPreference userPreference = UserPreference();
+
+  int userIdPrefs = 0;
+  String selectedValue = "";
 
   //User getUserPermissionsFunction
   Future<void> getUserPermissionsFunction({required String roleId}) async {
@@ -150,6 +154,36 @@ class SplashScreenController extends GetxController {
     }
   }
 
+  Future<void> getDateFormatFunction() async {
+    log("userIdPrefsuserIdPrefs:   $userIdPrefs");
+    isLoading(true);
+    String url = ApiUrl.getDateFormatApi;
+    log('Get getDateFormatFunction Api Url :$url');
+    try {
+      http.Response response = await http.get(Uri.parse(url));
+
+      GenralSettingModel genralSettingModel =
+      GenralSettingModel.fromJson(json.decode(response.body));
+      isSuccessStatus = genralSettingModel.success.obs;
+      log("getCompanyWiseEmployeeFunction ${response.body}");
+      if (isSuccessStatus.value) {
+        selectedValue = genralSettingModel.data;
+        log('Date Format Api: $selectedValue');
+        await userPreference.setDateFormatInPrefs(
+            dateFormat: selectedValue);
+
+        log("getDateFormatFunction :: $selectedValue");
+      } else {
+        log('getAllCompanyFunction Else');
+      }
+    } catch (e) {
+      log('getAllCompanyFunction Error :$e');
+      rethrow;
+    } finally {
+      isLoading(false);
+    }
+  }
+
   startTimer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Timer(
@@ -162,7 +196,7 @@ class SplashScreenController extends GetxController {
           int roleId = prefs.getInt(UserPreference.roleIdKey) ?? 0;
           await userPreference.getUserPrefsAndSaveToLocal();
           await getUserPermissionsFunction(roleId: roleId.toString());
-
+          await getDateFormatFunction();
         } else {
           Get.off(() => LoginScreen());
         }

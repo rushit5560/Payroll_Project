@@ -183,7 +183,7 @@ class EmployeeUploadedDocumentListModule extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               DocumentDatum singleDoc =
-                  screenController.employeeUploadedDocumentList[index];
+                  screenController.searchEmployeeUploadedDocumentList[index];
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.white,

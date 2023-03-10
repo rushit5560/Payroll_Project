@@ -212,8 +212,8 @@ class FieldValidation {
   }
 
   String? validateHomePhoneNumber(String value) {
-    String patttern = AppMessage.patternRegX;
-    RegExp regExp = RegExp(patttern);
+    String pattern = AppMessage.patternRegX;
+    RegExp regExp = RegExp(pattern);
 
     if (value.isEmpty) {
       return AppMessage.pleaseEnterPhoneNumber;
@@ -252,7 +252,10 @@ class FieldValidation {
   String? validateHourlyRate(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterHourlyRate;
-    } else {
+    } else if (value == "0" || int.parse(value) < 0) {
+      return AppMessage.valueGreterOne;
+    }
+    else {
       return null;
     }
   }
@@ -260,7 +263,9 @@ class FieldValidation {
   String? validateSalary(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterSalary;
-    } else {
+    } else if (value == "0" || int.parse(value) < 0) {
+      return AppMessage.valueGreterOne;
+    }else {
       return null;
     }
   }
@@ -397,7 +402,7 @@ class FieldValidation {
   String? validateRegularRate(String value) {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterRegularRate;
-    } else if (value == "0" || value.contains("-")) {
+    } else if (value == "0" || int.parse(value) < 0) {
       return AppMessage.valueGreterOne;
     }
     // 0// }
@@ -408,7 +413,9 @@ class FieldValidation {
 
   String? validateOt(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterOt;
+      return null;
+    } else if (value == "0" || int.parse(value) < 0) {
+      return AppMessage.valueGreterZero;
     } else {
       return null;
     }
@@ -416,7 +423,29 @@ class FieldValidation {
 
   String? validateHolidayPay(String value) {
     if (value.isEmpty) {
-      return AppMessage.pleaseEnterHolidayPay;
+      return null;
+    } else if (value == "0" || int.parse(value) < 0) {
+      return AppMessage.valueGreterZero;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateBonusPay(String value) {
+    if (value.isEmpty) {
+      return null;
+    } else if (value == "0" || int.parse(value) < 0) {
+      return AppMessage.valueGreterZero;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateOtherEarningPay(String value) {
+    if (value.isEmpty) {
+      return null;
+    } else if (value == "0" || int.parse(value) < 0) {
+      return AppMessage.valueGreterZero;
     } else {
       return null;
     }
