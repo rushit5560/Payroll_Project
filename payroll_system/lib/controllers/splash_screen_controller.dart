@@ -52,7 +52,7 @@ class SplashScreenController extends GetxController {
           subAdminEdit:
               userPermissionModel.data.subadminedit == "on" ? true : false,
           subAdminDelete: false,
-          companyView: roleId == "1" ? true : false,
+          companyView: roleId == "1" ? true : userPermissionModel.data.companyview == "on" ? true : false,
           companyAdd:
               userPermissionModel.data.companyadd == "on" ? true : false,
           companyEdit:
@@ -104,7 +104,7 @@ class SplashScreenController extends GetxController {
           payChecksAdd:
               userPermissionModel.data.payrolladd == "on" ? true : false,
           payChecksEdit: false,
-          payChecksDelete: false,
+          payChecksDelete: userPermissionModel.data.payrolldelete == "on" ? true : false,
           payChecksDownload:
               userPermissionModel.data.payrolldownload == "on" ? true : false,
           approvePayChecksView:

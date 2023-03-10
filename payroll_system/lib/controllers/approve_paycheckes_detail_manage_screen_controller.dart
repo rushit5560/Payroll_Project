@@ -25,6 +25,8 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
   UserPreference userPreference = UserPreference();
   String prefsDateFormat = "";
 
+  bool approvePayChecksEditPermission = false;
+
   // Delete Employee
   Future<void> deleteApprovalFunction(String approvalId) async {
     isLoading(true);

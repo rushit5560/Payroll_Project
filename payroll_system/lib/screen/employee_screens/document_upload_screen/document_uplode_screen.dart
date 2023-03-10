@@ -72,14 +72,26 @@ class DocumentUploadScreen extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () async {
-                            if (uploadDocumentScreenController
-                                    .selectedDocumentList.length <=
-                                5) {
-                              await uploadDocumentScreenController
-                                  .pickDocumentFunction();
+
+                            uploadDocumentScreenController.uploadDocumentPermission =
+                            await userPreference
+                                .getBoolPermissionFromPrefs(
+                                keyId: UserPreference
+                                    .employeeDocumentAddKey);
+
+                            if(uploadDocumentScreenController.uploadDocumentPermission == true) {
+                              if (uploadDocumentScreenController
+                                  .selectedDocumentList.length <=
+                                  5) {
+                                await uploadDocumentScreenController
+                                    .pickDocumentFunction();
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg: AppMessage.youReachedAtMaxLength);
+                              }
                             } else {
                               Fluttertoast.showToast(
-                                  msg: AppMessage.youReachedAtMaxLength);
+                                  msg: AppMessage.deniedPermission);
                             }
                           },
                           icon: const Icon(

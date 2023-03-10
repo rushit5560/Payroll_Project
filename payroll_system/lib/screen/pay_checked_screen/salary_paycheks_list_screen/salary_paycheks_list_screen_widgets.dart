@@ -74,11 +74,9 @@ class SalaryPaychecksListModule extends StatelessWidget {
                                     await userPreference
                                         .getBoolPermissionFromPrefs(
                                             keyId: UserPreference
-                                                .approvePayChecksDeleteKey);
+                                                .payChecksDeleteKey);
 
-                                if (screenController
-                                        .payChecksDeletePermission ==
-                                    true) {
+                                if (screenController.payChecksDeletePermission == true) {
                                   CustomAlertDialog().showAlertDialog(
                                     context: context,
                                     textContent:
