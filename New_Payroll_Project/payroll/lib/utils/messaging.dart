@@ -376,8 +376,8 @@ class AppMessage {
 
   static String download = 'Download';
   static String pleaseEnterRegularRate = 'Please Enter Regular Rate.';
-  static String valueGreterOne = 'Value must be grater then or equal to 1.';
-  static String valueGreterZero = 'Value must be grater then or equal to 0.';
+  static String valueGreterOne = 'Value must be grater than or equal to 1.';
+  static String valueGreterZero = 'Value must be grater than or equal to 0.';
   static String pleaseEnterOt = 'Please Enter Overtime.';
   static String pleaseEnterHolidayPay = 'Please Enter Holidaypay.';
 
