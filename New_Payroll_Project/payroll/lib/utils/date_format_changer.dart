@@ -15,7 +15,8 @@ class DateFormater {
     // String prefsDateFormat = dateFormat;
 
     if(prefsDateFormat == "m-d-Y") {
-      formatedDate = "${date.month}-${date.day}-${date.year}";
+      // formatedDate = "${date.month}-${date.day}-${date.year}";
+      formatedDate = DateFormat("MM-dd-yyyy").format(date);
     }
     else if(prefsDateFormat == "d-m-Y") {
       formatedDate = "${date.day}-${date.month}-${date.year}";

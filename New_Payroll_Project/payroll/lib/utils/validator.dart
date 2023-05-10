@@ -414,7 +414,7 @@ class FieldValidation {
   String? validateOt(String value) {
     if (value.isEmpty) {
       return null;
-    } else if (value == "0" || int.parse(value) < 0) {
+    } else if (int.parse(value) < 0) {
       return AppMessage.valueGreterZero;
     } else {
       return null;
@@ -424,7 +424,7 @@ class FieldValidation {
   String? validateHolidayPay(String value) {
     if (value.isEmpty) {
       return null;
-    } else if (value == "0" || int.parse(value) < 0) {
+    } else if (int.parse(value) < 0) {
       return AppMessage.valueGreterZero;
     } else {
       return null;
@@ -434,7 +434,7 @@ class FieldValidation {
   String? validateBonusPay(String value) {
     if (value.isEmpty) {
       return null;
-    } else if (value == "0" || int.parse(value) < 0) {
+    } else if (int.parse(value) < 0) {
       return AppMessage.valueGreterZero;
     } else {
       return null;
@@ -444,7 +444,7 @@ class FieldValidation {
   String? validateOtherEarningPay(String value) {
     if (value.isEmpty) {
       return null;
-    } else if (value == "0" || int.parse(value) < 0) {
+    } else if (int.parse(value) < 0) {
       return AppMessage.valueGreterZero;
     } else {
       return null;

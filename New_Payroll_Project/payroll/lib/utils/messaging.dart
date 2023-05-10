@@ -109,12 +109,12 @@ class AppMessage {
   static String departmentList = 'Department List';
   static String homeNo = 'Home Number';
   static String workNO = 'Work Number';
-  static String hourlyRate = 'Hourly Rate (\$,₹)';
+  static String hourlyRate = 'Hourly Rate (\$)';
   static String hourly = 'Hourly';
   static String isActive = 'Is-Active';
   static String regularHour = 'Regular Hour';
 
-  static String salary = 'Salary (\$,₹)';
+  static String salary = 'Salary (\$)';
   static String salaryText = 'Salary';
 
   static String payPeriod = 'Pay Period';
