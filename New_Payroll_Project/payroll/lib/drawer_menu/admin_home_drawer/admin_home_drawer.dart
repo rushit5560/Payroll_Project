@@ -97,9 +97,10 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                               imageStatus: true,
                               image: AppImages.roleIcon,
                             ),
-                            // general settings
 
-                            adminDrawerController.roleId.value == 1
+
+                            // general settings
+                            /*adminDrawerController.roleId.value == 1
                                 ? adminDrawerController
                                             .isGeneralSettingShowPermission
                                             .value ==
@@ -117,7 +118,7 @@ class AdminHomeDrawerMenu extends StatelessWidget {
                                                 .withOpacity(0.6)),
                                       )
                                     : Container()
-                                : Container(),
+                                : Container(),*/
                           ],
                         ),
                       ),

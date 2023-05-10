@@ -988,7 +988,7 @@ class CompanyEmployeeManageWidgetsScreen extends StatelessWidget {
         companyEmployeeManageScreenController.birthDate = d;
         companyEmployeeManageScreenController.dateOfBirthShowController.text =
             DateFormater().changeDateFormat(
-                d, companyEmployeeManageScreenController.prefsDateFormat);
+                DateTime.parse(d.toString()), companyEmployeeManageScreenController.prefsDateFormat);
       } else if (datePickerOption == DatePickerOption.startDate) {
         companyEmployeeManageScreenController.employmentStartDate = d;
         companyEmployeeManageScreenController.startDateShowController.text =
