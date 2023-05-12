@@ -15,6 +15,8 @@ import 'package:payroll_system/utils/extensions.dart';
 import 'package:payroll_system/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../utils/date_format_changer.dart';
+
 class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
   PayCheckesDowanloadWidgetsListScreen({super.key});
   final payChecksDownloadScreenController =
@@ -91,17 +93,24 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.startDate,
-                    textValue: payrollListDataListValue.startdate
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(payrollListDataListValue.startdate),
+                        payChecksDownloadScreenController.prefsDateFormat)
+                     /* payrollListDataListValue.startdate
                         .toString()
-                        .split(" ")[0],
+                        .split(" ")[0]*/,
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.endDate,
-                    textValue: payrollListDataListValue.enddate
+                    textValue:  DateFormater().changeDateFormat(
+                        DateTime.parse(payrollListDataListValue.enddate),
+                        payChecksDownloadScreenController.prefsDateFormat)
+
+                    /*payrollListDataListValue.enddate
                         .toString()
-                        .split(" ")[0],
+                        .split(" ")[0]*/,
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),

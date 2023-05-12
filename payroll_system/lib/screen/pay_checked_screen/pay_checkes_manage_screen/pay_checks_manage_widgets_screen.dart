@@ -98,9 +98,13 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                         payCheckedManageScreenController.isLoading(true);
                         payCheckedManageScreenController
                             .selectedCheckedValue.value = value!;
-                        payCheckedManageScreenController.endDateController
-                            .clear();
-                        // payCheckedManageScreenController.endDate = DateTime.now();
+
+                        // When change the date the time clear the field controllers
+                        payCheckedManageScreenController.startDateShowController.clear();
+                        payCheckedManageScreenController.endDateShowController.clear();
+                        payCheckedManageScreenController.startDateController.clear();
+                        payCheckedManageScreenController.endDateController.clear();
+
                         payCheckedManageScreenController.isLoading(false);
                       },
                     ).commonOnlyPadding(
@@ -517,7 +521,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
       if (payCheckedManageScreenController.selectedCheckedValue.value ==
           "Weekly") {
         final d1 = d;
-        final d2 = d1.add(const Duration(days: 7));
+        final d2 = d1.add(const Duration(days: 6));
         payCheckedManageScreenController.endDateController.text =
             "${d2.year}-${d2.month}-${d2.day}";
         payCheckedManageScreenController.endDateShowController.text =
@@ -527,7 +531,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
       } else if (payCheckedManageScreenController.selectedCheckedValue.value ==
           "Bi-Weekly") {
         final d1 = d;
-        final d2 = d1.add(const Duration(days: 14));
+        final d2 = d1.add(const Duration(days: 13));
         payCheckedManageScreenController.endDateController.text =
             "${d2.year}-${d2.month}-${d2.day}";
         payCheckedManageScreenController.endDate = d2;

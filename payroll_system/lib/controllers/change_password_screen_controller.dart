@@ -50,6 +50,7 @@ class ChangePasswordController extends GetxController {
       request.fields['password'] = newPasswordController.text.trim();
       request.fields['password_confirmation'] =
           newConfirmPasswordController.text.trim();
+
       log('changePasswordFunction fields ${request.fields}');
       var response = await request.send();
 

@@ -32,7 +32,7 @@ class CompanyProfileScreenController extends GetxController {
   List<String> departmentStringList = [];
 
   RxList<String> selectedDepartmentList = RxList<String>([]);
-  List<String> selectedDepartmentIdList = [];
+  // List<String> selectedDepartmentIdList = [];
   UserPreference userPreference = UserPreference();
 
   // List<String> selectedDepartmentList = [];
@@ -139,7 +139,7 @@ class CompanyProfileScreenController extends GetxController {
             ).toList();
 
             for (int i = 0; i < idList.length; i++) {
-              selectedDepartmentIdList.add(idList[i].toString());
+              // selectedDepartmentIdList.add(idList[i].toString());
               for (int j = 0; j < departmentList.length; j++) {
                 if (idList[i] == departmentList[j].id) {
                   log("idList.length :: ${idList.length}");

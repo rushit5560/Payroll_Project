@@ -252,6 +252,7 @@ class AppMessage {
   static String newPasswordAndConfirmPasswordMustBeSame =
       'New password & confirm password must be same.';
   static String days = 'Days';
+  static String month = 'Month';
 
   static String pleaseSelectLocationValidate = 'Please select location.';
   static String pleaseSelectDepartmentValidate = 'Please select department.';
@@ -309,6 +310,7 @@ class AppMessage {
   static String payRollForm = 'Payroll Form';
   static String startDate = 'Start Date';
   static String employee = 'Employee ';
+  static String selectMonth = 'Select Month.';
   static String selectPayRollStartDate = 'Select Start Date.';
   static String selectPayRollEndDate = 'Select End Date.';
   static String overtimeIsRequired = 'overtime is required.';
