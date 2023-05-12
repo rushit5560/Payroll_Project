@@ -179,7 +179,7 @@ class PayCheckesListScreen extends StatelessWidget {
                           focusedErrorBorder: InputFieldStyles().inputBorder(),
                           fillColor: AppColors.colorWhite,
                           filled: true,
-                          hintText: AppMessage.search,
+                          hintText: "${AppMessage.search} (${AppMessage.employeeName})",
                           hintStyle: const TextStyle(
                               color: AppColors.colorLightHintPurple2),
                           prefixIcon: const Icon(

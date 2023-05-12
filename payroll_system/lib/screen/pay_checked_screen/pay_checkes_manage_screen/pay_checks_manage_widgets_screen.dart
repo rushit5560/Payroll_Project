@@ -27,8 +27,6 @@ class PayChecksWidgetsScreen extends StatelessWidget {
 
   final payCheckedManageScreenController =
       Get.find<PayCheckedManageScreenController>();
-  UserPreference userPreference = UserPreference();
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -416,39 +414,37 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                             isApiCallStatusList.add(true);
                             // todo
                             payCheckedManageScreenController.data.add({
-                              "employee": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i].id
-                                  .toString(),
-                              "regularhour": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .regularTextFieldValue,
-                              "overtime": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .otTextFieldValue,
-                              "holidaypay": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .holidayPayTextFieldValue,
-                              "bonus": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .bonusTextFieldValue,
-                              "otherearning": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .otherEarningTextFieldValue,
-                              "commission": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .commissionTextFieldValue,
-                              "sickpay": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .sickPayHoursTextFieldValue,
-                              "vacationhours": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .vacationHoursTextFieldValue,
-                              "tip": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .tipTextFieldValue,
-                              "tax": payCheckedManageScreenController
-                                  .allCompanyWiseEmployeeList[i]
-                                  .taxTextFieldValue,
+                              "employee": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].id.toString(),
+                              "regularhour": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].regularTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].regularTextFieldValue,
+                              "overtime": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].otTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].otTextFieldValue,
+                              "holidaypay": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].holidayPayTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].holidayPayTextFieldValue,
+                              "bonus": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].bonusTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].bonusTextFieldValue,
+                              "otherearning": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].otherEarningTextFieldValue.isEmpty
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].otherEarningTextFieldValue,
+                              "commission": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].commissionTextFieldValue.isEmpty
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].commissionTextFieldValue,
+                              "sickpay": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].sickPayHoursTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].sickPayHoursTextFieldValue,
+                              "vacationhours": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].vacationHoursTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].vacationHoursTextFieldValue,
+                              "tip": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].tipTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].tipTextFieldValue,
+                              "tax": payCheckedManageScreenController.allCompanyWiseEmployeeList[i].taxTextFieldValue.isEmpty == true
+                              ? "0"
+                              : payCheckedManageScreenController.allCompanyWiseEmployeeList[i].taxTextFieldValue,
                             });
                           } else {
                             isApiCallStatusList.add(false);
@@ -485,6 +481,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
       ),
     );
   }
+
+  UserPreference userPreference = UserPreference();
 
   Future<void> _selectStartDate({
     required BuildContext context,
@@ -921,7 +919,7 @@ class OtTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) => FieldValidation().validateOt(value.toString()),
+          validator: (value) => FieldValidation().validateOt(value.toString()),
         )
       ],
     );
@@ -977,8 +975,8 @@ class HolidayPayTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateHolidayPay(value.toString()),
         )
       ],
     );
@@ -1024,8 +1022,8 @@ class BonusTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateBonusPay(value.toString()),
         )
       ],
     );
@@ -1071,8 +1069,8 @@ class OtherEarningTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -1118,8 +1116,8 @@ class CommissionTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -1165,8 +1163,8 @@ class SickPayTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -1212,8 +1210,8 @@ class VacationTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -1259,8 +1257,8 @@ class TipTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );
@@ -1306,8 +1304,8 @@ class TaxTextFormFieldModule extends StatelessWidget {
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
-          // validator: (value) =>
-          //     FieldValidation().validateHolidayPay(value.toString()),
+          validator: (value) =>
+              FieldValidation().validateOtherEarningPay(value.toString()),
         )
       ],
     );

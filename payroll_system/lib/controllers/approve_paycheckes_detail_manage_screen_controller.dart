@@ -25,6 +25,8 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
   UserPreference userPreference = UserPreference();
   String prefsDateFormat = "";
 
+  bool approvePayChecksEditPermission = false;
+
   // Delete Employee
   Future<void> deleteApprovalFunction(String approvalId) async {
     isLoading(true);
@@ -77,6 +79,7 @@ class ApprovePayCheckesDetailsScreenController extends GetxController {
 
       isSuccessStatus = approvalPermissionModel.success.obs;
       if (isSuccessStatus.value) {
+        log('approvalPermissionModel.messege121212 : ${approvalPermissionModel.messege}');
         Fluttertoast.showToast(msg: approvalPermissionModel.messege);
         approvalData.approvepaychecks = "1";
         Get.back();

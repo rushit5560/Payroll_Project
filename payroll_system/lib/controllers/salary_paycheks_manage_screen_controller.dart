@@ -50,7 +50,13 @@ class SalaryPayChecksManageScreenController extends GetxController {
   List<CompanyWiseEmployeeData> allSalaryPaychecksWiseEmployeeList = [];
 
 
+
   DateTime selectedDate = DateTime.now();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> employeeFormKey = GlobalKey<FormState>();
+
+
   DateTime birthDate = DateTime.now();
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();

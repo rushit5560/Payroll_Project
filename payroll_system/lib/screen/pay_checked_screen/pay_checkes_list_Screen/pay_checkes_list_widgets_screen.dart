@@ -84,11 +84,9 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                                     await userPreference
                                         .getBoolPermissionFromPrefs(
                                             keyId: UserPreference
-                                                .approvePayChecksDeleteKey);
+                                                .payChecksDeleteKey);
 
-                                if (payCheckesListScreenController
-                                        .payChecksDeletePermission ==
-                                    true) {
+                                if (payCheckesListScreenController.payChecksDeletePermission == true) {
                                   CustomAlertDialog().showAlertDialog(
                                     context: context,
                                     textContent:

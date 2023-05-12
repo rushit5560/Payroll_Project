@@ -30,6 +30,8 @@ class UploadDocumentScreenController extends GetxController {
   List<File> selectedDocumentList = [];
   List<DocumentDatumData> uploadedDocumentList = [];
 
+  bool uploadDocumentPermission = false;
+
   // final documentDownloadScreenController =
   //     Get.find<DocumentDownloadScreenController>();
   // final documentDownloadScreenController = Get.find<DocumentDownloadScreenController>();
