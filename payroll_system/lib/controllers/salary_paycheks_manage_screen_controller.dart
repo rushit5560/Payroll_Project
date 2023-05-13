@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
-import 'package:payroll_system/models/pay_checkes_manage_screen_model/paychecks_create_model.dart';
-import 'package:payroll_system/utils/api_url.dart';
-import 'package:payroll_system/utils/extension_methods/user_preference.dart';
 
+import '../models/employee_list_screen_models/employee_list_model.dart';
+import '../models/pay_checkes_manage_screen_model/paychecks_create_model.dart';
+import '../utils/api_url.dart';
+import '../utils/extension_methods/user_preference.dart';
 import 'salary_paycheks_list_screen_controller.dart';
 
 class SalaryPayChecksManageScreenController extends GetxController {
@@ -29,33 +29,12 @@ class SalaryPayChecksManageScreenController extends GetxController {
   ];
   RxString selectedSalaryChecksValue = "Choose Option".obs;
 
-  List<String> monthList = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  RxString selectedMonth = "January".obs;
-
   UserPreference userPreference = UserPreference();
 
   List<CompanyWiseEmployeeData> allSalaryPaychecksWiseEmployeeList = [];
 
-
-
-  DateTime selectedDate = DateTime.now();
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> employeeFormKey = GlobalKey<FormState>();
-
 
   DateTime birthDate = DateTime.now();
   DateTime startDate = DateTime.now();
@@ -67,12 +46,9 @@ class SalaryPayChecksManageScreenController extends GetxController {
   TextEditingController payDateController = TextEditingController();
   TextEditingController memoController = TextEditingController();
 
-  TextEditingController monthShowController = TextEditingController();
   TextEditingController startDateShowController = TextEditingController();
   TextEditingController endDateShowController = TextEditingController();
   TextEditingController payDateShowController = TextEditingController();
-
-  int daysCount = 0;
 
   List<Map<String, dynamic>> data = [];
 
@@ -134,15 +110,14 @@ class SalaryPayChecksManageScreenController extends GetxController {
 
     int userId = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
-    // int daysCount = endDate.difference(startDate).inDays;
+    int daysCount = endDate.difference(startDate).inDays;
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
       request.fields['cid'] = companyId;
       request.fields['userid'] = "$userId";
-      // request.fields['typeid'] = selectedSalaryChecksValue.value.toLowerCase();
-      request.fields['typeid'] = "Monthly";
+      request.fields['typeid'] = selectedSalaryChecksValue.value.toLowerCase();
       request.fields['startdate'] = startDateController.text.trim();
       request.fields['enddate'] = endDateController.text.trim();
       request.fields['paydate'] = payDateController.text.trim();

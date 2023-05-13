@@ -109,12 +109,12 @@ class AppMessage {
   static String departmentList = 'Department List';
   static String homeNo = 'Home Number';
   static String workNO = 'Work Number';
-  static String hourlyRate = 'Hourly Rate (\$,₹)';
+  static String hourlyRate = 'Hourly Rate (\$)';
   static String hourly = 'Hourly';
   static String isActive = 'Is-Active';
   static String regularHour = 'Regular Hour';
 
-  static String salary = 'Salary (\$,₹)';
+  static String salary = 'Salary (\$)';
   static String salaryText = 'Salary';
 
   static String payPeriod = 'Pay Period';
@@ -252,7 +252,6 @@ class AppMessage {
   static String newPasswordAndConfirmPasswordMustBeSame =
       'New password & confirm password must be same.';
   static String days = 'Days';
-  static String month = 'Month';
 
   static String pleaseSelectLocationValidate = 'Please select location.';
   static String pleaseSelectDepartmentValidate = 'Please select department.';
@@ -310,7 +309,6 @@ class AppMessage {
   static String payRollForm = 'Payroll Form';
   static String startDate = 'Start Date';
   static String employee = 'Employee ';
-  static String selectMonth = 'Select Month.';
   static String selectPayRollStartDate = 'Select Start Date.';
   static String selectPayRollEndDate = 'Select End Date.';
   static String overtimeIsRequired = 'overtime is required.';
@@ -378,8 +376,8 @@ class AppMessage {
 
   static String download = 'Download';
   static String pleaseEnterRegularRate = 'Please Enter Regular Rate.';
-  static String valueGreterOne = 'Value must be grater then or equal to 1.';
-  static String valueGreterZero = 'Value must be grater then or equal to 0.';
+  static String valueGreterOne = 'Value must be grater than or equal to 1.';
+  static String valueGreterZero = 'Value must be grater than or equal to 0.';
   static String pleaseEnterOt = 'Please Enter Overtime.';
   static String pleaseEnterHolidayPay = 'Please Enter Holidaypay.';
 

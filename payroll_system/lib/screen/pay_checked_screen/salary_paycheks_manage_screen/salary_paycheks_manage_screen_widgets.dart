@@ -4,23 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:month_year_picker/month_year_picker.dart';
-import 'package:payroll_system/common_modules/form_single_field_module.dart';
-import 'package:payroll_system/common_modules/new/custom_submit_button_module.dart';
+import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
-import 'package:payroll_system/controllers/salary_paycheks_manage_screen_controller.dart';
-import 'package:payroll_system/models/employee_list_screen_models/employee_list_model.dart';
 import 'package:payroll_system/utils/app_images.dart';
-import 'package:payroll_system/utils/date_format_changer.dart';
-import 'package:payroll_system/utils/extensions.dart';
-import 'package:payroll_system/utils/messaging.dart';
-import 'package:payroll_system/utils/style.dart';
-import 'package:payroll_system/utils/validator.dart';
+
 import 'package:sizer/sizer.dart';
 
+import '../../../Utils/messaging.dart';
+import '../../../Utils/style.dart';
+import '../../../common_modules/form_single_field_module.dart';
+import '../../../common_modules/new/custom_submit_button_module.dart';
+import '../../../controllers/salary_paycheks_manage_screen_controller.dart';
+import '../../../models/employee_list_screen_models/employee_list_model.dart';
+import '../../../utils/date_format_changer.dart';
 import '../../../utils/extension_methods/user_preference.dart';
-
+import '../../../utils/validator.dart';
 
 class SalaryPayChecksFormModule extends StatelessWidget {
   SalaryPayChecksFormModule({Key? key}) : super(key: key);
@@ -31,232 +30,6 @@ class SalaryPayChecksFormModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// Type Text & Dropdown Module
-          /*RichText(
-            textAlign: TextAlign.left,
-            maxLines: null,
-            text: TextSpan(
-                text: AppMessage.type,
-                style: TextStyleConfig.textStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-                children: [
-                  TextSpan(
-                    text: " ${AppMessage.mandatory}",
-                    style: TextStyleConfig.textStyle(
-                      textColor: AppColors.redColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
-                ]),
-          ).commonSymmetricPadding(vertical: 2),
-          Container(
-            width: Get.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              // border: Border.all(color: AppColors.greyColor),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 3),
-              child: Container(
-                // height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.transparent),
-                ),
-                // child: DropdownButtonHideUnderline(
-                child: Center(
-                  child: DropdownButtonFormField<String>(
-                    validator: (value) =>
-                        FieldValidation().validateDropdownStatus(value!),
-                    decoration: const InputDecoration.collapsed(hintText: ''),
-                    value: screenController.selectedSalaryChecksValue.value,
-                    items: screenController.isSalaryPayChecksList
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    borderRadius: BorderRadius.circular(10),
-                    icon: Image.asset(
-                      AppImages.arrowDownIcon,
-                      height: 15,
-                      width: 15,
-                    ).commonSymmetricPadding(horizontal: 10),
-                    onChanged: (String? value) {
-                      screenController.isLoading(true);
-                      screenController.selectedSalaryChecksValue.value = value!;
-                      screenController.endDateController.clear();
-                      // screenController.endDate = DateTime.now();
-                      screenController.isLoading(false);
-                    },
-                  ).commonOnlyPadding(left: 10, right: 10, top: 10, bottom: 10),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 15),*/
-
-          /*RichText(
-            textAlign: TextAlign.left,
-            maxLines: null,
-            text: TextSpan(
-                text: AppMessage.month,
-                style: TextStyleConfig.textStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-                children: [
-                  TextSpan(
-                    text: " ${AppMessage.mandatory}",
-                    style: TextStyleConfig.textStyle(
-                      textColor: AppColors.redColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
-                ]),
-          ).commonSymmetricPadding(vertical: 2),*/
-          FormSingleFieldModule(
-            headerText: AppMessage.month,
-            text: AppMessage.selectMonth,
-            keyboardType: TextInputType.datetime,
-            mandatoryText: AppMessage.mandatory,
-            textEditingController: screenController.monthShowController,
-            suffixIcon: Icons.calendar_month,
-            readOnly: true,
-            onPressed: () async {
-              await _selectMonthPicker(context: context);
-
-            },
-            validate: (value) =>
-                FieldValidation().validateStartDate(value),
-          ),
-          const SizedBox(height: 15),
-          ///
-
-          /// Start & End Date module
-          /*Row(
-            children: [
-              Expanded(
-                flex: 5,
-                child: FormSingleFieldModule(
-                  headerText: AppMessage.startDate,
-                  text: AppMessage.selectPayRollStartDate,
-                  keyboardType: TextInputType.datetime,
-                  mandatoryText: AppMessage.mandatory,
-                  textEditingController:
-                      screenController.startDateShowController,
-                  suffixIcon: Icons.calendar_month,
-                  readOnly: true,
-                  onPressed: () async {
-                    await _selectStartDate(
-                        context: context,
-                        dateTime: screenController.startDate,
-                        textEditingController:
-                            screenController.startDateController,
-                        datePickerOption: DatePickerOption.startDate);
-                  },
-                  validate: (value) =>
-                      FieldValidation().validateStartDate(value),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                flex: 5,
-                child: SalaryFormSingleDateFieldModule(
-                  headerText: AppMessage.endDate,
-                  text: AppMessage.selectPayRollEndDate,
-                  keyboardType: TextInputType.datetime,
-                  mandatoryText: AppMessage.mandatory,
-                  textEditingController: screenController.endDateShowController,
-                  suffixIcon: Icons.calendar_month,
-                  readOnly: true,
-                  onPressed: () async {
-                    await _selectEndDate(
-                        context: context,
-                        dateTime: screenController.endDate,
-                        textEditingController:
-                            screenController.endDateController,
-                        datePickerOption: DatePickerOption.startDate);
-                  },
-                  validate: (value) => FieldValidation()
-                      .validateEndDate(value, screenController.endDate),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 5),*/
-
-          /// Pay Date module
-          FormSingleFieldModule(
-            headerText: AppMessage.payDate,
-            text: AppMessage.payDate,
-            keyboardType: TextInputType.datetime,
-            mandatoryText: AppMessage.mandatory,
-            textEditingController: screenController.payDateShowController,
-            suffixIcon: Icons.calendar_month,
-            readOnly: true,
-            onPressed: () async {
-              await _selectPayDate(
-                context: context,
-                dateTime: screenController.payDate,
-                textEditingController: screenController.payDateController,
-                datePickerOption: DatePickerOption.startDate,
-              );
-            },
-            validate: (value) => FieldValidation().validatePayDate(
-                value, screenController.endDate, screenController.payDate),
-          ),
-          const SizedBox(height: 5),
-
-          /// Employee List module
-          RichText(
-            textAlign: TextAlign.left,
-            maxLines: null,
-            text: TextSpan(
-                text: AppMessage.companyEmployees,
-                style: TextStyleConfig.textStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-                children: [
-                  TextSpan(
-                    text: ' *',
-                    style: TextStyleConfig.textStyle(
-                      textColor: AppColors.redColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
-                ]),
-          ).commonSymmetricPadding(vertical: 2),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount:
-                screenController.allSalaryPaychecksWiseEmployeeList.length,
-            itemBuilder: (context, index) {
-              CompanyWiseEmployeeData employeeData =
-                  screenController.allSalaryPaychecksWiseEmployeeList[index];
-
-              // TextEditingController regularHourController = TextEditingController();
-
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.transparent),
-                ),
-               
       child: Form(
         key: screenController.formKey,
         child: Column(
@@ -272,7 +45,6 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
-
                   children: [
                     TextSpan(
                       text: " ${AppMessage.mandatory}",
@@ -668,9 +440,9 @@ class SalaryPayChecksFormModule extends StatelessWidget {
             ///
           ],
         ).commonOnlyPadding(top: 3.h, right: 6.w, left: 6.w, bottom: 3.h),
-      )
-              
-  
+      ),
+    );
+  }
 
   Future<void> _selectStartDate({
     required BuildContext context,
@@ -725,118 +497,6 @@ class SalaryPayChecksFormModule extends StatelessWidget {
 
       screenController.isLoading(false);
     }
-  }
-
-  Future<void> _selectMonthPicker({required BuildContext context}) async {
-    final selectedDate = await showMonthYearPicker(
-      context: context,
-      initialDate: screenController.selectedDate,
-      firstDate: DateTime(2019),
-      lastDate: DateTime(2030),
-    );
-    log('selected Month : $selectedDate');
-
-    if(selectedDate != null) {
-
-      screenController.startDateController.text = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
-
-      screenController.monthShowController.text =
-          DateFormater().changeDateFormat(
-        selectedDate,
-        screenController.prefsDateFormat,
-      );
-
-      if(selectedDate.month == 1) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
-        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
-        screenController.daysCount = 31;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(DateTime.parse(screenController.endDateController.text), screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 2) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-28";
-        screenController.endDateShowController.text = "${selectedDate.month}-28-${selectedDate.year}";
-        screenController.daysCount = 28;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 3) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
-        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
-        screenController.daysCount = 31;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 4) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
-        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
-        screenController.daysCount = 30;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 5) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
-        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
-        screenController.daysCount = 31;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 6) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
-        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
-        screenController.daysCount = 30;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 7) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
-        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
-        screenController.daysCount = 31;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 8) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
-        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
-        screenController.daysCount = 31;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 9) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
-        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
-        screenController.daysCount = 30;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 10) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
-        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
-        screenController.daysCount = 31;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 11) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
-        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
-        screenController.daysCount = 30;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-      if(selectedDate.month == 12) {
-        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
-        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
-        screenController.daysCount = 31;
-        // screenController.endDateShowController.text = DateFormater()
-        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
-      }
-
-      log('endDateController : ${screenController.endDateController.text}');
-      log('endDateShowController : ${screenController.endDateShowController.text}');
-
-    }
-
-
   }
 
   Future<void> _selectEndDate({
