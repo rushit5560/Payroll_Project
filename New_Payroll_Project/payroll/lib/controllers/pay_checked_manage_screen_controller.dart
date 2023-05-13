@@ -184,7 +184,7 @@ class PayCheckedManageScreenController extends GetxController {
 
     int userId = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
-    int daysCount = endDate.difference(startDate).inDays;
+    int daysCount = endDate.difference(startDate).inDays + 1;
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
