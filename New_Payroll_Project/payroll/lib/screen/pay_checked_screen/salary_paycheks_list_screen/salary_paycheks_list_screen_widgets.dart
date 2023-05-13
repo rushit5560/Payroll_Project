@@ -30,6 +30,12 @@ class SalaryPaychecksListModule extends StatelessWidget {
         itemBuilder: (context, i) {
           PayCheckesListData singleItem =
               screenController.filterSalaryPayChecksList[i];
+
+          // Total days
+          DateTime endDate = DateTime.parse(singleItem.enddate);
+          DateTime startDate = DateTime.parse(singleItem.startdate);
+          int daysCount = endDate.difference(startDate).inDays + 1;
+
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -150,7 +156,7 @@ class SalaryPaychecksListModule extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
-                    textValue: "${singleItem.days} ${AppMessage.days}",
+                    textValue: "$daysCount ${AppMessage.days}",
                     image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),

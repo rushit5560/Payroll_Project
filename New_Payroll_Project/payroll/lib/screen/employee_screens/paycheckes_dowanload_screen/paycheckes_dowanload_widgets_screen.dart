@@ -15,6 +15,8 @@ import 'package:payroll/utils/extensions.dart';
 import 'package:payroll/utils/messaging.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../utils/date_format_changer.dart';
+
 class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
   PayCheckesDowanloadWidgetsListScreen({super.key});
   final payChecksDownloadScreenController =
@@ -32,6 +34,13 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final payrollListDataListValue = payChecksDownloadScreenController
               .payCheckDwanloadListData[index];
+
+// Total days
+          DateTime endDate = DateTime.parse(payrollListDataListValue.enddate);
+          DateTime startDate = DateTime.parse(payrollListDataListValue.startdate);
+          int daysCount = endDate.difference(startDate).inDays + 1;
+
+
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -71,9 +80,9 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
                   ),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.payDate,
-                    textValue: payrollListDataListValue.paydate
-                        .toString()
-                        .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(payrollListDataListValue.paydate),
+                        payChecksDownloadScreenController.prefsDateFormat),
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
@@ -91,23 +100,23 @@ class PayCheckesDowanloadWidgetsListScreen extends StatelessWidget {
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.startDate,
-                    textValue: payrollListDataListValue.startdate
-                        .toString()
-                        .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(payrollListDataListValue.startdate),
+                        payChecksDownloadScreenController.prefsDateFormat),
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.endDate,
-                    textValue: payrollListDataListValue.enddate
-                        .toString()
-                        .split(" ")[0],
+                    textValue: DateFormater().changeDateFormat(
+                        DateTime.parse(payrollListDataListValue.enddate),
+                        payChecksDownloadScreenController.prefsDateFormat),
                     image: AppImages.calendarIcon,
                   ),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
-                    textValue: "${payrollListDataListValue.days} Days",
+                    textValue: "$daysCount Days",
                     image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),

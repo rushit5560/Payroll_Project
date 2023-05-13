@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'Screen/splash_Screen/splash_screen.dart';
 import 'constants/colors.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
             ),
           ),
           home: SplashScreen(),
+          localizationsDelegates: [
+            MonthYearPickerLocalizations.delegate,
+          ],
         );
       },
     );

@@ -36,6 +36,7 @@ class SalaryPayChecksManageScreenController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> employeeFormKey = GlobalKey<FormState>();
 
+  DateTime selectedDate = DateTime.now();
   DateTime birthDate = DateTime.now();
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
@@ -46,9 +47,12 @@ class SalaryPayChecksManageScreenController extends GetxController {
   TextEditingController payDateController = TextEditingController();
   TextEditingController memoController = TextEditingController();
 
+  TextEditingController monthShowController = TextEditingController();
   TextEditingController startDateShowController = TextEditingController();
   TextEditingController endDateShowController = TextEditingController();
   TextEditingController payDateShowController = TextEditingController();
+
+  int daysCount = 0;
 
   List<Map<String, dynamic>> data = [];
 
@@ -110,14 +114,14 @@ class SalaryPayChecksManageScreenController extends GetxController {
 
     int userId = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
-    int daysCount = endDate.difference(startDate).inDays;
+    // int daysCount = endDate.difference(startDate).inDays;
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
       request.fields['cid'] = companyId;
       request.fields['userid'] = "$userId";
-      request.fields['typeid'] = selectedSalaryChecksValue.value.toLowerCase();
+      request.fields['typeid'] = "Monthly";
       request.fields['startdate'] = startDateController.text.trim();
       request.fields['enddate'] = endDateController.text.trim();
       request.fields['paydate'] = payDateController.text.trim();

@@ -7,9 +7,13 @@ import 'package:payroll/utils/api_url.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:payroll/models/pay_checkes_download_screen_model/pay_checkes_dowanload_screen_model.dart';
 
+import '../utils/extension_methods/user_preference.dart';
+
 class PayCheckesDowanloadScreenController extends GetxController {
   String employeeId = Get.arguments[0];
   String employeeName = Get.arguments[1];
+
+  UserPreference userPreference = UserPreference();
 
   final TextEditingController textSearchEditingController =
       TextEditingController();
@@ -19,6 +23,8 @@ class PayCheckesDowanloadScreenController extends GetxController {
   List<String> isPayperList = ["Choose Option", "Salary", "Hourly"];
   List<PayCheckDwanloadListData> payCheckDwanloadListData = [];
   TextEditingController hourlyRateController = TextEditingController();
+
+  String prefsDateFormat = "";
 
   Future<void> getPaycheckesDowanlodeListFunction() async {
     isLoading(true);
@@ -49,6 +55,13 @@ class PayCheckesDowanloadScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getPaycheckesDowanlodeListFunction();
+    initMethod();
+  }
+
+
+  Future<void> initMethod() async {
+    prefsDateFormat = await userPreference.getStringValueFromPrefs(
+        keyId: UserPreference.dateFormatKey);
+    await getPaycheckesDowanlodeListFunction();
   }
 }

@@ -252,6 +252,8 @@ class AppMessage {
   static String newPasswordAndConfirmPasswordMustBeSame =
       'New password & confirm password must be same.';
   static String days = 'Days';
+  static String month = 'Month';
+  static String selectMonth = 'Select Month.';
 
   static String pleaseSelectLocationValidate = 'Please select location.';
   static String pleaseSelectDepartmentValidate = 'Please select department.';

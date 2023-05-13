@@ -4,21 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:payroll/common_modules/form_single_field_module.dart';
-import 'package:payroll/common_modules/new/custom_submit_button_module.dart';
-import 'package:payroll/constants/colors.dart';
-import 'package:payroll/constants/enums.dart';
-import 'package:payroll/controllers/salary_paycheks_manage_screen_controller.dart';
-import 'package:payroll/models/employee_list_screen_models/employee_list_model.dart';
-import 'package:payroll/utils/app_images.dart';
-import 'package:payroll/utils/date_format_changer.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:payroll/utils/extensions.dart';
-import 'package:payroll/utils/messaging.dart';
-import 'package:payroll/utils/style.dart';
-import 'package:payroll/utils/validator.dart';
 import 'package:sizer/sizer.dart';
-
+import '../../../Utils/messaging.dart';
+import '../../../Utils/style.dart';
+import '../../../common_modules/form_single_field_module.dart';
+import '../../../common_modules/new/custom_submit_button_module.dart';
+import '../../../constants/colors.dart';
+import '../../../constants/enums.dart';
+import '../../../controllers/salary_paycheks_manage_screen_controller.dart';
+import '../../../models/employee_list_screen_models/employee_list_model.dart';
+import '../../../utils/date_format_changer.dart';
 import '../../../utils/extension_methods/user_preference.dart';
+import '../../../utils/validator.dart';
 
 class SalaryPayChecksFormModule extends StatelessWidget {
   SalaryPayChecksFormModule({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class SalaryPayChecksFormModule extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// Type Text & Dropdown Module
-            RichText(
+            /*RichText(
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
@@ -102,12 +101,12 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 15),*/
 
             ///
 
             /// Start & End Date module
-            Row(
+            /*Row(
               children: [
                 Expanded(
                   flex: 5,
@@ -157,7 +156,23 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 5),*/
+
+            /// Select Month Module
+            FormSingleFieldModule(
+              headerText: AppMessage.month,
+              text: AppMessage.selectMonth,
+              keyboardType: TextInputType.datetime,
+              mandatoryText: AppMessage.mandatory,
+              textEditingController: screenController.monthShowController,
+              suffixIcon: Icons.calendar_month,
+              readOnly: true,
+              onPressed: () async {
+                await _selectMonthPicker(context: context);
+              },
+              validate: (value) => FieldValidation().validateStartDate(value),
+            ),
+            const SizedBox(height: 15),
 
             /// Pay Date module
             FormSingleFieldModule(
@@ -208,10 +223,10 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount:
-                    screenController.allSalaryPaychecksWiseEmployeeList.length,
+                screenController.allSalaryPaychecksWiseEmployeeList.length,
                 itemBuilder: (context, index) {
                   CompanyWiseEmployeeData employeeData =
-                      screenController.allSalaryPaychecksWiseEmployeeList[index];
+                  screenController.allSalaryPaychecksWiseEmployeeList[index];
 
                   // TextEditingController regularHourController = TextEditingController();
 
@@ -239,8 +254,9 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 "${employeeData.firstName} "
-                                "${employeeData.middleName} "
-                                "${employeeData.lastName}",
+                                    "${employeeData.middleName} "
+                                    "${employeeData.lastName}"
+                                    " (\$${employeeData.salary})",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyleConfig.textStyle(
@@ -254,64 +270,64 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                         employeeData.isChecked == false
                             ? Container()
                             : Column(
-                                children: [
-                                  // const SizedBox(height: 5),
-                                  // RegularTextFormFieldModule(
-                                  //   employeeData: employeeData,
-                                  //   regularHourController: regularHourController,
-                                  // ),
-                                  // const SizedBox(height: 5),
-                                  // OtTextFormFieldModule(employeeData: employeeData),
-                                  // const SizedBox(height: 5),
-                                  // HolidayPayTextFormFieldModule(employeeData: employeeData),
-                                  const SizedBox(height: 5),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: BonusTextFormFieldModule(
-                                            employeeData: employeeData),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Expanded(
-                                        child: OtherEarningTextFormFieldModule(
-                                            employeeData: employeeData),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: CommissionTextFormFieldModule(
-                                            employeeData: employeeData),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Expanded(
-                                        child: SickPayTextFormFieldModule(
-                                            employeeData: employeeData),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: VacationTextFormFieldModule(
-                                            employeeData: employeeData),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Expanded(
-                                        child: TipTextFormFieldModule(
-                                            employeeData: employeeData),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 5),
-                                  TaxTextFormFieldModule(
+                          children: [
+                            // const SizedBox(height: 5),
+                            // RegularTextFormFieldModule(
+                            //   employeeData: employeeData,
+                            //   regularHourController: regularHourController,
+                            // ),
+                            // const SizedBox(height: 5),
+                            // OtTextFormFieldModule(employeeData: employeeData),
+                            // const SizedBox(height: 5),
+                            // HolidayPayTextFormFieldModule(employeeData: employeeData),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: BonusTextFormFieldModule(
                                       employeeData: employeeData),
-                                  const SizedBox(height: 5),
-                                ],
-                              ).commonSymmetricPadding(horizontal: 5),
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: OtherEarningTextFormFieldModule(
+                                      employeeData: employeeData),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CommissionTextFormFieldModule(
+                                      employeeData: employeeData),
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: SickPayTextFormFieldModule(
+                                      employeeData: employeeData),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: VacationTextFormFieldModule(
+                                      employeeData: employeeData),
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: TipTextFormFieldModule(
+                                      employeeData: employeeData),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            TaxTextFormFieldModule(
+                                employeeData: employeeData),
+                            const SizedBox(height: 5),
+                          ],
+                        ).commonSymmetricPadding(horizontal: 5),
                       ],
                     ).commonSymmetricPadding(horizontal: 5, vertical: 3),
                   ).commonOnlyPadding(bottom: 5);
@@ -348,92 +364,92 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                   // } else {
 
                   if (screenController.formKey.currentState!.validate()) {
-                  /// Check Any employee select or not... & Then api call
-                  for (int i = 0;
+                    /// Check Any employee select or not... & Then api call
+                    for (int i = 0;
+                    i <
+                        screenController
+                            .allSalaryPaychecksWiseEmployeeList.length;
+                    i++) {
+                      if (screenController
+                          .allSalaryPaychecksWiseEmployeeList[i].isChecked ==
+                          true) {
+                        isEmployeeSelected = true;
+                      }
+                    }
+
+                    if (isEmployeeSelected == true) {
+                      // screenController.clearAllTextFieldsList();
+                      screenController.data.clear();
+                      // call api
+                      List<bool> isApiCallStatusList =
+                      []; // Set validate status on this list
+
+                      for (int i = 0;
                       i <
                           screenController
                               .allSalaryPaychecksWiseEmployeeList.length;
                       i++) {
-                    if (screenController
+                        if (screenController
                             .allSalaryPaychecksWiseEmployeeList[i].isChecked ==
-                        true) {
-                      isEmployeeSelected = true;
-                    }
-                  }
-
-                  if (isEmployeeSelected == true) {
-                    // screenController.clearAllTextFieldsList();
-                    screenController.data.clear();
-                    // call api
-                    List<bool> isApiCallStatusList =
-                        []; // Set validate status on this list
-
-                    for (int i = 0;
-                        i <
-                            screenController
-                                .allSalaryPaychecksWiseEmployeeList.length;
-                        i++) {
-                      if (screenController
-                              .allSalaryPaychecksWiseEmployeeList[i].isChecked ==
-                          true) {
-                        if (screenController.employeeFormKey.currentState!.validate()) {
-                        isApiCallStatusList.add(true);
-                        // todo
-                        screenController.data.add({
-                          "employee": screenController
-                              .allSalaryPaychecksWiseEmployeeList[i].id
-                              .toString(),
-                          // "regularhour": screenController.allCompanyWiseEmployeeList[i].regularTextFieldValue,
-                          // "overtime": screenController.allCompanyWiseEmployeeList[i].otTextFieldValue,
-                          // "holidaypay": screenController.allCompanyWiseEmployeeList[i].holidayPayTextFieldValue,
-                          "bonus": screenController.allSalaryPaychecksWiseEmployeeList[i].bonusTextFieldValue.isEmpty == true
-                              ? "0"
-                              : screenController.allSalaryPaychecksWiseEmployeeList[i].bonusTextFieldValue,
-                          "otherearning": screenController.allSalaryPaychecksWiseEmployeeList[i].otherEarningTextFieldValue.isEmpty == true
-                          ? "0"
-                          : screenController.allSalaryPaychecksWiseEmployeeList[i].otherEarningTextFieldValue,
-                          "commission": screenController.allSalaryPaychecksWiseEmployeeList[i].commissionTextFieldValue.isEmpty == true
-                          ? "0"
-                          : screenController.allSalaryPaychecksWiseEmployeeList[i].commissionTextFieldValue,
-                          "sickpay": screenController.allSalaryPaychecksWiseEmployeeList[i].sickPayHoursTextFieldValue.isEmpty == true
-                          ? "0"
-                          : screenController.allSalaryPaychecksWiseEmployeeList[i].sickPayHoursTextFieldValue,
-                          "vacationhours": screenController.allSalaryPaychecksWiseEmployeeList[i].vacationHoursTextFieldValue.isEmpty == true
-                          ? "0"
-                          : screenController.allSalaryPaychecksWiseEmployeeList[i].vacationHoursTextFieldValue,
-                          "tip": screenController.allSalaryPaychecksWiseEmployeeList[i].tipTextFieldValue.isEmpty == true
-                          ? "0"
-                          : screenController.allSalaryPaychecksWiseEmployeeList[i].tipTextFieldValue,
-                          "tax": screenController.allSalaryPaychecksWiseEmployeeList[i].taxTextFieldValue.isEmpty == true
-                          ? "0"
-                          : screenController.allSalaryPaychecksWiseEmployeeList[i].taxTextFieldValue,
-                        });
-                        } else {
-                          isApiCallStatusList.add(false);
+                            true) {
+                          if (screenController.employeeFormKey.currentState!.validate()) {
+                            isApiCallStatusList.add(true);
+                            // todo
+                            screenController.data.add({
+                              "employee": screenController
+                                  .allSalaryPaychecksWiseEmployeeList[i].id
+                                  .toString(),
+                              // "regularhour": screenController.allCompanyWiseEmployeeList[i].regularTextFieldValue,
+                              // "overtime": screenController.allCompanyWiseEmployeeList[i].otTextFieldValue,
+                              // "holidaypay": screenController.allCompanyWiseEmployeeList[i].holidayPayTextFieldValue,
+                              "bonus": screenController.allSalaryPaychecksWiseEmployeeList[i].bonusTextFieldValue.isEmpty == true
+                                  ? "0"
+                                  : screenController.allSalaryPaychecksWiseEmployeeList[i].bonusTextFieldValue,
+                              "otherearning": screenController.allSalaryPaychecksWiseEmployeeList[i].otherEarningTextFieldValue.isEmpty == true
+                                  ? "0"
+                                  : screenController.allSalaryPaychecksWiseEmployeeList[i].otherEarningTextFieldValue,
+                              "commission": screenController.allSalaryPaychecksWiseEmployeeList[i].commissionTextFieldValue.isEmpty == true
+                                  ? "0"
+                                  : screenController.allSalaryPaychecksWiseEmployeeList[i].commissionTextFieldValue,
+                              "sickpay": screenController.allSalaryPaychecksWiseEmployeeList[i].sickPayHoursTextFieldValue.isEmpty == true
+                                  ? "0"
+                                  : screenController.allSalaryPaychecksWiseEmployeeList[i].sickPayHoursTextFieldValue,
+                              "vacationhours": screenController.allSalaryPaychecksWiseEmployeeList[i].vacationHoursTextFieldValue.isEmpty == true
+                                  ? "0"
+                                  : screenController.allSalaryPaychecksWiseEmployeeList[i].vacationHoursTextFieldValue,
+                              "tip": screenController.allSalaryPaychecksWiseEmployeeList[i].tipTextFieldValue.isEmpty == true
+                                  ? "0"
+                                  : screenController.allSalaryPaychecksWiseEmployeeList[i].tipTextFieldValue,
+                              "tax": screenController.allSalaryPaychecksWiseEmployeeList[i].taxTextFieldValue.isEmpty == true
+                                  ? "0"
+                                  : screenController.allSalaryPaychecksWiseEmployeeList[i].taxTextFieldValue,
+                            });
+                          } else {
+                            isApiCallStatusList.add(false);
+                          }
                         }
                       }
-                    }
 
-                    // If any formKey Current Status not valid then api not call - set this type of logic here
-                    bool apiCallFinalStatus = true;
-                    for (int i = 0; i < isApiCallStatusList.length; i++) {
-                      if (isApiCallStatusList[i] == false) {
-                        apiCallFinalStatus = false;
+                      // If any formKey Current Status not valid then api not call - set this type of logic here
+                      bool apiCallFinalStatus = true;
+                      for (int i = 0; i < isApiCallStatusList.length; i++) {
+                        if (isApiCallStatusList[i] == false) {
+                          apiCallFinalStatus = false;
+                        }
                       }
-                    }
 
-                    if (apiCallFinalStatus == true) {
-                      // api call
-                      log('Api Call');
-                      await screenController.createSalaryPaycheckFunction();
+                      if (apiCallFinalStatus == true) {
+                        // api call
+                        log('Api Call');
+                        await screenController.createSalaryPaycheckFunction();
+                      }
+                    } else {
+                      Fluttertoast.showToast(msg: "Please select any employee.");
                     }
-                  } else {
-                    Fluttertoast.showToast(msg: "Please select any employee.");
-                  }
                   }
                 }
-                // },
-                ),
+              // },
+            ),
             const SizedBox(height: 5),
 
             ///
@@ -441,6 +457,147 @@ class SalaryPayChecksFormModule extends StatelessWidget {
         ).commonOnlyPadding(top: 3.h, right: 6.w, left: 6.w, bottom: 3.h),
       ),
     );
+  }
+
+  Future<void> _selectMonthPicker({required BuildContext context}) async {
+    final selectedDate = await showMonthYearPicker(
+      context: context,
+      initialDate: screenController.selectedDate,
+      firstDate: DateTime(2019),
+      // lastDate: DateTime(2030),
+      lastDate: DateTime.now(),
+    );
+    log('selected Month : $selectedDate');
+    if(selectedDate != null) {
+      screenController.startDateController.text = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
+      screenController.monthShowController.text = "${selectedDate.month}-${selectedDate.year}";
+      // DateFormater().changeDateFormat(
+      //   selectedDate,
+      //   screenController.prefsDateFormat,
+      // );
+      if(selectedDate.month == 1) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        //todo
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(DateTime.parse(screenController.endDateController.text), screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 2) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-28";
+        screenController.endDateShowController.text = "${selectedDate.month}-28-${selectedDate.year}";
+        screenController.daysCount = 28;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 28));
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 3) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 4) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 5) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 6) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 7) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 8) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 9) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 10) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 11) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 12) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      log('endDateController : ${screenController.endDateController.text}');
+      log('endDateShowController : ${screenController.endDateShowController.text}');
+    }
   }
 
   Future<void> _selectStartDate({
@@ -478,7 +635,7 @@ class SalaryPayChecksFormModule extends StatelessWidget {
         final d1 = d;
         final d2 = d1.add(const Duration(days: 7));
         screenController.endDateController.text =
-            "${d2.year}-${d2.month}-${d2.day}";
+        "${d2.year}-${d2.month}-${d2.day}";
         screenController.endDateShowController.text = DateFormater()
             .changeDateFormat(d2, screenController.prefsDateFormat);
         screenController.endDate = d2;
@@ -487,7 +644,7 @@ class SalaryPayChecksFormModule extends StatelessWidget {
         final d1 = d;
         final d2 = d1.add(const Duration(days: 14));
         screenController.endDateController.text =
-            "${d2.year}-${d2.month}-${d2.day}";
+        "${d2.year}-${d2.month}-${d2.day}";
         screenController.endDate = d2;
 
         screenController.endDateShowController.text = DateFormater()
@@ -582,24 +739,24 @@ class SalaryFormSingleDateFieldModule extends StatelessWidget {
   //  double fontSize = 15.0,
   SalaryFormSingleDateFieldModule(
       {Key? key,
-      required this.text,
-      required this.headerText,
-      required this.mandatoryText,
-      // required this.prefixIcon,
-      this.isHeaderTextShow = true,
-      this.inputFormatters,
-      this.suffixIcon,
-      this.color = Colors.grey,
-      this.size,
-      this.textEditingController,
-      this.onTap,
-      this.onChanged,
-      this.keyboardType,
-      this.validate,
-      this.maxLength,
-      this.onPressed,
-      this.obscureText = false,
-      this.readOnly = false})
+        required this.text,
+        required this.headerText,
+        required this.mandatoryText,
+        // required this.prefixIcon,
+        this.isHeaderTextShow = true,
+        this.inputFormatters,
+        this.suffixIcon,
+        this.color = Colors.grey,
+        this.size,
+        this.textEditingController,
+        this.onTap,
+        this.onChanged,
+        this.keyboardType,
+        this.validate,
+        this.maxLength,
+        this.onPressed,
+        this.obscureText = false,
+        this.readOnly = false})
       : super(key: key);
 
   final screenController = Get.find<SalaryPayChecksManageScreenController>();
@@ -611,25 +768,25 @@ class SalaryFormSingleDateFieldModule extends StatelessWidget {
       children: [
         isHeaderTextShow == true
             ? RichText(
-                textAlign: TextAlign.left,
-                maxLines: null,
-                text: TextSpan(
-                    text: headerText,
-                    style: TextStyleConfig.textStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: ' $mandatoryText',
-                        style: TextStyleConfig.textStyle(
-                          textColor: AppColors.redColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ]),
-              ).commonSymmetricPadding(vertical: 4)
+          textAlign: TextAlign.left,
+          maxLines: null,
+          text: TextSpan(
+              text: headerText,
+              style: TextStyleConfig.textStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+              children: [
+                TextSpan(
+                  text: ' $mandatoryText',
+                  style: TextStyleConfig.textStyle(
+                    textColor: AppColors.redColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+              ]),
+        ).commonSymmetricPadding(vertical: 4)
             : Container(),
         TextFormField(
           // obscureText: loginScreenController.isPasswordVisible.value,
@@ -653,14 +810,14 @@ class SalaryFormSingleDateFieldModule extends StatelessWidget {
             hintText: text,
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             suffixIcon:
-                screenController.selectedSalaryChecksValue.value == "Bi-Weekly"
-                    ? null
-                    : IconButton(
-                        onPressed: onPressed,
-                        icon: Icon(suffixIcon,
-                            color: AppColors.colorLightHintPurple2)),
+            screenController.selectedSalaryChecksValue.value == "Bi-Weekly"
+                ? null
+                : IconButton(
+                onPressed: onPressed,
+                icon: Icon(suffixIcon,
+                    color: AppColors.colorLightHintPurple2)),
             errorMaxLines: 2,
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
@@ -709,7 +866,7 @@ class BonusTextFormFieldModule extends StatelessWidget {
             counterText: '',
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
@@ -756,7 +913,7 @@ class OtherEarningTextFormFieldModule extends StatelessWidget {
             counterText: '',
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
@@ -803,7 +960,7 @@ class CommissionTextFormFieldModule extends StatelessWidget {
             counterText: '',
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
@@ -850,7 +1007,7 @@ class SickPayTextFormFieldModule extends StatelessWidget {
             counterText: '',
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
@@ -897,7 +1054,7 @@ class VacationTextFormFieldModule extends StatelessWidget {
             counterText: '',
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
@@ -944,7 +1101,7 @@ class TipTextFormFieldModule extends StatelessWidget {
             counterText: '',
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
@@ -991,7 +1148,7 @@ class TaxTextFormFieldModule extends StatelessWidget {
             counterText: '',
             hintStyle: const TextStyle(color: AppColors.colorLightHintPurple2),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
             hintText: AppMessage.zero,
             errorMaxLines: 2,
           ),
