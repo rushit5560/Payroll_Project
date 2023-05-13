@@ -20,10 +20,17 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
       child: ListView.builder(
         itemCount:
             approvePaychecksListScreenController.searchApprovePayCheckList.length,
+
         itemBuilder: (context, index) {
           final approvePayrollListDataListvalue =
               approvePaychecksListScreenController
                   .searchApprovePayCheckList[index];
+
+          // Total days
+          DateTime endDate = DateTime.parse(approvePayrollListDataListvalue.enddate);
+          DateTime startDate = DateTime.parse(approvePayrollListDataListvalue.startdate);
+          int daysCount = endDate.difference(startDate).inDays + 1;
+
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -75,7 +82,7 @@ class ApprovePaychecksListWidgetsScreen extends StatelessWidget {
                       textKey: AppMessage.endDate),
                   const SizedBox(height: 5),
                   SingleListTileModuleCustom(
-                      textValue: "${approvePayrollListDataListvalue.days} ${AppMessage.days}",
+                      textValue: "$daysCount ${AppMessage.days}",
                       image: AppImages.totalDaysIcon,
                       textKey: AppMessage.totalDays),
                   const SizedBox(height: 5),

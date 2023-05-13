@@ -72,7 +72,7 @@ class PayCheckesListScreenController extends GetxController {
       };
       log('bodyData : $bodyData');
       http.Response response = await http.post(Uri.parse(url), body: bodyData);
-      // log("getPaycheckesListFunction response  : ${response.body}");
+      log("getPaycheckesListFunction response  : ${response.body}");
 
       PayCheckListModel payCheckListModel =
           PayCheckListModel.fromJson(json.decode(response.body));

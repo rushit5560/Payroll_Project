@@ -149,9 +149,11 @@ class PayCheckedManageScreenController extends GetxController {
     } catch (e) {
       log('getAllCompanyFunction Error :$e');
       rethrow;
-    } finally {
+    } /*finally {
       isLoading(false);
-    }
+    }*/
+
+    isLoading(false);
   }
 
   // Future<void> getCreatePayrollFunction() async {
@@ -184,7 +186,19 @@ class PayCheckedManageScreenController extends GetxController {
 
     int userId = await userPreference.getIntValueFromPrefs(
         keyId: UserPreference.userIdKey);
-    int daysCount = endDate.difference(startDate).inDays;
+
+    int daysCount = 0;
+    if(selectedCheckedValue.value == "Other") {
+      int tempDaysCount = endDate.difference(startDate).inDays;
+      daysCount = tempDaysCount + 1;
+    } else {
+      daysCount = endDate.difference(startDate).inDays;
+    }
+
+    // int daysCount = endDate.difference(startDate).inDays;
+
+    log('Create time days count :$daysCount');
+
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));

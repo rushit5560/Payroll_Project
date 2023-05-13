@@ -38,6 +38,12 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final payrollListDataListValue =
               payCheckesListScreenController.filterPayChecksListData[index];
+
+          // Total days
+          DateTime endDate = DateTime.parse(payrollListDataListValue.enddate);
+          DateTime startDate = DateTime.parse(payrollListDataListValue.startdate);
+          int daysCount = endDate.difference(startDate).inDays + 1;
+
           return Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -166,7 +172,7 @@ class PayCheckesListWidgetsScreen extends StatelessWidget {
                   SingleListTileModuleCustom(
                     textKey: AppMessage.totalDays,
                     textValue:
-                        "${payrollListDataListValue.days} ${AppMessage.days}",
+                        "$daysCount ${AppMessage.days}",
                     image: AppImages.totalDaysIcon,
                   ),
                   const SizedBox(height: 5),

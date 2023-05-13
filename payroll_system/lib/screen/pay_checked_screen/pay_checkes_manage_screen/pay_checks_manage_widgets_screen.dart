@@ -96,6 +96,7 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                         payCheckedManageScreenController.isLoading(true);
                         payCheckedManageScreenController
                             .selectedCheckedValue.value = value!;
+                        log('value :$value');
 
                         // When change the date the time clear the field controllers
                         payCheckedManageScreenController.startDateShowController.clear();
@@ -271,7 +272,8 @@ class PayChecksWidgetsScreen extends StatelessWidget {
                               child: Text(
                                 "${employeeData.firstName} "
                                 "${employeeData.middleName} "
-                                "${employeeData.lastName}",
+                                "${employeeData.lastName}"
+                                    " (\$${employeeData.hourlyRate})",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyleConfig.textStyle(

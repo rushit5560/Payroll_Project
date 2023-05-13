@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:payroll_system/Utils/extensions.dart';
 import 'package:payroll_system/constants/colors.dart';
 import 'package:payroll_system/constants/enums.dart';
@@ -36,7 +37,7 @@ class SalaryPayChecksFormModule extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// Type Text & Dropdown Module
-            RichText(
+            /*RichText(
               textAlign: TextAlign.left,
               maxLines: null,
               text: TextSpan(
@@ -103,12 +104,12 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 15),*/
 
             ///
 
             /// Start & End Date module
-            Row(
+            /*Row(
               children: [
                 Expanded(
                   flex: 5,
@@ -158,7 +159,23 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 5),*/
+
+            /// Select Month Module
+            FormSingleFieldModule(
+              headerText: AppMessage.month,
+              text: AppMessage.selectMonth,
+              keyboardType: TextInputType.datetime,
+              mandatoryText: AppMessage.mandatory,
+              textEditingController: screenController.monthShowController,
+              suffixIcon: Icons.calendar_month,
+              readOnly: true,
+              onPressed: () async {
+                await _selectMonthPicker(context: context);
+              },
+              validate: (value) => FieldValidation().validateStartDate(value),
+            ),
+            const SizedBox(height: 15),
 
             /// Pay Date module
             FormSingleFieldModule(
@@ -241,7 +258,8 @@ class SalaryPayChecksFormModule extends StatelessWidget {
                               child: Text(
                                 "${employeeData.firstName} "
                                 "${employeeData.middleName} "
-                                "${employeeData.lastName}",
+                                "${employeeData.lastName}"
+                                    " (\$${employeeData.salary})",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyleConfig.textStyle(
@@ -442,6 +460,147 @@ class SalaryPayChecksFormModule extends StatelessWidget {
         ).commonOnlyPadding(top: 3.h, right: 6.w, left: 6.w, bottom: 3.h),
       ),
     );
+  }
+
+  Future<void> _selectMonthPicker({required BuildContext context}) async {
+    final selectedDate = await showMonthYearPicker(
+      context: context,
+      initialDate: screenController.selectedDate,
+      firstDate: DateTime(2019),
+      // lastDate: DateTime(2030),
+      lastDate: DateTime.now(),
+    );
+    log('selected Month : $selectedDate');
+    if(selectedDate != null) {
+      screenController.startDateController.text = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
+      screenController.monthShowController.text = "${selectedDate.month}-${selectedDate.year}";
+          // DateFormater().changeDateFormat(
+          //   selectedDate,
+          //   screenController.prefsDateFormat,
+          // );
+      if(selectedDate.month == 1) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        //todo
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(DateTime.parse(screenController.endDateController.text), screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 2) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-28";
+        screenController.endDateShowController.text = "${selectedDate.month}-28-${selectedDate.year}";
+        screenController.daysCount = 28;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 28));
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 3) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 4) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 5) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 6) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 7) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 8) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 9) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 10) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 11) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-30";
+        screenController.endDateShowController.text = "${selectedDate.month}-30-${selectedDate.year}";
+        screenController.daysCount = 30;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 30));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      if(selectedDate.month == 12) {
+        screenController.endDateController.text = "${selectedDate.year}-${selectedDate.month}-31";
+        screenController.endDateShowController.text = "${selectedDate.month}-31-${selectedDate.year}";
+        screenController.daysCount = 31;
+        // set end date
+        screenController.endDate = selectedDate.add(const Duration(days: 31));
+
+        // screenController.endDateShowController.text = DateFormater()
+        //     .changeDateFormat(selectedDate, screenController.prefsDateFormat);
+      }
+      log('endDateController : ${screenController.endDateController.text}');
+      log('endDateShowController : ${screenController.endDateShowController.text}');
+    }
   }
 
   Future<void> _selectStartDate({

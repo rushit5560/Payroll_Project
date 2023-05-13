@@ -381,7 +381,7 @@ class FieldValidation {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterEndDate;
     } else if (endTime.compareTo(d) > 0) {
-      return "The end date must be a date before ${d.year}-${d.month}-${d.day}.";
+      return "The end date must be a date before ${d.month}-${d.day}-${d.year}.";
     } else {
       return null;
     }
@@ -393,7 +393,7 @@ class FieldValidation {
     if (value.isEmpty) {
       return AppMessage.pleaseEnterPayDate;
     } else if (payDate.compareTo(endTime) < 0) {
-      return "The pay date must be a date after ${endTime.year}-${endTime.month}-${endTime.day}.";
+      return "The pay date must be a date after ${endTime.month}-${endTime.day}-${endTime.year}.";
     } else {
       return null;
     }
