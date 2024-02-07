@@ -51,3 +51,4 @@ class PayRollListScreenController extends GetxController {
     super.onInit();
   }
 }
+
